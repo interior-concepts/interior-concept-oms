@@ -552,7 +552,7 @@ export default function FinanceDashboard() {
     const displayEnd = fmtDisplayDate(end)
 
     const logoImg = new Image()
-    logoImg.src = "/Logo/HeaderLogo.png"
+    logoImg.src = "/Logo/interior-concept-logobg-removed.png"
     await new Promise((resolve) => {
       logoImg.onload = resolve
       logoImg.onerror = resolve

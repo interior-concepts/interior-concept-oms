@@ -110,7 +110,7 @@ export default function VisitPaymentsPage() {
 
       // ── Logo ──────────────────────────────────────────────────
       const logoImg = new Image()
-      logoImg.src = '/Logo/HeaderLogo.png'
+      logoImg.src = '/Logo/interior-concept-logobg-removed.png'
       await new Promise((resolve) => { logoImg.onload = resolve; logoImg.onerror = resolve })
       doc.addImage(logoImg, 'PNG', 14, 8, 43.2, 8)
 

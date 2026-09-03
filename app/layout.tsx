@@ -57,7 +57,7 @@ export const metadata: Metadata = {
       "Modern contemporary residential, commercial, and architectural interior design by INTERIOR CONCEPT Studio in Dhaka, Bangladesh.",
     images: [
       {
-        url: "/Logo/HeaderLogo.png",
+        url: "/Logo/interior-concept-logobg-removed.png",
         width: 1200,
         height: 630,
         alt: siteName,
@@ -69,7 +69,12 @@ export const metadata: Metadata = {
     title: `${siteName} | Interior Design Studio in Dhaka, Bangladesh`,
     description:
       "A pioneer brand for modern contemporary interior design in Dhaka, Bangladesh.",
-    images: ["/Logo/HeaderLogo.png"],
+    images: ["/Logo/interior-concept-logobg-removed.png"],
+  },
+  icons: {
+    icon: "/Logo/interior-concept-icon-light.png",
+    shortcut: "/Logo/interior-concept-icon-light.png",
+    apple: "/Logo/interior-concept-icon-light.png",
   },
   robots: {
     index: true,

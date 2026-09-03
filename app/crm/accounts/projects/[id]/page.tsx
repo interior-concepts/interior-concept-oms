@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState, useMemo } from 'react'
 import { useParams, useRouter } from 'next/navigation'
@@ -183,7 +183,7 @@ export default function ProjectDetailPage() {
     if (modalFilter.type === 'OUTFLOW') filterTitle = 'Outflow Transactions'
 
     const logoImg = new Image()
-    logoImg.src = "/Logo/HeaderLogo.png"
+    logoImg.src = "/Logo/interior-concept-logobg-removed.png"
     await new Promise((resolve) => {
       logoImg.onload = resolve
       logoImg.onerror = resolve
@@ -323,7 +323,7 @@ export default function ProjectDetailPage() {
     const fmtD = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
     const logoImg = new Image()
-    logoImg.src = "/Logo/HeaderLogo.png"
+    logoImg.src = "/Logo/interior-concept-logobg-removed.png"
     await new Promise((resolve) => {
       logoImg.onload = resolve
       logoImg.onerror = resolve

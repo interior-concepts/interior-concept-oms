@@ -50,7 +50,7 @@ export function Header() {
 				<div className="flex h-20 items-center justify-between">
 					<Link href="/" className="flex items-center">
 						<Image
-							src="/Logo/HeaderLogo.png"
+							src="/Logo/interior-concept-logobg-removed.png"
 							alt="INTERIOR CONCEPT Studio"
 							width={220}
 							height={72}

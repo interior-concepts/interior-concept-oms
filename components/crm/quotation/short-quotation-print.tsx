@@ -21,7 +21,7 @@ function formatCurrency(value: number) {
 function WatermarkBackground() {
   return (
     <div className="absolute inset-0 z-0 flex items-center justify-center opacity-5 pointer-events-none">
-      <img src="/android-chrome-512x512.png" alt="watermark" className="h-[400px] w-[400px] object-contain" />
+      <img src="/Logo/interior-concept-icon-light.png" alt="watermark" className="h-[400px] w-[400px] object-contain" />
     </div>
   )
 }
@@ -47,7 +47,7 @@ function PageHeader({ content }: { content: ShortQuotationContent }) {
       <div className="border-t-2 pt-2" style={{ borderColor: PRIMARY }}>
         <div className="flex items-center justify-between border-b border-[#e7d49a] pb-3">
           <div className="w-1/2">
-            <img src="/Logo/HeaderLogo.png" alt="Logo" className="w-[150px] object-contain object-left" />
+            <img src="/Logo/interior-concept-logobg-removed.png" alt="Logo" className="w-[150px] object-contain object-left" />
           </div>
           <div className="ml-auto rounded-xl border border-[#e7d49a] bg-[#fffdf7] px-4 py-2 text-right shadow-sm">
             <p className="text-[7px] font-bold uppercase tracking-[0.16em]" style={{ color: GOLD }}>Quotation Date</p>

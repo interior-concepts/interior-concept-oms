@@ -114,7 +114,7 @@ function formatDownloadDateTime(value: string | undefined) {
 
 const WatermarkBackground = () => (
   <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center', zIndex: -1, opacity: 0.05 }} fixed>
-    <Image src={`${getBaseUrl()}/android-chrome-512x512.png`} style={{ width: 400, height: 400 }} />
+    <Image src={`${getBaseUrl()}/Logo/interior-concept-icon-light.png`} style={{ width: 400, height: 400 }} />
   </View>
 )
 
@@ -128,7 +128,7 @@ const GlobalHeader = ({ content, showDate = true }: { content: ShortQuotationCon
         <View style={[styles.headerRule, { flexGrow: 0.85 }]} />
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-        <View style={{ flex: 1 }}><Image src={`${getBaseUrl()}/Logo/HeaderLogo.png`} style={{ width: 154 }} /></View>
+        <View style={{ flex: 1 }}><Image src={`${getBaseUrl()}/Logo/interior-concept-logobg-removed.png`} style={{ width: 154 }} /></View>
         <View style={styles.datePanel}>
           {showDate ? (
             <>

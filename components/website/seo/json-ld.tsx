@@ -15,11 +15,11 @@ export function LocalBusinessJsonLd() {
     description:
       "INTERIOR CONCEPT Studio is a pioneer brand for modern contemporary interior design in Dhaka, Bangladesh.",
     image: [
-      absoluteUrl("/Logo/HeaderLogo.png"),
+      absoluteUrl("/Logo/interior-concept-logobg-removed.png"),
       absoluteUrl("/banner/Banner1.png"),
       absoluteUrl("/banner/Banner9.png"),
     ],
-    logo: absoluteUrl("/Logo/HeaderLogo.png"),
+    logo: absoluteUrl("/Logo/interior-concept-logobg-removed.png"),
     url: siteUrl,
     telephone: "+8801329694663",
     email: "hello@aestheticinteriorbd.com",
@@ -102,7 +102,7 @@ export function OrganizationJsonLd() {
     name: siteName,
     alternateName: ["INTERIOR CONCEPT", "INTERIOR CONCEPT Studio in BD"],
     url: siteUrl,
-    logo: absoluteUrl("/Logo/HeaderLogo.png"),
+    logo: absoluteUrl("/Logo/interior-concept-logobg-removed.png"),
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+8801329694663",

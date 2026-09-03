@@ -83,7 +83,7 @@ export default function OverheadsPage() {
       const monthLabel = new Date(parseInt(year), parseInt(month) - 1, 1).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })
 
       const logoImg = new Image()
-      logoImg.src = "/Logo/HeaderLogo.png"
+      logoImg.src = "/Logo/interior-concept-logobg-removed.png"
       await new Promise((resolve) => {
         logoImg.onload = resolve
         logoImg.onerror = resolve
@@ -237,7 +237,7 @@ export default function OverheadsPage() {
       const total = txs.reduce((sum: number, t: any) => sum + t.amount, 0)
 
       const logoImg = new Image()
-      logoImg.src = '/Logo/HeaderLogo.png'
+      logoImg.src = '/Logo/interior-concept-logobg-removed.png'
       await new Promise((resolve) => {
         logoImg.onload = resolve
         logoImg.onerror = resolve
