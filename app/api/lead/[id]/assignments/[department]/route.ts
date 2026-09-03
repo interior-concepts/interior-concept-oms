@@ -853,24 +853,6 @@ export async function DELETE(
   - token: your_auth_token
 */
 
-type UpdateAssignmentBody = {
-  userId?: unknown
-}
-
-const debugLog = (...args: unknown[]) => {
-  if (process.env.NODE_ENV !== 'production') {
-    void args
-    // console.log(...args);
-  }
-}
-
-function toOptionalString(value: unknown): string | null {
-  if (typeof value !== 'string') return null
-  const trimmed = value.trim()
-  return trimmed.length > 0 ? trimmed : null
-}
-
-
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string; department: string }> },
