@@ -37,7 +37,7 @@ export async function OurTeam() {
                     <div className="relative overflow-hidden rounded-2xl aspect-[3/4] bg-[#e9e6dd]">
                       <Image
                         src={member.image}
-                        alt={`${member.name}, ${member.role} at Aesthetic Interior Studio`}
+                        alt={`${member.name}, ${member.role} at INTERIOR CONCEPT Studio`}
                         fill
                         sizes="(max-width: 1024px) 100vw, 38vw"
                         loading="lazy"
@@ -52,7 +52,7 @@ export async function OurTeam() {
                       {member.role}{member.specialty ? ` in ${member.specialty}` : ''}
                     </p>
                     {member.quote && (
-                      <p className="mt-5 text-[#4f4f4f] leading-relaxed text-base lg:text-lg">‚Äú{member.quote}‚Äù</p>
+                      <p className="mt-5 text-[#4f4f4f] leading-relaxed text-base lg:text-lg">ì{member.quote}î</p>
                     )}
                   </div>
                 </div>

@@ -10,11 +10,11 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Interior Design Projects in Dhaka, Bangladesh",
   description:
-    "Explore Aesthetic Interior Studio's residential, commercial, and architectural interior design projects in Dhaka and across Bangladesh.",
+    "Explore INTERIOR CONCEPT Studio's residential, commercial, and architectural interior design projects in Dhaka and across Bangladesh.",
   keywords: [
     "interior design projects Dhaka",
     "interior portfolio Bangladesh",
-    "Aesthetic Interior Studio projects",
+    "INTERIOR CONCEPT Studio projects",
     "residential commercial interior design portfolio",
   ],
   alternates: {
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Interior Design Projects in Dhaka, Bangladesh",
     description:
-      "See modern contemporary interior design projects by Aesthetic Interior Studio in Bangladesh.",
+      "See modern contemporary interior design projects by INTERIOR CONCEPT Studio in Bangladesh.",
     url: "/projects",
     type: "website",
   },

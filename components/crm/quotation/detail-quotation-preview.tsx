@@ -107,7 +107,7 @@ function ClientInfoBlock({ clientName, clientAddress }: { clientName: string, cl
       <div className="w-[100%]">
         <p className="text-[9px] text-[#a57c00] uppercase tracking-wider mb-1 font-bold">Prepared For</p>
         <p className="text-[14px] font-bold text-[#1f363d] leading-snug mb-0.5">{clientName}</p>
-        <p className="text-[10px] text-neutral-600 leading-snug max-w-[250px]">{clientAddress || '—'}</p>
+        <p className="text-[10px] text-neutral-600 leading-snug max-w-[250px]">{clientAddress || '�'}</p>
       </div>
     </div>
   )
@@ -144,7 +144,7 @@ function PageFooter({ content }: { content: QuotationDraftContent }) {
     <div className="mt-auto">
       <div className="border-t border-[#a57c00] pt-3 mt-12 relative z-10 flex justify-between text-[9px] text-neutral-700">
         <div className="w-[35%]">
-          <p className="font-bold mb-1 text-[11px]" style={{ color: PRIMARY }}>Aesthetic Interior Studio</p>
+          <p className="font-bold mb-1 text-[11px]" style={{ color: PRIMARY }}>INTERIOR CONCEPT Studio</p>
           <p>183, East Senpara, Begum Rokeya Soroni</p>
           <p>3rd floor, Mirpur 10, Dhaka-1216</p>
         </div>
@@ -153,7 +153,7 @@ function PageFooter({ content }: { content: QuotationDraftContent }) {
           <p className="font-bold" style={{ color: PRIMARY }}>www.aestheticinteriorbd.com</p>
         </div>
         <div className="w-[35%] flex flex-col justify-end items-end">
-          <p className="text-neutral-500">© 2026 All rights reserved.</p>
+          <p className="text-neutral-500">� 2026 All rights reserved.</p>
         </div>
       </div>
       <div className="flex justify-between mt-1 text-[8px] text-neutral-400">
@@ -191,7 +191,7 @@ function TableHeader({ cols }: { cols: { label: string; className?: string }[] }
 }
 
 function formatMaterialText(text: string | null | undefined) {
-  if (!text) return <span className="text-neutral-400">—</span>
+  if (!text) return <span className="text-neutral-400">�</span>
   const lines = text.split('\n')
   return (
     <span className="block space-y-0.5">
@@ -236,7 +236,7 @@ export function DetailQuotationPreview({
 
   return (
     <div className={`detail-quotation-preview w-full bg-neutral-100 ${className ?? ''}`}>
-      {/* ── SUMMARY PAGE ─────────────────────────────── */}
+      {/* -- SUMMARY PAGE ------------------------------- */}
       <section className="relative bg-white mx-auto w-[210mm] min-h-[297mm] px-[7px] pt-6 pb-14 box-border shadow-md mb-6 overflow-hidden">
         <WatermarkBackground />
         <PageHeader
@@ -298,7 +298,7 @@ export function DetailQuotationPreview({
         </div>
       </section>
 
-      {/* ── DETAIL PAGES ─────────────────────────────── */}
+      {/* -- DETAIL PAGES ------------------------------- */}
       {floorSummaries.map((entry) => (
         <section
           key={entry.floor.id}
@@ -389,7 +389,7 @@ export function DetailQuotationPreview({
         </section>
       ))}
 
-      {/* ── TERMS PAGE ───────────────────────────────── */}
+      {/* -- TERMS PAGE --------------------------------- */}
       <section className="relative bg-white mx-auto w-[210mm] min-h-[297mm] px-[7px] pt-6 pb-14 box-border shadow-md flex flex-col overflow-hidden">
         <WatermarkBackground />
         <PageHeader
@@ -452,7 +452,7 @@ export function DetailQuotationPreview({
           <div>
             <div className="w-36 border-t border-neutral-800 pt-1 text-right">
               <p className="text-[9px] font-bold">{normalized.signatoryName || 'Authorized Signature'}</p>
-              <p className="text-[8px] text-neutral-500">{normalized.signatoryTitle || 'Aesthetic Interior'}</p>
+              <p className="text-[8px] text-neutral-500">{normalized.signatoryTitle || 'INTERIOR CONCEPT'}</p>
             </div>
           </div>
         </div>

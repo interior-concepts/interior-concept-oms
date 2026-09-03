@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Commercial Interior Design in Dhaka, Bangladesh',
     description:
-      'Office, retail, and commercial interior solutions by Aesthetic Interior Studio in Bangladesh.',
+      'Office, retail, and commercial interior solutions by INTERIOR CONCEPT Studio in Bangladesh.',
     url: '/services/commercial',
     type: 'website',
   },

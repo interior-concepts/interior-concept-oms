@@ -8,7 +8,7 @@ export default function CrmEntryPage() {
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex min-h-screen w-full max-w-5xl items-center px-4 py-10 sm:px-6">
         <section className="w-full rounded-3xl border border-foreground/10 bg-background p-6 shadow-sm md:p-10">
-          <p className="text-xs tracking-[0.28em] text-foreground/60">AESTHETIC INTERIOR CRM</p>
+          <p className="text-xs tracking-[0.28em] text-foreground/60">INTERIOR CONCEPT CRM</p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Sign in to your workspace</h1>
           <p className="mt-4 max-w-2xl text-sm text-foreground/75 sm:text-base">
             Access lead management, team workflows, follow-up tracking, and department dashboards.

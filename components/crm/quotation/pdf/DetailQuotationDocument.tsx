@@ -43,7 +43,7 @@ import { amountInWordsTaka } from '@/lib/number-to-words'
 const PRIMARY = '#1f363d';
 const GOLD = '#a57c00';
 const PAGE_SIDE_PADDING = 7;
-const BDT_SYMBOL = 'à§³';
+const BDT_SYMBOL = '?';
 const DETAIL_ROW_LINE_HEIGHT = 1.15;
 const DETAIL_ROW_VERTICAL_PADDING = 3;
 
@@ -440,7 +440,7 @@ const FooterFixed = ({ content }: { content: QuotationDraftContent }) => (
   <View style={styles.footerFixed} fixed>
     <View style={{ borderTopWidth: 1, borderTopColor: '#a57c00', paddingTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
       <View style={{ width: '35%' }}>
-        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginBottom: 3, fontSize: 9 }]}>Aesthetic Interior Studio</Text>
+        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginBottom: 3, fontSize: 9 }]}>INTERIOR CONCEPT Studio</Text>
         <Text style={styles.footerText}>183, East Senpara, Begum Rokeya Soroni</Text>
         <Text style={styles.footerText}>3rd floor, Mirpur 10, Dhaka-1216</Text>
       </View>
@@ -449,7 +449,7 @@ const FooterFixed = ({ content }: { content: QuotationDraftContent }) => (
         <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold' }]}>www.aestheticinteriorbd.com</Text>
       </View>
       <View style={{ width: '35%', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-        <Text style={styles.footerText}>Â© 2026 All rights reserved.</Text>
+        <Text style={styles.footerText}>© 2026 All rights reserved.</Text>
       </View>
     </View>
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 }}>
@@ -510,7 +510,7 @@ function splitPdfTableLines(value: string | null | undefined, lineLength: number
 }
 
 function SingleMaterialLine({ text }: { text: string }) {
-  if (!text) return <Text wrap={false} style={styles.matText}>â€”</Text>
+  if (!text) return <Text wrap={false} style={styles.matText}>—</Text>
   const match = text.match(/^(\d{2}\.[^:]+:|[^:*]+:|\*[^:]+:)/)
   const isWithoutWiring = text.toLowerCase().includes('without supplying wiring') || text.toLowerCase().includes('without suppling wiring');
   if (!match) {
@@ -783,7 +783,7 @@ export function DetailQuotationDocument({
           <View>
             <View style={styles.sigLine} />
             <Text style={[styles.metaText, styles.bold, { marginTop: 4 }]}>{content.signatoryName || 'Authorized Signature'}</Text>
-            <Text style={styles.metaText}>{content.signatoryTitle || 'Aesthetic Interior'}</Text>
+            <Text style={styles.metaText}>{content.signatoryTitle || 'INTERIOR CONCEPT'}</Text>
           </View>
         </View>
 

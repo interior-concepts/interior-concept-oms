@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Architectural Interior Design in Dhaka, Bangladesh',
     description:
-      'Planning, detailing, and architectural interior support by Aesthetic Interior Studio in Bangladesh.',
+      'Planning, detailing, and architectural interior support by INTERIOR CONCEPT Studio in Bangladesh.',
     url: '/services/architectural',
     type: 'website',
   },

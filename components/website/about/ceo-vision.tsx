@@ -9,7 +9,7 @@ const ceoMessage = {
   title: "Chief Executive Officer",
   caption: "A clear vision shapes every extraordinary space.",
   description:
-    "Good design is never just about how a space looks-it is entirely about how it feels, functions, and inspires the people within it. At Aesthetic Interior, our team is relentlessly dedicated to elevating your environment. We don't believe in one-size-fits-all solutions; instead, we push the boundaries of creativity and precision to engineer bespoke spaces that truly reflect your unique identity, elevate your lifestyle, and match your highest ambitions.",
+    "Good design is never just about how a space looks-it is entirely about how it feels, functions, and inspires the people within it. At INTERIOR CONCEPT, our team is relentlessly dedicated to elevating your environment. We don't believe in one-size-fits-all solutions; instead, we push the boundaries of creativity and precision to engineer bespoke spaces that truly reflect your unique identity, elevate your lifestyle, and match your highest ambitions.",
 }
 
 export function CeoVision() {
@@ -57,7 +57,7 @@ export function CeoVision() {
               <div className="relative w-72 h-96 lg:w-96 lg:h-[32rem] rounded-2xl overflow-hidden bg-[#e9e6dd] animate-in fade-in zoom-in-95 duration-700">
                 <Image
                   src="/user/userceoimage.jpeg"
-                  alt="Jahirul Islam, CEO of Aesthetic Interior"
+                  alt="Jahirul Islam, CEO of INTERIOR CONCEPT"
                   fill
                   sizes="(max-width: 1024px) 288px, 384px"
                   className="object-cover object-center transition-transform duration-700 hover:scale-105"
@@ -72,7 +72,7 @@ export function CeoVision() {
                 <p className="text-[#a57c00] text-sm tracking-[0.2em] uppercase">Leadership Note</p>
               </div>
 
-              <p className="text-[#4a4a4a] leading-relaxed text-base lg:text-lg">‚Äú{ceoMessage.description}‚Äù</p>
+              <p className="text-[#4a4a4a] leading-relaxed text-base lg:text-lg">ì{ceoMessage.description}î</p>
 
               <div className="mt-8 pt-6">
                 <h3 className="text-2xl font-serif text-[#1a3a2f]">{ceoMessage.name}</h3>

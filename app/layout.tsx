@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteName}`,
   },
   description:
-    "Aesthetic Interior Studio is a pioneer brand for modern contemporary interior design in Dhaka, Bangladesh, serving residential, commercial, and architectural spaces.",
+    "INTERIOR CONCEPT Studio is a pioneer brand for modern contemporary interior design in Dhaka, Bangladesh, serving residential, commercial, and architectural spaces.",
   applicationName: siteName,
   authors: [{ name: siteName }],
   verification: googleSiteVerification
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   creator: siteName,
   publisher: siteName,
   keywords: [
-    "Aesthetic Interior Studio",
-    "aesthetic interior studio in BD",
+    "INTERIOR CONCEPT Studio",
+    "INTERIOR CONCEPT studio in BD",
     "interior design Dhaka",
     "interior design Bangladesh",
     "modern contemporary interior design",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     siteName,
     title: `${siteName} | Interior Design Studio in Dhaka, Bangladesh`,
     description:
-      "Modern contemporary residential, commercial, and architectural interior design by Aesthetic Interior Studio in Dhaka, Bangladesh.",
+      "Modern contemporary residential, commercial, and architectural interior design by INTERIOR CONCEPT Studio in Dhaka, Bangladesh.",
     images: [
       {
         url: "/Logo/HeaderLogo.png",

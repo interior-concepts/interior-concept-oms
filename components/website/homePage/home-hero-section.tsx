@@ -167,7 +167,7 @@ export function HomeHeroSection() {
             >
               <div className="h-px w-12 bg-[#c89f2f]/80" />
               <p className="text-xs font-medium uppercase tracking-[0.28em] text-white/90 sm:text-sm">
-                Aesthetic Interior Studio
+                INTERIOR CONCEPT Studio
               </p>
               <div className="h-px w-12 bg-[#c89f2f]/80" />
             </motion.div>
@@ -179,7 +179,7 @@ export function HomeHeroSection() {
               transition={{ duration: 0.6, delay: 0.05, ease: "easeOut" }}
               className={`${notoSerifBengali.className} mb-4 text-sm font-medium tracking-wide text-[#f2d487] sm:text-base`}
             >
-              রুচিতে আভিজাত্য, ছোঁয়ায় ঐতিহ্য
+              ?????? ????????, ?????? ??????
             </motion.p>
 
             <motion.h1

@@ -51,13 +51,13 @@ export function Header() {
 					<Link href="/" className="flex items-center">
 						<Image
 							src="/Logo/HeaderLogo.png"
-							alt="Aesthetic Interior Studio"
+							alt="INTERIOR CONCEPT Studio"
 							width={220}
 							height={72}
 							priority
 							className="h-12 w-auto"
 						/>
-						{/* <span className="ml-2 font-serif text-xl text-[#0d3d3d]">Aesthetic Interior Studio</span> */}
+						{/* <span className="ml-2 font-serif text-xl text-[#0d3d3d]">INTERIOR CONCEPT Studio</span> */}
 					</Link>
 
 					{/* Desktop Navigation */}

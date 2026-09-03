@@ -13,7 +13,7 @@ function formatAmount(value: number) {
 }
 
 function formatCurrency(value: number) {
-  return `à§³ ${formatAmount(value)}`
+  return `? ${formatAmount(value)}`
 }
 
 
@@ -64,7 +64,7 @@ function PageFooter({ content }: { content: ShortQuotationContent }) {
     <div className="relative z-10 mt-12 border-t border-[#a57c00] pt-3 text-[9px] text-neutral-700">
       <div className="flex justify-between">
         <div className="w-[35%]">
-          <p className="mb-1 font-bold" style={{ color: PRIMARY }}>Aesthetic Interior Studio</p>
+          <p className="mb-1 font-bold" style={{ color: PRIMARY }}>INTERIOR CONCEPT Studio</p>
           <p>183, East Senpara, Begum Rokeya Soroni</p>
           <p>3rd floor, Mirpur 10, Dhaka-1216</p>
         </div>
@@ -74,10 +74,10 @@ function PageFooter({ content }: { content: ShortQuotationContent }) {
           <p className="font-bold" style={{ color: PRIMARY }}>www.aestheticinteriorbd.com</p>
         </div>
         <div className="flex w-[35%] flex-col items-end justify-end">
-          <p className="text-neutral-500">Â© 2026 All rights reserved.</p>
+          <p className="text-neutral-500">© 2026 All rights reserved.</p>
         </div>
       </div>
-      <p className="mt-1 text-right text-[6px] text-neutral-400">Quotation Code: {content.quotationCode ?? 'Not generated yet'} â€¢ Generated: {formatDownloadDateTime(content.downloadedAt)}</p>
+      <p className="mt-1 text-right text-[6px] text-neutral-400">Quotation Code: {content.quotationCode ?? 'Not generated yet'} • Generated: {formatDownloadDateTime(content.downloadedAt)}</p>
     </div>
   )
 }
@@ -105,7 +105,7 @@ export function ShortQuotationPrint({ content }: { content: ShortQuotationConten
         <div className="pb-2">
           <p className="mb-1 text-[9px] font-bold uppercase tracking-wider text-[#a57c00]">Prepared For</p>
           <p className="mb-0.5 text-[14px] font-bold leading-snug text-[#0f5b53]">{content.clientName}</p>
-          <p className="max-w-[360px] text-[9px] leading-snug text-neutral-600">{content.clientAddress || 'â€”'}</p>
+          <p className="max-w-[360px] text-[9px] leading-snug text-neutral-600">{content.clientAddress || '—'}</p>
         </div>
 
         {content.subject ? <p className="mb-2 text-[9px] text-neutral-700"><span className="font-bold">Subject:</span> {content.subject}</p> : null}

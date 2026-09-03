@@ -147,14 +147,14 @@ const FooterFixed = ({ content }: { content: ShortQuotationContent }) => (
     <View style={styles.footerDivider} />
     <View style={{ paddingTop: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
       <View style={{ width: '48%' }}>
-        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginBottom: 3 }]}>Aesthetic Interior Studio</Text>
+        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginBottom: 3 }]}>INTERIOR CONCEPT Studio</Text>
         <Text style={styles.footerText}>183, East Senpara, Begum Rokeya Soroni</Text>
         <Text style={styles.footerText}>3rd floor, Mirpur 10, Dhaka-1216</Text>
       </View>
       <View style={{ width: '48%', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
         <Text style={styles.footerText}>+88 0132969 4663</Text>
         <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold' }]}>www.aestheticinteriorbd.com</Text>
-        <Text style={styles.footerText}>Â© 2026 All rights reserved.</Text>
+        <Text style={styles.footerText}>© 2026 All rights reserved.</Text>
       </View>
     </View>
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 }}>

@@ -1,4 +1,4 @@
-export const siteName = "Aesthetic Interior Studio"
+export const siteName = "INTERIOR CONCEPT Studio"
 
 export const siteUrl = "https://www.aestheticinteriorbd.com"
 

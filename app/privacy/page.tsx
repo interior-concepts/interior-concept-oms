@@ -1,7 +1,7 @@
 export default function PrivacyPolicyPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-20 font-sans">
-      <h1 className="mb-6 text-3xl font-bold">Privacy Policy for Aesthetic Interior</h1>
+      <h1 className="mb-6 text-3xl font-bold">Privacy Policy for INTERIOR CONCEPT</h1>
       <p className="mb-8 text-sm text-gray-600">Last Updated: March 30, 2026</p>
 
       <section className="mb-8">

@@ -12,11 +12,11 @@ import { BreadcrumbJsonLd } from "@/components/website/seo/json-ld"
 export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
-  title: "About Aesthetic Interior Studio | Interior Design Company in Dhaka",
+  title: "About INTERIOR CONCEPT Studio | Interior Design Company in Dhaka",
   description:
-    "Learn about Aesthetic Interior Studio, a pioneer modern contemporary interior design brand in Dhaka, Bangladesh for homes, offices, and architectural spaces.",
+    "Learn about INTERIOR CONCEPT Studio, a pioneer modern contemporary interior design brand in Dhaka, Bangladesh for homes, offices, and architectural spaces.",
   keywords: [
-    "about Aesthetic Interior Studio",
+    "about INTERIOR CONCEPT Studio",
     "interior design company Dhaka",
     "interior design firm Bangladesh",
     "modern contemporary interior design company",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     canonical: "/about",
   },
   openGraph: {
-    title: "About Aesthetic Interior Studio | Dhaka Interior Design Company",
+    title: "About INTERIOR CONCEPT Studio | Dhaka Interior Design Company",
     description:
-      "Meet the Dhaka-based team behind Aesthetic Interior Studio and our modern contemporary approach to interiors.",
+      "Meet the Dhaka-based team behind INTERIOR CONCEPT Studio and our modern contemporary approach to interiors.",
     url: "/about",
     type: "website",
   },

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
         "residential interior design Dhaka",
         "home interior design Bangladesh",
         "apartment interior design Dhaka",
-        "Aesthetic Interior Studio residential",
+        "INTERIOR CONCEPT Studio residential",
     ],
     alternates: {
         canonical: "/services/residential",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Residential Interior Design in Dhaka, Bangladesh",
         description:
-            "Modern contemporary home interiors by Aesthetic Interior Studio for apartments and houses in Bangladesh.",
+            "Modern contemporary home interiors by INTERIOR CONCEPT Studio for apartments and houses in Bangladesh.",
         url: "/services/residential",
         type: "website",
     },

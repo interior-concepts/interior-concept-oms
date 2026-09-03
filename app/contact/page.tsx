@@ -4,12 +4,12 @@ import { ContactInfo } from "@/components/website/contact/contact-info"
 import { BreadcrumbJsonLd } from "@/components/website/seo/json-ld"
 
 export const metadata: Metadata = {
-  title: "Contact Aesthetic Interior Studio | Interior Designer in Dhaka",
+  title: "Contact INTERIOR CONCEPT Studio | Interior Designer in Dhaka",
   description:
-    "Contact Aesthetic Interior Studio in Mirpur, Dhaka for residential, commercial, and architectural interior design consultations in Bangladesh.",
+    "Contact INTERIOR CONCEPT Studio in Mirpur, Dhaka for residential, commercial, and architectural interior design consultations in Bangladesh.",
   keywords: [
     "contact interior designer Dhaka",
-    "Aesthetic Interior Studio contact",
+    "INTERIOR CONCEPT Studio contact",
     "interior design consultation Bangladesh",
     "interior studio Mirpur Dhaka",
   ],
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contact Aesthetic Interior Studio | Dhaka, Bangladesh",
+    title: "Contact INTERIOR CONCEPT Studio | Dhaka, Bangladesh",
     description:
-      "Book an interior design consultation with Aesthetic Interior Studio in Dhaka, Bangladesh.",
+      "Book an interior design consultation with INTERIOR CONCEPT Studio in Dhaka, Bangladesh.",
     url: "/contact",
     type: "website",
   },

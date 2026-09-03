@@ -11,9 +11,9 @@ export function LocalBusinessJsonLd() {
     "@type": ["LocalBusiness", "InteriorDesignService"],
     "@id": `${siteUrl}/#localbusiness`,
     name: siteName,
-    alternateName: ["Aesthetic Interior", "Aesthetic Interior Studio in BD"],
+    alternateName: ["INTERIOR CONCEPT", "INTERIOR CONCEPT Studio in BD"],
     description:
-      "Aesthetic Interior Studio is a pioneer brand for modern contemporary interior design in Dhaka, Bangladesh.",
+      "INTERIOR CONCEPT Studio is a pioneer brand for modern contemporary interior design in Dhaka, Bangladesh.",
     image: [
       absoluteUrl("/Logo/HeaderLogo.png"),
       absoluteUrl("/banner/Banner1.png"),
@@ -79,7 +79,7 @@ export function WebsiteJsonLd() {
     "@type": "WebSite",
     "@id": `${siteUrl}/#website`,
     name: siteName,
-    alternateName: ["Aesthetic Interior", "Aesthetic Interior Studio BD"],
+    alternateName: ["INTERIOR CONCEPT", "INTERIOR CONCEPT Studio BD"],
     url: siteUrl,
     publisher: {
       "@id": `${siteUrl}/#localbusiness`,
@@ -100,7 +100,7 @@ export function OrganizationJsonLd() {
     "@type": "Organization",
     "@id": `${siteUrl}/#organization`,
     name: siteName,
-    alternateName: ["Aesthetic Interior", "Aesthetic Interior Studio in BD"],
+    alternateName: ["INTERIOR CONCEPT", "INTERIOR CONCEPT Studio in BD"],
     url: siteUrl,
     logo: absoluteUrl("/Logo/HeaderLogo.png"),
     contactPoint: {

@@ -29,11 +29,11 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: `${siteName} in BD | Modern Interior Design Studio in Dhaka`,
   description:
-    "Aesthetic Interior Studio in BD is a pioneer brand for modern contemporary interior design in Dhaka, Bangladesh. Explore residential, commercial, and architectural interiors.",
+    "INTERIOR CONCEPT Studio in BD is a pioneer brand for modern contemporary interior design in Dhaka, Bangladesh. Explore residential, commercial, and architectural interiors.",
   keywords: [
-    "aesthetic interior studio in bd",
-    "aesthetic interior studio Dhaka",
-    "aesthetic interior Bangladesh",
+    "INTERIOR CONCEPT studio in bd",
+    "INTERIOR CONCEPT studio Dhaka",
+    "INTERIOR CONCEPT Bangladesh",
     "interior design Dhaka Bangladesh",
     "modern contemporary interior design Bangladesh",
   ],
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${siteName} in BD | Modern Interior Design Studio in Dhaka`,
     description:
-      "Aesthetic Interior Studio is a pioneer brand for modern contemporary interior design in Dhaka, Bangladesh.",
+      "INTERIOR CONCEPT Studio is a pioneer brand for modern contemporary interior design in Dhaka, Bangladesh.",
     url: "/",
     type: "website",
   },

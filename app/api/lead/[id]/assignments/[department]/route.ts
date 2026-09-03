@@ -53,7 +53,724 @@ import { hasJrArchitectureLeaderRole } from '@/lib/jr-architecture-roles'
       "createdAt": "2026-03-09T08:03:54.636Z",
       "user": {
         "id": "cmmhf6aef0003pku3125gleqh",
-        "fullName": "aesthetic interior",
+        "fullName": "
+  $m = import prisma from '@/lib/prisma'
+import {
+  LeadAssignmentDepartment,
+  LeadPrimaryOwnerDepartment,
+  LeadStage,
+  LeadSubStatus,
+} from '@/generated/prisma/client'
+import { NextRequest, NextResponse } from 'next/server'
+import { requireDatabaseRoles } from '@/lib/authz'
+import { logUserAssigned } from '@/lib/activity-log-service'
+import { autoCompletePendingFollowups } from '@/lib/followup-auto-complete'
+import { hasJrArchitectureLeaderRole } from '@/lib/jr-architecture-roles'
+
+/*
+  POSTMAN TESTING DATA
+  =====================
+  
+  BASE URL: http://localhost:3000/api/lead/{leadId}/assignments/{department}
+  
+  VALID DEPARTMENTS: ADMIN, SR_CRM, JR_CRM, QUOTATION, VISIT_TEAM, JR_ARCHITECT, VISUALIZER_3D
+  
+  =====================
+  PUT - Update assignment for a specific department
+  =====================
+  URL: http://localhost:3000/api/lead/{leadId}/assignments/{department}
+  Method: PUT
+  Headers: 
+    - Content-Type: application/json
+    - Authorization: Bearer {token}
+  
+  Request Body:
+  {
+    "userId": "cmmhf6aef0003pku3125gleqh"
+  }
+  
+  Example URLs:
+  http://localhost:3000/api/lead/cmmhfdt160000vzwb5ai4ej2g/assignments/sr_crm
+  http://localhost:3000/api/lead/cmmhfdt160000vzwb5ai4ej2g/assignments/JR_CRM
+  
+  Example curl:
+  curl -X PUT http://localhost:3000/api/lead/cmmhfdt160000vzwb5ai4ej2g/assignments/SR_CRM \
+    -H "Content-Type: application/json" \
+    -d '{"userId": "cmmhf6aef0003pku3125gleqh"}'
+  
+  Expected Success Response (200):
+  {
+    "success": true,
+    "data": {
+      "id": "cmmiwa5xo0001fdwby7l7wjo2",
+      "leadId": "cmmhfdt160000vzwb5ai4ej2g",
+      "userId": "cmmhf6aef0003pku3125gleqh",
+      "department": "SR_CRM",
+      "createdAt": "2026-03-09T08:03:54.636Z",
+      "user": {
+        "id": "cmmhf6aef0003pku3125gleqh",
+        "fullName": "interior concept",
+        "email": "mdalraihan435@gmail.com"
+      }
+    },
+    "message": "Assignment updated successfully"
+  }
+  
+  Expected Error Responses:
+  - Missing userId (400):
+    {"success": false, "error": "userId is required"}
+  
+  - Invalid department (400):
+    {"success": false, "error": "Invalid department. Must be one of: ADMIN, SR_CRM, JR_CRM, QUOTATION, VISIT_TEAM, JR_ARCHITECT, VISUALIZER_3D"}
+  
+  - Lead not found (404):
+    {"success": false, "error": "Lead not found"}
+  
+  - User not found (404):
+    {"success": false, "error": "User not found"}
+  
+  - Assignment not found (404):
+    {"success": false, "error": "Assignment not found for this lead and department"}
+  
+  =====================
+  DELETE - Remove assignment for a specific department
+  =====================
+  URL: http://localhost:3000/api/lead/{leadId}/assignments/{department}
+  Method: DELETE
+  Headers: 
+    - Authorization: Bearer {token}
+  
+  No request body needed
+  
+  Example URLs:
+  http://localhost:3000/api/lead/cmmhfdt160000vzwb5ai4ej2g/assignments/sr_crm
+  http://localhost:3000/api/lead/cmmhfdt160000vzwb5ai4ej2g/assignments/JR_CRM
+  
+  Example curl:
+  curl -X DELETE http://localhost:3000/api/lead/cmmhfdt160000vzwb5ai4ej2g/assignments/SR_CRM \
+    -H "Authorization: Bearer {token}"
+  
+  Expected Success Response (200):
+  {
+    "success": true,
+    "data": {
+      "id": "cmmiwa5xo0001fdwby7l7wjo2",
+      "leadId": "cmmhfdt160000vzwb5ai4ej2g",
+      "userId": "cmmhf6aef0003pku3125gleqh",
+      "department": "SR_CRM",
+      "createdAt": "2026-03-09T08:03:54.636Z"
+    },
+    "message": "Assignment removed successfully"
+  }
+  
+  Expected Error Responses:
+  - Invalid department (400):
+    {"success": false, "error": "Invalid department. Must be one of: ADMIN, SR_CRM, JR_CRM, QUOTATION, VISIT_TEAM, JR_ARCHITECT, VISUALIZER_3D"}
+  
+  - Lead not found (404):
+    {"success": false, "error": "Lead not found"}
+  
+  - Assignment not found (404):
+    {"success": false, "error": "Assignment not found"}
+  
+  =====================
+  POSTMAN COLLECTION SETUP
+  =====================
+  
+  1. Create a new Collection: "Lead Assignments - Department"
+  2. Create two requests:
+  
+  Request 1: Update Assignment
+  - Name: PUT - Update Assignment
+  - Method: PUT
+  - URL: {{baseUrl}}/api/lead/{{leadId}}/assignments/{{department}}
+  - Body: {"userId": "{{userId}}"}
+  - Headers: Content-Type: application/json, Authorization: Bearer {{token}}
+  
+  Request 2: Delete Assignment
+  - Name: DELETE - Remove Assignment
+  - Method: DELETE
+  - URL: {{baseUrl}}/api/lead/{{leadId}}/assignments/{{department}}
+  - Headers: Authorization: Bearer {{token}}
+  
+  3. Set collection variables:
+  - baseUrl: http://localhost:3000
+  - leadId: cmmhfdt160000vzwb5ai4ej2g
+  - department: SR_CRM
+  - userId: cmmhf6aef0003pku3125gleqh
+  - token: your_auth_token
+*/
+
+type UpdateAssignmentBody = {
+  userId?: unknown
+}
+
+const debugLog = (...args: unknown[]) => {
+  if (process.env.NODE_ENV !== 'production') {
+    void args
+    // console.log(...args);
+  }
+}
+
+function toOptionalString(value: unknown): string | null {
+  if (typeof value !== 'string') return null
+  const trimmed = value.trim()
+  return trimmed.length > 0 ? trimmed : null
+}
+
+
+export async function POST(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string; department: string }> },
+) {
+  try {
+    const authResult = await requireDatabaseRoles([])
+    if (!authResult.ok) return authResult.response
+
+    const resolvedParams = await params
+    const leadId = resolvedParams?.id
+    const department = resolvedParams?.department?.toUpperCase()
+    const body = (await request.json().catch(() => ({}))) as { userId?: unknown }
+    const userId = typeof body.userId === 'string' ? body.userId.trim() : ''
+
+    if (!leadId || department !== 'QUOTATION' || !userId) {
+      return NextResponse.json(
+        { success: false, error: 'New quotation assignment requires lead id, QUOTATION department, and userId' },
+        { status: 400 },
+      )
+    }
+
+    const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
+    if (!actorDepartments.has('ADMIN') && !actorDepartments.has('SR_CRM')) {
+      return NextResponse.json(
+        { success: false, error: 'Only Admin or Senior CRM can assign a new quotation member' },
+        { status: 403 },
+      )
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, fullName: true, email: true },
+    })
+    if (!user) {
+      return NextResponse.json({ success: false, error: 'User not found' }, { status: 404 })
+    }
+
+    const result = await prisma.$transaction(async (tx) => {
+      const lead = await tx.lead.findUnique({
+        where: { id: leadId },
+        select: { id: true, name: true, stage: true, subStatus: true },
+      })
+      if (!lead) throw new Error('Lead not found')
+      if (lead.stage !== LeadStage.QUOTATION_PHASE || lead.subStatus !== LeadSubStatus.QUOTATION_APPROVED) {
+        throw new Error('New quotation can only be assigned after quotation approval')
+      }
+
+      const assignment = await tx.leadAssignment.upsert({
+        where: {
+          leadId_department_userId: {
+            leadId,
+            department: LeadAssignmentDepartment.QUOTATION,
+            userId,
+          },
+        },
+        create: {
+          leadId,
+          userId,
+          department: LeadAssignmentDepartment.QUOTATION,
+        },
+        update: {},
+        include: { user: { select: { id: true, fullName: true, email: true } } },
+      })
+
+      await tx.lead.update({
+        where: { id: leadId },
+        data: { stage: LeadStage.QUOTATION_PHASE, subStatus: LeadSubStatus.QUOTATION_ASSIGNED },
+      })
+
+      await logUserAssigned(tx, {
+        leadId,
+        userId,
+        leadName: `New quotation assignment: ${user.fullName} assigned while preserving previous quotation owners`,
+      })
+
+      await autoCompletePendingFollowups(tx, {
+        leadId,
+        userId: authResult.actorUserId,
+        action: 'new quotation assignment',
+      })
+
+      return assignment
+    })
+
+    return NextResponse.json({ success: true, data: result, message: 'New quotation assignment created successfully' })
+  } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : 'Failed to create new quotation assignment'
+    return NextResponse.json({ success: false, error: errorMsg }, { status: errorMsg.includes('not found') ? 404 : 500 })
+  }
+}
+
+// PUT - Update assignment for a specific department
+// Changes the user assigned to a department for a lead
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string; department: string }> },
+) {
+  try {
+    debugLog(
+      '🔵 [PUT /api/lead/[id]/assignments/[department]] - Request received',
+    )
+
+    // Verify user authentication
+    const authResult = await requireDatabaseRoles([])
+    if (!authResult.ok) {
+      return authResult.response
+    }
+    debugLog('✅ [PUT /api/lead/[id]/assignments/[department]] - Auth passed')
+    const actorUserId = authResult.ok ? authResult.actorUserId : null
+
+    const resolvedParams = await params
+    const leadId = resolvedParams?.id
+    const department = resolvedParams?.department?.toUpperCase()
+    debugLog(
+      '🔍 [PUT /api/lead/[id]/assignments/[department]] - Resolved leadId:',
+      leadId,
+      'department:',
+      department,
+    )
+
+    if (
+      !leadId ||
+      !department ||
+      typeof leadId !== 'string' ||
+      typeof department !== 'string'
+    ) {
+      debugLog(
+        '🔴 [PUT /api/lead/[id]/assignments/[department]] - Invalid params',
+      )
+      return NextResponse.json(
+        { success: false, error: 'Invalid lead id or department' },
+        { status: 400 },
+      )
+    }
+
+    const body = (await request.json()) as UpdateAssignmentBody
+    debugLog(
+      '📝 [PUT /api/lead/[id]/assignments/[department]] - Parsed body:',
+      JSON.stringify(body),
+    )
+
+    const userId = toOptionalString(body.userId)
+    debugLog(
+      '👤 [PUT /api/lead/[id]/assignments/[department]] - userId:',
+      userId,
+    )
+
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: 'userId is required' },
+        { status: 400 },
+      )
+    }
+
+    // Validate department enum
+    const validDepartments = [
+      'ADMIN',
+      'SR_CRM',
+      'JR_CRM',
+      'QUOTATION',
+      'VISIT_TEAM',
+      'JR_ARCHITECT',
+      'VISUALIZER_3D',
+      'ACCOUNTS',
+    ]
+    if (!validDepartments.includes(department)) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Invalid department. Must be one of: ${validDepartments.join(', ')}`,
+        },
+        { status: 400 },
+      )
+    }
+
+    if (department === 'JR_ARCHITECT' || department === 'SR_CRM') {
+      const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
+      const actorRoles = authResult.actorRoles ?? []
+      const isJrArchitectLeader =
+        actorDepartments.has('JR_ARCHITECT') &&
+        hasJrArchitectureLeaderRole(actorRoles)
+      const canUpdateAssignment =
+        actorDepartments.has('ADMIN') ||
+        actorDepartments.has('SR_CRM') ||
+        isJrArchitectLeader
+
+      if (!canUpdateAssignment) {
+        return NextResponse.json(
+          {
+            success: false,
+            error:
+              department === 'JR_ARCHITECT'
+                ? 'Only Admin, Senior CRM, or JR Architect leaders can reassign JR Architect'
+                : 'Only Admin, Senior CRM, or JR Architect leaders can reassign SR CRM',
+          },
+          { status: 403 },
+        )
+      }
+    }
+
+    if (department === 'QUOTATION' || department === 'VISUALIZER_3D') {
+      const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
+      const canUpdateQuotationAssignment =
+        actorDepartments.has('ADMIN') || actorDepartments.has('SR_CRM')
+      const canUpdateVisualizerAssignment =
+        canUpdateQuotationAssignment || actorDepartments.has('JR_ARCHITECT')
+      const canUpdateCrossDepartmentAssignment =
+        department === 'QUOTATION'
+          ? canUpdateQuotationAssignment
+          : canUpdateVisualizerAssignment
+
+      if (!canUpdateCrossDepartmentAssignment) {
+        return NextResponse.json(
+          {
+            success: false,
+            error:
+              department === 'QUOTATION'
+                ? 'Only Admin or Senior CRM can reassign quotation member'
+                : 'Only Admin, Senior CRM, or JR Architect can assign 3D Visualizer',
+          },
+          { status: 403 },
+        )
+      }
+    }
+
+    // Verify lead exists
+    const lead = await prisma.lead.findUnique({
+      where: { id: leadId },
+      select: { id: true, name: true, stage: true, subStatus: true },
+    })
+
+    if (!lead) {
+      return NextResponse.json(
+        { success: false, error: 'Lead not found' },
+        { status: 404 },
+      )
+    }
+
+    if (
+      department === 'JR_ARCHITECT' &&
+      (lead.subStatus === LeadSubStatus.CAD_APPROVED ||
+        (lead.stage === LeadStage.DISCOVERY &&
+          lead.subStatus === LeadSubStatus.FIRST_MEETING_SET))
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'JR Architect cannot be reassigned after CAD approval.',
+        },
+        { status: 409 },
+      )
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, fullName: true, email: true },
+    })
+
+    if (!user) {
+      return NextResponse.json(
+        { success: false, error: 'User not found' },
+        { status: 404 },
+      )
+    }
+
+    // Find and update the assignment
+    debugLog(
+      '💾 [PUT /api/lead/[id]/assignments/[department]] - Updating assignment',
+    )
+    const assignment = await prisma.$transaction(async (tx) => {
+      const existingAssignment = await tx.leadAssignment.findFirst({
+        where: {
+          leadId,
+          department: department as LeadAssignmentDepartment,
+        },
+      })
+      debugLog(
+        '📊 [PUT /api/lead/[id]/assignments/[department]] - Existing assignment:',
+        existingAssignment,
+      )
+
+      let assignmentId = existingAssignment?.id ?? null
+
+      if (!assignmentId) {
+        const canCreateMissingAssignment =
+          department === 'QUOTATION' ||
+          department === 'VISUALIZER_3D' ||
+          department === 'JR_ARCHITECT' ||
+          department === 'SR_CRM'
+
+        if (!canCreateMissingAssignment) {
+          throw new Error('Assignment not found for this lead and department')
+        }
+
+        const created = await tx.leadAssignment.create({
+          data: {
+            leadId,
+            userId,
+            department: department as LeadAssignmentDepartment,
+          },
+          include: {
+            user: {
+              select: { id: true, fullName: true, email: true },
+            },
+          },
+        })
+        assignmentId = created.id
+      }
+
+      await tx.leadAssignment.deleteMany({
+        where: {
+          leadId,
+          department: department as LeadAssignmentDepartment,
+          id: { not: assignmentId },
+        },
+      })
+
+      const updated = await tx.leadAssignment.update({
+        where: { id: assignmentId },
+        data: { userId },
+        include: {
+          user: {
+            select: { id: true, fullName: true, email: true },
+          },
+        },
+      })
+
+      if (department === 'SR_CRM') {
+        await tx.lead.update({
+          where: { id: leadId },
+          data: {
+            primaryOwnerDepartment: LeadPrimaryOwnerDepartment.SR_CRM,
+            primaryOwnerUserId: userId,
+          },
+        })
+      }
+
+      // Log the update activity
+      await logUserAssigned(tx, {
+        leadId,
+        userId: userId,
+        leadName: `Assignment updated: ${user.fullName} assigned to ${department} department`,
+      })
+
+      await autoCompletePendingFollowups(tx, {
+        leadId,
+        userId: actorUserId,
+        action: 'assignment update',
+      })
+
+      return updated
+    })
+    debugLog(
+      '✨ [PUT /api/lead/[id]/assignments/[department]] - Assignment updated successfully',
+    )
+
+    return NextResponse.json({
+      success: true,
+      data: assignment,
+      message: 'Assignment updated successfully',
+    })
+  } catch (error) {
+    console.error(
+      '❌ [PUT /api/lead/[id]/assignments/[department]] - Error:',
+      error,
+    )
+    const errorMsg =
+      error instanceof Error ? error.message : 'Failed to update assignment'
+    return NextResponse.json(
+      { success: false, error: errorMsg, details: String(error) },
+      {
+        status:
+          error instanceof Error && error.message.includes('not found')
+            ? 404
+            : 500,
+      },
+    )
+  }
+}
+
+// DELETE - Remove assignment for a specific department
+// Unassigns the user from a department for a lead
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string; department: string }> },
+) {
+  try {
+    debugLog(
+      '🔵 [DELETE /api/lead/[id]/assignments/[department]] - Request received',
+    )
+
+    // Verify user authentication
+    const authResult = await requireDatabaseRoles([])
+    if (!authResult.ok) {
+      return authResult.response
+    }
+    debugLog(
+      '✅ [DELETE /api/lead/[id]/assignments/[department]] - Auth passed',
+    )
+    const actorUserId = authResult.ok ? authResult.actorUserId : null
+
+    const resolvedParams = await params
+    const leadId = resolvedParams?.id
+    const department = resolvedParams?.department?.toUpperCase()
+    debugLog(
+      '🔍 [DELETE /api/lead/[id]/assignments/[department]] - Resolved leadId:',
+      leadId,
+      'department:',
+      department,
+    )
+
+    if (
+      !leadId ||
+      !department ||
+      typeof leadId !== 'string' ||
+      typeof department !== 'string'
+    ) {
+      debugLog(
+        '🔴 [DELETE /api/lead/[id]/assignments/[department]] - Invalid params',
+      )
+      return NextResponse.json(
+        { success: false, error: 'Invalid lead id or department' },
+        { status: 400 },
+      )
+    }
+
+    // Validate department enum
+    const validDepartments = [
+      'ADMIN',
+      'SR_CRM',
+      'JR_CRM',
+      'QUOTATION',
+      'VISIT_TEAM',
+      'JR_ARCHITECT',
+      'VISUALIZER_3D',
+      'ACCOUNTS',
+    ]
+    if (!validDepartments.includes(department)) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Invalid department. Must be one of: ${validDepartments.join(', ')}`,
+        },
+        { status: 400 },
+      )
+    }
+
+    // Verify lead exists
+    const lead = await prisma.lead.findUnique({
+      where: { id: leadId },
+      select: { id: true, name: true, stage: true },
+    })
+
+    if (!lead) {
+      return NextResponse.json(
+        { success: false, error: 'Lead not found' },
+        { status: 404 },
+      )
+    }
+
+    // Transaction for atomic delete and logging
+    debugLog(
+      '💾 [DELETE /api/lead/[id]/assignments/[department]] - Deleting assignment',
+    )
+    const result = await prisma.$transaction(async (tx) => {
+      // Find the assignment
+      const assignment = await tx.leadAssignment.findFirst({
+        where: {
+          leadId,
+          department: department as LeadAssignmentDepartment,
+        },
+        include: {
+          user: {
+            select: { fullName: true },
+          },
+        },
+      })
+
+      if (!assignment) {
+        throw new Error('Assignment not found')
+      }
+      debugLog(
+        '📊 [DELETE /api/lead/[id]/assignments/[department]] - Found assignment:',
+        assignment,
+      )
+
+      if (
+        department === 'SR_CRM' &&
+        lead.stage !== LeadStage.CONVERSION &&
+        lead.stage !== LeadStage.CLOSED
+      ) {
+        throw new Error(
+          'SR_CRM assignment is required until lead reaches CONVERSION or CLOSED',
+        )
+      }
+
+      // Delete the assignment
+      debugLog('🗑️ [DELETE /api/lead/[id]/assignments/[department]] - Deleting')
+      const deleted = await tx.leadAssignment.delete({
+        where: { id: assignment.id },
+      })
+
+      // Log the deletion activity
+      await logUserAssigned(tx, {
+        leadId,
+        userId: actorUserId,
+        leadName: `${assignment.user.fullName} unassigned from ${department} department`,
+      })
+
+      await autoCompletePendingFollowups(tx, {
+        leadId,
+        userId: actorUserId,
+        action: 'assignment update',
+      })
+
+      return deleted
+    })
+    debugLog(
+      '✨ [DELETE /api/lead/[id]/assignments/[department]] - Assignment deleted successfully',
+    )
+
+    return NextResponse.json(
+      {
+        success: true,
+        data: result,
+        message: 'Assignment removed successfully',
+      },
+      { status: 200 },
+    )
+  } catch (error) {
+    console.error(
+      '❌ [DELETE /api/lead/[id]/assignments/[department]] - Error:',
+      error,
+    )
+    const errorMsg =
+      error instanceof Error ? error.message : 'Failed to delete assignment'
+    return NextResponse.json(
+      { success: false, error: errorMsg },
+      {
+        status:
+          error instanceof Error && error.message.includes('not found')
+            ? 404
+            : 500,
+      },
+    )
+  }
+}
+.Value
+  if ($m -ceq 'AESTHETIC INTERIOR') { 'INTERIOR CONCEPT' }
+  elseif ($m -ceq 'Aesthetic Interior') { 'Interior Concept' }
+  else { 'interior concept' }
+",
         "email": "mdalraihan435@gmail.com"
       }
     },

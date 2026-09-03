@@ -102,7 +102,7 @@ export function Footer() {
               >
                 <Image
                   src="/images/logo3.png"
-                  alt="Aesthetic Interior Studio"
+                  alt="INTERIOR CONCEPT Studio"
                   width={160}
                   height={70}
                   loading="lazy"
@@ -216,7 +216,7 @@ export function Footer() {
       >
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-white/50 text-center md:text-left">
-            Â© {new Date().getFullYear()} Aesthetic Interior Studio. All rights reserved.
+            © {new Date().getFullYear()} INTERIOR CONCEPT Studio. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-white/50">
             <Link href="#" className="hover:text-[#a57c00] transition-colors">Privacy Policy</Link>

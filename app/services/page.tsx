@@ -21,7 +21,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Interior Design Services in Dhaka, Bangladesh",
   description:
-    "Explore residential, commercial, and architectural interior design services in Dhaka, Bangladesh by Aesthetic Interior Studio, a modern contemporary design brand.",
+    "Explore residential, commercial, and architectural interior design services in Dhaka, Bangladesh by INTERIOR CONCEPT Studio, a modern contemporary design brand.",
   keywords: [
     "interior design services Dhaka",
     "interior design services Bangladesh",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Interior Design Services in Dhaka, Bangladesh",
     description:
-      "Residential, commercial, and architectural interiors by Aesthetic Interior Studio in Bangladesh.",
+      "Residential, commercial, and architectural interiors by INTERIOR CONCEPT Studio in Bangladesh.",
     url: "/services",
     type: "website",
   },

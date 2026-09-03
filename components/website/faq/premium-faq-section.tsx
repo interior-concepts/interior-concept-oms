@@ -39,7 +39,7 @@ export function PremiumFaqSection({
               <div>
                 <h3 className="font-serif text-xl text-[#0d3d3d]">Trusted local design guidance</h3>
                 <p className="mt-2 text-sm leading-6 text-black/60">
-                  Aesthetic Interior Studio serves Dhaka and Bangladesh with modern contemporary interior design for
+                  INTERIOR CONCEPT Studio serves Dhaka and Bangladesh with modern contemporary interior design for
                   homes, offices, retail, and architectural spaces.
                 </p>
               </div>
