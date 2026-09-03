@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+﻿import prisma from '@/lib/prisma'
 import {
   LeadAssignmentDepartment,
   LeadPrimaryOwnerDepartment,
@@ -766,17 +766,8 @@ export async function DELETE(
     )
   }
 }
-.Value
-  if ($m -ceq 'AESTHETIC INTERIOR') { 'INTERIOR CONCEPT' }
-  elseif ($m -ceq 'Aesthetic Interior') { 'Interior Concept' }
-  else { 'interior concept' }
-",
-        "email": "mdalraihan435@gmail.com"
-      }
-    },
-    "message": "Assignment updated successfully"
-  }
-  
+
+/*
   Expected Error Responses:
   - Missing userId (400):
     {"success": false, "error": "userId is required"}
