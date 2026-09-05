@@ -449,7 +449,7 @@ const FooterFixed = ({ content }: { content: QuotationDraftContent }) => (
         <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold' }]}>www.aestheticinteriorbd.com</Text>
       </View>
       <View style={{ width: '35%', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-        <Text style={styles.footerText}>© 2026 All rights reserved.</Text>
+        <Text style={styles.footerText}>Â© 2026 All rights reserved.</Text>
       </View>
     </View>
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 }}>
@@ -510,7 +510,7 @@ function splitPdfTableLines(value: string | null | undefined, lineLength: number
 }
 
 function SingleMaterialLine({ text }: { text: string }) {
-  if (!text) return <Text wrap={false} style={styles.matText}>—</Text>
+  if (!text) return <Text wrap={false} style={styles.matText}>â€”</Text>
   const match = text.match(/^(\d{2}\.[^:]+:|[^:*]+:|\*[^:]+:)/)
   const isWithoutWiring = text.toLowerCase().includes('without supplying wiring') || text.toLowerCase().includes('without suppling wiring');
   if (!match) {

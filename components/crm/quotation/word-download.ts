@@ -126,9 +126,9 @@ function buildDetailQuotationHtml(input: DetailInput) {
   const summaryRows = floorSummaries.map((entry, index) => `<tr><td class="center">${String(index + 1).padStart(2, '0')}</td><td>${escapeHtml(entry.floor.name)}</td><td class="right">${formatDetailAmount(entry.total)}</td></tr>`).join('')
   const detailTables = floorSummaries.map((entry) => `<h2 class="section">${escapeHtml(entry.floor.name)}</h2><table><thead><tr><th>SL</th><th>Name</th><th>Materials</th><th>Qty SFT</th><th>Unit Price</th><th>Total</th></tr></thead><tbody>${entry.lines.map((line, lineIndex) => {
     const isPkg = isPackageLine(line)
-    return `<tr><td class="center">${String(lineIndex + 1).padStart(2, '0')}</td><td><b>${escapeHtml(line.description)}</b></td><td>${escapeHtml(line.materials || '—')}</td><td class="center">${isPkg ? 'Package' : (line.quantity != null ? escapeHtml(line.quantity) : '—')}</td><td class="center">${isPkg ? escapeHtml(line.unitPriceLabel?.trim() || 'as per project design') : (line.rate != null ? formatDetailAmount(line.rate) : '—')}</td><td class="right"><b>${formatDetailAmount(line.amount)}${line.description.toLowerCase().includes('electric wiring') ? ' (Approx)' : ''}</b></td></tr>`
+    return `<tr><td class="center">${String(lineIndex + 1).padStart(2, '0')}</td><td><b>${escapeHtml(line.description)}</b></td><td>${escapeHtml(line.materials || 'â€”')}</td><td class="center">${isPkg ? 'Package' : (line.quantity != null ? escapeHtml(line.quantity) : 'â€”')}</td><td class="center">${isPkg ? escapeHtml(line.unitPriceLabel?.trim() || 'as per project design') : (line.rate != null ? formatDetailAmount(line.rate) : 'â€”')}</td><td class="right"><b>${formatDetailAmount(line.amount)}${line.description.toLowerCase().includes('electric wiring') ? ' (Approx)' : ''}</b></td></tr>`
   }).join('')}<tr class="total"><td colspan="5">TOTAL</td><td class="right">${formatDetailAmount(entry.total)}</td></tr></tbody></table><p><b><u>In Words:</u></b> <b>${escapeHtml(amountInWordsTaka(entry.total))}</b></p>`).join('')
-  return pageHtml('Detail Quotation', `<h1>Detail Quotation</h1><table><tr><td><b>Quotation for:</b><br>${escapeHtml(clientName)}<br><b>Address:</b><br>${escapeHtml(clientAddress || '—')}</td><td><b>Date:</b><br>${escapeHtml(content.quotationDate ?? '')}</td></tr></table><p><b>Subject:</b> ${escapeHtml(content.summarySubject ?? content.subject ?? '')}</p><p><b>Dear Sir,</b><br>${escapeHtml((content.introLetter ?? '').replace('Dear Sir,\n', '').replace('Dear Sir,', ''))}</p><h2 class="section">Quotation Summary</h2><table><thead><tr><th>SL</th><th>Name</th><th>Total</th></tr></thead><tbody>${summaryRows}<tr class="total"><td colspan="2">GRAND TOTAL</td><td class="right">${formatDetailAmount(totals.grandTotal)}</td></tr></tbody></table><p><b><u>In Words:</u></b> <b>${escapeHtml(amountInWordsTaka(totals.grandTotal))}</b></p>${detailTables}<h2>Notes</h2><p>${escapeHtml(content.notes)}</p><h2>Terms & Condition</h2><p>${escapeHtml(content.terms)}</p><h2>Mode of Payment</h2><p>${escapeHtml(content.paymentTerms ?? '')}</p><h2>Duration Of Work</h2><p>${escapeHtml(content.durationNotes ?? '')}</p><p><b style="color:red">${escapeHtml(content.drawingDesign ?? '')}</b></p><br><table><tr><td>Customer Name & Sign</td><td><b>${escapeHtml(content.signatoryName ?? '')}</b><br>${escapeHtml(content.signatoryTitle ?? '')}</td></tr></table>`)
+  return pageHtml('Detail Quotation', `<h1>Detail Quotation</h1><table><tr><td><b>Quotation for:</b><br>${escapeHtml(clientName)}<br><b>Address:</b><br>${escapeHtml(clientAddress || 'â€”')}</td><td><b>Date:</b><br>${escapeHtml(content.quotationDate ?? '')}</td></tr></table><p><b>Subject:</b> ${escapeHtml(content.summarySubject ?? content.subject ?? '')}</p><p><b>Dear Sir,</b><br>${escapeHtml((content.introLetter ?? '').replace('Dear Sir,\n', '').replace('Dear Sir,', ''))}</p><h2 class="section">Quotation Summary</h2><table><thead><tr><th>SL</th><th>Name</th><th>Total</th></tr></thead><tbody>${summaryRows}<tr class="total"><td colspan="2">GRAND TOTAL</td><td class="right">${formatDetailAmount(totals.grandTotal)}</td></tr></tbody></table><p><b><u>In Words:</u></b> <b>${escapeHtml(amountInWordsTaka(totals.grandTotal))}</b></p>${detailTables}<h2>Notes</h2><p>${escapeHtml(content.notes)}</p><h2>Terms & Condition</h2><p>${escapeHtml(content.terms)}</p><h2>Mode of Payment</h2><p>${escapeHtml(content.paymentTerms ?? '')}</p><h2>Duration Of Work</h2><p>${escapeHtml(content.durationNotes ?? '')}</p><p><b style="color:red">${escapeHtml(content.drawingDesign ?? '')}</b></p><br><table><tr><td>Customer Name & Sign</td><td><b>${escapeHtml(content.signatoryName ?? '')}</b><br>${escapeHtml(content.signatoryTitle ?? '')}</td></tr></table>`)
 }
 
 const crcTable = new Uint32Array(256).map((_, index) => {
@@ -215,9 +215,9 @@ function buildDetailQuotationDocxBlob(input: DetailInput) {
         return tableRow([
           tableCell(String(lineIndex + 1).padStart(2, '0'), { align: 'center', bold: true }),
           tableCell(line.description, { bold: true }),
-          tableCell(wordMultilineParagraph(line.materials || '—')),
-          tableCell(isPkg ? 'Package' : (line.quantity != null ? String(line.quantity) : '—'), { align: 'center' }),
-          tableCell(isPkg ? (line.unitPriceLabel?.trim() || 'as per project design') : (line.rate != null ? formatDetailAmount(line.rate) : '—'), { align: 'center' }),
+          tableCell(wordMultilineParagraph(line.materials || 'â€”')),
+          tableCell(isPkg ? 'Package' : (line.quantity != null ? String(line.quantity) : 'â€”'), { align: 'center' }),
+          tableCell(isPkg ? (line.unitPriceLabel?.trim() || 'as per project design') : (line.rate != null ? formatDetailAmount(line.rate) : 'â€”'), { align: 'center' }),
           tableCell(`${formatDetailAmount(line.amount)}${line.description.toLowerCase().includes('electric wiring') ? ' (Approx)' : ''}`, { align: 'right', bold: true }),
         ])
       }),
@@ -232,7 +232,7 @@ function buildDetailQuotationDocxBlob(input: DetailInput) {
   const header = [
     wordParagraph('INTERIOR CONCEPT - Detail Quotation', { heading: true, align: 'center', color: '0F5B53' }),
     wordParagraph(`Quotation for: ${clientName}`, { bold: true }),
-    wordParagraph(`Address: ${clientAddress || '—'}`),
+    wordParagraph(`Address: ${clientAddress || 'â€”'}`),
     wordParagraph(`Date: ${content.quotationDate ?? ''}`),
     wordParagraph(`Subject: ${content.summarySubject ?? content.subject ?? ''}`, { bold: true }),
     wordParagraph('Dear Sir,', { bold: true }),

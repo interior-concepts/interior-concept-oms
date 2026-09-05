@@ -544,7 +544,7 @@ export default function FinanceDashboard() {
 
     // Format dates nicely for display: e.g. "01 Aug 2026"
     const fmtDisplayDate = (dateStr: string) => {
-      if (!dateStr) return "—"
+      if (!dateStr) return "â€”"
       const d = new Date(dateStr)
       return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
     }
@@ -570,7 +570,7 @@ export default function FinanceDashboard() {
     doc.setTextColor(71, 85, 105)
     doc.text(dateText, 18, 21.2)
 
-    // Report title & generated date — right aligned
+    // Report title & generated date â€” right aligned
     const reportTitle = mode === "PROJECT" ? "Project Wise Finance Report" : "Category Wise Finance Report"
     doc.setFontSize(10)
     doc.setFont("helvetica", "bold")
@@ -611,7 +611,7 @@ export default function FinanceDashboard() {
       if (mode === "PROJECT") {
         key = tx.lead?.name || "Office"
       } else {
-        key = CATEGORY_LABELS[tx.category] || tx.category || "—"
+        key = CATEGORY_LABELS[tx.category] || tx.category || "â€”"
       }
       if (!groups[key]) groups[key] = { inflow: 0, outflow: 0 }
       if (tx.type === "INFLOW") groups[key].inflow += tx.amount
@@ -628,15 +628,15 @@ export default function FinanceDashboard() {
         { content: idx + 1, rowSpan: 2, styles: { fillColor: bgColor, valign: "middle", halign: "center", textColor: [148, 163, 184] } },
         { content: name, rowSpan: 2, styles: { fillColor: bgColor, valign: "middle", fontStyle: "bold", textColor: [30, 41, 59] } },
         { content: "Inflow", styles: { fillColor: bgColor, textColor: [5, 150, 105], fontStyle: "italic", fontSize: 8 } },
-        { content: data.inflow > 0 ? data.inflow.toLocaleString() : "—", styles: { fillColor: bgColor, halign: "right", textColor: [5, 150, 105], fontStyle: "bold" } },
-        { content: "—", styles: { fillColor: bgColor, halign: "right", textColor: [148, 163, 184] } },
+        { content: data.inflow > 0 ? data.inflow.toLocaleString() : "â€”", styles: { fillColor: bgColor, halign: "right", textColor: [5, 150, 105], fontStyle: "bold" } },
+        { content: "â€”", styles: { fillColor: bgColor, halign: "right", textColor: [148, 163, 184] } },
       ])
 
       // Outflow row
       bodyRows.push([
         { content: "Outflow", styles: { fillColor: bgColor, textColor: [220, 38, 38], fontStyle: "italic", fontSize: 8 } },
-        { content: "—", styles: { fillColor: bgColor, halign: "right", textColor: [148, 163, 184] } },
-        { content: data.outflow > 0 ? data.outflow.toLocaleString() : "—", styles: { fillColor: bgColor, halign: "right", textColor: [220, 38, 38], fontStyle: "bold" } },
+        { content: "â€”", styles: { fillColor: bgColor, halign: "right", textColor: [148, 163, 184] } },
+        { content: data.outflow > 0 ? data.outflow.toLocaleString() : "â€”", styles: { fillColor: bgColor, halign: "right", textColor: [220, 38, 38], fontStyle: "bold" } },
       ])
     })
 
@@ -669,7 +669,7 @@ export default function FinanceDashboard() {
           doc.setFontSize(8)
           doc.setFont("helvetica", "bold")
           doc.setTextColor(30, 41, 59)
-          doc.text(`INTERIOR CONCEPT — ${reportTitle}`, 14, 7)
+          doc.text(`INTERIOR CONCEPT â€” ${reportTitle}`, 14, 7)
           doc.setFont("helvetica", "normal")
           doc.setTextColor(100, 116, 139)
           doc.text(`${displayStart} ? ${displayEnd}  |  Page ${pageNum}`, pageW - 14, 7, { align: "right" })
@@ -680,7 +680,7 @@ export default function FinanceDashboard() {
       },
     })
 
-    // Footer summary row — Inflow | Outflow | Net Margin as columns
+    // Footer summary row â€” Inflow | Outflow | Net Margin as columns
     const finalY = (doc as any).lastAutoTable.finalY + 6
 
     doc.setDrawColor(226, 232, 240)
@@ -1523,7 +1523,7 @@ export default function FinanceDashboard() {
                                 <td colSpan={11} className="px-4 py-2">
                                   <div className="flex items-center gap-2 justify-end">
                                     <span className="text-xs text-muted-foreground mr-auto">
-                                      #{tx.voucherNo || tx.id.slice(0, 8)} — Actions
+                                      #{tx.voucherNo || tx.id.slice(0, 8)} â€” Actions
                                     </span>
                                     <Button
                                       size="sm"

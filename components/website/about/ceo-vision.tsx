@@ -72,7 +72,7 @@ export function CeoVision() {
                 <p className="text-[#a57c00] text-sm tracking-[0.2em] uppercase">Leadership Note</p>
               </div>
 
-              <p className="text-[#4a4a4a] leading-relaxed text-base lg:text-lg">ì{ceoMessage.description}î</p>
+              <p className="text-[#4a4a4a] leading-relaxed text-base lg:text-lg">‚Äú{ceoMessage.description}‚Äù</p>
 
               <div className="mt-8 pt-6">
                 <h3 className="text-2xl font-serif text-[#1a3a2f]">{ceoMessage.name}</h3>

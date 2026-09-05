@@ -107,7 +107,7 @@ function ClientInfoBlock({ clientName, clientAddress }: { clientName: string, cl
       <div className="w-[100%]">
         <p className="text-[9px] text-[#a57c00] uppercase tracking-wider mb-1 font-bold">Prepared For</p>
         <p className="text-[14px] font-bold text-[#1f363d] leading-snug mb-0.5">{clientName}</p>
-        <p className="text-[10px] text-neutral-600 leading-snug max-w-[250px]">{clientAddress || '—'}</p>
+        <p className="text-[10px] text-neutral-600 leading-snug max-w-[250px]">{clientAddress || 'â€”'}</p>
       </div>
     </div>
   )
@@ -153,7 +153,7 @@ function PageFooter({ content }: { content: QuotationDraftContent }) {
           <p className="font-bold" style={{ color: PRIMARY }}>www.aestheticinteriorbd.com</p>
         </div>
         <div className="w-[35%] flex flex-col justify-end items-end">
-          <p className="text-neutral-500">© 2026 All rights reserved.</p>
+          <p className="text-neutral-500">Â© 2026 All rights reserved.</p>
         </div>
       </div>
       <div className="flex justify-between mt-1 text-[8px] text-neutral-400">
@@ -191,7 +191,7 @@ function TableHeader({ cols }: { cols: { label: string; className?: string }[] }
 }
 
 function formatMaterialText(text: string | null | undefined) {
-  if (!text) return <span className="text-neutral-400">—</span>
+  if (!text) return <span className="text-neutral-400">â€”</span>
   const lines = text.split('\n')
   return (
     <span className="block space-y-0.5">

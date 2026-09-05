@@ -154,7 +154,7 @@ const FooterFixed = ({ content }: { content: ShortQuotationContent }) => (
       <View style={{ width: '48%', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
         <Text style={styles.footerText}>+88 0132969 4663</Text>
         <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold' }]}>www.aestheticinteriorbd.com</Text>
-        <Text style={styles.footerText}>© 2026 All rights reserved.</Text>
+        <Text style={styles.footerText}>Â© 2026 All rights reserved.</Text>
       </View>
     </View>
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 }}>

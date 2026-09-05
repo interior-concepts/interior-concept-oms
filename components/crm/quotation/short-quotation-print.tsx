@@ -74,10 +74,10 @@ function PageFooter({ content }: { content: ShortQuotationContent }) {
           <p className="font-bold" style={{ color: PRIMARY }}>www.aestheticinteriorbd.com</p>
         </div>
         <div className="flex w-[35%] flex-col items-end justify-end">
-          <p className="text-neutral-500">© 2026 All rights reserved.</p>
+          <p className="text-neutral-500">Â© 2026 All rights reserved.</p>
         </div>
       </div>
-      <p className="mt-1 text-right text-[6px] text-neutral-400">Quotation Code: {content.quotationCode ?? 'Not generated yet'} • Generated: {formatDownloadDateTime(content.downloadedAt)}</p>
+      <p className="mt-1 text-right text-[6px] text-neutral-400">Quotation Code: {content.quotationCode ?? 'Not generated yet'} â€¢ Generated: {formatDownloadDateTime(content.downloadedAt)}</p>
     </div>
   )
 }
@@ -105,7 +105,7 @@ export function ShortQuotationPrint({ content }: { content: ShortQuotationConten
         <div className="pb-2">
           <p className="mb-1 text-[9px] font-bold uppercase tracking-wider text-[#a57c00]">Prepared For</p>
           <p className="mb-0.5 text-[14px] font-bold leading-snug text-[#0f5b53]">{content.clientName}</p>
-          <p className="max-w-[360px] text-[9px] leading-snug text-neutral-600">{content.clientAddress || '—'}</p>
+          <p className="max-w-[360px] text-[9px] leading-snug text-neutral-600">{content.clientAddress || 'â€”'}</p>
         </div>
 
         {content.subject ? <p className="mb-2 text-[9px] text-neutral-700"><span className="font-bold">Subject:</span> {content.subject}</p> : null}
