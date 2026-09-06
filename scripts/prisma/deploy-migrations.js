@@ -32,9 +32,10 @@ function sleepSync(ms) {
   }
 }
 
-function runDeployWithRetry(maxRetries = 3) {
+function runDeployWithRetry(maxRetries = 5) {
   let result
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    console.log(`[Attempt ${attempt}/${maxRetries}] Running prisma migrate deploy...`)
     result = runPrisma(['migrate', 'deploy'])
     if (result.status === 0) {
       return result
@@ -45,13 +46,16 @@ function runDeployWithRetry(maxRetries = 3) {
       deployOutput.includes('P1002') ||
       deployOutput.includes('P1001') ||
       deployOutput.includes('pg_advisory_lock') ||
-      deployOutput.includes('Timed out trying to acquire')
+      deployOutput.includes('Timed out trying to acquire') ||
+      deployOutput.includes('connect ETIMEDOUT') ||
+      deployOutput.includes('Connection timed out')
 
     if (isLockOrTimeout && attempt < maxRetries) {
+      const delay = attempt * 10000 // 10s, 20s, 30s, 40s back-off
       console.log(
-        `[Attempt ${attempt}/${maxRetries}] Postgres advisory lock timeout (P1002) detected. Retrying in 5 seconds...`,
+        `[Attempt ${attempt}/${maxRetries}] Postgres lock/timeout error detected. Retrying in ${delay / 1000}s...`,
       )
-      sleepSync(5000)
+      sleepSync(delay)
     } else {
       break
     }
@@ -59,7 +63,7 @@ function runDeployWithRetry(maxRetries = 3) {
   return result
 }
 
-let deploy = runDeployWithRetry(3)
+let deploy = runDeployWithRetry(5)
 
 if (deploy.status === 0) {
   process.exit(0)
@@ -89,5 +93,5 @@ if (resolve.status !== 0) {
   process.exit(resolve.status ?? 1)
 }
 
-deploy = runDeployWithRetry(3)
+deploy = runDeployWithRetry(5)
 process.exit(deploy.status ?? 1)
