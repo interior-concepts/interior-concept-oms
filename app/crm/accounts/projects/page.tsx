@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -41,6 +41,8 @@ type ProjectData = {
 
 export default function AccountsProjectsPage() {
   const router = useRouter()
+  const pathname = usePathname() || ''
+  const projectDetailBasePath = pathname.startsWith('/crm/admin') ? '/crm/admin/projects' : '/crm/accounts/projects'
   const [projects, setProjects] = useState<ProjectData[]>([])
   const [loading, setLoading] = useState(true)
   const [updatingId, setUpdatingId] = useState<string | null>(null)
@@ -177,11 +179,11 @@ export default function AccountsProjectsPage() {
                       <TableRow
                         key={project.id}
                         className="cursor-pointer hover:bg-muted/40 transition-colors"
-                        onClick={() => router.push(`/crm/accounts/projects/${project.id}`)}
+                        onClick={() => router.push(`${projectDetailBasePath}/${project.id}`)}
                       >
                         <TableCell className="font-medium">
                           <Link
-                            href={`/crm/accounts/projects/${project.id}`}
+                            href={`${projectDetailBasePath}/${project.id}`}
                             className="text-primary hover:underline font-semibold"
                           >
                             {project.name}
@@ -260,14 +262,14 @@ export default function AccountsProjectsPage() {
                 <Card
                   key={project.id}
                   className="flex flex-col hover:shadow-md transition-shadow cursor-pointer hover:bg-muted/40"
-                  onClick={() => router.push(`/crm/accounts/projects/${project.id}`)}
+                  onClick={() => router.push(`${projectDetailBasePath}/${project.id}`)}
                 >
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between">
                       <div>
                         <CardTitle className="text-base">
                           <Link
-                            href={`/crm/accounts/projects/${project.id}`}
+                            href={`${projectDetailBasePath}/${project.id}`}
                             className="text-primary hover:underline font-semibold"
                           >
                             {project.name}
@@ -368,7 +370,7 @@ export default function AccountsProjectsPage() {
                     })()}
 
                     <Link
-                      href={`/crm/accounts/projects/${project.id}`}
+                      href={`${projectDetailBasePath}/${project.id}`}
                       className="w-full text-center text-xs text-primary hover:underline py-1"
                     >
                       View Ledger →

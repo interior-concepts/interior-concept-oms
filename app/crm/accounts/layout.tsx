@@ -38,7 +38,11 @@ export default async function AccountsLayout({
     user.userDepartments.map((row) => row.department.name),
   )
 
-  if (departmentNames.has('ACCOUNTS') || departmentNames.has('ADMIN')) {
+  if (departmentNames.has('ADMIN')) {
+    return <MainLayout role="Admin">{children}</MainLayout>
+  }
+
+  if (departmentNames.has('ACCOUNTS')) {
     return <MainLayout role="Accounts">{children}</MainLayout>
   }
 
