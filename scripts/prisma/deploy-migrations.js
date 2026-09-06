@@ -23,7 +23,43 @@ function outputFor(result) {
   return `${result.stdout ?? ''}\n${result.stderr ?? ''}`
 }
 
-let deploy = runPrisma(['migrate', 'deploy'])
+function sleepSync(ms) {
+  try {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms)
+  } catch {
+    const start = Date.now()
+    while (Date.now() - start < ms) {}
+  }
+}
+
+function runDeployWithRetry(maxRetries = 3) {
+  let result
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    result = runPrisma(['migrate', 'deploy'])
+    if (result.status === 0) {
+      return result
+    }
+
+    const deployOutput = outputFor(result)
+    const isLockOrTimeout =
+      deployOutput.includes('P1002') ||
+      deployOutput.includes('P1001') ||
+      deployOutput.includes('pg_advisory_lock') ||
+      deployOutput.includes('Timed out trying to acquire')
+
+    if (isLockOrTimeout && attempt < maxRetries) {
+      console.log(
+        `[Attempt ${attempt}/${maxRetries}] Postgres advisory lock timeout (P1002) detected. Retrying in 5 seconds...`,
+      )
+      sleepSync(5000)
+    } else {
+      break
+    }
+  }
+  return result
+}
+
+let deploy = runDeployWithRetry(3)
 
 if (deploy.status === 0) {
   process.exit(0)
@@ -53,5 +89,5 @@ if (resolve.status !== 0) {
   process.exit(resolve.status ?? 1)
 }
 
-deploy = runPrisma(['migrate', 'deploy'])
+deploy = runDeployWithRetry(3)
 process.exit(deploy.status ?? 1)
