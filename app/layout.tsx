@@ -95,32 +95,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        variables: {
-          colorPrimary: "#6c47ff",
-          borderRadius: "8px",
-        },
-        elements: {
-          formButtonPrimary:
-            "bg-[#6c47ff] hover:bg-[#5936d9] text-white",
-          card: "shadow-xl rounded-2xl",
-          headerTitle: "text-2xl font-bold",
-          socialButtonsBlockButton:
-            "border border-gray-300 hover:bg-gray-100",
-        },
-      }}
-    >
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ClerkProvider
+          appearance={{
+            variables: {
+              colorPrimary: "#6c47ff",
+              borderRadius: "8px",
+            },
+            elements: {
+              formButtonPrimary:
+                "bg-[#6c47ff] hover:bg-[#5936d9] text-white",
+              card: "shadow-xl rounded-2xl",
+              headerTitle: "text-2xl font-bold",
+              socialButtonsBlockButton:
+                "border border-gray-300 hover:bg-gray-100",
+            },
+          }}
         >
           <ThemeProvider defaultTheme="light" storageKey="aesthetic-theme">
             <SiteShell>{children}</SiteShell>
             <Toaster richColors />
           </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

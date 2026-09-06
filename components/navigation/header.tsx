@@ -55,10 +55,10 @@ export function Header({ onMenuClick }: HeaderProps) {
 
       <div className="flex items-center gap-4 ml-auto">
         <SignedOut>
-          <SignInButton forceRedirectUrl="/onboarding">
+          <SignInButton fallbackRedirectUrl="/onboarding">
             <Button variant="ghost" className="text-sm">Sign In</Button>
           </SignInButton>
-          <SignUpButton forceRedirectUrl="/onboarding">
+          <SignUpButton fallbackRedirectUrl="/onboarding">
             <Button className="bg-[#6c47ff] hover:bg-[#5936d9] text-white text-sm">Sign Up</Button>
           </SignUpButton>
         </SignedOut>
