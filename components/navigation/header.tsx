@@ -11,7 +11,7 @@ import {
 import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useClerk } from '@clerk/nextjs'
 import { NotificationBell } from '@/components/navigation/notification-bell'
 
 interface HeaderProps {
@@ -21,11 +21,11 @@ interface HeaderProps {
 export function Header({ onMenuClick }: HeaderProps) {
   const router = useRouter()
   const pathname = usePathname() || ''
+  const { signOut } = useClerk()
   const isVisits = pathname.startsWith('/visits') || pathname.startsWith('/visit-team')
 
   const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' })
-    router.push('/login')
+    await signOut({ redirectUrl: '/' })
   }
 
   const headerClasses = cn(
