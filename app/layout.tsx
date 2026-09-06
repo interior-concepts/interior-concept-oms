@@ -72,7 +72,10 @@ export const metadata: Metadata = {
     images: ["/Logo/interior-concept-logobg-removed.png"],
   },
   icons: {
-    icon: "/Logo/interior-concept-icon-light.png",
+    icon: [
+      { url: "/Logo/interior-concept-icon-light.png", type: "image/png" },
+      { url: "/icon.png", type: "image/png" },
+    ],
     shortcut: "/Logo/interior-concept-icon-light.png",
     apple: "/Logo/interior-concept-icon-light.png",
   },
