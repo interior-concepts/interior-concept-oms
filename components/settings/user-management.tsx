@@ -14,7 +14,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Building2, Mail, Power, RefreshCw, Search, Trash2, UserCheck, UserX, Users2 } from 'lucide-react'
+import { Building2, Mail, Pencil, Power, RefreshCw, Search, Trash2, UserCheck, UserX, Users2 } from 'lucide-react'
 import { VISIT_TEAM_CO_LEADER_ROLE, VISIT_TEAM_LEADER_ROLE } from '@/lib/visit-team-roles'
 import { JR_ARCHITECT_CO_LEADER_ROLE, JR_ARCHITECT_LEADER_ROLE } from '@/lib/jr-architecture-roles'
 
@@ -113,6 +113,9 @@ export function UserManagement() {
   const [updatingVisitTeamRoleByUser, setUpdatingVisitTeamRoleByUser] = useState<Record<string, boolean>>({})
   const [deleteTargetUser, setDeleteTargetUser] = useState<UserApiItem | null>(null)
   const [deletingUserId, setDeletingUserId] = useState<string | null>(null)
+  const [editNameTarget, setEditNameTarget] = useState<UserApiItem | null>(null)
+  const [editNameValue, setEditNameValue] = useState('')
+  const [savingName, setSavingName] = useState(false)
 
   const loadData = useCallback(async () => {
     setLoading(true)
@@ -515,6 +518,51 @@ export function UserManagement() {
     }
   }
 
+  const saveUserName = async () => {
+    if (!editNameTarget) return
+    const trimmed = editNameValue.trim()
+    if (!trimmed) {
+      setStatusError('Name cannot be empty.')
+      return
+    }
+    if (trimmed === editNameTarget.fullName) {
+      setEditNameTarget(null)
+      return
+    }
+
+    setStatusMessage(null)
+    setStatusError(null)
+    setSavingName(true)
+
+    try {
+      const response = await fetch(`/api/user/${editNameTarget.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullName: trimmed }),
+      })
+      const payload = (await response.json()) as { error?: string }
+      if (!response.ok) {
+        throw new Error(payload.error ?? 'Failed to update name')
+      }
+
+      const updatedId = editNameTarget.id
+      setDepartments((prev) =>
+        prev.map((section) => ({
+          ...section,
+          users: section.users.map((u) =>
+            u.id === updatedId ? { ...u, fullName: trimmed } : u,
+          ),
+        })),
+      )
+      setStatusMessage(`Name updated to "${trimmed}".`)
+      setEditNameTarget(null)
+    } catch (error) {
+      setStatusError(error instanceof Error ? error.message : 'Failed to update name')
+    } finally {
+      setSavingName(false)
+    }
+  }
+
   if (loading) {
     return (
       <Card className="border-border">
@@ -776,7 +824,20 @@ export function UserManagement() {
                       {getInitials(user.fullName)}
                     </div>
                     <div>
-                      <p className="font-medium text-foreground">{user.fullName}</p>
+                      <div className="flex items-center gap-1.5">
+                        <p className="font-medium text-foreground">{user.fullName}</p>
+                        <button
+                          type="button"
+                          className="text-muted-foreground hover:text-foreground transition-colors"
+                          title="Edit name"
+                          onClick={() => {
+                            setEditNameTarget(user)
+                            setEditNameValue(user.fullName)
+                          }}
+                        >
+                          <Pencil className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
                       <p className="flex items-center gap-1 text-sm text-muted-foreground">
                         <Mail className="h-3.5 w-3.5" />
                         {user.email}
@@ -893,6 +954,47 @@ export function UserManagement() {
             >
               {deletingUserId ? 'Deleting...' : 'Delete Account'}
             </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Username Dialog */}
+      <Dialog open={Boolean(editNameTarget)} onOpenChange={(open) => !open && setEditNameTarget(null)}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Edit User Name</DialogTitle>
+            <DialogDescription>
+              {editNameTarget
+                ? `Update the display name for ${editNameTarget.email}.`
+                : 'Update user display name.'}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3">
+            <Input
+              value={editNameValue}
+              onChange={(e) => setEditNameValue(e.target.value)}
+              placeholder="Full name"
+              disabled={savingName}
+              onKeyDown={(e) => e.key === 'Enter' && void saveUserName()}
+              autoFocus
+            />
+            <div className="flex justify-end gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setEditNameTarget(null)}
+                disabled={savingName}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="button"
+                onClick={() => void saveUserName()}
+                disabled={savingName || !editNameValue.trim()}
+              >
+                {savingName ? 'Saving...' : 'Save Name'}
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
