@@ -5,7 +5,6 @@ import "leaflet/dist/leaflet.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { SiteShell } from "@/components/website/ui/site-shell";
 import { siteName, siteUrl } from "@/lib/site";
 
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -23,54 +22,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteName} | Modern Contemporary Interior Design in Dhaka, Bangladesh`,
-    template: `%s | ${siteName}`,
+    default: "Interior Concepts OMS / CRM",
+    template: `%s | Interior Concepts OMS`,
   },
-  description:
-    "INTERIOR CONCEPT Studio is a pioneer brand for modern contemporary interior design in Dhaka, Bangladesh, serving residential, commercial, and architectural spaces.",
+  description: "Interior Concepts CRM — workspace for lead management, team workflows, and department dashboards.",
   applicationName: siteName,
   authors: [{ name: siteName }],
   verification: googleSiteVerification
     ? { google: googleSiteVerification }
     : undefined,
-  category: "Interior Design",
-  creator: siteName,
-  publisher: siteName,
-  keywords: [
-    "INTERIOR CONCEPT Studio",
-    "INTERIOR CONCEPT studio in BD",
-    "interior design Dhaka",
-    "interior design Bangladesh",
-    "modern contemporary interior design",
-    "residential interior design Dhaka",
-    "commercial interior design Bangladesh",
-    "interior designer in Mirpur Dhaka",
-    "best interior design company in Bangladesh",
-  ],
-  openGraph: {
-    type: "website",
-    locale: "en_BD",
-    url: siteUrl,
-    siteName,
-    title: `${siteName} | Interior Design Studio in Dhaka, Bangladesh`,
-    description:
-      "Modern contemporary residential, commercial, and architectural interior design by INTERIOR CONCEPT Studio in Dhaka, Bangladesh.",
-    images: [
-      {
-        url: "/Logo/interior-concept-logobg-removed.png",
-        width: 1200,
-        height: 630,
-        alt: siteName,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${siteName} | Interior Design Studio in Dhaka, Bangladesh`,
-    description:
-      "A pioneer brand for modern contemporary interior design in Dhaka, Bangladesh.",
-    images: ["/Logo/interior-concept-logobg-removed.png"],
-  },
   icons: {
     icon: [
       { url: "/Logo/interior-concept-icon-light.png", type: "image/png" },
@@ -78,17 +38,6 @@ export const metadata: Metadata = {
     ],
     shortcut: "/Logo/interior-concept-icon-light.png",
     apple: "/Logo/interior-concept-icon-light.png",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
   },
 };
 
@@ -119,7 +68,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <ThemeProvider defaultTheme="light" storageKey="aesthetic-theme">
-            <SiteShell>{children}</SiteShell>
+            {children}
             <Toaster richColors />
           </ThemeProvider>
         </body>
@@ -127,3 +76,4 @@ export default function RootLayout({
     </ClerkProvider>
   );
 }
+
