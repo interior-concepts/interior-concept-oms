@@ -755,127 +755,200 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Create lead and activity log in a transaction
-    // Transaction ensures both operations succeed or both fail
-    // console.log('💾 [POST /api/lead] - Creating lead and activity log in transaction');
-    const lead = await prisma.$transaction(async (tx) => {
-      const stage = phone ? LeadStage.NUMBER_COLLECTED : LeadStage.NEW
-      const primaryOwnerDepartment = jrCrmAssigneeId
-        ? LeadPrimaryOwnerDepartment.JR_CRM
-        : null
-      const primaryOwnerUserId = jrCrmAssigneeId ?? null
+    // Pre-validate visit scheduling inputs and pre-fetch rotation/user details outside the transaction if requested
+    const shouldSchedule = Boolean(body.scheduleVisit);
+    let visitScheduleParams: {
+      visitTeamUserId: string;
+      seniorCrmUserId: string | null;
+      notes: string | null;
+      reason: string;
+      projectSqft: number | null;
+      visitFee: number | null;
+      projectStatus: ProjectStatus | null;
+      parsedScheduledAt: Date;
+      locationToUse: string;
+      visitAssignee: { id: string; fullName: string };
+      weekly: Awaited<ReturnType<typeof getWeeklySeniorCrmAssignment>>;
+      adminUsers: Array<{ id: string }>;
+    } | null = null;
 
-      // Create the new lead with validated data
-      const newLead = await tx.lead.create({
-        data: {
-          name,
-          phone: phone ?? null,
-          email,
-          source,
-          location: toOptionalString(body.location),
-          budget: toBudget(body.budget),
-          stage,
-          ...(jrCrmAssigneeId ? { assignedTo: jrCrmAssigneeId } : {}),
-          ...(primaryOwnerDepartment ? { primaryOwnerDepartment } : {}),
-          ...(primaryOwnerUserId ? { primaryOwnerUserId } : {}),
-        },
-        // Include assignee details in the response
-        include: {
-          assignee: {
-            select: { id: true, fullName: true, email: true },
-          },
-        },
-      });
-      // console.log('✨ [POST /api/lead] - Lead created:', newLead.id);
+    if (shouldSchedule) {
+      const visitBody: CreateLeadVisitBody = isRecord(body.visit) ? body.visit : {};
+      const visitTeamUserId = toOptionalString(visitBody.visitTeamUserId);
+      const seniorCrmUserId = toOptionalString(visitBody.seniorCrmUserId);
+      const notes = toOptionalString(visitBody.notes);
+      const reason = toOptionalString(visitBody.reason) ?? 'Visit has been scheduled.';
+      const projectSqft = toOptionalNumber(visitBody.projectSqft);
+      const visitFee = toOptionalNumber(visitBody.visitFee);
+      const projectStatus = toProjectStatus(visitBody.projectStatus);
+      const scheduledAtRaw = toOptionalString(visitBody.scheduledAt);
+      const parsedScheduledAt = scheduledAtRaw ? new Date(scheduledAtRaw) : null;
+      const explicitLocation = toOptionalString(visitBody.location) ?? toOptionalString(body.location) ?? null;
 
-      if (jrCrmAssigneeId) {
-        await tx.leadAssignment.create({
-          data: {
-            leadId: newLead.id,
-            userId: jrCrmAssigneeId,
-            department: LeadAssignmentDepartment.JR_CRM,
-          },
-        });
+      if (!visitTeamUserId || !scheduledAtRaw || !parsedScheduledAt || Number.isNaN(parsedScheduledAt.getTime())) {
+        return NextResponse.json(
+          { success: false, error: 'Visit team member and a valid visit date/time are required to schedule a visit.' },
+          { status: 400 },
+        );
       }
 
-      // Log the lead creation activity with the authenticated user
-      await logLeadCreated(tx, {
-        leadId: newLead.id,
-        userId: authResult.actorUserId,
-        leadName: name,
-      });
+      if (projectSqft !== null && projectSqft <= 0) {
+        return NextResponse.json(
+          { success: false, error: 'Project square feet must be greater than 0.' },
+          { status: 400 },
+        );
+      }
 
-      // Optionally schedule a visit as part of lead creation
-      const shouldSchedule = Boolean(body.scheduleVisit);
-      if (shouldSchedule) {
-        try {
-          const visitBody: CreateLeadVisitBody = isRecord(body.visit) ? body.visit : {};
-          const visitTeamUserId = toOptionalString(visitBody.visitTeamUserId);
-          const seniorCrmUserId = toOptionalString(visitBody.seniorCrmUserId);
-          const notes = toOptionalString(visitBody.notes);
-          const reason = toOptionalString(visitBody.reason) ?? 'Visit has been scheduled.';
-          const projectSqft = toOptionalNumber(visitBody.projectSqft);
-          const visitFee = toOptionalNumber(visitBody.visitFee);
-          const projectStatus = toProjectStatus(visitBody.projectStatus);
-          const scheduledAtRaw = toOptionalString(visitBody.scheduledAt);
-          const parsedScheduledAt = scheduledAtRaw ? new Date(scheduledAtRaw) : null;
-          const explicitLocation = toOptionalString(visitBody.location) ?? toOptionalString(body.location) ?? null;
+      if (visitFee !== null && visitFee < 0) {
+        return NextResponse.json(
+          { success: false, error: 'Visit fee cannot be negative.' },
+          { status: 400 },
+        );
+      }
 
-          if (!visitTeamUserId || !scheduledAtRaw || !parsedScheduledAt || Number.isNaN(parsedScheduledAt.getTime())) {
-            throw new Error('INVALID_VISIT_PARAMS');
-          }
+      if (projectStatus === null && visitBody.projectStatus) {
+        return NextResponse.json(
+          { success: false, error: 'Selected project status is not valid.' },
+          { status: 400 },
+        );
+      }
 
-          if (projectSqft !== null && projectSqft <= 0) {
-            throw new Error('INVALID_PROJECT_SQFT');
-          }
+      if (!explicitLocation) {
+        return NextResponse.json(
+          { success: false, error: 'Lead location is required when scheduling a visit.' },
+          { status: 400 },
+        );
+      }
 
-          if (visitFee !== null && visitFee < 0) {
-            throw new Error('INVALID_VISIT_FEE');
-          }
+      const [visitAssignee, weekly, adminUsers] = await Promise.all([
+        prisma.user.findUnique({
+          where: { id: visitTeamUserId },
+          select: {
+            id: true,
+            fullName: true,
+            userDepartments: { select: { department: { select: { name: true } } } },
+          },
+        }),
+        getWeeklySeniorCrmAssignment(),
+        prisma.user.findMany({
+          where: { isActive: true, userDepartments: { some: { department: { name: 'ADMIN' } } } },
+          select: { id: true },
+        }),
+      ]);
 
-          if (projectStatus === null && visitBody.projectStatus) {
-            throw new Error('INVALID_PROJECT_STATUS');
-          }
+      if (!visitAssignee) {
+        return NextResponse.json(
+          { success: false, error: 'Selected visit team member was not found.' },
+          { status: 400 },
+        );
+      }
 
-          const weekly = await getWeeklySeniorCrmAssignment();
+      const isAllowed = (visitAssignee.userDepartments ?? []).some(
+        (d) => d.department.name === 'VISIT_TEAM' || d.department.name === 'SR_CRM',
+      );
+      if (!isAllowed) {
+        return NextResponse.json(
+          { success: false, error: 'Selected user is not mapped to the visit team.' },
+          { status: 400 },
+        );
+      }
 
-          const [visitAssignee, latestVisit] = await Promise.all([
-            tx.user.findUnique({
-              where: { id: visitTeamUserId },
-              select: {
-                id: true,
-                fullName: true,
-                userDepartments: { select: { department: { select: { name: true } } } },
-              },
-            }),
-            tx.visit.findFirst({
-              where: { leadId: newLead.id },
-              orderBy: { createdAt: 'desc' },
-              select: { id: true, status: true, result: { select: { id: true } } },
-            }),
-          ]);
+      visitScheduleParams = {
+        visitTeamUserId,
+        seniorCrmUserId,
+        notes,
+        reason,
+        projectSqft,
+        visitFee,
+        projectStatus,
+        parsedScheduledAt,
+        locationToUse: explicitLocation,
+        visitAssignee: { id: visitAssignee.id, fullName: visitAssignee.fullName },
+        weekly,
+        adminUsers,
+      };
+    }
 
-          if (!visitAssignee) throw new Error('VISIT_ASSIGNEE_NOT_FOUND');
-          const isAllowed = (visitAssignee.userDepartments ?? []).some((d) => d.department.name === 'VISIT_TEAM' || d.department.name === 'SR_CRM');
-          if (!isAllowed) throw new Error('VISIT_ASSIGNEE_INVALID_DEPT');
+    // Create lead and activity log in a transaction
+    // Transaction ensures operations succeed or fail atomically
+    const lead = await prisma.$transaction(
+      async (tx) => {
+        const stage = phone ? LeadStage.NUMBER_COLLECTED : LeadStage.NEW;
+        const primaryOwnerDepartment = jrCrmAssigneeId
+          ? LeadPrimaryOwnerDepartment.JR_CRM
+          : null;
+        const primaryOwnerUserId = jrCrmAssigneeId ?? null;
 
-          const latestVisitHasResult = Boolean(latestVisit?.result?.id);
-          const latestVisitBlocksScheduling = Boolean(
-            latestVisit &&
-              (latestVisit.status === 'SCHEDULED' ||
-                latestVisit.status === 'RESCHEDULED' ||
-                (latestVisit.status === 'COMPLETED' && !latestVisitHasResult)),
-          );
-          if (latestVisitBlocksScheduling) throw new Error('LATEST_VISIT_BLOCKS_SCHEDULING');
+        // Create the new lead with validated data
+        const newLead = await tx.lead.create({
+          data: {
+            name,
+            phone: phone ?? null,
+            email,
+            source,
+            location: toOptionalString(body.location),
+            budget: toBudget(body.budget),
+            stage,
+            ...(jrCrmAssigneeId ? { assignedTo: jrCrmAssigneeId } : {}),
+            ...(primaryOwnerDepartment ? { primaryOwnerDepartment } : {}),
+            ...(primaryOwnerUserId ? { primaryOwnerUserId } : {}),
+          },
+          include: {
+            assignee: {
+              select: { id: true, fullName: true, email: true },
+            },
+          },
+        });
 
-          const locationToUse = explicitLocation ?? newLead.location;
-          if (!locationToUse) throw new Error('LOCATION_REQUIRED');
+        if (jrCrmAssigneeId) {
+          await tx.leadAssignment.create({
+            data: {
+              leadId: newLead.id,
+              userId: jrCrmAssigneeId,
+              department: LeadAssignmentDepartment.JR_CRM,
+            },
+          });
+        }
 
-          const conflict = await findVisitConflict(tx, { assignedToId: visitTeamUserId, scheduledAt: parsedScheduledAt });
+        // Log the lead creation activity with the authenticated user
+        await logLeadCreated(tx, {
+          leadId: newLead.id,
+          userId: authResult.actorUserId,
+          leadName: name,
+        });
+
+        // Schedule visit if requested
+        if (visitScheduleParams) {
+          const {
+            visitTeamUserId,
+            seniorCrmUserId,
+            notes,
+            reason,
+            projectSqft,
+            visitFee,
+            projectStatus,
+            parsedScheduledAt,
+            locationToUse,
+            visitAssignee,
+            weekly,
+            adminUsers,
+          } = visitScheduleParams;
+
+          const conflict = await findVisitConflict(tx, {
+            assignedToId: visitTeamUserId,
+            scheduledAt: parsedScheduledAt,
+          });
           if (conflict) throw new Error('VISIT_CONFLICT');
 
-          // update lead stage
-          await tx.lead.update({ where: { id: newLead.id }, data: { stage: LeadStage.VISIT_PHASE, subStatus: LeadSubStatus.VISIT_SCHEDULED, location: locationToUse } });
+          // Update lead stage
+          await tx.lead.update({
+            where: { id: newLead.id },
+            data: {
+              stage: LeadStage.VISIT_PHASE,
+              subStatus: LeadSubStatus.VISIT_SCHEDULED,
+              location: locationToUse,
+            },
+          });
 
           const visit = await tx.visit.create({
             data: {
@@ -906,7 +979,6 @@ export async function POST(request: NextRequest) {
             skipDuplicates: true,
           });
 
-          const adminUsers = await tx.user.findMany({ where: { isActive: true, userDepartments: { some: { department: { name: 'ADMIN' } } } }, select: { id: true } });
           if (adminUsers.length > 0) {
             await tx.notification.createMany({
               data: adminUsers.map((admin) => ({
@@ -921,45 +993,94 @@ export async function POST(request: NextRequest) {
             });
           }
 
-          const existingVisitTeamAssignment = await tx.leadAssignment.findFirst({ where: { leadId: newLead.id, department: LeadAssignmentDepartment.VISIT_TEAM } });
-          const targetSeniorCrmUserId = seniorCrmUserId ?? (weekly.automationEnabled ? weekly.current?.id : null) ?? null;
+          const existingVisitTeamAssignment = await tx.leadAssignment.findFirst({
+            where: { leadId: newLead.id, department: LeadAssignmentDepartment.VISIT_TEAM },
+          });
+
+          const targetSeniorCrmUserId =
+            seniorCrmUserId ?? (weekly.automationEnabled ? weekly.current?.id : null) ?? null;
           if (targetSeniorCrmUserId) {
-            const existingSrAssignment = await tx.leadAssignment.findFirst({ where: { leadId: newLead.id, department: LeadAssignmentDepartment.SR_CRM } });
+            const existingSrAssignment = await tx.leadAssignment.findFirst({
+              where: { leadId: newLead.id, department: LeadAssignmentDepartment.SR_CRM },
+            });
             if (existingSrAssignment) {
-              await tx.leadAssignment.update({ where: { id: existingSrAssignment.id }, data: { userId: targetSeniorCrmUserId } });
+              await tx.leadAssignment.update({
+                where: { id: existingSrAssignment.id },
+                data: { userId: targetSeniorCrmUserId },
+              });
             } else {
-              await tx.leadAssignment.create({ data: { leadId: newLead.id, userId: targetSeniorCrmUserId, department: LeadAssignmentDepartment.SR_CRM } });
+              await tx.leadAssignment.create({
+                data: {
+                  leadId: newLead.id,
+                  userId: targetSeniorCrmUserId,
+                  department: LeadAssignmentDepartment.SR_CRM,
+                },
+              });
             }
           }
 
           if (existingVisitTeamAssignment) {
-            await tx.leadAssignment.update({ where: { id: existingVisitTeamAssignment.id }, data: { userId: visitTeamUserId } });
+            await tx.leadAssignment.update({
+              where: { id: existingVisitTeamAssignment.id },
+              data: { userId: visitTeamUserId },
+            });
           } else {
-            await tx.leadAssignment.create({ data: { leadId: newLead.id, userId: visitTeamUserId, department: LeadAssignmentDepartment.VISIT_TEAM } });
+            await tx.leadAssignment.create({
+              data: {
+                leadId: newLead.id,
+                userId: visitTeamUserId,
+                department: LeadAssignmentDepartment.VISIT_TEAM,
+              },
+            });
           }
 
           if (notes) {
-            await tx.note.create({ data: { leadId: newLead.id, userId: authResult.actorUserId, content: notes } });
+            await tx.note.create({
+              data: {
+                leadId: newLead.id,
+                userId: authResult.actorUserId,
+                content: notes,
+              },
+            });
           }
 
-          await logLeadStageChanged(tx, { leadId: newLead.id, userId: authResult.actorUserId, from: newLead.stage, to: LeadStage.VISIT_PHASE, reason });
-          await logActivity(tx, { leadId: newLead.id, userId: authResult.actorUserId, type: ActivityType.VISIT_SCHEDULED, description: `Visit ${visit.id} scheduled at ${parsedScheduledAt.toISOString()} and assigned to ${visitAssignee.fullName}. Reason: ${reason}` });
-          await logUserAssigned(tx, { leadId: newLead.id, userId: authResult.actorUserId, leadName: `${visitAssignee.fullName} assigned as visit lead` });
-          await autoCompletePendingFollowups(tx, { leadId: newLead.id, userId: authResult.actorUserId, action: 'visit scheduled' });
-        } catch (err) {
-          // Bubble up known errors to abort transaction
-          throw err;
-        }
-      }
+          await logLeadStageChanged(tx, {
+            leadId: newLead.id,
+            userId: authResult.actorUserId,
+            from: newLead.stage,
+            to: LeadStage.VISIT_PHASE,
+            reason,
+          });
 
-      return newLead;
-    });
+          await logActivity(tx, {
+            leadId: newLead.id,
+            userId: authResult.actorUserId,
+            type: ActivityType.VISIT_SCHEDULED,
+            description: `Visit ${visit.id} scheduled at ${parsedScheduledAt.toISOString()} and assigned to ${visitAssignee.fullName}. Reason: ${reason}`,
+          });
+
+          await logUserAssigned(tx, {
+            leadId: newLead.id,
+            userId: authResult.actorUserId,
+            leadName: `${visitAssignee.fullName} assigned as visit lead`,
+          });
+
+          await autoCompletePendingFollowups(tx, {
+            leadId: newLead.id,
+            userId: authResult.actorUserId,
+            action: 'visit scheduled',
+          });
+        }
+
+        return newLead;
+      },
+      { maxWait: 10000, timeout: 20000 },
+    );
     // console.log('✨ [POST /api/lead] - Lead and activity log created successfully');
 
     // Send FCM push notification to the assigned visit team member's device
     // if a visit was scheduled during lead creation.
-    const shouldSchedule = Boolean(body.scheduleVisit);
-    if (shouldSchedule) {
+    if (shouldSchedule && visitScheduleParams) {
       try {
         const visitBody: CreateLeadVisitBody = isRecord(body.visit) ? body.visit : {};
         const visitTeamUserId = toOptionalString(visitBody.visitTeamUserId);
