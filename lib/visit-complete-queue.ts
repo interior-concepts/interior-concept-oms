@@ -454,8 +454,9 @@ export async function assignJrArchitectFromVisitComplete(input: AssignJrArchitec
   const reason = cleanText(input.reason)
   const requestId = cleanText(input.requestId)
 
-  return prisma.$transaction(async (tx) => {
-    const [lead, jrArchitect] = await Promise.all([
+  return prisma.$transaction(
+    async (tx) => {
+      const [lead, jrArchitect] = await Promise.all([
       tx.lead.findUnique({
         where: { id: input.leadId },
         select: {
@@ -698,5 +699,7 @@ export async function assignJrArchitectFromVisitComplete(input: AssignJrArchitec
       jrArchitectId: jrArchitect.id,
       jrArchitectName: jrArchitect.fullName,
     }
-  })
+  },
+  { timeout: 15000 },
+  )
 }

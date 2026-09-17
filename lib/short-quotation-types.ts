@@ -8,6 +8,12 @@ export type ShortQuotationLine = {
   total: number
   isLumpSum: boolean
   unitPriceLabel?: string
+  /** Reference to a detail-quotation catalog item (informational only, not shown in PDF) */
+  catalogItemId?: string
+  /** Which catalog template the item came from */
+  catalogTemplateKey?: string
+  /** Catalog item materials description */
+  materials?: string
 }
 
 export type ShortQuotationRoom = {
@@ -35,9 +41,12 @@ export type ShortQuotationContent = {
   clientAddress: string
   subject: string
   introLetter: string
+  terms?: string
   floors: ShortQuotationFloor[]
   rooms: ShortQuotationRoom[]
   footerNotes: string[]
+  discountAmount?: number
+  discountPercent?: number
 }
 
 export type ShortQuotationLineWithSerial = ShortQuotationLine & {

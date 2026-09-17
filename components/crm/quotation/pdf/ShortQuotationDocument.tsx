@@ -4,7 +4,7 @@ import { Document, Page, StyleSheet, Text, View, Image, Font } from '@react-pdf/
 
 const getBaseUrl = () => {
   if (typeof window !== 'undefined') return window.location.origin
-  return 'https://www.aestheticinteriorbd.com'
+  return 'https://interiorconcepts.com'
 }
 
 Font.register({
@@ -148,12 +148,12 @@ const FooterFixed = ({ content }: { content: ShortQuotationContent }) => (
     <View style={{ paddingTop: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
       <View style={{ width: '48%' }}>
         <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginBottom: 3 }]}>INTERIOR CONCEPT Studio</Text>
-        <Text style={styles.footerText}>183, East Senpara, Begum Rokeya Soroni</Text>
-        <Text style={styles.footerText}>3rd floor, Mirpur 10, Dhaka-1216</Text>
+        <Text style={styles.footerText}>Gudara Ghaat, Ta-166 Middle Badda</Text>
+        <Text style={styles.footerText}>Dhaka 1212</Text>
       </View>
       <View style={{ width: '48%', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-        <Text style={styles.footerText}>+88 0132969 4663</Text>
-        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold' }]}>www.aestheticinteriorbd.com</Text>
+        <Text style={styles.footerText}>01334935532</Text>
+        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold' }]}>interiorconcepts.com</Text>
         <Text style={styles.footerText}>© 2026 All rights reserved.</Text>
       </View>
     </View>
