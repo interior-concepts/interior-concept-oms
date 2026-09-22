@@ -67,7 +67,7 @@ export async function GET(request: NextRequest) {
     const requiresVisitTeamLeader = scope === 'all' && accessContext === 'queue';
     const isGlobalVisitDashboardScope = scope === 'dashboard' && (isAdmin || isVisitTeam);
     const shouldRestrictToSeniorCrmLeads =
-      isSeniorCrm && (scope === 'sr-assigned' || (!isAdmin && !isJuniorCrm && !isVisitTeam));
+      isSeniorCrm && (scope === 'sr-assigned' || (!isAdmin && !isJuniorCrm && !isVisitTeam && scope !== 'all'));
     if (isVisitTeam && requiresVisitTeamLeader && !isVisitTeamLeader) {
       return NextResponse.json(
         { success: false, error: 'Only visit team leaders can access visit schedule queue' },

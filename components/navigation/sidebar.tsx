@@ -305,11 +305,6 @@ const navigationGroups: Record<string, NavGroup[]> = {
       items: [
         {
           icon: ClipboardList,
-          label: 'Visit Queue',
-          href: '/crm/jr-architecture/queue',
-        },
-        {
-          icon: ClipboardList,
           label: 'CAD Queue',
           href: '/crm/jr-architecture/cad-phase-queue',
         },
@@ -511,7 +506,6 @@ export function Sidebar({ open, onOpenChange, role }: SidebarProps) {
               (item) =>
                 canViewJrArchitectLeaderPages ||
                 ![
-                  '/crm/jr-architecture/queue',
                   '/crm/jr-architecture/cad-phase-queue',
                   '/crm/jr-architecture/projects',
                   '/crm/jr-architecture/visits',

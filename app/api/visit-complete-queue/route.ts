@@ -27,10 +27,7 @@ export async function GET() {
 
     const [queue, jrArchitectUsers] = await Promise.all([
       canViewVisitCompleteQueue(flags)
-        ? listVisitCompleteQueueItems({
-            srAssigneeUserId:
-              flags.isSeniorCrm && !flags.isAdmin ? authResult.actorUserId : null,
-          })
+        ? listVisitCompleteQueueItems()
         : Promise.resolve([]),
       canAssignJrArchitect(flags)
         ? prisma.userDepartment.findMany({

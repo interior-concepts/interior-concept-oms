@@ -31,11 +31,7 @@ export default async function JrArchitectureQueuePage() {
   const departmentNames = new Set(
     (actor?.userDepartments ?? []).map((row) => row.department.name),
   )
-  const roleNames = (actor?.userRoles ?? []).map((row) => row.role.name)
-  const canAccessVisitQueue =
-    departmentNames.has('ADMIN') ||
-    (departmentNames.has('JR_ARCHITECT') &&
-      hasJrArchitectureLeaderRole(roleNames))
+  const canAccessVisitQueue = departmentNames.has('ADMIN')
 
   if (!canAccessVisitQueue) {
     redirect('/crm/jr-architecture/dashboard')
