@@ -134,6 +134,7 @@ export type VisitQueueCalendarProps = {
   subtitle: string
   leadHrefPrefix?: string | null
   visitScope?: 'all' | 'default'
+  hideSrCrmAssign?: boolean
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -190,6 +191,7 @@ export function VisitQueueCalendar({
   subtitle,
   leadHrefPrefix = null,
   visitScope = 'all',
+  hideSrCrmAssign = false,
 }: VisitQueueCalendarProps) {
   const now = new Date()
   const todayKey = getLocalDateKey(now)!
@@ -625,6 +627,7 @@ export function VisitQueueCalendar({
           </div>
 
           {/* SR CRM */}
+          {!hideSrCrmAssign && (
           <div className="min-w-[120px]">
             <p className="text-xs text-muted-foreground">SR CRM</p>
             <button
@@ -635,6 +638,7 @@ export function VisitQueueCalendar({
               {item.srCrmAssignee?.fullName ?? 'Unassigned'}
             </button>
           </div>
+          )}
         </div>
 
         {/* Actions dropdown */}
@@ -657,9 +661,11 @@ export function VisitQueueCalendar({
               <DropdownMenuItem onClick={() => openRenameDialog(item.leadId, item.leadName)}>
                 Change Client Name
               </DropdownMenuItem>
+              {!hideSrCrmAssign && (
               <DropdownMenuItem onClick={() => void openSrCrmDialog(item)}>
                 Change SR CRM
               </DropdownMenuItem>
+              )}
               <DropdownMenuItem
                 className="text-destructive focus:text-destructive"
                 onClick={() => openDropDialog(item.leadId, item.leadName)}
@@ -943,6 +949,7 @@ export function VisitQueueCalendar({
       </Dialog>
 
       {/* SR CRM dialog */}
+      {!hideSrCrmAssign && (
       <Dialog open={srCrmOpen} onOpenChange={setSrCrmOpen}>
         <DialogContent>
           <DialogHeader>
@@ -968,6 +975,7 @@ export function VisitQueueCalendar({
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      )}
 
       {/* Rename dialog */}
       <Dialog open={renameOpen} onOpenChange={setRenameOpen}>

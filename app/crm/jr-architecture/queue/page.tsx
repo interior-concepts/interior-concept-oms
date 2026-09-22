@@ -34,7 +34,6 @@ export default async function JrArchitectureQueuePage() {
   const roleNames = (actor?.userRoles ?? []).map((row) => row.role.name)
   const canAccessVisitQueue =
     departmentNames.has('ADMIN') ||
-    departmentNames.has('SR_CRM') ||
     (departmentNames.has('JR_ARCHITECT') &&
       hasJrArchitectureLeaderRole(roleNames))
 
