@@ -29,6 +29,7 @@ import { DIRECT_BLOB_UPLOAD_LIMIT_MESSAGE, DIRECT_BLOB_UPLOAD_MAX_BYTES, formatB
 
 type LeadDetails = {
   id: string
+  clientId?: number | null
   name: string
   phone: string | null
   email: string | null

@@ -15,6 +15,7 @@ datasource db {
 
 model Lead {
   id         String         @id @default(cuid())
+  clientId   Int            @unique @default(autoincrement())
   name       String
   phone      String?        @unique
   email      String?

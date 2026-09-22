@@ -5,6 +5,7 @@ import { Phone, Mail, MapPin, DollarSign, FileText, Clock } from 'lucide-react'
 
 type LeadDetails = {
   id: string
+  clientId?: number | null
   name: string
   phone: string | null
   email: string | null
@@ -77,7 +78,14 @@ export function LeadInfoCard({ lead, stage, hasPendingFollowup }: LeadInfoCardPr
       <CardHeader>
         <div className="flex items-start justify-between">
           <div>
-            <CardTitle className="text-2xl text-foreground">{lead.name}</CardTitle>
+            <div className="flex items-center gap-3">
+              <CardTitle className="text-2xl text-foreground">{lead.name}</CardTitle>
+              {lead.clientId ? (
+                <span className="inline-flex items-center rounded-md bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+                  Client ID: #{lead.clientId}
+                </span>
+              ) : null}
+            </div>
             <p className="mt-1 text-muted-foreground">{lead.location || '—'}</p>
             {hasPendingFollowup ? (
               <span className="mt-2 inline-flex items-center rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/40 dark:text-amber-200">

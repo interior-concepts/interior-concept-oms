@@ -401,6 +401,9 @@ export async function GET(request: NextRequest) {
           }
         : undefined;
 
+    const numericSearch = searchParam ? Number.parseInt(searchParam.replace(/\D/g, ''), 10) : NaN;
+    const isNumericSearchValid = Number.isFinite(numericSearch) && numericSearch > 0;
+
     const where: Prisma.LeadWhereInput = {
       ...baseWhere,
       ...(stageParam ? { stage: stageParam } : {}),
@@ -421,6 +424,7 @@ export async function GET(request: NextRequest) {
               { name: { contains: searchParam, mode: 'insensitive' } },
               { email: { contains: searchParam, mode: 'insensitive' } },
               { phone: { contains: searchParam, mode: 'insensitive' } },
+              ...(isNumericSearchValid ? [{ clientId: numericSearch }] : []),
             ],
           }
         : {}),
@@ -479,6 +483,7 @@ export async function GET(request: NextRequest) {
     const timedDb = await timeAsync(async () => {
       const leadSelect: Prisma.LeadSelect = {
         id: true,
+        clientId: true,
         name: true,
         phone: true,
         email: true,

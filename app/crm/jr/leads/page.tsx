@@ -171,6 +171,7 @@ function getSourceVisual(source: string | null | undefined) {
 
 type LeadSummary = {
   id: string
+  clientId?: number | null
   name: string
   phone: string | null
   email: string | null
@@ -797,7 +798,7 @@ export default function LeadsPage() {
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="Search by name, phone or email..."
+                placeholder="Search by client ID, name, phone or email..."
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 className="pl-10"
@@ -935,7 +936,14 @@ export default function LeadsPage() {
                               )
                             })()}
                             <div>
-                              <p className="font-semibold text-foreground">{lead.name}</p>
+                              <div className="flex items-center gap-2">
+                                <p className="font-semibold text-foreground">{lead.name}</p>
+                                {lead.clientId ? (
+                                  <span className="inline-flex items-center rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold text-primary">
+                                    #{lead.clientId}
+                                  </span>
+                                ) : null}
+                              </div>
                               <p className="text-xs text-muted-foreground">{lead.email || 'No email'}</p>
                               <p className="text-[11px] text-muted-foreground">Source: {lead.source || 'Unknown'}</p>
                             </div>
@@ -943,7 +951,7 @@ export default function LeadsPage() {
                         </div>
                         <div className="text-sm text-muted-foreground">
                           <p>Phone: {lead.phone || '—'}</p>
-                              <p>Senior CRM: {getSeniorAssignmentName(lead)}</p>
+                          <p>Senior CRM: {getSeniorAssignmentName(lead)}</p>
                           <p>Location: {lead.location || '—'}</p>
                         </div>
                         <div className="flex items-center justify-between gap-3">
@@ -978,6 +986,7 @@ export default function LeadsPage() {
                             aria-label="Select all visible leads"
                           />
                         </th>
+                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Client ID</th>
                         <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Lead Name</th>
                         <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Phone</th>
                         <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Senior CRM</th>
@@ -998,6 +1007,9 @@ export default function LeadsPage() {
                               className="h-4 w-4 rounded border-border"
                               aria-label={`Select ${lead.name}`}
                             />
+                          </td>
+                          <td className="py-4 px-4 font-semibold text-primary">
+                            {lead.clientId ? `#${lead.clientId}` : '—'}
                           </td>
                           <td className="py-4 px-4">
                             <div className="flex items-start gap-3">
