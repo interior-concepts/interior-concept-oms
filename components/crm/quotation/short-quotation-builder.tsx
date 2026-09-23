@@ -44,10 +44,15 @@ import {
   arrayMove,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { QuotationItemPicker } from '@/components/crm/quotation/quotation-item-picker'
+import { ShortQuotationConceptPicker } from '@/components/crm/quotation/short-quotation-concept-picker'
+import { getQuotationTemplate, listQuotationTemplates } from '@/lib/quotation-templates'
+import type { QuotationTemplateItem } from '@/lib/quotation-types'
 import type {
   ShortQuotationContent,
   ShortQuotationLine,
   ShortQuotationPackage,
+  ShortQuotationRoom,
 } from '@/lib/short-quotation-types'
 
 type ShortQuotationBuilderProps = {
@@ -67,11 +72,20 @@ type DraftPayload = {
   status: 'DRAFT' | 'FINALIZED'
 }
 
+type CatalogOption = {
+  key: string
+  name: string
+  itemCount?: number
+  sourceDocument?: string
+}
+
 type DraftResponse = {
   draft: DraftPayload | null
   defaultDraft: DraftPayload | null
   documentType?: 'short' | 'detail'
   canEdit: boolean
+  templates?: CatalogOption[]
+  fullTemplates?: any[]
 }
 
 const SHORT_QUOTATION_PACKAGES: ShortQuotationPackage[] = ['PLATINUM', 'PREMIUM', 'LUXURY']
@@ -135,6 +149,14 @@ function scrollToQuotationIssue(elementId: string) {
   document.getElementById(elementId)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 }
 
+function resolveShortItemRate(item: any, packageTier: ShortQuotationPackage): number {
+  if (item.priceMode === 'on-request') return 0
+  if (packageTier === 'LUXURY' || packageTier === 'PLATINUM') {
+    return item.premiumRate ?? item.rateMax ?? item.standardRate ?? item.rate ?? 0
+  }
+  return item.standardRate ?? item.rate ?? item.basicRate ?? item.rateMin ?? 0
+}
+
 export function ShortQuotationBuilder({
   leadId,
   leadName,
@@ -154,6 +176,14 @@ export function ShortQuotationBuilder({
   const [content, setContent] = useState<ShortQuotationContent | null>(null)
   const [selectedPackageTier, setSelectedPackageTier] = useState<ShortQuotationPackage>('PREMIUM')
   const [generatingPdf, setGeneratingPdf] = useState(false)
+
+  const [catalogs, setCatalogs] = useState<CatalogOption[]>([])
+  const [fullTemplates, setFullTemplates] = useState<any[]>([])
+  const [itemPickerOpen, setItemPickerOpen] = useState(false)
+  const [itemPickerRoomId, setItemPickerRoomId] = useState<string | null>(null)
+  const [itemPickerCatalogKey, setItemPickerCatalogKey] = useState('ceiling-curtain')
+  const [conceptPickerOpen, setConceptPickerOpen] = useState(false)
+  const [conceptPickerFloorId, setConceptPickerFloorId] = useState<string | null>(null)
 
   const dndSensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -198,6 +228,16 @@ export function ShortQuotationBuilder({
     setLoading(true)
     try {
       if (isPlayground) {
+        try {
+          const templatesResponse = await fetch('/api/quotation/templates', { cache: 'no-store' })
+          const templatesPayload = await templatesResponse.json()
+          if (templatesResponse.ok && templatesPayload?.success && Array.isArray(templatesPayload.data?.templates)) {
+            setCatalogs(templatesPayload.data.templates)
+          }
+        } catch {
+          // ignore fallback
+        }
+
         const stored = loadPlaygroundShortDraft(selectedPackageTier)
         if (stored) {
           setContent(stored)
@@ -225,6 +265,8 @@ export function ShortQuotationBuilder({
 
       const data = payload.data as DraftResponse
       setCanEdit(Boolean(data.canEdit))
+      if (Array.isArray(data.templates)) setCatalogs(data.templates)
+      if (Array.isArray(data.fullTemplates)) setFullTemplates(data.fullTemplates)
 
       const draftContent = data.draft?.content
       const defaultContent = data.defaultDraft?.content
@@ -249,6 +291,107 @@ export function ShortQuotationBuilder({
       setLoading(false)
     }
   }, [isPlayground, leadId, leadName, leadLocation, selectedPackageTier])
+
+  const handleSelectCatalogItem = (templateItemId: string, catalogKey: string) => {
+    if (!itemPickerRoomId) return
+    const searchTemplates = fullTemplates.length ? fullTemplates : listQuotationTemplates()
+    let item: any = null
+    for (const t of searchTemplates) {
+      if (t.items) {
+        const found = t.items.find((i: any) => i.id === templateItemId)
+        if (found) {
+          item = found
+          break
+        }
+      }
+    }
+    if (!item) {
+      const template = getQuotationTemplate(catalogKey)
+      item = template?.items?.find((i) => i.id === templateItemId)
+    }
+    if (!item) {
+      toast.error('Selected catalog item not found')
+      return
+    }
+
+    const rate = resolveShortItemRate(item, selectedPackageTier)
+    const isLs = item.unit === 'ls'
+    const newLine: ShortQuotationLine = {
+      id: crypto.randomUUID(),
+      name: item.description,
+      quantitySqft: isLs ? null : 1,
+      unitPrice: isLs ? null : rate,
+      unitPriceLabel: item.unitPriceLabel,
+      total: isLs ? (item.rate ?? rate) : rate * 1,
+      isLumpSum: isLs,
+      catalogItemId: item.id,
+      catalogTemplateKey: catalogKey,
+      materials: item.materials,
+    }
+
+    updateContent((prev) => ({
+      ...prev,
+      rooms: prev.rooms.map((room) =>
+        room.id === itemPickerRoomId
+          ? {
+              ...room,
+              lines: [...room.lines, newLine],
+            }
+          : room,
+      ),
+    }))
+    toast.success(`Added "${item.description}" from catalog`)
+  }
+
+  const handleSelectConceptBundle = (catalogKey: string) => {
+    if (!conceptPickerFloorId) return
+    let template: any = null
+    if (fullTemplates.length) {
+      template = fullTemplates.find((t) => t.key === catalogKey)
+    }
+    if (!template) {
+      template = getQuotationTemplate(catalogKey)
+    }
+    if (!template || !Array.isArray(template.items)) {
+      toast.error('Failed to load concept bundle')
+      return
+    }
+
+    updateContent((prev) => {
+      const roomsOnFloor = prev.rooms.filter((room) => room.floorId === conceptPickerFloorId)
+      const lines: ShortQuotationLine[] = template.items.map((item: any) => {
+        const isLs = item.unit === 'ls'
+        const rate = resolveShortItemRate(item, selectedPackageTier)
+        return {
+          id: crypto.randomUUID(),
+          name: item.description,
+          quantitySqft: isLs ? null : 1,
+          unitPrice: isLs ? null : rate,
+          unitPriceLabel: item.unitPriceLabel,
+          total: isLs ? (item.rate ?? rate) : rate * 1,
+          isLumpSum: isLs,
+          catalogItemId: item.id,
+          catalogTemplateKey: catalogKey,
+          materials: item.materials,
+        }
+      })
+
+      const newRoom: ShortQuotationRoom = {
+        id: crypto.randomUUID(),
+        floorId: conceptPickerFloorId,
+        name: template.name,
+        sortOrder: roomsOnFloor.length + 1,
+        lines,
+      }
+
+      return {
+        ...prev,
+        rooms: [...prev.rooms, newRoom],
+      }
+    })
+
+    toast.success(`Added concept bundle "${template.name}" with ${template.items.length} items`)
+  }
 
   useEffect(() => {
     void loadDraft()
@@ -962,7 +1105,7 @@ export function ShortQuotationBuilder({
                     }))
                   }
                 />
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="text-sm font-medium">
                     Floor Total: {formatAmount(floorSummary?.total ?? 0)}
                   </span>
@@ -974,6 +1117,19 @@ export function ShortQuotationBuilder({
                     onClick={() => addRoom(floor.id)}
                   >
                     Add Room
+                  </Button>
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    disabled={!canEdit}
+                    onClick={() => {
+                      setConceptPickerFloorId(floor.id)
+                      setConceptPickerOpen(true)
+                    }}
+                  >
+                    <Plus className="mr-1.5 h-3.5 w-3.5" />
+                    Add Concept from Catalog / Bundle
                   </Button>
                 </div>
               </CardHeader>
@@ -1004,6 +1160,10 @@ export function ShortQuotationBuilder({
                               updateContent={updateContent}
                               addSqftLine={addSqftLine}
                               addLumpSumLine={addLumpSumLine}
+                              openItemPicker={(roomId) => {
+                                setItemPickerRoomId(roomId)
+                                setItemPickerOpen(true)
+                              }}
                               reorderRoomLines={reorderRoomLines}
                               updateLine={updateLine}
                               removeLine={removeLine}
@@ -1073,6 +1233,24 @@ export function ShortQuotationBuilder({
         </div>
       </div>
 
+      <QuotationItemPicker
+        open={itemPickerOpen}
+        onOpenChange={setItemPickerOpen}
+        catalogs={catalogs}
+        fullTemplates={fullTemplates}
+        catalogTemplateKey={itemPickerCatalogKey}
+        onCatalogTemplateKeyChange={setItemPickerCatalogKey}
+        onSelectItem={handleSelectCatalogItem}
+      />
+
+      <ShortQuotationConceptPicker
+        open={conceptPickerOpen}
+        onOpenChange={setConceptPickerOpen}
+        catalogs={catalogs}
+        fullTemplates={fullTemplates}
+        onSelectCatalog={handleSelectConceptBundle}
+      />
+
 
       <style jsx global>{`
         @media print {
@@ -1107,6 +1285,7 @@ type SortableRoomCardProps = {
   updateContent: (updater: (prev: ShortQuotationContent) => ShortQuotationContent) => void
   addSqftLine: (roomId: string) => void
   addLumpSumLine: (roomId: string) => void
+  openItemPicker: (roomId: string) => void
   reorderRoomLines: (roomId: string, event: DragEndEvent) => void
   updateLine: (roomId: string, lineId: string, patch: Partial<ShortQuotationLine>) => void
   removeLine: (roomId: string, lineId: string) => void
@@ -1121,6 +1300,7 @@ function SortableRoomCard({
   updateContent,
   addSqftLine,
   addLumpSumLine,
+  openItemPicker,
   reorderRoomLines,
   updateLine,
   removeLine,
@@ -1227,6 +1407,15 @@ function SortableRoomCard({
           >
             Add Lump Sum Item
           </Button>
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            onClick={() => openItemPicker(room.id)}
+          >
+            <Plus className="mr-1 h-3.5 w-3.5" />
+            Add from Catalog / Bundle
+          </Button>
         </div>
       ) : null}
     </div>
@@ -1278,6 +1467,20 @@ function SortableShortRow({
           disabled={!canEdit}
           onChange={(event) => updateLine(roomId, line.id, { name: event.target.value })}
         />
+        {line.materials || line.catalogItemId ? (
+          <div className="mt-1 flex flex-wrap items-center gap-1.5 text-[11px] text-muted-foreground">
+            {line.catalogItemId ? (
+              <Badge variant="outline" className="text-[10px] text-primary border-primary/30">
+                Catalog item
+              </Badge>
+            ) : null}
+            {line.materials ? (
+              <span className="line-clamp-1 italic" title={line.materials}>
+                {line.materials}
+              </span>
+            ) : null}
+          </div>
+        ) : null}
       </td>
       <td className="px-2 py-2">
         {line.isLumpSum ? (
