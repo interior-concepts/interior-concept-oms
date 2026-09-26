@@ -431,12 +431,12 @@ export function ReviewCenterView({
       return
     }
 
-    if (decisionType === 'APPROVE') {
+    if (decisionType === 'APPROVE' || decisionType === 'CORRECTION') {
       if (!approveMeetingEnabled && !approveFollowupAt) {
-        toast.error('Follow-up date for next action is required when approving without setting a meeting.')
+        toast.error('Follow-up date for next action is required.')
         return
       }
-      if (approveMeetingEnabled && !approveMeetingAt) {
+      if (decisionType === 'APPROVE' && approveMeetingEnabled && !approveMeetingAt) {
         toast.error('Meeting date and time is required to schedule a client meeting.')
         return
       }
@@ -459,39 +459,44 @@ export function ReviewCenterView({
         throw new Error(payload.error ?? 'Failed to process review decision')
       }
 
-      // 2. If APPROVE, create meeting and/or follow-up
-      if (decisionType === 'APPROVE') {
-        if (approveMeetingEnabled && approveMeetingAt) {
-          try {
-            await fetch(`/api/lead/${decisionTarget.lead.id}/meetings`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                type: 'FIRST_MEETING',
-                title: 'Client Meeting Set on Approval',
-                startsAt: new Date(approveMeetingAt).toISOString(),
-                notes: approveMeetingNote.trim() || `Client meeting set during submission approval (${getSubmissionKindLabel(decisionTarget)}).`,
-              }),
-            })
-          } catch (mErr) {
-            console.error('Meeting creation error:', mErr)
-          }
+      // 2. Schedule Meeting if enabled (for APPROVE)
+      if (decisionType === 'APPROVE' && approveMeetingEnabled && approveMeetingAt) {
+        try {
+          await fetch(`/api/lead/${decisionTarget.lead.id}/meetings`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              type: 'FIRST_MEETING',
+              title: 'Client Meeting Set on Approval',
+              startsAt: new Date(approveMeetingAt).toISOString(),
+              notes: approveMeetingNote.trim() || `Client meeting set during submission approval (${getSubmissionKindLabel(decisionTarget)}).`,
+            }),
+          })
+        } catch (mErr) {
+          console.error('Meeting creation error:', mErr)
         }
+      }
 
-        const followupTime = approveFollowupAt || approveMeetingAt
-        if (followupTime) {
-          try {
-            await fetch(`/api/followup/${decisionTarget.lead.id}`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                followupDate: new Date(followupTime).toISOString(),
-                notes: approveFollowupNote.trim() || (approveMeetingEnabled ? `Follow-up for client meeting (${new Date(approveMeetingAt).toLocaleString()})` : `Next action follow-up after ${getSubmissionKindLabel(decisionTarget)} approval`),
-              }),
-            })
-          } catch (fErr) {
-            console.error('Follow-up creation error:', fErr)
-          }
+      // 3. Schedule Follow-up (for APPROVE & CORRECTION)
+      const followupTime = approveFollowupAt || (decisionType === 'APPROVE' ? approveMeetingAt : '')
+      if (followupTime) {
+        try {
+          const targetAssigneeId = decisionTarget.lead.srCrmAssignment?.user?.id || decisionTarget.submittedBy.id
+          const defaultNote = decisionType === 'APPROVE'
+            ? (approveMeetingEnabled ? `Follow-up for client meeting (${new Date(approveMeetingAt).toLocaleString()})` : `Next action follow-up after ${getSubmissionKindLabel(decisionTarget)} approval`)
+            : `Follow-up on correction: ${decisionSummary.trim()}`
+
+          await fetch(`/api/followup/${decisionTarget.lead.id}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              assignedToId: targetAssigneeId,
+              followupDate: new Date(followupTime).toISOString(),
+              notes: approveFollowupNote.trim() || defaultNote,
+            }),
+          })
+        } catch (fErr) {
+          console.error('Follow-up creation error:', fErr)
         }
       }
 
@@ -923,52 +928,56 @@ export function ReviewCenterView({
           </DialogHeader>
 
           <div className="space-y-4">
-            {decisionType === 'APPROVE' && (
+            {(decisionType === 'APPROVE' || decisionType === 'CORRECTION') && (
               <div className="rounded-xl border border-sky-200 bg-sky-50/50 p-4 space-y-3 dark:border-sky-800 dark:bg-sky-950/30">
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-900 dark:text-sky-200">
-                    <CalendarPlus className="h-4 w-4 text-sky-600 dark:text-sky-400" />
-                    Set Client Meeting (Meeting Queue)
-                  </span>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={approveMeetingEnabled}
-                      onChange={(e) => setApproveMeetingEnabled(e.target.checked)}
-                      className="sr-only peer"
-                    />
-                    <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-slate-600 peer-checked:bg-sky-600"></div>
-                  </label>
-                </div>
+                {decisionType === 'APPROVE' && (
+                  <>
+                    <div className="flex items-center justify-between">
+                      <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-900 dark:text-sky-200">
+                        <CalendarPlus className="h-4 w-4 text-sky-600 dark:text-sky-400" />
+                        Set Client Meeting (Meeting Queue)
+                      </span>
+                      <label className="relative inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={approveMeetingEnabled}
+                          onChange={(e) => setApproveMeetingEnabled(e.target.checked)}
+                          className="sr-only peer"
+                        />
+                        <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-slate-600 peer-checked:bg-sky-600"></div>
+                      </label>
+                    </div>
 
-                {approveMeetingEnabled && (
-                  <div className="space-y-2.5 pt-1">
-                    <div>
-                      <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Meeting Date & Time</p>
-                      <Input
-                        type="datetime-local"
-                        value={approveMeetingAt}
-                        onChange={(e) => setApproveMeetingAt(e.target.value)}
-                        className="bg-white dark:bg-slate-900 text-xs"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Meeting Notes / Agenda</p>
-                      <Input
-                        placeholder="Meeting agenda or details..."
-                        value={approveMeetingNote}
-                        onChange={(e) => setApproveMeetingNote(e.target.value)}
-                        className="bg-white dark:bg-slate-900 text-xs"
-                      />
-                    </div>
-                  </div>
+                    {approveMeetingEnabled && (
+                      <div className="space-y-2.5 pt-1">
+                        <div>
+                          <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Meeting Date & Time</p>
+                          <Input
+                            type="datetime-local"
+                            value={approveMeetingAt}
+                            onChange={(e) => setApproveMeetingAt(e.target.value)}
+                            className="bg-white dark:bg-slate-900 text-xs"
+                          />
+                        </div>
+                        <div>
+                          <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Meeting Notes / Agenda</p>
+                          <Input
+                            placeholder="Meeting agenda or details..."
+                            value={approveMeetingNote}
+                            onChange={(e) => setApproveMeetingNote(e.target.value)}
+                            className="bg-white dark:bg-slate-900 text-xs"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </>
                 )}
 
-                <div className="border-t border-sky-200/80 dark:border-sky-800/80 pt-3 space-y-2">
+                <div className={`${decisionType === 'APPROVE' ? 'border-t border-sky-200/80 dark:border-sky-800/80 pt-3' : ''} space-y-2`}>
                   <div className="flex items-center justify-between">
                     <p className="text-xs font-bold uppercase tracking-wider text-amber-900 dark:text-amber-200 flex items-center gap-1.5">
                       <CalendarClock className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
-                      Follow-up for Next Action {!approveMeetingEnabled && <span className="text-red-500 font-bold">*Mandatory</span>}
+                      Follow-up for Next Action <span className="text-red-500 font-bold">*Mandatory</span>
                     </p>
                   </div>
                   <div>
@@ -983,7 +992,7 @@ export function ReviewCenterView({
                   <div>
                     <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Follow-up Notes</p>
                     <Input
-                      placeholder="Notes for next follow-up action..."
+                      placeholder={decisionType === 'CORRECTION' ? 'Notes on correction follow-up action...' : 'Notes for next follow-up action...'}
                       value={approveFollowupNote}
                       onChange={(e) => setApproveFollowupNote(e.target.value)}
                       className="bg-white dark:bg-slate-900 text-xs"

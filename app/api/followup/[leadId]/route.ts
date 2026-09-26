@@ -111,7 +111,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
     }
 
     const body = await request.json();
-    const assignedToId = toNonEmptyString(body.assignedToId);
+    const assignedToId = toNonEmptyString(body.assignedToId) ?? authResult.actorUserId;
     const followupDate = toDate(body.followupDate);
     const notes = typeof body.notes === 'string' ? body.notes : undefined;
     const userId = authResult.actorUserId ?? toNonEmptyString(body.userId);
