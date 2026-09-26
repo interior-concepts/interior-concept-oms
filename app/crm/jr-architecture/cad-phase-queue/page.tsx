@@ -49,6 +49,7 @@ export default async function JrArchitectureCadPhaseQueuePage() {
       title="CAD Phase Lead Queue"
       subtitle="JR Architect leader view for all CAD phase leads with reassignment controls."
       leadBasePath="/crm/jr-architecture/leads"
+      hidePhoneInCards={true}
     />
   )
 }

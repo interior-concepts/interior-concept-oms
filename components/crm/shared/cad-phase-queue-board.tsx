@@ -487,6 +487,7 @@ export function CadPhaseQueueBoard({
   assigneeLabel = 'JR Architect',
   showAssigneeReassign = true,
   showSrCrmFilter = false,
+  hidePhoneInCards = false,
 }: {
   title: string
   subtitle: string
@@ -497,6 +498,7 @@ export function CadPhaseQueueBoard({
   assigneeLabel?: string
   showAssigneeReassign?: boolean
   showSrCrmFilter?: boolean
+  hidePhoneInCards?: boolean
 }) {
   const [searchInput, setSearchInput] = useState('')
   const [search, setSearch] = useState('')
@@ -1967,10 +1969,12 @@ export function CadPhaseQueueBoard({
                   </div>
 
                   <div className="grid gap-2 text-sm text-muted-foreground md:grid-cols-2">
-                    <p className="inline-flex items-center gap-1">
-                      <Phone className="h-3.5 w-3.5" />
-                      {lead.phone || 'No phone'}
-                    </p>
+                    {!hidePhoneInCards ? (
+                      <p className="inline-flex items-center gap-1">
+                        <Phone className="h-3.5 w-3.5" />
+                        {lead.phone || 'No phone'}
+                      </p>
+                    ) : null}
                     <p className="inline-flex items-center gap-1">
                       <CalendarClock className="h-3.5 w-3.5" />
                       Visit Date: {formatDate(lead.latestCompletedVisit?.scheduledAt)}
@@ -2223,10 +2227,12 @@ export function CadPhaseQueueBoard({
                   </div>
 
                   <div className="grid gap-2 text-sm text-muted-foreground md:grid-cols-2">
-                    <p className="inline-flex items-center gap-1">
-                      <Phone className="h-3.5 w-3.5" />
-                      {lead.phone || 'No phone'}
-                    </p>
+                    {!hidePhoneInCards ? (
+                      <p className="inline-flex items-center gap-1">
+                        <Phone className="h-3.5 w-3.5" />
+                        {lead.phone || 'No phone'}
+                      </p>
+                    ) : null}
                     <p className="inline-flex items-center gap-1">
                       <CalendarClock className="h-3.5 w-3.5" />
                       Visit Date: {formatDate(lead.latestCompletedVisit?.scheduledAt)}

@@ -25,7 +25,6 @@ import {
 } from '@/components/ui/select'
 import {
   Search,
-  Phone,
   ImageIcon,
   FileText,
   Loader2,
@@ -464,10 +463,6 @@ export default function JrArchLeadsPage() {
                       </div>
 
                       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
-                        <span className="inline-flex items-center gap-1">
-                          <Phone className="h-3.5 w-3.5" />
-                          {lead.phone || 'No phone number'}
-                        </span>
                         {lead.location ? (
                           <span className="inline-flex items-center gap-1">
                             <MapPin className="h-3.5 w-3.5" />

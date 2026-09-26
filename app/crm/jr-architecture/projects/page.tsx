@@ -10,6 +10,7 @@ export default function JrArchProjectsPage() {
       leadBasePath="/crm/jr-architecture/leads"
       queueType="history"
       showAssigneeReassign={false}
+      hidePhoneInCards={true}
     />
   )
 }

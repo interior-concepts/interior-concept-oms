@@ -6,7 +6,7 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Search, Phone, MapPin, Clock3, Loader2 } from 'lucide-react'
+import { Search, MapPin, Clock3, Loader2 } from 'lucide-react'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { toast } from 'sonner'
 
@@ -190,7 +190,7 @@ export default function JrArchitectMyWorkPage() {
           <div className="relative max-w-md flex-1">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
-              placeholder="Search by lead name, phone, or email..."
+              placeholder="Search by lead name or location..."
               value={searchInput}
               onChange={(event) => setSearchInput(event.target.value)}
               className="pl-10"
@@ -239,10 +239,6 @@ export default function JrArchitectMyWorkPage() {
                   </div>
 
                   <div className="grid gap-2 text-sm text-muted-foreground md:grid-cols-2">
-                    <p className="inline-flex items-center gap-1">
-                      <Phone className="h-3.5 w-3.5" />
-                      {lead.phone || 'No phone'}
-                    </p>
                     <p className="inline-flex items-center gap-1">
                       <MapPin className="h-3.5 w-3.5" />
                       {lead.location || 'No location'}
