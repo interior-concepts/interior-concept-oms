@@ -32,6 +32,10 @@ model Lead {
   primaryOwnerDepartment LeadPrimaryOwnerDepartment?
   primaryOwnerUserId String?
   accountStatus AccountStatus?
+  sentiment     ClientSentiment?
+  objection     ClientObjection?
+  objectionNote String?
+  lastContactedAt DateTime?
   created_at DateTime       @default(now())
   updated_at DateTime       @updatedAt
 
@@ -111,6 +115,9 @@ model FollowUp {
   followupDate DateTime
   status       FollowUpStatus @default(PENDING)
   notes        String?
+  category     FollowUpCategory @default(GENERAL)
+  sentiment    ClientSentiment?
+  objection    ClientObjection?
   createdAt    DateTime       @default(now())
   notifications Notification[]
 
@@ -746,6 +753,30 @@ enum FollowUpStatus {
   DONE
   LATELY_DONE
   MISSED
+}
+
+enum FollowUpCategory {
+  LAYOUT_REVIEW
+  BUDGET_NEGOTIATION
+  SITE_VISIT
+  CONTRACT_SIGNING
+  GENERAL
+}
+
+enum ClientSentiment {
+  HOT
+  WARM
+  COLD
+  AT_RISK
+}
+
+enum ClientObjection {
+  BUDGET_TOO_HIGH
+  COMPETITOR_COMPARISON
+  DESIGN_REVISION_NEEDED
+  SPACE_PLANNING_QUERY
+  TIMELINE_DELAY
+  OTHER
 }
 
 enum LeadPrimaryOwnerDepartment {

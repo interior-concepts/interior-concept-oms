@@ -441,7 +441,7 @@ const FooterFixed = ({ content }: { content: QuotationDraftContent }) => (
     <View style={{ borderTopWidth: 1, borderTopColor: '#a57c00', paddingTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
       <View style={{ width: '35%' }}>
         <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginBottom: 3, fontSize: 9 }]}>INTERIOR CONCEPT Studio</Text>
-        <Text style={styles.footerText}>174/1, Lake View Road, Gulshan-1</Text>
+        <Text style={styles.footerText}>174/1, Lake View Road,Gulshan-1,</Text>
         <Text style={styles.footerText}>Dhaka, Bangladesh, 1212</Text>
       </View>
       <View style={{ width: '30%', alignItems: 'center' }}>

@@ -1,4 +1,6 @@
 
+'use client'
+
 function toDateTimeLocalInput(date: Date): string {
   const yyyy = date.getFullYear()
   const mm = String(date.getMonth() + 1).padStart(2, '0')
@@ -7,7 +9,6 @@ function toDateTimeLocalInput(date: Date): string {
   const min = String(date.getMinutes()).padStart(2, '0')
   return `${yyyy}-${mm}-${dd}T${hh}:${min}`
 }
-'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { ComponentType } from 'react'
@@ -433,7 +434,7 @@ export function ReviewCenterView({
 
     if (decisionType === 'APPROVE' || decisionType === 'CORRECTION') {
       if (!approveMeetingEnabled && !approveFollowupAt) {
-        toast.error('Follow-up date for next action is required.')
+        toast.error('Follow-up date for next action is required when client meeting is not set.')
         return
       }
       if (decisionType === 'APPROVE' && approveMeetingEnabled && !approveMeetingAt) {

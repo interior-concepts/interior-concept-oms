@@ -65,7 +65,7 @@ function PageFooter({ content }: { content: ShortQuotationContent }) {
       <div className="flex justify-between">
         <div className="w-[35%]">
           <p className="mb-1 font-bold" style={{ color: PRIMARY }}>INTERIOR CONCEPT Studio</p>
-          <p>174/1, Lake View Road, Gulshan-1</p>
+          <p>174/1, Lake View Road,Gulshan-1,</p>
           <p>Dhaka, Bangladesh, 1212</p>
         </div>
         <div className="flex w-[30%] flex-col items-center">

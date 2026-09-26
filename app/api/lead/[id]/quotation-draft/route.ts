@@ -767,6 +767,26 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       },
     })
 
+    const existingFollowup = await prisma.followUp.findFirst({
+      where: { leadId: lead.id, status: 'PENDING' },
+    })
+
+    if (!existingFollowup) {
+      const followupDate = new Date(Date.now() + 24 * 60 * 60 * 1000)
+      await prisma.followUp.create({
+        data: {
+          leadId: lead.id,
+          assignedToId: authResult.actorUserId,
+          followupDate,
+          notes: `Auto-scheduled follow-up (24h) after ${documentType === 'short' ? 'Short' : 'Detailed'} Quotation creation`,
+          category: 'BUDGET_NEGOTIATION',
+          sentiment: 'WARM',
+        },
+      }).catch((err) => {
+        console.error('[lead/:id/quotation-draft][PUT] Auto-followup creation error:', err)
+      })
+    }
+
     void recalculateQuotationUserPerformance(authResult.actorUserId).catch((err) => {
       console.error('[lead/:id/quotation-draft][PUT] Performance sync error:', err)
     })

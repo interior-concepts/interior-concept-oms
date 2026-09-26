@@ -26,6 +26,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { User, TrendingUp, Plus, Mail, MessageCircle } from 'lucide-react'
 import { toast } from '@/components/ui/sonner'
 import {
+  FollowUpIntelligenceFields,
+  type FollowUpCategoryValue,
+  type ClientSentimentValue,
+  type ClientObjectionValue,
+} from '@/components/crm/shared/followup-intelligence-fields'
+import {
   budgetRangeOptions,
   clientMoodOptions,
   clientPersonalityOptions,
@@ -253,6 +259,10 @@ export function LeadActionsPanel({
   const [didClearDefaultReason, setDidClearDefaultReason] = useState(false)
   const [stageFollowupDate, setStageFollowupDate] = useState('')
   const [stageFollowupNotes, setStageFollowupNotes] = useState('')
+  const [stageFollowupCategory, setStageFollowupCategory] = useState<FollowUpCategoryValue>('GENERAL')
+  const [stageFollowupSentiment, setStageFollowupSentiment] = useState<ClientSentimentValue | undefined>(undefined)
+  const [stageFollowupObjection, setStageFollowupObjection] = useState<ClientObjectionValue | undefined>(undefined)
+  const [stageFollowupObjectionNote, setStageFollowupObjectionNote] = useState('')
   const [stagePhone, setStagePhone] = useState(leadPhone ?? '')
   const [stageError, setStageError] = useState<string | null>(null)
   const [savingStage, setSavingStage] = useState(false)
@@ -1216,7 +1226,11 @@ export function LeadActionsPanel({
           await onCreateFollowupForStage({
             followupDate: stageFollowupDate,
             notes: stageFollowupNotes.trim() || `Next action follow-up after updating to ${stage} (${subStatus || 'N/A'})`,
-          })
+            category: stageFollowupCategory,
+            sentiment: stageFollowupSentiment,
+            objection: stageFollowupObjection,
+            objectionNote: stageFollowupObjectionNote,
+          } as any)
         } else {
           await fetch(`/api/followup/${leadId}`, {
             method: 'POST',
@@ -1224,6 +1238,10 @@ export function LeadActionsPanel({
             body: JSON.stringify({
               followupDate: new Date(stageFollowupDate).toISOString(),
               notes: stageFollowupNotes.trim() || `Next action follow-up after updating to ${stage} (${subStatus || 'N/A'})`,
+              category: stageFollowupCategory,
+              sentiment: stageFollowupSentiment,
+              objection: stageFollowupObjection,
+              objectionNote: stageFollowupObjectionNote,
             }),
           })
         }
@@ -1232,6 +1250,10 @@ export function LeadActionsPanel({
       setReason('')
       setStageFollowupDate('')
       setStageFollowupNotes('')
+      setStageFollowupCategory('GENERAL')
+      setStageFollowupSentiment(undefined)
+      setStageFollowupObjection(undefined)
+      setStageFollowupObjectionNote('')
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Failed to update stage.'
       setStageError(message)
@@ -2159,6 +2181,16 @@ export function LeadActionsPanel({
                         rows={3}
                       />
                     </div>
+                    <FollowUpIntelligenceFields
+                      category={stageFollowupCategory}
+                      onCategoryChange={setStageFollowupCategory}
+                      sentiment={stageFollowupSentiment}
+                      onSentimentChange={setStageFollowupSentiment}
+                      objection={stageFollowupObjection}
+                      onObjectionChange={setStageFollowupObjection}
+                      objectionNote={stageFollowupObjectionNote}
+                      onObjectionNoteChange={setStageFollowupObjectionNote}
+                    />
                   </div>
                 ) : null}
               </div>

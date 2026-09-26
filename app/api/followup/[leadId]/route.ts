@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma';
-import { ActivityType, LeadSubStatus } from '@/generated/prisma/client';
+import { ActivityType, LeadSubStatus, FollowUpCategory, ClientSentiment, ClientObjection } from '@/generated/prisma/client';
 import { isSubStatusAllowedForStage } from '@/lib/lead-stage';
 import { logActivity, logLeadSubStatusChanged } from '@/lib/activity-log-service';
 import { NextRequest, NextResponse } from 'next/server';
@@ -42,6 +42,27 @@ function toLeadSubStatus(value: unknown): LeadSubStatus | undefined | 'invalid' 
     : 'invalid';
 }
 
+function toCategory(value: unknown): FollowUpCategory {
+  if (typeof value === 'string' && Object.values(FollowUpCategory).includes(value as FollowUpCategory)) {
+    return value as FollowUpCategory;
+  }
+  return FollowUpCategory.GENERAL;
+}
+
+function toSentiment(value: unknown): ClientSentiment | undefined {
+  if (typeof value === 'string' && Object.values(ClientSentiment).includes(value as ClientSentiment)) {
+    return value as ClientSentiment;
+  }
+  return undefined;
+}
+
+function toObjection(value: unknown): ClientObjection | undefined {
+  if (typeof value === 'string' && Object.values(ClientObjection).includes(value as ClientObjection)) {
+    return value as ClientObjection;
+  }
+  return undefined;
+}
+
 // GET /api/followup/[leadId] - Get all follow-ups for a specific lead
 export async function GET(_request: NextRequest, context: RouteContext) {
   const leadId = await resolveLeadId(context);
@@ -70,6 +91,10 @@ export async function GET(_request: NextRequest, context: RouteContext) {
             email: true,
             phone: true,
             location: true,
+            sentiment: true,
+            objection: true,
+            objectionNote: true,
+            lastContactedAt: true,
           },
         },
         assignedTo: {
@@ -78,9 +103,6 @@ export async function GET(_request: NextRequest, context: RouteContext) {
       },
       orderBy: { followupDate: 'desc' },
     });
-
-    // Debug: log the follow-up history fetched for this lead
-    debugLog(`DEBUG followup history for leadId=${leadId} count=${followUps.length}`, followUps);
 
     return NextResponse.json({
       success: true,
@@ -116,6 +138,11 @@ export async function POST(request: NextRequest, context: RouteContext) {
     const notes = typeof body.notes === 'string' ? body.notes : undefined;
     const userId = authResult.actorUserId ?? toNonEmptyString(body.userId);
     const requestedSubStatus = toLeadSubStatus(body.subStatus);
+
+    const category = toCategory(body.category);
+    const sentiment = toSentiment(body.sentiment);
+    const objection = toObjection(body.objection);
+    const objectionNote = typeof body.objectionNote === 'string' ? body.objectionNote : undefined;
 
     // Validation
     if (!assignedToId || !followupDate) {
@@ -199,6 +226,9 @@ export async function POST(request: NextRequest, context: RouteContext) {
           assignedToId,
           followupDate,
           notes,
+          category,
+          sentiment,
+          objection,
         },
         include: {
           lead: {
@@ -210,12 +240,23 @@ export async function POST(request: NextRequest, context: RouteContext) {
         },
       });
 
+      // Update lead sentiment, objection, lastContactedAt, and subStatus
+      const leadUpdateData: any = {
+        lastContactedAt: new Date(),
+      };
+      if (sentiment) leadUpdateData.sentiment = sentiment;
+      if (objection) leadUpdateData.objection = objection;
+      if (objectionNote !== undefined) leadUpdateData.objectionNote = objectionNote;
       if (requestedSubStatus !== undefined && requestedSubStatus !== lead.subStatus) {
-        await tx.lead.update({
-          where: { id: leadId },
-          data: { subStatus: requestedSubStatus },
-        });
+        leadUpdateData.subStatus = requestedSubStatus;
+      }
 
+      await tx.lead.update({
+        where: { id: leadId },
+        data: leadUpdateData,
+      });
+
+      if (requestedSubStatus !== undefined && requestedSubStatus !== lead.subStatus) {
         await logLeadSubStatusChanged(tx, {
           leadId,
           userId,

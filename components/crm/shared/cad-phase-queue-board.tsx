@@ -417,7 +417,7 @@ function LeadFilesSection({ lead }: { lead: LeadRecord }) {
             </Badge>
           </div>
           <div className="flex flex-wrap gap-2">
-            {lead.hasQuotationDraft && (
+            {(lead.hasQuotationDraft || true) && (
               <>
                 <a
                   href={buildDetailPreviewUrl({ context: 'lead', contextId: lead.id })}

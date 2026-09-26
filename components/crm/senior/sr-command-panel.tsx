@@ -24,6 +24,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import {
+  FollowUpIntelligenceFields,
+  type FollowUpCategoryValue,
+  type ClientSentimentValue,
+  type ClientObjectionValue,
+} from '@/components/crm/shared/followup-intelligence-fields'
 
 type LeadPrimaryOwner = {
   id: string
@@ -108,6 +114,10 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
   // Next action follow-up state for every update
   const [nextFollowupAt, setNextFollowupAt] = useState('')
   const [nextFollowupNotes, setNextFollowupNotes] = useState('')
+  const [nextCategory, setNextCategory] = useState<FollowUpCategoryValue>('GENERAL')
+  const [nextSentiment, setNextSentiment] = useState<ClientSentimentValue | undefined>(undefined)
+  const [nextObjection, setNextObjection] = useState<ClientObjectionValue | undefined>(undefined)
+  const [nextObjectionNote, setNextObjectionNote] = useState('')
 
   const autoCreateNextFollowup = async (defaultNote: string) => {
     if (!nextFollowupAt) return
@@ -115,10 +125,18 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
       await postJson(`/api/followup/${lead.id}`, {
         followupDate: new Date(nextFollowupAt).toISOString(),
         notes: nextFollowupNotes.trim() || defaultNote,
+        category: nextCategory,
+        sentiment: nextSentiment,
+        objection: nextObjection,
+        objectionNote: nextObjectionNote,
       })
       toast.success('Next action follow-up scheduled')
       setNextFollowupAt('')
       setNextFollowupNotes('')
+      setNextCategory('GENERAL')
+      setNextSentiment(undefined)
+      setNextObjection(undefined)
+      setNextObjectionNote('')
     } catch (err) {
       console.error('Failed to auto-create next follow-up:', err)
     }
@@ -376,7 +394,7 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
             </div>
 
             {/* Next Action Follow-Up */}
-            <div className="space-y-2 rounded-md border border-primary/20 bg-primary/5 p-3">
+            <div className="space-y-3 rounded-md border border-primary/20 bg-primary/5 p-3">
               <p className="text-xs font-semibold text-primary uppercase tracking-wide flex items-center gap-1.5">
                 <CalendarClock className="h-3.5 w-3.5" />
                 Schedule Follow-Up for Next Action
@@ -399,6 +417,16 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
                   className="bg-background text-xs"
                 />
               </div>
+              <FollowUpIntelligenceFields
+                category={nextCategory}
+                onCategoryChange={setNextCategory}
+                sentiment={nextSentiment}
+                onSentimentChange={setNextSentiment}
+                objection={nextObjection}
+                onObjectionChange={setNextObjection}
+                objectionNote={nextObjectionNote}
+                onObjectionNoteChange={setNextObjectionNote}
+              />
             </div>
           </div>
           <DialogFooter>
@@ -483,7 +511,7 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
             </div>
 
             {/* Next Action Follow-Up */}
-            <div className="space-y-2 rounded-md border border-primary/20 bg-primary/5 p-3">
+            <div className="space-y-3 rounded-md border border-primary/20 bg-primary/5 p-3">
               <p className="text-xs font-semibold text-primary uppercase tracking-wide flex items-center gap-1.5">
                 <CalendarClock className="h-3.5 w-3.5" />
                 Schedule Follow-Up for Next Action
@@ -506,6 +534,16 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
                   className="bg-background text-xs"
                 />
               </div>
+              <FollowUpIntelligenceFields
+                category={nextCategory}
+                onCategoryChange={setNextCategory}
+                sentiment={nextSentiment}
+                onSentimentChange={setNextSentiment}
+                objection={nextObjection}
+                onObjectionChange={setNextObjection}
+                objectionNote={nextObjectionNote}
+                onObjectionNoteChange={setNextObjectionNote}
+              />
             </div>
           </div>
           <DialogFooter>
@@ -554,7 +592,7 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
             </div>
 
             {/* Next Action Follow-Up */}
-            <div className="space-y-2 rounded-md border border-primary/20 bg-primary/5 p-3">
+            <div className="space-y-3 rounded-md border border-primary/20 bg-primary/5 p-3">
               <p className="text-xs font-semibold text-primary uppercase tracking-wide flex items-center gap-1.5">
                 <CalendarClock className="h-3.5 w-3.5" />
                 Schedule Follow-Up for Next Action
@@ -577,6 +615,16 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
                   className="bg-background text-xs"
                 />
               </div>
+              <FollowUpIntelligenceFields
+                category={nextCategory}
+                onCategoryChange={setNextCategory}
+                sentiment={nextSentiment}
+                onSentimentChange={setNextSentiment}
+                objection={nextObjection}
+                onObjectionChange={setNextObjection}
+                objectionNote={nextObjectionNote}
+                onObjectionNoteChange={setNextObjectionNote}
+              />
             </div>
           </div>
           <DialogFooter>
@@ -651,7 +699,7 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
               </div>
 
               {/* Next Action Follow-Up */}
-              <div className="space-y-2 rounded-md border border-primary/20 bg-primary/5 p-3">
+              <div className="space-y-3 rounded-md border border-primary/20 bg-primary/5 p-3">
                 <p className="text-xs font-semibold text-primary uppercase tracking-wide flex items-center gap-1.5">
                   <CalendarClock className="h-3.5 w-3.5" />
                   Schedule Follow-Up for Next Action
@@ -674,6 +722,16 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
                     className="bg-background text-xs"
                   />
                 </div>
+                <FollowUpIntelligenceFields
+                  category={nextCategory}
+                  onCategoryChange={setNextCategory}
+                  sentiment={nextSentiment}
+                  onSentimentChange={setNextSentiment}
+                  objection={nextObjection}
+                  onObjectionChange={setNextObjection}
+                  objectionNote={nextObjectionNote}
+                  onObjectionNoteChange={setNextObjectionNote}
+                />
               </div>
             </div>
           )}
