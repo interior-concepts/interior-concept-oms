@@ -1353,6 +1353,8 @@ type SortableRowProps = {
 }
 
 function SortableRow({ line, lineIndex, isPkg, canEdit, updateLineItem, removeLine, lineNeedsManualPrice }: SortableRowProps) {
+  const [lengthVal, setLengthVal] = useState('')
+  const [breadthVal, setBreadthVal] = useState('')
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: line.id })
 
   const rowStyle = {
@@ -1423,12 +1425,53 @@ function SortableRow({ line, lineIndex, isPkg, canEdit, updateLineItem, removeLi
             ) : <span className="break-all">{fmt(line.rate)}</span>}
             <p className="mt-1 text-[11px] text-muted-foreground break-words">PDF: {formatTemplatePriceHint(line)}</p>
           </td>
-          <td className="px-3 py-2 max-w-[100px]">
+          <td className="px-3 py-2 min-w-[130px] max-w-[150px]">
             {canEdit ? (
-              <Input type="text" inputMode="decimal" 
-                value={line.quantity > 0 ? String(line.quantity) : ''}
-                placeholder="0"
-                onChange={(e) => updateLineItem(line.id, { quantity: Number(e.target.value.replace(/,/g, '')) || 0 })} />
+              <div className="space-y-1">
+                <Input type="text" inputMode="decimal" 
+                  value={line.quantity > 0 ? String(line.quantity) : ''}
+                  placeholder="0"
+                  onChange={(e) => updateLineItem(line.id, { quantity: Number(e.target.value.replace(/,/g, '')) || 0 })} />
+                <div className="flex items-center gap-1 text-[11px] text-muted-foreground" title="Calculate Sqft: Length × Breadth">
+                  <Input
+                    type="text"
+                    inputMode="decimal"
+                    placeholder="L"
+                    title="Length (ft)"
+                    className="h-6 w-12 px-1 text-center text-xs"
+                    value={lengthVal}
+                    onChange={(e) => {
+                      const newL = e.target.value
+                      setLengthVal(newL)
+                      const l = parseFloat(newL) || 0
+                      const b = parseFloat(breadthVal) || 0
+                      if (l > 0 && b > 0) {
+                        const qty = Math.round(l * b * 100) / 100
+                        updateLineItem(line.id, { quantity: qty })
+                      }
+                    }}
+                  />
+                  <span className="font-semibold">×</span>
+                  <Input
+                    type="text"
+                    inputMode="decimal"
+                    placeholder="B"
+                    title="Breadth (ft)"
+                    className="h-6 w-12 px-1 text-center text-xs"
+                    value={breadthVal}
+                    onChange={(e) => {
+                      const newB = e.target.value
+                      setBreadthVal(newB)
+                      const l = parseFloat(lengthVal) || 0
+                      const b = parseFloat(newB) || 0
+                      if (l > 0 && b > 0) {
+                        const qty = Math.round(l * b * 100) / 100
+                        updateLineItem(line.id, { quantity: qty })
+                      }
+                    }}
+                  />
+                </div>
+              </div>
             ) : <span className="break-all">{line.quantity}</span>}
           </td>
         </>

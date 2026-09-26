@@ -1437,6 +1437,8 @@ function SortableShortRow({
   updateLine,
   removeLine,
 }: SortableShortRowProps) {
+  const [lengthVal, setLengthVal] = useState('')
+  const [breadthVal, setBreadthVal] = useState('')
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: line.id })
 
   const rowStyle = {
@@ -1482,21 +1484,65 @@ function SortableShortRow({
           </div>
         ) : null}
       </td>
-      <td className="px-2 py-2">
+      <td className="px-2 py-2 min-w-[140px]">
         {line.isLumpSum ? (
           <span className="text-xs text-muted-foreground">Lump sum</span>
         ) : (
-          <Input
-            type="text"
-            inputMode="decimal"
-            disabled={!canEdit}
-            value={line.quantitySqft ?? ''}
-            onChange={(event) =>
-              updateLine(roomId, line.id, {
-                quantitySqft: Number(event.target.value.replace(/,/g, '')) || 0,
-              })
-            }
-          />
+          <div className="space-y-1">
+            <Input
+              type="text"
+              inputMode="decimal"
+              disabled={!canEdit}
+              value={line.quantitySqft ?? ''}
+              placeholder="Sqft"
+              onChange={(event) =>
+                updateLine(roomId, line.id, {
+                  quantitySqft: Number(event.target.value.replace(/,/g, '')) || 0,
+                })
+              }
+            />
+            {canEdit && (
+              <div className="flex items-center gap-1 text-[11px] text-muted-foreground" title="Calculate Sqft: Length × Breadth">
+                <Input
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="L"
+                  title="Length (ft)"
+                  className="h-6 w-12 px-1 text-center text-xs"
+                  value={lengthVal}
+                  onChange={(e) => {
+                    const newL = e.target.value
+                    setLengthVal(newL)
+                    const l = parseFloat(newL) || 0
+                    const b = parseFloat(breadthVal) || 0
+                    if (l > 0 && b > 0) {
+                      const sqft = Math.round(l * b * 100) / 100
+                      updateLine(roomId, line.id, { quantitySqft: sqft })
+                    }
+                  }}
+                />
+                <span className="font-semibold">×</span>
+                <Input
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="B"
+                  title="Breadth (ft)"
+                  className="h-6 w-12 px-1 text-center text-xs"
+                  value={breadthVal}
+                  onChange={(e) => {
+                    const newB = e.target.value
+                    setBreadthVal(newB)
+                    const l = parseFloat(lengthVal) || 0
+                    const b = parseFloat(newB) || 0
+                    if (l > 0 && b > 0) {
+                      const sqft = Math.round(l * b * 100) / 100
+                      updateLine(roomId, line.id, { quantitySqft: sqft })
+                    }
+                  }}
+                />
+              </div>
+            )}
+          </div>
         )}
       </td>
       <td className="px-2 py-2">
