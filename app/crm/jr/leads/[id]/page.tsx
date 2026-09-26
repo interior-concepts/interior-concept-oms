@@ -728,6 +728,8 @@ export default function LeadDetailPage() {
                   currentUserId={currentUserId}
                   onRefreshFollowups={refreshFollowups}
                   onAddFollowup={handleAddFollowup}
+                  leadName={lead?.name}
+                  leadPhone={lead?.phone}
                 />
               )}
             </TabsContent>

@@ -23,6 +23,7 @@ import {
   Phone,
   Mail,
   User,
+  MessageSquare,
   ArrowRight,
   ChevronLeft,
   ChevronRight,
@@ -356,6 +357,18 @@ export default function FollowupsPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
+                  {followup.lead.phone ? (
+                    <a
+                      href={`https://wa.me/${followup.lead.phone.replace(/[^\d+]/g, '').replace(/^0/, '880')}?text=${encodeURIComponent(`Hi ${followup.lead.name}, checking in regarding your interior design project.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button size="sm" variant="outline" className="gap-1 text-green-700 border-green-300 hover:bg-green-50">
+                        <MessageSquare className="w-3.5 h-3.5 fill-green-600 text-green-600" />
+                        WhatsApp
+                      </Button>
+                    </a>
+                  ) : null}
                   <Link href={`/crm/jr/leads/${followup.leadId}`}>
                     <Button size="sm" variant="outline" className="gap-1">
                       View <ArrowRight className="w-3.5 h-3.5" />

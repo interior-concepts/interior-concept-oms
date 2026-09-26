@@ -216,6 +216,7 @@ const navigationGroups: Record<string, NavGroup[]> = {
           label: 'Design Queue',
           href: '/crm/sr/design-queue',
         },
+        { icon: CheckSquare, label: 'Followups', href: '/crm/sr/followups' },
         { icon: Users, label: 'Lead Journey', href: '/crm/sr/lead-journey' },
       ],
     },
