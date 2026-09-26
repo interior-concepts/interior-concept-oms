@@ -105,6 +105,25 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
   const [visitReason, setVisitReason] = useState('Scheduled by Senior CRM for direct client handling.')
   const [visitNotes, setVisitNotes] = useState('')
 
+  // Next action follow-up state for every update
+  const [nextFollowupAt, setNextFollowupAt] = useState('')
+  const [nextFollowupNotes, setNextFollowupNotes] = useState('')
+
+  const autoCreateNextFollowup = async (defaultNote: string) => {
+    if (!nextFollowupAt) return
+    try {
+      await postJson(`/api/followup/${lead.id}`, {
+        followupDate: new Date(nextFollowupAt).toISOString(),
+        notes: nextFollowupNotes.trim() || defaultNote,
+      })
+      toast.success('Next action follow-up scheduled')
+      setNextFollowupAt('')
+      setNextFollowupNotes('')
+    } catch (err) {
+      console.error('Failed to auto-create next follow-up:', err)
+    }
+  }
+
   const runAction = async (key: string, action: () => Promise<void>) => {
     setBusyAction(key)
     try {
@@ -355,6 +374,32 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
                 onChange={(event) => setFirstMeetingNotes(event.target.value)}
               />
             </div>
+
+            {/* Next Action Follow-Up */}
+            <div className="space-y-2 rounded-md border border-primary/20 bg-primary/5 p-3">
+              <p className="text-xs font-semibold text-primary uppercase tracking-wide flex items-center gap-1.5">
+                <CalendarClock className="h-3.5 w-3.5" />
+                Schedule Follow-Up for Next Action
+              </p>
+              <div className="space-y-1">
+                <Label className="text-xs font-medium">Next Follow-Up Date & Time</Label>
+                <Input
+                  type="datetime-local"
+                  value={nextFollowupAt}
+                  onChange={(e) => setNextFollowupAt(e.target.value)}
+                  className="bg-background text-xs"
+                />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs font-medium">Follow-Up Goal / Notes</Label>
+                <Input
+                  placeholder="e.g. Call client to confirm meeting preparation"
+                  value={nextFollowupNotes}
+                  onChange={(e) => setNextFollowupNotes(e.target.value)}
+                  className="bg-background text-xs"
+                />
+              </div>
+            </div>
           </div>
           <DialogFooter>
             <Button
@@ -378,6 +423,7 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
                     .join('\n\n')
 
                   await handleScheduleMeeting('FIRST_MEETING', firstMeetingAt, compiledNotes)
+                  await autoCreateNextFollowup('Follow-up after setting first meeting')
 
                   setFirstMeetingOpen(false)
                   await patchJson(`/api/lead/${lead.id}/stage`, {
@@ -435,6 +481,32 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
                 placeholder="Optional meeting completion note..."
               />
             </div>
+
+            {/* Next Action Follow-Up */}
+            <div className="space-y-2 rounded-md border border-primary/20 bg-primary/5 p-3">
+              <p className="text-xs font-semibold text-primary uppercase tracking-wide flex items-center gap-1.5">
+                <CalendarClock className="h-3.5 w-3.5" />
+                Schedule Follow-Up for Next Action
+              </p>
+              <div className="space-y-1">
+                <Label className="text-xs font-medium">Next Follow-Up Date & Time</Label>
+                <Input
+                  type="datetime-local"
+                  value={nextFollowupAt}
+                  onChange={(e) => setNextFollowupAt(e.target.value)}
+                  className="bg-background text-xs"
+                />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs font-medium">Follow-Up Goal / Notes</Label>
+                <Input
+                  placeholder="e.g. Follow up on quotation progress"
+                  value={nextFollowupNotes}
+                  onChange={(e) => setNextFollowupNotes(e.target.value)}
+                  className="bg-background text-xs"
+                />
+              </div>
+            </div>
           </div>
           <DialogFooter>
             <Button
@@ -445,6 +517,7 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
                     note: completeFirstMeetingNote.trim() || null,
                     quotationMemberId: selectedQuotationMemberId || null,
                   })
+                  await autoCreateNextFollowup('Follow-up after completing first meeting')
                   setCompleteFirstMeetingOpen(false)
                   toast.success('First meeting completed')
                 })
@@ -479,6 +552,32 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
                 onChange={(event) => setBudgetMeetingNotes(event.target.value)}
               />
             </div>
+
+            {/* Next Action Follow-Up */}
+            <div className="space-y-2 rounded-md border border-primary/20 bg-primary/5 p-3">
+              <p className="text-xs font-semibold text-primary uppercase tracking-wide flex items-center gap-1.5">
+                <CalendarClock className="h-3.5 w-3.5" />
+                Schedule Follow-Up for Next Action
+              </p>
+              <div className="space-y-1">
+                <Label className="text-xs font-medium">Next Follow-Up Date & Time</Label>
+                <Input
+                  type="datetime-local"
+                  value={nextFollowupAt}
+                  onChange={(e) => setNextFollowupAt(e.target.value)}
+                  className="bg-background text-xs"
+                />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs font-medium">Follow-Up Goal / Notes</Label>
+                <Input
+                  placeholder="e.g. Call client for budget proposal decision"
+                  value={nextFollowupNotes}
+                  onChange={(e) => setNextFollowupNotes(e.target.value)}
+                  className="bg-background text-xs"
+                />
+              </div>
+            </div>
           </div>
           <DialogFooter>
             <Button
@@ -486,6 +585,7 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
               onClick={() =>
                 runAction('budget-meeting', async () => {
                   await handleScheduleMeeting('BUDGET_MEETING', budgetMeetingAt, budgetMeetingNotes)
+                  await autoCreateNextFollowup('Follow-up after setting budget meeting')
                   setBudgetMeetingOpen(false)
                   await patchJson(`/api/lead/${lead.id}/stage`, {
                     stage: 'BUDGET_PHASE',
@@ -549,6 +649,32 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
                 <Label>Notes</Label>
                 <Textarea rows={3} value={visitNotes} onChange={(event) => setVisitNotes(event.target.value)} />
               </div>
+
+              {/* Next Action Follow-Up */}
+              <div className="space-y-2 rounded-md border border-primary/20 bg-primary/5 p-3">
+                <p className="text-xs font-semibold text-primary uppercase tracking-wide flex items-center gap-1.5">
+                  <CalendarClock className="h-3.5 w-3.5" />
+                  Schedule Follow-Up for Next Action
+                </p>
+                <div className="space-y-1">
+                  <Label className="text-xs font-medium">Next Follow-Up Date & Time</Label>
+                  <Input
+                    type="datetime-local"
+                    value={nextFollowupAt}
+                    onChange={(e) => setNextFollowupAt(e.target.value)}
+                    className="bg-background text-xs"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs font-medium">Follow-Up Goal / Notes</Label>
+                  <Input
+                    placeholder="e.g. Call client after site visit completion"
+                    value={nextFollowupNotes}
+                    onChange={(e) => setNextFollowupNotes(e.target.value)}
+                    className="bg-background text-xs"
+                  />
+                </div>
+              </div>
             </div>
           )}
 
@@ -568,6 +694,7 @@ export function SrCommandPanel({ lead, currentUserId, onRefreshLead }: SrCommand
                     reason: visitReason.trim() || undefined,
                     notes: visitNotes.trim() || undefined,
                   })
+                  await autoCreateNextFollowup('Follow-up after scheduling SR visit')
 
                   setSrVisitOpen(false)
                   toast.success('Visit scheduled successfully')

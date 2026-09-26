@@ -406,8 +406,7 @@ export function LeadActionsPanel({
     stage === 'NURTURING'
   const requiresFollowupForStageUpdate =
     shouldCreateFollowupForNoAnswer || requiresPendingFollowupForNurturing
-  const showFollowupFieldsInStageModal =
-    isNoAnswerSubStatus || requiresPendingFollowupForNurturing
+  const showFollowupFieldsInStageModal = true
   const requiresVisitSchedulingInStageModal = stage === 'VISIT_PHASE' && subStatus === 'VISIT_SCHEDULED'
   const canUpdateStage =
     (!requiresSubStatus || Boolean(subStatus)) &&
@@ -1212,14 +1211,22 @@ export function LeadActionsPanel({
         jrArchitectUserId: requiresCadArchitectSelection ? selectedCadArchitectUserId : undefined,
         quotationUserId: requiresQuotationSelection ? selectedQuotationUserId : undefined,
       })
-      if (requiresFollowupForStageUpdate) {
-        if (!onCreateFollowupForStage) {
-          throw new Error('Follow-up handler is not available.')
+      if (stageFollowupDate) {
+        if (onCreateFollowupForStage) {
+          await onCreateFollowupForStage({
+            followupDate: stageFollowupDate,
+            notes: stageFollowupNotes.trim() || `Next action follow-up after updating to ${stage} (${subStatus || 'N/A'})`,
+          })
+        } else {
+          await fetch(`/api/followup/${leadId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              followupDate: new Date(stageFollowupDate).toISOString(),
+              notes: stageFollowupNotes.trim() || `Next action follow-up after updating to ${stage} (${subStatus || 'N/A'})`,
+            }),
+          })
         }
-        await onCreateFollowupForStage({
-          followupDate: stageFollowupDate,
-          notes: stageFollowupNotes.trim() || undefined,
-        })
       }
       setReasonOpen(false)
       setReason('')
