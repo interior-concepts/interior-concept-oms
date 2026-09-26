@@ -36,9 +36,11 @@ function generateShortQuotationCode(packageTier: string) {
 export function ShortQuotationLivePreview({
   context,
   contextId,
+  packageTier,
 }: {
   context: ShortPreviewContext
   contextId: string
+  packageTier?: string
 }) {
   const [payload, setPayload] = useState<ShortPreviewPayload | null>(null)
   const [generatingPdf, setGeneratingPdf] = useState(false)
@@ -49,22 +51,33 @@ export function ShortQuotationLivePreview({
     return subscribeShortPreview(context, contextId, load)
   }, [context, contextId])
 
+  const targetPackage = (packageTier && ['PLATINUM', 'PREMIUM', 'LUXURY'].includes(packageTier)
+    ? packageTier
+    : payload?.content?.packageTier ?? 'PREMIUM') as 'PLATINUM' | 'PREMIUM' | 'LUXURY'
+
+  const activeContent = payload
+    ? normalizeShortQuotationContent({
+        ...payload.content,
+        packageTier: targetPackage,
+      })
+    : null
+
   const handleDownloadPdf = async () => {
-    if (!payload) return
+    if (!activeContent) return
     setGeneratingPdf(true)
     try {
       const downloadedAt = new Date().toISOString()
       const contentForDownload = normalizeShortQuotationContent({
-        ...payload.content,
-        quotationCode: generateShortQuotationCode(payload.content.packageTier),
+        ...activeContent,
+        quotationCode: generateShortQuotationCode(activeContent.packageTier),
         downloadedAt,
       })
       const safeClientName = (contentForDownload.clientName || 'Quotation').replace(/[^a-z0-9]/gi, '_').toLowerCase()
       await downloadPdfFromDocument(
         <ShortQuotationDocument content={contentForDownload} />,
-        `Short_Quotation_${safeClientName}_${contentForDownload.quotationCode}.pdf`,
+        `Short_Quotation_${safeClientName}_${contentForDownload.packageTier}_${contentForDownload.quotationCode}.pdf`,
       )
-      toast.success(`PDF downloaded with quotation code ${contentForDownload.quotationCode}`)
+      toast.success(`PDF downloaded for ${contentForDownload.packageTier} package with code ${contentForDownload.quotationCode}`)
     } catch (error) {
       console.error('PDF generation error:', error)
       toast.error(error instanceof Error ? error.message : 'Failed to generate PDF')
@@ -73,7 +86,7 @@ export function ShortQuotationLivePreview({
     }
   }
 
-  if (!payload) {
+  if (!activeContent) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-6">
         <Card className="max-w-md">
@@ -90,7 +103,9 @@ export function ShortQuotationLivePreview({
     <div className="min-h-screen bg-neutral-100 py-6 print:bg-white print:py-0">
       <div className="mx-auto mb-4 flex max-w-[794px] items-center justify-between rounded-xl border bg-white px-4 py-3 shadow-sm print:hidden">
         <div>
-          <p className="text-sm font-semibold">Short quotation live preview</p>
+          <p className="text-sm font-semibold">
+            Short quotation live preview — <span className="text-primary font-bold">{activeContent.packageTier} Package</span>
+          </p>
           <p className="text-xs text-muted-foreground">Updates automatically while you edit.</p>
         </div>
         <Button type="button" disabled={generatingPdf} onClick={() => void handleDownloadPdf()}>
@@ -102,12 +117,13 @@ export function ShortQuotationLivePreview({
           ) : (
             <>
               <Download className="mr-2 h-4 w-4" />
-              Download Short Quotation PDF
+              Download {activeContent.packageTier} Short PDF
             </>
           )}
         </Button>
       </div>
-      <ShortQuotationPrint content={payload.content} />
+
+      <ShortQuotationPrint content={activeContent} />
     </div>
   )
 }

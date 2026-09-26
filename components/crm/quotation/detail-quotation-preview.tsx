@@ -145,8 +145,8 @@ function PageFooter({ content }: { content: QuotationDraftContent }) {
       <div className="border-t border-[#a57c00] pt-3 mt-12 relative z-10 flex justify-between text-[9px] text-neutral-700">
         <div className="w-[35%]">
           <p className="font-bold mb-1 text-[11px]" style={{ color: PRIMARY }}>INTERIOR CONCEPT Studio</p>
-          <p>Gudara Ghaat, Ta-166 Middle Badda</p>
-          <p>Dhaka 1212</p>
+          <p>174/1, Lake View Road, Gulshan-1</p>
+          <p>Dhaka, Bangladesh, 1212</p>
         </div>
         <div className="w-[30%] flex flex-col items-center">
           <p>01334935532</p>

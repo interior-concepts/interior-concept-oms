@@ -962,8 +962,8 @@ return (
               Print
             </Button>
             {!isPlayground ? (
-              <Button type="button" variant="outline" asChild>
-                <Link href="/quotation-team/my-work">Back to My Work</Link>
+              <Button type="button" size="sm" variant="outline" onClick={() => window.history.back()}>
+                Back
               </Button>
             ) : null}
           </div>
@@ -1191,8 +1191,8 @@ return (
             Live Preview
           </Button>
           {!isPlayground ? (
-            <Button type="button" size="sm" variant="outline" asChild>
-              <Link href="/quotation-team/my-work">Back to My Work</Link>
+            <Button type="button" size="sm" variant="outline" onClick={() => window.history.back()}>
+              Back
             </Button>
           ) : null}
           <Button type="button" size="sm" variant="secondary" disabled={!canEdit || !taskbarFloorId} onClick={openTaskbarSavedItem}>

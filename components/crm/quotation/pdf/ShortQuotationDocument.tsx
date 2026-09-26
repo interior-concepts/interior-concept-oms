@@ -148,8 +148,8 @@ const FooterFixed = ({ content }: { content: ShortQuotationContent }) => (
     <View style={{ paddingTop: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
       <View style={{ width: '48%' }}>
         <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginBottom: 3 }]}>INTERIOR CONCEPT Studio</Text>
-        <Text style={styles.footerText}>Gudara Ghaat, Ta-166 Middle Badda</Text>
-        <Text style={styles.footerText}>Dhaka 1212</Text>
+        <Text style={styles.footerText}>174/1, Lake View Road, Gulshan-1</Text>
+        <Text style={styles.footerText}>Dhaka, Bangladesh, 1212</Text>
       </View>
       <View style={{ width: '48%', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
         <Text style={styles.footerText}>01334935532</Text>

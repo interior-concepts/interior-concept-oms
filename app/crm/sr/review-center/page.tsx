@@ -1,3 +1,12 @@
+
+function toDateTimeLocalInput(date: Date): string {
+  const yyyy = date.getFullYear()
+  const mm = String(date.getMonth() + 1).padStart(2, '0')
+  const dd = String(date.getDate()).padStart(2, '0')
+  const hh = String(date.getHours()).padStart(2, '0')
+  const min = String(date.getMinutes()).padStart(2, '0')
+  return `${yyyy}-${mm}-${dd}T${hh}:${min}`
+}
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -29,6 +38,7 @@ import {
   CircleAlert,
   Ban,
   CalendarClock,
+  CalendarPlus,
   ClipboardCheck,
   Download,
   FileText,
@@ -353,6 +363,13 @@ export function ReviewCenterView({
   const [visitMonthFilter, setVisitMonthFilter] = useState(ALL_MONTH_FILTER)
   const [stageFilter, setStageFilter] = useState(ALL_STAGE_FILTER)
 
+  // Approve-with-meeting + follow-up state
+  const [approveMeetingEnabled, setApproveMeetingEnabled] = useState(false)
+  const [approveMeetingAt, setApproveMeetingAt] = useState('')
+  const [approveMeetingNote, setApproveMeetingNote] = useState('')
+  const [approveFollowupAt, setApproveFollowupAt] = useState('')
+  const [approveFollowupNote, setApproveFollowupNote] = useState('')
+
   useEffect(() => {
     const timer = window.setTimeout(() => setSearch(searchInput.trim()), 400)
     return () => window.clearTimeout(timer)
@@ -399,6 +416,11 @@ export function ReviewCenterView({
     setDecisionTarget(submission)
     setDecisionType(decision)
     setDecisionSummary('')
+    setApproveMeetingEnabled(false)
+    setApproveMeetingAt(toDateTimeLocalInput(new Date(Date.now() + 86400000))) // default tomorrow
+    setApproveMeetingNote('')
+    setApproveFollowupAt(toDateTimeLocalInput(new Date(Date.now() + 86400000)))
+    setApproveFollowupNote('')
     setDecisionDialogOpen(true)
   }, [])
 
@@ -409,8 +431,21 @@ export function ReviewCenterView({
       return
     }
 
+    if (decisionType === 'APPROVE') {
+      if (!approveMeetingEnabled && !approveFollowupAt) {
+        toast.error('Follow-up date for next action is required when approving without setting a meeting.')
+        return
+      }
+      if (approveMeetingEnabled && !approveMeetingAt) {
+        toast.error('Meeting date and time is required to schedule a client meeting.')
+        return
+      }
+    }
+
     try {
       setDecisionBusy(true)
+
+      // 1. Process Review Decision first
       const response = await fetch(`/api/cad-work/review-center/${decisionTarget.id}/decision`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -424,7 +459,43 @@ export function ReviewCenterView({
         throw new Error(payload.error ?? 'Failed to process review decision')
       }
 
-      toast.success(payload.message ?? 'Review decision saved')
+      // 2. If APPROVE, create meeting and/or follow-up
+      if (decisionType === 'APPROVE') {
+        if (approveMeetingEnabled && approveMeetingAt) {
+          try {
+            await fetch(`/api/lead/${decisionTarget.lead.id}/meetings`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                type: 'FIRST_MEETING',
+                title: 'Client Meeting Set on Approval',
+                startsAt: new Date(approveMeetingAt).toISOString(),
+                notes: approveMeetingNote.trim() || `Client meeting set during submission approval (${getSubmissionKindLabel(decisionTarget)}).`,
+              }),
+            })
+          } catch (mErr) {
+            console.error('Meeting creation error:', mErr)
+          }
+        }
+
+        const followupTime = approveFollowupAt || approveMeetingAt
+        if (followupTime) {
+          try {
+            await fetch(`/api/followup/${decisionTarget.lead.id}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                followupDate: new Date(followupTime).toISOString(),
+                notes: approveFollowupNote.trim() || (approveMeetingEnabled ? `Follow-up for client meeting (${new Date(approveMeetingAt).toLocaleString()})` : `Next action follow-up after ${getSubmissionKindLabel(decisionTarget)} approval`),
+              }),
+            })
+          } catch (fErr) {
+            console.error('Follow-up creation error:', fErr)
+          }
+        }
+      }
+
+      toast.success(payload.message ?? 'Review decision saved & follow-up updated')
       setDecisionDialogOpen(false)
       setDecisionTarget(null)
       setDecisionSummary('')
@@ -436,7 +507,17 @@ export function ReviewCenterView({
     } finally {
       setDecisionBusy(false)
     }
-  }, [decisionSummary, decisionTarget, decisionType, fetchSubmissions])
+  }, [
+    decisionSummary,
+    decisionTarget,
+    decisionType,
+    approveMeetingEnabled,
+    approveMeetingAt,
+    approveMeetingNote,
+    approveFollowupAt,
+    approveFollowupNote,
+    fetchSubmissions,
+  ])
 
 
   const srCrmFilterOptions = useMemo(() => {
@@ -841,22 +922,94 @@ export function ReviewCenterView({
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              {decisionType === 'APPROVE' ? 'Optional Note' : decisionType === 'DROP' ? 'Drop Reason' : 'Correction Summary'}
-            </p>
-            <Textarea
-              rows={4}
-              placeholder={
-                decisionType === 'APPROVE'
-                  ? 'Optional approval note for history...'
-                  : decisionType === 'DROP'
-                    ? 'Required: explain why this project is being dropped...'
-                    : 'Required: explain what should be corrected...'
-              }
-              value={decisionSummary}
-              onChange={(event) => setDecisionSummary(event.target.value)}
-            />
+          <div className="space-y-4">
+            {decisionType === 'APPROVE' && (
+              <div className="rounded-xl border border-sky-200 bg-sky-50/50 p-4 space-y-3 dark:border-sky-800 dark:bg-sky-950/30">
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-900 dark:text-sky-200">
+                    <CalendarPlus className="h-4 w-4 text-sky-600 dark:text-sky-400" />
+                    Set Client Meeting (Meeting Queue)
+                  </span>
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={approveMeetingEnabled}
+                      onChange={(e) => setApproveMeetingEnabled(e.target.checked)}
+                      className="sr-only peer"
+                    />
+                    <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-slate-600 peer-checked:bg-sky-600"></div>
+                  </label>
+                </div>
+
+                {approveMeetingEnabled && (
+                  <div className="space-y-2.5 pt-1">
+                    <div>
+                      <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Meeting Date & Time</p>
+                      <Input
+                        type="datetime-local"
+                        value={approveMeetingAt}
+                        onChange={(e) => setApproveMeetingAt(e.target.value)}
+                        className="bg-white dark:bg-slate-900 text-xs"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Meeting Notes / Agenda</p>
+                      <Input
+                        placeholder="Meeting agenda or details..."
+                        value={approveMeetingNote}
+                        onChange={(e) => setApproveMeetingNote(e.target.value)}
+                        className="bg-white dark:bg-slate-900 text-xs"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className="border-t border-sky-200/80 dark:border-sky-800/80 pt-3 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs font-bold uppercase tracking-wider text-amber-900 dark:text-amber-200 flex items-center gap-1.5">
+                      <CalendarClock className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                      Follow-up for Next Action {!approveMeetingEnabled && <span className="text-red-500 font-bold">*Mandatory</span>}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Follow-up Date & Time</p>
+                    <Input
+                      type="datetime-local"
+                      value={approveFollowupAt}
+                      onChange={(e) => setApproveFollowupAt(e.target.value)}
+                      className="bg-white dark:bg-slate-900 text-xs"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Follow-up Notes</p>
+                    <Input
+                      placeholder="Notes for next follow-up action..."
+                      value={approveFollowupNote}
+                      onChange={(e) => setApproveFollowupNote(e.target.value)}
+                      className="bg-white dark:bg-slate-900 text-xs"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="space-y-1.5">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                {decisionType === 'APPROVE' ? 'Optional Approval Note' : decisionType === 'DROP' ? 'Drop Reason' : 'Correction Summary'}
+              </p>
+              <Textarea
+                rows={decisionType === 'APPROVE' ? 2 : 4}
+                placeholder={
+                  decisionType === 'APPROVE'
+                    ? 'Optional approval note for history...'
+                    : decisionType === 'DROP'
+                      ? 'Required: explain why this project is being dropped...'
+                      : 'Required: explain what should be corrected...'
+                }
+                value={decisionSummary}
+                onChange={(event) => setDecisionSummary(event.target.value)}
+              />
+            </div>
           </div>
 
           <DialogFooter>

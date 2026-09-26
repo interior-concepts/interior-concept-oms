@@ -1059,8 +1059,8 @@ export function ShortQuotationBuilder({
               )}
             </Button>
             {!isPlayground ? (
-              <Button type="button" variant="outline" asChild>
-                <Link href="/quotation-team/my-work">Back to My Work</Link>
+              <Button type="button" variant="outline" onClick={() => window.history.back()}>
+                Back
               </Button>
             ) : null}
           </div>

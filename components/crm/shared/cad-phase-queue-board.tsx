@@ -334,6 +334,8 @@ function srCrmVisitTeamBlock(lead: LeadRecord) {
 }
 
 function LeadFilesSection({ lead }: { lead: LeadRecord }) {
+  const [shortPkgModalOpen, setShortPkgModalOpen] = useState(false)
+
   const allSubFiles = (lead.cadWorkSubmissions ?? []).flatMap((sub) =>
     (sub.files ?? []).map((file) => ({
       id: file.id,
@@ -365,7 +367,8 @@ function LeadFilesSection({ lead }: { lead: LeadRecord }) {
   if (jrArchitectFiles.length === 0 && quotationFiles.length === 0 && !lead.hasQuotationDraft) return null
 
   return (
-    <div className="mt-3 space-y-2">
+    <>
+      <div className="mt-3 space-y-2">
       {/* JR Architect Planning Files Block */}
       {jrArchitectFiles.length > 0 && (
         <div className="rounded-lg border border-sky-200/80 bg-gradient-to-br from-sky-50/80 via-white to-blue-50/40 p-3 text-sm dark:border-sky-800/60 dark:from-sky-950/30 dark:via-slate-950 dark:to-blue-950/20">
@@ -430,20 +433,19 @@ function LeadFilesSection({ lead }: { lead: LeadRecord }) {
                   </Badge>
                   <Download className="h-3.5 w-3.5 shrink-0 text-white" />
                 </a>
-                <a
-                  href={buildShortPreviewUrl({ context: 'lead', contextId: lead.id })}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-8 max-w-full items-center gap-2 rounded-md border border-sky-300 bg-sky-600 px-2.5 py-1 text-xs font-bold text-white transition hover:bg-sky-700 shadow-sm"
-                  title="Download generated Short Quotation PDF"
+                <button
+                  type="button"
+                  onClick={() => setShortPkgModalOpen(true)}
+                  className="inline-flex min-h-8 max-w-full items-center gap-2 rounded-md border border-sky-300 bg-sky-600 px-2.5 py-1 text-xs font-bold text-white transition hover:bg-sky-700 shadow-sm cursor-pointer"
+                  title="Select package tier and download Short Quotation PDF"
                 >
                   <FileText className="h-3.5 w-3.5 shrink-0 text-white" />
                   <span className="max-w-[180px] truncate">Short Quotation PDF</span>
                   <Badge variant="secondary" className="px-1.5 py-0 text-[9px] font-bold bg-white text-sky-900">
-                    LIVE PDF
+                    CHOOSE PKG
                   </Badge>
                   <Download className="h-3.5 w-3.5 shrink-0 text-white" />
-                </a>
+                </button>
               </>
             )}
             {quotationFiles.map((file) => (
@@ -465,6 +467,100 @@ function LeadFilesSection({ lead }: { lead: LeadRecord }) {
         </div>
       )}
     </div>
+
+      {/* Short Quotation Package Selection Modal */}
+      <Dialog open={shortPkgModalOpen} onOpenChange={setShortPkgModalOpen}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-sky-700 dark:text-sky-400">
+              <FileText className="h-5 w-5 text-sky-600" />
+              Select Short Quotation Package
+            </DialogTitle>
+            <DialogDescription>
+              Choose which package tier PDF you want to download for{' '}
+              <span className="font-semibold text-foreground">{lead.name}</span>.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3 py-2">
+            {[
+              {
+                tier: 'PLATINUM',
+                label: '💎 PLATINUM Package',
+                desc: 'High-end finish with premium material specifications',
+                color: 'border-purple-300 bg-purple-50/50 hover:bg-purple-100/60 text-purple-950 dark:border-purple-800 dark:bg-purple-950/30 dark:text-purple-100',
+                badgeColor: 'bg-purple-600 hover:bg-purple-700 text-white',
+              },
+              {
+                tier: 'PREMIUM',
+                label: '⭐ PREMIUM Package',
+                desc: 'Standard high-quality interior package specifications',
+                color: 'border-sky-300 bg-sky-50/50 hover:bg-sky-100/60 text-sky-950 dark:border-sky-800 dark:bg-sky-950/30 dark:text-sky-100',
+                badgeColor: 'bg-sky-600 hover:bg-sky-700 text-white',
+              },
+              {
+                tier: 'LUXURY',
+                label: '👑 LUXURY Package',
+                desc: 'Custom luxury finish & bespoke material package',
+                color: 'border-amber-300 bg-amber-50/50 hover:bg-amber-100/60 text-amber-950 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-100',
+                badgeColor: 'bg-amber-600 hover:bg-amber-700 text-white',
+              },
+            ].map((pkg) => {
+              const allFiles = [
+                ...(lead.cadWorkSubmissions ?? []).flatMap((sub) => sub.files ?? []),
+                ...(lead.attachments ?? []),
+              ]
+              const matchingFile = allFiles.find(
+                (f) =>
+                  f.fileName.toUpperCase().includes(`[SHORT - ${pkg.tier}]`) ||
+                  f.fileName.toUpperCase().includes(`SHORT - ${pkg.tier}`)
+              )
+              const downloadUrl = matchingFile
+                ? matchingFile.url
+                : buildShortPreviewUrl({ context: 'lead', contextId: lead.id, packageTier: pkg.tier })
+              return (
+                <div
+                  key={pkg.tier}
+                  className={`flex items-center justify-between rounded-xl border p-4 transition-all ${pkg.color}`}
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-sm">{pkg.label}</span>
+                      {matchingFile ? (
+                        <Badge variant="outline" className="text-[10px] bg-white border-green-400 text-green-700">
+                          Uploaded
+                        </Badge>
+                      ) : (
+                        <Badge variant="outline" className="text-[10px] bg-white border-sky-400 text-sky-700">
+                          Live PDF
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="text-xs text-muted-foreground">{pkg.desc}</p>
+                  </div>
+                  <a
+                    href={downloadUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download={matchingFile ? matchingFile.fileName : undefined}
+                    onClick={() => setShortPkgModalOpen(false)}
+                  >
+                    <Button size="sm" className={`gap-1.5 shadow-sm text-xs font-bold ${pkg.badgeColor}`}>
+                      <Download className="h-3.5 w-3.5" />
+                      Download
+                    </Button>
+                  </a>
+                </div>
+              )
+            })}
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShortPkgModalOpen(false)}>
+              Close
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }
 
