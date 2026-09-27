@@ -143,16 +143,16 @@ function PageFooter({ content }: { content: QuotationDraftContent }) {
   return (
     <div className="mt-auto">
       <div className="border-t border-[#a57c00] pt-3 mt-12 relative z-10 flex justify-between text-[9px] text-neutral-700">
-        <div className="w-[35%]">
-          <p className="font-bold mb-1 text-[11px]" style={{ color: PRIMARY }}>INTERIOR CONCEPT Studio</p>
-          <p>174/1, Lake View Road,Gulshan-1,</p>
-          <p>Dhaka, Bangladesh, 1212</p>
+        <div className="w-[48%]">
+          <p className="font-bold mb-1 text-[11px]" style={{ color: PRIMARY }}>Interior Concepts Studio</p>
+          <p>TA-174/1, Unit 4A, 3rd Floor(Lift-3) Khonikachroy,</p>
+          <p>South Badda Lake View Road, Badda, Dhaka-1212</p>
         </div>
-        <div className="w-[30%] flex flex-col items-center">
-          <p>01334935532</p>
-          <p className="font-bold" style={{ color: PRIMARY }}>interiorconcepts.com</p>
+        <div className="w-[32%] flex flex-col items-center">
+          <p>+880 1334-935530, +880 1334-935531</p>
+          <p className="font-bold" style={{ color: PRIMARY }}>interiorconceptsstudio.com</p>
         </div>
-        <div className="w-[35%] flex flex-col justify-end items-end">
+        <div className="w-[20%] flex flex-col justify-end items-end">
           <p className="text-neutral-500">© 2026 All rights reserved.</p>
         </div>
       </div>

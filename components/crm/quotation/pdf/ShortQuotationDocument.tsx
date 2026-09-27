@@ -146,14 +146,14 @@ const FooterFixed = ({ content }: { content: ShortQuotationContent }) => (
   <View style={styles.footerFixed} fixed>
     <View style={styles.footerDivider} />
     <View style={{ paddingTop: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
-      <View style={{ width: '48%' }}>
-        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginBottom: 3 }]}>INTERIOR CONCEPT Studio</Text>
-        <Text style={styles.footerText}>174/1, Lake View Road,Gulshan-1,</Text>
-        <Text style={styles.footerText}>Dhaka, Bangladesh, 1212</Text>
+      <View style={{ width: '52%' }}>
+        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginBottom: 3 }]}>Interior Concepts Studio</Text>
+        <Text style={styles.footerText}>TA-174/1, Unit 4A, 3rd Floor(Lift-3) Khonikachroy,</Text>
+        <Text style={styles.footerText}>South Badda Lake View Road, Badda, Dhaka-1212</Text>
       </View>
-      <View style={{ width: '48%', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-        <Text style={styles.footerText}>01334935532</Text>
-        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold' }]}>interiorconcepts.com</Text>
+      <View style={{ width: '46%', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+        <Text style={styles.footerText}>+880 1334-935530, +880 1334-935531</Text>
+        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold' }]}>interiorconceptsstudio.com</Text>
         <Text style={styles.footerText}>© 2026 All rights reserved.</Text>
       </View>
     </View>

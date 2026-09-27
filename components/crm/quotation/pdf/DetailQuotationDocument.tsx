@@ -439,16 +439,17 @@ function formatDetailTotalCurrency(line: QuotationDraftContent['lineItems'][numb
 const FooterFixed = ({ content }: { content: QuotationDraftContent }) => (
   <View style={styles.footerFixed} fixed>
     <View style={{ borderTopWidth: 1, borderTopColor: '#a57c00', paddingTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
-      <View style={{ width: '35%' }}>
-        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginBottom: 3, fontSize: 9 }]}>INTERIOR CONCEPT Studio</Text>
-        <Text style={styles.footerText}>174/1, Lake View Road,Gulshan-1,</Text>
-        <Text style={styles.footerText}>Dhaka, Bangladesh, 1212</Text>
+      <View style={{ width: '48%' }}>
+        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginBottom: 3, fontSize: 9 }]}>Interior Concepts Studio</Text>
+        <Text style={styles.footerText}>TA-174/1, Unit 4A, 3rd Floor(Lift-3) Khonikachroy,</Text>
+        <Text style={styles.footerText}>South Badda Lake View Road, Badda, Dhaka-1212</Text>
       </View>
-      <View style={{ width: '30%', alignItems: 'center' }}>
-        <Text style={styles.footerText}>01334935532</Text>
-        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold' }]}>interiorconcepts.com</Text>
+      <View style={{ width: '32%', alignItems: 'center' }}>
+        <Text style={styles.footerText}>+880 1334-935530</Text>
+        <Text style={styles.footerText}>+880 1334-935531</Text>
+        <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginTop: 1 }]}>interiorconceptsstudio.com</Text>
       </View>
-      <View style={{ width: '35%', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+      <View style={{ width: '20%', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
         <Text style={styles.footerText}>© 2026 All rights reserved.</Text>
       </View>
     </View>

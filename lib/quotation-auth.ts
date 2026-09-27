@@ -47,18 +47,20 @@ export function buildQuotationLeadWhere(input: {
     return null
   }
 
+  // Admins and SR CRM can view any lead's quotation draft regardless of stage
+  if (isAdminOrSr) {
+    return { id: input.leadId }
+  }
+
+  // Quotation team members can only access leads in quotation/budget phases where they are assigned
   return {
     id: input.leadId,
     stage: { in: [LeadStage.QUOTATION_PHASE, LeadStage.BUDGET_PHASE] },
-    ...(isAdminOrSr
-      ? {}
-      : {
-          assignments: {
-            some: {
-              department: LeadAssignmentDepartment.QUOTATION,
-              userId: input.actorUserId,
-            },
-          },
-        }),
+    assignments: {
+      some: {
+        department: LeadAssignmentDepartment.QUOTATION,
+        userId: input.actorUserId,
+      },
+    },
   }
 }
