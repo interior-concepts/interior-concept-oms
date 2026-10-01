@@ -37,6 +37,9 @@ import {
   MessageCircle,
   Globe,
   UserCircle2,
+  X,
+  Calendar,
+  Users,
   type LucideIcon,
 } from 'lucide-react'
 import LeadCreateModal from '@/components/crm/junior/LeadCreateModal'
@@ -185,6 +188,51 @@ type LeadSummary = {
     department: string
     user: { id: string; fullName: string; email: string }
   }>
+  latestVisit?: {
+    id: string
+    scheduledAt: string
+    status: string
+    location: string
+    result?: { completedAt: string } | null
+    assignedTo?: { id: string; fullName: string } | null
+    supportAssignments?: Array<{ supportUser: { id: string; fullName: string } }>
+  } | null
+  meetings?: Array<{
+    id: string
+    type: string
+    title: string
+    startsAt: string
+    endsAt?: string | null
+    notes?: string | null
+    createdBy: { id: string; fullName: string }
+  }>
+  cadStatus?: {
+    status: string
+    completedAt?: string | null
+  } | null
+  quotationDrafts?: Array<{
+    id: string
+    draftKey: string
+    status: string
+    grandTotal: number
+    updatedAt: string
+  }>
+  lastFollowup?: {
+    id: string
+    followupDate: string
+    notes?: string | null
+    status: string
+    category: string
+    assignedTo: { id: string; fullName: string }
+  } | null
+  nextFollowup?: {
+    id: string
+    followupDate: string
+    notes?: string | null
+    status: string
+    category: string
+    assignedTo: { id: string; fullName: string }
+  } | null
 }
 
 type LeadsResponse = {
@@ -231,6 +279,22 @@ function formatDateInput(date: Date): string {
   const month = String(date.getMonth() + 1).padStart(2, '0')
   const day = String(date.getDate()).padStart(2, '0')
   return `${year}-${month}-${day}`
+}
+
+function formatDate(dateStr: string | null | undefined, opts?: { includeTime?: boolean }): string {
+  if (!dateStr) return '—'
+  const d = new Date(dateStr)
+  if (Number.isNaN(d.getTime())) return '—'
+  const day = d.getDate().toString().padStart(2, '0')
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  const month = months[d.getMonth()]
+  const year = d.getFullYear()
+  if (opts?.includeTime) {
+    const hours = d.getHours().toString().padStart(2, '0')
+    const minutes = d.getMinutes().toString().padStart(2, '0')
+    return `${day} ${month} ${year} ${hours}:${minutes}`
+  }
+  return `${day} ${month} ${year}`
 }
 
 function getTodayRange(): { from: string; to: string } {
@@ -353,6 +417,7 @@ export default function LeadsPage() {
   const [hasMore, setHasMore] = useState(true)
   const [canBatchAssign, setCanBatchAssign] = useState(true)
   const [selectedLeadIds, setSelectedLeadIds] = useState<string[]>([])
+  const [meetingModalLead, setMeetingModalLead] = useState<LeadSummary | null>(null)
   const [batchAssignOpen, setBatchAssignOpen] = useState(false)
   const [departments, setDepartments] = useState<DepartmentSummary[]>([])
   const [departmentUsers, setDepartmentUsers] = useState<DepartmentUser[]>([])
@@ -468,6 +533,7 @@ export default function LeadsPage() {
       const params = new URLSearchParams({
         limit: PAGE_SIZE.toString(),
         offset: offset.toString(),
+        includeEnriched: '1',
       })
 
       if (search) {
@@ -793,7 +859,7 @@ export default function LeadsPage() {
         title="Leads"
         subtitle="View and manage all leads"
       />
-      <main className="mx-auto max-w-[1440px] px-3 py-4 sm:px-4 sm:py-5 lg:px-6 lg:py-6">
+      <main className="w-full px-3 py-4 sm:px-4 sm:py-5 lg:px-6 lg:py-6">
         <div className="space-y-6">
           <div className="flex items-center justify-end gap-2">
             <LeadImportModal onImported={refreshLeads} />
@@ -1013,11 +1079,11 @@ export default function LeadsPage() {
                   ))}
                 </div>
               ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
+                <div className="overflow-x-auto rounded-md border border-border">
+                  <table className="w-full min-w-[1400px] text-sm">
                     <thead>
-                      <tr className="border-b">
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground">
+                      <tr className="border-b bg-muted/40">
+                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground w-12">
                           <input
                             type="checkbox"
                             checked={allVisibleSelected}
@@ -1027,63 +1093,217 @@ export default function LeadsPage() {
                             aria-label="Select all visible leads"
                           />
                         </th>
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Client ID</th>
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Lead Name</th>
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Phone</th>
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Senior CRM</th>
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Location</th>
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Stage</th>
-                        <th className="px-4 py-3 text-center font-semibold text-muted-foreground">Action</th>
+                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground whitespace-nowrap">Client ID</th>
+                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground whitespace-nowrap">Client Info</th>
+                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground whitespace-nowrap">Stage</th>
+                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground whitespace-nowrap">Visit Details</th>
+                        <th className="px-4 py-3 text-center font-semibold text-muted-foreground whitespace-nowrap">CAD</th>
+                        <th className="px-4 py-3 text-center font-semibold text-muted-foreground whitespace-nowrap">Meeting</th>
+                        <th className="px-4 py-3 text-center font-semibold text-muted-foreground whitespace-nowrap">Quotation</th>
+                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground whitespace-nowrap">Last Followup</th>
+                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground whitespace-nowrap">Next Followup</th>
+                        <th className="px-4 py-3 text-center font-semibold text-muted-foreground whitespace-nowrap">Action</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="divide-y divide-border">
                       {leads.map((lead) => (
-                        <tr key={lead.id} className="border-b hover:bg-muted/50">
-                          <td className="py-4 px-4">
+                        <tr key={lead.id} className="hover:bg-muted/40 transition-colors">
+                          <td className="py-4 px-4 align-top">
                             <input
                               type="checkbox"
                               checked={selectedLeadIds.includes(lead.id)}
                               onChange={(event) => toggleLeadSelection(lead.id, event.target.checked)}
                               disabled={!canBatchAssign}
-                              className="h-4 w-4 rounded border-border"
+                              className="h-4 w-4 rounded border-border mt-1"
                               aria-label={`Select ${lead.name}`}
                             />
                           </td>
-                          <td className="py-4 px-4 font-semibold text-primary">
+
+                          {/* 1. Client ID */}
+                          <td className="py-4 px-4 align-top font-bold text-primary whitespace-nowrap">
                             {lead.clientId ? `#${lead.clientId}` : '—'}
                           </td>
-                          <td className="py-4 px-4">
-                            <div className="flex items-start gap-3">
+
+                          {/* 2. Client Info (Name, Phone, Address/Location) */}
+                          <td className="py-4 px-4 align-top min-w-[220px]">
+                            <div className="flex items-start gap-2.5">
                               {(() => {
                                 const sourceVisual = getSourceVisual(lead.source)
                                 const SourceIcon = sourceVisual.icon
                                 return (
-                                  <div className="relative mt-0.5">
-                                    <div className={`flex h-8 w-8 items-center justify-center rounded-full ${sourceVisual.bgClass}`}>
-                                      <SourceIcon className={`h-4 w-4 ${sourceVisual.iconClass}`} />
+                                  <div className="relative mt-0.5 shrink-0">
+                                    <div className={`flex h-7 w-7 items-center justify-center rounded-full ${sourceVisual.bgClass}`}>
+                                      <SourceIcon className={`h-3.5 w-3.5 ${sourceVisual.iconClass}`} />
                                     </div>
-                                    <span className={`absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border border-white ${sourceVisual.dotClass}`} />
+                                    <span className={`absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-white ${sourceVisual.dotClass}`} />
                                   </div>
                                 )
                               })()}
-                              <div>
-                                <div className="font-medium text-foreground">{lead.name}</div>
-                                <div className="text-xs text-muted-foreground">{lead.email || 'No email'}</div>
-                                <div className="text-[11px] text-muted-foreground">Source: {lead.source || 'Unknown'}</div>
+                              <div className="space-y-1">
+                                <div className="font-semibold text-foreground text-sm leading-tight">{lead.name}</div>
+                                <div className="text-xs text-muted-foreground flex items-center gap-1">
+                                  <PhoneCall className="h-3 w-3 text-muted-foreground shrink-0" />
+                                  <span>{lead.phone || '—'}</span>
+                                </div>
+                                <div className="text-xs text-muted-foreground flex items-start gap-1">
+                                  <span className="shrink-0">📍</span>
+                                  <span>{lead.location || 'No address'}</span>
+                                </div>
+                                <div className="text-[11px] text-muted-foreground/80">
+                                  Source: <span className="font-medium">{lead.source || 'Unknown'}</span>
+                                  {lead.email ? ` • ${lead.email}` : ''}
+                                </div>
                               </div>
                             </div>
                           </td>
-                          <td className="py-4 px-4">{lead.phone || '—'}</td>
-                          <td className="py-4 px-4">{lead.assignments?.[0]?.user?.fullName || 'Unassigned'}</td>
-                          <td className="py-4 px-4">{lead.location || '—'}</td>
-                          <td className="py-4 px-4">
-                            <span className={`px-3 py-1 rounded-full text-xs font-medium ${stageColors[lead.stage]}`}>
+
+                          {/* Stage */}
+                          <td className="py-4 px-4 align-top whitespace-nowrap">
+                            <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-semibold ${stageColors[lead.stage] || 'bg-muted text-foreground'}`}>
                               {formatStageDisplay(lead.stage)}
                             </span>
+                            {lead.assignments?.[0]?.user?.fullName ? (
+                              <div className="text-[11px] text-muted-foreground mt-1">
+                                Sr: {lead.assignments[0].user.fullName}
+                              </div>
+                            ) : null}
                           </td>
-                          <td className="py-4 px-4 text-center">
+
+                          {/* 3. Visit (Visit schedule date, visit complete time, visit team members) */}
+                          <td className="py-4 px-4 align-top min-w-[210px]">
+                            {lead.latestVisit ? (
+                              <div className="space-y-1 text-xs">
+                                <div className="flex items-center gap-1.5 font-medium text-foreground">
+                                  <Calendar className="h-3.5 w-3.5 text-primary shrink-0" />
+                                  <span>Sched: {formatDate(lead.latestVisit.scheduledAt, { includeTime: true })}</span>
+                                </div>
+                                {lead.latestVisit.result?.completedAt ? (
+                                  <div className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                                    <span>✓ Done: {formatDate(lead.latestVisit.result.completedAt, { includeTime: true })}</span>
+                                  </div>
+                                ) : (
+                                  <div className="text-amber-600 dark:text-amber-400 text-[11px] font-medium">
+                                    Status: {lead.latestVisit.status.replace(/_/g, ' ')}
+                                  </div>
+                                )}
+                                <div className="flex flex-wrap items-center gap-1 text-muted-foreground pt-0.5">
+                                  <Users className="h-3 w-3 shrink-0 text-muted-foreground" />
+                                  {lead.latestVisit.assignedTo ? (
+                                    <span className="rounded bg-muted px-1.5 py-0.5 text-[11px] font-medium">
+                                      {lead.latestVisit.assignedTo.fullName}
+                                    </span>
+                                  ) : null}
+                                  {lead.latestVisit.supportAssignments?.map((s) => (
+                                    <span key={s.supportUser.id} className="rounded bg-muted/80 px-1.5 py-0.5 text-[10px]">
+                                      {s.supportUser.fullName}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            ) : (
+                              <span className="text-muted-foreground text-xs">—</span>
+                            )}
+                          </td>
+
+                          {/* 4. CAD (if completed file/check or show X) */}
+                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[90px]">
+                            {lead.cadStatus?.status === 'COMPLETED' || lead.cadStatus?.status === 'APPROVED' ? (
+                              <div className="inline-flex flex-col items-center gap-0.5 text-emerald-600 dark:text-emerald-400">
+                                <CheckCircle2 className="h-5 w-5" />
+                                <span className="text-[10px] font-bold uppercase">Completed</span>
+                              </div>
+                            ) : lead.cadStatus ? (
+                              <div className="inline-flex flex-col items-center gap-0.5 text-amber-600 dark:text-amber-400">
+                                <span className="text-xs font-semibold">{lead.cadStatus.status.replace(/_/g, ' ')}</span>
+                              </div>
+                            ) : (
+                              <div className="inline-flex items-center justify-center text-red-500">
+                                <X className="h-5 w-5" />
+                              </div>
+                            )}
+                          </td>
+
+                          {/* 5. Meeting (modal button showing time + date and remarks) */}
+                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[120px]">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="h-8 text-xs gap-1.5 font-medium"
+                              onClick={() => setMeetingModalLead(lead)}
+                            >
+                              <Calendar className="h-3.5 w-3.5 text-primary" />
+                              <span>Meetings ({lead.meetings?.length ?? 0})</span>
+                            </Button>
+                          </td>
+
+                          {/* 6. Quotation (if completed download/view buttons, if none show X) */}
+                          <td className="py-4 px-4 align-top text-center min-w-[130px]">
+                            {lead.quotationDrafts && lead.quotationDrafts.length > 0 ? (
+                              <div className="flex flex-col items-center gap-1.5">
+                                {lead.quotationDrafts.map((draft) => (
+                                  <Link key={draft.id} href={getLeadHref(lead.id)}>
+                                    <Button
+                                      variant={draft.status === 'FINALIZED' ? 'default' : 'outline'}
+                                      size="sm"
+                                      className="h-6 px-2 text-[11px] font-medium w-full"
+                                    >
+                                      {draft.draftKey.toUpperCase()} {draft.status === 'FINALIZED' ? '✓' : '(Draft)'}
+                                    </Button>
+                                  </Link>
+                                ))}
+                              </div>
+                            ) : (
+                              <div className="inline-flex items-center justify-center text-red-500">
+                                <X className="h-5 w-5" />
+                              </div>
+                            )}
+                          </td>
+
+                          {/* 7. Show last followup data */}
+                          <td className="py-4 px-4 align-top min-w-[180px]">
+                            {lead.lastFollowup ? (
+                              <div className="text-xs space-y-1">
+                                <div className="font-semibold text-foreground">
+                                  {formatDate(lead.lastFollowup.followupDate)}
+                                </div>
+                                {lead.lastFollowup.assignedTo ? (
+                                  <div className="text-[11px] text-muted-foreground font-medium">
+                                    By: {lead.lastFollowup.assignedTo.fullName}
+                                  </div>
+                                ) : null}
+                                {lead.lastFollowup.notes ? (
+                                  <div className="text-[11px] text-muted-foreground/90 italic bg-muted/30 rounded p-1.5 border border-border/50 line-clamp-2" title={lead.lastFollowup.notes}>
+                                    "{lead.lastFollowup.notes}"
+                                  </div>
+                                ) : null}
+                              </div>
+                            ) : (
+                              <span className="text-muted-foreground text-xs">—</span>
+                            )}
+                          </td>
+
+                          {/* 8. Show next follow up date */}
+                          <td className="py-4 px-4 align-top min-w-[140px]">
+                            {lead.nextFollowup ? (
+                              <div className="text-xs space-y-1">
+                                <div className="font-bold text-primary">
+                                  {formatDate(lead.nextFollowup.followupDate)}
+                                </div>
+                                {lead.nextFollowup.assignedTo ? (
+                                  <div className="text-[11px] text-muted-foreground">
+                                    Assigned: {lead.nextFollowup.assignedTo.fullName}
+                                  </div>
+                                ) : null}
+                              </div>
+                            ) : (
+                              <span className="text-muted-foreground text-xs">—</span>
+                            )}
+                          </td>
+
+                          {/* Action */}
+                          <td className="py-4 px-4 align-top text-center whitespace-nowrap">
                             <Link href={getLeadHref(lead.id)}>
-                              <Button variant="outline" size="sm">View</Button>
+                              <Button variant="outline" size="sm" className="h-8">View</Button>
                             </Link>
                           </td>
                         </tr>
@@ -1204,6 +1424,69 @@ export default function LeadsPage() {
                 >
                   {submittingBatchDelete ? 'Deleting...' : 'Delete Selected Leads'}
                 </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
+          <Dialog
+            open={Boolean(meetingModalLead)}
+            onOpenChange={(open) => {
+              if (!open) setMeetingModalLead(null)
+            }}
+          >
+            <DialogContent className="max-w-lg">
+              <DialogHeader>
+                <DialogTitle>Meeting Details: {meetingModalLead?.name}</DialogTitle>
+                <DialogDescription>
+                  Client ID: {meetingModalLead?.clientId ? `#${meetingModalLead.clientId}` : '—'} • Phone: {meetingModalLead?.phone || '—'}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="max-h-[60vh] overflow-y-auto space-y-3 py-2 pr-1">
+                {!meetingModalLead?.meetings || meetingModalLead.meetings.length === 0 ? (
+                  <div className="py-8 text-center text-sm text-muted-foreground">
+                    No meetings scheduled for this lead yet.
+                  </div>
+                ) : (
+                  meetingModalLead.meetings.map((meeting) => (
+                    <div key={meeting.id} className="rounded-lg border border-border p-3.5 bg-muted/20 space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-semibold text-sm text-foreground">{meeting.title}</span>
+                        <span className="rounded bg-primary/10 text-primary px-2 py-0.5 text-[11px] font-semibold">
+                          {meeting.type.replace(/_/g, ' ')}
+                        </span>
+                      </div>
+                      <div className="text-xs text-muted-foreground space-y-1">
+                        <div>
+                          <strong>Date & Time:</strong> {formatDate(meeting.startsAt, { includeTime: true })}
+                          {meeting.endsAt ? ` - ${formatDate(meeting.endsAt, { includeTime: true })}` : ''}
+                        </div>
+                        <div>
+                          <strong>Created by:</strong> {meeting.createdBy?.fullName || '—'}
+                        </div>
+                      </div>
+                      {meeting.notes ? (
+                        <div className="rounded bg-background p-2.5 text-xs border border-border">
+                          <div className="font-semibold text-muted-foreground mb-1">Remarks / Notes:</div>
+                          <div className="text-foreground whitespace-pre-wrap">{meeting.notes}</div>
+                        </div>
+                      ) : (
+                        <div className="text-xs text-muted-foreground italic">No remarks recorded.</div>
+                      )}
+                    </div>
+                  ))
+                )}
+              </div>
+
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setMeetingModalLead(null)}>
+                  Close
+                </Button>
+                {meetingModalLead ? (
+                  <Link href={getLeadHref(meetingModalLead.id)}>
+                    <Button>Open Lead Profile</Button>
+                  </Link>
+                ) : null}
               </DialogFooter>
             </DialogContent>
           </Dialog>

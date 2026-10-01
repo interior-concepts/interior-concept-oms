@@ -373,6 +373,7 @@ export async function GET(request: NextRequest) {
     const sourceParam = toOptionalString(searchParams.get('source'));
     const includeAttachmentPreview = toBooleanParam(searchParams.get('includeAttachmentPreview'));
     const includeCadCorrectionFlag = toBooleanParam(searchParams.get('includeCadCorrectionFlag'));
+    const includeEnriched = toBooleanParam(searchParams.get('includeEnriched'));
     const unassignedOnly = toBooleanParam(searchParams.get('unassigned'));
     const createdFrom = parseDateAtStartOfDayUtc(searchParams.get('createdFrom'));
     const createdTo = parseDateAtEndOfDayUtc(searchParams.get('createdTo'));
@@ -610,10 +611,238 @@ export async function GET(request: NextRequest) {
         }
       }
 
+      // ── Enriched data (only when includeEnriched=1) ──────────────────────────
+      type EnrichedVisitRow = {
+        id: string;
+        leadId: string;
+        scheduledAt: Date;
+        status: string;
+        location: string;
+        result: { completedAt: Date } | null;
+        assignedTo: { id: string; fullName: string } | null;
+        supportAssignments: Array<{ supportUser: { id: string; fullName: string } }>;
+      };
+      type EnrichedMeetingRow = {
+        id: string;
+        leadId: string;
+        type: string;
+        title: string;
+        startsAt: Date;
+        endsAt: Date | null;
+        notes: string | null;
+        createdBy: { id: string; fullName: string };
+      };
+      type EnrichedCadStatusRow = {
+        leadId: string;
+        status: string;
+        completedAt: Date | null;
+      };
+      type EnrichedQuotationRow = {
+        id: string;
+        leadId: string;
+        draftKey: string;
+        status: string;
+        grandTotal: number;
+        updatedAt: Date;
+      };
+      type EnrichedFollowupRow = {
+        id: string;
+        leadId: string;
+        followupDate: Date;
+        notes: string | null;
+        status: string;
+        category: string;
+        assignedTo: { id: string; fullName: string };
+      };
+
+      const latestVisitByLeadId = new Map<string, Omit<EnrichedVisitRow, 'leadId'>>();
+      const meetingsByLeadId = new Map<string, Array<Omit<EnrichedMeetingRow, 'leadId'>>>();
+      const cadStatusByLeadId = new Map<string, { status: string; completedAt: Date | null }>();
+      const quotationsByLeadId = new Map<string, Array<Omit<EnrichedQuotationRow, 'leadId'>>>();
+      const lastFollowupByLeadId = new Map<string, Omit<EnrichedFollowupRow, 'leadId'>>();
+      const nextFollowupByLeadId = new Map<string, Omit<EnrichedFollowupRow, 'leadId'>>();
+
+      if (includeEnriched && leadIds.length > 0) {
+        const now = new Date();
+
+        const [
+          visitResult,
+          meetingResult,
+          cadStatusResult,
+          quotationResult,
+          lastFollowupResult,
+          nextFollowupResult,
+        ] = await Promise.allSettled([
+          // Latest visit per lead
+          prisma.visit.findMany({
+            where: { leadId: { in: leadIds } },
+            orderBy: { createdAt: 'desc' },
+            select: {
+              id: true,
+              leadId: true,
+              scheduledAt: true,
+              status: true,
+              location: true,
+              result: { select: { completedAt: true } },
+              assignedTo: { select: { id: true, fullName: true } },
+              supportAssignments: {
+                include: { supportUser: { select: { id: true, fullName: true } } },
+              },
+            },
+          }),
+          // All meetings per lead (we pick latest + return all)
+          prisma.leadMeetingEvent.findMany({
+            where: { leadId: { in: leadIds } },
+            orderBy: { startsAt: 'desc' },
+            select: {
+              id: true,
+              leadId: true,
+              type: true,
+              title: true,
+              startsAt: true,
+              endsAt: true,
+              notes: true,
+              createdBy: { select: { id: true, fullName: true } },
+            },
+          }),
+          // Latest CAD phase task per lead
+          prisma.leadPhaseTask.findMany({
+            where: { leadId: { in: leadIds }, phaseType: LeadPhaseType.CAD },
+            orderBy: { createdAt: 'desc' },
+            select: {
+              leadId: true,
+              status: true,
+              completedAt: true,
+            },
+          }),
+          // All quotation drafts per lead
+          prisma.quotationDraft.findMany({
+            where: { leadId: { in: leadIds } },
+            orderBy: { updatedAt: 'desc' },
+            select: {
+              id: true,
+              leadId: true,
+              draftKey: true,
+              status: true,
+              grandTotal: true,
+              updatedAt: true,
+            },
+          }),
+          // Last followup per lead (most recent by followupDate)
+          prisma.followUp.findMany({
+            where: { leadId: { in: leadIds } },
+            orderBy: { followupDate: 'desc' },
+            select: {
+              id: true,
+              leadId: true,
+              followupDate: true,
+              notes: true,
+              status: true,
+              category: true,
+              assignedTo: { select: { id: true, fullName: true } },
+            },
+          }),
+          // Next upcoming pending followup per lead
+          prisma.followUp.findMany({
+            where: {
+              leadId: { in: leadIds },
+              status: 'PENDING',
+              followupDate: { gte: now },
+            },
+            orderBy: { followupDate: 'asc' },
+            select: {
+              id: true,
+              leadId: true,
+              followupDate: true,
+              notes: true,
+              status: true,
+              category: true,
+              assignedTo: { select: { id: true, fullName: true } },
+            },
+          }),
+        ]);
+
+        if (visitResult.status === 'rejected') {
+          console.error('[GET /api/lead] Enriched visit fetch failed:', visitResult.reason);
+        } else {
+          for (const row of visitResult.value as EnrichedVisitRow[]) {
+            const { leadId, ...rest } = row;
+            if (!latestVisitByLeadId.has(leadId)) {
+              latestVisitByLeadId.set(leadId, rest);
+            }
+          }
+        }
+
+        if (meetingResult.status === 'rejected') {
+          console.error('[GET /api/lead] Enriched meeting fetch failed:', meetingResult.reason);
+        } else {
+          for (const row of meetingResult.value as EnrichedMeetingRow[]) {
+            const { leadId, ...rest } = row;
+            const arr = meetingsByLeadId.get(leadId) ?? [];
+            arr.push(rest);
+            meetingsByLeadId.set(leadId, arr);
+          }
+        }
+
+        if (cadStatusResult.status === 'rejected') {
+          console.error('[GET /api/lead] Enriched CAD status fetch failed:', cadStatusResult.reason);
+        } else {
+          for (const row of cadStatusResult.value as EnrichedCadStatusRow[]) {
+            if (!cadStatusByLeadId.has(row.leadId)) {
+              cadStatusByLeadId.set(row.leadId, { status: row.status, completedAt: row.completedAt });
+            }
+          }
+        }
+
+        if (quotationResult.status === 'rejected') {
+          console.error('[GET /api/lead] Enriched quotation fetch failed:', quotationResult.reason);
+        } else {
+          for (const row of quotationResult.value as EnrichedQuotationRow[]) {
+            const { leadId, ...rest } = row;
+            const arr = quotationsByLeadId.get(leadId) ?? [];
+            arr.push(rest);
+            quotationsByLeadId.set(leadId, arr);
+          }
+        }
+
+        if (lastFollowupResult.status === 'rejected') {
+          console.error('[GET /api/lead] Enriched last-followup fetch failed:', lastFollowupResult.reason);
+        } else {
+          for (const row of lastFollowupResult.value as EnrichedFollowupRow[]) {
+            const { leadId, ...rest } = row;
+            if (!lastFollowupByLeadId.has(leadId)) {
+              lastFollowupByLeadId.set(leadId, rest);
+            }
+          }
+        }
+
+        if (nextFollowupResult.status === 'rejected') {
+          console.error('[GET /api/lead] Enriched next-followup fetch failed:', nextFollowupResult.reason);
+        } else {
+          for (const row of nextFollowupResult.value as EnrichedFollowupRow[]) {
+            const { leadId, ...rest } = row;
+            if (!nextFollowupByLeadId.has(leadId)) {
+              nextFollowupByLeadId.set(leadId, rest);
+            }
+          }
+        }
+      }
+      // ─────────────────────────────────────────────────────────────────────────
+
       const enrichedLeads = leads.map((lead) => ({
         ...lead,
         ...(includeAttachmentPreview ? { attachments: attachmentsByLeadId.get(lead.id) ?? [] } : {}),
         ...(includeCadCorrectionFlag ? { phaseTasks: phaseTasksByLeadId.get(lead.id) ?? [] } : {}),
+        ...(includeEnriched
+          ? {
+              latestVisit: latestVisitByLeadId.get(lead.id) ?? null,
+              meetings: meetingsByLeadId.get(lead.id) ?? [],
+              cadStatus: cadStatusByLeadId.get(lead.id) ?? null,
+              quotationDrafts: quotationsByLeadId.get(lead.id) ?? [],
+              lastFollowup: lastFollowupByLeadId.get(lead.id) ?? null,
+              nextFollowup: nextFollowupByLeadId.get(lead.id) ?? null,
+            }
+          : {}),
       }));
       const groupedStageCounts = groupedStageCountsResult.status === 'fulfilled' ? groupedStageCountsResult.value : [];
       return { total, leads: enrichedLeads, groupedStageCounts };
