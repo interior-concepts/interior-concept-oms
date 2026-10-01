@@ -637,6 +637,22 @@ export async function GET(request: NextRequest) {
         status: string;
         completedAt: Date | null;
       };
+      type EnrichedCadSubmissionRow = {
+        id: string;
+        leadId: string;
+        note: string | null;
+        submittedAt: Date;
+        submittedBy: { id: string; fullName: string } | null;
+        files: Array<{
+          id: string;
+          url: string;
+          fileName: string;
+          fileType: string;
+          cadFileType: string;
+          sizeBytes: number | null;
+          createdAt: Date;
+        }>;
+      };
       type EnrichedQuotationRow = {
         id: string;
         leadId: string;
@@ -658,6 +674,7 @@ export async function GET(request: NextRequest) {
       const latestVisitByLeadId = new Map<string, Omit<EnrichedVisitRow, 'leadId'>>();
       const meetingsByLeadId = new Map<string, Array<Omit<EnrichedMeetingRow, 'leadId'>>>();
       const cadStatusByLeadId = new Map<string, { status: string; completedAt: Date | null }>();
+      const cadSubmissionsByLeadId = new Map<string, Array<Omit<EnrichedCadSubmissionRow, 'leadId'>>>();
       const quotationsByLeadId = new Map<string, Array<Omit<EnrichedQuotationRow, 'leadId'>>>();
       const lastFollowupByLeadId = new Map<string, Omit<EnrichedFollowupRow, 'leadId'>>();
       const nextFollowupByLeadId = new Map<string, Omit<EnrichedFollowupRow, 'leadId'>>();
@@ -669,6 +686,7 @@ export async function GET(request: NextRequest) {
           visitResult,
           meetingResult,
           cadStatusResult,
+          cadSubmissionsResult,
           quotationResult,
           lastFollowupResult,
           nextFollowupResult,
@@ -713,6 +731,30 @@ export async function GET(request: NextRequest) {
               leadId: true,
               status: true,
               completedAt: true,
+            },
+          }),
+          // All CAD work submissions & files per lead
+          prisma.cadWorkSubmission.findMany({
+            where: { leadId: { in: leadIds } },
+            orderBy: { submittedAt: 'desc' },
+            select: {
+              id: true,
+              leadId: true,
+              note: true,
+              submittedAt: true,
+              submittedBy: { select: { id: true, fullName: true } },
+              files: {
+                select: {
+                  id: true,
+                  url: true,
+                  fileName: true,
+                  fileType: true,
+                  cadFileType: true,
+                  sizeBytes: true,
+                  createdAt: true,
+                },
+                orderBy: { createdAt: 'desc' },
+              },
             },
           }),
           // All quotation drafts per lead
@@ -794,6 +836,17 @@ export async function GET(request: NextRequest) {
           }
         }
 
+        if (cadSubmissionsResult.status === 'rejected') {
+          console.error('[GET /api/lead] Enriched CAD submissions fetch failed:', cadSubmissionsResult.reason);
+        } else {
+          for (const row of cadSubmissionsResult.value as EnrichedCadSubmissionRow[]) {
+            const { leadId, ...rest } = row;
+            const arr = cadSubmissionsByLeadId.get(leadId) ?? [];
+            arr.push(rest);
+            cadSubmissionsByLeadId.set(leadId, arr);
+          }
+        }
+
         if (quotationResult.status === 'rejected') {
           console.error('[GET /api/lead] Enriched quotation fetch failed:', quotationResult.reason);
         } else {
@@ -838,6 +891,7 @@ export async function GET(request: NextRequest) {
               latestVisit: latestVisitByLeadId.get(lead.id) ?? null,
               meetings: meetingsByLeadId.get(lead.id) ?? [],
               cadStatus: cadStatusByLeadId.get(lead.id) ?? null,
+              cadSubmissions: cadSubmissionsByLeadId.get(lead.id) ?? [],
               quotationDrafts: quotationsByLeadId.get(lead.id) ?? [],
               lastFollowup: lastFollowupByLeadId.get(lead.id) ?? null,
               nextFollowup: nextFollowupByLeadId.get(lead.id) ?? null,

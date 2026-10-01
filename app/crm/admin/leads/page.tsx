@@ -40,6 +40,9 @@ import {
   X,
   Calendar,
   Users,
+  FileText,
+  Download,
+  ExternalLink,
   type LucideIcon,
 } from 'lucide-react'
 import LeadCreateModal from '@/components/crm/junior/LeadCreateModal'
@@ -210,6 +213,21 @@ type LeadSummary = {
     status: string
     completedAt?: string | null
   } | null
+  cadSubmissions?: Array<{
+    id: string
+    note?: string | null
+    submittedAt: string
+    submittedBy?: { id: string; fullName: string } | null
+    files: Array<{
+      id: string
+      url: string
+      fileName: string
+      fileType: string
+      cadFileType: string
+      sizeBytes?: number | null
+      createdAt: string
+    }>
+  }>
   quotationDrafts?: Array<{
     id: string
     draftKey: string
@@ -418,6 +436,7 @@ export default function LeadsPage() {
   const [canBatchAssign, setCanBatchAssign] = useState(true)
   const [selectedLeadIds, setSelectedLeadIds] = useState<string[]>([])
   const [meetingModalLead, setMeetingModalLead] = useState<LeadSummary | null>(null)
+  const [cadModalLead, setCadModalLead] = useState<LeadSummary | null>(null)
   const [batchAssignOpen, setBatchAssignOpen] = useState(false)
   const [departments, setDepartments] = useState<DepartmentSummary[]>([])
   const [departmentUsers, setDepartmentUsers] = useState<DepartmentUser[]>([])
@@ -1205,22 +1224,55 @@ export default function LeadsPage() {
                             )}
                           </td>
 
-                          {/* 4. CAD (if completed file/check or show X) */}
-                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[90px]">
-                            {lead.cadStatus?.status === 'COMPLETED' || lead.cadStatus?.status === 'APPROVED' ? (
-                              <div className="inline-flex flex-col items-center gap-0.5 text-emerald-600 dark:text-emerald-400">
-                                <CheckCircle2 className="h-5 w-5" />
-                                <span className="text-[10px] font-bold uppercase">Completed</span>
-                              </div>
-                            ) : lead.cadStatus ? (
-                              <div className="inline-flex flex-col items-center gap-0.5 text-amber-600 dark:text-amber-400">
-                                <span className="text-xs font-semibold">{lead.cadStatus.status.replace(/_/g, ' ')}</span>
-                              </div>
-                            ) : (
-                              <div className="inline-flex items-center justify-center text-red-500">
-                                <X className="h-5 w-5" />
-                              </div>
-                            )}
+                          {/* 4. CAD (if CAD files exist, button to open modal with all files; if none show X) */}
+                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[120px]">
+                            {(() => {
+                              const cadFiles = lead.cadSubmissions?.flatMap((sub) =>
+                                sub.files.map((f) => ({
+                                  ...f,
+                                  note: sub.note,
+                                  submittedBy: sub.submittedBy,
+                                  submittedAt: sub.submittedAt,
+                                }))
+                              ) ?? []
+
+                              if (cadFiles.length > 0) {
+                                return (
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="h-8 text-xs gap-1.5 font-semibold border-primary/40 text-primary hover:bg-primary/10"
+                                    onClick={() => setCadModalLead(lead)}
+                                  >
+                                    <FileText className="h-3.5 w-3.5" />
+                                    <span>CAD ({cadFiles.length})</span>
+                                  </Button>
+                                )
+                              }
+
+                              if (lead.cadStatus?.status === 'COMPLETED' || lead.cadStatus?.status === 'APPROVED') {
+                                return (
+                                  <div className="inline-flex flex-col items-center gap-0.5 text-emerald-600 dark:text-emerald-400">
+                                    <CheckCircle2 className="h-5 w-5" />
+                                    <span className="text-[10px] font-bold uppercase">Completed</span>
+                                  </div>
+                                )
+                              }
+
+                              if (lead.cadStatus?.status) {
+                                return (
+                                  <span className="inline-block rounded bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-200 px-2 py-0.5 text-[11px] font-semibold">
+                                    {lead.cadStatus.status.replace(/_/g, ' ')}
+                                  </span>
+                                )
+                              }
+
+                              return (
+                                <div className="inline-flex items-center justify-center text-red-500">
+                                  <X className="h-5 w-5" />
+                                </div>
+                              )
+                            })()}
                           </td>
 
                           {/* 5. Meeting (modal button showing time + date and remarks) */}
@@ -1485,6 +1537,106 @@ export default function LeadsPage() {
                 {meetingModalLead ? (
                   <Link href={getLeadHref(meetingModalLead.id)}>
                     <Button>Open Lead Profile</Button>
+                  </Link>
+                ) : null}
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
+          <Dialog
+            open={Boolean(cadModalLead)}
+            onOpenChange={(open) => {
+              if (!open) setCadModalLead(null)
+            }}
+          >
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-primary" />
+                  <span>CAD Files: {cadModalLead?.name}</span>
+                </DialogTitle>
+                <DialogDescription>
+                  Client ID: {cadModalLead?.clientId ? `#${cadModalLead.clientId}` : '—'} • Phone: {cadModalLead?.phone || '—'}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="max-h-[60vh] overflow-y-auto space-y-3 py-2 pr-1">
+                {(() => {
+                  const cadFiles = cadModalLead?.cadSubmissions?.flatMap((sub) =>
+                    sub.files.map((f) => ({
+                      ...f,
+                      note: sub.note,
+                      submittedBy: sub.submittedBy,
+                      submittedAt: sub.submittedAt,
+                    }))
+                  ) ?? []
+
+                  if (cadFiles.length === 0) {
+                    return (
+                      <div className="py-8 text-center text-sm text-muted-foreground">
+                        No CAD files uploaded for this lead yet.
+                      </div>
+                    )
+                  }
+
+                  return cadFiles.map((file) => (
+                    <div key={file.id} className="rounded-lg border border-border p-3.5 bg-muted/20 space-y-2">
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <div className="space-y-1">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <FileText className="h-4 w-4 text-primary shrink-0" />
+                            <span className="font-semibold text-sm text-foreground break-all">{file.fileName}</span>
+                            {file.cadFileType ? (
+                              <span className="rounded bg-primary/10 text-primary px-2 py-0.5 text-[10px] font-bold uppercase">
+                                {file.cadFileType.replace(/_/g, ' ')}
+                              </span>
+                            ) : null}
+                          </div>
+                          <div className="text-xs text-muted-foreground space-y-0.5">
+                            {file.sizeBytes ? (
+                              <div>Size: {(file.sizeBytes / (1024 * 1024)).toFixed(2)} MB</div>
+                            ) : null}
+                            {file.submittedBy ? (
+                              <div>Uploaded by: <span className="font-medium text-foreground">{file.submittedBy.fullName}</span></div>
+                            ) : null}
+                            {file.submittedAt ? (
+                              <div>Date: {formatDate(file.submittedAt, { includeTime: true })}</div>
+                            ) : null}
+                          </div>
+                        </div>
+
+                        <a
+                          href={file.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          download={file.fileName}
+                          className="shrink-0"
+                        >
+                          <Button size="sm" className="h-8 gap-1.5 text-xs font-semibold">
+                            <Download className="h-3.5 w-3.5" />
+                            <span>Download / Open</span>
+                          </Button>
+                        </a>
+                      </div>
+
+                      {file.note ? (
+                        <div className="rounded bg-background p-2 text-xs border border-border/80">
+                          <span className="font-semibold text-muted-foreground mr-1">Note:</span>
+                          <span className="text-foreground">{file.note}</span>
+                        </div>
+                      ) : null}
+                    </div>
+                  ))
+                })()}
+              </div>
+
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setCadModalLead(null)}>
+                  Close
+                </Button>
+                {cadModalLead ? (
+                  <Link href={getLeadHref(cadModalLead.id)}>
+                    <Button variant="secondary">Open Lead Profile</Button>
                   </Link>
                 ) : null}
               </DialogFooter>
