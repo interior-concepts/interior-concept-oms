@@ -231,9 +231,14 @@ type LeadSummary = {
   quotationDrafts?: Array<{
     id: string
     draftKey: string
+    quotationType?: string | null
+    projectSqft?: number | null
     status: string
     grandTotal: number
+    createdAt?: string | null
     updatedAt: string
+    createdBy?: { id: string; fullName: string } | null
+    updatedBy?: { id: string; fullName: string } | null
   }>
   lastFollowup?: {
     id: string
@@ -437,6 +442,7 @@ export default function LeadsPage() {
   const [selectedLeadIds, setSelectedLeadIds] = useState<string[]>([])
   const [meetingModalLead, setMeetingModalLead] = useState<LeadSummary | null>(null)
   const [cadModalLead, setCadModalLead] = useState<LeadSummary | null>(null)
+  const [quotationModalLead, setQuotationModalLead] = useState<LeadSummary | null>(null)
   const [batchAssignOpen, setBatchAssignOpen] = useState(false)
   const [departments, setDepartments] = useState<DepartmentSummary[]>([])
   const [departmentUsers, setDepartmentUsers] = useState<DepartmentUser[]>([])
@@ -1288,22 +1294,18 @@ export default function LeadsPage() {
                             </Button>
                           </td>
 
-                          {/* 6. Quotation (if completed download/view buttons, if none show X) */}
-                          <td className="py-4 px-4 align-top text-center min-w-[130px]">
+                          {/* 6. Quotation (if quotation drafts exist, button to open modal with all quotations; if none show X) */}
+                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[130px]">
                             {lead.quotationDrafts && lead.quotationDrafts.length > 0 ? (
-                              <div className="flex flex-col items-center gap-1.5">
-                                {lead.quotationDrafts.map((draft) => (
-                                  <Link key={draft.id} href={getLeadHref(lead.id)}>
-                                    <Button
-                                      variant={draft.status === 'FINALIZED' ? 'default' : 'outline'}
-                                      size="sm"
-                                      className="h-6 px-2 text-[11px] font-medium w-full"
-                                    >
-                                      {draft.draftKey.toUpperCase()} {draft.status === 'FINALIZED' ? '✓' : '(Draft)'}
-                                    </Button>
-                                  </Link>
-                                ))}
-                              </div>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-8 text-xs gap-1.5 font-semibold border-sky-500/40 text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-950/30"
+                                onClick={() => setQuotationModalLead(lead)}
+                              >
+                                <FileText className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
+                                <span>Quotations ({lead.quotationDrafts.length})</span>
+                              </Button>
                             ) : (
                               <div className="inline-flex items-center justify-center text-red-500">
                                 <X className="h-5 w-5" />
@@ -1637,6 +1639,112 @@ export default function LeadsPage() {
                 {cadModalLead ? (
                   <Link href={getLeadHref(cadModalLead.id)}>
                     <Button variant="secondary">Open Lead Profile</Button>
+                  </Link>
+                ) : null}
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
+          <Dialog
+            open={Boolean(quotationModalLead)}
+            onOpenChange={(open) => {
+              if (!open) setQuotationModalLead(null)
+            }}
+          >
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-sky-600" />
+                  <span>Quotations: {quotationModalLead?.name}</span>
+                </DialogTitle>
+                <DialogDescription>
+                  Client ID: {quotationModalLead?.clientId ? `#${quotationModalLead.clientId}` : '—'} • Phone: {quotationModalLead?.phone || '—'}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="max-h-[60vh] overflow-y-auto space-y-3 py-2 pr-1">
+                {!quotationModalLead?.quotationDrafts || quotationModalLead.quotationDrafts.length === 0 ? (
+                  <div className="py-8 text-center text-sm text-muted-foreground">
+                    No quotation drafts created for this lead yet.
+                  </div>
+                ) : (
+                  quotationModalLead.quotationDrafts.map((draft) => {
+                    const isFinalized = draft.status === 'FINALIZED'
+                    const isShort = draft.draftKey.toLowerCase().startsWith('short')
+                    const displayTitle = isShort
+                      ? 'Short Quotation'
+                      : draft.draftKey.toLowerCase() === 'detail'
+                        ? 'Detail Quotation'
+                        : `Quotation (${draft.draftKey.toUpperCase()})`
+
+                    return (
+                      <div key={draft.id} className="rounded-lg border border-border p-3.5 bg-muted/20 space-y-2.5">
+                        <div className="flex flex-wrap items-start justify-between gap-3">
+                          <div className="space-y-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <span className="font-semibold text-sm text-foreground">{displayTitle}</span>
+                              <span
+                                className={`rounded px-2 py-0.5 text-[10px] font-bold uppercase ${
+                                  isFinalized
+                                    ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300'
+                                    : 'bg-amber-100 text-amber-800 dark:bg-amber-950/50 dark:text-amber-300'
+                                }`}
+                              >
+                                {draft.status}
+                              </span>
+                              {draft.quotationType ? (
+                                <span className="rounded bg-sky-100 text-sky-800 dark:bg-sky-950/50 dark:text-sky-300 px-2 py-0.5 text-[10px] font-bold uppercase">
+                                  {draft.quotationType}
+                                </span>
+                              ) : null}
+                            </div>
+
+                            <div className="text-sm font-bold text-foreground">
+                              Grand Total:{' '}
+                              <span className="text-primary font-extrabold text-base">
+                                ৳ {draft.grandTotal.toLocaleString('en-IN')}
+                              </span>
+                              {draft.projectSqft ? (
+                                <span className="text-xs font-normal text-muted-foreground ml-2">
+                                  ({draft.projectSqft.toLocaleString()} sqft)
+                                </span>
+                              ) : null}
+                            </div>
+
+                            <div className="text-xs text-muted-foreground space-y-0.5 pt-0.5">
+                              {draft.createdBy ? (
+                                <div>
+                                  Created by: <span className="font-medium text-foreground">{draft.createdBy.fullName}</span>
+                                </div>
+                              ) : null}
+                              {draft.updatedAt ? (
+                                <div>Last updated: {formatDate(draft.updatedAt, { includeTime: true })}</div>
+                              ) : null}
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col sm:flex-row gap-2 shrink-0">
+                            <Link href={`/crm/sr/quotation/leads/${quotationModalLead.id}`}>
+                              <Button size="sm" className="h-8 gap-1.5 text-xs font-semibold">
+                                <ExternalLink className="h-3.5 w-3.5" />
+                                <span>Open Quotation Studio</span>
+                              </Button>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })
+                )}
+              </div>
+
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setQuotationModalLead(null)}>
+                  Close
+                </Button>
+                {quotationModalLead ? (
+                  <Link href={`/crm/sr/quotation/leads/${quotationModalLead.id}`}>
+                    <Button variant="secondary">Open Quotation Workspace</Button>
                   </Link>
                 ) : null}
               </DialogFooter>

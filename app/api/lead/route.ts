@@ -657,9 +657,14 @@ export async function GET(request: NextRequest) {
         id: string;
         leadId: string;
         draftKey: string;
+        quotationType: string;
+        projectSqft: number | null;
         status: string;
         grandTotal: number;
+        createdAt: Date;
         updatedAt: Date;
+        createdBy: { id: string; fullName: string } | null;
+        updatedBy: { id: string; fullName: string } | null;
       };
       type EnrichedFollowupRow = {
         id: string;
@@ -765,9 +770,14 @@ export async function GET(request: NextRequest) {
               id: true,
               leadId: true,
               draftKey: true,
+              quotationType: true,
+              projectSqft: true,
               status: true,
               grandTotal: true,
+              createdAt: true,
               updatedAt: true,
+              createdBy: { select: { id: true, fullName: true } },
+              updatedBy: { select: { id: true, fullName: true } },
             },
           }),
           // Last followup per lead (most recent by followupDate)
