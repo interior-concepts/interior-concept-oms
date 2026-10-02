@@ -15,6 +15,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input'
 import {
   CheckCircle2,
   Clock,
@@ -27,6 +28,7 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  CalendarPlus,
 } from 'lucide-react'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { fetchMeCached } from '@/lib/client-me'
@@ -142,6 +144,16 @@ function getDateRangeForFollowups() {
   }
 }
 
+/** Returns tomorrow's date-time string in local ISO format suitable for datetime-local input */
+function defaultNextFollowupDatetime(): string {
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  tomorrow.setHours(10, 0, 0, 0)
+  // Format as YYYY-MM-DDTHH:mm (for datetime-local input)
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${tomorrow.getFullYear()}-${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}T${pad(tomorrow.getHours())}:${pad(tomorrow.getMinutes())}`
+}
+
 export default function FollowupsPage() {
   const [activeTab, setActiveTab] = useState<TabKey>('pending')
   const [currentUserId, setCurrentUserId] = useState<string | null>(null)
@@ -151,6 +163,11 @@ export default function FollowupsPage() {
   const [completionNote, setCompletionNote] = useState('')
   const [completing, setCompleting] = useState(false)
   const [completeError, setCompleteError] = useState<string | null>(null)
+
+  // Next follow-up state
+  const [setNextFollowup, setSetNextFollowup] = useState(true)
+  const [nextFollowupDatetime, setNextFollowupDatetime] = useState('')
+  const [nextFollowupNote, setNextFollowupNote] = useState('')
 
   const dateRange = useMemo(getDateRangeForFollowups, [])
 
@@ -250,6 +267,9 @@ export default function FollowupsPage() {
     setSelectedFollowup(followup)
     setCompletionNote('')
     setCompleteError(null)
+    setSetNextFollowup(true)
+    setNextFollowupDatetime(defaultNextFollowupDatetime())
+    setNextFollowupNote('')
     setCompleteOpen(true)
   }
 
@@ -268,13 +288,18 @@ export default function FollowupsPage() {
       setCompleteError('Please add completion notes.')
       return
     }
+    if (setNextFollowup && !nextFollowupDatetime) {
+      setCompleteError('Please set the next follow-up date and time.')
+      return
+    }
 
     const nextStatus: FollowUpStatus = selectedFollowup.status === 'MISSED' ? 'LATELY_DONE' : 'DONE'
 
     setCompleting(true)
     setCompleteError(null)
     try {
-      const res = await fetch(`/api/followup/${selectedFollowup.leadId}/${selectedFollowup.id}`, {
+      // Step 1: Mark current follow-up as complete
+      const completeRes = await fetch(`/api/followup/${selectedFollowup.leadId}/${selectedFollowup.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -283,14 +308,40 @@ export default function FollowupsPage() {
           userId: currentUserId,
         }),
       })
-      const data = await res.json()
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Failed to complete follow-up.')
+      const completeData = await completeRes.json()
+      if (!completeRes.ok || !completeData.success) {
+        throw new Error(completeData.error || 'Failed to complete follow-up.')
+      }
+
+      // Step 2: Create next follow-up if requested
+      if (setNextFollowup && nextFollowupDatetime) {
+        const nextDate = new Date(nextFollowupDatetime)
+        const nextRes = await fetch(`/api/followup/${selectedFollowup.leadId}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            assignedToId: currentUserId,
+            followupDate: nextDate.toISOString(),
+            notes: nextFollowupNote.trim() || undefined,
+            userId: currentUserId,
+          }),
+        })
+        const nextData = await nextRes.json()
+        if (!nextRes.ok || !nextData.success) {
+          // Still succeeded on complete; just warn
+          console.warn('Next follow-up creation failed:', nextData.error)
+          setCompleteError(`Follow-up completed, but failed to create next: ${nextData.error as string}`)
+          setCompleting(false)
+          await invalidateAndRefresh()
+          return
+        }
       }
 
       setCompleteOpen(false)
       setSelectedFollowup(null)
       setCompletionNote('')
+      setNextFollowupNote('')
+      setNextFollowupDatetime('')
       await invalidateAndRefresh()
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Failed to complete follow-up.'
@@ -516,28 +567,117 @@ export default function FollowupsPage() {
         </Tabs>
       </div>
 
-      <Dialog open={completeOpen} onOpenChange={setCompleteOpen}>
-        <DialogContent>
+      {/* ── Complete Follow-up Modal ── */}
+      <Dialog open={completeOpen} onOpenChange={(open) => { if (!completing) setCompleteOpen(open) }}>
+        <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>Complete follow-up</DialogTitle>
+            <DialogTitle>Complete Follow-up</DialogTitle>
             <DialogDescription>
               {selectedFollowup?.status === 'MISSED'
                 ? 'This follow-up will be marked as lately done.'
-                : 'This follow-up will be marked as done.'}
+                : 'This follow-up will be marked as done.'}{' '}
+              {selectedFollowup ? (
+                <span className="font-medium text-foreground">— {selectedFollowup.lead.name}</span>
+              ) : null}
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-2">
-            <Textarea
-              value={completionNote}
-              onChange={(event) => setCompletionNote(event.target.value)}
-              placeholder="Follow-up finished successfully"
-              rows={4}
-            />
-            {completeError ? <p className="text-sm text-destructive">{completeError}</p> : null}
+
+          <div className="space-y-5">
+            {/* Completion Notes */}
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">
+                Completion Notes <span className="text-destructive">*</span>
+              </label>
+              <Textarea
+                value={completionNote}
+                onChange={(event) => setCompletionNote(event.target.value)}
+                placeholder="What was discussed? How did the follow-up go?"
+                rows={3}
+                disabled={completing}
+              />
+            </div>
+
+            {/* Divider */}
+            <div className="border-t border-border" />
+
+            {/* Next Follow-up Section */}
+            <div className="space-y-3">
+              <label className="flex items-center gap-2.5 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={setNextFollowup}
+                  onChange={(e) => setSetNextFollowup(e.target.checked)}
+                  disabled={completing}
+                  className="h-4 w-4 rounded border-border accent-primary"
+                />
+                <div className="flex items-center gap-1.5">
+                  <CalendarPlus className="h-4 w-4 text-primary" />
+                  <span className="text-sm font-medium text-foreground">Set Next Follow-up</span>
+                </div>
+              </label>
+
+              {setNextFollowup ? (
+                <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 space-y-3">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                      Date & Time <span className="text-destructive">*</span>
+                    </label>
+                    <Input
+                      type="datetime-local"
+                      value={nextFollowupDatetime}
+                      onChange={(e) => setNextFollowupDatetime(e.target.value)}
+                      disabled={completing}
+                      className="bg-background"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                      Notes for Next Follow-up <span className="text-muted-foreground/60">(optional)</span>
+                    </label>
+                    <Textarea
+                      value={nextFollowupNote}
+                      onChange={(e) => setNextFollowupNote(e.target.value)}
+                      placeholder="What should be discussed next time?"
+                      rows={2}
+                      disabled={completing}
+                      className="bg-background"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <p className="text-xs text-muted-foreground pl-6">
+                  No next follow-up will be scheduled for this client.
+                </p>
+              )}
+            </div>
+
+            {completeError ? (
+              <p className="text-sm text-destructive rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2">
+                {completeError}
+              </p>
+            ) : null}
           </div>
-          <DialogFooter>
-            <Button onClick={handleCompleteFollowup} disabled={completing}>
-              {completing ? 'Saving...' : 'Complete follow-up'}
+
+          <DialogFooter className="gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setCompleteOpen(false)}
+              disabled={completing}
+            >
+              Cancel
+            </Button>
+            <Button onClick={() => void handleCompleteFollowup()} disabled={completing} className="gap-2">
+              {completing ? (
+                <>
+                  <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                  Saving…
+                </>
+              ) : (
+                <>
+                  <CheckCircle2 className="h-4 w-4" />
+                  {setNextFollowup ? 'Complete & Set Next' : 'Complete Follow-up'}
+                </>
+              )}
             </Button>
           </DialogFooter>
         </DialogContent>
