@@ -42,12 +42,19 @@ export default async function SrCrmLayout({
     user.userDepartments.map((row) => row.department.name),
   )
 
-  if (departmentNames.has('SR_CRM')) {
-    return <MainLayout role="Senior CRM">{children}</MainLayout>
-  }
+  const isAllowedSrAccess =
+    departmentNames.has('SR_CRM') ||
+    departmentNames.has('ADMIN') ||
+    departmentNames.has('QUOTATION') ||
+    departmentNames.has('QUOTATION_TEAM')
 
-  if (departmentNames.has('ADMIN')) {
-    redirect(ADMIN_DASHBOARD)
+  if (isAllowedSrAccess) {
+    const roleLabel = departmentNames.has('ADMIN')
+      ? 'Admin'
+      : departmentNames.has('QUOTATION') || departmentNames.has('QUOTATION_TEAM')
+        ? 'Quotation Team'
+        : 'Senior CRM'
+    return <MainLayout role={roleLabel}>{children}</MainLayout>
   }
 
   if (departmentNames.has('JR_CRM')) {

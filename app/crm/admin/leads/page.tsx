@@ -1035,17 +1035,19 @@ export default function LeadsPage() {
             </div>
           ) : null}
 
-          <Card className="border-border bg-card">
-            <CardHeader>
+          <Card className="border-border bg-card overflow-hidden max-w-full shadow-sm">
+            <CardHeader className="px-4 py-4 sm:px-6 border-b border-border/50">
               <CardTitle className="text-foreground">Leads ({displayedCount}/{totalCount})</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
               {loadingInitial ? (
-                renderLoadingSkeleton()
+                <div className="p-4 sm:p-6">
+                  {renderLoadingSkeleton()}
+                </div>
               ) : leads.length === 0 ? (
-                <div className="py-8 text-center text-muted-foreground">No leads found.</div>
+                <div className="py-12 text-center text-muted-foreground">No leads found.</div>
               ) : viewMode === 'card' ? (
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                <div className="p-4 sm:p-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
                   {leads.map((lead) => (
                     <Card key={lead.id} className="border-border">
                       <CardContent className="space-y-3 p-4">
@@ -1104,11 +1106,11 @@ export default function LeadsPage() {
                   ))}
                 </div>
               ) : (
-                <div className="overflow-x-auto rounded-md border border-border">
-                  <table className="w-full min-w-[1400px] text-sm">
+                <div className="w-full overflow-x-auto touch-pan-x scrollbar-thin">
+                  <table className="w-full min-w-[1450px] text-sm divide-y divide-border">
                     <thead>
-                      <tr className="border-b bg-muted/40">
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground w-12">
+                      <tr className="bg-muted/50 border-b border-border">
+                        <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground w-12">
                           <input
                             type="checkbox"
                             checked={allVisibleSelected}
@@ -1118,19 +1120,19 @@ export default function LeadsPage() {
                             aria-label="Select all visible leads"
                           />
                         </th>
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground whitespace-nowrap">Client ID</th>
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground whitespace-nowrap">Client Info</th>
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground whitespace-nowrap">Stage</th>
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground whitespace-nowrap">Visit Details</th>
-                        <th className="px-4 py-3 text-center font-semibold text-muted-foreground whitespace-nowrap">CAD</th>
-                        <th className="px-4 py-3 text-center font-semibold text-muted-foreground whitespace-nowrap">Meeting</th>
-                        <th className="px-4 py-3 text-center font-semibold text-muted-foreground whitespace-nowrap">Quotation</th>
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground whitespace-nowrap">Last Followup</th>
-                        <th className="px-4 py-3 text-left font-semibold text-muted-foreground whitespace-nowrap">Next Followup</th>
-                        <th className="px-4 py-3 text-center font-semibold text-muted-foreground whitespace-nowrap">Action</th>
+                        <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground whitespace-nowrap">Client ID</th>
+                        <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground whitespace-nowrap">Client Info</th>
+                        <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground whitespace-nowrap">Stage</th>
+                        <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground whitespace-nowrap">Visit Details</th>
+                        <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">CAD</th>
+                        <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">Meeting</th>
+                        <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">Quotation</th>
+                        <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground whitespace-nowrap">Last Followup</th>
+                        <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground whitespace-nowrap">Next Followup</th>
+                        <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">Action</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-border">
+                    <tbody className="divide-y divide-border bg-card">
                       {leads.map((lead) => (
                         <tr key={lead.id} className="hover:bg-muted/40 transition-colors">
                           <td className="py-4 px-4 align-top">
@@ -1370,7 +1372,7 @@ export default function LeadsPage() {
               {loadingMore ? <p className="mt-4 text-center text-sm text-muted-foreground">Loading more leads...</p> : null}
               <div ref={sentinelRef} className="h-1" />
               {!hasMore && leads.length > 0 ? (
-                <p className="mt-4 text-center text-xs text-muted-foreground">You have reached the end of the list.</p>
+                <p className="py-4 text-center text-xs text-muted-foreground">You have reached the end of the list.</p>
               ) : null}
             </CardContent>
           </Card>
@@ -1482,21 +1484,25 @@ export default function LeadsPage() {
             </DialogContent>
           </Dialog>
 
+          {/* 1. Meeting Details Modal */}
           <Dialog
             open={Boolean(meetingModalLead)}
             onOpenChange={(open) => {
               if (!open) setMeetingModalLead(null)
             }}
           >
-            <DialogContent className="max-w-lg">
-              <DialogHeader>
-                <DialogTitle>Meeting Details: {meetingModalLead?.name}</DialogTitle>
+            <DialogContent className="max-w-lg max-h-[85vh] flex flex-col p-0 overflow-hidden">
+              <DialogHeader className="px-6 pt-6 pb-3 border-b">
+                <DialogTitle className="flex items-center gap-2">
+                  <Calendar className="h-5 w-5 text-primary" />
+                  <span>Meetings: {meetingModalLead?.name}</span>
+                </DialogTitle>
                 <DialogDescription>
                   Client ID: {meetingModalLead?.clientId ? `#${meetingModalLead.clientId}` : '—'} • Phone: {meetingModalLead?.phone || '—'}
                 </DialogDescription>
               </DialogHeader>
 
-              <div className="max-h-[60vh] overflow-y-auto space-y-3 py-2 pr-1">
+              <div className="flex-1 overflow-y-auto px-6 py-4 space-y-3 overscroll-contain">
                 {!meetingModalLead?.meetings || meetingModalLead.meetings.length === 0 ? (
                   <div className="py-8 text-center text-sm text-muted-foreground">
                     No meetings scheduled for this lead yet.
@@ -1532,7 +1538,7 @@ export default function LeadsPage() {
                 )}
               </div>
 
-              <DialogFooter>
+              <DialogFooter className="px-6 py-3 border-t bg-muted/20">
                 <Button variant="outline" onClick={() => setMeetingModalLead(null)}>
                   Close
                 </Button>
@@ -1545,14 +1551,15 @@ export default function LeadsPage() {
             </DialogContent>
           </Dialog>
 
+          {/* 2. CAD Files Modal */}
           <Dialog
             open={Boolean(cadModalLead)}
             onOpenChange={(open) => {
               if (!open) setCadModalLead(null)
             }}
           >
-            <DialogContent className="max-w-2xl">
-              <DialogHeader>
+            <DialogContent className="max-w-2xl max-h-[85vh] flex flex-col p-0 overflow-hidden">
+              <DialogHeader className="px-6 pt-6 pb-3 border-b">
                 <DialogTitle className="flex items-center gap-2">
                   <FileText className="h-5 w-5 text-primary" />
                   <span>CAD Files: {cadModalLead?.name}</span>
@@ -1562,7 +1569,7 @@ export default function LeadsPage() {
                 </DialogDescription>
               </DialogHeader>
 
-              <div className="max-h-[60vh] overflow-y-auto space-y-3 py-2 pr-1">
+              <div className="flex-1 overflow-y-auto px-6 py-4 space-y-3 overscroll-contain">
                 {(() => {
                   const cadFiles = cadModalLead?.cadSubmissions?.flatMap((sub) =>
                     sub.files.map((f) => ({
@@ -1632,7 +1639,7 @@ export default function LeadsPage() {
                 })()}
               </div>
 
-              <DialogFooter>
+              <DialogFooter className="px-6 py-3 border-t bg-muted/20">
                 <Button variant="outline" onClick={() => setCadModalLead(null)}>
                   Close
                 </Button>
@@ -1645,14 +1652,15 @@ export default function LeadsPage() {
             </DialogContent>
           </Dialog>
 
+          {/* 3. Quotation Details Modal */}
           <Dialog
             open={Boolean(quotationModalLead)}
             onOpenChange={(open) => {
               if (!open) setQuotationModalLead(null)
             }}
           >
-            <DialogContent className="max-w-2xl">
-              <DialogHeader>
+            <DialogContent className="max-w-2xl max-h-[85vh] flex flex-col p-0 overflow-hidden">
+              <DialogHeader className="px-6 pt-6 pb-3 border-b">
                 <DialogTitle className="flex items-center gap-2">
                   <FileText className="h-5 w-5 text-sky-600" />
                   <span>Quotations: {quotationModalLead?.name}</span>
@@ -1662,7 +1670,7 @@ export default function LeadsPage() {
                 </DialogDescription>
               </DialogHeader>
 
-              <div className="max-h-[60vh] overflow-y-auto space-y-3 py-2 pr-1">
+              <div className="flex-1 overflow-y-auto px-6 py-4 space-y-3 overscroll-contain">
                 {!quotationModalLead?.quotationDrafts || quotationModalLead.quotationDrafts.length === 0 ? (
                   <div className="py-8 text-center text-sm text-muted-foreground">
                     No quotation drafts created for this lead yet.
@@ -1723,9 +1731,28 @@ export default function LeadsPage() {
                             </div>
                           </div>
 
-                          <div className="flex flex-col sm:flex-row gap-2 shrink-0">
+                          <div className="flex flex-wrap items-center gap-2 shrink-0 pt-1">
+                            {/* Button 1: Download / Print Quotation */}
+                            <Link
+                              href={`/crm/sr/quotation/leads/${quotationModalLead.id}`}
+                              target="_blank"
+                            >
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                className="h-8 gap-1.5 text-xs font-semibold border-border hover:bg-muted"
+                              >
+                                <Download className="h-3.5 w-3.5" />
+                                <span>Download Quotation</span>
+                              </Button>
+                            </Link>
+
+                            {/* Button 2: Open Quotation Studio (Edit & Manage) */}
                             <Link href={`/crm/sr/quotation/leads/${quotationModalLead.id}`}>
-                              <Button size="sm" className="h-8 gap-1.5 text-xs font-semibold">
+                              <Button
+                                size="sm"
+                                className="h-8 gap-1.5 text-xs font-semibold"
+                              >
                                 <ExternalLink className="h-3.5 w-3.5" />
                                 <span>Open Quotation Studio</span>
                               </Button>
@@ -1738,13 +1765,13 @@ export default function LeadsPage() {
                 )}
               </div>
 
-              <DialogFooter>
+              <DialogFooter className="px-6 py-3 border-t bg-muted/20">
                 <Button variant="outline" onClick={() => setQuotationModalLead(null)}>
                   Close
                 </Button>
                 {quotationModalLead ? (
                   <Link href={`/crm/sr/quotation/leads/${quotationModalLead.id}`}>
-                    <Button variant="secondary">Open Quotation Workspace</Button>
+                    <Button variant="secondary">Open Quotation Studio</Button>
                   </Link>
                 ) : null}
               </DialogFooter>
