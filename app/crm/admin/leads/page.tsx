@@ -49,6 +49,9 @@ import LeadCreateModal from '@/components/crm/junior/LeadCreateModal'
 import { LeadImportModal } from '@/components/crm/admin/lead-import-modal'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { LeadDateRangeFilter, type LeadDatePreset } from '@/components/crm/shared/lead-date-range-filter'
+import { downloadDetailQuotationWord, downloadShortQuotationWord } from '@/components/crm/quotation/word-download'
+import { isDetailQuotationContent, isShortQuotationContent } from '@/lib/quotation-document'
+import { calculateQuotationTotals } from '@/lib/quotation-calculations'
 
 const PAGE_SIZE = 20
 const stages = [
@@ -443,6 +446,7 @@ export default function LeadsPage() {
   const [meetingModalLead, setMeetingModalLead] = useState<LeadSummary | null>(null)
   const [cadModalLead, setCadModalLead] = useState<LeadSummary | null>(null)
   const [quotationModalLead, setQuotationModalLead] = useState<LeadSummary | null>(null)
+  const [downloadingDraftId, setDownloadingDraftId] = useState<string | null>(null)
   const [batchAssignOpen, setBatchAssignOpen] = useState(false)
   const [departments, setDepartments] = useState<DepartmentSummary[]>([])
   const [departmentUsers, setDepartmentUsers] = useState<DepartmentUser[]>([])
@@ -522,6 +526,44 @@ export default function LeadsPage() {
 
     return () => window.clearTimeout(timer)
   }, [searchInput])
+
+  const handleDownloadQuotation = useCallback(async (lead: LeadSummary, draft: NonNullable<LeadSummary['quotationDrafts']>[number]) => {
+    if (downloadingDraftId) return
+    setDownloadingDraftId(draft.id)
+    try {
+      const res = await fetch(`/api/lead/${lead.id}/quotation-draft?draftId=${encodeURIComponent(draft.id)}`)
+      if (!res.ok) throw new Error('Failed to fetch draft')
+      const payload = (await res.json()) as {
+        success: boolean
+        data?: {
+          draft?: { content?: unknown; quotationType?: string } | null
+          documentType?: string
+          lead?: { name?: string; location?: string }
+        }
+      }
+      if (!payload.success || !payload.data?.draft?.content) {
+        throw new Error('Draft content unavailable')
+      }
+      const { content } = payload.data.draft
+      const clientName = payload.data.lead?.name ?? lead.name
+      const clientAddress = payload.data.lead?.location ?? lead.location ?? ''
+      const safeFileName = `Quotation_${(clientName ?? 'Client').replace(/[^a-z0-9]/gi, '_')}`
+
+      if (isShortQuotationContent(content)) {
+        downloadShortQuotationWord(content, `${safeFileName}_short.docx`, 'docx')
+      } else if (isDetailQuotationContent(content)) {
+        const totals = calculateQuotationTotals(content)
+        downloadDetailQuotationWord({ clientName, clientAddress, content, totals }, `${safeFileName}_detail.docx`, 'docx')
+      } else {
+        throw new Error('Unknown quotation type')
+      }
+    } catch (err) {
+      console.error('Quotation download failed:', err)
+      alert('Could not download quotation. Please try again.')
+    } finally {
+      setDownloadingDraftId(null)
+    }
+  }, [downloadingDraftId])
 
   const fetchLeads = useCallback(async (offset: number, replace: boolean) => {
     try {
@@ -1090,7 +1132,7 @@ export default function LeadsPage() {
                         </div>
                         <div className="text-sm text-muted-foreground">
                           <p>Phone: {lead.phone || '—'}</p>
-                          <p>Senior CRM: {lead.assignments?.[0]?.user?.fullName || 'Unassigned'}</p>
+                          <p>Senior CRM: {lead.assignments?.find((a) => a.department === 'SR_CRM')?.user?.fullName || 'Unassigned'}</p>
                           <p>Location: {lead.location || '—'}</p>
                         </div>
                         <div className="flex items-center justify-between gap-3">
@@ -1166,15 +1208,15 @@ export default function LeadsPage() {
                                   </div>
                                 )
                               })()}
-                              <div className="space-y-1">
+                              <div className="space-y-1 min-w-0">
                                 <div className="font-semibold text-foreground text-sm leading-tight">{lead.name}</div>
                                 <div className="text-xs text-muted-foreground flex items-center gap-1">
                                   <PhoneCall className="h-3 w-3 text-muted-foreground shrink-0" />
                                   <span>{lead.phone || '—'}</span>
                                 </div>
-                                <div className="text-xs text-muted-foreground flex items-start gap-1">
+                                <div className="text-xs text-muted-foreground flex items-start gap-1 max-w-[180px]" title={lead.location || 'No address'}>
                                   <span className="shrink-0">📍</span>
-                                  <span>{lead.location || 'No address'}</span>
+                                  <span className="truncate">{lead.location || 'No address'}</span>
                                 </div>
                                 <div className="text-[11px] text-muted-foreground/80">
                                   Source: <span className="font-medium">{lead.source || 'Unknown'}</span>
@@ -1189,11 +1231,24 @@ export default function LeadsPage() {
                             <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-semibold ${stageColors[lead.stage] || 'bg-muted text-foreground'}`}>
                               {formatStageDisplay(lead.stage)}
                             </span>
-                            {lead.assignments?.[0]?.user?.fullName ? (
-                              <div className="text-[11px] text-muted-foreground mt-1">
-                                Sr: {lead.assignments[0].user.fullName}
-                              </div>
-                            ) : null}
+                            {(() => {
+                              const srCrm = lead.assignments?.find((a) => a.department === 'SR_CRM')
+                              const jrCrm = lead.assignments?.find((a) => a.department === 'JR_CRM')
+                              return (
+                                <>
+                                  {srCrm ? (
+                                    <div className="text-[11px] text-muted-foreground mt-1">
+                                      Sr: {srCrm.user.fullName}
+                                    </div>
+                                  ) : null}
+                                  {jrCrm ? (
+                                    <div className="text-[11px] text-muted-foreground/70">
+                                      Jr: {jrCrm.user.fullName}
+                                    </div>
+                                  ) : null}
+                                </>
+                              )
+                            })()}
                           </td>
 
                           {/* 3. Visit (Visit schedule date, visit complete time, visit team members) */}
@@ -1732,20 +1787,21 @@ export default function LeadsPage() {
                           </div>
 
                           <div className="flex flex-wrap items-center gap-2 shrink-0 pt-1">
-                            {/* Button 1: Download / Print Quotation */}
-                            <Link
-                              href={`/crm/sr/quotation/leads/${quotationModalLead.id}`}
-                              target="_blank"
+                            {/* Button 1: Download Quotation as .docx */}
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              disabled={downloadingDraftId === draft.id}
+                              className="h-8 gap-1.5 text-xs font-semibold border-border hover:bg-muted"
+                              onClick={() => void handleDownloadQuotation(quotationModalLead, draft)}
                             >
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                className="h-8 gap-1.5 text-xs font-semibold border-border hover:bg-muted"
-                              >
+                              {downloadingDraftId === draft.id ? (
+                                <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                              ) : (
                                 <Download className="h-3.5 w-3.5" />
-                                <span>Download Quotation</span>
-                              </Button>
-                            </Link>
+                              )}
+                              <span>{downloadingDraftId === draft.id ? 'Downloading…' : 'Download Quotation'}</span>
+                            </Button>
 
                             {/* Button 2: Open Quotation Studio (Edit & Manage) */}
                             <Link href={`/crm/sr/quotation/leads/${quotationModalLead.id}`}>

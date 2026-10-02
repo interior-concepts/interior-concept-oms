@@ -497,10 +497,10 @@ export async function GET(request: NextRequest) {
         created_at: true,
         updated_at: true,
         assignments: {
-          where: { department: LeadAssignmentDepartment.JR_CRM },
           orderBy: { createdAt: 'desc' },
-          take: 1,
-          include: {
+          select: {
+            id: true,
+            department: true,
             user: { select: { id: true, fullName: true, email: true } },
           },
         },

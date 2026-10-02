@@ -460,6 +460,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
     })
 
     const projectSqft = lead.visits[0]?.projectSqft ?? null
+    const requestedDraftId = request.nextUrl.searchParams.get('draftId')
     const requestedTemplateKey = resolveTemplateKey(request.nextUrl.searchParams.get('templateKey'))
     const requestedDocumentType = toRequestedDocumentType(request.nextUrl.searchParams.get('documentType'))
     const requestedShortPackage = toShortQuotationPackage(request.nextUrl.searchParams.get('packageTier')) ?? 'PREMIUM'
@@ -468,7 +469,9 @@ export async function GET(request: NextRequest, context: RouteContext) {
       ? buildDraftKey(requestedDocumentType, requestedShortPackage, requestedSlot)
       : null
     const savedDrafts = lead.quotationDrafts ?? []
-    const selectedDraft = requestedDraftKey
+    const selectedDraft = requestedDraftId
+      ? savedDrafts.find((draft) => draft.id === requestedDraftId) ?? null
+      : requestedDraftKey
       ? savedDrafts.find((draft) => draft.draftKey === buildOwnedDraftKey(requestedDraftKey, authResult.actorUserId))
         ?? savedDrafts.find((draft) => draft.draftKey === requestedDraftKey)
         ?? savedDrafts.find((draft) => matchesBaseDraftKey(draft.draftKey, requestedDraftKey))
