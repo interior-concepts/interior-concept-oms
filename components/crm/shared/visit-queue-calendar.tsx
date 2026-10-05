@@ -199,6 +199,14 @@ export function VisitQueueCalendar({
   const [viewYear, setViewYear] = useState(now.getFullYear())
   const [viewMonth, setViewMonth] = useState(now.getMonth())
   const [expandedDates, setExpandedDates] = useState<Set<string>>(new Set())
+  const [activeStatFilter, setActiveStatFilter] = useState<'scheduled' | 'needs_jr' | 'assigned' | null>(null)
+  const [highlightedDateKey, setHighlightedDateKey] = useState<string | null>(null)
+  const [filterOnlyMatchingDays, setFilterOnlyMatchingDays] = useState(false)
+  const [statJumpIndex, setStatJumpIndex] = useState<Record<'scheduled' | 'needs_jr' | 'assigned', number>>({
+    scheduled: 0,
+    needs_jr: 0,
+    assigned: 0,
+  })
 
   // Data
   const [queueItems, setQueueItems] = useState<QueueItem[]>([])
@@ -312,21 +320,126 @@ export function VisitQueueCalendar({
   const totalQueuePending = useMemo(() => allDayRows.reduce((a, d) => a + d.queueItems.filter(q => !q.jrArchitectAssignee).length, 0), [allDayRows])
   const totalQueueAssigned = useMemo(() => allDayRows.reduce((a, d) => a + d.queueItems.filter(q => !!q.jrArchitectAssignee).length, 0), [allDayRows])
 
+  const scheduledDayKeys = useMemo(
+    () => allDayRows.filter(d => d.scheduledVisits.length > 0).map(d => d.dateKey),
+    [allDayRows],
+  )
+  const needsJrDayKeys = useMemo(
+    () => allDayRows.filter(d => d.queueItems.some(q => !q.jrArchitectAssignee)).map(d => d.dateKey),
+    [allDayRows],
+  )
+  const assignedDayKeys = useMemo(
+    () => allDayRows.filter(d => d.queueItems.some(q => !!q.jrArchitectAssignee)).map(d => d.dateKey),
+    [allDayRows],
+  )
+  const activeDayKeys = useMemo(
+    () => allDayRows.filter(d => d.scheduledVisits.length > 0 || d.queueItems.length > 0).map(d => d.dateKey),
+    [allDayRows],
+  )
+
+  const scrollToDayBox = useCallback((dateKey: string, section?: 'scheduled' | 'needs_jr' | 'assigned') => {
+    setHighlightedDateKey(dateKey)
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        const sectionEl = section ? document.getElementById(`visit-day-${dateKey}-${section}`) : null
+        const dayEl = document.getElementById(`visit-day-${dateKey}`)
+        const target = sectionEl ?? dayEl
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }
+      }, 60)
+    })
+  }, [])
+
+  const handleStatCardClick = useCallback(
+    (statType: 'scheduled' | 'needs_jr' | 'assigned') => {
+      const matchingKeys =
+        statType === 'scheduled'
+          ? scheduledDayKeys
+          : statType === 'needs_jr'
+            ? needsJrDayKeys
+            : assignedDayKeys
+
+      const label =
+        statType === 'scheduled'
+          ? 'Scheduled'
+          : statType === 'needs_jr'
+            ? 'Needs JR'
+            : 'Assigned'
+
+      if (matchingKeys.length === 0) {
+        setActiveStatFilter(prev => (prev === statType ? null : statType))
+        toast.info(`No "${label}" visits found in ${MONTH_NAMES[viewMonth]} ${viewYear}.`)
+        return
+      }
+
+      const isAlreadyActive = activeStatFilter === statType
+      const currentIdx = isAlreadyActive ? (statJumpIndex[statType] + 1) % matchingKeys.length : 0
+      const targetDateKey = matchingKeys[currentIdx]
+
+      setActiveStatFilter(statType)
+      setStatJumpIndex(prev => ({ ...prev, [statType]: currentIdx }))
+      setExpandedDates(prev => {
+        const next = new Set(prev)
+        for (const key of matchingKeys) next.add(key)
+        return next
+      })
+
+      scrollToDayBox(targetDateKey, statType)
+    },
+    [
+      scheduledDayKeys,
+      needsJrDayKeys,
+      assignedDayKeys,
+      activeStatFilter,
+      statJumpIndex,
+      viewMonth,
+      viewYear,
+      scrollToDayBox,
+    ],
+  )
+
+  const handleAllDaysClick = useCallback(() => {
+    setActiveStatFilter(null)
+    setFilterOnlyMatchingDays(false)
+    setHighlightedDateKey(null)
+    if (activeDayKeys.length > 0) {
+      setExpandedDates(new Set(activeDayKeys))
+      scrollToDayBox(activeDayKeys[0])
+    }
+  }, [activeDayKeys, scrollToDayBox])
+
+  const visibleDayRows = useMemo(() => {
+    if (!filterOnlyMatchingDays || !activeStatFilter) return allDayRows
+    return allDayRows.filter(day => {
+      if (activeStatFilter === 'scheduled') return day.scheduledVisits.length > 0
+      if (activeStatFilter === 'needs_jr') return day.queueItems.some(q => !q.jrArchitectAssignee)
+      if (activeStatFilter === 'assigned') return day.queueItems.some(q => !!q.jrArchitectAssignee)
+      return true
+    })
+  }, [allDayRows, filterOnlyMatchingDays, activeStatFilter])
+
   // ── Navigation ─────────────────────────────────────────────────────────────
 
   const goToPrevMonth = () => {
     if (viewMonth === 0) { setViewMonth(11); setViewYear(y => y - 1) }
     else setViewMonth(m => m - 1)
     setExpandedDates(new Set())
+    setActiveStatFilter(null)
+    setHighlightedDateKey(null)
   }
   const goToNextMonth = () => {
     if (viewMonth === 11) { setViewMonth(0); setViewYear(y => y + 1) }
     else setViewMonth(m => m + 1)
     setExpandedDates(new Set())
+    setActiveStatFilter(null)
+    setHighlightedDateKey(null)
   }
   const goToCurrentMonth = () => {
     setViewMonth(now.getMonth()); setViewYear(now.getFullYear())
     setExpandedDates(new Set())
+    setActiveStatFilter(null)
+    setHighlightedDateKey(null)
   }
 
   const isCurrentMonth = viewYear === now.getFullYear() && viewMonth === now.getMonth()
@@ -746,36 +859,156 @@ export function VisitQueueCalendar({
                 )}
               </div>
 
-              {/* Summary */}
-              <div className="flex items-center gap-3 flex-wrap">
-                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                  <CalendarDays className="h-4 w-4" />
-                  <span>{daysInMonth} days</span>
+              {/* Filter controls when a stat card is active */}
+              {activeStatFilter && (
+                <div className="flex items-center gap-2 flex-wrap">
+                  <Button
+                    type="button"
+                    variant={filterOnlyMatchingDays ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setFilterOnlyMatchingDays(prev => !prev)}
+                    className="text-xs whitespace-nowrap"
+                  >
+                    {filterOnlyMatchingDays ? 'Showing Matching Days Only' : 'Filter to Matching Days Only'}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setActiveStatFilter(null)
+                      setFilterOnlyMatchingDays(false)
+                      setHighlightedDateKey(null)
+                    }}
+                    className="text-xs text-muted-foreground whitespace-nowrap"
+                  >
+                    Clear Selection
+                  </Button>
                 </div>
-                <Badge variant="secondary" className="text-blue-700 bg-blue-50 border-blue-200">
-                  <Eye className="mr-1 h-3 w-3" />
-                  {totalScheduled} scheduled
-                </Badge>
-                <Badge variant="secondary" className="text-amber-700 bg-amber-50 border-amber-200">
-                  <Clock className="mr-1 h-3 w-3" />
-                  {totalQueuePending} needs JR
-                </Badge>
-                <Badge variant="secondary" className="text-emerald-700 bg-emerald-50 border-emerald-200">
-                  <CheckCircle2 className="mr-1 h-3 w-3" />
-                  {totalQueueAssigned} assigned
-                </Badge>
-              </div>
+              )}
+            </div>
+
+            {/* Interactive Stat Cards */}
+            <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {/* Total Days / Active Days */}
+              <button
+                type="button"
+                onClick={handleAllDaysClick}
+                className={`group flex items-center justify-between rounded-xl border p-4 text-left transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                  activeStatFilter === null && highlightedDateKey !== null
+                    ? 'border-primary bg-primary/5 ring-2 ring-primary/20'
+                    : 'border-border bg-card hover:border-primary/40 hover:bg-muted/40'
+                }`}
+              >
+                <div className="space-y-1">
+                  <p className="text-xs font-medium text-muted-foreground">Month Overview</p>
+                  <p className="text-2xl font-bold tracking-tight text-foreground tabular-nums">
+                    {daysInMonth} <span className="text-sm font-normal text-muted-foreground">days</span>
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {activeDayKeys.length > 0
+                      ? `${activeDayKeys.length} day${activeDayKeys.length === 1 ? '' : 's'} with activity — click to expand`
+                      : 'No visits in this month'}
+                  </p>
+                </div>
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/50 text-foreground transition-transform group-hover:scale-105">
+                  <CalendarDays className="h-5 w-5" />
+                </div>
+              </button>
+
+              {/* Scheduled Stat Card */}
+              <button
+                type="button"
+                onClick={() => handleStatCardClick('scheduled')}
+                className={`group flex items-center justify-between rounded-xl border p-4 text-left transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                  activeStatFilter === 'scheduled'
+                    ? 'border-blue-500 bg-blue-50/90 dark:bg-blue-950/40 ring-2 ring-blue-500/20'
+                    : 'border-blue-200/80 bg-blue-50/40 hover:border-blue-400 hover:bg-blue-50/80 dark:border-blue-900/60 dark:bg-blue-950/20'
+                }`}
+              >
+                <div className="space-y-1">
+                  <p className="text-xs font-semibold text-blue-700 dark:text-blue-300">Scheduled Visits</p>
+                  <p className="text-2xl font-bold tracking-tight text-blue-900 dark:text-blue-100 tabular-nums">
+                    {totalScheduled}
+                  </p>
+                  <p className="text-xs text-blue-700/80 dark:text-blue-300/80">
+                    {scheduledDayKeys.length > 0
+                      ? `${scheduledDayKeys.length} day${scheduledDayKeys.length === 1 ? '' : 's'} — click to jump to schedule`
+                      : 'No scheduled visits'}
+                  </p>
+                </div>
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-blue-200 bg-blue-100/80 text-blue-700 dark:border-blue-800 dark:bg-blue-900/50 dark:text-blue-200 transition-transform group-hover:scale-105">
+                  <Eye className="h-5 w-5" />
+                </div>
+              </button>
+
+              {/* Needs JR Stat Card */}
+              <button
+                type="button"
+                onClick={() => handleStatCardClick('needs_jr')}
+                className={`group flex items-center justify-between rounded-xl border p-4 text-left transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
+                  activeStatFilter === 'needs_jr'
+                    ? 'border-amber-500 bg-amber-50/90 dark:bg-amber-950/40 ring-2 ring-amber-500/20'
+                    : 'border-amber-200/80 bg-amber-50/40 hover:border-amber-400 hover:bg-amber-50/80 dark:border-amber-900/60 dark:bg-amber-950/20'
+                }`}
+              >
+                <div className="space-y-1">
+                  <p className="text-xs font-semibold text-amber-700 dark:text-amber-300">Needs JR Architect</p>
+                  <p className="text-2xl font-bold tracking-tight text-amber-900 dark:text-amber-100 tabular-nums">
+                    {totalQueuePending}
+                  </p>
+                  <p className="text-xs text-amber-700/80 dark:text-amber-300/80">
+                    {needsJrDayKeys.length > 0
+                      ? `${needsJrDayKeys.length} day${needsJrDayKeys.length === 1 ? '' : 's'} — click to jump to queue`
+                      : 'All completed visits assigned'}
+                  </p>
+                </div>
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-amber-200 bg-amber-100/80 text-amber-700 dark:border-amber-800 dark:bg-amber-900/50 dark:text-amber-200 transition-transform group-hover:scale-105">
+                  <Clock className="h-5 w-5" />
+                </div>
+              </button>
+
+              {/* Assigned Stat Card */}
+              <button
+                type="button"
+                onClick={() => handleStatCardClick('assigned')}
+                className={`group flex items-center justify-between rounded-xl border p-4 text-left transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
+                  activeStatFilter === 'assigned'
+                    ? 'border-emerald-500 bg-emerald-50/90 dark:bg-emerald-950/40 ring-2 ring-emerald-500/20'
+                    : 'border-emerald-200/80 bg-emerald-50/40 hover:border-emerald-400 hover:bg-emerald-50/80 dark:border-emerald-900/60 dark:bg-emerald-950/20'
+                }`}
+              >
+                <div className="space-y-1">
+                  <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">JR Assigned</p>
+                  <p className="text-2xl font-bold tracking-tight text-emerald-900 dark:text-emerald-100 tabular-nums">
+                    {totalQueueAssigned}
+                  </p>
+                  <p className="text-xs text-emerald-700/80 dark:text-emerald-300/80">
+                    {assignedDayKeys.length > 0
+                      ? `${assignedDayKeys.length} day${assignedDayKeys.length === 1 ? '' : 's'} — click to jump to assigned`
+                      : 'No assigned visits yet'}
+                  </p>
+                </div>
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-emerald-200 bg-emerald-100/80 text-emerald-700 dark:border-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200 transition-transform group-hover:scale-105">
+                  <CheckCircle2 className="h-5 w-5" />
+                </div>
+              </button>
             </div>
 
             {/* Legend */}
-            <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground flex-wrap">
-              <span className="flex items-center gap-1.5">
-                <span className="inline-block h-3 w-3 rounded-sm bg-blue-200 border border-blue-300" />
-                Scheduled visit (observe only — not completed yet)
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="inline-block h-3 w-3 rounded-sm bg-emerald-200 border border-emerald-300" />
-                Visit completed (action required — assign JR Architect)
+            <div className="mt-3 flex items-center justify-between gap-4 text-xs text-muted-foreground flex-wrap">
+              <div className="flex items-center gap-4 flex-wrap">
+                <span className="flex items-center gap-1.5">
+                  <span className="inline-block h-3 w-3 rounded-sm bg-blue-200 border border-blue-300" />
+                  Scheduled visit (observe only — not completed yet)
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="inline-block h-3 w-3 rounded-sm bg-emerald-200 border border-emerald-300" />
+                  Visit completed (action required — assign JR Architect)
+                </span>
+              </div>
+              <span className="text-xs text-muted-foreground">
+                Tip: Click any stat card above or badge on a date row to jump directly to its schedule or JR queue box.
               </span>
             </div>
           </CardHeader>
@@ -787,14 +1020,31 @@ export function VisitQueueCalendar({
                   <div key={i} className="h-24 animate-pulse rounded-xl bg-card border" />
                 ))}
               </div>
+            ) : visibleDayRows.length === 0 ? (
+              <div className="flex flex-col items-center justify-center rounded-xl border bg-card py-12 px-4 text-center">
+                <p className="text-sm font-medium text-foreground">No matching days found for this filter.</p>
+                <p className="mt-1 text-xs text-muted-foreground">Try showing all days in the month or selecting another stat card.</p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="mt-4"
+                  onClick={() => setFilterOnlyMatchingDays(false)}
+                >
+                  Show All Days
+                </Button>
+              </div>
             ) : (
               <div className="space-y-4">
-                {allDayRows.map(day => {
+                {visibleDayRows.map(day => {
                   const isToday = day.dateKey === todayKey
+                  const isHighlighted = day.dateKey === highlightedDateKey
                   const hasData = day.scheduledVisits.length > 0 || day.queueItems.length > 0
                   const isExpanded = expandedDates.has(day.dateKey)
-                  const pendingQueue = day.queueItems.filter(q => !q.jrArchitectAssignee).length
-                  const assignedQueue = day.queueItems.filter(q => !!q.jrArchitectAssignee).length
+                  const pendingQueueItems = day.queueItems.filter(q => !q.jrArchitectAssignee)
+                  const assignedQueueItems = day.queueItems.filter(q => !!q.jrArchitectAssignee)
+                  const pendingQueue = pendingQueueItems.length
+                  const assignedQueue = assignedQueueItems.length
 
                   const [y, m, d] = day.dateKey.split('-').map(Number)
                   const dateObj = new Date(y, m - 1, d)
@@ -804,24 +1054,35 @@ export function VisitQueueCalendar({
                   return (
                     <div 
                       key={day.dateKey}
-                      className={`rounded-xl border bg-card transition-all overflow-hidden ${
-                        isToday ? 'border-primary shadow-sm' : 'border-border/60 hover:border-border'
+                      id={`visit-day-${day.dateKey}`}
+                      className={`rounded-xl border bg-card transition-all overflow-hidden scroll-mt-24 ${
+                        isHighlighted
+                          ? 'border-primary ring-2 ring-primary/30 shadow-md'
+                          : isToday
+                            ? 'border-primary shadow-sm'
+                            : 'border-border/60 hover:border-border'
                       }`}
                     >
                       {/* Day row (Clickable Header) */}
-                      <button
-                        type="button"
+                      <div
+                        role={hasData ? 'button' : undefined}
+                        tabIndex={hasData ? 0 : -1}
                         onClick={() => hasData && toggleDate(day.dateKey)}
-                        className={`w-full flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:px-6 sm:py-5 text-left focus-visible:outline-none transition-colors ${
+                        onKeyDown={(e) => {
+                          if (hasData && (e.key === 'Enter' || e.key === ' ')) {
+                            e.preventDefault()
+                            toggleDate(day.dateKey)
+                          }
+                        }}
+                        className={`w-full flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:px-6 sm:py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors ${
                           hasData ? 'hover:bg-muted/40 cursor-pointer' : 'cursor-default opacity-80'
                         }`}
                         aria-expanded={isExpanded}
-                        disabled={!hasData}
                       >
                         {/* Left side: Date stack */}
                         <div className="flex flex-col gap-1 min-w-[120px]">
                           <div className="flex items-center gap-2">
-                            <span className={`text-base font-bold tracking-tight ${isToday ? 'text-primary' : 'text-foreground'}`}>
+                            <span className={`text-base font-bold tracking-tight tabular-nums ${isToday ? 'text-primary' : 'text-foreground'}`}>
                               {formattedDate}
                             </span>
                             {isToday && (
@@ -840,45 +1101,79 @@ export function VisitQueueCalendar({
                           )}
                         </div>
 
-                        {/* Right side: Status badges & chevron */}
+                        {/* Right side: Interactive Status buttons & chevron */}
                         <div className="flex items-center gap-3 self-start sm:self-center">
                           {hasData && (
-                            <div className="flex flex-wrap items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-2.5">
                               {day.scheduledVisits.length > 0 && (
-                                <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-100/80 px-3 py-1 text-xs font-semibold text-blue-800">
-                                  <Eye className="h-3.5 w-3.5" />
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    setActiveStatFilter('scheduled')
+                                    setExpandedDates(prev => new Set(prev).add(day.dateKey))
+                                    scrollToDayBox(day.dateKey, 'scheduled')
+                                  }}
+                                  className="inline-flex items-center gap-2 rounded-lg border border-blue-200 bg-blue-100/90 hover:bg-blue-200/80 px-3.5 py-1.5 text-sm font-semibold text-blue-900 transition-colors cursor-pointer tabular-nums"
+                                >
+                                  <Eye className="h-4 w-4 text-blue-700" />
                                   {day.scheduledVisits.length} scheduled
-                                </span>
+                                </button>
                               )}
                               {pendingQueue > 0 && (
-                                <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100/80 px-3 py-1 text-xs font-semibold text-amber-800">
-                                  <Clock className="h-3.5 w-3.5" />
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    setActiveStatFilter('needs_jr')
+                                    setExpandedDates(prev => new Set(prev).add(day.dateKey))
+                                    scrollToDayBox(day.dateKey, 'needs_jr')
+                                  }}
+                                  className="inline-flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-100/90 hover:bg-amber-200/80 px-3.5 py-1.5 text-sm font-semibold text-amber-900 transition-colors cursor-pointer tabular-nums"
+                                >
+                                  <Clock className="h-4 w-4 text-amber-700" />
                                   {pendingQueue} needs JR
-                                </span>
+                                </button>
                               )}
                               {assignedQueue > 0 && (
-                                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100/80 px-3 py-1 text-xs font-semibold text-emerald-800">
-                                  <CheckCircle2 className="h-3.5 w-3.5" />
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    setActiveStatFilter('assigned')
+                                    setExpandedDates(prev => new Set(prev).add(day.dateKey))
+                                    scrollToDayBox(day.dateKey, 'assigned')
+                                  }}
+                                  className="inline-flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-100/90 hover:bg-emerald-200/80 px-3.5 py-1.5 text-sm font-semibold text-emerald-900 transition-colors cursor-pointer tabular-nums"
+                                >
+                                  <CheckCircle2 className="h-4 w-4 text-emerald-700" />
                                   {assignedQueue} assigned
-                                </span>
+                                </button>
                               )}
                             </div>
                           )}
                           
                           {hasData && (
-                            <div className="ml-2 bg-background p-1.5 rounded-full border shadow-sm group-hover:bg-muted transition-colors">
+                            <div className="ml-2 bg-background p-2 rounded-full border shadow-sm group-hover:bg-muted transition-colors">
                               {isExpanded ? <ChevronUp className="h-4 w-4 text-foreground" /> : <ChevronDown className="h-4 w-4 text-foreground" />}
                             </div>
                           )}
                         </div>
-                      </button>
+                      </div>
 
                       {/* Expanded detail */}
                       {isExpanded && hasData && (
                         <div className="border-t border-border/60 bg-muted/10 p-5 sm:p-6 space-y-5">
                           {/* Scheduled visits section */}
                           {day.scheduledVisits.length > 0 && (
-                            <div className="space-y-3">
+                            <div
+                              id={`visit-day-${day.dateKey}-scheduled`}
+                              className={`space-y-3 rounded-lg p-3 transition-colors scroll-mt-28 ${
+                                activeStatFilter === 'scheduled' && isHighlighted
+                                  ? 'bg-blue-50/70 ring-1 ring-blue-300 dark:bg-blue-950/30'
+                                  : ''
+                              }`}
+                            >
                               <h4 className="text-xs font-bold uppercase tracking-widest text-blue-700/80">
                                 Scheduled Visits (Observe Only) — {day.scheduledVisits.length}
                               </h4>
@@ -888,14 +1183,40 @@ export function VisitQueueCalendar({
                             </div>
                           )}
 
-                          {/* Queue items section */}
-                          {day.queueItems.length > 0 && (
-                            <div className="space-y-3">
-                              <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-700/80">
-                                Visit Completed (Action Required) — {day.queueItems.length}
+                          {/* Needs JR items section */}
+                          {pendingQueueItems.length > 0 && (
+                            <div
+                              id={`visit-day-${day.dateKey}-needs_jr`}
+                              className={`space-y-3 rounded-lg p-3 transition-colors scroll-mt-28 ${
+                                activeStatFilter === 'needs_jr' && isHighlighted
+                                  ? 'bg-amber-50/70 ring-1 ring-amber-300 dark:bg-amber-950/30'
+                                  : ''
+                              }`}
+                            >
+                              <h4 className="text-xs font-bold uppercase tracking-widest text-amber-700/90">
+                                Visit Completed — Needs JR Assignment ({pendingQueueItems.length})
                               </h4>
                               <div className="grid gap-3">
-                                {day.queueItems.map(q => renderQueueItemCard(q))}
+                                {pendingQueueItems.map(q => renderQueueItemCard(q))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Assigned JR items section */}
+                          {assignedQueueItems.length > 0 && (
+                            <div
+                              id={`visit-day-${day.dateKey}-assigned`}
+                              className={`space-y-3 rounded-lg p-3 transition-colors scroll-mt-28 ${
+                                activeStatFilter === 'assigned' && isHighlighted
+                                  ? 'bg-emerald-50/70 ring-1 ring-emerald-300 dark:bg-emerald-950/30'
+                                  : ''
+                              }`}
+                            >
+                              <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-700/90">
+                                Visit Completed — JR Architect Assigned ({assignedQueueItems.length})
+                              </h4>
+                              <div className="grid gap-3">
+                                {assignedQueueItems.map(q => renderQueueItemCard(q))}
                               </div>
                             </div>
                           )}

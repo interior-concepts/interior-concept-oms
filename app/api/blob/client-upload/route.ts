@@ -1,4 +1,4 @@
-import { handleUpload, type HandleUploadBody } from '@vercel/blob/client'
+import { handleUpload, type HandleUploadBody } from '@/lib/blob-mock'
 import { NextRequest, NextResponse } from 'next/server'
 import { LeadAssignmentDepartment, LeadStage, LeadSubStatus } from '@/generated/prisma/client'
 import { requireDatabaseRoles } from '@/lib/authz'

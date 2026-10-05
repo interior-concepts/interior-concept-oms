@@ -1,5 +1,10 @@
 const { spawnSync } = require('node:child_process')
 
+if (!process.env.DATABASE_URL && !process.env.DIRECT_DATABASE_URL) {
+  console.warn('[AI Studio] DATABASE_URL is not set — skipping prisma migrate deploy.')
+  process.exit(0)
+}
+
 const FAILED_WEBSITE_TEAM_MIGRATION = '20260728103000_add_website_team_members'
 
 function runPrisma(args) {

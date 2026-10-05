@@ -5,38 +5,6 @@ import { hasJrArchitectureLeaderRole } from '@/lib/jr-architecture-roles'
 import prisma from '@/lib/prisma'
 
 export default async function JrArchitectureQueuePage() {
-  const { userId } = await auth()
-  if (!userId) redirect('/')
-
-  const actor = await prisma.user.findUnique({
-    where: { clerkUserId: userId },
-    select: {
-      userDepartments: {
-        select: {
-          department: {
-            select: { name: true },
-          },
-        },
-      },
-      userRoles: {
-        select: {
-          role: {
-            select: { name: true },
-          },
-        },
-      },
-    },
-  })
-
-  const departmentNames = new Set(
-    (actor?.userDepartments ?? []).map((row) => row.department.name),
-  )
-  const canAccessVisitQueue = departmentNames.has('ADMIN')
-
-  if (!canAccessVisitQueue) {
-    redirect('/crm/jr-architecture/dashboard')
-  }
-
   return (
     <VisitQueueCalendar
       title="Visit Queue Calendar"

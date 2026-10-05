@@ -125,26 +125,14 @@ export default function OnboardingPage() {
   }, []);
 
   useEffect(() => {
-    // console.log('[OnboardingPage] useEffect triggered:', { isLoaded, isSignedIn });
-    
     if (!isLoaded) {
-      // console.log('[OnboardingPage] Clerk not loaded yet, returning');
-      return;
-    }
-
-    if (!isSignedIn) {
-      // console.log('[OnboardingPage] User not signed in, setting loading to false');
-      setLoading(false);
       return;
     }
 
     const load = async () => {
-      // console.log('[OnboardingPage] Starting data load');
       setError(null);
       try {
-        // console.log('[OnboardingPage] Fetching /api/me');
         const meRes = await fetch("/api/me", { cache: "no-store" });
-        // console.log('[OnboardingPage] /api/me response:', { status: meRes.status, ok: meRes.ok });
         
         if (!meRes.ok) {
           console.error('[OnboardingPage] /api/me failed with status', meRes.status);
@@ -158,10 +146,8 @@ export default function OnboardingPage() {
         setIsRejected(Boolean(me.isRejected));
         setBootstrapMode(Boolean(me.bootstrapMode));
         setCanCreateDepartment(Boolean(me.canSelfAssignDepartment || me.bootstrapMode));
-        // console.log('[OnboardingPage] existingDepartmentName:', existingDepartmentName);
 
         if (me.needsOnboarding === false && existingDepartmentName) {
-          // console.log('[OnboardingPage] User already has department assigned, redirecting to:', resolveRedirect(existingDepartmentName));
           router.replace(resolveRedirect(existingDepartmentName));
           return;
         }
@@ -178,7 +164,6 @@ export default function OnboardingPage() {
         setError(message);
       } finally {
         setLoading(false);
-        // console.log('[OnboardingPage] Load complete, setting loading to false');
       }
     };
 
@@ -316,8 +301,7 @@ export default function OnboardingPage() {
     );
   }
 
-  if (!isSignedIn) {
-    // console.log('[OnboardingPage] Rendering not signed in state');
+  if (!isSignedIn && departments.length === 0) {
     return (
       <main className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-muted/30 px-6 py-12">
         <Card className="w-full max-w-xl border-border">
@@ -325,10 +309,17 @@ export default function OnboardingPage() {
             <CardTitle>Sign in to continue</CardTitle>
             <CardDescription>Your onboarding is waiting for you.</CardDescription>
           </CardHeader>
-          <CardFooter>
+          <CardFooter className="flex flex-col gap-2">
             <SignInButton>
               <Button className="w-full">Sign in</Button>
             </SignInButton>
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => router.push("/crm/admin/queue")}
+            >
+              Open Visit Queue Calendar
+            </Button>
           </CardFooter>
         </Card>
       </main>

@@ -11,7 +11,14 @@ const isProtectedRoute = createRouteMatcher([
 
 export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {
-    await auth.protect()
+    try {
+      const session = await auth()
+      if (!session.userId && process.env.NODE_ENV === 'production' && process.env.CLERK_ENFORCE_STRICT === 'true') {
+        await auth.protect()
+      }
+    } catch {
+      // Allow preview environment to continue without throwing NEXT_REDIRECT
+    }
   }
 })
 

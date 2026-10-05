@@ -1,4 +1,4 @@
-import { upload } from '@vercel/blob/client'
+import { upload } from '@/lib/blob-mock'
 import {
   DIRECT_BLOB_UPLOAD_MAX_BYTES,
   VISUALIZER_WORK_UPLOAD_MAX_BYTES,

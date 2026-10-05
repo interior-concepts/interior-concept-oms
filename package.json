@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "prisma generate && node scripts/prisma/deploy-migrations.js && next build",
-    "start": "next start",
+    "dev": "next dev -p 3000 -H 0.0.0.0",
+    "build": "node scripts/prisma/deploy-migrations.js && next build",
+    "start": "next start -p 3000 -H 0.0.0.0",
     "lint": "eslint",
     "db:backup": "bash scripts/db/backup.sh",
     "db:restore": "bash scripts/db/restore.sh",
-    "postinstall": "prisma generate",
-    "vercel-build": "prisma generate && node scripts/prisma/deploy-migrations.js && next build"
+    "vercel-build": "node scripts/prisma/deploy-migrations.js && next build"
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^4.13.23",
@@ -23,7 +22,6 @@
     "@radix-ui/react-dialog": "^1.1.15",
     "@react-pdf/renderer": "^4.5.1",
     "@types/leaflet": "^1.9.21",
-    "@vercel/blob": "^2.3.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "color-string": "^2.1.4",

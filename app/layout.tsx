@@ -5,6 +5,7 @@ import "leaflet/dist/leaflet.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { ClerkIframeGuard } from "@/components/clerk-iframe-guard";
 import { siteName, siteUrl } from "@/lib/site";
 
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -26,6 +27,10 @@ export const metadata: Metadata = {
     template: `%s | Interior Concepts OMS`,
   },
   description: "Interior Concepts CRM — workspace for lead management, team workflows, and department dashboards.",
+  openGraph: {
+    title: "Interior Concepts OMS / CRM",
+    description: "Interior Concepts CRM — workspace for lead management, team workflows, and department dashboards.",
+  },
   applicationName: siteName,
   authors: [{ name: siteName }],
   verification: googleSiteVerification
@@ -64,9 +69,17 @@ export default function RootLayout({
       }}
     >
       <html lang="en" suppressHydrationWarning>
+        <head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(){if(typeof window==='undefined'||!window.fetch)return;var orig=window.fetch;window.fetch=function(input,init){var u=typeof input==='string'?input:(input&&input.url)||'';var isClerk=u.indexOf('clerk.accounts.dev')!==-1||u.indexOf('/v1/dev_browser')!==-1||u.indexOf('/v1/environment')!==-1||u.indexOf('/v1/client')!==-1;return orig.apply(this,arguments).catch(function(e){if(isClerk){return new Response(JSON.stringify({id:'dev_browser_mock',client:{sessions:[],sign_in:null,sign_up:null},auth_config:{},display_config:{},user_settings:{},organization_settings:{}}),{status:200,headers:{'Content-Type':'application/json'}});}throw e;});};})();`,
+            }}
+          />
+        </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <ClerkIframeGuard />
           <ThemeProvider defaultTheme="light" storageKey="aesthetic-theme">
             {children}
             <Toaster richColors />

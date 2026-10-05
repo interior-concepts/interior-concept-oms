@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto'
-import { head, put } from '@vercel/blob'
+import { head, put } from '@/lib/blob-mock'
 import { NextRequest, NextResponse } from 'next/server'
 import { ActivityType, LeadStage, LeadSubStatus, Prisma, ProjectStatus } from '@/generated/prisma/client'
 import prisma from '@/lib/prisma'

@@ -38,11 +38,27 @@ export default function CrmEntryPage() {
 
             <SignedIn>
               <Button asChild className="h-10 bg-foreground text-background hover:bg-foreground/90">
-                <Link href="/onboarding">
-                  Continue to Dashboard <ArrowRight className="ml-2 h-4 w-4" />
+                <Link href="/crm/admin/queue">
+                  Open Visit Queue <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="h-10">
+                <Link href="/crm/admin/dashboard">
+                  Admin Dashboard
                 </Link>
               </Button>
             </SignedIn>
+
+            <Button asChild variant="secondary" className="h-10">
+              <Link href="/crm/admin/queue">
+                Visit Queue Calendar <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="h-10">
+              <Link href="/crm/admin/dashboard">
+                Dashboard
+              </Link>
+            </Button>
           </div>
         </section>
       </div>

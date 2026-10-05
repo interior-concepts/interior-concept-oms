@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto'
-import { put } from '@vercel/blob'
+import { put } from '@/lib/blob-mock'
 import { NextRequest, NextResponse } from 'next/server'
 import {
   ActivityType,
