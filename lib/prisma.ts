@@ -334,7 +334,10 @@ function wrapPrismaWithFallback(client: PrismaClient, mockClient: PrismaClient):
   return new Proxy(client, {
     get(target, prop, receiver) {
       if (prop === 'then') return undefined
-      const val = Reflect.get(target, prop, receiver)
+      let val = Reflect.get(target, prop, receiver)
+      if (val === undefined || val === null) {
+        val = Reflect.get(mockClient as object, prop)
+      }
       if (typeof val === 'function') {
         return async (...args: unknown[]) => {
           try {
@@ -353,7 +356,8 @@ function wrapPrismaWithFallback(client: PrismaClient, mockClient: PrismaClient):
         const modelMock = getModelMock(String(prop)) as Record<string, (...a: unknown[]) => unknown>
         return new Proxy(val, {
           get(modelTarget, modelProp, modelReceiver) {
-            const method = Reflect.get(modelTarget, modelProp, modelReceiver)
+            const rawMethod = Reflect.get(modelTarget, modelProp, modelReceiver)
+            const method = typeof rawMethod === 'function' ? rawMethod : modelMock[String(modelProp)]
             if (typeof method === 'function') {
               return async (...args: unknown[]) => {
                 try {
@@ -368,11 +372,11 @@ function wrapPrismaWithFallback(client: PrismaClient, mockClient: PrismaClient):
                 }
               }
             }
-            return method
+            return method ?? modelMock[String(modelProp)]
           },
         })
       }
-      return val
+      return val ?? Reflect.get(mockClient as object, prop)
     },
   })
 }
