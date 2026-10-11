@@ -4,6 +4,7 @@ import {
   getSeniorCrmMembers,
   getWeeklySeniorCrmAssignment,
   setWeeklySeniorCrmAutomationSettings,
+  type SeniorCrmMember,
 } from '@/lib/sr-crm-rotation'
 
 export async function GET() {
@@ -28,7 +29,7 @@ export async function PATCH(request: NextRequest) {
 
   if (seniorCrmUserId) {
     const seniors = await getSeniorCrmMembers()
-    const isSeniorCrm = seniors.some((senior) => senior.id === seniorCrmUserId)
+    const isSeniorCrm = seniors.some((senior: SeniorCrmMember) => senior.id === seniorCrmUserId)
     if (!isSeniorCrm) {
       return NextResponse.json({ success: false, error: 'Selected user must be a Senior CRM member' }, { status: 400 })
     }

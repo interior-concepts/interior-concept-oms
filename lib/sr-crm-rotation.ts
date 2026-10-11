@@ -12,12 +12,18 @@ function startOfWeekUtc(date: Date): Date {
   return d
 }
 
-export async function getSeniorCrmMembers() {
+export type SeniorCrmMember = {
+  id: string
+  fullName: string | null
+  email: string | null
+}
+
+export async function getSeniorCrmMembers(): Promise<SeniorCrmMember[]> {
   const department = await prisma.department.findUnique({
     where: { name: 'SR_CRM' },
     select: { userDepartments: { select: { user: { select: { id: true, fullName: true, email: true } } }, orderBy: { user: { fullName: 'asc' } } } },
   })
-  return (department?.userDepartments ?? []).map((row) => row.user)
+  return ((department as any)?.userDepartments ?? []).map((row: any) => row.user as SeniorCrmMember)
 }
 
 export async function getWeeklySeniorCrmAssignment() {
