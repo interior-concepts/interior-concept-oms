@@ -222,6 +222,9 @@ function getModelMock(modelName: string) {
           },
         ],
         jrCompletionRequests: [],
+        meetingEvents: [],
+        quotationDrafts: [],
+        attachments: [],
       },
       {
         id: 'lead-demo-4',
@@ -264,6 +267,9 @@ function getModelMock(modelName: string) {
           },
         ],
         jrCompletionRequests: [],
+        meetingEvents: [],
+        quotationDrafts: [],
+        attachments: [],
       },
     ]
     return {

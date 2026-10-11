@@ -22,7 +22,7 @@ export const DEFAULT_SIGNATORY_NAME = 'Shopi Ullah Rashed'
 export const DEFAULT_SIGNATORY_TITLE = 'Chief Executive Officer'
 
 export function normalizeSignatoryName(name: string | null | undefined): string {
-  if (!name || /Sho[pi]\sullah\s+rashed/i.test(name)) {
+  if (!name || /j[ao]hirul\s+islam/i.test(name)) {
     return DEFAULT_SIGNATORY_NAME
   }
   return name

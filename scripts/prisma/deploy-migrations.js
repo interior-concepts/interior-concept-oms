@@ -1,10 +1,5 @@
 const { spawnSync } = require('node:child_process')
 
-if (!process.env.DATABASE_URL && !process.env.DIRECT_DATABASE_URL) {
-  console.warn('[AI Studio] DATABASE_URL is not set — skipping prisma migrate deploy.')
-  process.exit(0)
-}
-
 const FAILED_WEBSITE_TEAM_MIGRATION = '20260728103000_add_website_team_members'
 
 function runPrisma(args) {
@@ -35,6 +30,21 @@ function sleepSync(ms) {
     const start = Date.now()
     while (Date.now() - start < ms) {}
   }
+}
+
+function finishSuccess() {
+  console.log('Generating Prisma Client...')
+  const gen = runPrisma(['generate'])
+  if (gen.status !== 0) {
+    console.error('Failed to generate Prisma Client')
+    process.exit(gen.status ?? 1)
+  }
+  process.exit(0)
+}
+
+if (!process.env.DATABASE_URL && !process.env.DIRECT_DATABASE_URL) {
+  console.warn('[AI Studio] DATABASE_URL is not set — skipping prisma migrate deploy.')
+  finishSuccess()
 }
 
 function runDeployWithRetry(maxRetries = 5) {
@@ -71,7 +81,7 @@ function runDeployWithRetry(maxRetries = 5) {
 let deploy = runDeployWithRetry(5)
 
 if (deploy.status === 0) {
-  process.exit(0)
+  finishSuccess()
 }
 
 const deployOutput = outputFor(deploy)
@@ -99,4 +109,7 @@ if (resolve.status !== 0) {
 }
 
 deploy = runDeployWithRetry(5)
+if (deploy.status === 0) {
+  finishSuccess()
+}
 process.exit(deploy.status ?? 1)

@@ -151,8 +151,8 @@ export async function GET(request: Request) {
       orderBy: { updated_at: 'desc' },
     })
 
-    const tasksData = leads.map((lead) => {
-      const fallbackSqft = lead.visits[0]?.projectSqft ?? 0
+    const tasksData = leads.map((lead: any) => {
+      const fallbackSqft = lead.visits?.[0]?.projectSqft ?? 0
       const sqftSummary = calculateLeadQuotationSqftSummary(lead.quotationDrafts ?? [], fallbackSqft)
       return {
         id: lead.id,
@@ -166,13 +166,13 @@ export async function GET(request: Request) {
         quotationAssignee: ((lead.assignments || []) as any[]).find((a: any) => a.department === 'QUOTATION')?.user ?? null,
         srCrmAssignee: ((lead.assignments || []) as any[]).find((a: any) => a.department === 'SR_CRM')?.user ?? null,
         jrArchitectAssignee: ((lead.assignments || []) as any[]).find((a: any) => a.department === 'JR_ARCHITECT')?.user ?? null,
-        latestFirstMeeting: lead.meetingEvents[0] ?? null,
+        latestFirstMeeting: lead.meetingEvents?.[0] ?? null,
         projectSqft: fallbackSqft || null,
         avgDetailSqft: sqftSummary.avgDetailSqft,
         avgShortSqft: sqftSummary.avgShortSqft,
         detailVersionsCount: sqftSummary.detailVersionsCount,
         shortPackagesCount: sqftSummary.shortPackagesCount,
-        attachments: lead.attachments,
+        attachments: lead.attachments ?? [],
         canStart:
           lead.subStatus === LeadSubStatus.QUOTATION_ASSIGNED ||
           lead.subStatus === LeadSubStatus.QUOTATION_CORRECTION,
