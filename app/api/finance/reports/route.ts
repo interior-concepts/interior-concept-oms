@@ -189,7 +189,7 @@ export async function GET(request: NextRequest) {
           select: { id: true, name: true },
         })
 
-        const projectIds = activeProjects.map((p) => p.id)
+        const projectIds = (activeProjects as any[]).map((p: any) => p.id)
 
         // Get all transactions for active projects
         const transactions = await prisma.transaction.findMany({

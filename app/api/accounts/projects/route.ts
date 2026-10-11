@@ -69,9 +69,13 @@ export async function GET(request: NextRequest) {
       },
     })
 
-    const data = projects.map((p: (typeof projects)[number]) => {
-      const paid = p.transactions.filter((t) => t.type === 'INFLOW').reduce((sum, t) => sum + t.amount, 0)
-      const totalOutflow = p.transactions.filter((t) => t.type === 'OUTFLOW').reduce((sum, t) => sum + t.amount, 0)
+    const data = (projects as any[]).map((p: any) => {
+      const paid = ((p.transactions || []) as Array<{ type: string; amount: number }>)
+        .filter((t: { type: string; amount: number }) => t.type === 'INFLOW')
+        .reduce((sum: number, t: { type: string; amount: number }) => sum + (t.amount || 0), 0)
+      const totalOutflow = ((p.transactions || []) as Array<{ type: string; amount: number }>)
+        .filter((t: { type: string; amount: number }) => t.type === 'OUTFLOW')
+        .reduce((sum: number, t: { type: string; amount: number }) => sum + (t.amount || 0), 0)
       const agreementValue = p.agreementValue ?? 0
       const due = agreementValue - paid
       const profitMargin = agreementValue - totalOutflow
@@ -86,7 +90,7 @@ export async function GET(request: NextRequest) {
         due,
         totalOutflow,
         profitMargin,
-        srCrmName: p.assignments[0]?.user?.fullName ?? 'Unassigned',
+        srCrmName: p.assignments?.[0]?.user?.fullName ?? 'Unassigned',
       }
     })
 
