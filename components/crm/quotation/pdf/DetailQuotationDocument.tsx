@@ -43,7 +43,7 @@ import { amountInWordsTaka } from '@/lib/number-to-words'
 const PRIMARY = '#1f363d';
 const GOLD = '#a57c00';
 const PAGE_SIDE_PADDING = 7;
-const BDT_SYMBOL = '?';
+const BDT_SYMBOL = '৳';
 const DETAIL_ROW_LINE_HEIGHT = 1.15;
 const DETAIL_ROW_VERTICAL_PADDING = 3;
 
@@ -439,18 +439,15 @@ function formatDetailTotalCurrency(line: QuotationDraftContent['lineItems'][numb
 const FooterFixed = ({ content }: { content: QuotationDraftContent }) => (
   <View style={styles.footerFixed} fixed>
     <View style={{ borderTopWidth: 1, borderTopColor: '#a57c00', paddingTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
-      <View style={{ width: '48%' }}>
+      <View style={{ width: '55%' }}>
         <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginBottom: 3, fontSize: 9 }]}>Interior Concepts Studio</Text>
         <Text style={styles.footerText}>TA-174/1, Unit 4A, 3rd Floor(Lift-3) Khonikachroy,</Text>
         <Text style={styles.footerText}>South Badda Lake View Road, Badda, Dhaka-1212</Text>
       </View>
-      <View style={{ width: '32%', alignItems: 'center' }}>
-        <Text style={styles.footerText}>+880 1334-935530</Text>
-        <Text style={styles.footerText}>+880 1334-935531</Text>
+      <View style={{ width: '45%', alignItems: 'flex-end' }}>
+        <Text style={styles.footerText}>+880 1334-935530  |  +880 1334-935531</Text>
         <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', marginTop: 1 }]}>interiorconceptsstudio.com</Text>
-      </View>
-      <View style={{ width: '20%', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-        <Text style={styles.footerText}>© 2026 All rights reserved.</Text>
+        <Text style={[styles.footerText, { marginTop: 3 }]}>© 2026 All rights reserved.</Text>
       </View>
     </View>
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 }}>
@@ -459,6 +456,7 @@ const FooterFixed = ({ content }: { content: QuotationDraftContent }) => (
     </View>
   </View>
 );
+
 
 
 function softWrapPdfText(value: string | null | undefined, chunkSize = 24) {
@@ -620,106 +618,116 @@ export function DetailQuotationDocument({
       </Page>
 
       {/* DETAIL PAGES */}
-      {floorSummaries.map((entry) => (
-        <Page key={entry.floor.id} size="A4" style={styles.detailPage}>
-          <WatermarkBackground />
-          <GlobalHeader
-            date={content.quotationDate ?? ''}
-            subject={content.subject ?? ''}
-            clientName={clientName}
-            clientAddress={clientAddress || ''}
-          />
+      {(() => {
+        // Build a global serial counter that carries across all floors and areas
+        let globalSerial = 0
+        return floorSummaries.map((entry) => (
+          <Page key={entry.floor.id} size="A4" style={styles.detailPage}>
+            <WatermarkBackground />
+            <GlobalHeader
+              date={content.quotationDate ?? ''}
+              subject={content.subject ?? ''}
+              clientName={clientName}
+              clientAddress={clientAddress || ''}
+            />
 
-          <Text style={styles.sectionTitle}>{softWrapPdfText(entry.floor.name)}</Text>
+            <Text style={styles.sectionTitle}>{softWrapPdfText(entry.floor.name)}</Text>
 
 
-          <View style={styles.tableWrapper}>
-            <View style={styles.tHead} fixed>
-              <Text style={[styles.thCol, styles.wSl]}>SL</Text>
-              <Text style={[styles.thCol, styles.wName]}>Name</Text>
-              <Text style={[styles.thCol, styles.wMats]}>Materials</Text>
-              <Text style={[styles.thCol, styles.wQty]}>Qty/Sft</Text>
-              <Text style={[styles.thCol, styles.wPrice]}>U/P ({BDT_SYMBOL})</Text>
-              <Text style={[styles.thCol, styles.wTotal, styles.thColLast]}>Total ({BDT_SYMBOL})</Text>
-            </View>
-            {getAreaGroups(entry).map((area) => (
-              <View key={area.id}>
-                <View style={styles.areaTitleRow} wrap={false}>
-                  <Text style={styles.areaTitleText}>{softWrapPdfText(area.name)}</Text>
-                </View>
-                {area.lines.map((line, lineIndex) => {
-              const isPkg = isPackageLine(line)
-              const nameLines = splitPdfTableLines(line.description, 14)
-              const materialLines = splitPdfTableLines(line.materials, 76)
-              const tableLineCount = Math.max(nameLines.length, materialLines.length)
-              const rowCellStyle = {
-                paddingTop: DETAIL_ROW_VERTICAL_PADDING,
-                paddingBottom: DETAIL_ROW_VERTICAL_PADDING,
-              }
-
-              return Array.from({ length: tableLineCount }, (_, rowIndex) => {
-                const isFirstMaterialRow = rowIndex === 0
-                const isLastSubRow = rowIndex === tableLineCount - 1
-                const nameText = nameLines[rowIndex] ?? ''
-                const matText = materialLines[rowIndex] ?? ''
-                const isMergedPkg = isPkg && (!line.amount || line.amount <= 0)
-                let quantityCell
-                let priceText = ''
-
-                if (isFirstMaterialRow && isPkg) {
-                  quantityCell = <Text style={[styles.tdCol, styles.wQty, rowCellStyle]}>Package</Text>
-                  priceText = line.unitPriceLabel?.trim() || 'as per project design'
-                } else {
-                  quantityCell = <Text style={[styles.tdCol, styles.wQty, rowCellStyle]}>{isFirstMaterialRow ? formatDetailQtyCell(line) : ''}</Text>
-                  priceText = isFirstMaterialRow ? formatDetailUnitPriceCurrency(line) : ''
-                }
-
-                const priceCell = <Text style={[styles.tdCol, styles.wPrice, rowCellStyle]}>{priceText}</Text>
-
+            <View style={styles.tableWrapper}>
+              <View style={styles.tHead} fixed>
+                <Text style={[styles.thCol, styles.wSl]}>SL</Text>
+                <Text style={[styles.thCol, styles.wName]}>Name</Text>
+                <Text style={[styles.thCol, styles.wMats]}>Materials</Text>
+                <Text style={[styles.thCol, styles.wQty]}>Qty/Sft</Text>
+                <Text style={[styles.thCol, styles.wPrice]}>U/P ({BDT_SYMBOL})</Text>
+                <Text style={[styles.thCol, styles.wTotal, styles.thColLast]}>Total ({BDT_SYMBOL})</Text>
+              </View>
+              {getAreaGroups(entry).map((area) => {
+                // Capture serial numbers for all lines in this area before rendering
+                const areaLineSerials: number[] = area.lines.map(() => ++globalSerial)
                 return (
-                  <View key={`${line.id}-${rowIndex}`} wrap={false} style={[styles.tRow, lineIndex % 2 === 1 ? styles.tRowAlt : {}, !isLastSubRow ? { borderBottomWidth: 0 } : {}]}>
-                    <Text style={[styles.tdCol, styles.wSl, styles.bold, rowCellStyle]}>{isFirstMaterialRow ? String(lineIndex + 1).padStart(2, '0') : ''}</Text>
-                    <Text wrap={false} style={[styles.tdCol, styles.wName, rowCellStyle]}>{nameText ? softWrapPdfText(nameText) : ''}</Text>
-                    <View style={[styles.tdCol, styles.wMats, styles.matCell, rowCellStyle]}>{matText || isFirstMaterialRow ? <SingleMaterialLine text={matText} /> : <Text wrap={false} style={styles.matText}></Text>}</View>
-                    {quantityCell}
-                    {isFirstMaterialRow && isMergedPkg ? (
-                      <Text style={[styles.tdCol, { width: '24%', textAlign: 'center' }, rowCellStyle]}>
-                        {softWrapPdfText(line.unitPriceLabel?.trim() || 'as per project design')}
-                      </Text>
-                    ) : (
-                      <>
-                        {priceCell}
-                        <Text style={[styles.tdCol, styles.wTotal, styles.tdColLast, styles.bold, { color: PRIMARY }, rowCellStyle]}>{isFirstMaterialRow ? formatDetailTotalCurrency(line) : ''}{isFirstMaterialRow && line.description?.toLowerCase().includes('electric wiring') ? '\n(Approx)' : ''}</Text>
-                      </>
-                    )}
-                    {!isFirstMaterialRow && isMergedPkg ? (
-                      <Text style={[styles.tdCol, { width: '24%' }, rowCellStyle]} />
-                    ) : null}
+                  <View key={area.id}>
+                    <View style={styles.areaTitleRow} wrap={false}>
+                      <Text style={styles.areaTitleText}>{softWrapPdfText(area.name)}</Text>
+                    </View>
+                    {area.lines.map((line, lineIndex) => {
+                  const serialNo = areaLineSerials[lineIndex]
+                  const isPkg = isPackageLine(line)
+                  const nameLines = splitPdfTableLines(line.description, 14)
+                  const materialLines = splitPdfTableLines(line.materials, 76)
+                  const tableLineCount = Math.max(nameLines.length, materialLines.length)
+                  const rowCellStyle = {
+                    paddingTop: DETAIL_ROW_VERTICAL_PADDING,
+                    paddingBottom: DETAIL_ROW_VERTICAL_PADDING,
+                  }
+
+                  return Array.from({ length: tableLineCount }, (_, rowIndex) => {
+                    const isFirstMaterialRow = rowIndex === 0
+                    const isLastSubRow = rowIndex === tableLineCount - 1
+                    const nameText = nameLines[rowIndex] ?? ''
+                    const matText = materialLines[rowIndex] ?? ''
+                    const isMergedPkg = isPkg && (!line.amount || line.amount <= 0)
+                    let quantityCell
+                    let priceText = ''
+
+                    if (isFirstMaterialRow && isPkg) {
+                      quantityCell = <Text style={[styles.tdCol, styles.wQty, { textAlign: 'center' }, rowCellStyle]}>Package</Text>
+                      priceText = line.unitPriceLabel?.trim() || 'as per project design'
+                    } else {
+                      quantityCell = <Text style={[styles.tdCol, styles.wQty, { textAlign: 'center' }, rowCellStyle]}>{isFirstMaterialRow ? formatDetailQtyCell(line) : ''}</Text>
+                      priceText = isFirstMaterialRow ? formatDetailUnitPriceCurrency(line) : ''
+                    }
+
+                    const priceCell = <Text style={[styles.tdCol, styles.wPrice, rowCellStyle]}>{priceText}</Text>
+
+                    return (
+                      <View key={`${line.id}-${rowIndex}`} wrap={false} style={[styles.tRow, lineIndex % 2 === 1 ? styles.tRowAlt : {}, !isLastSubRow ? { borderBottomWidth: 0 } : {}]}>
+                        <Text style={[styles.tdCol, styles.wSl, styles.bold, rowCellStyle]}>{isFirstMaterialRow ? String(serialNo).padStart(2, '0') : ''}</Text>
+                        <Text wrap={false} style={[styles.tdCol, styles.wName, rowCellStyle]}>{nameText ? softWrapPdfText(nameText) : ''}</Text>
+                        <View style={[styles.tdCol, styles.wMats, styles.matCell, rowCellStyle]}>{matText || isFirstMaterialRow ? <SingleMaterialLine text={matText} /> : <Text wrap={false} style={styles.matText}></Text>}</View>
+                        {quantityCell}
+                        {isFirstMaterialRow && isMergedPkg ? (
+                          <Text style={[styles.tdCol, { width: '24%', textAlign: 'center' }, rowCellStyle]}>
+                            {softWrapPdfText(line.unitPriceLabel?.trim() || 'as per project design')}
+                          </Text>
+                        ) : (
+                          <>
+                            {priceCell}
+                            <Text style={[styles.tdCol, styles.wTotal, styles.tdColLast, styles.bold, { color: PRIMARY }, rowCellStyle]}>{isFirstMaterialRow ? formatDetailTotalCurrency(line) : ''}{isFirstMaterialRow && line.description?.toLowerCase().includes('electric wiring') ? '\n(Approx)' : ''}</Text>
+                          </>
+                        )}
+                        {!isFirstMaterialRow && isMergedPkg ? (
+                          <Text style={[styles.tdCol, { width: '24%' }, rowCellStyle]} />
+                        ) : null}
+                      </View>
+                    )
+                  })
+                })}
+                    <View style={[styles.tRow, styles.areaTotalRow]} wrap={false}>
+                      <Text style={[styles.tdCol, styles.wSl]} />
+                      <Text style={[styles.tdCol, styles.wName]} />
+                      <Text style={[styles.tdCol, styles.wMats, styles.bold, styles.areaTotalLabel]}>Total for {softWrapPdfText(area.name)}</Text>
+                      <Text style={[styles.tdCol, styles.wQty, styles.bold, { textAlign: 'center' }]}>{formatDetailAmount(getDetailAreaSqft(area.lines))}</Text>
+                      <Text style={[styles.tdCol, styles.wPrice]} />
+                      <Text style={[styles.tdCol, styles.wTotal, styles.tdColLast, styles.bold, { color: PRIMARY }]}>{formatDetailCurrency(getDetailAreaTotal(area.lines))}</Text>
+                    </View>
                   </View>
                 )
-              })
-            })}
-                <View style={[styles.tRow, styles.areaTotalRow]} wrap={false}>
-                  <Text style={[styles.tdCol, styles.wSl]} />
-                  <Text style={[styles.tdCol, styles.wName]} />
-                  <Text style={[styles.tdCol, styles.wMats, styles.bold, styles.areaTotalLabel]}>Total for {softWrapPdfText(area.name)}</Text>
-                  <Text style={[styles.tdCol, styles.wQty, styles.bold]}>{formatDetailAmount(getDetailAreaSqft(area.lines))}</Text>
-                  <Text style={[styles.tdCol, styles.wPrice]} />
-                  <Text style={[styles.tdCol, styles.wTotal, styles.tdColLast, styles.bold, { color: PRIMARY }]}>{formatDetailCurrency(getDetailAreaTotal(area.lines))}</Text>
-                </View>
-              </View>
-            ))}
-          </View>
+              })}
+            </View>
 
-          <View style={[styles.grandTotalRow, { marginTop: 15 }]} wrap={false}>
-            <Text style={styles.grandTotalLabel}>Total for {softWrapPdfText(entry.floor.name)} ({formatDetailAmount(getDetailFloorSqft(entry))} SQFT)</Text>
-            <Text style={styles.grandTotalValue}>{formatDetailCurrency(entry.total)}</Text>
-          </View>
-          <Text style={styles.inWords}>In Words: {amountInWordsTaka(entry.total)}</Text>
+            <View style={[styles.grandTotalRow, { marginTop: 15 }]} wrap={false}>
+              <Text style={styles.grandTotalLabel}>Total for {softWrapPdfText(entry.floor.name)} ({formatDetailAmount(getDetailFloorSqft(entry))} SQFT)</Text>
+              <Text style={styles.grandTotalValue}>{formatDetailCurrency(entry.total)}</Text>
+            </View>
+            <Text style={styles.inWords}>In Words: {amountInWordsTaka(entry.total)}</Text>
 
-          <FooterFixed content={content} />
-        </Page>
-      ))}
+            <FooterFixed content={content} />
+          </Page>
+        ))
+      })()}
+
 
       {/* TERMS PAGE */}
       <Page size="A4" style={styles.page}>

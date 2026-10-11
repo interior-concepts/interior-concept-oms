@@ -18,7 +18,7 @@ export const DEFAULT_DETAIL_DURATION = `Duration Of Work:
 export const DEFAULT_DRAWING_DESIGN =
   'Drawing Design: All fabrication work will be implemented by approved drawing design, so client should be approved all drawing & design.'
 
-export const DEFAULT_SIGNATORY_NAME = 'Md Johirul Islam'
+export const DEFAULT_SIGNATORY_NAME = 'Shopi Ullah Rashed'
 export const DEFAULT_SIGNATORY_TITLE = 'Chief Executive Officer'
 
 export type DetailQuotationLayoutMode = 'split-right' | 'split-left' | 'stacked' | 'tabs'

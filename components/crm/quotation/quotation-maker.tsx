@@ -854,11 +854,40 @@ return (
           </div>
         </CardHeader>
         <CardContent className="space-y-4 border-t border-amber-100 bg-background p-5 text-foreground md:p-6">
-          <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
+          <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
             <div className="space-y-1">
-              <p className="text-xs font-medium text-muted-foreground">Client</p>
-              <p className="text-sm font-medium">{leadName}</p>
+              <p className="text-xs font-medium text-muted-foreground">Quotation Name</p>
+              <Input
+                value={content?.versionTitle ?? ''}
+                disabled={!canEdit}
+                onChange={(event) => updateContentField({ versionTitle: event.target.value })}
+                placeholder="e.g. Version 1 / Premium Package"
+                className="h-8"
+              />
             </div>
+            <div className="space-y-1">
+              <p className="text-xs font-medium text-muted-foreground">Client Name</p>
+              <Input
+                value={content?.clientName ?? leadName}
+                disabled={!canEdit}
+                onChange={(event) => updateContentField({ clientName: event.target.value })}
+                placeholder="Client Name"
+                className="h-8"
+              />
+            </div>
+            <div className="space-y-1">
+              <p className="text-xs font-medium text-muted-foreground">Location</p>
+              <Input
+                value={content?.clientAddress ?? leadLocation ?? ''}
+                disabled={!canEdit}
+                onChange={(event) => updateContentField({ clientAddress: event.target.value })}
+                placeholder="Project location"
+                className="h-8"
+              />
+            </div>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
             <div className="space-y-1">
               <p className="text-xs font-medium text-muted-foreground">Rate</p>
               <Select
