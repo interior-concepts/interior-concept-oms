@@ -20,6 +20,8 @@ import {
   type PriorityAction,
 } from './_components/command-center-dashboard'
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminDashboardPage() {
   const now = new Date()
   const nextWeek = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
@@ -271,7 +273,7 @@ export default async function AdminDashboardPage() {
     orderBy: { performanceScore: 'desc' },
   })
 
-  const quotationPerformances = quotationPerformanceRecords.map((r) => ({
+  const quotationPerformances = (quotationPerformanceRecords ?? []).map((r) => ({
     userId: r.userId,
     fullName: r.user.fullName,
     email: r.user.email,
@@ -284,7 +286,7 @@ export default async function AdminDashboardPage() {
   }))
 
   const priorityActions: PriorityAction[] = [
-    ...overdueCadTasks.map((task): PriorityAction => ({
+    ...(overdueCadTasks ?? []).map((task): PriorityAction => ({
       id: `cad-task-${task.id}`,
       title: task.lead.name,
       label: 'CAD deadline missed',
@@ -293,7 +295,7 @@ export default async function AdminDashboardPage() {
       tone: 'critical',
       time: task.dueAt,
     })),
-    ...reviewSubmissions.map((submission): PriorityAction => ({
+    ...(reviewSubmissions ?? []).map((submission): PriorityAction => ({
       id: `review-${submission.id}`,
       title: submission.lead.name,
       label: 'CAD review waiting',
@@ -302,7 +304,7 @@ export default async function AdminDashboardPage() {
       tone: 'warning',
       time: submission.submittedAt,
     })),
-    ...overdueQuotationTasks.map((task): PriorityAction => ({
+    ...(overdueQuotationTasks ?? []).map((task): PriorityAction => ({
       id: `quotation-task-${task.id}`,
       title: task.lead.name,
       label: 'Quotation deadline missed',
@@ -311,7 +313,7 @@ export default async function AdminDashboardPage() {
       tone: 'critical',
       time: task.dueAt,
     })),
-    ...overdueQuotationReviews.map((submission): PriorityAction => ({
+    ...(overdueQuotationReviews ?? []).map((submission): PriorityAction => ({
       id: `quotation-review-${submission.id}`,
       title: submission.lead.name,
       label: 'Quotation review overdue',
@@ -320,7 +322,7 @@ export default async function AdminDashboardPage() {
       tone: 'warning',
       time: submission.submittedAt,
     })),
-    ...overdueDesignReviews.map((submission): PriorityAction => ({
+    ...(overdueDesignReviews ?? []).map((submission): PriorityAction => ({
       id: `design-review-${submission.id}`,
       title: submission.lead.name,
       label: 'Design review overdue',
@@ -351,7 +353,7 @@ export default async function AdminDashboardPage() {
           time: now,
         }]
       : []),
-    ...visitItems.slice(0, 4).map((item): PriorityAction => ({
+    ...(visitItems ?? []).slice(0, 4).map((item): PriorityAction => ({
       id: `visit-${item.leadId}`,
       title: item.leadName,
       label: 'Visit output ready',
@@ -360,7 +362,7 @@ export default async function AdminDashboardPage() {
       tone: 'info',
       time: item.latestCompletedVisit?.completedAt ?? item.latestCompletedVisit?.scheduledAt ?? null,
     })),
-    ...upcomingMeetings.map((meeting): PriorityAction => ({
+    ...(upcomingMeetings ?? []).map((meeting): PriorityAction => ({
       id: `meeting-${meeting.id}`,
       title: meeting.lead.name,
       label: meeting.type === LeadMeetingEventType.BUDGET_MEETING ? 'Budget meeting upcoming' : 'Client meeting upcoming',
@@ -378,34 +380,34 @@ export default async function AdminDashboardPage() {
       queueCounts={{
         cad: cadCount,
         review: reviewCount,
-        visit: visitItems.length,
+        visit: (visitItems ?? []).length,
         meeting: meetingCount,
         budget: budgetCount,
       }}
       priorityActions={priorityActions}
-      upcomingMeetings={upcomingMeetings}
-      budgetLeads={budgetLeads}
-      reviewSubmissions={reviewSubmissions}
+      upcomingMeetings={upcomingMeetings ?? []}
+      budgetLeads={budgetLeads ?? []}
+      reviewSubmissions={reviewSubmissions ?? []}
       designWatch={{
         queueCount: designQueueCount,
         overdueQueueCount: overdueDesignQueueCount,
         reviewPendingCount: designReviewPendingCount,
-        overdueReviewCount: overdueDesignReviews.length,
+        overdueReviewCount: (overdueDesignReviews ?? []).length,
       }}
       visitInsights={{
         statusData: [
-          { name: 'Completed', value: visitStatusCounts.find((row) => row.status === VisitStatus.COMPLETED)?._count._all ?? 0, fill: 'var(--color-chart-2)' },
-          { name: 'Rescheduled', value: visitStatusCounts.find((row) => row.status === VisitStatus.RESCHEDULED)?._count._all ?? 0, fill: 'var(--color-chart-3)' },
-          { name: 'Cancelled', value: visitStatusCounts.find((row) => row.status === VisitStatus.CANCELLED)?._count._all ?? 0, fill: 'var(--color-destructive)' },
-          { name: 'Pending', value: visitStatusCounts.find((row) => row.status === VisitStatus.SCHEDULED)?._count._all ?? 0, fill: 'var(--color-chart-1)' },
+          { name: 'Completed', value: (visitStatusCounts ?? []).find((row) => row.status === VisitStatus.COMPLETED)?._count._all ?? 0, fill: 'var(--color-chart-2)' },
+          { name: 'Rescheduled', value: (visitStatusCounts ?? []).find((row) => row.status === VisitStatus.RESCHEDULED)?._count._all ?? 0, fill: 'var(--color-chart-3)' },
+          { name: 'Cancelled', value: (visitStatusCounts ?? []).find((row) => row.status === VisitStatus.CANCELLED)?._count._all ?? 0, fill: 'var(--color-destructive)' },
+          { name: 'Pending', value: (visitStatusCounts ?? []).find((row) => row.status === VisitStatus.SCHEDULED)?._count._all ?? 0, fill: 'var(--color-chart-1)' },
         ],
         pendingOverdueCount: pendingOverdueVisitCount,
       }}
       visitTeamPerformance={visitTeamPerformance}
       srCrmPerformance={srCrmPerformance}
-      jrArchitectPerformances={jrArchitectPerformances}
+      jrArchitectPerformances={jrArchitectPerformances ?? []}
       quotationPerformances={quotationPerformances}
-      overduePendingVisits={overduePendingVisits.map((visit) => ({
+      overduePendingVisits={(overduePendingVisits ?? []).map((visit) => ({
         id: visit.id,
         leadId: visit.lead.id,
         leadName: visit.lead.name,
