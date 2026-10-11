@@ -69,7 +69,7 @@ export async function GET(request: NextRequest) {
       },
     })
 
-    const data = projects.map((p) => {
+    const data = projects.map((p: (typeof projects)[number]) => {
       const paid = p.transactions.filter((t) => t.type === 'INFLOW').reduce((sum, t) => sum + t.amount, 0)
       const totalOutflow = p.transactions.filter((t) => t.type === 'OUTFLOW').reduce((sum, t) => sum + t.amount, 0)
       const agreementValue = p.agreementValue ?? 0
