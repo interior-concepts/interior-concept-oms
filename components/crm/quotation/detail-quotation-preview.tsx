@@ -451,8 +451,12 @@ export function DetailQuotationPreview({
           </div>
           <div>
             <div className="w-36 border-t border-neutral-800 pt-1 text-right">
-              <p className="text-[9px] font-bold">{normalized.signatoryName || 'Authorized Signature'}</p>
-              <p className="text-[8px] text-neutral-500">{normalized.signatoryTitle || 'INTERIOR CONCEPT'}</p>
+              <p className="text-[9px] font-bold">
+                {normalized.signatoryName && !/j[ao]hirul\s+islam/i.test(normalized.signatoryName)
+                  ? normalized.signatoryName
+                  : 'Shopi Ullah Rashed'}
+              </p>
+              <p className="text-[8px] text-neutral-500">{normalized.signatoryTitle || 'Chief Executive Officer'}</p>
             </div>
           </div>
         </div>

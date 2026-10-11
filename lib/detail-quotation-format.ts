@@ -21,6 +21,13 @@ export const DEFAULT_DRAWING_DESIGN =
 export const DEFAULT_SIGNATORY_NAME = 'Shopi Ullah Rashed'
 export const DEFAULT_SIGNATORY_TITLE = 'Chief Executive Officer'
 
+export function normalizeSignatoryName(name: string | null | undefined): string {
+  if (!name || /j[ao]hirul\s+islam/i.test(name)) {
+    return DEFAULT_SIGNATORY_NAME
+  }
+  return name
+}
+
 export type DetailQuotationLayoutMode = 'split-right' | 'split-left' | 'stacked' | 'tabs'
 
 export const DETAIL_QUOTATION_LAYOUT_STORAGE_KEY = 'detail-quotation-layout-mode'
@@ -36,7 +43,7 @@ export function withDetailQuotationDefaults(
     paymentTerms: content.paymentTerms ?? DEFAULT_DETAIL_PAYMENT_TERMS,
     durationNotes: content.durationNotes ?? DEFAULT_DETAIL_DURATION,
     drawingDesign: content.drawingDesign ?? DEFAULT_DRAWING_DESIGN,
-    signatoryName: content.signatoryName ?? DEFAULT_SIGNATORY_NAME,
+    signatoryName: normalizeSignatoryName(content.signatoryName),
     signatoryTitle: content.signatoryTitle ?? DEFAULT_SIGNATORY_TITLE,
     summarySubject: content.summarySubject ?? DEFAULT_DETAIL_SUMMARY_SUBJECT,
   }

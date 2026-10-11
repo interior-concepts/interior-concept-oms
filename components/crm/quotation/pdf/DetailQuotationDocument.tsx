@@ -791,8 +791,12 @@ export function DetailQuotationDocument({
 
           <View>
             <View style={styles.sigLine} />
-            <Text style={[styles.metaText, styles.bold, { marginTop: 4 }]}>{content.signatoryName || 'Authorized Signature'}</Text>
-            <Text style={styles.metaText}>{content.signatoryTitle || 'INTERIOR CONCEPT'}</Text>
+            <Text style={[styles.metaText, styles.bold, { marginTop: 4 }]}>
+              {content.signatoryName && !/j[ao]hirul\s+islam/i.test(content.signatoryName)
+                ? content.signatoryName
+                : 'Shopi Ullah Rashed'}
+            </Text>
+            <Text style={styles.metaText}>{content.signatoryTitle || 'Chief Executive Officer'}</Text>
           </View>
         </View>
 

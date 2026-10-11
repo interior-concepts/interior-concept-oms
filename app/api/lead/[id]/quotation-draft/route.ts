@@ -313,8 +313,11 @@ function toDetailQuotationContent(value: unknown): QuotationDraftContent | null 
     paymentTerms: typeof record.paymentTerms === 'string' ? record.paymentTerms : undefined,
     durationNotes: typeof record.durationNotes === 'string' ? record.durationNotes : undefined,
     drawingDesign: typeof record.drawingDesign === 'string' ? record.drawingDesign : undefined,
-    signatoryName: typeof record.signatoryName === 'string' ? record.signatoryName : undefined,
-    signatoryTitle: typeof record.signatoryTitle === 'string' ? record.signatoryTitle : undefined,
+    signatoryName:
+      typeof record.signatoryName === 'string' && !/j[ao]hirul\s+islam/i.test(record.signatoryName)
+        ? record.signatoryName
+        : 'Shopi Ullah Rashed',
+    signatoryTitle: typeof record.signatoryTitle === 'string' ? record.signatoryTitle : 'Chief Executive Officer',
     summarySubject: typeof record.summarySubject === 'string' ? record.summarySubject : undefined,
     clientName: typeof record.clientName === 'string' ? record.clientName : undefined,
     clientAddress: typeof record.clientAddress === 'string' ? record.clientAddress : undefined,
