@@ -339,7 +339,7 @@ export async function GET(request: NextRequest) {
                 scheduledAt: latestCompletedVisit.scheduledAt,
                 projectSqft: latestCompletedVisit.projectSqft,
                 assignedVisitLead: latestCompletedVisit.assignedTo ?? null,
-                supportMembers: (latestCompletedVisit.supportAssignments ?? []).map((row) => row.supportUser),
+                supportMembers: ((latestCompletedVisit.supportAssignments ?? []) as any[]).map((row: any) => row.supportUser),
               }
             : null,
           latestFirstMeeting,
