@@ -4,19 +4,20 @@ import { LeadAssignmentDepartment, LeadStage, LeadSubStatus } from '@/generated/
 import { requireDatabaseRoles } from '@/lib/authz'
 import { calculateLeadQuotationSqftSummary } from '@/lib/quotation-sqft-calculator'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: Request) {
   try {
     const authResult = await requireDatabaseRoles([])
     if (!authResult.ok) return authResult.response
 
     const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
-    const canView =
-      actorDepartments.has('ADMIN') ||
-      actorDepartments.has('SR_CRM') ||
-      actorDepartments.has('QUOTATION') ||
-      actorDepartments.has('QUOTATION_TEAM')
+    const isAdmin = actorDepartments.has('ADMIN')
+    const isSrCrm = actorDepartments.has('SR_CRM')
+    const isQuotation = actorDepartments.has('QUOTATION') || actorDepartments.has('QUOTATION_TEAM')
+    const isAdminOrSr = isAdmin || isSrCrm
 
-    if (!canView) {
+    if (!isAdminOrSr && !isQuotation) {
       return NextResponse.json(
         { success: false, error: 'Only quotation team, senior CRM, or admin can access assigned tasks' },
         { status: 403 },
@@ -25,24 +26,71 @@ export async function GET(request: Request) {
 
     const { searchParams } = new URL(request.url)
     const includeHistory = searchParams.get('includeHistory') === '1'
+    const viewAll = searchParams.get('all') === '1'
+
+    const where: any = {
+      AND: [
+        {
+          OR: [
+            { stage: LeadStage.QUOTATION_PHASE },
+            { stage: LeadStage.BUDGET_PHASE },
+            {
+              subStatus: {
+                in: [
+                  LeadSubStatus.QUOTATION_ASSIGNED,
+                  LeadSubStatus.QUOTATION_WORKING,
+                  LeadSubStatus.QUOTATION_COMPLETED,
+                  LeadSubStatus.QUOTATION_CORRECTION,
+                  LeadSubStatus.QUOTATION_APPROVED,
+                ],
+              },
+            },
+            {
+              assignments: {
+                some: {
+                  department: LeadAssignmentDepartment.QUOTATION,
+                },
+              },
+            },
+          ],
+        },
+        ...(isAdminOrSr || viewAll
+          ? []
+          : [
+              {
+                OR: [
+                  {
+                    assignments: {
+                      some: {
+                        department: LeadAssignmentDepartment.QUOTATION,
+                        userId: authResult.actorUserId,
+                      },
+                    },
+                  },
+                  {
+                    assignments: {
+                      none: {
+                        department: LeadAssignmentDepartment.QUOTATION,
+                      },
+                    },
+                  },
+                ],
+              },
+            ]),
+        ...(includeHistory
+          ? []
+          : [
+              {
+                NOT: {
+                  subStatus: LeadSubStatus.QUOTATION_APPROVED,
+                },
+              },
+            ]),
+      ],
+    }
 
     const leads = await prisma.lead.findMany({
-      where: {
-        assignments: {
-          some: {
-            department: LeadAssignmentDepartment.QUOTATION,
-            userId: authResult.actorUserId,
-          },
-        },
-        ...(includeHistory
-          ? {}
-          : {
-              stage: LeadStage.QUOTATION_PHASE,
-              NOT: {
-                subStatus: LeadSubStatus.QUOTATION_APPROVED,
-              },
-            }),
-      },
+      where,
       select: {
         id: true,
         name: true,
@@ -126,11 +174,10 @@ export async function GET(request: Request) {
         shortPackagesCount: sqftSummary.shortPackagesCount,
         attachments: lead.attachments,
         canStart:
-          lead.stage === LeadStage.QUOTATION_PHASE &&
-          (lead.subStatus === LeadSubStatus.QUOTATION_ASSIGNED ||
-            lead.subStatus === LeadSubStatus.QUOTATION_CORRECTION),
+          lead.subStatus === LeadSubStatus.QUOTATION_ASSIGNED ||
+          lead.subStatus === LeadSubStatus.QUOTATION_CORRECTION,
         canSubmit:
-          lead.stage === LeadStage.QUOTATION_PHASE && lead.subStatus === LeadSubStatus.QUOTATION_WORKING,
+          lead.subStatus === LeadSubStatus.QUOTATION_WORKING,
       }
     })
 

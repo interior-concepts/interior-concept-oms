@@ -50,7 +50,15 @@ export async function POST(_request: NextRequest, context: RouteContext) {
       const lead = await tx.lead.findFirst({
         where: {
           id: leadId,
-          stage: LeadStage.QUOTATION_PHASE,
+          stage: {
+            in: [
+              LeadStage.QUOTATION_PHASE,
+              LeadStage.PARTIAL_VISIT_PHASE,
+              LeadStage.VISIT_PHASE,
+              LeadStage.CAD_PHASE,
+              LeadStage.BUDGET_PHASE,
+            ],
+          },
           subStatus: { in: Array.from(STARTABLE_SUBSTATUSES) },
           ...(isAdminOrSr
             ? {}
@@ -81,7 +89,10 @@ export async function POST(_request: NextRequest, context: RouteContext) {
       const now = new Date()
       const updatedLead = await tx.lead.update({
         where: { id: lead.id },
-        data: { subStatus: LeadSubStatus.QUOTATION_WORKING },
+        data: {
+          stage: LeadStage.QUOTATION_PHASE,
+          subStatus: LeadSubStatus.QUOTATION_WORKING,
+        },
         select: { id: true, stage: true, subStatus: true },
       })
 
