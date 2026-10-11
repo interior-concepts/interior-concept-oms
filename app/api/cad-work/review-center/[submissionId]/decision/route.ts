@@ -247,14 +247,14 @@ export async function POST(request: NextRequest, context: RouteContext) {
 
       const notificationTargets = Array.from(
         new Set(
-          submission.lead.assignments
-            .map((assignment) => assignment.userId),
+          ((submission.lead.assignments || []) as any[])
+            .map((assignment: any) => assignment.userId),
         ),
       )
 
       if (notificationTargets.length > 0) {
         await tx.notification.createMany({
-          data: notificationTargets.map((userId) => ({
+          data: (notificationTargets as any[]).map((userId: any) => ({
             userId,
             leadId: submission.leadId,
             type: NotificationType.LEAD_ASSIGNED_TO_YOU,

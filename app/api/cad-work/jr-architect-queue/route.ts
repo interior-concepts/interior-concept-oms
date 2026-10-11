@@ -277,7 +277,7 @@ export async function GET(request: NextRequest) {
     const assignments = leads.length > 0
       ? await prisma.leadAssignment.findMany({
           where: {
-            leadId: { in: leads.map((lead) => lead.id) },
+            leadId: { in: (leads as any[]).map((lead: any) => lead.id) },
             department: {
               in: [
                 LeadAssignmentDepartment.JR_ARCHITECT,
@@ -300,8 +300,8 @@ export async function GET(request: NextRequest) {
         })
       : []
 
-    const assignmentsByLeadId = new Map<string, typeof assignments>()
-    for (const assignment of assignments) {
+    const assignmentsByLeadId = new Map<string, any[]>()
+    for (const assignment of (assignments as any[])) {
       const leadAssignments = assignmentsByLeadId.get(assignment.leadId) ?? []
       leadAssignments.push(assignment)
       assignmentsByLeadId.set(assignment.leadId, leadAssignments)
@@ -309,14 +309,14 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      data: leads.map((lead) => {
-        const leadAssignments = assignmentsByLeadId.get(lead.id) ?? []
+      data: (leads as any[]).map((lead: any) => {
+        const leadAssignments = (assignmentsByLeadId.get(lead.id) ?? []) as any[]
         const jrArchitectAssignment =
-          leadAssignments.find((item) => item.department === LeadAssignmentDepartment.JR_ARCHITECT) ?? null
+          leadAssignments.find((item: any) => item.department === LeadAssignmentDepartment.JR_ARCHITECT) ?? null
         const srCrmAssignment =
-          leadAssignments.find((item) => item.department === LeadAssignmentDepartment.SR_CRM) ?? null
+          leadAssignments.find((item: any) => item.department === LeadAssignmentDepartment.SR_CRM) ?? null
         const quotationAssignment =
-          leadAssignments.find((item) => item.department === LeadAssignmentDepartment.QUOTATION) ?? null
+          leadAssignments.find((item: any) => item.department === LeadAssignmentDepartment.QUOTATION) ?? null
         const relationLead = lead as QueueLeadOptionalRelations
         const latestCompletedVisit = relationLead.visits?.[0] ?? null
         const latestFirstMeeting = relationLead.meetingEvents?.[0] ?? null

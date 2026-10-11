@@ -208,19 +208,19 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      data: leads.map((lead) => {
+      data: (leads as any[]).map((lead: any) => {
         const jrArchitectAssignment =
-          lead.assignments.find(
-            (item) =>
+          ((lead.assignments || []) as any[]).find(
+            (item: any) =>
               item.department === LeadAssignmentDepartment.VISUALIZER_3D,
           ) ?? null
         const srCrmAssignment =
-          lead.assignments.find(
-            (item) => item.department === LeadAssignmentDepartment.SR_CRM,
+          ((lead.assignments || []) as any[]).find(
+            (item: any) => item.department === LeadAssignmentDepartment.SR_CRM,
           ) ?? null
         const quotationAssignment =
-          lead.assignments.find(
-            (item) => item.department === LeadAssignmentDepartment.QUOTATION,
+          ((lead.assignments || []) as any[]).find(
+            (item: any) => item.department === LeadAssignmentDepartment.QUOTATION,
           ) ?? null
 
         return {
