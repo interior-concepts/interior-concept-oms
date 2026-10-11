@@ -1,0 +1,12 @@
+1. in the quotation in this page when i click on the "open quotation studio " at that button this take us to the dashboard. 
+2. i want here in there 2 button download quotation and open quotation studio from there user should able to edit the quotation and download the quotation
+3. in the cad and quotation modal i want scroll 
+4. in this lead list page i want horizontal scroll so that in the small screen user should able to scroll 
+
+
+Second Updates
+
+1. client info : address should take proper specific space and to know more hover will give us total address 
+2. in the visit info -> sr crm there you are showing jr crm name 
+3. in the quotation when i click download it's taking me to the editor both button doing same thing. 
+4. solve the issue
