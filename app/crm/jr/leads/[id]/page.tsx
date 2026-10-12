@@ -15,13 +15,16 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
-import { ArrowLeft, MessageSquare, History, Calendar, FileText, ImageIcon, Video } from 'lucide-react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { ArrowLeft, MessageSquare, History, Calendar, FileText, ImageIcon, Video, UserCheck, ShieldCheck, Sparkles, Layers, FileSpreadsheet, MapPin, CreditCard } from 'lucide-react'
 import { LeadInfoCard } from '@/components/crm/junior/lead-info-card'
 import { LeadNotesTab } from '@/components/crm/junior/lead-notes-tab'
 import { LeadActivityTab } from '@/components/crm/junior/lead-activity-tab'
 import { LeadFollowupsTab } from '@/components/crm/junior/lead-followups-tab'
 import { LeadActionsPanel } from '@/components/crm/junior/lead-actions-panel'
 import { SrCommandPanel } from '@/components/crm/senior/sr-command-panel'
+import { FOLLOWUP_CATEGORIES } from '@/components/crm/shared/followup-intelligence-fields'
+import { FOLLOWUP_DEPARTMENTS } from '@/components/crm/shared/followup-departments'
 import { fetchMeCached } from '@/lib/client-me'
 import { FacebookMessagesDialog } from '@/components/crm/shared/facebook-messages-dialog'
 import { uploadDirectBlobFile } from '@/lib/client-blob-upload'
@@ -189,6 +192,8 @@ export default function LeadDetailPage() {
   const [addFollowupOpen, setAddFollowupOpen] = useState(false)
   const [followupDate, setFollowupDate] = useState('')
   const [followupNotes, setFollowupNotes] = useState('')
+  const [followupCategory, setFollowupCategory] = useState<string>('GENERAL')
+  const [followupTargetRole, setFollowupTargetRole] = useState<string>('SELF')
   const [addFollowupError, setAddFollowupError] = useState<string | null>(null)
   const [addingFollowup, setAddingFollowup] = useState(false)
   const [addAttachmentOpen, setAddAttachmentOpen] = useState(false)
@@ -488,7 +493,14 @@ export default function LeadDetailPage() {
     }
   }
 
-  const createFollowup = async (payload: { followupDate: string; notes?: string }) => {
+  const createFollowup = async (payload: {
+    followupDate: string;
+    notes?: string;
+    category?: string;
+    targetDepartment?: string;
+    targetCrmRole?: string;
+    assignedToId?: string;
+  }) => {
     if (!currentUserId) {
       throw new Error('Unable to determine your user id.')
     }
@@ -497,7 +509,9 @@ export default function LeadDetailPage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        assignedToId: currentUserId,
+        assignedToId: payload.assignedToId || (payload.targetDepartment && payload.targetDepartment !== 'SELF' ? undefined : currentUserId),
+        targetDepartment: payload.targetDepartment || payload.targetCrmRole,
+        category: payload.category || 'GENERAL',
         followupDate: toIsoFromLocalDateTime(payload.followupDate),
         notes: payload.notes,
         userId: currentUserId,
@@ -521,6 +535,9 @@ export default function LeadDetailPage() {
       await createFollowup({
         followupDate,
         notes: followupNotes.trim() || undefined,
+        category: followupCategory,
+        targetDepartment: followupTargetRole !== 'SELF' ? followupTargetRole : undefined,
+        assignedToId: followupTargetRole === 'SELF' ? (currentUserId ?? undefined) : undefined,
       })
       handleAddFollowupOpenChange(false)
       refreshFollowups()
@@ -924,36 +941,166 @@ export default function LeadDetailPage() {
       <Dialog open={addFollowupOpen} onOpenChange={handleAddFollowupOpenChange}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Schedule follow-up</DialogTitle>
+            <DialogTitle>Schedule Connected Follow-Up</DialogTitle>
             <DialogDescription>
-              Set a date and optional note for this follow-up.
+              Schedule the next action for any team department to maintain seamless client progression.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
-            <div className="space-y-2">
-              <Label>Follow-up date</Label>
-              <Input
-                type="datetime-local"
-                value={followupDate}
-                onChange={(event) => setFollowupDate(event.target.value)}
-              />
+            <div className="space-y-1.5">
+              <Label className="text-xs">Assign Follow-Up To Department</Label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                <Button
+                  type="button"
+                  size="sm"
+                  variant={followupTargetRole === 'JR_CRM' ? 'default' : 'outline'}
+                  className={`h-7 text-xs ${followupTargetRole === 'JR_CRM' ? 'bg-sky-600 hover:bg-sky-700 text-white' : ''}`}
+                  onClick={() => setFollowupTargetRole('JR_CRM')}
+                >
+                  <UserCheck className="w-3 h-3 mr-1" />
+                  Junior CRM
+                </Button>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant={followupTargetRole === 'SR_CRM' ? 'default' : 'outline'}
+                  className={`h-7 text-xs ${followupTargetRole === 'SR_CRM' ? 'bg-purple-600 hover:bg-purple-700 text-white' : ''}`}
+                  onClick={() => setFollowupTargetRole('SR_CRM')}
+                >
+                  <ShieldCheck className="w-3 h-3 mr-1" />
+                  Senior CRM
+                </Button>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant={followupTargetRole === 'VISUALIZER_3D' ? 'default' : 'outline'}
+                  className={`h-7 text-xs ${followupTargetRole === 'VISUALIZER_3D' ? 'bg-pink-600 hover:bg-pink-700 text-white' : ''}`}
+                  onClick={() => setFollowupTargetRole('VISUALIZER_3D')}
+                >
+                  <Sparkles className="w-3 h-3 mr-1" />
+                  3D Visualizer
+                </Button>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant={followupTargetRole === 'JR_ARCHITECT' ? 'default' : 'outline'}
+                  className={`h-7 text-xs ${followupTargetRole === 'JR_ARCHITECT' ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : ''}`}
+                  onClick={() => setFollowupTargetRole('JR_ARCHITECT')}
+                >
+                  <Layers className="w-3 h-3 mr-1" />
+                  CAD / Architect
+                </Button>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant={followupTargetRole === 'QUOTATION' ? 'default' : 'outline'}
+                  className={`h-7 text-xs ${followupTargetRole === 'QUOTATION' ? 'bg-amber-600 hover:bg-amber-700 text-white' : ''}`}
+                  onClick={() => setFollowupTargetRole('QUOTATION')}
+                >
+                  <FileSpreadsheet className="w-3 h-3 mr-1" />
+                  Quotation
+                </Button>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant={followupTargetRole === 'VISIT_TEAM' ? 'default' : 'outline'}
+                  className={`h-7 text-xs ${followupTargetRole === 'VISIT_TEAM' ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : ''}`}
+                  onClick={() => setFollowupTargetRole('VISIT_TEAM')}
+                >
+                  <MapPin className="w-3 h-3 mr-1" />
+                  Site Visit
+                </Button>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant={followupTargetRole === 'ACCOUNTS' ? 'default' : 'outline'}
+                  className={`h-7 text-xs ${followupTargetRole === 'ACCOUNTS' ? 'bg-teal-600 hover:bg-teal-700 text-white' : ''}`}
+                  onClick={() => setFollowupTargetRole('ACCOUNTS')}
+                >
+                  <CreditCard className="w-3 h-3 mr-1" />
+                  Accounts
+                </Button>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant={followupTargetRole === 'SELF' ? 'default' : 'outline'}
+                  className="h-7 text-xs"
+                  onClick={() => setFollowupTargetRole('SELF')}
+                >
+                  Myself
+                </Button>
+              </div>
+
+              <div className="flex items-center gap-2 pt-1">
+                <span className="text-[11px] text-muted-foreground whitespace-nowrap">Other department:</span>
+                <Select
+                  value={['JR_CRM', 'SR_CRM', 'JR_ARCHITECT', 'VISUALIZER_3D', 'QUOTATION', 'VISIT_TEAM', 'ACCOUNTS', 'SELF'].includes(followupTargetRole) ? '' : followupTargetRole}
+                  onValueChange={(val) => {
+                    if (val) setFollowupTargetRole(val)
+                  }}
+                >
+                  <SelectTrigger className="h-7 text-xs">
+                    <SelectValue placeholder="Select another department..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {FOLLOWUP_DEPARTMENTS.filter(d => !['JR_CRM', 'SR_CRM', 'JR_ARCHITECT', 'VISUALIZER_3D', 'QUOTATION', 'VISIT_TEAM', 'ACCOUNTS'].includes(d.key)).map((dept) => (
+                      <SelectItem key={dept.key} value={dept.key} className="text-xs">
+                        {dept.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label>Notes</Label>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="space-y-1.5">
+                <Label className="text-xs">Follow-up date & time</Label>
+                <Input
+                  type="datetime-local"
+                  value={followupDate}
+                  onChange={(event) => setFollowupDate(event.target.value)}
+                  className="h-9 text-xs"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <Label className="text-xs">Category</Label>
+                <Select
+                  value={followupCategory}
+                  onValueChange={(val) => setFollowupCategory(val)}
+                >
+                  <SelectTrigger className="h-9 text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {FOLLOWUP_CATEGORIES.map((cat) => (
+                      <SelectItem key={cat.value} value={cat.value} className="text-xs">
+                        {cat.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <Label className="text-xs">Notes & Instructions</Label>
               <Textarea
                 value={followupNotes}
                 onChange={(event) => setFollowupNotes(event.target.value)}
-                placeholder="Optional notes for the follow-up..."
-                rows={4}
+                placeholder="Notes for client discussion or handover..."
+                rows={3}
+                className="text-sm"
               />
             </div>
             {addFollowupError ? (
-              <p className="text-sm text-destructive">{addFollowupError}</p>
+              <p className="text-xs text-destructive">{addFollowupError}</p>
             ) : null}
           </div>
           <DialogFooter>
             <Button onClick={handleCreateFollowup} disabled={addingFollowup}>
-              {addingFollowup ? 'Saving...' : 'Create follow-up'}
+              {addingFollowup ? 'Scheduling...' : 'Schedule Follow-Up'}
             </Button>
           </DialogFooter>
         </DialogContent>

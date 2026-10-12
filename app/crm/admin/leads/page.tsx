@@ -101,6 +101,28 @@ const stageColors: Record<string, string> = {
   CLOSED: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200',
 }
 
+const stageRowStyles: Record<string, string> = {
+  NEW: 'bg-slate-50/70 hover:bg-slate-100/80 dark:bg-slate-900/30 dark:hover:bg-slate-900/50 border-l-4 border-l-slate-400',
+  NUMBER_COLLECTED: 'bg-cyan-50/70 hover:bg-cyan-100/80 dark:bg-cyan-950/30 dark:hover:bg-cyan-900/50 border-l-4 border-l-cyan-500',
+  DISCOVERY: 'bg-violet-50/70 hover:bg-violet-100/80 dark:bg-violet-950/30 dark:hover:bg-violet-900/50 border-l-4 border-l-violet-500',
+  CAD_PHASE: 'bg-orange-50/70 hover:bg-orange-100/80 dark:bg-orange-950/30 dark:hover:bg-orange-900/50 border-l-4 border-l-orange-500',
+  QUOTATION_PHASE: 'bg-sky-50/70 hover:bg-sky-100/80 dark:bg-sky-950/30 dark:hover:bg-sky-900/50 border-l-4 border-l-sky-500',
+  BUDGET_PHASE: 'bg-teal-50/70 hover:bg-teal-100/80 dark:bg-teal-950/30 dark:hover:bg-teal-900/50 border-l-4 border-l-teal-500',
+  VISUALIZATION_PHASE: 'bg-pink-50/70 hover:bg-pink-100/80 dark:bg-pink-950/30 dark:hover:bg-pink-900/50 border-l-4 border-l-pink-500',
+  CONVERSION: 'bg-emerald-50/80 hover:bg-emerald-100/90 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/60 border-l-4 border-l-emerald-500',
+  VISIT_PHASE: 'bg-purple-50/70 hover:bg-purple-100/80 dark:bg-purple-950/30 dark:hover:bg-purple-900/50 border-l-4 border-l-purple-500',
+  CONTACT_ATTEMPTED: 'bg-blue-50/70 hover:bg-blue-100/80 dark:bg-blue-950/30 dark:hover:bg-blue-900/50 border-l-4 border-l-blue-500',
+  NURTURING: 'bg-amber-50/70 hover:bg-amber-100/80 dark:bg-amber-950/30 dark:hover:bg-amber-900/50 border-l-4 border-l-amber-500',
+  CLOSED: 'bg-red-50/60 hover:bg-red-100/70 dark:bg-red-950/30 dark:hover:bg-red-900/50 border-l-4 border-l-red-500',
+  VISIT_SCHEDULED: 'bg-purple-50/70 hover:bg-purple-100/80 dark:bg-purple-950/30 dark:hover:bg-purple-900/50 border-l-4 border-l-purple-500',
+  VISIT_RESCHEDULED: 'bg-amber-50/70 hover:bg-amber-100/80 dark:bg-amber-950/30 dark:hover:bg-amber-900/50 border-l-4 border-l-amber-500',
+  VISIT_COMPLETED: 'bg-emerald-50/80 hover:bg-emerald-100/90 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/60 border-l-4 border-l-emerald-500',
+  VISIT_CANCELLED: 'bg-red-50/60 hover:bg-red-100/70 dark:bg-red-950/30 dark:hover:bg-red-900/50 border-l-4 border-l-red-500',
+  PARTIAL_VISIT_PHASE: 'bg-purple-50/70 hover:bg-purple-100/80 dark:bg-purple-950/30 dark:hover:bg-purple-900/50 border-l-4 border-l-purple-500',
+  PARTIAL_QUOTATION_PHASE: 'bg-sky-50/70 hover:bg-sky-100/80 dark:bg-sky-950/30 dark:hover:bg-sky-900/50 border-l-4 border-l-sky-500',
+}
+
+
 const stageStatConfig: Record<string, { icon: typeof CircleDot; tint: string }> = {
   NEW: { icon: CircleDot, tint: 'text-slate-600 bg-slate-100 dark:bg-slate-900/40 dark:text-slate-200' },
   NUMBER_COLLECTED: { icon: PhoneCall, tint: 'text-cyan-700 bg-cyan-100 dark:bg-cyan-900/40 dark:text-cyan-200' },
@@ -1090,9 +1112,11 @@ export default function LeadsPage() {
                 <div className="py-12 text-center text-muted-foreground">No leads found.</div>
               ) : viewMode === 'card' ? (
                 <div className="p-4 sm:p-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                  {leads.map((lead) => (
-                    <Card key={lead.id} className="border-border">
-                      <CardContent className="space-y-3 p-4">
+                  {leads.map((lead) => {
+                    const cardStyle = stageRowStyles[lead.stage] || 'border-border'
+                    return (
+                      <Card key={lead.id} className={`transition-all shadow-sm ${cardStyle}`}>
+                        <CardContent className="space-y-3 p-4">
                         <div className="flex items-start justify-between gap-2">
                           <label className="mt-1 inline-flex items-center">
                             <input
@@ -1145,7 +1169,7 @@ export default function LeadsPage() {
                         </div>
                       </CardContent>
                     </Card>
-                  ))}
+                  )})}
                 </div>
               ) : (
                 <div className="w-full overflow-x-auto touch-pan-x scrollbar-thin">
@@ -1174,9 +1198,15 @@ export default function LeadsPage() {
                         <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">Action</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-border bg-card">
-                      {leads.map((lead) => (
-                        <tr key={lead.id} className="hover:bg-muted/40 transition-colors">
+                    <tbody className="divide-y divide-border">
+                      {leads.map((lead) => {
+                        const rowStyle = stageRowStyles[lead.stage] || 'hover:bg-muted/40'
+                        const isSelected = selectedLeadIds.includes(lead.id)
+                        return (
+                          <tr
+                            key={lead.id}
+                            className={`${rowStyle} ${isSelected ? 'ring-2 ring-inset ring-primary/60' : ''} transition-colors`}
+                          >
                           <td className="py-4 px-4 align-top">
                             <input
                               type="checkbox"
@@ -1418,7 +1448,7 @@ export default function LeadsPage() {
                             </Link>
                           </td>
                         </tr>
-                      ))}
+                      )})}
                     </tbody>
                   </table>
                 </div>

@@ -239,7 +239,7 @@ export async function GET(request: NextRequest) {
             ? {
                 assignedVisitLead: lead.visits[0].assignedTo ?? null,
                 supportMembers: (lead.visits[0].supportAssignments ?? []).map(
-                  (row) => row.supportUser,
+                  (row: any) => row.supportUser,
                 ),
               }
             : null,

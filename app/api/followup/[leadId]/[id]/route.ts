@@ -1,7 +1,8 @@
 import prisma from '@/lib/prisma';
-import { ActivityType, FollowUpStatus, Prisma } from '@/generated/prisma/client';
+import { ActivityType, FollowUpCategory, FollowUpStatus, LeadAssignmentDepartment, Prisma } from '@/generated/prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
+import { ensureDepartmentAssignment, ensureSeniorCrmAssignment } from '@/lib/lead-handoff';
 
 type RouteContext = { params: { leadId: string; id: string } | Promise<{ leadId: string; id: string }> };
 const completedFollowUpStatuses: FollowUpStatus[] = [FollowUpStatus.DONE, FollowUpStatus.LATELY_DONE];
@@ -16,7 +17,6 @@ async function resolveParams(context: RouteContext): Promise<{ leadId: string | 
     id: id && id.length > 0 ? id : null,
   };
 }
-
 
 async function resolveActivityUserId(requestedUserId: unknown): Promise<string | null> {
   const normalizedRequested = typeof requestedUserId === 'string' ? requestedUserId.trim() : ''
@@ -63,10 +63,24 @@ export async function GET(_request: NextRequest, context: RouteContext) {
             email: true,
             phone: true,
             location: true,
+            assignments: {
+              select: {
+                id: true,
+                department: true,
+                user: { select: { id: true, fullName: true, email: true } },
+              },
+            },
           },
         },
         assignedTo: {
-          select: { id: true, fullName: true, email: true },
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+            userDepartments: {
+              select: { department: { select: { name: true } } },
+            },
+          },
         },
       },
     });
@@ -78,7 +92,6 @@ export async function GET(_request: NextRequest, context: RouteContext) {
       );
     }
 
-    // Verify that the follow-up belongs to the specified lead
     if (followUp.leadId !== leadId) {
       return NextResponse.json(
         { success: false, error: 'Follow-up does not belong to the specified lead' },
@@ -96,6 +109,82 @@ export async function GET(_request: NextRequest, context: RouteContext) {
   }
 }
 
+// Helper to handle next connected follow-up creation inside transaction
+async function handleNextConnectedFollowUp(
+  tx: Prisma.TransactionClient,
+  leadId: string,
+  actorUserId: string | null,
+  nextData: {
+    followupDate?: string;
+    notes?: string;
+    category?: FollowUpCategory;
+    targetDepartment?: string;
+    targetCrmRole?: string;
+    assignedToId?: string;
+  }
+) {
+  if (!nextData.followupDate) return null;
+  const parsedDate = new Date(nextData.followupDate);
+  if (Number.isNaN(parsedDate.getTime())) return null;
+
+  let targetUserId = nextData.assignedToId?.trim() || null;
+  const targetDept = (nextData.targetDepartment || nextData.targetCrmRole)?.trim().toUpperCase();
+
+  // Fetch current lead assignments
+  const leadAssignments = await tx.leadAssignment.findMany({
+    where: { leadId },
+    select: { department: true, userId: true },
+  });
+
+  if (!targetUserId && targetDept && targetDept !== 'SELF') {
+    const existingAssignment = leadAssignments.find((a) => a.department === targetDept);
+    if (existingAssignment) {
+      targetUserId = existingAssignment.userId;
+    } else if (Object.values(LeadAssignmentDepartment).includes(targetDept as LeadAssignmentDepartment)) {
+      const autoAssignment = await ensureDepartmentAssignment({
+        tx,
+        leadId,
+        department: targetDept as LeadAssignmentDepartment,
+        actorUserId,
+      });
+      targetUserId = autoAssignment.userId;
+    }
+  }
+
+  if (!targetUserId) {
+    targetUserId = actorUserId;
+  }
+
+  if (!targetUserId) return null;
+
+  const newFollowUp = await tx.followUp.create({
+    data: {
+      leadId,
+      assignedToId: targetUserId,
+      followupDate: parsedDate,
+      notes: nextData.notes?.trim() || undefined,
+      category: nextData.category || FollowUpCategory.GENERAL,
+    },
+    include: {
+      assignedTo: {
+        select: { id: true, fullName: true, email: true },
+      },
+    },
+  });
+
+  const roleLabel = nextData.targetCrmRole === 'SR_CRM' ? 'Senior CRM' : nextData.targetCrmRole === 'JR_CRM' ? 'Junior CRM' : 'CRM';
+  await tx.activityLog.create({
+    data: {
+      leadId,
+      userId: actorUserId || targetUserId,
+      type: ActivityType.FOLLOWUP_SET,
+      description: `Next action connected to ${roleLabel} (${newFollowUp.assignedTo.fullName}) for ${parsedDate.toLocaleDateString()}`,
+    },
+  });
+
+  return newFollowUp;
+}
+
 // PUT /api/followup/[leadId]/[id] - Update a follow-up
 export async function PUT(request: NextRequest, context: RouteContext) {
   const { leadId, id } = await resolveParams(context);
@@ -110,11 +199,11 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       followupDate,
       status,
       notes,
-      userId, // User updating the follow-up (for activity log)
-    } = body
-    const activityUserId = await resolveActivityUserId(userId)
+      userId,
+      nextFollowUp,
+    } = body;
+    const activityUserId = await resolveActivityUserId(userId);
 
-    // Check if follow-up exists
     const existingFollowUp = await prisma.followUp.findUnique({ where: { id } });
     if (!existingFollowUp) {
       return NextResponse.json(
@@ -123,7 +212,6 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       );
     }
 
-    // Verify that the follow-up belongs to the specified lead
     if (existingFollowUp.leadId !== leadId) {
       return NextResponse.json(
         { success: false, error: 'Follow-up does not belong to the specified lead' },
@@ -131,7 +219,6 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       );
     }
 
-    // Validate assigned user if provided
     if (assignedToId) {
       const user = await prisma.user.findUnique({ where: { id: assignedToId } });
       if (!user) {
@@ -142,7 +229,8 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       }
     }
 
-    // Update follow-up with transaction to log activity
+    let createdNext: unknown = null;
+
     const followUp = await prisma.$transaction(async (tx) => {
       const updatedFollowUp = await tx.followUp.update({
         where: { id },
@@ -160,9 +248,8 @@ export async function PUT(request: NextRequest, context: RouteContext) {
             select: { id: true, fullName: true, email: true },
           },
         },
-      })
+      });
 
-      // Log activity when follow-up is completed
       if (
         status !== undefined &&
         completedFollowUpStatuses.includes(status as FollowUpStatus) &&
@@ -174,25 +261,30 @@ export async function PUT(request: NextRequest, context: RouteContext) {
             leadId: existingFollowUp.leadId,
             userId: activityUserId,
             type: ActivityType.FOLLOWUP_COMPLETED,
-            description: `Follow-up marked as ${(status as FollowUpStatus).toLowerCase()}`,
+            description: `Follow-up marked as ${(status as FollowUpStatus).toLowerCase()}: ${notes || 'Completed'}`,
           },
-        })
+        });
       }
 
-      return updatedFollowUp
-    })
+      if (nextFollowUp && typeof nextFollowUp === 'object') {
+        createdNext = await handleNextConnectedFollowUp(tx, leadId, activityUserId, nextFollowUp);
+      }
+
+      return updatedFollowUp;
+    });
 
     return NextResponse.json({
       success: true,
       data: followUp,
+      nextFollowUp: createdNext,
       message: 'Follow-up updated successfully',
-    })
+    });
   } catch (error: unknown) {
     console.error('Error updating follow-up:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to update follow-up', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
-    )
+    );
   }
 }
 
@@ -204,32 +296,31 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
   }
 
   try {
-    const body = await request.json()
-    const activityUserId = await resolveActivityUserId(body.userId)
+    const body = await request.json();
+    const activityUserId = await resolveActivityUserId(body.userId);
 
-    // Check if follow-up exists
-    const existingFollowUp = await prisma.followUp.findUnique({ where: { id } })
+    const existingFollowUp = await prisma.followUp.findUnique({ where: { id } });
     if (!existingFollowUp) {
       return NextResponse.json(
         { success: false, error: 'Follow-up not found' },
         { status: 404 }
-      )
+      );
     }
 
-    // Verify that the follow-up belongs to the specified lead
     if (existingFollowUp.leadId !== leadId) {
       return NextResponse.json(
         { success: false, error: 'Follow-up does not belong to the specified lead' },
         { status: 403 }
-      )
+      );
     }
 
-    // Prepare update data
-    const updateData: Prisma.FollowUpUncheckedUpdateInput = {}
-    if (body.assignedToId !== undefined) updateData.assignedToId = body.assignedToId
-    if (body.followupDate !== undefined) updateData.followupDate = new Date(body.followupDate)
-    if (body.status !== undefined) updateData.status = body.status
-    if (body.notes !== undefined) updateData.notes = body.notes
+    const updateData: Prisma.FollowUpUncheckedUpdateInput = {};
+    if (body.assignedToId !== undefined) updateData.assignedToId = body.assignedToId;
+    if (body.followupDate !== undefined) updateData.followupDate = new Date(body.followupDate);
+    if (body.status !== undefined) updateData.status = body.status;
+    if (body.notes !== undefined) updateData.notes = body.notes;
+
+    let createdNext: unknown = null;
 
     const followUp = await prisma.$transaction(async (tx) => {
       const updatedFollowUp = await tx.followUp.update({
@@ -243,9 +334,9 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
             select: { id: true, fullName: true, email: true },
           },
         },
-      })
+      });
 
-      const nextStatus = body.status as FollowUpStatus | undefined
+      const nextStatus = body.status as FollowUpStatus | undefined;
       if (
         nextStatus !== undefined &&
         completedFollowUpStatuses.includes(nextStatus) &&
@@ -257,25 +348,30 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
             leadId: existingFollowUp.leadId,
             userId: activityUserId,
             type: ActivityType.FOLLOWUP_COMPLETED,
-            description: `Follow-up marked as ${nextStatus.toLowerCase()}`,
+            description: `Follow-up marked as ${nextStatus.toLowerCase()}: ${body.notes || 'Completed'}`,
           },
-        })
+        });
       }
 
-      return updatedFollowUp
-    })
+      if (body.nextFollowUp && typeof body.nextFollowUp === 'object') {
+        createdNext = await handleNextConnectedFollowUp(tx, leadId, activityUserId, body.nextFollowUp);
+      }
+
+      return updatedFollowUp;
+    });
 
     return NextResponse.json({
       success: true,
       data: followUp,
+      nextFollowUp: createdNext,
       message: 'Follow-up updated successfully',
-    })
+    });
   } catch (error: unknown) {
     console.error('Error updating follow-up:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to update follow-up', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
-    )
+    );
   }
 }
 
@@ -287,7 +383,6 @@ export async function DELETE(_request: NextRequest, context: RouteContext) {
   }
 
   try {
-    // Check if follow-up exists
     const existingFollowUp = await prisma.followUp.findUnique({ where: { id } });
     if (!existingFollowUp) {
       return NextResponse.json(
@@ -296,7 +391,6 @@ export async function DELETE(_request: NextRequest, context: RouteContext) {
       );
     }
 
-    // Verify that the follow-up belongs to the specified lead
     if (existingFollowUp.leadId !== leadId) {
       return NextResponse.json(
         { success: false, error: 'Follow-up does not belong to the specified lead' },
@@ -304,17 +398,17 @@ export async function DELETE(_request: NextRequest, context: RouteContext) {
       );
     }
 
-    await prisma.followUp.delete({ where: { id } })
+    await prisma.followUp.delete({ where: { id } });
 
     return NextResponse.json({
       success: true,
       message: 'Follow-up deleted successfully',
-    })
+    });
   } catch (error: unknown) {
     console.error('Error deleting follow-up:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to delete follow-up', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
-    )
+    );
   }
 }

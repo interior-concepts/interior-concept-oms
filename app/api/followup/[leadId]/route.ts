@@ -1,19 +1,22 @@
 import prisma from '@/lib/prisma';
-import { ActivityType, LeadSubStatus, FollowUpCategory, ClientSentiment, ClientObjection } from '@/generated/prisma/client';
+import {
+  ActivityType,
+  LeadSubStatus,
+  FollowUpCategory,
+  ClientSentiment,
+  ClientObjection,
+  FollowUpStatus,
+  LeadAssignmentDepartment,
+} from '@/generated/prisma/client';
 import { isSubStatusAllowedForStage } from '@/lib/lead-stage';
 import { logActivity, logLeadSubStatusChanged } from '@/lib/activity-log-service';
 import { NextRequest, NextResponse } from 'next/server';
 import { autoCompletePendingFollowups } from '@/lib/followup-auto-complete';
 import { requireDatabaseRoles } from '@/lib/authz';
-import { canManagePaymentStatus } from '@/lib/lead-handoff';
+import { canManagePaymentStatus, ensureSeniorCrmAssignment, ensureDepartmentAssignment } from '@/lib/lead-handoff';
 import { buildScopedLeadWhere } from '@/lib/lead-access';
 
 type RouteContext = { params: { leadId: string } | Promise<{ leadId: string }> };
-const debugLog = (...args: unknown[]) => {
-  if (process.env.NODE_ENV !== 'production') {
-    // console.log(...args);
-  }
-};
 
 async function resolveLeadId(context: RouteContext): Promise<string | null> {
   const resolvedParams = await context.params;
@@ -63,7 +66,7 @@ function toObjection(value: unknown): ClientObjection | undefined {
   return undefined;
 }
 
-// GET /api/followup/[leadId] - Get all follow-ups for a specific lead
+// GET /api/followup/[leadId] - Get all connected follow-ups for a specific lead
 export async function GET(_request: NextRequest, context: RouteContext) {
   const leadId = await resolveLeadId(context);
   if (!leadId) {
@@ -71,8 +74,20 @@ export async function GET(_request: NextRequest, context: RouteContext) {
   }
 
   try {
-    // Verify that the lead exists
-    const lead = await prisma.lead.findUnique({ where: { id: leadId } });
+    // Verify that the lead exists with its CRM assignments
+    const lead = await prisma.lead.findUnique({
+      where: { id: leadId },
+      include: {
+        assignments: {
+          select: {
+            id: true,
+            department: true,
+            user: { select: { id: true, fullName: true, email: true } },
+          },
+        },
+      },
+    });
+
     if (!lead) {
       return NextResponse.json(
         { success: false, error: 'Lead not found' },
@@ -80,34 +95,75 @@ export async function GET(_request: NextRequest, context: RouteContext) {
       );
     }
 
-    // Fetch all follow-ups for this lead
+    const jrAssignment = lead.assignments.find((a) => a.department === LeadAssignmentDepartment.JR_CRM);
+    const srAssignment = lead.assignments.find((a) => a.department === LeadAssignmentDepartment.SR_CRM);
+
+    // Fetch all follow-ups for this lead in chronological order
     const followUps = await prisma.followUp.findMany({
       where: { leadId },
       include: {
-        lead: {
+        assignedTo: {
           select: {
             id: true,
-            name: true,
+            fullName: true,
             email: true,
-            phone: true,
-            location: true,
-            sentiment: true,
-            objection: true,
-            objectionNote: true,
-            lastContactedAt: true,
+            userDepartments: {
+              select: {
+                department: { select: { name: true } },
+              },
+            },
           },
         },
-        assignedTo: {
-          select: { id: true, fullName: true, email: true },
-        },
       },
-      orderBy: { followupDate: 'desc' },
+      orderBy: { followupDate: 'asc' },
+    });
+
+    // Annotate follow-ups with connected step, CRM role, and department role
+    const totalCount = followUps.length;
+    const enrichedFollowUps = followUps.map((f, index) => {
+      const assignedDeptNames = (f.assignedTo.userDepartments ?? []).map((ud) => ud.department?.name).filter(Boolean) as string[];
+      const isJrCrm = assignedDeptNames.includes('JR_CRM') || f.assignedToId === jrAssignment?.user.id;
+      const isSrCrm = assignedDeptNames.includes('SR_CRM') || f.assignedToId === srAssignment?.user.id;
+
+      const leadMatch = lead.assignments.find((a) => a.user.id === f.assignedToId);
+      const departmentRole = leadMatch?.department || (assignedDeptNames.length > 0 ? assignedDeptNames[0] : null) || (isSrCrm ? 'SR_CRM' : isJrCrm ? 'JR_CRM' : 'GENERAL');
+
+      const crmRole: 'JR_CRM' | 'SR_CRM' | 'GENERAL' = isSrCrm
+        ? 'SR_CRM'
+        : isJrCrm
+          ? 'JR_CRM'
+          : 'GENERAL';
+
+      return {
+        ...f,
+        crmRole,
+        departmentRole,
+        stepNumber: index + 1,
+        totalSteps: totalCount,
+        isLatest: index === totalCount - 1,
+      };
     });
 
     return NextResponse.json({
       success: true,
-      data: followUps,
-      count: followUps.length,
+      data: enrichedFollowUps,
+      count: totalCount,
+      lead: {
+        id: lead.id,
+        name: lead.name,
+        email: lead.email,
+        phone: lead.phone,
+        location: lead.location,
+        stage: lead.stage,
+        subStatus: lead.subStatus,
+        sentiment: lead.sentiment,
+        objection: lead.objection,
+        objectionNote: lead.objectionNote,
+        lastContactedAt: lead.lastContactedAt,
+        assignments: lead.assignments,
+        assignedJrCrm: jrAssignment?.user ?? null,
+        assignedSrCrm: srAssignment?.user ?? null,
+      },
     });
   } catch (error: unknown) {
     console.error('Error fetching follow-ups for lead:', error);
@@ -119,7 +175,7 @@ export async function GET(_request: NextRequest, context: RouteContext) {
   }
 }
 
-// POST /api/followup/[leadId] - Create a new follow-up for a specific lead
+// POST /api/followup/[leadId] - Create a connected follow-up for a lead
 export async function POST(request: NextRequest, context: RouteContext) {
   const leadId = await resolveLeadId(context);
   if (!leadId) {
@@ -133,7 +189,11 @@ export async function POST(request: NextRequest, context: RouteContext) {
     }
 
     const body = await request.json();
-    const assignedToId = toNonEmptyString(body.assignedToId) ?? authResult.actorUserId;
+    let assignedToId = toNonEmptyString(body.assignedToId);
+    const targetDepartment = toNonEmptyString(body.targetDepartment || body.targetCrmRole)?.toUpperCase();
+    const previousFollowUpId = toNonEmptyString(body.previousFollowUpId);
+    const completionNotes = toNonEmptyString(body.completionNotes);
+
     const followupDate = toDate(body.followupDate);
     const notes = typeof body.notes === 'string' ? body.notes : undefined;
     const userId = authResult.actorUserId ?? toNonEmptyString(body.userId);
@@ -144,21 +204,6 @@ export async function POST(request: NextRequest, context: RouteContext) {
     const objection = toObjection(body.objection);
     const objectionNote = typeof body.objectionNote === 'string' ? body.objectionNote : undefined;
 
-    // Validation
-    if (!assignedToId || !followupDate) {
-      return NextResponse.json(
-        { success: false, error: 'Assigned user and follow-up date are required' },
-        { status: 400 }
-      );
-    }
-
-    if (requestedSubStatus === 'invalid') {
-      return NextResponse.json(
-        { success: false, error: 'Invalid subStatus value' },
-        { status: 400 }
-      );
-    }
-
     // Check if lead exists
     const scopedWhere = buildScopedLeadWhere({
       leadId,
@@ -168,7 +213,19 @@ export async function POST(request: NextRequest, context: RouteContext) {
 
     const lead = await prisma.lead.findFirst({
       where: scopedWhere,
-      select: { id: true, stage: true, subStatus: true },
+      select: {
+        id: true,
+        stage: true,
+        subStatus: true,
+        assignments: {
+          select: {
+            id: true,
+            department: true,
+            userId: true,
+            user: { select: { id: true, fullName: true, email: true } },
+          },
+        },
+      },
     });
 
     if (!lead) {
@@ -180,6 +237,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
 
     if (
       requestedSubStatus !== undefined &&
+      requestedSubStatus !== 'invalid' &&
       !isSubStatusAllowedForStage(lead.stage, requestedSubStatus)
     ) {
       return NextResponse.json(
@@ -189,6 +247,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
     }
     if (
       requestedSubStatus !== undefined &&
+      requestedSubStatus !== 'invalid' &&
       !canManagePaymentStatus({
         actorDepartments: authResult.actor.userDepartments ?? [],
         nextSubStatus: requestedSubStatus,
@@ -200,30 +259,78 @@ export async function POST(request: NextRequest, context: RouteContext) {
       );
     }
 
-    // Check if assigned user exists
-    const user = await prisma.user.findUnique({
-      where: { id: assignedToId },
-    });
-
-    if (!user) {
+    if (!followupDate) {
       return NextResponse.json(
-        { success: false, error: 'Assigned user not found' },
-        { status: 404 }
+        { success: false, error: 'Follow-up date and time are required' },
+        { status: 400 }
       );
     }
 
-    // Create follow-up with transaction to log activity
+    // Resolve assigned user if targetDepartment specified
+    if (!assignedToId && targetDepartment) {
+      if (targetDepartment === 'SELF') {
+        assignedToId = authResult.actorUserId;
+      } else {
+        const existingAssignment = lead.assignments.find((a) => a.department === targetDepartment);
+        if (existingAssignment) {
+          assignedToId = existingAssignment.userId;
+        }
+      }
+    }
+
+    // Fallback to current actor if still not set and no target department specified
+    if (!assignedToId && (!targetDepartment || targetDepartment === 'SELF')) {
+      assignedToId = authResult.actorUserId;
+    }
+
+    // Execute creation in transaction
     const followUp = await prisma.$transaction(async (tx) => {
-      await autoCompletePendingFollowups(tx, {
-        leadId,
-        userId,
-        action: 'follow-up scheduled',
-      });
+      // If targetDepartment is specified (and not SELF) and no user assigned yet, ensure department assignment
+      if (!assignedToId && targetDepartment && targetDepartment !== 'SELF') {
+        if (Object.values(LeadAssignmentDepartment).includes(targetDepartment as LeadAssignmentDepartment)) {
+          const autoDept = await ensureDepartmentAssignment({
+            tx,
+            leadId,
+            department: targetDepartment as LeadAssignmentDepartment,
+            actorUserId: userId,
+          });
+          if (autoDept.userId) {
+            assignedToId = autoDept.userId;
+          }
+        }
+      }
+
+      // Ultimate fallback if department has no member configured yet
+      if (!assignedToId) {
+        assignedToId = authResult.actorUserId;
+      }
+
+      // If completing a specific previous follow-up
+      if (previousFollowUpId) {
+        const prev = await tx.followUp.findUnique({ where: { id: previousFollowUpId } });
+        if (prev && prev.leadId === leadId && prev.status === FollowUpStatus.PENDING) {
+          const isLate = prev.followupDate < new Date();
+          await tx.followUp.update({
+            where: { id: previousFollowUpId },
+            data: {
+              status: isLate ? FollowUpStatus.LATELY_DONE : FollowUpStatus.DONE,
+              notes: completionNotes ? `${prev.notes ? `${prev.notes} | ` : ''}Outcome: ${completionNotes}` : prev.notes,
+            },
+          });
+        }
+      } else {
+        // Complete older pending followups
+        await autoCompletePendingFollowups(tx, {
+          leadId,
+          userId,
+          action: 'connected next follow-up scheduled',
+        });
+      }
 
       const newFollowUp = await tx.followUp.create({
         data: {
           leadId,
-          assignedToId,
+          assignedToId: assignedToId!,
           followupDate,
           notes,
           category,
@@ -235,19 +342,28 @@ export async function POST(request: NextRequest, context: RouteContext) {
             select: { id: true, name: true, email: true },
           },
           assignedTo: {
-            select: { id: true, fullName: true, email: true },
+            select: {
+              id: true,
+              fullName: true,
+              email: true,
+              userDepartments: {
+                select: {
+                  department: { select: { name: true } },
+                },
+              },
+            },
           },
         },
       });
 
       // Update lead sentiment, objection, lastContactedAt, and subStatus
-      const leadUpdateData: any = {
+      const leadUpdateData: Record<string, unknown> = {
         lastContactedAt: new Date(),
       };
       if (sentiment) leadUpdateData.sentiment = sentiment;
       if (objection) leadUpdateData.objection = objection;
       if (objectionNote !== undefined) leadUpdateData.objectionNote = objectionNote;
-      if (requestedSubStatus !== undefined && requestedSubStatus !== lead.subStatus) {
+      if (requestedSubStatus !== undefined && requestedSubStatus !== 'invalid' && requestedSubStatus !== lead.subStatus) {
         leadUpdateData.subStatus = requestedSubStatus;
       }
 
@@ -256,7 +372,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
         data: leadUpdateData,
       });
 
-      if (requestedSubStatus !== undefined && requestedSubStatus !== lead.subStatus) {
+      if (requestedSubStatus !== undefined && requestedSubStatus !== 'invalid' && requestedSubStatus !== lead.subStatus) {
         await logLeadSubStatusChanged(tx, {
           leadId,
           userId,
@@ -265,18 +381,21 @@ export async function POST(request: NextRequest, context: RouteContext) {
         });
       }
 
+      const deptLabel = targetDepartment
+        ? targetDepartment.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+        : 'CRM';
       await logActivity(tx, {
         leadId,
         userId,
         type: ActivityType.FOLLOWUP_SET,
-        description: `Follow-up scheduled for ${followupDate.toLocaleDateString()}`,
+        description: `Connected follow-up scheduled for ${deptLabel} (${newFollowUp.assignedTo.fullName}) on ${followupDate.toLocaleDateString()}`,
       });
 
       return newFollowUp;
     });
 
     return NextResponse.json(
-      { success: true, data: followUp, message: 'Follow-up created successfully' },
+      { success: true, data: followUp, message: 'Connected follow-up created successfully' },
       { status: 201 }
     );
   } catch (error: unknown) {

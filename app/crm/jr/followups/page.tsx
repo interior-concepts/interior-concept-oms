@@ -2,10 +2,11 @@
 
 import { type ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   Dialog,
   DialogContent,
@@ -16,6 +17,7 @@ import {
 } from '@/components/ui/dialog'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import {
   CheckCircle2,
   Clock,
@@ -28,13 +30,24 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  CalendarPlus,
+  ShieldCheck,
+  UserCheck,
+  Search,
+  Layers,
+  Sparkles,
+  FileSpreadsheet,
+  MapPin,
+  CreditCard,
 } from 'lucide-react'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { fetchMeCached } from '@/lib/client-me'
+import { ConnectedFollowupChainDialog } from '@/components/crm/shared/connected-followup-chain-dialog'
+import { FOLLOWUP_CATEGORIES, type FollowUpCategoryValue } from '@/components/crm/shared/followup-intelligence-fields'
+import { FOLLOWUP_DEPARTMENTS, DepartmentRoleBadge } from '@/components/crm/shared/followup-departments'
 
 type FollowUpStatus = 'PENDING' | 'DONE' | 'LATELY_DONE' | 'MISSED'
 type TabKey = 'pending' | 'today' | 'overdue' | 'completed' | 'missed'
+type CrmPerspective = string
 
 type FollowUp = {
   id: string
@@ -43,7 +56,13 @@ type FollowUp = {
   followupDate: string
   status: FollowUpStatus
   notes: string | null
+  category: string
   createdAt: string
+  crmRole?: 'JR_CRM' | 'SR_CRM' | 'GENERAL'
+  departmentRole?: string
+  connectedLeadFollowupsCount?: number
+  assignedJrCrm?: { id: string; fullName: string; email: string } | null
+  assignedSrCrm?: { id: string; fullName: string; email: string } | null
   lead: {
     id: string
     name: string
@@ -86,8 +105,8 @@ const PAGE_SIZE = 20
 const statusConfig: Record<FollowUpStatus, { icon: ReactNode; color: string; bgColor: string; label: string }> = {
   PENDING: {
     icon: <Clock className="w-4 h-4" />,
-    color: 'text-yellow-700 dark:text-yellow-200',
-    bgColor: 'bg-yellow-100 dark:bg-yellow-900/40',
+    color: 'text-amber-700 dark:text-amber-200',
+    bgColor: 'bg-amber-100 dark:bg-amber-900/40',
     label: 'Pending',
   },
   DONE: {
@@ -149,25 +168,37 @@ function defaultNextFollowupDatetime(): string {
   const tomorrow = new Date()
   tomorrow.setDate(tomorrow.getDate() + 1)
   tomorrow.setHours(10, 0, 0, 0)
-  // Format as YYYY-MM-DDTHH:mm (for datetime-local input)
   const pad = (n: number) => String(n).padStart(2, '0')
   return `${tomorrow.getFullYear()}-${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}T${pad(tomorrow.getHours())}:${pad(tomorrow.getMinutes())}`
 }
 
 export default function FollowupsPage() {
+  const pathname = usePathname()
+  const isSeniorCrmView = pathname?.startsWith('/crm/sr') ?? false
+
   const [activeTab, setActiveTab] = useState<TabKey>('pending')
+  const [crmPerspective, setCrmPerspective] = useState<CrmPerspective>('ALL')
+  const [searchQuery, setSearchQuery] = useState('')
   const [currentUserId, setCurrentUserId] = useState<string | null>(null)
   const [tabState, setTabState] = useState<Record<TabKey, TabState>>(createInitialTabState)
+
+  // Complete modal state
   const [completeOpen, setCompleteOpen] = useState(false)
   const [selectedFollowup, setSelectedFollowup] = useState<FollowUp | null>(null)
   const [completionNote, setCompletionNote] = useState('')
   const [completing, setCompleting] = useState(false)
   const [completeError, setCompleteError] = useState<string | null>(null)
 
-  // Next follow-up state
+  // Next follow-up handover state
   const [setNextFollowup, setSetNextFollowup] = useState(true)
   const [nextFollowupDatetime, setNextFollowupDatetime] = useState('')
   const [nextFollowupNote, setNextFollowupNote] = useState('')
+  const [nextFollowupCategory, setNextFollowupCategory] = useState<FollowUpCategoryValue>('GENERAL')
+  const [nextAssignRole, setNextAssignRole] = useState<string>('SELF')
+
+  // Chain dialog state
+  const [chainDialogOpen, setChainDialogOpen] = useState(false)
+  const [selectedChainLead, setSelectedChainLead] = useState<FollowUp | null>(null)
 
   const dateRange = useMemo(getDateRangeForFollowups, [])
 
@@ -178,6 +209,7 @@ export default function FollowupsPage() {
         limit: String(PAGE_SIZE),
       })
 
+      // Status filters
       if (tab === 'pending') {
         params.set('status', 'PENDING')
       } else if (tab === 'today') {
@@ -193,9 +225,28 @@ export default function FollowupsPage() {
         params.set('status', 'MISSED')
       }
 
+      // Department / CRM Perspective filter
+      if (crmPerspective !== 'ALL') {
+        if (crmPerspective === 'MY') {
+          params.set('crmType', 'MY')
+          if (currentUserId) {
+            params.set('myUserId', currentUserId)
+          }
+        } else if (crmPerspective === 'JR_CRM' || crmPerspective === 'SR_CRM') {
+          params.set('crmType', crmPerspective)
+        } else {
+          params.set('department', crmPerspective)
+        }
+      }
+
+      // Search filter
+      if (searchQuery.trim()) {
+        params.set('search', searchQuery.trim())
+      }
+
       return params
     },
-    [dateRange.beforeTodayIso, dateRange.todayEndIso, dateRange.todayStartIso],
+    [crmPerspective, currentUserId, dateRange.beforeTodayIso, dateRange.todayEndIso, dateRange.todayStartIso, searchQuery],
   )
 
   const loadTab = useCallback(
@@ -257,6 +308,11 @@ export default function FollowupsPage() {
   }, [])
 
   useEffect(() => {
+    // Reset tabs when perspective or search changes
+    setTabState(createInitialTabState())
+  }, [crmPerspective, searchQuery])
+
+  useEffect(() => {
     const state = tabState[activeTab]
     if (!state.loaded && !state.loading) {
       loadTab(activeTab, 1)
@@ -270,6 +326,10 @@ export default function FollowupsPage() {
     setSetNextFollowup(true)
     setNextFollowupDatetime(defaultNextFollowupDatetime())
     setNextFollowupNote('')
+    setNextFollowupCategory('GENERAL')
+    // Default: if current is JR CRM completing, suggest Sr CRM; else suggest Myself
+    const currentDept = followup.departmentRole || followup.crmRole
+    setNextAssignRole(currentDept === 'JR_CRM' ? 'SR_CRM' : 'SELF')
     setCompleteOpen(true)
   }
 
@@ -298,43 +358,31 @@ export default function FollowupsPage() {
     setCompleting(true)
     setCompleteError(null)
     try {
-      // Step 1: Mark current follow-up as complete
+      const nextFollowUpPayload = setNextFollowup && nextFollowupDatetime
+        ? {
+            followupDate: new Date(nextFollowupDatetime).toISOString(),
+            notes: nextFollowupNote.trim() || undefined,
+            category: nextFollowupCategory,
+            targetDepartment: nextAssignRole !== 'SELF' ? nextAssignRole : undefined,
+            targetCrmRole: nextAssignRole === 'SR_CRM' ? 'SR_CRM' : nextAssignRole === 'JR_CRM' ? 'JR_CRM' : undefined,
+            assignedToId: nextAssignRole === 'SELF' ? currentUserId : undefined,
+          }
+        : undefined
+
       const completeRes = await fetch(`/api/followup/${selectedFollowup.leadId}/${selectedFollowup.id}`, {
-        method: 'PATCH',
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           status: nextStatus,
           notes: completionNote.trim(),
           userId: currentUserId,
+          nextFollowUp: nextFollowUpPayload,
         }),
       })
+
       const completeData = await completeRes.json()
       if (!completeRes.ok || !completeData.success) {
         throw new Error(completeData.error || 'Failed to complete follow-up.')
-      }
-
-      // Step 2: Create next follow-up if requested
-      if (setNextFollowup && nextFollowupDatetime) {
-        const nextDate = new Date(nextFollowupDatetime)
-        const nextRes = await fetch(`/api/followup/${selectedFollowup.leadId}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            assignedToId: currentUserId,
-            followupDate: nextDate.toISOString(),
-            notes: nextFollowupNote.trim() || undefined,
-            userId: currentUserId,
-          }),
-        })
-        const nextData = await nextRes.json()
-        if (!nextRes.ok || !nextData.success) {
-          // Still succeeded on complete; just warn
-          console.warn('Next follow-up creation failed:', nextData.error)
-          setCompleteError(`Follow-up completed, but failed to create next: ${nextData.error as string}`)
-          setCompleting(false)
-          await invalidateAndRefresh()
-          return
-        }
       }
 
       setCompleteOpen(false)
@@ -351,10 +399,21 @@ export default function FollowupsPage() {
     }
   }
 
+  const openChainDialogForFollowup = (followup: FollowUp) => {
+    setSelectedChainLead(followup)
+    setChainDialogOpen(true)
+  }
+
+  const leadHref = (leadId: string) => {
+    return isSeniorCrmView ? `/crm/sr/leads/${leadId}` : `/crm/jr/leads/${leadId}`
+  }
+
   const FollowupCard = ({ followup }: { followup: FollowUp }) => {
     const config = statusConfig[followup.status]
     const followupDateTime = new Date(followup.followupDate)
     const canComplete = followup.status === 'PENDING' || followup.status === 'MISSED'
+    const isSr = followup.crmRole === 'SR_CRM'
+    const isJr = followup.crmRole === 'JR_CRM'
 
     return (
       <Card className="hover:shadow-md transition-shadow duration-200 border-border">
@@ -365,15 +424,29 @@ export default function FollowupsPage() {
             </div>
 
             <div className="flex-1 min-w-0">
-              <Link href={`/crm/jr/leads/${followup.leadId}`} className="group">
-                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                  {followup.lead.name}
-                </h3>
-              </Link>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <Link href={leadHref(followup.leadId)} className="group flex items-center gap-2">
+                  <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                    {followup.lead.name}
+                  </h3>
+                  <Badge variant="outline" className="text-[11px] font-normal">
+                    {followup.lead.stage.replace(/_/g, ' ')}
+                  </Badge>
+                </Link>
+
+                <div className="flex items-center gap-2">
+                  <DepartmentRoleBadge departmentKey={followup.departmentRole || followup.crmRole} />
+                  <Badge className={`${config.bgColor} ${config.color} text-xs font-medium`}>
+                    {config.label}
+                  </Badge>
+                </div>
+              </div>
+
+              {/* Client Contacts */}
               <div className="flex flex-col md:flex-row md:items-center gap-2 mt-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <Mail className="w-3.5 h-3.5" />
-                  <span className="truncate">{followup.lead.email}</span>
+                  <span className="truncate">{followup.lead.email || 'No email'}</span>
                 </div>
                 <div className="hidden md:block">•</div>
                 <div className="flex items-center gap-1">
@@ -382,8 +455,37 @@ export default function FollowupsPage() {
                 </div>
               </div>
 
+              {/* Connected Team Info */}
+              <div className="mt-3 flex flex-wrap items-center gap-3 text-xs bg-muted/30 p-2 rounded border border-border/50">
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <span className="font-medium text-foreground">Jr CRM:</span>
+                  <span className="text-sky-700 dark:text-sky-300 font-medium">
+                    {followup.assignedJrCrm?.fullName || (isJr ? followup.assignedTo.fullName : 'Not assigned')}
+                  </span>
+                </div>
+                <div className="text-border">|</div>
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <span className="font-medium text-foreground">Sr CRM:</span>
+                  <span className="text-purple-700 dark:text-purple-300 font-medium">
+                    {followup.assignedSrCrm?.fullName || (isSr ? followup.assignedTo.fullName : 'Pending handover')}
+                  </span>
+                </div>
+                <div className="text-border">|</div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-5 px-1.5 text-[11px] text-primary hover:bg-primary/10 gap-1 ml-auto"
+                  onClick={() => openChainDialogForFollowup(followup)}
+                >
+                  <Layers className="w-3 h-3" />
+                  {followup.connectedLeadFollowupsCount ?? 1} Connected {followup.connectedLeadFollowupsCount === 1 ? 'Action' : 'Actions'}
+                </Button>
+              </div>
+
               {followup.notes ? (
-                <p className="text-sm text-muted-foreground mt-3 line-clamp-2">{followup.notes}</p>
+                <p className="text-sm text-muted-foreground mt-3 line-clamp-2 italic">
+                  &ldquo;{followup.notes}&rdquo;
+                </p>
               ) : null}
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-4 pt-4 border-t border-border">
@@ -404,9 +506,10 @@ export default function FollowupsPage() {
                   </div>
                   <div className="flex items-center gap-1 text-muted-foreground">
                     <User className="w-3.5 h-3.5" />
-                    <span>{followup.assignedTo.fullName}</span>
+                    <span>Assigned: {followup.assignedTo.fullName}</span>
                   </div>
                 </div>
+
                 <div className="flex items-center gap-2">
                   {followup.lead.phone ? (
                     <a
@@ -420,24 +523,18 @@ export default function FollowupsPage() {
                       </Button>
                     </a>
                   ) : null}
-                  <Link href={`/crm/jr/leads/${followup.leadId}`}>
+                  <Link href={leadHref(followup.leadId)}>
                     <Button size="sm" variant="outline" className="gap-1">
-                      View <ArrowRight className="w-3.5 h-3.5" />
+                      Lead <ArrowRight className="w-3.5 h-3.5" />
                     </Button>
                   </Link>
                   {canComplete ? (
-                    <Button size="sm" onClick={() => openCompleteModal(followup)}>
-                      Complete
+                    <Button size="sm" onClick={() => openCompleteModal(followup)} className="gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Complete
                     </Button>
                   ) : null}
                 </div>
               </div>
-            </div>
-
-            <div className="flex-shrink-0">
-              <Badge className={`${config.bgColor} ${config.color} text-xs font-medium`}>
-                {config.label}
-              </Badge>
             </div>
           </div>
         </CardContent>
@@ -502,186 +599,380 @@ export default function FollowupsPage() {
             variant="outline"
             size="sm"
             onClick={() => loadTab(tab, state.page - 1, true)}
-            disabled={state.loading || state.page <= 1}
-            className="gap-1"
+            disabled={state.page <= 1 || state.loading}
           >
-            <ChevronLeft className="h-4 w-4" /> Prev
+            <ChevronLeft className="w-4 h-4 mr-1" /> Previous
           </Button>
-          <span className="text-xs text-muted-foreground">
+          <span className="text-xs text-muted-foreground px-2">
             Page {state.page} of {state.totalPages}
           </span>
           <Button
             variant="outline"
             size="sm"
             onClick={() => loadTab(tab, state.page + 1, true)}
-            disabled={state.loading || state.page >= state.totalPages}
-            className="gap-1"
+            disabled={state.page >= state.totalPages || state.loading}
           >
-            Next <ChevronRight className="h-4 w-4" />
+            Next <ChevronRight className="w-4 h-4 ml-1" />
           </Button>
         </div>
       </div>
     )
   }
 
-  return (
-    <main className="min-h-screen bg-background">
-      <CrmPageHeader
-        title="Followups"
-        subtitle="Track and manage all your followup tasks"
-      />
+  const pageTitle = isSeniorCrmView ? 'Senior CRM Follow-Up Hub' : 'Junior CRM Follow-Up Hub'
+  const pageSubtitle = 'Connected Lead Pipeline: seamlessly link Junior CRM qualification with Senior CRM closing actions.'
 
-      <div className="mx-auto max-w-[1440px] px-6 py-6">
-        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TabKey)} className="w-full mt-8">
-          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 mb-8">
-            {(['pending', 'today', 'overdue', 'completed', 'missed'] as TabKey[]).map((tab) => (
-              <TabsTrigger key={tab} value={tab} className="flex items-center gap-2">
-                {tab === 'pending' ? <Clock className="w-4 h-4" /> : null}
-                {tab === 'today' ? <Calendar className="w-4 h-4" /> : null}
-                {tab === 'overdue' ? <AlertCircle className="w-4 h-4" /> : null}
-                {tab === 'completed' ? <CheckCircle2 className="w-4 h-4" /> : null}
-                {tab === 'missed' ? <AlertCircle className="w-4 h-4" /> : null}
-                <span>{tabLabels[tab]}</span>
-                <Badge variant="secondary" className="ml-auto text-[10px] px-2 py-0">
-                  {tabState[tab].total}
-                </Badge>
+  return (
+    <div className="min-h-screen bg-background">
+      <CrmPageHeader title={pageTitle} subtitle={pageSubtitle} />
+
+      <main className="mx-auto max-w-[1440px] px-4 sm:px-6 py-6 space-y-6">
+        {/* Connected Perspective Selector & Search Bar */}
+        <div className="flex flex-col gap-3 bg-card border rounded-xl p-4 shadow-sm">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mr-1">
+              Department Filter:
+            </span>
+            <Button
+              size="sm"
+              variant={crmPerspective === 'ALL' ? 'default' : 'outline'}
+              className="h-7 text-xs gap-1.5"
+              onClick={() => setCrmPerspective('ALL')}
+            >
+              <Sparkles className="w-3 h-3" /> All
+            </Button>
+            <Button
+              size="sm"
+              variant={crmPerspective === 'JR_CRM' ? 'default' : 'outline'}
+              className={`h-7 text-xs gap-1.5 ${crmPerspective === 'JR_CRM' ? 'bg-sky-600 hover:bg-sky-700 text-white' : ''}`}
+              onClick={() => setCrmPerspective('JR_CRM')}
+            >
+              <UserCheck className="w-3 h-3" /> Jr CRM
+            </Button>
+            <Button
+              size="sm"
+              variant={crmPerspective === 'SR_CRM' ? 'default' : 'outline'}
+              className={`h-7 text-xs gap-1.5 ${crmPerspective === 'SR_CRM' ? 'bg-purple-600 hover:bg-purple-700 text-white' : ''}`}
+              onClick={() => setCrmPerspective('SR_CRM')}
+            >
+              <ShieldCheck className="w-3 h-3" /> Sr CRM
+            </Button>
+            <Button
+              size="sm"
+              variant={crmPerspective === 'VISUALIZER_3D' ? 'default' : 'outline'}
+              className={`h-7 text-xs gap-1.5 ${crmPerspective === 'VISUALIZER_3D' ? 'bg-pink-600 hover:bg-pink-700 text-white' : ''}`}
+              onClick={() => setCrmPerspective('VISUALIZER_3D')}
+            >
+              <Sparkles className="w-3 h-3" /> 3D Viz
+            </Button>
+            <Button
+              size="sm"
+              variant={crmPerspective === 'JR_ARCHITECT' ? 'default' : 'outline'}
+              className={`h-7 text-xs gap-1.5 ${crmPerspective === 'JR_ARCHITECT' ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : ''}`}
+              onClick={() => setCrmPerspective('JR_ARCHITECT')}
+            >
+              <Layers className="w-3 h-3" /> CAD
+            </Button>
+            <Button
+              size="sm"
+              variant={crmPerspective === 'QUOTATION' ? 'default' : 'outline'}
+              className={`h-7 text-xs gap-1.5 ${crmPerspective === 'QUOTATION' ? 'bg-amber-600 hover:bg-amber-700 text-white' : ''}`}
+              onClick={() => setCrmPerspective('QUOTATION')}
+            >
+              <FileSpreadsheet className="w-3 h-3" /> Quotation
+            </Button>
+            <Button
+              size="sm"
+              variant={crmPerspective === 'VISIT_TEAM' ? 'default' : 'outline'}
+              className={`h-7 text-xs gap-1.5 ${crmPerspective === 'VISIT_TEAM' ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : ''}`}
+              onClick={() => setCrmPerspective('VISIT_TEAM')}
+            >
+              <MapPin className="w-3 h-3" /> Site Visit
+            </Button>
+            <Button
+              size="sm"
+              variant={crmPerspective === 'ACCOUNTS' ? 'default' : 'outline'}
+              className={`h-7 text-xs gap-1.5 ${crmPerspective === 'ACCOUNTS' ? 'bg-teal-600 hover:bg-teal-700 text-white' : ''}`}
+              onClick={() => setCrmPerspective('ACCOUNTS')}
+            >
+              <CreditCard className="w-3 h-3" /> Accounts
+            </Button>
+            <Button
+              size="sm"
+              variant={crmPerspective === 'MY' ? 'default' : 'outline'}
+              className="h-7 text-xs gap-1.5"
+              onClick={() => setCrmPerspective('MY')}
+            >
+              <User className="w-3 h-3" /> My Follow-Ups
+            </Button>
+          </div>
+
+          <div className="relative sm:w-64">
+            <Search className="w-4 h-4 absolute left-3 top-2.5 text-muted-foreground" />
+            <Input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search lead or notes..."
+              className="pl-9 h-9 text-xs"
+            />
+          </div>
+        </div>
+
+        {/* Status Tabs */}
+        <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val as TabKey)} className="w-full">
+          <TabsList className="grid grid-cols-5 w-full max-w-2xl">
+            {(Object.keys(tabLabels) as TabKey[]).map((tab) => (
+              <TabsTrigger key={tab} value={tab} className="text-xs sm:text-sm">
+                {tabLabels[tab]}
+                {tabState[tab].loaded && tabState[tab].total > 0 && (
+                  <Badge variant="secondary" className="ml-1.5 px-1.5 py-0 text-[10px] h-4">
+                    {tabState[tab].total}
+                  </Badge>
+                )}
               </TabsTrigger>
             ))}
           </TabsList>
 
-          <TabsContent value="pending" className="space-y-4">
-            {renderTabContent('pending', <Clock className="w-12 h-12" />, 'No pending followups')}
-          </TabsContent>
-          <TabsContent value="today" className="space-y-4">
-            {renderTabContent('today', <Calendar className="w-12 h-12" />, 'No followups for today')}
-          </TabsContent>
-          <TabsContent value="overdue" className="space-y-4">
-            {renderTabContent('overdue', <CheckCircle2 className="w-12 h-12" />, 'No overdue followups')}
-          </TabsContent>
-          <TabsContent value="completed" className="space-y-4">
-            {renderTabContent('completed', <CheckCircle2 className="w-12 h-12" />, 'No completed followups')}
-          </TabsContent>
-          <TabsContent value="missed" className="space-y-4">
-            {renderTabContent('missed', <AlertCircle className="w-12 h-12" />, 'No missed followups')}
-          </TabsContent>
+          <div className="mt-6">
+            {activeTab === 'pending' && renderTabContent('pending', <Clock className="w-12 h-12" />, 'No pending follow-ups')}
+            {activeTab === 'today' && renderTabContent('today', <Calendar className="w-12 h-12" />, 'No follow-ups for today')}
+            {activeTab === 'overdue' && renderTabContent('overdue', <CheckCircle2 className="w-12 h-12" />, 'No overdue follow-ups')}
+            {activeTab === 'completed' && renderTabContent('completed', <CheckCircle2 className="w-12 h-12" />, 'No completed follow-ups')}
+            {activeTab === 'missed' && renderTabContent('missed', <AlertCircle className="w-12 h-12" />, 'No missed follow-ups')}
+          </div>
         </Tabs>
-      </div>
+      </main>
 
-      {/* ── Complete Follow-up Modal ── */}
-      <Dialog open={completeOpen} onOpenChange={(open) => { if (!completing) setCompleteOpen(open) }}>
+      {/* Complete & Connect Next Follow-Up Dialog */}
+      <Dialog open={completeOpen} onOpenChange={setCompleteOpen}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>Complete Follow-up</DialogTitle>
+            <DialogTitle>Complete & Connect Next Follow-Up</DialogTitle>
             <DialogDescription>
               {selectedFollowup?.status === 'MISSED'
-                ? 'This follow-up will be marked as lately done.'
-                : 'This follow-up will be marked as done.'}{' '}
-              {selectedFollowup ? (
-                <span className="font-medium text-foreground">— {selectedFollowup.lead.name}</span>
-              ) : null}
+                ? 'This action will be marked lately done. Connect the next action to continue the client journey.'
+                : 'Record the outcome and seamlessly connect the next action for Junior or Senior CRM.'}
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-5">
-            {/* Completion Notes */}
-            <div className="space-y-1.5">
-              <label className="text-sm font-medium text-foreground">
-                Completion Notes <span className="text-destructive">*</span>
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs font-semibold text-foreground">
+                Client Discussion Outcome & Notes <span className="text-destructive">*</span>
               </label>
               <Textarea
                 value={completionNote}
-                onChange={(event) => setCompletionNote(event.target.value)}
-                placeholder="What was discussed? How did the follow-up go?"
+                onChange={(e) => setCompletionNote(e.target.value)}
+                placeholder="What did the client say? e.g. Discussed 3BHK layout; client requested budget review meeting with Senior CRM..."
                 rows={3}
-                disabled={completing}
+                className="mt-1 text-sm"
               />
             </div>
 
-            {/* Divider */}
-            <div className="border-t border-border" />
-
-            {/* Next Follow-up Section */}
-            <div className="space-y-3">
-              <label className="flex items-center gap-2.5 cursor-pointer select-none">
+            {/* Next Connected Step Section */}
+            <div className="rounded-lg border bg-muted/30 p-3.5 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-foreground flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-primary" />
+                  Connect Next Follow-Up Action
+                </span>
                 <input
                   type="checkbox"
+                  id="setNextFollowup"
                   checked={setNextFollowup}
                   onChange={(e) => setSetNextFollowup(e.target.checked)}
-                  disabled={completing}
-                  className="h-4 w-4 rounded border-border accent-primary"
+                  className="rounded border-gray-300 text-primary focus:ring-primary h-4 w-4"
                 />
-                <div className="flex items-center gap-1.5">
-                  <CalendarPlus className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-medium text-foreground">Set Next Follow-up</span>
-                </div>
-              </label>
+              </div>
 
-              {setNextFollowup ? (
-                <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 space-y-3">
+              {setNextFollowup && (
+                <div className="space-y-3 pt-2 border-t">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-[11px] font-medium text-muted-foreground">
+                        Next Action Date & Time
+                      </label>
+                      <Input
+                        type="datetime-local"
+                        value={nextFollowupDatetime}
+                        onChange={(e) => setNextFollowupDatetime(e.target.value)}
+                        className="mt-1 h-9 text-xs"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[11px] font-medium text-muted-foreground">
+                        Category
+                      </label>
+                      <Select
+                        value={nextFollowupCategory}
+                        onValueChange={(val) => setNextFollowupCategory(val as FollowUpCategoryValue)}
+                      >
+                        <SelectTrigger className="mt-1 h-9 text-xs">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {FOLLOWUP_CATEGORIES.map((cat) => (
+                            <SelectItem key={cat.value} value={cat.value} className="text-xs">
+                              {cat.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  {/* Handover Assignment to Any Department */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                      Date & Time <span className="text-destructive">*</span>
+                    <label className="text-[11px] font-semibold text-muted-foreground">
+                      Assign Next Follow-Up To Department:
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mt-1">
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant={nextAssignRole === 'JR_CRM' ? 'default' : 'outline'}
+                        className={`h-7 text-xs ${nextAssignRole === 'JR_CRM' ? 'bg-sky-600 hover:bg-sky-700 text-white' : ''}`}
+                        onClick={() => setNextAssignRole('JR_CRM')}
+                      >
+                        <UserCheck className="w-3 h-3 mr-1" />
+                        Junior CRM
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant={nextAssignRole === 'SR_CRM' ? 'default' : 'outline'}
+                        className={`h-7 text-xs ${nextAssignRole === 'SR_CRM' ? 'bg-purple-600 hover:bg-purple-700 text-white' : ''}`}
+                        onClick={() => setNextAssignRole('SR_CRM')}
+                      >
+                        <ShieldCheck className="w-3 h-3 mr-1" />
+                        Senior CRM
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant={nextAssignRole === 'VISUALIZER_3D' ? 'default' : 'outline'}
+                        className={`h-7 text-xs ${nextAssignRole === 'VISUALIZER_3D' ? 'bg-pink-600 hover:bg-pink-700 text-white' : ''}`}
+                        onClick={() => setNextAssignRole('VISUALIZER_3D')}
+                      >
+                        <Sparkles className="w-3 h-3 mr-1" />
+                        3D Visualizer
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant={nextAssignRole === 'JR_ARCHITECT' ? 'default' : 'outline'}
+                        className={`h-7 text-xs ${nextAssignRole === 'JR_ARCHITECT' ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : ''}`}
+                        onClick={() => setNextAssignRole('JR_ARCHITECT')}
+                      >
+                        <Layers className="w-3 h-3 mr-1" />
+                        CAD / Architect
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant={nextAssignRole === 'QUOTATION' ? 'default' : 'outline'}
+                        className={`h-7 text-xs ${nextAssignRole === 'QUOTATION' ? 'bg-amber-600 hover:bg-amber-700 text-white' : ''}`}
+                        onClick={() => setNextAssignRole('QUOTATION')}
+                      >
+                        <FileSpreadsheet className="w-3 h-3 mr-1" />
+                        Quotation
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant={nextAssignRole === 'VISIT_TEAM' ? 'default' : 'outline'}
+                        className={`h-7 text-xs ${nextAssignRole === 'VISIT_TEAM' ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : ''}`}
+                        onClick={() => setNextAssignRole('VISIT_TEAM')}
+                      >
+                        <MapPin className="w-3 h-3 mr-1" />
+                        Site Visit
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant={nextAssignRole === 'ACCOUNTS' ? 'default' : 'outline'}
+                        className={`h-7 text-xs ${nextAssignRole === 'ACCOUNTS' ? 'bg-teal-600 hover:bg-teal-700 text-white' : ''}`}
+                        onClick={() => setNextAssignRole('ACCOUNTS')}
+                      >
+                        <CreditCard className="w-3 h-3 mr-1" />
+                        Accounts
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant={nextAssignRole === 'SELF' ? 'default' : 'outline'}
+                        className="h-7 text-xs"
+                        onClick={() => setNextAssignRole('SELF')}
+                      >
+                        Myself
+                      </Button>
+                    </div>
+
+                    <div className="flex items-center gap-2 pt-1">
+                      <span className="text-[11px] text-muted-foreground whitespace-nowrap">Other:</span>
+                      <Select
+                        value={['JR_CRM', 'SR_CRM', 'JR_ARCHITECT', 'VISUALIZER_3D', 'QUOTATION', 'VISIT_TEAM', 'ACCOUNTS', 'SELF'].includes(nextAssignRole) ? '' : nextAssignRole}
+                        onValueChange={(val) => { if (val) setNextAssignRole(val) }}
+                      >
+                        <SelectTrigger className="h-7 text-xs">
+                          <SelectValue placeholder="Select another department..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {FOLLOWUP_DEPARTMENTS.filter(d => !['JR_CRM', 'SR_CRM', 'JR_ARCHITECT', 'VISUALIZER_3D', 'QUOTATION', 'VISIT_TEAM', 'ACCOUNTS'].includes(d.key)).map((dept) => (
+                            <SelectItem key={dept.key} value={dept.key} className="text-xs">
+                              {dept.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-[11px] font-medium text-muted-foreground">
+                      Instructions for Next Follow-Up
                     </label>
                     <Input
-                      type="datetime-local"
-                      value={nextFollowupDatetime}
-                      onChange={(e) => setNextFollowupDatetime(e.target.value)}
-                      disabled={completing}
-                      className="bg-background"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                      Notes for Next Follow-up <span className="text-muted-foreground/60">(optional)</span>
-                    </label>
-                    <Textarea
                       value={nextFollowupNote}
                       onChange={(e) => setNextFollowupNote(e.target.value)}
-                      placeholder="What should be discussed next time?"
-                      rows={2}
-                      disabled={completing}
-                      className="bg-background"
+                      placeholder="e.g. Present 3D visualizer concepts and discuss material options"
+                      className="mt-1 h-9 text-xs"
                     />
                   </div>
                 </div>
-              ) : (
-                <p className="text-xs text-muted-foreground pl-6">
-                  No next follow-up will be scheduled for this client.
-                </p>
               )}
             </div>
 
-            {completeError ? (
-              <p className="text-sm text-destructive rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2">
-                {completeError}
-              </p>
-            ) : null}
+            {completeError && <p className="text-xs text-destructive">{completeError}</p>}
           </div>
 
-          <DialogFooter className="gap-2">
-            <Button
-              variant="outline"
-              onClick={() => setCompleteOpen(false)}
-              disabled={completing}
-            >
+          <DialogFooter>
+            <Button variant="outline" size="sm" onClick={() => setCompleteOpen(false)} disabled={completing}>
               Cancel
             </Button>
-            <Button onClick={() => void handleCompleteFollowup()} disabled={completing} className="gap-2">
-              {completing ? (
-                <>
-                  <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                  Saving…
-                </>
-              ) : (
-                <>
-                  <CheckCircle2 className="h-4 w-4" />
-                  {setNextFollowup ? 'Complete & Set Next' : 'Complete Follow-up'}
-                </>
-              )}
+            <Button size="sm" onClick={handleCompleteFollowup} disabled={completing}>
+              {completing ? 'Saving & Connecting...' : 'Complete & Connect'}
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </main>
+
+      {/* Connected Follow-Up Chain Dialog */}
+      <ConnectedFollowupChainDialog
+        open={chainDialogOpen}
+        onOpenChange={setChainDialogOpen}
+        leadId={selectedChainLead?.leadId ?? null}
+        leadName={selectedChainLead?.lead.name}
+        leadPhone={selectedChainLead?.lead.phone}
+        leadEmail={selectedChainLead?.lead.email}
+        assignedJrCrm={selectedChainLead?.assignedJrCrm}
+        assignedSrCrm={selectedChainLead?.assignedSrCrm}
+        onScheduleNext={(leadId) => {
+          if (selectedChainLead) {
+            openCompleteModal(selectedChainLead)
+          }
+        }}
+      />
+    </div>
   )
 }
