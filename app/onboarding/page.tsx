@@ -309,17 +309,10 @@ export default function OnboardingPage() {
             <CardTitle>Sign in to continue</CardTitle>
             <CardDescription>Your onboarding is waiting for you.</CardDescription>
           </CardHeader>
-          <CardFooter className="flex flex-col gap-2">
+          <CardFooter>
             <SignInButton>
               <Button className="w-full">Sign in</Button>
             </SignInButton>
-            <Button
-              variant="outline"
-              className="w-full"
-              onClick={() => router.push("/crm/admin/queue")}
-            >
-              Open Visit Queue Calendar
-            </Button>
           </CardFooter>
         </Card>
       </main>
