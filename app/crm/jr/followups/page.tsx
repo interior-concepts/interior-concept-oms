@@ -38,6 +38,8 @@ import {
   FileSpreadsheet,
   MapPin,
   CreditCard,
+  Table as TableIcon,
+  LayoutList,
 } from 'lucide-react'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { fetchMeCached } from '@/lib/client-me'
@@ -178,6 +180,7 @@ export default function FollowupsPage() {
   const isSeniorCrmView = pathname?.startsWith('/crm/sr') ?? false
 
   const [activeTab, setActiveTab] = useState<TabKey>('pending')
+  const [viewMode, setViewMode] = useState<'table' | 'list'>('table')
   const [crmPerspective, setCrmPerspective] = useState<CrmPerspective>('ALL')
   const [searchQuery, setSearchQuery] = useState('')
   const [currentUserId, setCurrentUserId] = useState<string | null>(null)
@@ -560,6 +563,236 @@ export default function FollowupsPage() {
     </Card>
   )
 
+  const FollowupTable = ({ items }: { items: FollowUp[] }) => {
+    return (
+      <div className="w-full rounded-xl border border-border bg-card overflow-hidden shadow-sm">
+        <div className="w-full overflow-x-auto touch-pan-x scrollbar-thin">
+          <table className="w-full min-w-[1000px] text-xs text-left divide-y divide-border border-collapse">
+            <thead className="bg-muted/50 border-b border-border">
+              <tr>
+                <th className="py-3 px-4 font-semibold text-muted-foreground whitespace-nowrap min-w-[190px]">
+                  Lead / Client
+                </th>
+                <th className="py-3 px-4 font-semibold text-muted-foreground whitespace-nowrap">
+                  Department
+                </th>
+                <th className="py-3 px-4 font-semibold text-muted-foreground whitespace-nowrap">
+                  Status
+                </th>
+                <th className="py-3 px-4 font-semibold text-muted-foreground whitespace-nowrap min-w-[140px]">
+                  Scheduled Date
+                </th>
+                <th className="py-3 px-4 font-semibold text-muted-foreground min-w-[240px] max-w-[340px]">
+                  Follow-up Remarks
+                </th>
+                <th className="py-3 px-4 font-semibold text-muted-foreground whitespace-nowrap min-w-[160px]">
+                  Assigned Team
+                </th>
+                <th className="py-3 px-4 font-semibold text-muted-foreground whitespace-nowrap text-right min-w-[170px]">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border">
+              {items.map((followup) => {
+                const config = statusConfig[followup.status]
+                const followupDateTime = new Date(followup.followupDate)
+                const canComplete = followup.status === 'PENDING' || followup.status === 'MISSED'
+                const isSr = followup.crmRole === 'SR_CRM'
+                const isJr = followup.crmRole === 'JR_CRM'
+
+                return (
+                  <tr key={followup.id} className="hover:bg-muted/30 transition-colors">
+                    {/* 1. Lead / Client */}
+                    <td className="py-3.5 px-4 align-top">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <Link
+                            href={leadHref(followup.leadId)}
+                            className="font-semibold text-foreground hover:text-primary transition-colors text-xs"
+                          >
+                            {followup.lead.name}
+                          </Link>
+                          <Badge variant="outline" className="text-[10px] font-normal px-1.5 py-0">
+                            {followup.lead.stage.replace(/_/g, ' ')}
+                          </Badge>
+                        </div>
+                        <div className="text-[11px] text-muted-foreground flex items-center gap-1">
+                          <Phone className="w-3 h-3 text-muted-foreground/70 shrink-0" />
+                          <span>{followup.lead.phone}</span>
+                        </div>
+                        {followup.lead.email ? (
+                          <div className="text-[11px] text-muted-foreground flex items-center gap-1 truncate max-w-[180px]">
+                            <Mail className="w-3 h-3 text-muted-foreground/70 shrink-0" />
+                            <span className="truncate">{followup.lead.email}</span>
+                          </div>
+                        ) : null}
+                      </div>
+                    </td>
+
+                    {/* 2. Department */}
+                    <td className="py-3.5 px-4 align-top whitespace-nowrap">
+                      <DepartmentRoleBadge departmentKey={followup.departmentRole || followup.crmRole} />
+                    </td>
+
+                    {/* 3. Status */}
+                    <td className="py-3.5 px-4 align-top whitespace-nowrap">
+                      <Badge className={`${config.bgColor} ${config.color} text-[11px] font-medium gap-1`}>
+                        {config.icon}
+                        <span>{config.label}</span>
+                      </Badge>
+                    </td>
+
+                    {/* 4. Scheduled Date */}
+                    <td className="py-3.5 px-4 align-top whitespace-nowrap">
+                      <div className="space-y-0.5">
+                        <div className="font-semibold text-foreground flex items-center gap-1">
+                          <Calendar className="w-3 h-3 text-muted-foreground" />
+                          <span>
+                            {followupDateTime.toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric',
+                            })}
+                          </span>
+                        </div>
+                        <div className="text-[11px] text-muted-foreground flex items-center gap-1 pl-4">
+                          <Clock className="w-2.5 h-2.5 text-muted-foreground/70" />
+                          <span>
+                            {followupDateTime.toLocaleTimeString('en-US', {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+
+                    {/* 5. Remarks */}
+                    <td className="py-3.5 px-4 align-top">
+                      {followup.notes ? (
+                        <div
+                          className="text-xs font-semibold text-foreground leading-relaxed break-words bg-muted/40 p-2 rounded border border-border/60 max-h-24 overflow-y-auto"
+                          title={followup.notes}
+                        >
+                          "{followup.notes}"
+                        </div>
+                      ) : (
+                        <span className="text-muted-foreground/60 italic text-xs">No remarks</span>
+                      )}
+                    </td>
+
+                    {/* 6. Assigned & Team */}
+                    <td className="py-3.5 px-4 align-top">
+                      <div className="space-y-1">
+                        <div className="font-medium text-foreground flex items-center gap-1 text-xs">
+                          <User className="w-3 h-3 text-muted-foreground shrink-0" />
+                          <span>{followup.assignedTo.fullName}</span>
+                        </div>
+                        <div className="text-[10px] text-muted-foreground flex items-center gap-1">
+                          <span>Jr: {followup.assignedJrCrm?.fullName || (isJr ? followup.assignedTo.fullName : '—')}</span>
+                          <span>•</span>
+                          <span>Sr: {followup.assignedSrCrm?.fullName || (isSr ? followup.assignedTo.fullName : '—')}</span>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-5 px-1.5 text-[10px] text-primary hover:bg-primary/10 gap-1"
+                          onClick={() => openChainDialogForFollowup(followup)}
+                        >
+                          <Layers className="w-3 h-3" />
+                          {followup.connectedLeadFollowupsCount ?? 1} Connected
+                        </Button>
+                      </div>
+                    </td>
+
+                    {/* 7. Actions */}
+                    <td className="py-3.5 px-4 align-top whitespace-nowrap text-right">
+                      <div className="flex items-center justify-end gap-1.5">
+                        {followup.lead.phone ? (
+                          <a
+                            href={`https://wa.me/${followup.lead.phone.replace(/[^\d+]/g, '').replace(/^0/, '880')}?text=${encodeURIComponent(`Hi ${followup.lead.name}, checking in regarding your interior design project.`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="h-7 w-7 p-0 text-green-700 border-green-300 hover:bg-green-50"
+                              title="WhatsApp"
+                            >
+                              <MessageSquare className="w-3.5 h-3.5 fill-green-600 text-green-600" />
+                            </Button>
+                          </a>
+                        ) : null}
+                        <Link href={leadHref(followup.leadId)}>
+                          <Button size="sm" variant="outline" className="h-7 px-2 text-xs gap-1">
+                            Lead <ArrowRight className="w-3 h-3" />
+                          </Button>
+                        </Link>
+                        {canComplete ? (
+                          <Button
+                            size="sm"
+                            onClick={() => openCompleteModal(followup)}
+                            className="h-7 px-2.5 text-xs gap-1"
+                          >
+                            <CheckCircle2 className="w-3.5 h-3.5" /> Complete
+                          </Button>
+                        ) : null}
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
+  }
+
+  const FollowupTableSkeleton = () => (
+    <div className="w-full rounded-xl border border-border bg-card overflow-hidden shadow-sm">
+      <div className="w-full overflow-x-auto touch-pan-x">
+        <table className="w-full min-w-[1000px] text-xs text-left divide-y divide-border">
+          <thead className="bg-muted/50 border-b border-border">
+            <tr>
+              <th className="py-3 px-4 font-semibold text-muted-foreground min-w-[190px]">Lead / Client</th>
+              <th className="py-3 px-4 font-semibold text-muted-foreground">Department</th>
+              <th className="py-3 px-4 font-semibold text-muted-foreground">Status</th>
+              <th className="py-3 px-4 font-semibold text-muted-foreground min-w-[140px]">Scheduled Date</th>
+              <th className="py-3 px-4 font-semibold text-muted-foreground min-w-[240px]">Follow-up Remarks</th>
+              <th className="py-3 px-4 font-semibold text-muted-foreground min-w-[160px]">Assigned Team</th>
+              <th className="py-3 px-4 font-semibold text-muted-foreground text-right min-w-[170px]">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border">
+            {Array.from({ length: 5 }).map((_, idx) => (
+              <tr key={idx} className="animate-pulse">
+                <td className="py-3.5 px-4 space-y-1.5">
+                  <div className="h-3.5 w-32 bg-muted rounded" />
+                  <div className="h-2.5 w-24 bg-muted rounded" />
+                </td>
+                <td className="py-3.5 px-4"><div className="h-5 w-20 bg-muted rounded" /></td>
+                <td className="py-3.5 px-4"><div className="h-5 w-16 bg-muted rounded" /></td>
+                <td className="py-3.5 px-4 space-y-1">
+                  <div className="h-3.5 w-24 bg-muted rounded" />
+                  <div className="h-2.5 w-16 bg-muted rounded" />
+                </td>
+                <td className="py-3.5 px-4"><div className="h-9 w-full bg-muted rounded" /></td>
+                <td className="py-3.5 px-4 space-y-1">
+                  <div className="h-3.5 w-24 bg-muted rounded" />
+                  <div className="h-2.5 w-28 bg-muted rounded" />
+                </td>
+                <td className="py-3.5 px-4 text-right"><div className="h-7 w-20 bg-muted rounded ml-auto" /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+
   const EmptyState = ({ icon, text }: { icon: ReactNode; text: string }) => (
     <Card className="border-dashed">
       <CardContent className="pt-14 pb-14 text-center">
@@ -573,7 +806,9 @@ export default function FollowupsPage() {
     const state = tabState[tab]
 
     if (state.loading && state.items.length === 0) {
-      return (
+      return viewMode === 'table' ? (
+        <FollowupTableSkeleton />
+      ) : (
         <div className="space-y-4">
           {Array.from({ length: 4 }).map((_, idx) => (
             <FollowupCardSkeleton key={idx} />
@@ -592,9 +827,13 @@ export default function FollowupsPage() {
 
     return (
       <div className="space-y-4">
-        {state.items.map((followup) => (
-          <FollowupCard key={followup.id} followup={followup} />
-        ))}
+        {viewMode === 'table' ? (
+          <FollowupTable items={state.items} />
+        ) : (
+          state.items.map((followup) => (
+            <FollowupCard key={followup.id} followup={followup} />
+          ))
+        )}
 
         <div className="flex items-center justify-end gap-2 pt-2">
           <Button
@@ -726,20 +965,43 @@ export default function FollowupsPage() {
           </div>
         </div>
 
-        {/* Status Tabs */}
+        {/* Status Tabs & View Mode Switcher */}
         <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val as TabKey)} className="w-full">
-          <TabsList className="grid grid-cols-5 w-full max-w-2xl">
-            {(Object.keys(tabLabels) as TabKey[]).map((tab) => (
-              <TabsTrigger key={tab} value={tab} className="text-xs sm:text-sm">
-                {tabLabels[tab]}
-                {tabState[tab].loaded && tabState[tab].total > 0 && (
-                  <Badge variant="secondary" className="ml-1.5 px-1.5 py-0 text-[10px] h-4">
-                    {tabState[tab].total}
-                  </Badge>
-                )}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <TabsList className="grid grid-cols-5 w-full sm:max-w-2xl">
+              {(Object.keys(tabLabels) as TabKey[]).map((tab) => (
+                <TabsTrigger key={tab} value={tab} className="text-xs sm:text-sm">
+                  {tabLabels[tab]}
+                  {tabState[tab].loaded && tabState[tab].total > 0 && (
+                    <Badge variant="secondary" className="ml-1.5 px-1.5 py-0 text-[10px] h-4">
+                      {tabState[tab].total}
+                    </Badge>
+                  )}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+
+            <div className="inline-flex items-center rounded-lg border border-border p-0.5 bg-muted/30 self-start sm:self-auto shrink-0">
+              <Button
+                type="button"
+                variant={viewMode === 'table' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('table')}
+                className="h-8 px-3 text-xs gap-1.5 font-medium"
+              >
+                <TableIcon className="h-3.5 w-3.5" /> Table
+              </Button>
+              <Button
+                type="button"
+                variant={viewMode === 'list' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('list')}
+                className="h-8 px-3 text-xs gap-1.5 font-medium"
+              >
+                <LayoutList className="h-3.5 w-3.5" /> List
+              </Button>
+            </div>
+          </div>
 
           <div className="mt-6">
             {activeTab === 'pending' && renderTabContent('pending', <Clock className="w-12 h-12" />, 'No pending follow-ups')}
