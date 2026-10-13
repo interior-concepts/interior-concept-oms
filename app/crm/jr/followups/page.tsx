@@ -174,6 +174,7 @@ function defaultNextFollowupDatetime(): string {
 
 export default function FollowupsPage() {
   const pathname = usePathname()
+  const isAdminView = pathname?.startsWith('/crm/admin') ?? false
   const isSeniorCrmView = pathname?.startsWith('/crm/sr') ?? false
 
   const [activeTab, setActiveTab] = useState<TabKey>('pending')
@@ -405,6 +406,7 @@ export default function FollowupsPage() {
   }
 
   const leadHref = (leadId: string) => {
+    if (isAdminView) return `/crm/admin/leads/${leadId}`
     return isSeniorCrmView ? `/crm/sr/leads/${leadId}` : `/crm/jr/leads/${leadId}`
   }
 
@@ -619,8 +621,14 @@ export default function FollowupsPage() {
     )
   }
 
-  const pageTitle = isSeniorCrmView ? 'Senior CRM Follow-Up Hub' : 'Junior CRM Follow-Up Hub'
-  const pageSubtitle = 'Connected Lead Pipeline: seamlessly link Junior CRM qualification with Senior CRM closing actions.'
+  const pageTitle = isAdminView
+    ? 'Admin Follow-Up Hub'
+    : isSeniorCrmView
+      ? 'Senior CRM Follow-Up Hub'
+      : 'Junior CRM Follow-Up Hub'
+  const pageSubtitle = isAdminView
+    ? 'Organization-wide lead follow-ups: manage and monitor follow-up actions across all departments.'
+    : 'Connected Lead Pipeline: seamlessly link Junior CRM qualification with Senior CRM closing actions.'
 
   return (
     <div className="min-h-screen bg-background">

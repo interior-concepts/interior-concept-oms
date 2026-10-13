@@ -82,6 +82,11 @@ const navigationGroups: Record<string, NavGroup[]> = {
           href: '/crm/admin/leads',
         },
         {
+          icon: CheckSquare,
+          label: 'Followups',
+          href: '/crm/admin/followups',
+        },
+        {
           icon: ClipboardList,
           label: 'Projects',
           href: '/crm/admin/projects',

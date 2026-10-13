@@ -268,6 +268,7 @@ type LeadSummary = {
   lastFollowup?: {
     id: string
     followupDate: string
+    createdAt?: string | null
     notes?: string | null
     status: string
     category: string
@@ -276,6 +277,7 @@ type LeadSummary = {
   nextFollowup?: {
     id: string
     followupDate: string
+    createdAt?: string | null
     notes?: string | null
     status: string
     category: string
@@ -1401,22 +1403,32 @@ export default function LeadsPage() {
                           </td>
 
                           {/* 7. Show last followup data */}
-                          <td className="py-4 px-4 align-top min-w-[180px]">
+                          <td className="py-4 px-4 align-top min-w-[220px] max-w-[320px]">
                             {lead.lastFollowup ? (
-                              <div className="text-xs space-y-1">
-                                <div className="font-semibold text-foreground">
-                                  {formatDate(lead.lastFollowup.followupDate)}
-                                </div>
-                                {lead.lastFollowup.assignedTo ? (
-                                  <div className="text-[11px] text-muted-foreground font-medium">
-                                    By: {lead.lastFollowup.assignedTo.fullName}
-                                  </div>
-                                ) : null}
+                              <div className="space-y-1.5">
+                                {/* Primary focus: Follow-up remarks shown in a bigger, clearer way */}
                                 {lead.lastFollowup.notes ? (
-                                  <div className="text-[11px] text-muted-foreground/90 italic bg-muted/30 rounded p-1.5 border border-border/50 line-clamp-2" title={lead.lastFollowup.notes}>
+                                  <div
+                                    className="text-xs font-semibold text-foreground leading-relaxed break-words bg-muted/40 rounded p-2 border border-border/60"
+                                    title={lead.lastFollowup.notes}
+                                  >
                                     "{lead.lastFollowup.notes}"
                                   </div>
-                                ) : null}
+                                ) : (
+                                  <div className="text-xs text-muted-foreground/70 italic">
+                                    No remarks recorded
+                                  </div>
+                                )}
+                                {/* Secondary metadata: date when data was provided, By: small */}
+                                <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-muted-foreground">
+                                  <span>{formatDate(lead.lastFollowup.createdAt || lead.lastFollowup.followupDate)}</span>
+                                  {lead.lastFollowup.assignedTo ? (
+                                    <>
+                                      <span className="text-muted-foreground/40">•</span>
+                                      <span>By: {lead.lastFollowup.assignedTo.fullName}</span>
+                                    </>
+                                  ) : null}
+                                </div>
                               </div>
                             ) : (
                               <span className="text-muted-foreground text-xs">—</span>

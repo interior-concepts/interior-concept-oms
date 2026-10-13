@@ -670,6 +670,7 @@ export async function GET(request: NextRequest) {
         id: string;
         leadId: string;
         followupDate: Date;
+        createdAt: Date;
         notes: string | null;
         status: string;
         category: string;
@@ -780,14 +781,15 @@ export async function GET(request: NextRequest) {
               updatedBy: { select: { id: true, fullName: true } },
             },
           }),
-          // Last followup per lead (most recent by followupDate)
+          // Followups per lead for resolving lastFollowup (most recently recorded/created)
           prisma.followUp.findMany({
             where: { leadId: { in: leadIds } },
-            orderBy: { followupDate: 'desc' },
+            orderBy: [{ createdAt: 'desc' }, { followupDate: 'desc' }],
             select: {
               id: true,
               leadId: true,
               followupDate: true,
+              createdAt: true,
               notes: true,
               status: true,
               category: true,
@@ -806,6 +808,7 @@ export async function GET(request: NextRequest) {
               id: true,
               leadId: true,
               followupDate: true,
+              createdAt: true,
               notes: true,
               status: true,
               category: true,
@@ -871,9 +874,36 @@ export async function GET(request: NextRequest) {
         if (lastFollowupResult.status === 'rejected') {
           console.error('[GET /api/lead] Enriched last-followup fetch failed:', lastFollowupResult.reason);
         } else {
+          const followupsByLead = new Map<string, EnrichedFollowupRow[]>();
           for (const row of lastFollowupResult.value as EnrichedFollowupRow[]) {
-            const { leadId, ...rest } = row;
-            if (!lastFollowupByLeadId.has(leadId)) {
+            const list = followupsByLead.get(row.leadId) ?? [];
+            list.push(row);
+            followupsByLead.set(row.leadId, list);
+          }
+
+          for (const [leadId, rows] of followupsByLead.entries()) {
+            // Determine the true "last followup" (past / completed interaction with data provided):
+            // 1. Most recent completed follow-up (DONE or LATELY_DONE)
+            // 2. Most recent follow-up that is in the past (MISSED or followupDate <= now)
+            // 3. Most recent follow-up that has non-empty notes (excluding upcoming pending follow-ups)
+            // 4. Any follow-up with notes
+            const completed = rows.find(
+              (r) => r.status === 'DONE' || r.status === 'LATELY_DONE',
+            );
+            const past = rows.find(
+              (r) => r.status === 'MISSED' || new Date(r.followupDate) <= now,
+            );
+            const nonPendingWithNotes = rows.find(
+              (r) => r.notes && r.notes.trim().length > 0 && !(r.status === 'PENDING' && new Date(r.followupDate) > now),
+            );
+            const anyWithNotes = rows.find(
+              (r) => r.notes && r.notes.trim().length > 0,
+            );
+
+            // A future pending followup without notes should not be considered a "last followup"
+            const chosen = completed ?? past ?? nonPendingWithNotes ?? anyWithNotes;
+            if (chosen) {
+              const { leadId: _, ...rest } = chosen;
               lastFollowupByLeadId.set(leadId, rest);
             }
           }
