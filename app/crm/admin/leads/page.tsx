@@ -43,10 +43,12 @@ import {
   FileText,
   Download,
   ExternalLink,
+  Sparkles,
   type LucideIcon,
 } from 'lucide-react'
 import LeadCreateModal from '@/components/crm/junior/LeadCreateModal'
 import { LeadImportModal } from '@/components/crm/admin/lead-import-modal'
+import { InstantQuotationModal } from '@/components/crm/admin/instant-quotation-modal'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { LeadDateRangeFilter, type LeadDatePreset } from '@/components/crm/shared/lead-date-range-filter'
 import { downloadDetailQuotationWord, downloadShortQuotationWord } from '@/components/crm/quotation/word-download'
@@ -470,6 +472,7 @@ export default function LeadsPage() {
   const [meetingModalLead, setMeetingModalLead] = useState<LeadSummary | null>(null)
   const [cadModalLead, setCadModalLead] = useState<LeadSummary | null>(null)
   const [quotationModalLead, setQuotationModalLead] = useState<LeadSummary | null>(null)
+  const [instantQuotationLead, setInstantQuotationLead] = useState<LeadSummary | null>(null)
   const [downloadingDraftId, setDownloadingDraftId] = useState<string | null>(null)
   const [batchAssignOpen, setBatchAssignOpen] = useState(false)
   const [departments, setDepartments] = useState<DepartmentSummary[]>([])
@@ -1161,13 +1164,24 @@ export default function LeadsPage() {
                           <p>Senior CRM: {lead.assignments?.find((a) => a.department === 'SR_CRM')?.user?.fullName || 'Unassigned'}</p>
                           <p>Location: {lead.location || '—'}</p>
                         </div>
-                        <div className="flex items-center justify-between gap-3">
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${stageColors[lead.stage]}`}>
+                        <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-border/40">
+                          <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${stageColors[lead.stage]}`}>
                             {formatStageDisplay(lead.stage)}
                           </span>
-                          <Link href={getLeadHref(lead.id)}>
-                            <Button variant="outline" size="sm">View</Button>
-                          </Link>
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="h-7 text-xs gap-1 border-sky-400/70 text-sky-700 hover:bg-sky-50 dark:border-sky-800 dark:text-sky-300"
+                              onClick={() => setInstantQuotationLead(lead)}
+                            >
+                              <Sparkles className="h-3 w-3 text-sky-600 dark:text-sky-400" />
+                              <span>Instant Quote</span>
+                            </Button>
+                            <Link href={getLeadHref(lead.id)}>
+                              <Button variant="outline" size="sm" className="h-7">View</Button>
+                            </Link>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
@@ -1383,22 +1397,39 @@ export default function LeadsPage() {
                             </Button>
                           </td>
 
-                          {/* 6. Quotation (if quotation drafts exist, button to open modal with all quotations; if none show X) */}
-                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[130px]">
+                          {/* 6. Quotation */}
+                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[140px]">
                             {lead.quotationDrafts && lead.quotationDrafts.length > 0 ? (
+                              <div className="flex flex-col items-center gap-1.5">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="h-7 text-xs gap-1.5 font-semibold border-sky-500/40 text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-950/30 w-full justify-center"
+                                  onClick={() => setQuotationModalLead(lead)}
+                                >
+                                  <FileText className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
+                                  <span>Quotations ({lead.quotationDrafts.length})</span>
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-6 px-2 text-[11px] gap-1 font-medium text-sky-700 hover:text-sky-800 hover:bg-sky-100/50 dark:text-sky-300 dark:hover:bg-sky-950/40"
+                                  onClick={() => setInstantQuotationLead(lead)}
+                                >
+                                  <Sparkles className="h-3 w-3" />
+                                  <span>Instant Quote</span>
+                                </Button>
+                              </div>
+                            ) : (
                               <Button
                                 variant="outline"
                                 size="sm"
-                                className="h-8 text-xs gap-1.5 font-semibold border-sky-500/40 text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-950/30"
-                                onClick={() => setQuotationModalLead(lead)}
+                                className="h-7 text-xs gap-1.5 font-semibold border-sky-500/50 bg-sky-50 text-sky-800 hover:bg-sky-100 dark:bg-sky-950/40 dark:text-sky-200 dark:border-sky-800"
+                                onClick={() => setInstantQuotationLead(lead)}
                               >
-                                <FileText className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
-                                <span>Quotations ({lead.quotationDrafts.length})</span>
+                                <Sparkles className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
+                                <span>Instant Quote</span>
                               </Button>
-                            ) : (
-                              <div className="inline-flex items-center justify-center text-red-500">
-                                <X className="h-5 w-5" />
-                              </div>
                             )}
                           </td>
 
@@ -1846,7 +1877,7 @@ export default function LeadsPage() {
                             </Button>
 
                             {/* Button 2: Open Quotation Studio (Edit & Manage) */}
-                            <Link href={`/crm/sr/quotation/leads/${quotationModalLead.id}`}>
+                            <Link href={`/crm/admin/quotation/leads/${quotationModalLead.id}`}>
                               <Button
                                 size="sm"
                                 className="h-8 gap-1.5 text-xs font-semibold"
@@ -1868,13 +1899,26 @@ export default function LeadsPage() {
                   Close
                 </Button>
                 {quotationModalLead ? (
-                  <Link href={`/crm/sr/quotation/leads/${quotationModalLead.id}`}>
+                  <Link href={`/crm/admin/quotation/leads/${quotationModalLead.id}`}>
                     <Button variant="secondary">Open Quotation Studio</Button>
                   </Link>
                 ) : null}
               </DialogFooter>
             </DialogContent>
           </Dialog>
+
+          {/* 4. Instant Quotation Modal (Admin-only setup) */}
+          <InstantQuotationModal
+            open={Boolean(instantQuotationLead)}
+            onOpenChange={(open) => {
+              if (!open) setInstantQuotationLead(null)
+            }}
+            lead={instantQuotationLead}
+            onSuccess={(url) => {
+              setInstantQuotationLead(null)
+              router.push(url)
+            }}
+          />
         </div>
       </main>
     </div>
