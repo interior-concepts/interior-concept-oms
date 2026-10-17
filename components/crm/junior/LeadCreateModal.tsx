@@ -31,6 +31,7 @@ type CreateLeadPayload = {
   budget?: number
   source: string
   assignedToId?: string
+  seniorCrmUserId?: string
   scheduleVisit?: boolean
   visit?: {
     visitTeamUserId?: string
@@ -48,6 +49,7 @@ type ModalBootstrapCache = {
   currentUserId: string | null
   isAdmin: boolean
   isJuniorCrm: boolean
+  isSeniorCrm: boolean
   jrCrmUsers: JrCrmUser[]
 }
 
@@ -76,6 +78,7 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
   const [currentUserId, setCurrentUserId] = useState<string | null>(null)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isJuniorCrm, setIsJuniorCrm] = useState(false)
+  const [isSeniorCrm, setIsSeniorCrm] = useState(false)
   const [scheduleVisit, setScheduleVisit] = useState(false)
   const [visitForm, setVisitForm] = useState({
     visitTeamUserId: '',
@@ -105,9 +108,13 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
         setCurrentUserId(cached.currentUserId)
         setIsAdmin(cached.isAdmin)
         setIsJuniorCrm(cached.isJuniorCrm)
+        setIsSeniorCrm(cached.isSeniorCrm)
         setJrCrmUsers(cached.jrCrmUsers)
         if (cached.isJuniorCrm && !cached.isAdmin && cached.currentUserId) {
           setForm((prev) => ({ ...prev, jrCrmUserId: cached.currentUserId ?? '' }))
+        }
+        if (cached.isSeniorCrm && cached.currentUserId) {
+          setVisitForm((prev) => ({ ...prev, seniorCrmUserId: cached.currentUserId ?? '' }))
         }
       }
       return
@@ -124,10 +131,12 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
           : []
         const isAdminUser = departments.includes('ADMIN')
         const isJrUser = departments.includes('JR_CRM')
+        const isSrUser = departments.includes('SR_CRM')
 
         setCurrentUserId(meData?.id ?? null)
         setIsAdmin(isAdminUser)
         setIsJuniorCrm(isJrUser)
+        setIsSeniorCrm(isSrUser)
 
         if (jrData?.success && Array.isArray(jrData?.users)) {
           setJrCrmUsers(jrData.users)
@@ -139,11 +148,16 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
           setForm((prev) => ({ ...prev, jrCrmUserId: String(meData.id) }))
         }
 
+        if (isSrUser && meData?.id) {
+          setVisitForm((prev) => ({ ...prev, seniorCrmUserId: String(meData.id) }))
+        }
+
         modalBootstrapCache = {
           savedAt: Date.now(),
           currentUserId: meData?.id ?? null,
           isAdmin: isAdminUser,
           isJuniorCrm: isJrUser,
+          isSeniorCrm: isSrUser,
           jrCrmUsers: jrData?.success && Array.isArray(jrData?.users) ? jrData.users : [],
         }
       })
@@ -196,6 +210,10 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
     }
     setLoading(true)
     setError('')
+    const effectiveSeniorCrmUserId =
+      (isSeniorCrm && currentUserId ? currentUserId : undefined) ||
+      (visitForm.seniorCrmUserId || undefined)
+
     const payload: CreateLeadPayload = {
       name: form.name.trim(),
       email: form.email.trim() || undefined,
@@ -204,6 +222,7 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
       budget: form.budget ? Number(form.budget) : undefined,
       source: form.source.trim(),
       assignedToId: form.jrCrmUserId || undefined,
+      seniorCrmUserId: effectiveSeniorCrmUserId,
     }
     if (scheduleVisit) {
       payload.scheduleVisit = true
@@ -229,7 +248,7 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
         visitFee: visitForm.visitFee ? Number(visitForm.visitFee) : undefined,
         projectSqft: visitForm.projectSqft ? Number(visitForm.projectSqft) : undefined,
         projectStatus: visitForm.projectStatus || undefined,
-        seniorCrmUserId: visitForm.seniorCrmUserId || undefined,
+        seniorCrmUserId: visitForm.seniorCrmUserId || effectiveSeniorCrmUserId,
       }
     }
     let data: { success?: boolean; error?: string } = {}
@@ -265,7 +284,15 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
         jrCrmUserId: currentUserId && isJuniorCrm && !isAdmin ? currentUserId : '',
       })
       setScheduleVisit(false)
-      setVisitForm({ visitTeamUserId: '', scheduledAt: '', notes: '', visitFee: '', projectSqft: '', projectStatus: '', seniorCrmUserId: '' })
+      setVisitForm({
+        visitTeamUserId: '',
+        scheduledAt: '',
+        notes: '',
+        visitFee: '',
+        projectSqft: '',
+        projectStatus: '',
+        seniorCrmUserId: isSeniorCrm && currentUserId ? currentUserId : '',
+      })
       if (onCreated) onCreated()
     } else {
       setError(data.error || 'Failed to create lead')

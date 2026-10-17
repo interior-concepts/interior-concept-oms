@@ -147,6 +147,7 @@ type CreateLeadBody = {
   location?: unknown;
   budget?: unknown;
   assignedToId?: unknown;
+  seniorCrmUserId?: unknown;
   scheduleVisit?: unknown;
   visit?: unknown;
 };
@@ -1038,10 +1039,16 @@ export async function POST(request: NextRequest) {
     );
     const isJuniorCrm = departmentNames.has('JR_CRM');
     const isAdmin = departmentNames.has('ADMIN');
+    const isSeniorCrm = departmentNames.has('SR_CRM');
 
     let jrCrmAssigneeId = requestedAssigneeId;
     if (!jrCrmAssigneeId && isJuniorCrm && !isAdmin) {
       jrCrmAssigneeId = authResult.actorUserId;
+    }
+
+    let srCrmAssigneeId = toOptionalString(body.seniorCrmUserId);
+    if (!srCrmAssigneeId && isSeniorCrm) {
+      srCrmAssigneeId = authResult.actorUserId;
     }
 
     if (phone) {
@@ -1083,6 +1090,27 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    if (srCrmAssigneeId) {
+      const srCrmUser = await prisma.user.findUnique({
+        where: { id: srCrmAssigneeId },
+        select: {
+          id: true,
+          userDepartments: { select: { department: { select: { name: true } } } },
+        },
+      });
+
+      const srDepartments = new Set(
+        (srCrmUser?.userDepartments ?? []).map((row) => row.department.name),
+      );
+
+      if (!srCrmUser || !srDepartments.has('SR_CRM')) {
+        return NextResponse.json(
+          { success: false, error: 'Selected user is not mapped to SR_CRM department' },
+          { status: 400 }
+        );
+      }
+    }
+
     // Pre-validate visit scheduling inputs and pre-fetch rotation/user details outside the transaction if requested
     const shouldSchedule = Boolean(body.scheduleVisit);
     let visitScheduleParams: {
@@ -1103,7 +1131,7 @@ export async function POST(request: NextRequest) {
     if (shouldSchedule) {
       const visitBody: CreateLeadVisitBody = isRecord(body.visit) ? body.visit : {};
       const visitTeamUserId = toOptionalString(visitBody.visitTeamUserId);
-      const seniorCrmUserId = toOptionalString(visitBody.seniorCrmUserId);
+      const seniorCrmUserId = toOptionalString(visitBody.seniorCrmUserId) ?? srCrmAssigneeId;
       const notes = toOptionalString(visitBody.notes);
       const reason = toOptionalString(visitBody.reason) ?? 'Visit has been scheduled.';
       const projectSqft = toOptionalNumber(visitBody.projectSqft);
@@ -1202,10 +1230,12 @@ export async function POST(request: NextRequest) {
     const lead = await prisma.$transaction(
       async (tx) => {
         const stage = phone ? LeadStage.NUMBER_COLLECTED : LeadStage.NEW;
-        const primaryOwnerDepartment = jrCrmAssigneeId
-          ? LeadPrimaryOwnerDepartment.JR_CRM
-          : null;
-        const primaryOwnerUserId = jrCrmAssigneeId ?? null;
+        const primaryOwnerDepartment = srCrmAssigneeId
+          ? LeadPrimaryOwnerDepartment.SR_CRM
+          : jrCrmAssigneeId
+            ? LeadPrimaryOwnerDepartment.JR_CRM
+            : null;
+        const primaryOwnerUserId = srCrmAssigneeId ?? jrCrmAssigneeId ?? null;
 
         // Create the new lead with validated data
         const newLead = await tx.lead.create({
@@ -1217,7 +1247,11 @@ export async function POST(request: NextRequest) {
             location: toOptionalString(body.location),
             budget: toBudget(body.budget),
             stage,
-            ...(jrCrmAssigneeId ? { assignedTo: jrCrmAssigneeId } : {}),
+            ...(jrCrmAssigneeId
+              ? { assignedTo: jrCrmAssigneeId }
+              : srCrmAssigneeId
+                ? { assignedTo: srCrmAssigneeId }
+                : {}),
             ...(primaryOwnerDepartment ? { primaryOwnerDepartment } : {}),
             ...(primaryOwnerUserId ? { primaryOwnerUserId } : {}),
           },
@@ -1234,6 +1268,16 @@ export async function POST(request: NextRequest) {
               leadId: newLead.id,
               userId: jrCrmAssigneeId,
               department: LeadAssignmentDepartment.JR_CRM,
+            },
+          });
+        }
+
+        if (srCrmAssigneeId) {
+          await tx.leadAssignment.create({
+            data: {
+              leadId: newLead.id,
+              userId: srCrmAssigneeId,
+              department: LeadAssignmentDepartment.SR_CRM,
             },
           });
         }
