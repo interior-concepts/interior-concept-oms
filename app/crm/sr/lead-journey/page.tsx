@@ -38,12 +38,18 @@ import {
   Globe,
   UserCircle2,
   Sparkles,
+  FileText,
+  Download,
+  ExternalLink,
   type LucideIcon,
 } from 'lucide-react'
 import LeadCreateModal from '@/components/crm/junior/LeadCreateModal'
 import { InstantQuotationModal } from '@/components/crm/admin/instant-quotation-modal'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { LeadDateRangeFilter, type LeadDatePreset } from '@/components/crm/shared/lead-date-range-filter'
+import { downloadDetailQuotationWord, downloadShortQuotationWord } from '@/components/crm/quotation/word-download'
+import { isDetailQuotationContent, isShortQuotationContent } from '@/lib/quotation-document'
+import { calculateQuotationTotals } from '@/lib/quotation-calculations'
 
 const PAGE_SIZE = 20
 const stages = [
@@ -206,6 +212,18 @@ type LeadSummary = {
     notes?: string | null
     assignedTo?: { fullName?: string | null } | null
   } | null
+  quotationDrafts?: Array<{
+    id: string
+    draftKey: string
+    quotationType?: string | null
+    projectSqft?: number | null
+    status: string
+    grandTotal: number
+    createdAt?: string | null
+    updatedAt: string
+    createdBy?: { id: string; fullName: string } | null
+    updatedBy?: { id: string; fullName: string } | null
+  }>
 }
 
 type LeadsResponse = {
@@ -252,6 +270,16 @@ function formatDateInput(date: Date): string {
   const month = String(date.getMonth() + 1).padStart(2, '0')
   const day = String(date.getDate()).padStart(2, '0')
   return `${year}-${month}-${day}`
+}
+
+function formatDate(dateStr: string | null | undefined, opts?: { includeTime?: boolean }): string {
+  if (!dateStr) return '—'
+  const d = new Date(dateStr)
+  if (isNaN(d.getTime())) return '—'
+  const date = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+  if (!opts?.includeTime) return date
+  const time = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
+  return `${date}, ${time}`
 }
 
 function getTodayRange(): { from: string; to: string } {
@@ -375,6 +403,8 @@ export default function SeniorCrmLeadJourneyPage() {
   const [canBatchAssign, setCanBatchAssign] = useState(true)
   const [selectedLeadIds, setSelectedLeadIds] = useState<string[]>([])
   const [instantQuotationLead, setInstantQuotationLead] = useState<LeadSummary | null>(null)
+  const [quotationModalLead, setQuotationModalLead] = useState<LeadSummary | null>(null)
+  const [downloadingDraftId, setDownloadingDraftId] = useState<string | null>(null)
   const [batchAssignOpen, setBatchAssignOpen] = useState(false)
   const [departments, setDepartments] = useState<DepartmentSummary[]>([])
   const [departmentUsers, setDepartmentUsers] = useState<DepartmentUser[]>([])
@@ -722,6 +752,43 @@ export default function SeniorCrmLeadJourneyPage() {
   }, [departments, fetchLeads, selectedDepartmentId, selectedLeadIds, selectedUserId])
 
   const displayedCount = useMemo(() => leads.length, [leads])
+  const handleDownloadQuotation = useCallback(async (lead: LeadSummary, draft: NonNullable<LeadSummary['quotationDrafts']>[number]) => {
+    if (downloadingDraftId) return
+    setDownloadingDraftId(draft.id)
+    try {
+      const res = await fetch(`/api/lead/${lead.id}/quotation-draft?draftId=${encodeURIComponent(draft.id)}`)
+      if (!res.ok) throw new Error('Failed to fetch draft')
+      const payload = (await res.json()) as {
+        success: boolean
+        data?: {
+          draft?: { content?: unknown; quotationType?: string } | null
+          documentType?: string
+          lead?: { name?: string; location?: string }
+        }
+      }
+      if (!payload.success || !payload.data?.draft?.content) {
+        throw new Error('Draft content not found')
+      }
+      const content = payload.data.draft.content
+      const clientName = payload.data.lead?.name ?? lead.name
+      const clientAddress = payload.data.lead?.location ?? lead.location ?? ''
+      const safeFileName = clientName.replace(/[^a-z0-9]/gi, '_').toLowerCase()
+      if (isShortQuotationContent(content)) {
+        downloadShortQuotationWord(content, `${safeFileName}_short.docx`, 'docx')
+      } else if (isDetailQuotationContent(content)) {
+        const totals = calculateQuotationTotals(content)
+        downloadDetailQuotationWord({ clientName, clientAddress, content, totals }, `${safeFileName}_detail.docx`, 'docx')
+      } else {
+        throw new Error('Unknown quotation type')
+      }
+    } catch (err) {
+      console.error('Quotation download failed:', err)
+      alert('Could not download quotation. Please try again.')
+    } finally {
+      setDownloadingDraftId(null)
+    }
+  }, [downloadingDraftId])
+
   const getLeadHref = useCallback(
     (leadId: string) => {
       const query = leadListQuery
@@ -1007,6 +1074,7 @@ export default function SeniorCrmLeadJourneyPage() {
                         <th className="px-4 py-3 text-left font-semibold text-muted-foreground">JR CRM</th>
                         <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Location</th>
                         <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Stage</th>
+                        <th className="px-4 py-3 text-center font-semibold text-muted-foreground">Quotation</th>
                         <th className="px-4 py-3 text-center font-semibold text-muted-foreground">Action</th>
                       </tr>
                     </thead>
@@ -1052,8 +1120,30 @@ export default function SeniorCrmLeadJourneyPage() {
                               {formatStageDisplay(lead.stage)}
                             </span>
                           </td>
-                          <td className="py-4 px-4 text-center whitespace-nowrap">
-                            <div className="inline-flex items-center gap-2">
+                          {/* Quotation cell */}
+                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[140px]">
+                            {lead.quotationDrafts && lead.quotationDrafts.length > 0 ? (
+                              <div className="flex flex-col items-center gap-1.5">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="h-7 text-xs gap-1.5 font-semibold border-sky-500/40 text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-950/30 w-full justify-center"
+                                  onClick={() => setQuotationModalLead(lead)}
+                                >
+                                  <FileText className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
+                                  <span>Quotations ({lead.quotationDrafts.length})</span>
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-6 px-2 text-[11px] gap-1 font-medium text-sky-700 hover:text-sky-800 hover:bg-sky-100/50 dark:text-sky-300 dark:hover:bg-sky-950/40"
+                                  onClick={() => setInstantQuotationLead(lead)}
+                                >
+                                  <Sparkles className="h-3 w-3" />
+                                  <span>Instant Quote</span>
+                                </Button>
+                              </div>
+                            ) : (
                               <Button
                                 variant="outline"
                                 size="sm"
@@ -1063,6 +1153,10 @@ export default function SeniorCrmLeadJourneyPage() {
                                 <Sparkles className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
                                 <span>Instant Quote</span>
                               </Button>
+                            )}
+                          </td>
+                          <td className="py-4 px-4 text-center whitespace-nowrap">
+                            <div className="inline-flex items-center gap-2">
                               <Link href={getLeadHref(lead.id)}>
                                 <Button variant="outline" size="sm" className="h-7">View</Button>
                               </Link>
@@ -1153,6 +1247,131 @@ export default function SeniorCrmLeadJourneyPage() {
                 <Button onClick={() => void submitBatchAssign()} disabled={submittingBatchAssign}>
                   {submittingBatchAssign ? 'Assigning...' : 'Assign Selected Leads'}
                 </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
+          {/* Quotation Details Modal */}
+          <Dialog
+            open={Boolean(quotationModalLead)}
+            onOpenChange={(open) => {
+              if (!open) setQuotationModalLead(null)
+            }}
+          >
+            <DialogContent className="max-w-2xl max-h-[85vh] flex flex-col p-0 overflow-hidden">
+              <DialogHeader className="px-6 pt-6 pb-3 border-b">
+                <DialogTitle className="flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-sky-600" />
+                  <span>Quotations: {quotationModalLead?.name}</span>
+                </DialogTitle>
+                <DialogDescription>
+                  Client ID: {quotationModalLead?.clientId ? `#${quotationModalLead.clientId}` : '—'} • Phone: {quotationModalLead?.phone || '—'}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="flex-1 overflow-y-auto px-6 py-4 space-y-3 overscroll-contain">
+                {!quotationModalLead?.quotationDrafts || quotationModalLead.quotationDrafts.length === 0 ? (
+                  <div className="py-8 text-center text-sm text-muted-foreground">
+                    No quotation drafts created for this lead yet.
+                  </div>
+                ) : (
+                  quotationModalLead.quotationDrafts.map((draft) => {
+                    const isFinalized = draft.status === 'FINALIZED'
+                    const isShort = draft.draftKey.toLowerCase().startsWith('short')
+                    const displayTitle = isShort
+                      ? 'Short Quotation'
+                      : draft.draftKey.toLowerCase() === 'detail'
+                        ? 'Detail Quotation'
+                        : `Quotation (${draft.draftKey.toUpperCase()})`
+
+                    return (
+                      <div key={draft.id} className="rounded-lg border border-border p-3.5 bg-muted/20 space-y-2.5">
+                        <div className="flex flex-wrap items-start justify-between gap-3">
+                          <div className="space-y-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <span className="font-semibold text-sm text-foreground">{displayTitle}</span>
+                              <span
+                                className={`rounded px-2 py-0.5 text-[10px] font-bold uppercase ${
+                                  isFinalized
+                                    ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300'
+                                    : 'bg-amber-100 text-amber-800 dark:bg-amber-950/50 dark:text-amber-300'
+                                }`}
+                              >
+                                {draft.status}
+                              </span>
+                              {draft.quotationType ? (
+                                <span className="rounded bg-sky-100 text-sky-800 dark:bg-sky-950/50 dark:text-sky-300 px-2 py-0.5 text-[10px] font-bold uppercase">
+                                  {draft.quotationType}
+                                </span>
+                              ) : null}
+                            </div>
+
+                            <div className="text-sm font-bold text-foreground">
+                              Grand Total:{' '}
+                              <span className="text-primary font-extrabold text-base">
+                                ৳ {draft.grandTotal.toLocaleString('en-IN')}
+                              </span>
+                              {draft.projectSqft ? (
+                                <span className="text-xs font-normal text-muted-foreground ml-2">
+                                  ({draft.projectSqft.toLocaleString()} sqft)
+                                </span>
+                              ) : null}
+                            </div>
+
+                            <div className="text-xs text-muted-foreground space-y-0.5 pt-0.5">
+                              {draft.createdBy ? (
+                                <div>
+                                  Created by: <span className="font-medium text-foreground">{draft.createdBy.fullName}</span>
+                                </div>
+                              ) : null}
+                              {draft.updatedAt ? (
+                                <div>Last updated: {formatDate(draft.updatedAt, { includeTime: true })}</div>
+                              ) : null}
+                            </div>
+                          </div>
+
+                          <div className="flex flex-wrap items-center gap-2 shrink-0 pt-1">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              disabled={downloadingDraftId === draft.id}
+                              className="h-8 gap-1.5 text-xs font-semibold border-border hover:bg-muted"
+                              onClick={() => void handleDownloadQuotation(quotationModalLead, draft)}
+                            >
+                              {downloadingDraftId === draft.id ? (
+                                <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                              ) : (
+                                <Download className="h-3.5 w-3.5" />
+                              )}
+                              <span>{downloadingDraftId === draft.id ? 'Downloading…' : 'Download Quotation'}</span>
+                            </Button>
+
+                            <Link href={`/crm/sr/quotation/leads/${quotationModalLead.id}`}>
+                              <Button
+                                size="sm"
+                                className="h-8 gap-1.5 text-xs font-semibold"
+                              >
+                                <ExternalLink className="h-3.5 w-3.5" />
+                                <span>Open Quotation Studio</span>
+                              </Button>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })
+                )}
+              </div>
+
+              <DialogFooter className="px-6 py-3 border-t bg-muted/20">
+                <Button variant="outline" onClick={() => setQuotationModalLead(null)}>
+                  Close
+                </Button>
+                {quotationModalLead ? (
+                  <Link href={`/crm/sr/quotation/leads/${quotationModalLead.id}`}>
+                    <Button variant="secondary">Open Quotation Studio</Button>
+                  </Link>
+                ) : null}
               </DialogFooter>
             </DialogContent>
           </Dialog>
