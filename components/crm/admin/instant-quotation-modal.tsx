@@ -23,6 +23,7 @@ import {
   Loader2,
   Sparkles,
 } from 'lucide-react'
+import { fetchMeCached } from '@/lib/client-me'
 
 type SeniorCrmUser = {
   id: string
@@ -122,9 +123,23 @@ export function InstantQuotationModal({
     const existingSqft = lead.latestVisit?.projectSqft
     setProjectSqft(existingSqft ? String(existingSqft) : '')
 
-    // Pre-fill Senior CRM if already assigned
+    // Pre-fill Senior CRM if already assigned, or fallback to current user if they are in SR_CRM
     const currentSr = lead.assignments?.find((a) => a.department === 'SR_CRM')
-    setSeniorCrmUserId(currentSr?.user?.id || '')
+    if (currentSr?.user?.id) {
+      setSeniorCrmUserId(currentSr.user.id)
+    } else {
+      void fetchMeCached()
+        .then((me) => {
+          if (!open) return
+          const isSr = (me?.userDepartments ?? []).some(
+            (d) => d?.department?.name === 'SR_CRM',
+          )
+          if (isSr && me?.id) {
+            setSeniorCrmUserId(me.id)
+          }
+        })
+        .catch(() => undefined)
+    }
 
     // Pre-fill Visit Date if scheduled
     if (lead.latestVisit?.scheduledAt && lead.latestVisit.status === 'SCHEDULED') {
@@ -218,7 +233,7 @@ export function InstantQuotationModal({
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
                 <span>Instant Quotation Setup</span>
                 <span className="rounded bg-sky-100 px-2 py-0.5 text-[11px] font-semibold text-sky-800 dark:bg-sky-950/50 dark:text-sky-300">
-                  Admin Action
+                  Fast Track
                 </span>
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-0.5">

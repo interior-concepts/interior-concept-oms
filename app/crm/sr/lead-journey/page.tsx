@@ -37,9 +37,11 @@ import {
   MessageCircle,
   Globe,
   UserCircle2,
+  Sparkles,
   type LucideIcon,
 } from 'lucide-react'
 import LeadCreateModal from '@/components/crm/junior/LeadCreateModal'
+import { InstantQuotationModal } from '@/components/crm/admin/instant-quotation-modal'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { LeadDateRangeFilter, type LeadDatePreset } from '@/components/crm/shared/lead-date-range-filter'
 
@@ -172,6 +174,7 @@ function getSourceVisual(source: string | null | undefined) {
 type LeadSummary = {
   id: string
   name: string
+  clientId?: number | null
   phone: string | null
   email: string | null
   source: string | null
@@ -183,6 +186,26 @@ type LeadSummary = {
     department: string
     user: { id: string; fullName: string; email: string }
   }>
+  latestVisit?: {
+    id: string
+    scheduledAt: string
+    projectSqft?: number | null
+    status: string
+  } | null
+  lastFollowup?: {
+    id: string
+    followupDate?: string | null
+    status?: string | null
+    notes?: string | null
+    assignedTo?: { fullName?: string | null } | null
+  } | null
+  nextFollowup?: {
+    id: string
+    followupDate?: string | null
+    status?: string | null
+    notes?: string | null
+    assignedTo?: { fullName?: string | null } | null
+  } | null
 }
 
 type LeadsResponse = {
@@ -351,6 +374,7 @@ export default function SeniorCrmLeadJourneyPage() {
   const [hasMore, setHasMore] = useState(true)
   const [canBatchAssign, setCanBatchAssign] = useState(true)
   const [selectedLeadIds, setSelectedLeadIds] = useState<string[]>([])
+  const [instantQuotationLead, setInstantQuotationLead] = useState<LeadSummary | null>(null)
   const [batchAssignOpen, setBatchAssignOpen] = useState(false)
   const [departments, setDepartments] = useState<DepartmentSummary[]>([])
   const [departmentUsers, setDepartmentUsers] = useState<DepartmentUser[]>([])
@@ -464,6 +488,7 @@ export default function SeniorCrmLeadJourneyPage() {
       const params = new URLSearchParams({
         limit: PAGE_SIZE.toString(),
         offset: offset.toString(),
+        includeEnriched: '1',
       })
 
       if (search) {
@@ -939,13 +964,24 @@ export default function SeniorCrmLeadJourneyPage() {
                           <p>JR CRM: {lead.assignments?.[0]?.user?.fullName || 'Unassigned'}</p>
                           <p>Location: {lead.location || '—'}</p>
                         </div>
-                        <div className="flex items-center justify-between gap-3">
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${stageColors[lead.stage]}`}>
+                        <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-border/40">
+                          <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${stageColors[lead.stage]}`}>
                             {formatStageDisplay(lead.stage)}
                           </span>
-                          <Link href={getLeadHref(lead.id)}>
-                            <Button variant="outline" size="sm">View</Button>
-                          </Link>
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="h-7 text-xs gap-1 border-sky-400/70 text-sky-700 hover:bg-sky-50 dark:border-sky-800 dark:text-sky-300"
+                              onClick={() => setInstantQuotationLead(lead)}
+                            >
+                              <Sparkles className="h-3 w-3 text-sky-600 dark:text-sky-400" />
+                              <span>Instant Quote</span>
+                            </Button>
+                            <Link href={getLeadHref(lead.id)}>
+                              <Button variant="outline" size="sm" className="h-7">View</Button>
+                            </Link>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
@@ -1016,10 +1052,21 @@ export default function SeniorCrmLeadJourneyPage() {
                               {formatStageDisplay(lead.stage)}
                             </span>
                           </td>
-                          <td className="py-4 px-4 text-center">
-                            <Link href={getLeadHref(lead.id)}>
-                              <Button variant="outline" size="sm">View</Button>
-                            </Link>
+                          <td className="py-4 px-4 text-center whitespace-nowrap">
+                            <div className="inline-flex items-center gap-2">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-7 text-xs gap-1.5 font-semibold border-sky-500/50 bg-sky-50 text-sky-800 hover:bg-sky-100 dark:bg-sky-950/40 dark:text-sky-200 dark:border-sky-800"
+                                onClick={() => setInstantQuotationLead(lead)}
+                              >
+                                <Sparkles className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
+                                <span>Instant Quote</span>
+                              </Button>
+                              <Link href={getLeadHref(lead.id)}>
+                                <Button variant="outline" size="sm" className="h-7">View</Button>
+                              </Link>
+                            </div>
                           </td>
                         </tr>
                       ))}
@@ -1109,6 +1156,19 @@ export default function SeniorCrmLeadJourneyPage() {
               </DialogFooter>
             </DialogContent>
           </Dialog>
+
+          {/* Instant Quotation Modal */}
+          <InstantQuotationModal
+            open={Boolean(instantQuotationLead)}
+            onOpenChange={(open) => {
+              if (!open) setInstantQuotationLead(null)
+            }}
+            lead={instantQuotationLead}
+            onSuccess={(url) => {
+              setInstantQuotationLead(null)
+              router.push(url)
+            }}
+          />
         </div>
       </main>
     </div>

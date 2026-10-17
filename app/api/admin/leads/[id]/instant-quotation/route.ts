@@ -35,9 +35,13 @@ export async function POST(req: NextRequest, context: RouteContext) {
       authResult.actor.userDepartments.includes('ADMIN') ||
       authResult.actorRoles.some((r) => r.toUpperCase() === 'ADMIN')
 
-    if (!isAdmin) {
+    const isSeniorCrm =
+      authResult.actor.userDepartments.includes('SR_CRM') ||
+      authResult.actorRoles.some((r) => r.toUpperCase() === 'SR_CRM')
+
+    if (!isAdmin && !isSeniorCrm) {
       return NextResponse.json(
-        { success: false, error: 'Only administrators can activate instant quotation.' },
+        { success: false, error: 'Only administrators and Senior CRM can activate instant quotation.' },
         { status: 403 },
       )
     }
@@ -158,12 +162,13 @@ export async function POST(req: NextRequest, context: RouteContext) {
       })
 
       // 3. Log activity
+      const actorLabel = isAdmin ? 'Admin' : 'Senior CRM'
       await tx.activityLog.create({
         data: {
           leadId,
           userId: authResult.actorUserId,
           type: ActivityType.STATUS_CHANGE,
-          description: `Instant quotation activated by Admin. Project size: ${parsedSqft.toLocaleString()} sqft. Assigned to Senior CRM: ${seniorUser.fullName}`,
+          description: `Instant quotation activated by ${actorLabel}. Project size: ${parsedSqft.toLocaleString()} sqft. Assigned to Senior CRM: ${seniorUser.fullName}`,
         },
       })
 
@@ -261,11 +266,12 @@ export async function POST(req: NextRequest, context: RouteContext) {
       }
     })
 
+    const actorRolePrefix = isAdmin ? '/crm/admin' : '/crm/sr'
     return NextResponse.json({
       success: true,
       data: {
         leadId,
-        quotationUrl: `/crm/admin/quotation/leads/${leadId}`,
+        quotationUrl: `${actorRolePrefix}/quotation/leads/${leadId}`,
       },
     })
   } catch (error) {
