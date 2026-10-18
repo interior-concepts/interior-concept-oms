@@ -64,6 +64,7 @@ import {
   FileDown,
   Pencil,
   Trash2,
+  BarChart3,
 } from "lucide-react"
 import { uploadDirectBlobFile } from "@/lib/client-blob-upload"
 
@@ -735,8 +736,15 @@ export default function FinanceDashboard() {
           <p className="text-muted-foreground mt-1">Manage cash flow, project budgets, and office overheads.</p>
         </div>
 
-        {/* LOG TRANSACTION TRIGGER */}
-        <Dialog open={isLogOpen} onOpenChange={(open) => {
+        <div className="flex items-center gap-2">
+          <Link href="/crm/accounts/summary" prefetch={false}>
+            <Button size="lg" variant="outline" className="gap-2">
+              <BarChart3 className="w-5 h-5 text-sky-600" /> Cash Flow Summary
+            </Button>
+          </Link>
+
+          {/* LOG TRANSACTION TRIGGER */}
+          <Dialog open={isLogOpen} onOpenChange={(open) => {
           setIsLogOpen(open)
           if (!open) {
             resetForm()
@@ -1225,6 +1233,7 @@ export default function FinanceDashboard() {
             </form>
           </DialogContent>
         </Dialog>
+        </div>
       </div>
 
       {/* STATS HEADER */}

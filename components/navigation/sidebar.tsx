@@ -19,6 +19,7 @@ import {
   ChevronDown,
   FlaskConical,
   FileText,
+  BarChart3,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/components/theme-provider'
@@ -107,6 +108,11 @@ const navigationGroups: Record<string, NavGroup[]> = {
           icon: ClipboardList,
           label: 'Finance',
           href: '/crm/admin/finance',
+        },
+        {
+          icon: BarChart3,
+          label: 'Summary',
+          href: '/crm/accounts/summary',
         },
         {
           icon: ClipboardList,
@@ -423,6 +429,11 @@ const navigationGroups: Record<string, NavGroup[]> = {
           href: '/crm/admin/finance',
         },
         {
+          icon: BarChart3,
+          label: 'Summary',
+          href: '/crm/accounts/summary',
+        },
+        {
           icon: Settings,
           label: 'Finance Settings',
           href: '/crm/admin/finance/settings',
@@ -440,6 +451,11 @@ const navigationGroups: Record<string, NavGroup[]> = {
           icon: ClipboardList,
           label: 'Finance',
           href: '/crm/admin/finance',
+        },
+        {
+          icon: BarChart3,
+          label: 'Summary',
+          href: '/crm/accounts/summary',
         },
         {
           icon: ClipboardList,
