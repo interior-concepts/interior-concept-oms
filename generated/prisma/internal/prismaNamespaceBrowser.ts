@@ -65,6 +65,8 @@ export const ModelName = {
   LeadMeetingEvent: 'LeadMeetingEvent',
   CadWorkSubmission: 'CadWorkSubmission',
   QuotationDraft: 'QuotationDraft',
+  FurnitureQuotationDraft: 'FurnitureQuotationDraft',
+  FurnitureQuotationSavedItem: 'FurnitureQuotationSavedItem',
   CadWorkSubmissionFile: 'CadWorkSubmissionFile',
   Visit: 'Visit',
   VisitUpdateRequest: 'VisitUpdateRequest',
@@ -328,6 +330,38 @@ export const QuotationDraftScalarFieldEnum = {
 } as const
 
 export type QuotationDraftScalarFieldEnum = (typeof QuotationDraftScalarFieldEnum)[keyof typeof QuotationDraftScalarFieldEnum]
+
+
+export const FurnitureQuotationDraftScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  content: 'content',
+  grandTotal: 'grandTotal',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FurnitureQuotationDraftScalarFieldEnum = (typeof FurnitureQuotationDraftScalarFieldEnum)[keyof typeof FurnitureQuotationDraftScalarFieldEnum]
+
+
+export const FurnitureQuotationSavedItemScalarFieldEnum = {
+  id: 'id',
+  section: 'section',
+  name: 'name',
+  description: 'description',
+  quantity: 'quantity',
+  unit: 'unit',
+  rate: 'rate',
+  serialNo: 'serialNo',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FurnitureQuotationSavedItemScalarFieldEnum = (typeof FurnitureQuotationSavedItemScalarFieldEnum)[keyof typeof FurnitureQuotationSavedItemScalarFieldEnum]
 
 
 export const CadWorkSubmissionFileScalarFieldEnum = {

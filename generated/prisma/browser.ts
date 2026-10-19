@@ -88,6 +88,16 @@ export type CadWorkSubmission = Prisma.CadWorkSubmissionModel
  */
 export type QuotationDraft = Prisma.QuotationDraftModel
 /**
+ * Model FurnitureQuotationDraft
+ * 
+ */
+export type FurnitureQuotationDraft = Prisma.FurnitureQuotationDraftModel
+/**
+ * Model FurnitureQuotationSavedItem
+ * 
+ */
+export type FurnitureQuotationSavedItem = Prisma.FurnitureQuotationSavedItemModel
+/**
  * Model CadWorkSubmissionFile
  * 
  */

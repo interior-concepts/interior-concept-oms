@@ -398,6 +398,8 @@ export const ModelName = {
   LeadMeetingEvent: 'LeadMeetingEvent',
   CadWorkSubmission: 'CadWorkSubmission',
   QuotationDraft: 'QuotationDraft',
+  FurnitureQuotationDraft: 'FurnitureQuotationDraft',
+  FurnitureQuotationSavedItem: 'FurnitureQuotationSavedItem',
   CadWorkSubmissionFile: 'CadWorkSubmissionFile',
   Visit: 'Visit',
   VisitUpdateRequest: 'VisitUpdateRequest',
@@ -444,7 +446,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "lead" | "leadAssignment" | "leadStatusHistory" | "activityLog" | "followUp" | "note" | "user" | "deviceToken" | "leadPhaseTask" | "leadJrArchitectRequest" | "leadPhaseReview" | "leadMeetingEvent" | "cadWorkSubmission" | "quotationDraft" | "cadWorkSubmissionFile" | "visit" | "visitUpdateRequest" | "visitResult" | "visitSupportAssignment" | "visitSupportResult" | "attachment" | "leadAttachment" | "supportAttachment" | "notification" | "facebookSyncControl" | "instagramSyncControl" | "whatsAppWebhookControl" | "whatsAppProcessedMessage" | "visitWorkflowControl" | "whatsAppWebhookEvent" | "role" | "department" | "userRole" | "userDepartment" | "financeAccount" | "transaction" | "cashFlowDaily" | "websiteProject" | "websiteProjectImage" | "websiteVideo" | "websiteTestimonial" | "websiteTeamMember" | "quotationTemplateOverride" | "jrArchitectPerformance" | "quotationUserPerformance"
+    modelProps: "lead" | "leadAssignment" | "leadStatusHistory" | "activityLog" | "followUp" | "note" | "user" | "deviceToken" | "leadPhaseTask" | "leadJrArchitectRequest" | "leadPhaseReview" | "leadMeetingEvent" | "cadWorkSubmission" | "quotationDraft" | "furnitureQuotationDraft" | "furnitureQuotationSavedItem" | "cadWorkSubmissionFile" | "visit" | "visitUpdateRequest" | "visitResult" | "visitSupportAssignment" | "visitSupportResult" | "attachment" | "leadAttachment" | "supportAttachment" | "notification" | "facebookSyncControl" | "instagramSyncControl" | "whatsAppWebhookControl" | "whatsAppProcessedMessage" | "visitWorkflowControl" | "whatsAppWebhookEvent" | "role" | "department" | "userRole" | "userDepartment" | "financeAccount" | "transaction" | "cashFlowDaily" | "websiteProject" | "websiteProjectImage" | "websiteVideo" | "websiteTestimonial" | "websiteTeamMember" | "quotationTemplateOverride" | "jrArchitectPerformance" | "quotationUserPerformance"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1481,6 +1483,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.QuotationDraftCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.QuotationDraftCountAggregateOutputType> | number
+        }
+      }
+    }
+    FurnitureQuotationDraft: {
+      payload: Prisma.$FurnitureQuotationDraftPayload<ExtArgs>
+      fields: Prisma.FurnitureQuotationDraftFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FurnitureQuotationDraftFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationDraftPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FurnitureQuotationDraftFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationDraftPayload>
+        }
+        findFirst: {
+          args: Prisma.FurnitureQuotationDraftFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationDraftPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FurnitureQuotationDraftFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationDraftPayload>
+        }
+        findMany: {
+          args: Prisma.FurnitureQuotationDraftFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationDraftPayload>[]
+        }
+        create: {
+          args: Prisma.FurnitureQuotationDraftCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationDraftPayload>
+        }
+        createMany: {
+          args: Prisma.FurnitureQuotationDraftCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FurnitureQuotationDraftCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationDraftPayload>[]
+        }
+        delete: {
+          args: Prisma.FurnitureQuotationDraftDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationDraftPayload>
+        }
+        update: {
+          args: Prisma.FurnitureQuotationDraftUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationDraftPayload>
+        }
+        deleteMany: {
+          args: Prisma.FurnitureQuotationDraftDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FurnitureQuotationDraftUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FurnitureQuotationDraftUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationDraftPayload>[]
+        }
+        upsert: {
+          args: Prisma.FurnitureQuotationDraftUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationDraftPayload>
+        }
+        aggregate: {
+          args: Prisma.FurnitureQuotationDraftAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFurnitureQuotationDraft>
+        }
+        groupBy: {
+          args: Prisma.FurnitureQuotationDraftGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FurnitureQuotationDraftGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FurnitureQuotationDraftCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FurnitureQuotationDraftCountAggregateOutputType> | number
+        }
+      }
+    }
+    FurnitureQuotationSavedItem: {
+      payload: Prisma.$FurnitureQuotationSavedItemPayload<ExtArgs>
+      fields: Prisma.FurnitureQuotationSavedItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FurnitureQuotationSavedItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationSavedItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FurnitureQuotationSavedItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationSavedItemPayload>
+        }
+        findFirst: {
+          args: Prisma.FurnitureQuotationSavedItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationSavedItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FurnitureQuotationSavedItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationSavedItemPayload>
+        }
+        findMany: {
+          args: Prisma.FurnitureQuotationSavedItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationSavedItemPayload>[]
+        }
+        create: {
+          args: Prisma.FurnitureQuotationSavedItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationSavedItemPayload>
+        }
+        createMany: {
+          args: Prisma.FurnitureQuotationSavedItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FurnitureQuotationSavedItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationSavedItemPayload>[]
+        }
+        delete: {
+          args: Prisma.FurnitureQuotationSavedItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationSavedItemPayload>
+        }
+        update: {
+          args: Prisma.FurnitureQuotationSavedItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationSavedItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.FurnitureQuotationSavedItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FurnitureQuotationSavedItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FurnitureQuotationSavedItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationSavedItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.FurnitureQuotationSavedItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FurnitureQuotationSavedItemPayload>
+        }
+        aggregate: {
+          args: Prisma.FurnitureQuotationSavedItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFurnitureQuotationSavedItem>
+        }
+        groupBy: {
+          args: Prisma.FurnitureQuotationSavedItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FurnitureQuotationSavedItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FurnitureQuotationSavedItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FurnitureQuotationSavedItemCountAggregateOutputType> | number
         }
       }
     }
@@ -4033,6 +4183,38 @@ export const QuotationDraftScalarFieldEnum = {
 export type QuotationDraftScalarFieldEnum = (typeof QuotationDraftScalarFieldEnum)[keyof typeof QuotationDraftScalarFieldEnum]
 
 
+export const FurnitureQuotationDraftScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  content: 'content',
+  grandTotal: 'grandTotal',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FurnitureQuotationDraftScalarFieldEnum = (typeof FurnitureQuotationDraftScalarFieldEnum)[keyof typeof FurnitureQuotationDraftScalarFieldEnum]
+
+
+export const FurnitureQuotationSavedItemScalarFieldEnum = {
+  id: 'id',
+  section: 'section',
+  name: 'name',
+  description: 'description',
+  quantity: 'quantity',
+  unit: 'unit',
+  rate: 'rate',
+  serialNo: 'serialNo',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FurnitureQuotationSavedItemScalarFieldEnum = (typeof FurnitureQuotationSavedItemScalarFieldEnum)[keyof typeof FurnitureQuotationSavedItemScalarFieldEnum]
+
+
 export const CadWorkSubmissionFileScalarFieldEnum = {
   id: 'id',
   submissionId: 'submissionId',
@@ -5089,6 +5271,8 @@ export type GlobalOmitConfig = {
   leadMeetingEvent?: Prisma.LeadMeetingEventOmit
   cadWorkSubmission?: Prisma.CadWorkSubmissionOmit
   quotationDraft?: Prisma.QuotationDraftOmit
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftOmit
+  furnitureQuotationSavedItem?: Prisma.FurnitureQuotationSavedItemOmit
   cadWorkSubmissionFile?: Prisma.CadWorkSubmissionFileOmit
   visit?: Prisma.VisitOmit
   visitUpdateRequest?: Prisma.VisitUpdateRequestOmit

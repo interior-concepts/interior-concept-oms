@@ -249,6 +249,8 @@ export type UserWhereInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionListRelationFilter
   quotationDraftsCreated?: Prisma.QuotationDraftListRelationFilter
   quotationDraftsUpdated?: Prisma.QuotationDraftListRelationFilter
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftListRelationFilter
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   signupNotifications?: Prisma.NotificationListRelationFilter
   transactionsRecorded?: Prisma.TransactionListRelationFilter
@@ -296,6 +298,8 @@ export type UserOrderByWithRelationInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionOrderByRelationAggregateInput
   quotationDraftsCreated?: Prisma.QuotationDraftOrderByRelationAggregateInput
   quotationDraftsUpdated?: Prisma.QuotationDraftOrderByRelationAggregateInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftOrderByRelationAggregateInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   signupNotifications?: Prisma.NotificationOrderByRelationAggregateInput
   transactionsRecorded?: Prisma.TransactionOrderByRelationAggregateInput
@@ -346,6 +350,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   cadWorkSubmissions?: Prisma.CadWorkSubmissionListRelationFilter
   quotationDraftsCreated?: Prisma.QuotationDraftListRelationFilter
   quotationDraftsUpdated?: Prisma.QuotationDraftListRelationFilter
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftListRelationFilter
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   signupNotifications?: Prisma.NotificationListRelationFilter
   transactionsRecorded?: Prisma.TransactionListRelationFilter
@@ -424,6 +430,8 @@ export type UserCreateInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -470,6 +478,8 @@ export type UserUncheckedCreateInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -516,6 +526,8 @@ export type UserUpdateInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -562,6 +574,8 @@ export type UserUncheckedUpdateInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -976,6 +990,36 @@ export type UserUpdateOneWithoutQuotationDraftsUpdatedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutQuotationDraftsUpdatedInput, Prisma.UserUpdateWithoutQuotationDraftsUpdatedInput>, Prisma.UserUncheckedUpdateWithoutQuotationDraftsUpdatedInput>
 }
 
+export type UserCreateNestedOneWithoutFurnitureQuotationDraftsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFurnitureQuotationDraftsCreatedInput, Prisma.UserUncheckedCreateWithoutFurnitureQuotationDraftsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFurnitureQuotationDraftsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutFurnitureQuotationDraftsUpdatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFurnitureQuotationDraftsUpdatedInput, Prisma.UserUncheckedCreateWithoutFurnitureQuotationDraftsUpdatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFurnitureQuotationDraftsUpdatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFurnitureQuotationDraftsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFurnitureQuotationDraftsCreatedInput, Prisma.UserUncheckedCreateWithoutFurnitureQuotationDraftsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFurnitureQuotationDraftsCreatedInput
+  upsert?: Prisma.UserUpsertWithoutFurnitureQuotationDraftsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFurnitureQuotationDraftsCreatedInput, Prisma.UserUpdateWithoutFurnitureQuotationDraftsCreatedInput>, Prisma.UserUncheckedUpdateWithoutFurnitureQuotationDraftsCreatedInput>
+}
+
+export type UserUpdateOneWithoutFurnitureQuotationDraftsUpdatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFurnitureQuotationDraftsUpdatedInput, Prisma.UserUncheckedCreateWithoutFurnitureQuotationDraftsUpdatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFurnitureQuotationDraftsUpdatedInput
+  upsert?: Prisma.UserUpsertWithoutFurnitureQuotationDraftsUpdatedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFurnitureQuotationDraftsUpdatedInput, Prisma.UserUpdateWithoutFurnitureQuotationDraftsUpdatedInput>, Prisma.UserUncheckedUpdateWithoutFurnitureQuotationDraftsUpdatedInput>
+}
+
 export type UserCreateNestedOneWithoutVisitsAssignedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutVisitsAssignedInput, Prisma.UserUncheckedCreateWithoutVisitsAssignedInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutVisitsAssignedInput
@@ -1230,6 +1274,8 @@ export type UserCreateWithoutLeadsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -1275,6 +1321,8 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -1325,6 +1373,8 @@ export type UserCreateWithoutPrimaryOwnedLeadsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -1370,6 +1420,8 @@ export type UserUncheckedCreateWithoutPrimaryOwnedLeadsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -1431,6 +1483,8 @@ export type UserUpdateWithoutLeadsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -1476,6 +1530,8 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -1532,6 +1588,8 @@ export type UserUpdateWithoutPrimaryOwnedLeadsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -1577,6 +1635,8 @@ export type UserUncheckedUpdateWithoutPrimaryOwnedLeadsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -1622,6 +1682,8 @@ export type UserCreateWithoutLeadAssignmentsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -1667,6 +1729,8 @@ export type UserUncheckedCreateWithoutLeadAssignmentsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -1728,6 +1792,8 @@ export type UserUpdateWithoutLeadAssignmentsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -1773,6 +1839,8 @@ export type UserUncheckedUpdateWithoutLeadAssignmentsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -1818,6 +1886,8 @@ export type UserCreateWithoutStatusChangesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -1863,6 +1933,8 @@ export type UserUncheckedCreateWithoutStatusChangesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -1924,6 +1996,8 @@ export type UserUpdateWithoutStatusChangesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -1969,6 +2043,8 @@ export type UserUncheckedUpdateWithoutStatusChangesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -2014,6 +2090,8 @@ export type UserCreateWithoutActivitiesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -2059,6 +2137,8 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -2120,6 +2200,8 @@ export type UserUpdateWithoutActivitiesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -2165,6 +2247,8 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -2210,6 +2294,8 @@ export type UserCreateWithoutFollowUpsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -2255,6 +2341,8 @@ export type UserUncheckedCreateWithoutFollowUpsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -2316,6 +2404,8 @@ export type UserUpdateWithoutFollowUpsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -2361,6 +2451,8 @@ export type UserUncheckedUpdateWithoutFollowUpsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -2406,6 +2498,8 @@ export type UserCreateWithoutNotesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -2451,6 +2545,8 @@ export type UserUncheckedCreateWithoutNotesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -2512,6 +2608,8 @@ export type UserUpdateWithoutNotesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -2557,6 +2655,8 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -2602,6 +2702,8 @@ export type UserCreateWithoutApprovedUsersInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -2647,6 +2749,8 @@ export type UserUncheckedCreateWithoutApprovedUsersInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -2697,6 +2801,8 @@ export type UserCreateWithoutApprovedByInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -2742,6 +2848,8 @@ export type UserUncheckedCreateWithoutApprovedByInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -2808,6 +2916,8 @@ export type UserUpdateWithoutApprovedUsersInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -2853,6 +2963,8 @@ export type UserUncheckedUpdateWithoutApprovedUsersInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -2931,6 +3043,8 @@ export type UserCreateWithoutDeviceTokensInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -2976,6 +3090,8 @@ export type UserUncheckedCreateWithoutDeviceTokensInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -3037,6 +3153,8 @@ export type UserUpdateWithoutDeviceTokensInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -3082,6 +3200,8 @@ export type UserUncheckedUpdateWithoutDeviceTokensInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -3126,6 +3246,8 @@ export type UserCreateWithoutPhaseTasksAssignedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -3171,6 +3293,8 @@ export type UserUncheckedCreateWithoutPhaseTasksAssignedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -3221,6 +3345,8 @@ export type UserCreateWithoutPhaseTasksCreatedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -3266,6 +3392,8 @@ export type UserUncheckedCreateWithoutPhaseTasksCreatedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -3327,6 +3455,8 @@ export type UserUpdateWithoutPhaseTasksAssignedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -3372,6 +3502,8 @@ export type UserUncheckedUpdateWithoutPhaseTasksAssignedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -3428,6 +3560,8 @@ export type UserUpdateWithoutPhaseTasksCreatedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -3473,6 +3607,8 @@ export type UserUncheckedUpdateWithoutPhaseTasksCreatedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -3518,6 +3654,8 @@ export type UserCreateWithoutJrArchitectRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -3563,6 +3701,8 @@ export type UserUncheckedCreateWithoutJrArchitectRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -3613,6 +3753,8 @@ export type UserCreateWithoutJrArchitectReviewedRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -3658,6 +3800,8 @@ export type UserUncheckedCreateWithoutJrArchitectReviewedRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -3719,6 +3863,8 @@ export type UserUpdateWithoutJrArchitectRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -3764,6 +3910,8 @@ export type UserUncheckedUpdateWithoutJrArchitectRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -3820,6 +3968,8 @@ export type UserUpdateWithoutJrArchitectReviewedRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -3865,6 +4015,8 @@ export type UserUncheckedUpdateWithoutJrArchitectReviewedRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -3910,6 +4062,8 @@ export type UserCreateWithoutPhaseReviewsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -3955,6 +4109,8 @@ export type UserUncheckedCreateWithoutPhaseReviewsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -4016,6 +4172,8 @@ export type UserUpdateWithoutPhaseReviewsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -4061,6 +4219,8 @@ export type UserUncheckedUpdateWithoutPhaseReviewsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -4106,6 +4266,8 @@ export type UserCreateWithoutMeetingEventsCreatedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -4151,6 +4313,8 @@ export type UserUncheckedCreateWithoutMeetingEventsCreatedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -4212,6 +4376,8 @@ export type UserUpdateWithoutMeetingEventsCreatedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -4257,6 +4423,8 @@ export type UserUncheckedUpdateWithoutMeetingEventsCreatedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -4302,6 +4470,8 @@ export type UserCreateWithoutCadWorkSubmissionsInput = {
   meetingEventsCreated?: Prisma.LeadMeetingEventCreateNestedManyWithoutCreatedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -4347,6 +4517,8 @@ export type UserUncheckedCreateWithoutCadWorkSubmissionsInput = {
   meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -4408,6 +4580,8 @@ export type UserUpdateWithoutCadWorkSubmissionsInput = {
   meetingEventsCreated?: Prisma.LeadMeetingEventUpdateManyWithoutCreatedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -4453,6 +4627,8 @@ export type UserUncheckedUpdateWithoutCadWorkSubmissionsInput = {
   meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -4498,6 +4674,8 @@ export type UserCreateWithoutQuotationDraftsCreatedInput = {
   meetingEventsCreated?: Prisma.LeadMeetingEventCreateNestedManyWithoutCreatedByInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -4543,6 +4721,8 @@ export type UserUncheckedCreateWithoutQuotationDraftsCreatedInput = {
   meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutCreatedByInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -4593,6 +4773,8 @@ export type UserCreateWithoutQuotationDraftsUpdatedInput = {
   meetingEventsCreated?: Prisma.LeadMeetingEventCreateNestedManyWithoutCreatedByInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -4638,6 +4820,8 @@ export type UserUncheckedCreateWithoutQuotationDraftsUpdatedInput = {
   meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutCreatedByInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -4699,6 +4883,8 @@ export type UserUpdateWithoutQuotationDraftsCreatedInput = {
   meetingEventsCreated?: Prisma.LeadMeetingEventUpdateManyWithoutCreatedByNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -4744,6 +4930,8 @@ export type UserUncheckedUpdateWithoutQuotationDraftsCreatedInput = {
   meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutCreatedByNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -4800,6 +4988,8 @@ export type UserUpdateWithoutQuotationDraftsUpdatedInput = {
   meetingEventsCreated?: Prisma.LeadMeetingEventUpdateManyWithoutCreatedByNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -4845,6 +5035,416 @@ export type UserUncheckedUpdateWithoutQuotationDraftsUpdatedInput = {
   meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutCreatedByNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
+  transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
+  transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutFurnitureQuotationDraftsCreatedInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  isActive?: boolean
+  clerkUserId?: string | null
+  approvedAt?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedUsersInput
+  approvedUsers?: Prisma.UserCreateNestedManyWithoutApprovedByInput
+  leads?: Prisma.LeadCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadCreateNestedManyWithoutPrimaryOwnerInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutAssignedToInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  statusChanges?: Prisma.LeadStatusHistoryCreateNestedManyWithoutChangedByInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  userDepartments?: Prisma.UserDepartmentCreateNestedManyWithoutUserInput
+  leadAssignments?: Prisma.LeadAssignmentCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitCreateNestedManyWithoutCreatedByInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutResolvedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutSupportUserInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutAssignedByInput
+  supportVisitResults?: Prisma.VisitSupportResultCreateNestedManyWithoutSupportUserInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskCreateNestedManyWithoutCreatedByInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutReviewedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
+  quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
+  transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
+  transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFurnitureQuotationDraftsCreatedInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  isActive?: boolean
+  clerkUserId?: string | null
+  approvedById?: string | null
+  approvedAt?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  approvedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutApprovedByInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutPrimaryOwnerInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutAssignedToInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  userDepartments?: Prisma.UserDepartmentUncheckedCreateNestedManyWithoutUserInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitUncheckedCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitUncheckedCreateNestedManyWithoutCreatedByInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutResolvedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutSupportUserInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutSupportUserInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
+  transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
+  transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFurnitureQuotationDraftsCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFurnitureQuotationDraftsCreatedInput, Prisma.UserUncheckedCreateWithoutFurnitureQuotationDraftsCreatedInput>
+}
+
+export type UserCreateWithoutFurnitureQuotationDraftsUpdatedInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  isActive?: boolean
+  clerkUserId?: string | null
+  approvedAt?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedUsersInput
+  approvedUsers?: Prisma.UserCreateNestedManyWithoutApprovedByInput
+  leads?: Prisma.LeadCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadCreateNestedManyWithoutPrimaryOwnerInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutAssignedToInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  statusChanges?: Prisma.LeadStatusHistoryCreateNestedManyWithoutChangedByInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  userDepartments?: Prisma.UserDepartmentCreateNestedManyWithoutUserInput
+  leadAssignments?: Prisma.LeadAssignmentCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitCreateNestedManyWithoutCreatedByInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutResolvedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutSupportUserInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutAssignedByInput
+  supportVisitResults?: Prisma.VisitSupportResultCreateNestedManyWithoutSupportUserInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskCreateNestedManyWithoutCreatedByInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutReviewedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
+  quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
+  transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
+  transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFurnitureQuotationDraftsUpdatedInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  isActive?: boolean
+  clerkUserId?: string | null
+  approvedById?: string | null
+  approvedAt?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  approvedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutApprovedByInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutPrimaryOwnerInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutAssignedToInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  userDepartments?: Prisma.UserDepartmentUncheckedCreateNestedManyWithoutUserInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitUncheckedCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitUncheckedCreateNestedManyWithoutCreatedByInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutResolvedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutSupportUserInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutSupportUserInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
+  transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
+  transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFurnitureQuotationDraftsUpdatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFurnitureQuotationDraftsUpdatedInput, Prisma.UserUncheckedCreateWithoutFurnitureQuotationDraftsUpdatedInput>
+}
+
+export type UserUpsertWithoutFurnitureQuotationDraftsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFurnitureQuotationDraftsCreatedInput, Prisma.UserUncheckedUpdateWithoutFurnitureQuotationDraftsCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFurnitureQuotationDraftsCreatedInput, Prisma.UserUncheckedCreateWithoutFurnitureQuotationDraftsCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFurnitureQuotationDraftsCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFurnitureQuotationDraftsCreatedInput, Prisma.UserUncheckedUpdateWithoutFurnitureQuotationDraftsCreatedInput>
+}
+
+export type UserUpdateWithoutFurnitureQuotationDraftsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedUsersNestedInput
+  approvedUsers?: Prisma.UserUpdateManyWithoutApprovedByNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUpdateManyWithoutPrimaryOwnerNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutAssignedToNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  activities?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUpdateManyWithoutChangedByNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  userDepartments?: Prisma.UserDepartmentUpdateManyWithoutUserNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUpdateManyWithoutCreatedByNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutResolvedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUpdateManyWithoutSupportUserNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUpdateManyWithoutAssignedByNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUpdateManyWithoutSupportUserNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUpdateManyWithoutCreatedByNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutReviewedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
+  transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
+  transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFurnitureQuotationDraftsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedUsers?: Prisma.UserUncheckedUpdateManyWithoutApprovedByNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedUpdateManyWithoutPrimaryOwnerNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutAssignedToNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  userDepartments?: Prisma.UserDepartmentUncheckedUpdateManyWithoutUserNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUncheckedUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutResolvedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutSupportUserNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
+  transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
+  transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutFurnitureQuotationDraftsUpdatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFurnitureQuotationDraftsUpdatedInput, Prisma.UserUncheckedUpdateWithoutFurnitureQuotationDraftsUpdatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFurnitureQuotationDraftsUpdatedInput, Prisma.UserUncheckedCreateWithoutFurnitureQuotationDraftsUpdatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFurnitureQuotationDraftsUpdatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFurnitureQuotationDraftsUpdatedInput, Prisma.UserUncheckedUpdateWithoutFurnitureQuotationDraftsUpdatedInput>
+}
+
+export type UserUpdateWithoutFurnitureQuotationDraftsUpdatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedUsersNestedInput
+  approvedUsers?: Prisma.UserUpdateManyWithoutApprovedByNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUpdateManyWithoutPrimaryOwnerNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutAssignedToNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  activities?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUpdateManyWithoutChangedByNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  userDepartments?: Prisma.UserDepartmentUpdateManyWithoutUserNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUpdateManyWithoutCreatedByNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutResolvedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUpdateManyWithoutSupportUserNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUpdateManyWithoutAssignedByNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUpdateManyWithoutSupportUserNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUpdateManyWithoutCreatedByNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutReviewedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
+  transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
+  transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFurnitureQuotationDraftsUpdatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedUsers?: Prisma.UserUncheckedUpdateManyWithoutApprovedByNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedUpdateManyWithoutPrimaryOwnerNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutAssignedToNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  userDepartments?: Prisma.UserDepartmentUncheckedUpdateManyWithoutUserNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUncheckedUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutResolvedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutSupportUserNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -4890,6 +5490,8 @@ export type UserCreateWithoutVisitsAssignedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -4935,6 +5537,8 @@ export type UserUncheckedCreateWithoutVisitsAssignedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -4985,6 +5589,8 @@ export type UserCreateWithoutVisitsCreatedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -5030,6 +5636,8 @@ export type UserUncheckedCreateWithoutVisitsCreatedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -5091,6 +5699,8 @@ export type UserUpdateWithoutVisitsAssignedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -5136,6 +5746,8 @@ export type UserUncheckedUpdateWithoutVisitsAssignedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -5192,6 +5804,8 @@ export type UserUpdateWithoutVisitsCreatedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -5237,6 +5851,8 @@ export type UserUncheckedUpdateWithoutVisitsCreatedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -5282,6 +5898,8 @@ export type UserCreateWithoutVisitUpdateRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -5327,6 +5945,8 @@ export type UserUncheckedCreateWithoutVisitUpdateRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -5377,6 +5997,8 @@ export type UserCreateWithoutResolvedVisitUpdateRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -5422,6 +6044,8 @@ export type UserUncheckedCreateWithoutResolvedVisitUpdateRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -5483,6 +6107,8 @@ export type UserUpdateWithoutVisitUpdateRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -5528,6 +6154,8 @@ export type UserUncheckedUpdateWithoutVisitUpdateRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -5584,6 +6212,8 @@ export type UserUpdateWithoutResolvedVisitUpdateRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -5629,6 +6259,8 @@ export type UserUncheckedUpdateWithoutResolvedVisitUpdateRequestsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -5674,6 +6306,8 @@ export type UserCreateWithoutSupportVisitsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -5719,6 +6353,8 @@ export type UserUncheckedCreateWithoutSupportVisitsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -5769,6 +6405,8 @@ export type UserCreateWithoutSupportVisitsAssignedByInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -5814,6 +6452,8 @@ export type UserUncheckedCreateWithoutSupportVisitsAssignedByInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -5875,6 +6515,8 @@ export type UserUpdateWithoutSupportVisitsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -5920,6 +6562,8 @@ export type UserUncheckedUpdateWithoutSupportVisitsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -5976,6 +6620,8 @@ export type UserUpdateWithoutSupportVisitsAssignedByInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -6021,6 +6667,8 @@ export type UserUncheckedUpdateWithoutSupportVisitsAssignedByInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -6066,6 +6714,8 @@ export type UserCreateWithoutSupportVisitResultsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -6111,6 +6761,8 @@ export type UserUncheckedCreateWithoutSupportVisitResultsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -6172,6 +6824,8 @@ export type UserUpdateWithoutSupportVisitResultsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -6217,6 +6871,8 @@ export type UserUncheckedUpdateWithoutSupportVisitResultsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -6263,6 +6919,8 @@ export type UserCreateWithoutNotificationsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
   transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
@@ -6308,6 +6966,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
   transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
@@ -6358,6 +7018,8 @@ export type UserCreateWithoutSignupNotificationsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
   transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
@@ -6403,6 +7065,8 @@ export type UserUncheckedCreateWithoutSignupNotificationsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
   transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
@@ -6464,6 +7128,8 @@ export type UserUpdateWithoutNotificationsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
   transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
@@ -6509,6 +7175,8 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
   transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
@@ -6565,6 +7233,8 @@ export type UserUpdateWithoutSignupNotificationsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
   transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
@@ -6610,6 +7280,8 @@ export type UserUncheckedUpdateWithoutSignupNotificationsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
   transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
@@ -6654,6 +7326,8 @@ export type UserCreateWithoutUserRolesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -6699,6 +7373,8 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -6760,6 +7436,8 @@ export type UserUpdateWithoutUserRolesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -6805,6 +7483,8 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -6850,6 +7530,8 @@ export type UserCreateWithoutUserDepartmentsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -6895,6 +7577,8 @@ export type UserUncheckedCreateWithoutUserDepartmentsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -6956,6 +7640,8 @@ export type UserUpdateWithoutUserDepartmentsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -7001,6 +7687,8 @@ export type UserUncheckedUpdateWithoutUserDepartmentsInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -7047,6 +7735,8 @@ export type UserCreateWithoutTransactionsRecordedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
@@ -7092,6 +7782,8 @@ export type UserUncheckedCreateWithoutTransactionsRecordedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
@@ -7142,6 +7834,8 @@ export type UserCreateWithoutTransactionsCollectedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -7187,6 +7881,8 @@ export type UserUncheckedCreateWithoutTransactionsCollectedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -7248,6 +7944,8 @@ export type UserUpdateWithoutTransactionsRecordedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
@@ -7293,6 +7991,8 @@ export type UserUncheckedUpdateWithoutTransactionsRecordedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
@@ -7349,6 +8049,8 @@ export type UserUpdateWithoutTransactionsCollectedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -7394,6 +8096,8 @@ export type UserUncheckedUpdateWithoutTransactionsCollectedInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -7439,6 +8143,8 @@ export type UserCreateWithoutJrArchitectPerformancesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -7484,6 +8190,8 @@ export type UserUncheckedCreateWithoutJrArchitectPerformancesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -7545,6 +8253,8 @@ export type UserUpdateWithoutJrArchitectPerformancesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -7590,6 +8300,8 @@ export type UserUncheckedUpdateWithoutJrArchitectPerformancesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -7635,6 +8347,8 @@ export type UserCreateWithoutQuotationPerformancesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
@@ -7680,6 +8394,8 @@ export type UserUncheckedCreateWithoutQuotationPerformancesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
   transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
@@ -7741,6 +8457,8 @@ export type UserUpdateWithoutQuotationPerformancesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -7786,6 +8504,8 @@ export type UserUncheckedUpdateWithoutQuotationPerformancesInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -7842,6 +8562,8 @@ export type UserUpdateWithoutApprovedByInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
@@ -7887,6 +8609,8 @@ export type UserUncheckedUpdateWithoutApprovedByInput = {
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
   quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
   quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
   transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
@@ -7940,6 +8664,8 @@ export type UserCountOutputType = {
   cadWorkSubmissions: number
   quotationDraftsCreated: number
   quotationDraftsUpdated: number
+  furnitureQuotationDraftsCreated: number
+  furnitureQuotationDraftsUpdated: number
   notifications: number
   signupNotifications: number
   transactionsRecorded: number
@@ -7976,6 +8702,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   cadWorkSubmissions?: boolean | UserCountOutputTypeCountCadWorkSubmissionsArgs
   quotationDraftsCreated?: boolean | UserCountOutputTypeCountQuotationDraftsCreatedArgs
   quotationDraftsUpdated?: boolean | UserCountOutputTypeCountQuotationDraftsUpdatedArgs
+  furnitureQuotationDraftsCreated?: boolean | UserCountOutputTypeCountFurnitureQuotationDraftsCreatedArgs
+  furnitureQuotationDraftsUpdated?: boolean | UserCountOutputTypeCountFurnitureQuotationDraftsUpdatedArgs
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   signupNotifications?: boolean | UserCountOutputTypeCountSignupNotificationsArgs
   transactionsRecorded?: boolean | UserCountOutputTypeCountTransactionsRecordedArgs
@@ -8180,6 +8908,20 @@ export type UserCountOutputTypeCountQuotationDraftsUpdatedArgs<ExtArgs extends r
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountFurnitureQuotationDraftsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FurnitureQuotationDraftWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFurnitureQuotationDraftsUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FurnitureQuotationDraftWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.NotificationWhereInput
 }
@@ -8265,6 +9007,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   cadWorkSubmissions?: boolean | Prisma.User$cadWorkSubmissionsArgs<ExtArgs>
   quotationDraftsCreated?: boolean | Prisma.User$quotationDraftsCreatedArgs<ExtArgs>
   quotationDraftsUpdated?: boolean | Prisma.User$quotationDraftsUpdatedArgs<ExtArgs>
+  furnitureQuotationDraftsCreated?: boolean | Prisma.User$furnitureQuotationDraftsCreatedArgs<ExtArgs>
+  furnitureQuotationDraftsUpdated?: boolean | Prisma.User$furnitureQuotationDraftsUpdatedArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   signupNotifications?: boolean | Prisma.User$signupNotificationsArgs<ExtArgs>
   transactionsRecorded?: boolean | Prisma.User$transactionsRecordedArgs<ExtArgs>
@@ -8345,6 +9089,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   cadWorkSubmissions?: boolean | Prisma.User$cadWorkSubmissionsArgs<ExtArgs>
   quotationDraftsCreated?: boolean | Prisma.User$quotationDraftsCreatedArgs<ExtArgs>
   quotationDraftsUpdated?: boolean | Prisma.User$quotationDraftsUpdatedArgs<ExtArgs>
+  furnitureQuotationDraftsCreated?: boolean | Prisma.User$furnitureQuotationDraftsCreatedArgs<ExtArgs>
+  furnitureQuotationDraftsUpdated?: boolean | Prisma.User$furnitureQuotationDraftsUpdatedArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   signupNotifications?: boolean | Prisma.User$signupNotificationsArgs<ExtArgs>
   transactionsRecorded?: boolean | Prisma.User$transactionsRecordedArgs<ExtArgs>
@@ -8391,6 +9137,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     cadWorkSubmissions: Prisma.$CadWorkSubmissionPayload<ExtArgs>[]
     quotationDraftsCreated: Prisma.$QuotationDraftPayload<ExtArgs>[]
     quotationDraftsUpdated: Prisma.$QuotationDraftPayload<ExtArgs>[]
+    furnitureQuotationDraftsCreated: Prisma.$FurnitureQuotationDraftPayload<ExtArgs>[]
+    furnitureQuotationDraftsUpdated: Prisma.$FurnitureQuotationDraftPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     signupNotifications: Prisma.$NotificationPayload<ExtArgs>[]
     transactionsRecorded: Prisma.$TransactionPayload<ExtArgs>[]
@@ -8831,6 +9579,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   cadWorkSubmissions<T extends Prisma.User$cadWorkSubmissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cadWorkSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CadWorkSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quotationDraftsCreated<T extends Prisma.User$quotationDraftsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$quotationDraftsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quotationDraftsUpdated<T extends Prisma.User$quotationDraftsUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$quotationDraftsUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  furnitureQuotationDraftsCreated<T extends Prisma.User$furnitureQuotationDraftsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$furnitureQuotationDraftsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FurnitureQuotationDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  furnitureQuotationDraftsUpdated<T extends Prisma.User$furnitureQuotationDraftsUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$furnitureQuotationDraftsUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FurnitureQuotationDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   signupNotifications<T extends Prisma.User$signupNotificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$signupNotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   transactionsRecorded<T extends Prisma.User$transactionsRecordedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$transactionsRecordedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -9913,6 +10663,54 @@ export type User$quotationDraftsUpdatedArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.QuotationDraftScalarFieldEnum | Prisma.QuotationDraftScalarFieldEnum[]
+}
+
+/**
+ * User.furnitureQuotationDraftsCreated
+ */
+export type User$furnitureQuotationDraftsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FurnitureQuotationDraft
+   */
+  select?: Prisma.FurnitureQuotationDraftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FurnitureQuotationDraft
+   */
+  omit?: Prisma.FurnitureQuotationDraftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FurnitureQuotationDraftInclude<ExtArgs> | null
+  where?: Prisma.FurnitureQuotationDraftWhereInput
+  orderBy?: Prisma.FurnitureQuotationDraftOrderByWithRelationInput | Prisma.FurnitureQuotationDraftOrderByWithRelationInput[]
+  cursor?: Prisma.FurnitureQuotationDraftWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FurnitureQuotationDraftScalarFieldEnum | Prisma.FurnitureQuotationDraftScalarFieldEnum[]
+}
+
+/**
+ * User.furnitureQuotationDraftsUpdated
+ */
+export type User$furnitureQuotationDraftsUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FurnitureQuotationDraft
+   */
+  select?: Prisma.FurnitureQuotationDraftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FurnitureQuotationDraft
+   */
+  omit?: Prisma.FurnitureQuotationDraftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FurnitureQuotationDraftInclude<ExtArgs> | null
+  where?: Prisma.FurnitureQuotationDraftWhereInput
+  orderBy?: Prisma.FurnitureQuotationDraftOrderByWithRelationInput | Prisma.FurnitureQuotationDraftOrderByWithRelationInput[]
+  cursor?: Prisma.FurnitureQuotationDraftWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FurnitureQuotationDraftScalarFieldEnum | Prisma.FurnitureQuotationDraftScalarFieldEnum[]
 }
 
 /**
