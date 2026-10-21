@@ -3,6 +3,7 @@ import { ActivityType, FollowUpCategory, FollowUpStatus, LeadAssignmentDepartmen
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { ensureDepartmentAssignment, ensureSeniorCrmAssignment } from '@/lib/lead-handoff';
+import { parseScheduledAtDate } from '@/lib/date-utils';
 
 type RouteContext = { params: { leadId: string; id: string } | Promise<{ leadId: string; id: string }> };
 const completedFollowUpStatuses: FollowUpStatus[] = [FollowUpStatus.DONE, FollowUpStatus.LATELY_DONE];
@@ -236,9 +237,12 @@ export async function PUT(request: NextRequest, context: RouteContext) {
         where: { id },
         data: {
           ...(assignedToId !== undefined ? { assignedToId } : {}),
-          ...(followupDate !== undefined ? { followupDate: new Date(followupDate) } : {}),
+          ...(followupDate !== undefined ? { followupDate: parseScheduledAtDate(followupDate) || new Date(followupDate) } : {}),
           ...(status !== undefined ? { status: status as FollowUpStatus } : {}),
           ...(notes !== undefined ? { notes } : {}),
+          ...(body.category !== undefined ? { category: body.category as FollowUpCategory } : {}),
+          ...(body.sentiment !== undefined ? { sentiment: body.sentiment } : {}),
+          ...(body.objection !== undefined ? { objection: body.objection } : {}),
         },
         include: {
           lead: {
@@ -316,9 +320,14 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
 
     const updateData: Prisma.FollowUpUncheckedUpdateInput = {};
     if (body.assignedToId !== undefined) updateData.assignedToId = body.assignedToId;
-    if (body.followupDate !== undefined) updateData.followupDate = new Date(body.followupDate);
+    if (body.followupDate !== undefined) {
+      updateData.followupDate = parseScheduledAtDate(body.followupDate) || new Date(body.followupDate);
+    }
     if (body.status !== undefined) updateData.status = body.status;
     if (body.notes !== undefined) updateData.notes = body.notes;
+    if (body.category !== undefined) updateData.category = body.category;
+    if (body.sentiment !== undefined) updateData.sentiment = body.sentiment;
+    if (body.objection !== undefined) updateData.objection = body.objection;
 
     let createdNext: unknown = null;
 
@@ -337,18 +346,31 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       });
 
       const nextStatus = body.status as FollowUpStatus | undefined;
-      if (
+      const isCompletingNow =
         nextStatus !== undefined &&
         completedFollowUpStatuses.includes(nextStatus) &&
-        !completedFollowUpStatuses.includes(existingFollowUp.status) &&
-        activityUserId
-      ) {
+        !completedFollowUpStatuses.includes(existingFollowUp.status);
+
+      if (isCompletingNow && activityUserId) {
         await tx.activityLog.create({
           data: {
             leadId: existingFollowUp.leadId,
             userId: activityUserId,
             type: ActivityType.FOLLOWUP_COMPLETED,
             description: `Follow-up marked as ${nextStatus.toLowerCase()}: ${body.notes || 'Completed'}`,
+          },
+        });
+      } else if (
+        activityUserId &&
+        !completedFollowUpStatuses.includes(existingFollowUp.status) &&
+        (body.followupDate !== undefined || body.notes !== undefined || body.category !== undefined)
+      ) {
+        await tx.activityLog.create({
+          data: {
+            leadId: existingFollowUp.leadId,
+            userId: activityUserId,
+            type: ActivityType.FOLLOWUP_SET,
+            description: `Follow-up updated: ${updatedFollowUp.notes || updatedFollowUp.category}`,
           },
         });
       }

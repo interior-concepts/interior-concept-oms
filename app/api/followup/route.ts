@@ -1,6 +1,8 @@
 import prisma from '@/lib/prisma';
 import { Prisma, FollowUpStatus, LeadAssignmentDepartment } from '@/generated/prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@clerk/nextjs/server';
+import { parseScheduledAtDate } from '@/lib/date-utils';
 
 // GET /api/followup - Get all follow-ups with optional filtering and connected Jr/Sr CRM data
 export async function GET(request: NextRequest) {
@@ -25,51 +27,68 @@ export async function GET(request: NextRequest) {
     const from = searchParams.get('from')
     const to = searchParams.get('to')
 
-    // Build where clause
-    const where: Prisma.FollowUpWhereInput = {}
+    // Build where clause using AND conditions to avoid overwriting OR filters
+    const andConditions: Prisma.FollowUpWhereInput[] = []
 
-    if (leadId) where.leadId = leadId
+    if (leadId) andConditions.push({ leadId })
 
     // Department / crmType & assignedToId filtering
     const filterDept = department || (crmType && crmType !== 'ALL' && crmType !== 'MY' ? crmType : null)
 
-    if (crmType === 'MY' && (assignedToId || myUserId)) {
-      where.assignedToId = (assignedToId || myUserId) ?? undefined
+    if (crmType === 'MY') {
+      let targetUserId = assignedToId || myUserId
+      if (!targetUserId) {
+        const { userId: clerkUserId } = await auth()
+        if (clerkUserId) {
+          const user = await prisma.user.findUnique({
+            where: { clerkUserId },
+            select: { id: true },
+          })
+          targetUserId = user?.id ?? null
+        }
+      }
+      if (targetUserId) {
+        andConditions.push({ assignedToId: targetUserId })
+      }
     } else if (filterDept) {
-      where.OR = [
-        {
-          assignedTo: {
-            userDepartments: {
-              some: {
-                department: {
-                  name: filterDept,
+      andConditions.push({
+        OR: [
+          {
+            assignedTo: {
+              userDepartments: {
+                some: {
+                  department: {
+                    name: filterDept,
+                  },
                 },
               },
             },
           },
-        },
-        {
-          lead: {
-            assignments: {
-              some: {
-                department: filterDept as LeadAssignmentDepartment,
+          {
+            lead: {
+              assignments: {
+                some: {
+                  department: filterDept as LeadAssignmentDepartment,
+                },
               },
             },
           },
-        },
-      ]
+        ],
+      })
     } else if (assignedToId) {
-      where.assignedToId = assignedToId
+      andConditions.push({ assignedToId })
     }
 
     // Search query across lead name, phone, email, notes
     if (search && search.length > 0) {
-      where.OR = [
-        { lead: { name: { contains: search, mode: 'insensitive' } } },
-        { lead: { phone: { contains: search, mode: 'insensitive' } } },
-        { lead: { email: { contains: search, mode: 'insensitive' } } },
-        { notes: { contains: search, mode: 'insensitive' } },
-      ]
+      andConditions.push({
+        OR: [
+          { lead: { name: { contains: search, mode: 'insensitive' } } },
+          { lead: { phone: { contains: search, mode: 'insensitive' } } },
+          { lead: { email: { contains: search, mode: 'insensitive' } } },
+          { notes: { contains: search, mode: 'insensitive' } },
+        ],
+      })
     }
 
     const parsedStatuses = statusesParam
@@ -80,35 +99,47 @@ export async function GET(request: NextRequest) {
       ) ?? []
 
     if (parsedStatuses.length > 0) {
-      where.status = { in: parsedStatuses }
+      andConditions.push({ status: { in: parsedStatuses } })
     } else if (status && Object.values(FollowUpStatus).includes(status)) {
-      where.status = status
+      andConditions.push({ status })
     }
+
     if (upcoming) {
-      where.followupDate = { gte: new Date() }
-      where.status = FollowUpStatus.PENDING
+      andConditions.push({
+        followupDate: { gte: new Date() },
+        status: FollowUpStatus.PENDING,
+      })
     }
-    const fromDate = from ? new Date(from) : null
-    const toDate = to ? new Date(to) : null
-    if (fromDate && Number.isNaN(fromDate.getTime())) {
+
+    const fromDate = from ? parseScheduledAtDate(from) || new Date(from) : null
+    const toDate = to ? parseScheduledAtDate(to) || new Date(to) : null
+    if (from && (!fromDate || Number.isNaN(fromDate.getTime()))) {
       return NextResponse.json(
         { success: false, error: 'Invalid "from" date' },
         { status: 400 },
       )
     }
-    if (toDate && Number.isNaN(toDate.getTime())) {
+    if (to && (!toDate || Number.isNaN(toDate.getTime()))) {
       return NextResponse.json(
         { success: false, error: 'Invalid "to" date' },
         { status: 400 },
       )
     }
     if (fromDate || toDate) {
-      where.followupDate = {
-        ...(where.followupDate as Prisma.DateTimeFilter | undefined),
-        ...(fromDate ? { gte: fromDate } : {}),
-        ...(toDate ? { lte: toDate } : {}),
-      }
+      andConditions.push({
+        followupDate: {
+          ...(fromDate ? { gte: fromDate } : {}),
+          ...(toDate ? { lte: toDate } : {}),
+        },
+      })
     }
+
+    const where: Prisma.FollowUpWhereInput = andConditions.length > 0 ? { AND: andConditions } : {}
+
+    const isCompletedQuery =
+      status === FollowUpStatus.DONE ||
+      status === FollowUpStatus.LATELY_DONE ||
+      parsedStatuses.includes(FollowUpStatus.DONE)
 
     // Get follow-ups with connected lead & team info
     const [followUps, total] = await Promise.all([
@@ -151,7 +182,7 @@ export async function GET(request: NextRequest) {
         },
         skip,
         take: limit,
-        orderBy: { followupDate: 'asc' },
+        orderBy: { followupDate: isCompletedQuery ? 'desc' : 'asc' },
       }),
       prisma.followUp.count({ where }),
     ])

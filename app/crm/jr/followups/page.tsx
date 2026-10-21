@@ -18,6 +18,8 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Label } from '@/components/ui/label'
+import { toast } from '@/components/ui/sonner'
 import {
   CheckCircle2,
   Clock,
@@ -40,6 +42,7 @@ import {
   CreditCard,
   Table as TableIcon,
   LayoutList,
+  Edit3,
 } from 'lucide-react'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { fetchMeCached } from '@/lib/client-me'
@@ -48,7 +51,7 @@ import { FOLLOWUP_CATEGORIES, type FollowUpCategoryValue } from '@/components/cr
 import { FOLLOWUP_DEPARTMENTS, DepartmentRoleBadge } from '@/components/crm/shared/followup-departments'
 
 type FollowUpStatus = 'PENDING' | 'DONE' | 'LATELY_DONE' | 'MISSED'
-type TabKey = 'pending' | 'today' | 'overdue' | 'completed' | 'missed'
+type TabKey = 'today' | 'overdue' | 'upcoming' | 'pending' | 'completed' | 'missed'
 type CrmPerspective = string
 
 type FollowUp = {
@@ -132,17 +135,19 @@ const statusConfig: Record<FollowUpStatus, { icon: ReactNode; color: string; bgC
 }
 
 const tabLabels: Record<TabKey, string> = {
-  pending: 'Pending',
   today: 'Today',
   overdue: 'Overdue',
+  upcoming: 'Upcoming',
+  pending: 'All Pending',
   completed: 'Completed',
   missed: 'Missed',
 }
 
 const createInitialTabState = (): Record<TabKey, TabState> => ({
-  pending: { items: [], page: 1, totalPages: 1, total: 0, loading: false, loaded: false, error: null },
   today: { items: [], page: 1, totalPages: 1, total: 0, loading: false, loaded: false, error: null },
   overdue: { items: [], page: 1, totalPages: 1, total: 0, loading: false, loaded: false, error: null },
+  upcoming: { items: [], page: 1, totalPages: 1, total: 0, loading: false, loaded: false, error: null },
+  pending: { items: [], page: 1, totalPages: 1, total: 0, loading: false, loaded: false, error: null },
   completed: { items: [], page: 1, totalPages: 1, total: 0, loading: false, loaded: false, error: null },
   missed: { items: [], page: 1, totalPages: 1, total: 0, loading: false, loaded: false, error: null },
 })
@@ -158,11 +163,21 @@ function getDateRangeForFollowups() {
   const beforeToday = new Date(start)
   beforeToday.setMilliseconds(beforeToday.getMilliseconds() - 1)
 
+  const tomorrowStart = new Date(start)
+  tomorrowStart.setDate(tomorrowStart.getDate() + 1)
+
   return {
     todayStartIso: start.toISOString(),
     todayEndIso: end.toISOString(),
     beforeTodayIso: beforeToday.toISOString(),
+    tomorrowStartIso: tomorrowStart.toISOString(),
   }
+}
+
+/** Formats a Date object into local YYYY-MM-DDTHH:mm string for datetime-local input */
+function toDateTimeLocalInput(date: Date): string {
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`
 }
 
 /** Returns tomorrow's date-time string in local ISO format suitable for datetime-local input */
@@ -178,13 +193,23 @@ export default function FollowupsPage() {
   const pathname = usePathname()
   const isAdminView = pathname?.startsWith('/crm/admin') ?? false
   const isSeniorCrmView = pathname?.startsWith('/crm/sr') ?? false
+  const isJuniorCrmView = !isAdminView && !isSeniorCrmView
 
-  const [activeTab, setActiveTab] = useState<TabKey>('pending')
+  const [activeTab, setActiveTab] = useState<TabKey>('today')
   const [viewMode, setViewMode] = useState<'table' | 'list'>('table')
-  const [crmPerspective, setCrmPerspective] = useState<CrmPerspective>('ALL')
+  const [crmPerspective, setCrmPerspective] = useState<CrmPerspective>(isJuniorCrmView ? 'MY' : 'ALL')
   const [searchQuery, setSearchQuery] = useState('')
   const [currentUserId, setCurrentUserId] = useState<string | null>(null)
   const [tabState, setTabState] = useState<Record<TabKey, TabState>>(createInitialTabState)
+
+  // Edit follow-up state
+  const [editOpen, setEditOpen] = useState(false)
+  const [selectedEditFollowup, setSelectedEditFollowup] = useState<FollowUp | null>(null)
+  const [editFollowupDate, setEditFollowupDate] = useState('')
+  const [editCategory, setEditCategory] = useState<FollowUpCategoryValue>('GENERAL')
+  const [editNotes, setEditNotes] = useState('')
+  const [editSaving, setEditSaving] = useState(false)
+  const [editError, setEditError] = useState<string | null>(null)
 
   // Complete modal state
   const [completeOpen, setCompleteOpen] = useState(false)
@@ -214,15 +239,18 @@ export default function FollowupsPage() {
       })
 
       // Status filters
-      if (tab === 'pending') {
-        params.set('status', 'PENDING')
-      } else if (tab === 'today') {
+      if (tab === 'today') {
         params.set('status', 'PENDING')
         params.set('from', dateRange.todayStartIso)
         params.set('to', dateRange.todayEndIso)
       } else if (tab === 'overdue') {
         params.set('status', 'PENDING')
         params.set('to', dateRange.beforeTodayIso)
+      } else if (tab === 'upcoming') {
+        params.set('status', 'PENDING')
+        params.set('from', dateRange.tomorrowStartIso)
+      } else if (tab === 'pending') {
+        params.set('status', 'PENDING')
       } else if (tab === 'completed') {
         params.set('statuses', 'DONE,LATELY_DONE')
       } else if (tab === 'missed') {
@@ -250,7 +278,7 @@ export default function FollowupsPage() {
 
       return params
     },
-    [crmPerspective, currentUserId, dateRange.beforeTodayIso, dateRange.todayEndIso, dateRange.todayStartIso, searchQuery],
+    [crmPerspective, currentUserId, dateRange.beforeTodayIso, dateRange.todayEndIso, dateRange.todayStartIso, dateRange.tomorrowStartIso, searchQuery],
   )
 
   const loadTab = useCallback(
@@ -312,9 +340,9 @@ export default function FollowupsPage() {
   }, [])
 
   useEffect(() => {
-    // Reset tabs when perspective or search changes
+    // Reset tabs when perspective, search, or user changes
     setTabState(createInitialTabState())
-  }, [crmPerspective, searchQuery])
+  }, [crmPerspective, searchQuery, currentUserId])
 
   useEffect(() => {
     const state = tabState[activeTab]
@@ -322,6 +350,52 @@ export default function FollowupsPage() {
       loadTab(activeTab, 1)
     }
   }, [activeTab, loadTab, tabState])
+
+  const openEditModal = (followup: FollowUp) => {
+    setSelectedEditFollowup(followup)
+    setEditFollowupDate(toDateTimeLocalInput(new Date(followup.followupDate)))
+    setEditCategory((followup.category as FollowUpCategoryValue) || 'GENERAL')
+    setEditNotes(followup.notes || '')
+    setEditError(null)
+    setEditOpen(true)
+  }
+
+  const handleSaveEditFollowup = async () => {
+    if (!selectedEditFollowup) return
+    if (!editFollowupDate) {
+      setEditError('Please select a valid follow-up date & time.')
+      return
+    }
+
+    setEditSaving(true)
+    setEditError(null)
+    try {
+      const res = await fetch(`/api/followup/${selectedEditFollowup.leadId}/${selectedEditFollowup.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          followupDate: new Date(editFollowupDate).toISOString(),
+          category: editCategory,
+          notes: editNotes.trim() || null,
+          userId: currentUserId,
+        }),
+      })
+
+      const data = await res.json()
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Failed to update follow-up.')
+      }
+
+      toast.success('Follow-up updated successfully.')
+      setEditOpen(false)
+      setSelectedEditFollowup(null)
+      await invalidateAndRefresh()
+    } catch (err) {
+      setEditError(err instanceof Error ? err.message : 'Failed to update follow-up.')
+    } finally {
+      setEditSaving(false)
+    }
+  }
 
   const openCompleteModal = (followup: FollowUp) => {
     setSelectedFollowup(followup)
@@ -533,6 +607,15 @@ export default function FollowupsPage() {
                       Lead <ArrowRight className="w-3.5 h-3.5" />
                     </Button>
                   </Link>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => openEditModal(followup)}
+                    className="gap-1 text-xs"
+                    title="Edit follow-up schedule or remarks"
+                  >
+                    <Edit3 className="w-3.5 h-3.5" /> Edit
+                  </Button>
                   {canComplete ? (
                     <Button size="sm" onClick={() => openCompleteModal(followup)} className="gap-1.5">
                       <CheckCircle2 className="w-3.5 h-3.5" /> Complete
@@ -730,6 +813,15 @@ export default function FollowupsPage() {
                             Lead <ArrowRight className="w-3 h-3" />
                           </Button>
                         </Link>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => openEditModal(followup)}
+                          className="h-7 px-2 text-xs gap-1"
+                          title="Edit follow-up schedule or remarks"
+                        >
+                          <Edit3 className="w-3 h-3" /> Edit
+                        </Button>
                         {canComplete ? (
                           <Button
                             size="sm"
@@ -878,15 +970,15 @@ export default function FollowupsPage() {
         <div className="flex flex-col gap-3 bg-card border rounded-xl p-4 shadow-sm">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mr-1">
-              Department Filter:
+              View:
             </span>
             <Button
               size="sm"
-              variant={crmPerspective === 'ALL' ? 'default' : 'outline'}
-              className="h-7 text-xs gap-1.5"
-              onClick={() => setCrmPerspective('ALL')}
+              variant={crmPerspective === 'MY' ? 'default' : 'outline'}
+              className={`h-7 text-xs gap-1.5 font-medium ${crmPerspective === 'MY' ? 'bg-primary text-primary-foreground shadow-sm' : ''}`}
+              onClick={() => setCrmPerspective('MY')}
             >
-              <Sparkles className="w-3 h-3" /> All
+              <User className="w-3.5 h-3.5" /> My Follow-Ups
             </Button>
             <Button
               size="sm"
@@ -894,7 +986,15 @@ export default function FollowupsPage() {
               className={`h-7 text-xs gap-1.5 ${crmPerspective === 'JR_CRM' ? 'bg-sky-600 hover:bg-sky-700 text-white' : ''}`}
               onClick={() => setCrmPerspective('JR_CRM')}
             >
-              <UserCheck className="w-3 h-3" /> Jr CRM
+              <UserCheck className="w-3 h-3" /> All Jr CRM
+            </Button>
+            <Button
+              size="sm"
+              variant={crmPerspective === 'ALL' ? 'default' : 'outline'}
+              className="h-7 text-xs gap-1.5"
+              onClick={() => setCrmPerspective('ALL')}
+            >
+              <Sparkles className="w-3 h-3" /> All Departments
             </Button>
             <Button
               size="sm"
@@ -944,14 +1044,6 @@ export default function FollowupsPage() {
             >
               <CreditCard className="w-3 h-3" /> Accounts
             </Button>
-            <Button
-              size="sm"
-              variant={crmPerspective === 'MY' ? 'default' : 'outline'}
-              className="h-7 text-xs gap-1.5"
-              onClick={() => setCrmPerspective('MY')}
-            >
-              <User className="w-3 h-3" /> My Follow-Ups
-            </Button>
           </div>
 
           <div className="relative sm:w-64">
@@ -968,7 +1060,7 @@ export default function FollowupsPage() {
         {/* Status Tabs & View Mode Switcher */}
         <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val as TabKey)} className="w-full">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <TabsList className="grid grid-cols-5 w-full sm:max-w-2xl">
+            <TabsList className="grid grid-cols-3 sm:grid-cols-6 w-full sm:max-w-3xl">
               {(Object.keys(tabLabels) as TabKey[]).map((tab) => (
                 <TabsTrigger key={tab} value={tab} className="text-xs sm:text-sm">
                   {tabLabels[tab]}
@@ -1004,9 +1096,10 @@ export default function FollowupsPage() {
           </div>
 
           <div className="mt-6">
-            {activeTab === 'pending' && renderTabContent('pending', <Clock className="w-12 h-12" />, 'No pending follow-ups')}
             {activeTab === 'today' && renderTabContent('today', <Calendar className="w-12 h-12" />, 'No follow-ups for today')}
-            {activeTab === 'overdue' && renderTabContent('overdue', <CheckCircle2 className="w-12 h-12" />, 'No overdue follow-ups')}
+            {activeTab === 'overdue' && renderTabContent('overdue', <AlertCircle className="w-12 h-12" />, 'No overdue follow-ups')}
+            {activeTab === 'upcoming' && renderTabContent('upcoming', <Clock className="w-12 h-12" />, 'No upcoming follow-ups scheduled')}
+            {activeTab === 'pending' && renderTabContent('pending', <Clock className="w-12 h-12" />, 'No pending follow-ups')}
             {activeTab === 'completed' && renderTabContent('completed', <CheckCircle2 className="w-12 h-12" />, 'No completed follow-ups')}
             {activeTab === 'missed' && renderTabContent('missed', <AlertCircle className="w-12 h-12" />, 'No missed follow-ups')}
           </div>
@@ -1222,6 +1315,95 @@ export default function FollowupsPage() {
             </Button>
             <Button size="sm" onClick={handleCompleteFollowup} disabled={completing}>
               {completing ? 'Saving & Connecting...' : 'Complete & Connect'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Follow-Up Dialog */}
+      <Dialog open={editOpen} onOpenChange={setEditOpen}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Edit3 className="w-5 h-5 text-primary" />
+              <span>Edit Follow-Up</span>
+            </DialogTitle>
+            <DialogDescription>
+              {selectedEditFollowup ? (
+                <span>
+                  Update follow-up for <strong className="text-foreground">{selectedEditFollowup.lead.name}</strong>
+                  {selectedEditFollowup.lead.phone ? ` (${selectedEditFollowup.lead.phone})` : ''}
+                </span>
+              ) : (
+                'Update follow-up schedule and details'
+              )}
+            </DialogDescription>
+          </DialogHeader>
+
+          {editError && (
+            <div className="p-3 bg-red-100 dark:bg-red-950 border border-red-200 dark:border-red-900 rounded-lg text-xs text-red-700 dark:text-red-300 flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              <span>{editError}</span>
+            </div>
+          )}
+
+          <div className="space-y-4 py-2">
+            <div className="space-y-1.5">
+              <Label className="text-xs font-semibold">Follow-Up Date & Time *</Label>
+              <Input
+                type="datetime-local"
+                value={editFollowupDate}
+                onChange={(e) => setEditFollowupDate(e.target.value)}
+                className="h-9 text-xs"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label className="text-xs font-semibold">Category / Topic</Label>
+              <Select
+                value={editCategory}
+                onValueChange={(val) => setEditCategory(val as FollowUpCategoryValue)}
+              >
+                <SelectTrigger className="h-9 text-xs">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {FOLLOWUP_CATEGORIES.map((cat) => (
+                    <SelectItem key={cat.value} value={cat.value} className="text-xs">
+                      {cat.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-1.5">
+              <Label className="text-xs font-semibold">Follow-Up Remarks / Notes</Label>
+              <Textarea
+                rows={3}
+                placeholder="What was discussed or planned for this follow-up..."
+                value={editNotes}
+                onChange={(e) => setEditNotes(e.target.value)}
+                className="text-xs resize-none"
+              />
+            </div>
+          </div>
+
+          <DialogFooter className="gap-2 sm:gap-0">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setEditOpen(false)}
+              disabled={editSaving}
+            >
+              Cancel
+            </Button>
+            <Button
+              size="sm"
+              onClick={handleSaveEditFollowup}
+              disabled={editSaving || !editFollowupDate}
+            >
+              {editSaving ? 'Saving...' : 'Save Changes'}
             </Button>
           </DialogFooter>
         </DialogContent>
