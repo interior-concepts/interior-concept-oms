@@ -1810,13 +1810,26 @@ export function VisitsPageView({
                                                 ))
                                               : 'None'}
                                           </p>
-                                          {!cardNavigatesToLead ? (
-                                            <div>
+                                          <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                                            {!cardNavigatesToLead ? (
                                               <Button size="sm" variant="outline" asChild className="h-7 px-2 text-xs">
                                                 <Link href={leadHref}>Open Lead</Link>
                                               </Button>
-                                            </div>
-                                          ) : null}
+                                            ) : null}
+                                            {canEditVisit ? (
+                                              <Button
+                                                size="sm"
+                                                variant="outline"
+                                                onClick={(e) => {
+                                                  e.stopPropagation()
+                                                  openEditDialog(visit)
+                                                }}
+                                                className="h-7 px-2 text-xs"
+                                              >
+                                                Edit Visit
+                                              </Button>
+                                            ) : null}
+                                          </div>
                                           {role !== 'NONE' ? (
                                             <p className="text-xs font-semibold text-muted-foreground">
                                               {role === 'LEAD' ? 'Leading' : 'Supporting'}
@@ -1938,8 +1951,8 @@ export function VisitsPageView({
                                   {role === 'LEAD' ? 'Leading' : 'Supporting'}
                                 </span>
                               ) : null}
-                              {!cardNavigatesToLead ? (
-                                <div className="pt-1">
+                              <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                                {!cardNavigatesToLead ? (
                                   <Button
                                     size="sm"
                                     variant="outline"
@@ -1948,8 +1961,21 @@ export function VisitsPageView({
                                   >
                                     <Link href={leadHref}>Open Lead</Link>
                                   </Button>
-                                </div>
-                              ) : null}
+                                ) : null}
+                                {canEditVisit ? (
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={(e) => {
+                                      e.stopPropagation()
+                                      openEditDialog(visit)
+                                    }}
+                                    className="h-7 px-2 text-[11px]"
+                                  >
+                                    Edit Visit
+                                  </Button>
+                                ) : null}
+                              </div>
                             </div>
                           </div>
                         )
