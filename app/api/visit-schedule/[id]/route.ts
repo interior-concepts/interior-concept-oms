@@ -7,6 +7,7 @@ import { autoCompletePendingFollowups } from '@/lib/followup-auto-complete';
 import { findVisitConflict } from '@/lib/visit-guards';
 import { hasVisitTeamLeadershipRole } from '@/lib/visit-team-roles';
 import { sendPushToUser } from '@/lib/fcm-service';
+import { parseScheduledAtDate } from '@/lib/date-utils';
 
 type RouteContext = { params: { id: string } | Promise<{ id: string }> };
 
@@ -170,7 +171,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
     const notes = toOptionalString(body.notes);
     const reason = toOptionalString(body.reason);
     const scheduledAtRaw = toOptionalString(body.scheduledAt);
-    const parsedScheduledAt = scheduledAtRaw ? new Date(scheduledAtRaw) : null;
+    const parsedScheduledAt = scheduledAtRaw ? parseScheduledAtDate(scheduledAtRaw) : null;
     const statusInput = toVisitStatus(toOptionalString(body.status));
     const projectSqft = toOptionalNumber(body.projectSqft);
     const visitFee = toOptionalNumber(body.visitFee);

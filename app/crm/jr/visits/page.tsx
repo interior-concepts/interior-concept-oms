@@ -714,6 +714,13 @@ export function VisitsPageView({
     return creatorId === currentUserId
   }
 
+  const canEditVisit =
+    isAdminActor ||
+    actorDepartments.has('JR_CRM') ||
+    actorDepartments.has('ADMIN') ||
+    isVisitTeamLeaderActor ||
+    !visitTeamView
+
   function getVisitRole(visit: VisitRecord): 'LEAD' | 'SUPPORT' | 'NONE' {
     if (!currentUserId) return 'NONE'
     if (visit.assignedTo?.id === currentUserId) return 'LEAD'
@@ -1038,7 +1045,7 @@ export function VisitsPageView({
           projectSqft: editProjectSqft === '' ? undefined : Number(editProjectSqft),
           projectStatus: editProjectStatus || undefined,
           notes: editNotes,
-          reason: 'Admin edited visit data.',
+          reason: isAdminActor ? 'Admin edited visit data.' : 'JR CRM edited visit data.',
         }),
       })
       const payload = await response.json()
@@ -1403,6 +1410,11 @@ export function VisitsPageView({
                     {!cardNavigatesToLead ? (
                       <Button size="sm" variant="outline" className="w-full sm:w-auto" asChild>
                         <Link href={leadHref}>Open Lead Details</Link>
+                      </Button>
+                    ) : null}
+                    {canEditVisit ? (
+                      <Button size="sm" variant="outline" className="w-full sm:w-auto" onClick={() => openEditDialog(visit)}>
+                        Edit Visit
                       </Button>
                     ) : null}
                     {allowManageAssignment || isAdminActor ? (
@@ -2278,7 +2290,7 @@ export function VisitsPageView({
                             </TableCell>
                             <TableCell className="text-right">
                               <div className="flex justify-end gap-2">
-                                {isAdminActor ? (
+                                {canEditVisit ? (
                                   <Button size="sm" variant="outline" onClick={() => openEditDialog(visit)}>
                                     Edit Visit
                                   </Button>
@@ -2425,7 +2437,7 @@ export function VisitsPageView({
           <DialogHeader>
             <DialogTitle>Edit Visit Data</DialogTitle>
             <DialogDescription>
-              Admin-only edit form for visit schedule, address, fee, project data, and notes.
+              Edit visit schedule date & time, address, fee, project size, and notes.
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-2 sm:grid-cols-2">
