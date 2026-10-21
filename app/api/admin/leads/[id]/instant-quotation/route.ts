@@ -13,6 +13,7 @@ import {
   VisitStatus,
 } from '@/generated/prisma/client'
 import { buildDefaultQuotationContent } from '@/lib/quotation-templates'
+import { parseScheduledAtDate } from '@/lib/date-utils'
 
 type RouteContext = { params: { id: string } | Promise<{ id: string }> }
 
@@ -119,21 +120,8 @@ export async function POST(req: NextRequest, context: RouteContext) {
       )
     }
 
-    let parsedVisitDate: Date | null = null
-    if (typeof body.visitDate === 'string' && body.visitDate.trim()) {
-      const d = new Date(body.visitDate.trim())
-      if (!Number.isNaN(d.getTime())) {
-        parsedVisitDate = d
-      }
-    }
-
-    let parsedFollowupDate: Date | null = null
-    if (typeof body.followupDate === 'string' && body.followupDate.trim()) {
-      const d = new Date(body.followupDate.trim())
-      if (!Number.isNaN(d.getTime())) {
-        parsedFollowupDate = d
-      }
-    }
+    const parsedVisitDate = typeof body.visitDate === 'string' ? parseScheduledAtDate(body.visitDate) : null
+    const parsedFollowupDate = typeof body.followupDate === 'string' ? parseScheduledAtDate(body.followupDate) : null
 
     const followupNotes =
       typeof body.followupNotes === 'string' ? body.followupNotes.trim() : ''

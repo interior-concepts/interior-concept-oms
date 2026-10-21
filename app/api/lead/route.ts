@@ -23,6 +23,7 @@ import { maybeRunFacebookFallbackSync, runFacebookSyncWithControl } from '@/lib/
 import { maybeRunInstagramFallbackSync } from '@/lib/instagram-sync-control';
 import { formatPhoneForStorage } from '@/lib/phone-normalize';
 import { sendPushToUser } from '@/lib/fcm-service';
+import { parseScheduledAtDate } from '@/lib/date-utils';
 
 export const runtime = 'nodejs';
 export const preferredRegion = 'sin1';
@@ -1138,7 +1139,7 @@ export async function POST(request: NextRequest) {
       const visitFee = toOptionalNumber(visitBody.visitFee);
       const projectStatus = toProjectStatus(visitBody.projectStatus);
       const scheduledAtRaw = toOptionalString(visitBody.scheduledAt);
-      const parsedScheduledAt = scheduledAtRaw ? new Date(scheduledAtRaw) : null;
+      const parsedScheduledAt = parseScheduledAtDate(scheduledAtRaw);
       const explicitLocation = toOptionalString(visitBody.location) ?? toOptionalString(body.location) ?? null;
 
       if (!visitTeamUserId || !scheduledAtRaw || !parsedScheduledAt || Number.isNaN(parsedScheduledAt.getTime())) {
@@ -1457,7 +1458,7 @@ export async function POST(request: NextRequest) {
         const visitBody: CreateLeadVisitBody = isRecord(body.visit) ? body.visit : {};
         const visitTeamUserId = toOptionalString(visitBody.visitTeamUserId);
         const scheduledAtRaw = toOptionalString(visitBody.scheduledAt);
-        const parsedScheduledAt = scheduledAtRaw ? new Date(scheduledAtRaw) : null;
+        const parsedScheduledAt = parseScheduledAtDate(scheduledAtRaw);
         if (visitTeamUserId && parsedScheduledAt && !Number.isNaN(parsedScheduledAt.getTime())) {
           await sendPushToUser(
             visitTeamUserId,

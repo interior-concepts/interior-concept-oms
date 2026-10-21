@@ -188,8 +188,8 @@ export function InstantQuotationModal({
         body: JSON.stringify({
           projectSqft: parsedSqft,
           seniorCrmUserId,
-          visitDate: visitDate || null,
-          followupDate: followupDate || null,
+          visitDate: visitDate ? new Date(visitDate).toISOString() : null,
+          followupDate: followupDate ? new Date(followupDate).toISOString() : null,
           followupNotes: followupNotes.trim() || null,
         }),
       })

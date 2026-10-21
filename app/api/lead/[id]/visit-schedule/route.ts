@@ -18,6 +18,7 @@ import { autoCompletePendingFollowups } from '@/lib/followup-auto-complete';
 import { findVisitConflict } from '@/lib/visit-guards';
 import { getWeeklySeniorCrmAssignment } from '@/lib/sr-crm-rotation';
 import { sendPushToUser } from '@/lib/fcm-service';
+import { parseScheduledAtDate } from '@/lib/date-utils';
 
 type RouteContext = { params: { id: string } | Promise<{ id: string }> };
 
@@ -237,7 +238,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
     const visitFee = toOptionalNumber(body.visitFee);
     const projectStatus = toProjectStatus(body.projectStatus);
     const scheduledAtRaw = toOptionalString(body.scheduledAt);
-    const parsedScheduledAt = scheduledAtRaw ? new Date(scheduledAtRaw) : null;
+    const parsedScheduledAt = parseScheduledAtDate(scheduledAtRaw);
     const explicitLocation = toOptionalString(body.location);
 
     if (!visitTeamUserId || !scheduledAtRaw || !parsedScheduledAt || Number.isNaN(parsedScheduledAt.getTime())) {

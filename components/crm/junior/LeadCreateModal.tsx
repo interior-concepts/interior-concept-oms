@@ -241,9 +241,15 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
         setLoading(false)
         return
       }
+      const parsedDate = new Date(visitForm.scheduledAt)
+      if (Number.isNaN(parsedDate.getTime())) {
+        setError('Please choose a valid visit date and time.')
+        setLoading(false)
+        return
+      }
       payload.visit = {
         visitTeamUserId: visitForm.visitTeamUserId || undefined,
-        scheduledAt: visitForm.scheduledAt || undefined,
+        scheduledAt: parsedDate.toISOString(),
         notes: visitForm.notes || undefined,
         visitFee: visitForm.visitFee ? Number(visitForm.visitFee) : undefined,
         projectSqft: visitForm.projectSqft ? Number(visitForm.projectSqft) : undefined,
