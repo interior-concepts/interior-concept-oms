@@ -20,6 +20,7 @@ import {
   FlaskConical,
   FileText,
   BarChart3,
+  FileCheck2,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/components/theme-provider'
@@ -161,6 +162,11 @@ const navigationGroups: Record<string, NavGroup[]> = {
           href: '/crm/admin/design-queue',
         },
         {
+          icon: FileCheck2,
+          label: 'Agreement Center',
+          href: '/crm/admin/agreement',
+        },
+        {
           icon: ClipboardList,
           label: 'Review Center',
           href: '/crm/admin/review-center',
@@ -226,6 +232,11 @@ const navigationGroups: Record<string, NavGroup[]> = {
           icon: ClipboardList,
           label: 'Design Queue',
           href: '/crm/sr/design-queue',
+        },
+        {
+          icon: FileCheck2,
+          label: 'Agreement Center',
+          href: '/crm/sr/agreement',
         },
         { icon: CheckSquare, label: 'Followups', href: '/crm/sr/followups' },
         { icon: Users, label: 'Lead Journey', href: '/crm/sr/lead-journey' },

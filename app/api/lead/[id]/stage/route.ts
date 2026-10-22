@@ -379,6 +379,16 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
         });
       }
 
+      // Auto-assign ACCOUNTS department when an agreement is confirmed
+      if (agreementType !== null) {
+        await ensureDepartmentAssignment({
+          tx,
+          leadId,
+          department: LeadAssignmentDepartment.ACCOUNTS,
+          actorUserId: userId,
+        });
+      }
+
       if (
         nextStage === LeadStage.CAD_PHASE &&
         nextSubStatus === LeadSubStatus.CAD_ASSIGNED &&

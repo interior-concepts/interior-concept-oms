@@ -1285,7 +1285,7 @@ export function CadPhaseQueueBoard({
         if (!response.ok || !payload?.success) {
           throw new Error(payload?.error ?? 'Failed to move lead to Visualization phase')
         }
-        toast.success('Agreement confirmed — Lead sent to Design Queue')
+        toast.success('Agreement confirmed — Lead moved to Agreement Center & Design Queue')
       } else if (
         (completeMeetingLead.stage === 'BUDGET_PHASE' &&
         completeMeetingLead.subStatus === 'BUDGET_MEETING_SET') || isDirectAgreementConfirm
@@ -1342,7 +1342,7 @@ export function CadPhaseQueueBoard({
         toast.success(
           clientApproval === 'NO_APPROVAL'
             ? 'Budget meeting completed'
-            : 'Lead sent to Design Queue',
+            : 'Agreement confirmed — Lead moved to Agreement Center & Design Queue',
         )
       } else {
         throw new Error('This lead is not eligible for meeting completion')
