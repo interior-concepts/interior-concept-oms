@@ -42,7 +42,11 @@ import {
   CalendarPlus,
   ClipboardCheck,
   Download,
+  ExternalLink,
+  FileDown,
+  FileEdit,
   FileText,
+  LayoutList,
   ListFilter,
   Sparkles,
   ImageIcon,
@@ -52,6 +56,7 @@ import {
   RotateCcw,
   Send,
   Search,
+  Table2,
   UserRound,
 } from 'lucide-react'
 import { formatCadSubmissionFileType } from '@/lib/cad-work'
@@ -64,6 +69,12 @@ type ReviewFile = {
   fileType: string
   cadFileType: string
   sizeBytes: number | null
+}
+
+type QuotationDraftMeta = {
+  draftKey: string
+  grandTotal: number | null
+  quotationType: string | null
 }
 
 const ALL_MEMBER_FILTER = 'ALL_MEMBERS'
@@ -91,6 +102,7 @@ type ReviewSubmission = {
       id: string
       scheduledAt: string
     } | null
+    quotationDraftKeys?: QuotationDraftMeta[]
   }
   submittedBy: {
     id: string
@@ -165,6 +177,7 @@ type ReviewCenterViewProps = {
   subtitle?: string
   myLeadsOnly?: boolean
   leadBasePath?: string
+  quotationBasePath?: string
   showSrCrmFilter?: boolean
 }
 
@@ -344,11 +357,162 @@ function FilePreviewCard({ file }: { file: ReviewFile }) {
   )
 }
 
+function formatGrandTotal(value: number | null): string {
+  if (!value || value <= 0) return ''
+  return ` — ৳${value.toLocaleString('en-BD')}`
+}
+
+function getDraftKindLabel(draftKey: string): string {
+  if (draftKey === 'detail') return 'Detail Quotation'
+  if (draftKey.startsWith('detail:slot:')) return `Detail Quotation v${draftKey.replace('detail:slot:', '')}`
+  if (draftKey.startsWith('detail:owner:')) return 'Detail Quotation (owner)'
+  if (draftKey === 'short:PREMIUM') return 'Short — Premium'
+  if (draftKey === 'short:STANDARD') return 'Short — Standard'
+  if (draftKey === 'short:BASIC') return 'Short — Basic'
+  if (draftKey.startsWith('short:')) return `Short — ${draftKey.replace('short:', '')}`
+  return draftKey
+}
+
+function isDetailDraft(draftKey: string): boolean {
+  return draftKey.startsWith('detail')
+}
+
+function QuotationSubmissionPanel({
+  submission,
+  quotationBasePath,
+}: {
+  submission: ReviewSubmission
+  quotationBasePath: string
+}) {
+  const leadId = submission.lead.id
+  const drafts = submission.lead.quotationDraftKeys ?? []
+
+  const detailDrafts = drafts.filter((d) => isDetailDraft(d.draftKey))
+  const shortDrafts = drafts.filter((d) => !isDetailDraft(d.draftKey))
+
+  return (
+    <div className="space-y-3">
+      {/* Live quotation workspace link */}
+      <div className="flex flex-wrap items-center gap-2">
+        <Link
+          href={`${quotationBasePath}/${leadId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-md border border-amber-300/70 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-800 shadow-sm transition hover:bg-amber-100 hover:border-amber-400 dark:border-amber-700/50 dark:bg-amber-950/40 dark:text-amber-200 dark:hover:bg-amber-900/50"
+        >
+          <ExternalLink className="h-3.5 w-3.5" />
+          Open Quotation Workspace
+        </Link>
+        <Link
+          href={`${quotationBasePath}/${leadId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-md border border-border/70 bg-card px-3 py-2 text-xs font-medium text-muted-foreground shadow-sm transition hover:bg-accent hover:text-foreground"
+        >
+          <FileEdit className="h-3.5 w-3.5" />
+          Modify Quotation
+        </Link>
+      </div>
+
+      {/* Detail quotation links */}
+      {detailDrafts.length > 0 && (
+        <div className="space-y-1.5">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground flex items-center gap-1.5">
+            <Table2 className="h-3 w-3" />
+            Detail Quotation
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {detailDrafts.map((draft) => (
+              <div
+                key={draft.draftKey}
+                className="flex items-stretch overflow-hidden rounded-md border border-border/70 bg-card text-xs shadow-sm"
+              >
+                <Link
+                  href={`${quotationBasePath}/${leadId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-2 font-medium text-foreground transition hover:bg-accent"
+                  title="Modify in Quotation Workspace"
+                >
+                  <FileText className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                  {getDraftKindLabel(draft.draftKey)}
+                  {formatGrandTotal(draft.grandTotal)}
+                </Link>
+                <Link
+                  href={`/quotation-team/detail-preview?context=lead&id=${encodeURIComponent(leadId)}${draft.draftKey.startsWith('detail:slot:') ? `&slot=${encodeURIComponent(draft.draftKey.replace('detail:slot:', ''))}` : ''}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="View & Download Detail PDF"
+                  className="flex items-center gap-1 border-l border-border/70 bg-muted/40 px-2.5 py-2 font-semibold text-primary transition hover:bg-accent hover:text-foreground"
+                >
+                  <FileDown className="h-3.5 w-3.5" />
+                  <span className="hidden sm:inline">PDF</span>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Short quotation links */}
+      {shortDrafts.length > 0 && (
+        <div className="space-y-1.5">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground flex items-center gap-1.5">
+            <LayoutList className="h-3 w-3" />
+            Short Quotation
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {shortDrafts.map((draft) => {
+              const packageTier = draft.draftKey.startsWith('short:') ? draft.draftKey.replace('short:', '') : 'PREMIUM'
+              return (
+                <div
+                  key={draft.draftKey}
+                  className="flex items-stretch overflow-hidden rounded-md border border-border/70 bg-card text-xs shadow-sm"
+                >
+                  <Link
+                    href={`${quotationBasePath}/${leadId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 px-3 py-2 font-medium text-foreground transition hover:bg-accent"
+                    title="Modify in Quotation Workspace"
+                  >
+                    <FileText className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
+                    {getDraftKindLabel(draft.draftKey)}
+                    {formatGrandTotal(draft.grandTotal)}
+                  </Link>
+                  <Link
+                    href={`/quotation-team/short-preview?context=lead&id=${encodeURIComponent(leadId)}&package=${encodeURIComponent(packageTier)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="View & Download Short PDF"
+                    className="flex items-center gap-1 border-l border-border/70 bg-muted/40 px-2.5 py-2 font-semibold text-primary transition hover:bg-accent hover:text-foreground"
+                  >
+                    <FileDown className="h-3.5 w-3.5" />
+                    <span className="hidden sm:inline">PDF</span>
+                  </Link>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
+      {drafts.length === 0 && (
+        <div className="inline-flex h-16 min-w-[260px] items-center gap-2 rounded-md border border-dashed border-amber-300/70 px-3 text-xs text-muted-foreground dark:border-amber-700/40">
+          <Table2 className="h-4 w-4 text-amber-500" />
+          No quotation drafts found yet. Open the workspace to build one.
+        </div>
+      )}
+    </div>
+  )
+}
+
 export function ReviewCenterView({
   title = 'Review Center',
   subtitle = 'Review completed CAD, quotation, and 3D visualization submissions with quick preview and handoff notes.',
   myLeadsOnly = true,
   leadBasePath = '/crm/sr/leads',
+  quotationBasePath = '/crm/sr/quotation/leads',
   showSrCrmFilter = false,
 }: ReviewCenterViewProps) {
   const [submissions, setSubmissions] = useState<ReviewSubmission[]>([])
@@ -872,22 +1036,47 @@ export function ReviewCenterView({
                     </div>
                   ) : null}
 
-                  <div className="space-y-2">
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                      Submitted Files
-                    </p>
-                    <div className="flex items-center gap-2 overflow-x-auto pb-1">
-                      {submission.files.map((file) => (
-                        <FilePreviewCard key={file.id} file={file} />
-                      ))}
-                      {submission.files.length === 0 ? (
-                        <div className="inline-flex h-20 min-w-[230px] items-center gap-2 rounded-md border border-dashed border-border/70 px-3 text-xs text-muted-foreground">
-                          <ImageIcon className="h-4 w-4" />
-                          No files were submitted with this record.
+                  {getSubmissionKind(submission) === 'quotation' ? (
+                    <div className="space-y-2">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        Quotation Work
+                      </p>
+                      <QuotationSubmissionPanel
+                        submission={submission}
+                        quotationBasePath={quotationBasePath}
+                      />
+                      {/* Also show any manually uploaded files if present */}
+                      {submission.files.length > 0 && (
+                        <div className="space-y-1.5 pt-1">
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                            Attached Files
+                          </p>
+                          <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                            {submission.files.map((file) => (
+                              <FilePreviewCard key={file.id} file={file} />
+                            ))}
+                          </div>
                         </div>
-                      ) : null}
+                      )}
                     </div>
-                  </div>
+                  ) : (
+                    <div className="space-y-2">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        Submitted Files
+                      </p>
+                      <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                        {submission.files.map((file) => (
+                          <FilePreviewCard key={file.id} file={file} />
+                        ))}
+                        {submission.files.length === 0 ? (
+                          <div className="inline-flex h-20 min-w-[230px] items-center gap-2 rounded-md border border-dashed border-border/70 px-3 text-xs text-muted-foreground">
+                            <ImageIcon className="h-4 w-4" />
+                            No files were submitted with this record.
+                          </div>
+                        ) : null}
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}

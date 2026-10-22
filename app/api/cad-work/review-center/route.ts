@@ -170,6 +170,13 @@ export async function GET(request: NextRequest) {
                   scheduledAt: true,
                 },
               },
+              quotationDrafts: {
+                select: {
+                  draftKey: true,
+                  grandTotal: true,
+                  quotationType: true,
+                },
+              },
             },
           },
           submittedBy: {
@@ -198,6 +205,14 @@ export async function GET(request: NextRequest) {
         const srCrmAssignment = submission.lead.assignments[0] ?? null
         const latestCompletedVisit = submission.lead.visits[0] ?? null
 
+        const quotationDraftKeys = (submission.lead.quotationDrafts ?? [])
+          .map((d: { draftKey: string; grandTotal: number | null; quotationType: string | null }) => ({
+            draftKey: d.draftKey,
+            grandTotal: d.grandTotal,
+            quotationType: d.quotationType,
+          }))
+          .filter((d: { draftKey: string }) => d.draftKey !== 'agreement')
+
         return {
           ...submission,
           lead: {
@@ -209,6 +224,7 @@ export async function GET(request: NextRequest) {
             subStatus: submission.lead.subStatus,
             srCrmAssignment,
             latestCompletedVisit,
+            quotationDraftKeys,
           },
           files: await Promise.all(
             submission.files.map(async (file) => ({
