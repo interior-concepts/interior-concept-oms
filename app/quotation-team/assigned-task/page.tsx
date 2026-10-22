@@ -85,9 +85,7 @@ export default function QuotationAssignedTaskPage() {
   const [leads, setLeads] = useState<TaskLead[]>([]);
   const [submitLead, setSubmitLead] = useState<TaskLead | null>(null);
   const [submitNote, setSubmitNote] = useState("");
-  const [submitAttachments, setSubmitAttachments] = useState<AttachmentInput[]>([
-    { id: crypto.randomUUID(), file: null, documentType: "SHORT", packageType: "PREMIUM" },
-  ]);
+  const [submitAttachments, setSubmitAttachments] = useState<AttachmentInput[]>([]);
   const [uploadingFiles, setUploadingFiles] = useState(false);
   const [viewMode, setViewMode] = useState<"card" | "table">("card");
 
@@ -164,24 +162,20 @@ export default function QuotationAssignedTaskPage() {
   const openSubmitDialog = (lead: TaskLead) => {
     setSubmitLead(lead);
     setSubmitNote("");
-    setSubmitAttachments([{ id: crypto.randomUUID(), file: null, documentType: "SHORT", packageType: "PREMIUM" }]);
+    setSubmitAttachments([]);
   };
 
   const submitQuotationWork = async () => {
     if (!submitLead) return;
     const validAttachments = submitAttachments.filter((item) => item.file);
-    if (validAttachments.length === 0) {
-      toast.error("Please add at least one attachment");
-      return;
-    }
     const invalidFiles = validAttachments.filter((item) => item.file?.type && item.file.type !== "application/pdf");
     if (invalidFiles.length > 0) {
-      toast.error("Please upload PDF files only for quotation submissions");
+      toast.error("Please upload PDF files only if attaching files");
       return;
     }
     setBusyId(submitLead.id);
     try {
-      setUploadingFiles(true);
+      setUploadingFiles(validAttachments.length > 0);
       const uploadedFiles: UploadedBlobFileMeta[] = [];
       for (const attachment of validAttachments) {
         const file = attachment.file;
@@ -227,7 +221,7 @@ export default function QuotationAssignedTaskPage() {
       toast.success("Quotation submitted to Senior CRM Review Center");
       setSubmitLead(null);
       setSubmitNote("");
-      setSubmitAttachments([{ id: crypto.randomUUID(), file: null, documentType: "SHORT", packageType: "PREMIUM" }]);
+      setSubmitAttachments([]);
       await loadTasks();
     } catch (error) {
       toast.error(
@@ -597,58 +591,128 @@ export default function QuotationAssignedTaskPage() {
             </DialogDescription>
           </DialogHeader>
           <div className="flex-1 overflow-y-auto space-y-4 pr-1">
+            {/* Software-generated drafts overview */}
+            <div className="rounded-lg border border-amber-200/80 bg-amber-50/50 p-3 dark:border-amber-900/50 dark:bg-amber-950/20 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-amber-900 dark:text-amber-200 uppercase tracking-wide">
+                  Software Quotation Drafts
+                </span>
+                <Link
+                  href={`/quotation-team/leads/${submitLead?.id}`}
+                  target="_blank"
+                  className="text-xs text-primary underline font-medium hover:text-primary/80"
+                >
+                  Open Workspace ↗
+                </Link>
+              </div>
+              <div className="text-xs text-muted-foreground">
+                <p>
+                  Senior CRM will review the software drafts directly in their Review Center. No file upload is required.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  <span className="inline-flex items-center gap-1 rounded bg-white px-2 py-1 text-[11px] font-medium border shadow-xs dark:bg-slate-900">
+                    Detail: {submitLead?.avgDetailSqft ? `${submitLead.avgDetailSqft.toLocaleString()} SQFT` : "0 SQFT"}
+                  </span>
+                  <span className="inline-flex items-center gap-1 rounded bg-white px-2 py-1 text-[11px] font-medium border shadow-xs dark:bg-slate-900">
+                    Short: {submitLead?.avgShortSqft ? `${submitLead.avgShortSqft.toLocaleString()} SQFT` : "0 SQFT"}
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <div className="space-y-2">
               <p className="text-sm font-medium">
-                Work details for {submitLead?.name} (optional)
+                Handoff Note for Senior CRM (optional)
               </p>
               <Textarea
-                rows={5}
+                rows={3}
                 value={submitNote}
                 onChange={(event) => setSubmitNote(event.target.value)}
-                placeholder="Add optional notes for Senior CRM review..."
+                placeholder="e.g. Quotation prepared according to client floor plan and material preferences..."
               />
             </div>
-            <div className="space-y-2">
-              <p className="text-sm font-medium">Quotation files</p>
-              <div className="space-y-1">
-                <p className="text-xs text-muted-foreground">Choose Short or Detail for each PDF. Short quotations also need a package type.</p>
-                {submitAttachments.map((attachment, index) => (
-                  <div key={attachment.id} className="space-y-2 rounded-md border p-3">
-                    <p className="text-xs font-medium text-muted-foreground">Attachment {index + 1}</p>
-                    <select
-                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                      value={attachment.documentType}
-                      onChange={(event) => setSubmitAttachments((prev) => prev.map((item) => item.id === attachment.id ? { ...item, documentType: event.target.value as AttachmentDocumentType } : item))}
-                    >
-                      <option value="SHORT">Short</option>
-                      <option value="DETAIL">Detail</option>
-                    </select>
-                    {attachment.documentType === "SHORT" ? (
-                      <select
-                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                        value={attachment.packageType}
-                        onChange={(event) => setSubmitAttachments((prev) => prev.map((item) => item.id === attachment.id ? { ...item, packageType: event.target.value as QuotationPackageType } : item))}
-                      >
-                        <option value="PREMIUM">Premium</option>
-                        <option value="STANDARD">Standard</option>
-                        <option value="BASIC">Basic</option>
-                        <option value="MIXED">Mix</option>
-                      </select>
-                    ) : null}
-                    <Input type="file" accept="application/pdf,.pdf" onChange={(event) => setSubmitAttachments((prev) => prev.map((item) => item.id === attachment.id ? { ...item, file: event.target.files?.[0] ?? null } : item))} />
-                    {submitAttachments.length > 1 ? <Button type="button" variant="outline" size="sm" onClick={() => setSubmitAttachments((prev) => prev.filter((item) => item.id !== attachment.id))}>Remove</Button> : null}
-                  </div>
-                ))}
-                <Button type="button" variant="secondary" onClick={() => setSubmitAttachments((prev) => [...prev, { id: crypto.randomUUID(), file: null, documentType: "SHORT", packageType: "PREMIUM" }])}>Add Attachment</Button>
+
+            {/* Optional extra attachments */}
+            <div className="space-y-2 pt-1 border-t">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-semibold text-foreground">
+                    Optional Supplementary Files
+                  </p>
+                  <p className="text-[11px] text-muted-foreground">
+                    Attach extra client documents or export PDFs only if needed.
+                  </p>
+                </div>
+                {submitAttachments.length === 0 ? (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="h-7 text-xs"
+                    onClick={() => setSubmitAttachments([createEmptyAttachment()])}
+                  >
+                    + Add File
+                  </Button>
+                ) : null}
               </div>
-              <p className="text-xs text-muted-foreground"><span className="font-bold">PDF files only</span></p>
-              {submitAttachments.some((item) => item.file) ? (
-                <ul className="space-y-1 text-xs text-muted-foreground">
-                  {submitAttachments.filter((item) => item.file).map((item) => (
-                    <li key={item.id}>{item.file?.name} <span className="font-medium">({item.documentType}{item.documentType === "SHORT" ? ` / ${item.packageType}` : ""})</span></li>
+
+              {submitAttachments.length > 0 && (
+                <div className="space-y-2 pt-1">
+                  {submitAttachments.map((attachment, index) => (
+                    <div key={attachment.id} className="space-y-2 rounded-md border p-2.5 text-xs bg-muted/20">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-muted-foreground">Attachment {index + 1}</span>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 px-1.5 text-xs text-destructive hover:bg-destructive/10"
+                          onClick={() => setSubmitAttachments((prev) => prev.filter((item) => item.id !== attachment.id))}
+                        >
+                          Remove
+                        </Button>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <select
+                          className="w-full rounded-md border border-input bg-background px-2 py-1 text-xs"
+                          value={attachment.documentType}
+                          onChange={(event) => setSubmitAttachments((prev) => prev.map((item) => item.id === attachment.id ? { ...item, documentType: event.target.value as AttachmentDocumentType } : item))}
+                        >
+                          <option value="SHORT">Short</option>
+                          <option value="DETAIL">Detail</option>
+                        </select>
+                        {attachment.documentType === "SHORT" ? (
+                          <select
+                            className="w-full rounded-md border border-input bg-background px-2 py-1 text-xs"
+                            value={attachment.packageType}
+                            onChange={(event) => setSubmitAttachments((prev) => prev.map((item) => item.id === attachment.id ? { ...item, packageType: event.target.value as QuotationPackageType } : item))}
+                          >
+                            <option value="PREMIUM">Premium</option>
+                            <option value="STANDARD">Standard</option>
+                            <option value="BASIC">Basic</option>
+                            <option value="MIXED">Mix</option>
+                          </select>
+                        ) : null}
+                      </div>
+                      <Input
+                        type="file"
+                        accept="application/pdf,.pdf"
+                        className="text-xs h-8"
+                        onChange={(event) => setSubmitAttachments((prev) => prev.map((item) => item.id === attachment.id ? { ...item, file: event.target.files?.[0] ?? null } : item))}
+                      />
+                    </div>
                   ))}
-                </ul>
-              ) : null}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="w-full h-7 text-xs"
+                    onClick={() => setSubmitAttachments((prev) => [...prev, createEmptyAttachment()])}
+                  >
+                    + Add Another File
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
           <DialogFooter>
@@ -659,7 +723,7 @@ export default function QuotationAssignedTaskPage() {
               onClick={() => {
                 setSubmitLead(null);
                 setSubmitNote("");
-                setSubmitAttachments([{ id: crypto.randomUUID(), file: null, documentType: "SHORT", packageType: "PREMIUM" }]);
+                setSubmitAttachments([]);
               }}
             >
               Cancel
