@@ -50,16 +50,6 @@ export async function POST(_request: NextRequest, context: RouteContext) {
       const lead = await tx.lead.findFirst({
         where: {
           id: leadId,
-          stage: {
-            in: [
-              LeadStage.QUOTATION_PHASE,
-              LeadStage.PARTIAL_VISIT_PHASE,
-              LeadStage.VISIT_PHASE,
-              LeadStage.CAD_PHASE,
-              LeadStage.BUDGET_PHASE,
-            ],
-          },
-          subStatus: { in: Array.from(STARTABLE_SUBSTATUSES) },
           ...(isAdminOrSr
             ? {}
             : {
@@ -74,6 +64,7 @@ export async function POST(_request: NextRequest, context: RouteContext) {
         select: {
           id: true,
           name: true,
+          stage: true,
           subStatus: true,
           assignments: {
             where: { department: LeadAssignmentDepartment.QUOTATION },
@@ -84,7 +75,7 @@ export async function POST(_request: NextRequest, context: RouteContext) {
         },
       })
 
-      if (!lead) throw new Error('LEAD_NOT_FOUND_OR_NOT_STARTABLE')
+      if (!lead) throw new Error('LEAD_NOT_ASSIGNED_TO_USER')
 
       const now = new Date()
       const updatedLead = await tx.lead.update({
@@ -96,13 +87,15 @@ export async function POST(_request: NextRequest, context: RouteContext) {
         select: { id: true, stage: true, subStatus: true },
       })
 
-      await logLeadSubStatusChanged(tx, {
-        leadId: lead.id,
-        userId: authResult.actorUserId,
-        from: lead.subStatus,
-        to: LeadSubStatus.QUOTATION_WORKING,
-        reason: 'Quotation team confirmed work start.',
-      })
+      if (lead.subStatus !== LeadSubStatus.QUOTATION_WORKING) {
+        await logLeadSubStatusChanged(tx, {
+          leadId: lead.id,
+          userId: authResult.actorUserId,
+          from: lead.subStatus,
+          to: LeadSubStatus.QUOTATION_WORKING,
+          reason: 'Quotation team confirmed work start.',
+        })
+      }
 
       const openTask = await tx.leadPhaseTask.findFirst({
         where: {
@@ -145,9 +138,9 @@ export async function POST(_request: NextRequest, context: RouteContext) {
 
     return NextResponse.json({ success: true, data: result, message: 'Quotation work started' })
   } catch (error) {
-    if (error instanceof Error && error.message === 'LEAD_NOT_FOUND_OR_NOT_STARTABLE') {
+    if (error instanceof Error && error.message === 'LEAD_NOT_ASSIGNED_TO_USER') {
       return NextResponse.json(
-        { success: false, error: 'Lead is not assigned to you or is not ready to start quotation work' },
+        { success: false, error: 'Lead not found or quotation work is not assigned to you' },
         { status: 404 },
       )
     }

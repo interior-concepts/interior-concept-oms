@@ -130,16 +130,6 @@ export async function POST(request: NextRequest, context: RouteContext) {
       const lead = await tx.lead.findFirst({
         where: {
           id: leadId,
-          stage: {
-            in: [
-              LeadStage.QUOTATION_PHASE,
-              LeadStage.PARTIAL_VISIT_PHASE,
-              LeadStage.VISIT_PHASE,
-              LeadStage.CAD_PHASE,
-              LeadStage.BUDGET_PHASE,
-            ],
-          },
-          subStatus: LeadSubStatus.QUOTATION_WORKING,
           ...(isAdminOrSr
             ? {}
             : {

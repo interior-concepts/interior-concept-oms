@@ -126,7 +126,14 @@ export async function requireDatabaseRoles(allowedRoles: string[]): Promise<Role
       email: actor.email,
       phone: actor.phone,
       clerkUserId: actor.clerkUserId,
-      userDepartments: (actor.userDepartments ?? []).map((item) => item.department.name),
+      userDepartments: (actor.userDepartments ?? []).flatMap((item) => {
+        const name = item.department.name
+        if (name === 'QUOTATION_TEAM') return ['QUOTATION_TEAM', 'QUOTATION']
+        if (name === 'QUOTATION') return ['QUOTATION', 'QUOTATION_TEAM']
+        if (name === 'VISUALIZER_3D') return ['VISUALIZER_3D', '3D_VISUALIZER']
+        if (name === '3D_VISUALIZER') return ['3D_VISUALIZER', 'VISUALIZER_3D']
+        return [name]
+      }),
     },
   };
 }

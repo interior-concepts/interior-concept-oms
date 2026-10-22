@@ -422,7 +422,7 @@ export async function PUT(
     if (department === 'QUOTATION' || department === 'VISUALIZER_3D') {
       const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
       const canUpdateQuotationAssignment =
-        actorDepartments.has('ADMIN') || actorDepartments.has('SR_CRM')
+        actorDepartments.has('ADMIN') || actorDepartments.has('SR_CRM') || ((actorDepartments.has('QUOTATION') || actorDepartments.has('QUOTATION_TEAM')) && userId === authResult.actorUserId)
       const canUpdateVisualizerAssignment =
         canUpdateQuotationAssignment || actorDepartments.has('JR_ARCHITECT')
       const canUpdateCrossDepartmentAssignment =

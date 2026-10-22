@@ -30,53 +30,39 @@ export async function GET(request: Request) {
 
     const where: any = {
       AND: [
-        {
-          OR: [
-            { stage: LeadStage.QUOTATION_PHASE },
-            { stage: LeadStage.BUDGET_PHASE },
-            {
-              subStatus: {
-                in: [
-                  LeadSubStatus.QUOTATION_ASSIGNED,
-                  LeadSubStatus.QUOTATION_WORKING,
-                  LeadSubStatus.QUOTATION_COMPLETED,
-                  LeadSubStatus.QUOTATION_CORRECTION,
-                  LeadSubStatus.QUOTATION_APPROVED,
-                ],
-              },
-            },
-            {
+        isAdminOrSr || viewAll
+          ? {
+              OR: [
+                { stage: LeadStage.QUOTATION_PHASE },
+                { stage: LeadStage.BUDGET_PHASE },
+                {
+                  subStatus: {
+                    in: [
+                      LeadSubStatus.QUOTATION_ASSIGNED,
+                      LeadSubStatus.QUOTATION_WORKING,
+                      LeadSubStatus.QUOTATION_COMPLETED,
+                      LeadSubStatus.QUOTATION_CORRECTION,
+                      LeadSubStatus.QUOTATION_APPROVED,
+                    ],
+                  },
+                },
+                {
+                  assignments: {
+                    some: {
+                      department: LeadAssignmentDepartment.QUOTATION,
+                    },
+                  },
+                },
+              ],
+            }
+          : {
               assignments: {
                 some: {
                   department: LeadAssignmentDepartment.QUOTATION,
+                  userId: authResult.actorUserId,
                 },
               },
             },
-          ],
-        },
-        ...(isAdminOrSr || viewAll
-          ? []
-          : [
-              {
-                OR: [
-                  {
-                    assignments: {
-                      some: {
-                        department: LeadAssignmentDepartment.QUOTATION,
-                        userId: authResult.actorUserId,
-                      },
-                    },
-                  },
-                  {
-                    assignments: {
-                      none: {
-                        department: LeadAssignmentDepartment.QUOTATION,
-                      },
-                    },
-                  },
-                ],
-              },
-            ]),
         ...(includeHistory
           ? []
           : [
@@ -174,10 +160,12 @@ export async function GET(request: Request) {
         shortPackagesCount: sqftSummary.shortPackagesCount,
         attachments: lead.attachments ?? [],
         canStart:
-          lead.subStatus === LeadSubStatus.QUOTATION_ASSIGNED ||
-          lead.subStatus === LeadSubStatus.QUOTATION_CORRECTION,
+          lead.subStatus !== LeadSubStatus.QUOTATION_WORKING &&
+          lead.subStatus !== LeadSubStatus.QUOTATION_COMPLETED &&
+          lead.subStatus !== LeadSubStatus.QUOTATION_APPROVED,
         canSubmit:
-          lead.subStatus === LeadSubStatus.QUOTATION_WORKING,
+          lead.subStatus === LeadSubStatus.QUOTATION_WORKING ||
+          lead.subStatus === LeadSubStatus.QUOTATION_CORRECTION,
       }
     })
 

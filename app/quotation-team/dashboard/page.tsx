@@ -36,6 +36,8 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Skeleton } from '@/components/ui/skeleton'
+import { AddQuotationClientModal } from '@/components/quotation/AddQuotationClientModal'
+
 
 type StatusBreakdownItem = {
   name: string
@@ -204,7 +206,8 @@ export default function QuotationTeamDashboardPage() {
               <RefreshCw className={`mr-1.5 h-4 w-4 ${loading || perfLoading ? 'animate-spin' : ''}`} />
               Refresh
             </Button>
-            <Button size="sm" asChild className="h-9">
+            <AddQuotationClientModal onClientCreated={() => void loadData()} />
+            <Button size="sm" asChild variant="outline" className="h-9">
               <Link href="/quotation-team/my-work">
                 View My Work Queue
                 <ArrowUpRight className="ml-1.5 h-4 w-4" />

@@ -19,6 +19,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { AddQuotationClientModal } from "@/components/quotation/AddQuotationClientModal";
+
 
 type TaskLead = {
   id: string;
@@ -134,10 +136,7 @@ export default function QuotationAssignedTaskPage() {
   );
 
 
-  const canShowLeadAttachments = (lead: TaskLead) =>
-    lead.subStatus === "QUOTATION_WORKING" ||
-    lead.subStatus === "QUOTATION_COMPLETED" ||
-    lead.subStatus === "QUOTATION_APPROVED";
+  const canShowLeadAttachments = (_lead: TaskLead) => true;
 
   const startQuotationWork = async (leadId: string) => {
     setBusyId(leadId);
@@ -247,7 +246,9 @@ export default function QuotationAssignedTaskPage() {
       <CrmPageHeader
         title="Assigned Task"
         subtitle="Assigned quotation leads. Start work and submit using the same flow style as Jr Architecture."
+        actions={<AddQuotationClientModal onClientCreated={() => void loadTasks()} />}
       />
+
 
       <main className="mx-auto max-w-[1440px] px-6 py-6 space-y-4">
         <div className="rounded-[1.35rem] border border-border/70 bg-gradient-to-br from-background via-muted/20 to-background p-3 shadow-sm mb-4">
@@ -403,11 +404,11 @@ export default function QuotationAssignedTaskPage() {
                           </td>
                           <td className="px-4 py-3 text-right">
                             <div className="flex flex-wrap justify-end gap-2">
-                              {lead.subStatus === "QUOTATION_WORKING" || lead.subStatus === "QUOTATION_CORRECTION" ? (
-                                <Button asChild size="sm" variant="ghost" className="h-8 px-2 text-xs">
-                                  <Link href={`/quotation-team/leads/${lead.id}`}>Work</Link>
-                                </Button>
-                              ) : null}
+                              <Button asChild size="sm" variant="outline" className="h-8 px-2 text-xs">
+                                <Link href={`/quotation-team/leads/${lead.id}`}>
+                                  {lead.subStatus === "QUOTATION_WORKING" || lead.subStatus === "QUOTATION_CORRECTION" ? "Create Quotation" : "Work"}
+                                </Link>
+                              </Button>
                               <Button
                                 size="sm"
                                 variant="outline"

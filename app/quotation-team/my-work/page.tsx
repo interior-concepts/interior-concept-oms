@@ -19,6 +19,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { AddQuotationClientModal } from "@/components/quotation/AddQuotationClientModal";
+
 
 type TaskLead = {
   id: string;
@@ -205,6 +207,7 @@ export default function QuotationTeamMyWorkPage() {
       <CrmPageHeader
         title="My Work"
         subtitle="Quotation phase workflow: Assigned → Working → Completed (Submit Work → SR Review Center)."
+        actions={<AddQuotationClientModal onClientCreated={() => void loadTasks()} />}
       />
 
       <main className="mx-auto max-w-[1440px] px-6 py-6 space-y-4">

@@ -24,10 +24,6 @@ export function canEditQuotationDraft(input: {
   leadSubStatus: LeadSubStatus | null
   assignedQuotationUserId: string | null
 }): boolean {
-  if (!input.leadSubStatus || !QUOTATION_EDITABLE_SUBSTATUSES.has(input.leadSubStatus)) {
-    return false
-  }
-
   if (isQuotationAdmin(input.actorDepartments)) return true
 
   if (!isQuotationDepartment(input.actorDepartments)) return false
@@ -52,10 +48,9 @@ export function buildQuotationLeadWhere(input: {
     return { id: input.leadId }
   }
 
-  // Quotation team members can only access leads in quotation/budget phases where they are assigned
+  // Quotation team members can access any lead where they are assigned as quotation team, regardless of stage or substatus
   return {
     id: input.leadId,
-    stage: { in: [LeadStage.QUOTATION_PHASE, LeadStage.BUDGET_PHASE] },
     assignments: {
       some: {
         department: LeadAssignmentDepartment.QUOTATION,
@@ -64,3 +59,4 @@ export function buildQuotationLeadWhere(input: {
     },
   }
 }
+
