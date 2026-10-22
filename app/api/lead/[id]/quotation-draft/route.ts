@@ -332,10 +332,10 @@ function parseStoredQuotationContent(value: unknown): QuotationStoredContent | n
 }
 
 function toSlotIndex(value: unknown): number {
-  if (typeof value === 'number' && Number.isInteger(value) && value >= 1 && value <= 3) return value
+  if (typeof value === 'number' && Number.isInteger(value) && value >= 1 && value <= 4) return value
   if (typeof value === 'string') {
     const parsed = parseInt(value.trim(), 10)
-    if (parsed >= 1 && parsed <= 3) return parsed
+    if (parsed >= 1 && parsed <= 4) return parsed
   }
   return 1
 }
@@ -481,7 +481,14 @@ export async function GET(request: NextRequest, context: RouteContext) {
         ?? null
       : savedDrafts[0] ?? null
 
-    const availableSlots = [1, 2, 3].map((s) => {
+    const DETAIL_TIER_TITLES: Record<number, string> = {
+      1: 'Premium',
+      2: 'Platinum',
+      3: 'Luxury',
+      4: 'Mix',
+    }
+
+    const availableSlots = [1, 2, 3, 4].map((s) => {
       const bKey = s === 1 ? 'detail' : `detail:slot:${s}`
       const foundDraft =
         savedDrafts.find((d) => d.draftKey === buildOwnedDraftKey(bKey, authResult.actorUserId)) ||
@@ -492,7 +499,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       const title =
         typeof c?.versionTitle === 'string' && c.versionTitle.trim()
           ? c.versionTitle.trim()
-          : `Version ${s}`
+          : (DETAIL_TIER_TITLES[s] ?? `Tier ${s}`)
 
       return {
         slotIndex: s,
@@ -517,7 +524,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
         quotationType: 'STANDARD',
         projectSqft,
       })
-      detailContent.versionTitle = `Version ${requestedSlot}`
+      detailContent.versionTitle = DETAIL_TIER_TITLES[requestedSlot] ?? `Tier ${requestedSlot}`
       const detailTotals = calculateQuotationTotals(detailContent)
 
       const mergedTemplates = await getMergedQuotationTemplates()
@@ -698,14 +705,21 @@ export async function PUT(request: NextRequest, context: RouteContext) {
 
     const documentType = isShort ? 'short' : 'detail'
 
+    const DETAIL_TIER_TITLES: Record<number, string> = {
+      1: 'Premium',
+      2: 'Platinum',
+      3: 'Luxury',
+      4: 'Mix',
+    }
+
     if (!isShort && saveAllSlots) {
-      const targetSlots = targetSlotsInput.length > 0 ? targetSlotsInput : [1, 2, 3]
+      const targetSlots = targetSlotsInput.length > 0 ? targetSlotsInput : [1, 2, 3, 4]
       const upsertPromises = targetSlots.map((s: number) => {
         const bKey = s === 1 ? 'detail' : `detail:slot:${s}`
         const dKey = buildOwnedDraftKey(bKey, authResult.actorUserId)
         const slotContent = {
           ...normalizedContent,
-          versionTitle: (normalizedContent as QuotationDraftContent).versionTitle || `Version ${s}`,
+          versionTitle: (normalizedContent as QuotationDraftContent).versionTitle || (DETAIL_TIER_TITLES[s] ?? `Tier ${s}`),
         }
         return prisma.quotationDraft.upsert({
           where: { leadId_draftKey: { leadId: lead.id, draftKey: dKey } },

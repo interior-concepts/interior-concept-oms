@@ -143,11 +143,12 @@ export function QuotationMaker({
   const previewContextId = isPlayground ? 'playground' : leadId
 
   const [slotIndex, setSlotIndex] = useState<number>(1)
-  const QUOTATION_TYPE_LABELS: Record<number, string> = { 1: 'Premium', 2: 'Platinum', 3: 'Luxury' }
+  const QUOTATION_TYPE_LABELS: Record<number, string> = { 1: 'Premium', 2: 'Platinum', 3: 'Luxury', 4: 'Mix' }
   const [availableSlots, setAvailableSlots] = useState<Array<{ slotIndex: number; title: string; grandTotal: number; exists: boolean }>>([
     { slotIndex: 1, title: 'Premium', grandTotal: 0, exists: true },
     { slotIndex: 2, title: 'Platinum', grandTotal: 0, exists: true },
     { slotIndex: 3, title: 'Luxury', grandTotal: 0, exists: true },
+    { slotIndex: 4, title: 'Mix', grandTotal: 0, exists: true },
   ])
   const [saveAllConfirmOpen, setSaveAllConfirmOpen] = useState(false)
   const [confirmClientNameInput, setConfirmClientNameInput] = useState('')
@@ -230,7 +231,7 @@ export function QuotationMaker({
       if (Array.isArray(data.templates)) setTemplates(data.templates)
       if (Array.isArray(data.fullTemplates)) setFullTemplates(data.fullTemplates)
       if (Array.isArray(data.availableSlots)) {
-        const filledSlots = [1, 2, 3].map((sIndex) => {
+        const filledSlots = [1, 2, 3, 4].map((sIndex) => {
           const found = data.availableSlots.find((item: any) => item.slotIndex === sIndex)
           return found
             ? { ...found, exists: true }
@@ -1234,7 +1235,7 @@ return (
           </DialogHeader>
           <div className="space-y-3 py-2 text-sm">
             <p className="text-muted-foreground">
-              This action will copy and save the current quotation items and pricing into <strong>Premium, Platinum, and Luxury</strong>.
+              This action will copy and save the current quotation items and pricing into <strong>Premium, Platinum, Luxury, and Mix</strong>.
             </p>
             <p className="font-medium text-slate-900 dark:text-slate-100">
               To confirm, please type the client name: <span className="rounded bg-amber-100 px-2 py-0.5 font-bold text-amber-900 dark:bg-amber-950 dark:text-amber-100">{content?.clientName || leadName}</span>

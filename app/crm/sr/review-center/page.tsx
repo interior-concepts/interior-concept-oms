@@ -363,10 +363,15 @@ function formatGrandTotal(value: number | null): string {
 }
 
 function getDraftKindLabel(draftKey: string): string {
-  if (draftKey === 'detail') return 'Detail Quotation'
-  if (draftKey.startsWith('detail:slot:')) return `Detail Quotation v${draftKey.replace('detail:slot:', '')}`
-  if (draftKey.startsWith('detail:owner:')) return 'Detail Quotation (owner)'
+  if (draftKey === 'detail' || draftKey === 'detail:slot:1') return 'Detail — Premium'
+  if (draftKey === 'detail:slot:2') return 'Detail — Platinum'
+  if (draftKey === 'detail:slot:3') return 'Detail — Luxury'
+  if (draftKey === 'detail:slot:4') return 'Detail — Mix'
+  if (draftKey.startsWith('detail:slot:')) return `Detail — Slot ${draftKey.replace('detail:slot:', '')}`
+  if (draftKey.startsWith('detail:owner:')) return 'Detail — Premium (owner)'
   if (draftKey === 'short:PREMIUM') return 'Short — Premium'
+  if (draftKey === 'short:PLATINUM') return 'Short — Platinum'
+  if (draftKey === 'short:LUXURY') return 'Short — Luxury'
   if (draftKey === 'short:STANDARD') return 'Short — Standard'
   if (draftKey === 'short:BASIC') return 'Short — Basic'
   if (draftKey.startsWith('short:')) return `Short — ${draftKey.replace('short:', '')}`
