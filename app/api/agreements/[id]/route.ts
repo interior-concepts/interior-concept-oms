@@ -53,26 +53,10 @@ export async function GET(request: NextRequest, context: RouteContext) {
 
     // Check if an agreement draft exists
     const agreementDraft = lead.quotationDrafts.find((d) => d.draftKey === 'agreement')
-    if (agreementDraft && agreementDraft.content) {
-      return NextResponse.json({
-        success: true,
-        data: {
-          ...(agreementDraft.content as object),
-          id: agreementDraft.id,
-          leadId: lead.id,
-          clientId: lead.clientId,
-          updatedAt: agreementDraft.updatedAt.toISOString(),
-        },
-        isSaved: true,
-      })
-    }
-
-    // If not saved, find the most relevant detail quotation draft
     const detailDraft = lead.quotationDrafts.find(
       (d) => d.draftKey === 'detail' || d.draftKey.startsWith('detail:')
     )
     const detailContent = (detailDraft?.content as QuotationDraftContent | null) || null
-
     const srCrmUser = lead.assignments[0]?.user ?? null
 
     const defaultAgreement = buildDefaultAgreementData(
@@ -89,6 +73,22 @@ export async function GET(request: NextRequest, context: RouteContext) {
       },
       detailContent
     )
+
+    if (agreementDraft && agreementDraft.content) {
+      const savedContent = agreementDraft.content as Partial<AgreementData>
+      return NextResponse.json({
+        success: true,
+        data: {
+          ...defaultAgreement,
+          ...savedContent,
+          id: agreementDraft.id,
+          leadId: lead.id,
+          clientId: lead.clientId,
+          updatedAt: agreementDraft.updatedAt.toISOString(),
+        },
+        isSaved: true,
+      })
+    }
 
     return NextResponse.json({
       success: true,

@@ -18,23 +18,13 @@ Font.register({
   ],
 })
 
-Font.register({
-  family: 'Playfair Display',
-  fonts: [
-    {
-      src: 'https://fonts.gstatic.com/s/playfairdisplay/v10/9MkijrV-dEJ0-_NWV7E6N218GKU_F_kIyfK-gGC-Yzs.ttf',
-      fontStyle: 'italic',
-    },
-  ],
-})
-
 Font.registerHyphenationCallback((word: string) => [word])
 
 const PRIMARY = '#1f363d'
 const GOLD = '#a57c00'
 const PAGE_SIDE_PADDING = 28
 const HEADER_SPACE = 82
-const FOOTER_SPACE = 92
+const FOOTER_SPACE = 88
 
 const styles = StyleSheet.create({
   page: {
@@ -46,7 +36,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Noto Sans Bengali',
     color: '#1a1a1a',
     backgroundColor: '#ffffff',
-    lineHeight: 1.4,
   },
   watermark: {
     position: 'absolute',
@@ -88,8 +77,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: PRIMARY,
     fontSize: 10,
-    fontFamily: 'Playfair Display',
-    fontStyle: 'italic',
+    fontFamily: 'Times-Italic',
     letterSpacing: 2,
     marginHorizontal: 12,
     textTransform: 'uppercase',
@@ -146,7 +134,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3f8f7',
     paddingVertical: 5,
     paddingHorizontal: 8,
-    marginTop: 10,
+    marginTop: 8,
     marginBottom: 8,
     textAlign: 'center',
     textTransform: 'uppercase',
@@ -173,7 +161,7 @@ const styles = StyleSheet.create({
     fontSize: 8.5,
     fontWeight: 'bold',
     color: PRIMARY,
-    marginTop: 5,
+    marginTop: 6,
     marginBottom: 2,
   },
   clauseBody: {
@@ -338,7 +326,7 @@ function Watermark() {
   )
 }
 
-function PageHeader({ title, refNo, date }: { title: string; refNo: string; date: string }) {
+function PageHeader({ title, refNo, date }: { title: string; refNo?: string; date?: string }) {
   return (
     <View style={styles.header} fixed>
       <Image src={`${getBaseUrl()}/backgrounddata.svg`} style={styles.headerPattern} />
@@ -353,8 +341,8 @@ function PageHeader({ title, refNo, date }: { title: string; refNo: string; date
             <Image src={`${getBaseUrl()}/Logo/interior-concept-logobg-removed.png`} style={{ width: 145 }} />
           </View>
           <View style={styles.datePanel}>
-            <Text style={styles.metaLabel}>Ref: {refNo}</Text>
-            <Text style={styles.metaValue}>{date}</Text>
+            <Text style={styles.metaLabel}>Ref: {refNo || 'N/A'}</Text>
+            <Text style={styles.metaValue}>{date || 'N/A'}</Text>
           </View>
         </View>
       </View>
@@ -363,6 +351,10 @@ function PageHeader({ title, refNo, date }: { title: string; refNo: string; date
 }
 
 function PageFooter({ agreementCode, updatedAt }: { agreementCode: string; updatedAt?: string }) {
+  const formattedDate = updatedAt
+    ? new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(updatedAt))
+    : new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date())
+
   return (
     <View style={styles.footerFixed} fixed>
       <View style={styles.footerDivider} />
@@ -378,10 +370,7 @@ function PageFooter({ agreementCode, updatedAt }: { agreementCode: string; updat
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
         <Text style={styles.footerMeta}>Agreement ID: {agreementCode}</Text>
-        <Text
-          style={styles.footerMeta}
-          render={({ pageNumber, totalPages }: { pageNumber: number; totalPages: number }) => `Page ${pageNumber} of ${totalPages}`}
-        />
+        <Text style={[styles.footerMeta, { textAlign: 'right' }]}>Generated: {formattedDate}</Text>
       </View>
     </View>
   )
@@ -391,6 +380,8 @@ export type AgreementPdfProps = AgreementData
 
 export function AgreementDocument(props: AgreementPdfProps) {
   const agreementCode = props.workOrderId || `AGR-${props.clientId || '001'}`
+  const interiorTotal = props.interiorWorkTotal ?? 0
+  const grandTotalVal = props.grandTotal ?? interiorTotal
 
   // Group items by Area for Detail Quotation section
   const areaGroups = new Map<string, typeof props.items>()
@@ -413,60 +404,60 @@ export function AgreementDocument(props: AgreementPdfProps) {
         <View style={styles.metaCard}>
           <View style={styles.metaCardRow}>
             <Text style={styles.metaCardKey}>Work Order ID:</Text>
-            <Text style={styles.metaCardVal}>{props.workOrderId}</Text>
+            <Text style={styles.metaCardVal}>{props.workOrderId || 'N/A'}</Text>
           </View>
           <View style={styles.metaCardRow}>
             <Text style={styles.metaCardKey}>Reference:</Text>
-            <Text style={styles.metaCardVal}>{props.referenceNo}</Text>
+            <Text style={styles.metaCardVal}>{props.referenceNo || 'N/A'}</Text>
           </View>
           <View style={styles.metaCardRow}>
             <Text style={styles.metaCardKey}>Date of Award:</Text>
-            <Text style={styles.metaCardVal}>{props.agreementDate}</Text>
+            <Text style={styles.metaCardVal}>{props.agreementDate || 'N/A'}</Text>
           </View>
         </View>
 
         {/* To Recipient */}
-        <View style={{ marginBottom: 12 }}>
-          <Text style={[styles.bold, { fontSize: 10, color: PRIMARY }]}>{props.companyName}</Text>
-          <Text style={styles.paragraph}>{props.companyAddress}</Text>
-          <Text style={styles.paragraph}>Phone: {props.companyPhones}</Text>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={[styles.bold, { fontSize: 10, color: PRIMARY }]}>{props.companyName || 'INTERIOR CONCEPTS'}</Text>
+          <Text style={styles.paragraph}>{props.companyAddress || 'Dhaka, Bangladesh'}</Text>
+          <Text style={styles.paragraph}>Phone: {props.companyPhones || '01334-935531'}</Text>
         </View>
 
         {/* Subject */}
-        <View style={{ backgroundColor: '#f3f8f7', padding: 6, borderLeftWidth: 3, borderLeftColor: PRIMARY, marginBottom: 12 }}>
+        <View style={{ backgroundColor: '#f3f8f7', padding: 6, borderLeftWidth: 3, borderLeftColor: PRIMARY, marginBottom: 10 }}>
           <Text style={[styles.bold, { fontSize: 8.5, color: PRIMARY, letterSpacing: 0.5 }]}>
-            {props.introSubject}
+            {props.introSubject || 'WORK ORDER FOR INTERIOR WORKS'}
           </Text>
         </View>
 
         {/* Letter Body */}
-        <Text style={[styles.bold, { fontSize: 9, marginBottom: 6, color: PRIMARY }]}>{props.introSalutation}</Text>
+        <Text style={[styles.bold, { fontSize: 9, marginBottom: 5, color: PRIMARY }]}>{props.introSalutation || 'Dear Interior Concepts,'}</Text>
         <Text style={styles.paragraph}>{props.introAwardText}</Text>
         <Text style={styles.paragraph}>{props.introTermsText}</Text>
         <Text style={styles.paragraph}>{props.introCommenceText}</Text>
         <Text style={styles.paragraph}>{props.introAcceptanceText}</Text>
 
-        <Text style={[styles.paragraph, { marginTop: 10, fontWeight: 'bold' }]}>Thanking you—</Text>
+        <Text style={[styles.paragraph, { marginTop: 8, fontWeight: 'bold' }]}>Thanking you—</Text>
 
         {/* Signatures on Intro Letter */}
         <View style={styles.signatureRow}>
           <View style={styles.signatureColTwo}>
-            <Text style={styles.sigName}>{props.clientName}</Text>
+            <Text style={styles.sigName}>{props.clientName || 'Client'}</Text>
             <Text style={styles.sigRole}>Owner (Project)</Text>
           </View>
           <View style={styles.signatureColTwo}>
             <Text style={styles.sigName}>{props.officeAdminName || 'Office Admin'}</Text>
-            <Text style={styles.sigRole}>{props.officeAdminDesignation}, {props.companyName}</Text>
+            <Text style={styles.sigRole}>{props.officeAdminDesignation || 'Office Admin'}, {props.companyName || 'Interior Concepts'}</Text>
           </View>
         </View>
 
         {/* Acceptance Note */}
         <View style={styles.acceptanceBox}>
           <Text style={[styles.bold, { fontSize: 8, color: PRIMARY, marginBottom: 2 }]}>
-            Accepted by {props.companyName}:
+            Accepted by {props.companyName || 'Interior Concepts'}:
           </Text>
           <Text style={{ fontSize: 8, color: '#333333' }}>
-            Name: <Text style={styles.bold}>{props.ceoName}</Text>  |  Designation: <Text style={styles.bold}>{props.ceoDesignation}</Text>
+            Name: <Text style={styles.bold}>{props.ceoName || 'Shopi Ullah Rashed'}</Text>  |  Designation: <Text style={styles.bold}>{props.ceoDesignation || 'Chief Executive Officer'}</Text>
           </Text>
         </View>
 
@@ -482,7 +473,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
 
         <Text style={styles.sectionTitle}>THIS AGREEMENT</Text>
         <Text style={[styles.paragraph, { textAlign: 'center', marginBottom: 10 }]}>
-          THIS AGREEMENT is made at {props.agreementPlace} dated <Text style={styles.bold}>{props.agreementDate}</Text>.
+          THIS AGREEMENT is made at {props.agreementPlace || 'Dhaka'} dated <Text style={styles.bold}>{props.agreementDate}</Text>.
         </Text>
 
         {/* Parties Card */}
@@ -495,7 +486,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
 
           <Text style={[styles.bold, { fontSize: 9, color: PRIMARY, marginBottom: 4 }]}>AND</Text>
           <Text style={[styles.paragraph, { marginBottom: 2 }]}>
-            <Text style={styles.bold}>{props.companyName}</Text>, having registered address at {props.companyAddress}, Trade License No: {props.tradeLicenseNo}, TIN: {props.tinNo}, represented by Mr. <Text style={styles.bold}>{props.ceoName}</Text>, Designation: {props.ceoDesignation}, NID No: {props.ceoNid} (hereinafter referred to as the &quot;Consultant&quot;) of the OTHER PART.
+            <Text style={styles.bold}>{props.companyName || 'INTERIOR CONCEPTS'}</Text>, having registered address at {props.companyAddress}, Trade License No: {props.tradeLicenseNo}, TIN: {props.tinNo}, represented by Mr. <Text style={styles.bold}>{props.ceoName}</Text>, Designation: {props.ceoDesignation}, NID No: {props.ceoNid} (hereinafter referred to as the &quot;Consultant&quot;) of the OTHER PART.
           </Text>
         </View>
 
@@ -508,44 +499,51 @@ export function AgreementDocument(props: AgreementPdfProps) {
         </Text>
         <Text style={styles.paragraph}>{props.agreementScopeText}</Text>
 
-        {/* ============================================================== */}
-        {/* 3. QUOTATION SUMMARY & PAYMENT SCHEDULE                        */}
-        {/* ============================================================== */}
-        <Text style={[styles.sectionTitle, { marginTop: 14 }]}>Quotation Summary and Payment Schedule</Text>
+        <PageFooter agreementCode={agreementCode} updatedAt={props.updatedAt} />
+      </Page>
+
+      {/* ============================================================== */}
+      {/* 3. QUOTATION SUMMARY & PAYMENT SCHEDULE                        */}
+      {/* ============================================================== */}
+      <Page size="A4" style={styles.page}>
+        <Watermark />
+        <PageHeader title="QUOTATION & PAYMENT" refNo={props.referenceNo} date={props.agreementDate} />
+
+        <Text style={styles.sectionTitle}>Quotation Summary and Payment Schedule</Text>
 
         <Text style={styles.subSectionTitle}>Project Costing Summary</Text>
         <View style={styles.tHead}>
           <Text style={[styles.thCol, { width: '10%', textAlign: 'center' }]}>SL</Text>
           <Text style={[styles.thCol, { width: '65%' }]}>ITEM NAME</Text>
-          <Text style={[styles.thCol, styles.thColLast, { width: '25%', textAlign: 'right' }]}>TOTAL</Text>
+          <Text style={[styles.thCol, styles.thColLast, { width: '25%', textAlign: 'right' }]}>TOTAL (BDT)</Text>
         </View>
         <View style={styles.tRow}>
           <Text style={[styles.tdCol, { width: '10%', textAlign: 'center' }]}>01</Text>
           <Text style={[styles.tdCol, { width: '65%' }]}>Interior Work and Fixed Furniture</Text>
           <Text style={[styles.tdCol, styles.tdColLast, styles.bold, { width: '25%', textAlign: 'right' }]}>
-            {props.interiorWorkTotal.toLocaleString('en-IN')}
+            {interiorTotal.toLocaleString('en-IN')}
           </Text>
         </View>
         <View style={styles.grandTotalBar}>
           <Text style={[styles.bold, { fontSize: 9, color: PRIMARY }]}>GRAND TOTAL</Text>
           <Text style={[styles.bold, { fontSize: 9, color: PRIMARY }]}>
-            {props.grandTotal.toLocaleString('en-IN')} BDT
+            {grandTotalVal.toLocaleString('en-IN')} BDT
           </Text>
         </View>
         <Text style={styles.inWordsText}>In Words: {props.inWordsText}</Text>
-        <Text style={[styles.paragraph, { fontSize: 7.5, color: '#666666', marginTop: 2 }]}>
+        <Text style={[styles.paragraph, { fontSize: 7.5, color: '#666666', marginTop: 4 }]}>
           {props.projectCostSummaryNote}
         </Text>
 
         {/* Payment Schedule Table */}
-        <Text style={[styles.subSectionTitle, { marginTop: 10 }]}>Payment Schedule</Text>
+        <Text style={[styles.subSectionTitle, { marginTop: 12 }]}>Payment Schedule</Text>
         <View style={styles.tHead}>
           <Text style={[styles.thCol, { width: '10%', textAlign: 'center' }]}>SL</Text>
           <Text style={[styles.thCol, { width: '70%' }]}>Payment Mode</Text>
           <Text style={[styles.thCol, styles.thColLast, { width: '20%', textAlign: 'center' }]}>Percentage</Text>
         </View>
         {(props.paymentSchedule || []).map((step, idx) => (
-          <View key={step.sl || idx} style={[styles.tRow, idx % 2 === 1 ? styles.tRowAlt : {}]}>
+          <View key={step.sl || idx} wrap={false} style={[styles.tRow, idx % 2 === 1 ? styles.tRowAlt : {}]}>
             <Text style={[styles.tdCol, { width: '10%', textAlign: 'center' }]}>{step.sl}</Text>
             <View style={[styles.tdCol, { width: '70%' }]}>
               <Text style={styles.bold}>{step.milestone}</Text>
@@ -558,7 +556,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
         ))}
 
         {/* Duration of Work */}
-        <Text style={[styles.subSectionTitle, { marginTop: 10 }]}>Duration of Work</Text>
+        <Text style={[styles.subSectionTitle, { marginTop: 12 }]}>Duration of Work</Text>
         <Text style={styles.paragraph}>{props.durationText}</Text>
         <Text style={[styles.paragraph, { fontSize: 7.8, color: '#555555' }]}>{props.durationDiscussionsText}</Text>
 
@@ -587,11 +585,11 @@ export function AgreementDocument(props: AgreementPdfProps) {
 
         {Array.from(areaGroups.entries()).map(([areaTitle, lines], gIdx) => (
           <View key={areaTitle || gIdx}>
-            <View style={styles.areaHeaderRow}>
+            <View style={styles.areaHeaderRow} wrap={false}>
               <Text style={styles.areaHeaderText}>{areaTitle}</Text>
             </View>
             {lines.map((line, lIdx) => (
-              <View key={line.sl || lIdx} style={[styles.tRow, lIdx % 2 === 1 ? styles.tRowAlt : {}]}>
+              <View key={line.sl || lIdx} wrap={false} style={[styles.tRow, lIdx % 2 === 1 ? styles.tRowAlt : {}]}>
                 <Text style={[styles.tdCol, { width: '6%', textAlign: 'center' }]}>{line.sl}</Text>
                 <Text style={[styles.tdCol, styles.bold, { width: '18%' }]}>{line.name}</Text>
                 <Text style={[styles.tdCol, { width: '42%', fontSize: 7.5, color: '#333333' }]}>
@@ -600,7 +598,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
                 <Text style={[styles.tdCol, { width: '10%', textAlign: 'center' }]}>{line.qtySft}</Text>
                 <Text style={[styles.tdCol, { width: '12%', textAlign: 'right' }]}>{line.unitPrice}</Text>
                 <Text style={[styles.tdCol, styles.tdColLast, styles.bold, { width: '12%', textAlign: 'right' }]}>
-                  {line.total.toLocaleString('en-IN')}
+                  {(line.total ?? 0).toLocaleString('en-IN')}
                 </Text>
               </View>
             ))}
@@ -608,17 +606,17 @@ export function AgreementDocument(props: AgreementPdfProps) {
         ))}
 
         {/* Detail Quotation Summary Rows */}
-        <View style={styles.tRow}>
+        <View style={styles.tRow} wrap={false}>
           <Text style={[styles.tdCol, { width: '6%', textAlign: 'center' }]}>01</Text>
           <Text style={[styles.tdCol, styles.bold, { width: '70%' }]}>INTERIOR WORK TOTAL</Text>
           <Text style={[styles.tdCol, styles.tdColLast, styles.bold, { width: '24%', textAlign: 'right' }]}>
-            {props.interiorWorkTotal.toLocaleString('en-IN')}
+            {interiorTotal.toLocaleString('en-IN')}
           </Text>
         </View>
-        <View style={styles.grandTotalBar}>
+        <View style={styles.grandTotalBar} wrap={false}>
           <Text style={[styles.bold, { fontSize: 9, color: PRIMARY }]}>TOTAL AMOUNT:</Text>
           <Text style={[styles.bold, { fontSize: 9, color: PRIMARY }]}>
-            {props.grandTotal.toLocaleString('en-IN')} BDT
+            {grandTotalVal.toLocaleString('en-IN')} BDT
           </Text>
         </View>
         <Text style={styles.inWordsText}>In Words: {props.inWordsText}</Text>
@@ -627,7 +625,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
       </Page>
 
       {/* ============================================================== */}
-      {/* 5. AGREEMENT CONDITIONS & 6. SIGNATURE                         */}
+      {/* 5. AGREEMENT CONDITIONS                                        */}
       {/* ============================================================== */}
       <Page size="A4" style={styles.page}>
         <Watermark />
@@ -666,14 +664,16 @@ export function AgreementDocument(props: AgreementPdfProps) {
         <PageFooter agreementCode={agreementCode} updatedAt={props.updatedAt} />
       </Page>
 
-      {/* Continuation of conditions and final signatures */}
+      {/* ============================================================== */}
+      {/* 6. OTHER TERMS & FINAL SIGNATURES                              */}
+      {/* ============================================================== */}
       <Page size="A4" style={styles.page}>
         <Watermark />
-        <PageHeader title="TERMS & SIGNATURE" refNo={props.referenceNo} date={props.agreementDate} />
+        <PageHeader title="EXECUTION & SIGNATURES" refNo={props.referenceNo} date={props.agreementDate} />
 
         <Text style={styles.subSectionTitle}>Other Terms & Conditions</Text>
         {(props.otherTerms || []).map((term, index) => (
-          <View key={index} style={{ flexDirection: 'row', marginBottom: 3, paddingLeft: 4 }}>
+          <View key={index} wrap={false} style={{ flexDirection: 'row', marginBottom: 2.5, paddingLeft: 4 }}>
             <Text style={{ width: 18, fontSize: 7.5, fontWeight: 'bold', color: PRIMARY }}>
               {String(index + 1).padStart(2, '0')}.
             </Text>
@@ -684,23 +684,23 @@ export function AgreementDocument(props: AgreementPdfProps) {
         ))}
 
         {/* 6. SIGNATURE SECTION */}
-        <Text style={[styles.sectionTitle, { marginTop: 16 }]}>Execution & Witnesses</Text>
-        <Text style={[styles.paragraph, { textAlign: 'center', fontFamily: 'Playfair Display', fontStyle: 'italic', marginBottom: 25 }]}>
+        <Text style={[styles.sectionTitle, { marginTop: 12 }]}>Execution & Witnesses</Text>
+        <Text style={[styles.paragraph, { textAlign: 'center', fontFamily: 'Times-Italic', marginBottom: 20 }]}>
           IN WITNESS WHEREOF, each of the Parties hereto has caused this Agreement to be executed by its duly authorized officers or representatives as of the date first written above in the presence of WITNESSES.
         </Text>
 
-        <View style={styles.signatureRow}>
+        <View style={styles.signatureRow} wrap={false}>
           <View style={styles.signatureCol}>
-            <Text style={styles.sigName}>{props.clientName}</Text>
-            <Text style={styles.sigRole}>{props.witness1Title}</Text>
+            <Text style={styles.sigName}>{props.clientName || 'Client'}</Text>
+            <Text style={styles.sigRole}>{props.witness1Title || 'Owner (Project)'}</Text>
           </View>
           <View style={styles.signatureCol}>
             <Text style={styles.sigName}>{props.officeAdminName || 'Office Admin'}</Text>
-            <Text style={styles.sigRole}>{props.witness2Title}</Text>
+            <Text style={styles.sigRole}>{props.witness2Title || 'Office Admin, Interior Concepts'}</Text>
           </View>
           <View style={styles.signatureCol}>
-            <Text style={styles.sigName}>{props.ceoName}</Text>
-            <Text style={styles.sigRole}>{props.witness3Title}</Text>
+            <Text style={styles.sigName}>{props.ceoName || 'Shopi Ullah Rashed'}</Text>
+            <Text style={styles.sigRole}>{props.witness3Title || 'Chief Executive Officer, Interior Concepts'}</Text>
           </View>
         </View>
 
