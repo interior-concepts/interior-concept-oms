@@ -34,9 +34,11 @@ import {
   Phone,
   MapPin,
   FileText,
+  FileEdit,
 } from 'lucide-react'
 import { toast } from 'sonner'
-import { AgreementDocument, type AgreementPdfProps } from './AgreementDocument'
+import { AgreementDocument } from './AgreementDocument'
+import { AgreementEditModal } from './AgreementEditModal'
 import { downloadPdfFromDocument } from '@/components/crm/quotation/pdf/pdf-download'
 import { buildDetailPreviewUrl } from '@/lib/detail-quotation-preview-sync'
 
@@ -89,6 +91,7 @@ export function AgreementCenterView({
   const [search, setSearch] = useState('')
   const [typeFilter, setTypeFilter] = useState('ALL')
   const [downloadingId, setDownloadingId] = useState<string | null>(null)
+  const [editingLead, setEditingLead] = useState<AgreementLead | null>(null)
 
   useEffect(() => {
     const timer = setTimeout(() => setSearch(searchInput.trim()), 300)
@@ -131,24 +134,17 @@ export function AgreementCenterView({
   const handleDownloadAgreement = async (lead: AgreementLead) => {
     setDownloadingId(lead.id)
     try {
-      const pdfProps: AgreementPdfProps = {
-        clientName: lead.name,
-        clientPhone: lead.phone,
-        clientLocation: lead.location,
-        agreementType: lead.agreementType || 'DESIGN_AGREEMENT',
-        agreementValue: lead.agreementValue,
-        projectSqft: lead.projectSqft,
-        dateStr: formatDate(lead.updatedAt),
-        srCrmName: lead.srCrm?.fullName,
-        visualizerName: lead.visualizer?.fullName,
-        agreementCode: `AGR-${lead.clientId || lead.id.slice(0, 6).toUpperCase()}`,
+      const res = await fetch(`/api/agreements/${lead.id}`, { cache: 'no-store' })
+      const json = await res.json()
+      if (!res.ok || !json.success || !json.data) {
+        throw new Error(json.error || 'Failed to fetch agreement data')
       }
 
-      const safeName = lead.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()
-      const typeStr = lead.agreementType?.includes('FITOUT') ? 'Fitout' : 'Design'
-      const fileName = `Agreement_${safeName}_${typeStr}.pdf`
+      const agreementData = json.data
+      const safeName = (agreementData.clientName || lead.name).replace(/[^a-z0-9]/gi, '_').toLowerCase()
+      const fileName = `Agreement_${safeName}.pdf`
 
-      await downloadPdfFromDocument(<AgreementDocument {...pdfProps} />, fileName)
+      await downloadPdfFromDocument(<AgreementDocument {...agreementData} />, fileName)
       toast.success(`Agreement paper downloaded for ${lead.name}`)
     } catch (err) {
       console.error('Download error:', err)
@@ -358,12 +354,24 @@ export function AgreementCenterView({
 
                         <TableCell className="text-right">
                           <div className="flex items-center justify-end gap-2">
+                            {/* Edit Agreement Data */}
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="gap-1.5 border-border hover:bg-muted text-xs font-semibold shadow-xs"
+                              onClick={() => setEditingLead(lead)}
+                              title="Edit Agreement data for client"
+                            >
+                              <FileEdit className="h-3.5 w-3.5 text-primary" />
+                              <span>Edit</span>
+                            </Button>
+
                             {/* Final Quotation Download */}
                             <a
                               href={buildDetailPreviewUrl({ context: 'lead', contextId: lead.id })}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex h-9 items-center justify-center rounded-md border border-amber-300 bg-amber-50 px-3 text-xs font-semibold text-amber-900 transition hover:bg-amber-100 dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-200"
+                              className="inline-flex h-8 items-center justify-center rounded-md border border-amber-300 bg-amber-50 px-2.5 text-xs font-semibold text-amber-900 transition hover:bg-amber-100 dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-200"
                               title="Download Final Detail Quotation PDF"
                             >
                               <FileText className="mr-1.5 h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
@@ -373,7 +381,7 @@ export function AgreementCenterView({
                             {/* Agreement Paper Download */}
                             <Button
                               size="sm"
-                              className="gap-1.5 shadow-sm bg-primary text-primary-foreground hover:bg-primary/90"
+                              className="gap-1.5 shadow-sm bg-primary text-primary-foreground hover:bg-primary/90 h-8"
                               disabled={isDownloading}
                               onClick={() => void handleDownloadAgreement(lead)}
                             >
@@ -400,6 +408,20 @@ export function AgreementCenterView({
           </CardContent>
         </Card>
       </main>
+
+      {/* Edit Agreement Modal */}
+      {editingLead && (
+        <AgreementEditModal
+          isOpen={!!editingLead}
+          onClose={() => setEditingLead(null)}
+          leadId={editingLead.id}
+          leadName={editingLead.name}
+          onSaved={() => {
+            void fetchLeads()
+          }}
+        />
+      )}
     </div>
   )
 }
+
