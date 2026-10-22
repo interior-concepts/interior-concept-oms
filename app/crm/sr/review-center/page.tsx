@@ -468,7 +468,9 @@ function QuotationSubmissionPanel({
           </p>
           <div className="flex flex-wrap gap-2">
             {shortDrafts.map((draft) => {
-              const packageTier = draft.draftKey.startsWith('short:') ? draft.draftKey.replace('short:', '') : 'PREMIUM'
+              // draft.draftKey looks like "short:premium" or "short:premium:owner:xxx"
+              const rawTier = draft.draftKey.startsWith('short:') ? draft.draftKey.replace('short:', '') : 'PREMIUM'
+              const cleanTier = rawTier.split(':')[0]?.toUpperCase() || 'PREMIUM'
               return (
                 <div
                   key={draft.draftKey}
@@ -486,7 +488,7 @@ function QuotationSubmissionPanel({
                     {formatGrandTotal(draft.grandTotal)}
                   </Link>
                   <Link
-                    href={`/quotation-team/short-preview?context=lead&id=${encodeURIComponent(leadId)}&package=${encodeURIComponent(packageTier)}`}
+                    href={`/quotation-team/short-preview?context=lead&id=${encodeURIComponent(leadId)}&package=${encodeURIComponent(cleanTier)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     title="View & Download Short PDF"

@@ -42,18 +42,76 @@ export function ShortQuotationLivePreview({
   contextId: string
   packageTier?: string
 }) {
-  const [payload, setPayload] = useState<ShortPreviewPayload | null>(null)
-  const [generatingPdf, setGeneratingPdf] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  const cleanPackage = (
+    packageTier && ['PLATINUM', 'PREMIUM', 'LUXURY'].includes(packageTier.toUpperCase())
+      ? packageTier.toUpperCase()
+      : 'PREMIUM'
+  ) as 'PLATINUM' | 'PREMIUM' | 'LUXURY'
 
   useEffect(() => {
-    const load = () => setPayload(readShortPreview(context, contextId))
-    load()
-    return subscribeShortPreview(context, contextId, load)
-  }, [context, contextId])
+    let isMounted = true
 
-  const targetPackage = (packageTier && ['PLATINUM', 'PREMIUM', 'LUXURY'].includes(packageTier)
-    ? packageTier
-    : payload?.content?.packageTier ?? 'PREMIUM') as 'PLATINUM' | 'PREMIUM' | 'LUXURY'
+    const load = async () => {
+      // 1. Try localStorage preview cache
+      const cached = readShortPreview(context, contextId)
+      if (cached) {
+        if (isMounted) {
+          setPayload(cached)
+          setLoading(false)
+        }
+        return
+      }
+
+      // 2. Fallback: fetch saved draft directly from DB API
+      if (context === 'lead') {
+        try {
+          const response = await fetch(
+            `/api/lead/${contextId}/quotation-draft?documentType=short&packageTier=${cleanPackage}`,
+            { cache: 'no-store' },
+          )
+          const result = await response.json()
+          if (response.ok && result?.success && result?.data) {
+            const source = result.data.draft ?? result.data.defaultDraft
+            if (source?.content && isMounted) {
+              setPayload({
+                updatedAt: new Date().toISOString(),
+                context,
+                contextId,
+                content: source.content as ShortQuotationContent,
+              })
+            }
+          }
+        } catch {
+          // ignore error, will display fallback or empty state
+        }
+      } else if (context === 'playground') {
+        const stored = loadPlaygroundShortDraft(cleanPackage)
+        if (stored && isMounted) {
+          setPayload({
+            updatedAt: new Date().toISOString(),
+            context,
+            contextId,
+            content: stored,
+          })
+        }
+      }
+
+      if (isMounted) setLoading(false)
+    }
+
+    void load()
+    const unsubscribe = subscribeShortPreview(context, contextId, () => void load())
+    return () => {
+      isMounted = false
+      unsubscribe()
+    }
+  }, [context, contextId, cleanPackage])
+
+  const targetPackage = (
+    cleanPackage || payload?.content?.packageTier || 'PREMIUM'
+  ) as 'PLATINUM' | 'PREMIUM' | 'LUXURY'
 
   const activeContent = payload
     ? normalizeShortQuotationContent({
@@ -84,6 +142,19 @@ export function ShortQuotationLivePreview({
     } finally {
       setGeneratingPdf(false)
     }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-6">
+        <Card className="max-w-md">
+          <CardContent className="flex items-center justify-center gap-2.5 p-6 text-sm text-muted-foreground">
+            <Loader2 className="h-4 w-4 animate-spin text-primary" />
+            Loading quotation live preview...
+          </CardContent>
+        </Card>
+      </div>
+    )
   }
 
   if (!activeContent) {
