@@ -14,7 +14,9 @@ Font.register({
   family: 'Noto Sans Bengali',
   fonts: [
     { src: `${getBaseUrl()}/fonts/NotoSansBengali-Regular.ttf` },
+    { src: `${getBaseUrl()}/fonts/NotoSansBengali-Regular.ttf`, fontStyle: 'italic' },
     { src: `${getBaseUrl()}/fonts/NotoSansBengali-Bold.ttf`, fontWeight: 'bold' },
+    { src: `${getBaseUrl()}/fonts/NotoSansBengali-Bold.ttf`, fontWeight: 'bold', fontStyle: 'italic' },
   ],
 })
 Font.registerHyphenationCallback((word) => [word])

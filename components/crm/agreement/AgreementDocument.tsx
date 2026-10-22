@@ -12,7 +12,9 @@ Font.register({
   family: 'Noto Sans Bengali',
   fonts: [
     { src: `${getBaseUrl()}/fonts/NotoSansBengali-Regular.ttf` },
+    { src: `${getBaseUrl()}/fonts/NotoSansBengali-Regular.ttf`, fontStyle: 'italic' },
     { src: `${getBaseUrl()}/fonts/NotoSansBengali-Bold.ttf`, fontWeight: 'bold' },
+    { src: `${getBaseUrl()}/fonts/NotoSansBengali-Bold.ttf`, fontWeight: 'bold', fontStyle: 'italic' },
   ],
 })
 
@@ -683,7 +685,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
 
         {/* 6. SIGNATURE SECTION */}
         <Text style={[styles.sectionTitle, { marginTop: 16 }]}>Execution & Witnesses</Text>
-        <Text style={[styles.paragraph, { textAlign: 'center', fontStyle: 'italic', marginBottom: 25 }]}>
+        <Text style={[styles.paragraph, { textAlign: 'center', fontFamily: 'Playfair Display', fontStyle: 'italic', marginBottom: 25 }]}>
           IN WITNESS WHEREOF, each of the Parties hereto has caused this Agreement to be executed by its duly authorized officers or representatives as of the date first written above in the presence of WITNESSES.
         </Text>
 
