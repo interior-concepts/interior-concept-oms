@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
-import { ArrowDownToLine, Edit2, ExternalLink, GripVertical, Loader2, Plus, Printer, Save, Trash2 } from 'lucide-react'
+import { ArrowDownToLine, ExternalLink, GripVertical, Loader2, Plus, Printer, Save, Trash2 } from 'lucide-react'
 import { toast } from '@/components/ui/sonner'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -143,13 +143,12 @@ export function QuotationMaker({
   const previewContextId = isPlayground ? 'playground' : leadId
 
   const [slotIndex, setSlotIndex] = useState<number>(1)
+  const QUOTATION_TYPE_LABELS: Record<number, string> = { 1: 'Premium', 2: 'Platinum', 3: 'Luxury' }
   const [availableSlots, setAvailableSlots] = useState<Array<{ slotIndex: number; title: string; grandTotal: number; exists: boolean }>>([
-    { slotIndex: 1, title: 'Version 1', grandTotal: 0, exists: true },
-    { slotIndex: 2, title: 'Version 2', grandTotal: 0, exists: true },
-    { slotIndex: 3, title: 'Version 3', grandTotal: 0, exists: true },
+    { slotIndex: 1, title: 'Premium', grandTotal: 0, exists: true },
+    { slotIndex: 2, title: 'Platinum', grandTotal: 0, exists: true },
+    { slotIndex: 3, title: 'Luxury', grandTotal: 0, exists: true },
   ])
-  const [editingTitleSlot, setEditingTitleSlot] = useState<number | null>(null)
-  const [editingTitleText, setEditingTitleText] = useState('')
   const [saveAllConfirmOpen, setSaveAllConfirmOpen] = useState(false)
   const [confirmClientNameInput, setConfirmClientNameInput] = useState('')
   const [importDialogOpen, setImportDialogOpen] = useState(false)
@@ -213,7 +212,7 @@ export function QuotationMaker({
           setQuotationType('STANDARD')
           setProjectSqft('')
           const def = buildDefaultFloorDetailContent()
-          def.versionTitle = `Version ${targetSlot}`
+          def.versionTitle = QUOTATION_TYPE_LABELS[targetSlot] ?? `Type ${targetSlot}`
           setContent(def)
         }
         setCanEdit(true)
@@ -235,7 +234,7 @@ export function QuotationMaker({
           const found = data.availableSlots.find((item: any) => item.slotIndex === sIndex)
           return found
             ? { ...found, exists: true }
-            : { slotIndex: sIndex, title: `Version ${sIndex}`, grandTotal: 0, exists: true }
+          : { slotIndex: sIndex, title: QUOTATION_TYPE_LABELS[sIndex] ?? `Type ${sIndex}`, grandTotal: 0, exists: true }
         })
         setAvailableSlots(filledSlots)
       }
@@ -249,7 +248,7 @@ export function QuotationMaker({
       setProjectSqft(source.projectSqft ? String(source.projectSqft) : '')
       const normContent = normalizeQuotationContent(withDetailQuotationDefaults(source.content))
       if (!normContent.versionTitle) {
-        normContent.versionTitle = `Version ${targetSlot}`
+        normContent.versionTitle = QUOTATION_TYPE_LABELS[targetSlot] ?? `Type ${targetSlot}`
       }
       setContent(normContent)
     } catch (error) {
@@ -556,12 +555,12 @@ export function QuotationMaker({
                 quotationType,
                 projectSqft: projectSqftValue,
                 templateKey: FLOOR_DETAIL_TEMPLATE_KEY,
-                content: { ...normalized, versionTitle: availableSlots.find((item) => item.slotIndex === s)?.title || `Version ${s}` },
+                content: { ...normalized, versionTitle: availableSlots.find((item) => item.slotIndex === s)?.title || (QUOTATION_TYPE_LABELS[s] ?? `Type ${s}`) },
               },
               s,
             )
           })
-          toast.success('Saved to all versions (playground)')
+          toast.success('Saved to all quotation types (playground)')
         } else {
           savePlaygroundDetailDraft(
             {
@@ -572,7 +571,7 @@ export function QuotationMaker({
             },
             slotIndex,
           )
-          toast.success(`Saved Version ${slotIndex} to browser`)
+          toast.success(`Saved ${QUOTATION_TYPE_LABELS[slotIndex] ?? 'Type'} to browser`)
         }
         setContent(normalized)
         return
@@ -597,7 +596,7 @@ export function QuotationMaker({
         throw new Error(payload?.error ?? 'Failed to save quotation')
       }
       setContent(normalized)
-      toast.success(allSlots ? 'Quotation saved in all versions' : 'Quotation saved')
+      toast.success(allSlots ? 'Quotation saved in all types' : 'Quotation saved')
       await loadDraft(slotIndex)
       onDraftSaved?.()
     } catch (error) {
@@ -659,7 +658,7 @@ export function QuotationMaker({
       // Preserve current metadata from the active slot
       const merged = {
         ...detailContent,
-        versionTitle: content?.versionTitle ?? `Version ${slotIndex}`,
+        versionTitle: content?.versionTitle ?? (QUOTATION_TYPE_LABELS[slotIndex] ?? `Type ${slotIndex}`),
         quotationDate: content?.quotationDate ?? detailContent.quotationDate,
       }
       setContent(normalizeQuotationContent(withDetailQuotationDefaults(merged)))
@@ -762,16 +761,15 @@ return (
             </div>
           </div>
 
-          {/* Quotation Version Tabs (3 Versions Always Present) */}
+          {/* Quotation Type Tabs (Premium / Platinum / Luxury) */}
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-amber-200/60 pt-4 print:hidden">
             <div className="flex flex-wrap items-center gap-3">
               <span className="text-xs font-bold uppercase tracking-wider text-amber-950">
-                Quotation Versions:
+                Quotation Type:
               </span>
               <div className="flex flex-wrap items-center gap-2.5">
                 {availableSlots.map((s) => {
                   const isActive = s.slotIndex === slotIndex
-                  const isEditing = editingTitleSlot === s.slotIndex
                   return (
                     <div
                       key={s.slotIndex}
@@ -781,70 +779,17 @@ return (
                           void loadDraft(s.slotIndex)
                         }
                       }}
-                      className={`group relative flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all cursor-pointer shadow-sm ${
+                      className={`relative flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all cursor-pointer shadow-sm ${
                         isActive
                           ? 'border-amber-600 bg-amber-600 text-white shadow-md ring-2 ring-amber-400/40'
                           : 'border-slate-200 bg-white hover:bg-amber-50 text-slate-800'
                       }`}
                     >
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          value={editingTitleText}
-                          autoFocus
-                          onClick={(e) => e.stopPropagation()}
-                          onChange={(e) => setEditingTitleText(e.target.value)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                              const trimmed = editingTitleText.trim() || `Version ${s.slotIndex}`
-                              setAvailableSlots((prev) =>
-                                prev.map((item) => (item.slotIndex === s.slotIndex ? { ...item, title: trimmed } : item)),
-                              )
-                              if (s.slotIndex === slotIndex && content) {
-                                setContent({ ...content, versionTitle: trimmed })
-                              }
-                              setEditingTitleSlot(null)
-                            }
-                            if (e.key === 'Escape') setEditingTitleSlot(null)
-                          }}
-                          onBlur={() => {
-                            const trimmed = editingTitleText.trim() || `Version ${s.slotIndex}`
-                            setAvailableSlots((prev) =>
-                              prev.map((item) => (item.slotIndex === s.slotIndex ? { ...item, title: trimmed } : item)),
-                            )
-                            if (s.slotIndex === slotIndex && content) {
-                              setContent({ ...content, versionTitle: trimmed })
-                            }
-                            setEditingTitleSlot(null)
-                          }}
-                          className="h-6 w-32 rounded border px-2 text-sm text-black"
-                        />
-                      ) : (
-                        <span
-                          className="font-semibold text-sm"
-                          onDoubleClick={(e) => {
-                            e.stopPropagation()
-                            setEditingTitleSlot(s.slotIndex)
-                            setEditingTitleText(s.title)
-                          }}
-                        >
-                          {s.title}
+                      <span className="font-semibold text-sm">{s.title}</span>
+                      {s.grandTotal > 0 && (
+                        <span className={`text-xs ${isActive ? 'text-amber-200' : 'text-muted-foreground'}`}>
+                          {formatCurrency(s.grandTotal)}
                         </span>
-                      )}
-
-                      {!isEditing && (
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            setEditingTitleSlot(s.slotIndex)
-                            setEditingTitleText(s.title)
-                          }}
-                          className="opacity-70 hover:opacity-100"
-                          title="Double-click or click to rename tab"
-                        >
-                          <Edit2 className="h-3.5 w-3.5" />
-                        </button>
                       )}
                     </div>
                   )
@@ -856,12 +801,12 @@ return (
         <CardContent className="space-y-4 border-t border-amber-100 bg-background p-5 text-foreground md:p-6">
           <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
             <div className="space-y-1">
-              <p className="text-xs font-medium text-muted-foreground">Quotation Name</p>
+              <p className="text-xs font-medium text-muted-foreground">Quotation Title</p>
               <Input
                 value={content?.versionTitle ?? ''}
                 disabled={!canEdit}
                 onChange={(event) => updateContentField({ versionTitle: event.target.value })}
-                placeholder="e.g. Version 1 / Premium Package"
+                placeholder="e.g. Premium / Platinum / Luxury"
                 className="h-8"
               />
             </div>
@@ -960,7 +905,7 @@ return (
                 setConfirmClientNameInput('')
                 setSaveAllConfirmOpen(true)
               }}
-              title="Save current quotation data into all 3 versions"
+              title="Save current quotation data into all 3 types (Premium, Platinum, Luxury)"
             >
               <Save className="mr-1.5 h-4 w-4" />
               {saving ? 'Saving...' : 'Save in All'}
@@ -1285,11 +1230,11 @@ return (
       <Dialog open={saveAllConfirmOpen} onOpenChange={setSaveAllConfirmOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-lg font-bold">Save to All Quotation Versions?</DialogTitle>
+            <DialogTitle className="text-lg font-bold">Save to All Quotation Types?</DialogTitle>
           </DialogHeader>
           <div className="space-y-3 py-2 text-sm">
             <p className="text-muted-foreground">
-              This action will copy and save the current quotation items and pricing into <strong>Version 1, Version 2, and Version 3</strong>.
+              This action will copy and save the current quotation items and pricing into <strong>Premium, Platinum, and Luxury</strong>.
             </p>
             <p className="font-medium text-slate-900 dark:text-slate-100">
               To confirm, please type the client name: <span className="rounded bg-amber-100 px-2 py-0.5 font-bold text-amber-900 dark:bg-amber-950 dark:text-amber-100">{content?.clientName || leadName}</span>

@@ -95,14 +95,20 @@ export async function sendPushToUser(
               priority: 'max',
               defaultSound: true,
               defaultVibrateTimings: true,
+              visibility: 'public',
+              clickAction: 'FLUTTER_NOTIFICATION_CLICK',
             },
           },
           apns: {
+            headers: {
+              'apns-priority': '10', // Immediate delivery even when device is locked/sleeping
+            },
             payload: {
               aps: {
                 alert: { title, body },
                 sound: 'default',
                 badge: 1,
+                'content-available': 1,
               },
             },
           },
