@@ -88,16 +88,6 @@ const navigationGroups: Record<string, NavGroup[]> = {
           label: 'Followups',
           href: '/crm/admin/followups',
         },
-        {
-          icon: ClipboardList,
-          label: 'Projects',
-          href: '/crm/admin/projects',
-        },
-        {
-          icon: ClipboardList,
-          label: 'Overheads',
-          href: '/crm/admin/overheads',
-        },
       ],
     },
     {
@@ -111,14 +101,14 @@ const navigationGroups: Record<string, NavGroup[]> = {
           href: '/crm/admin/finance',
         },
         {
-          icon: BarChart3,
-          label: 'Summary',
-          href: '/crm/accounts/summary',
-        },
-        {
           icon: ClipboardList,
           label: 'Projects',
           href: '/crm/admin/projects',
+        },
+        {
+          icon: BarChart3,
+          label: 'Summary',
+          href: '/crm/accounts/summary',
         },
         {
           icon: ClipboardList,
@@ -129,14 +119,14 @@ const navigationGroups: Record<string, NavGroup[]> = {
     },
     {
       id: 'admin-front-team',
-      label: 'Front team',
+      label: 'Front Team',
       defaultOpen: true,
       items: [
         { icon: Calendar, label: 'Visits', href: '/crm/admin/visits' },
         { icon: ClipboardList, label: 'Visit Queue', href: '/crm/admin/queue' },
         {
           icon: ClipboardList,
-          label: 'CAD Queue',
+          label: 'Cad Queue',
           href: '/crm/admin/cad-phase-queue',
         },
       ],
@@ -162,14 +152,14 @@ const navigationGroups: Record<string, NavGroup[]> = {
           href: '/crm/admin/design-queue',
         },
         {
-          icon: FileCheck2,
-          label: 'Agreement Center',
-          href: '/crm/admin/agreement',
-        },
-        {
           icon: ClipboardList,
           label: 'Review Center',
           href: '/crm/admin/review-center',
+        },
+        {
+          icon: FileCheck2,
+          label: 'Agreement Center',
+          href: '/crm/admin/agreement',
         },
         {
           icon: CalendarClock,
@@ -205,6 +195,22 @@ const navigationGroups: Record<string, NavGroup[]> = {
           label: 'Dashboard',
           href: '/crm/sr/dashboard',
         },
+        { icon: CalendarClock, label: 'Calendar', href: '/crm/sr/meetings' },
+        { icon: Users, label: 'Lead Journey', href: '/crm/sr/lead-journey' },
+      ],
+    },
+    {
+      id: 'sr-review-flow',
+      label: 'Review Flow',
+      defaultOpen: true,
+      items: [
+        { icon: Calendar, label: 'Visits', href: '/crm/sr/visits' },
+        { icon: ClipboardList, label: 'Visit Queue', href: '/crm/sr/queue' },
+        {
+          icon: ClipboardList,
+          label: 'Cad Queue',
+          href: '/crm/sr/cad-phase-queue',
+        },
       ],
     },
     {
@@ -212,16 +218,15 @@ const navigationGroups: Record<string, NavGroup[]> = {
       label: 'Workflow',
       defaultOpen: true,
       items: [
-        { icon: CalendarClock, label: 'Calendar', href: '/crm/sr/meetings' },
+        {
+          icon: ClipboardList,
+          label: 'Review Center',
+          href: '/crm/sr/review-center',
+        },
         {
           icon: CalendarClock,
           label: 'Meeting Queue',
           href: '/crm/sr/meeting-queue',
-        },
-        {
-          icon: FileText,
-          label: 'Quotation Queue',
-          href: '/crm/sr/quotation',
         },
         {
           icon: CalendarClock,
@@ -238,27 +243,19 @@ const navigationGroups: Record<string, NavGroup[]> = {
           label: 'Agreement Center',
           href: '/crm/sr/agreement',
         },
-        { icon: CheckSquare, label: 'Followups', href: '/crm/sr/followups' },
-        { icon: Users, label: 'Lead Journey', href: '/crm/sr/lead-journey' },
       ],
     },
     {
-      id: 'sr-review-flow',
-      label: 'Review Flow',
+      id: 'sr-secondary-workflow',
+      label: 'Secondary Workflow',
       defaultOpen: true,
       items: [
+        { icon: CheckSquare, label: 'Followups', href: '/crm/sr/followups' },
         {
-          icon: ClipboardList,
-          label: 'Review Center',
-          href: '/crm/sr/review-center',
+          icon: FileText,
+          label: 'Quotation Queue',
+          href: '/crm/sr/quotation',
         },
-        {
-          icon: ClipboardList,
-          label: 'CAD Queue',
-          href: '/crm/sr/cad-phase-queue',
-        },
-        { icon: ClipboardList, label: 'Visit Queue', href: '/crm/sr/queue' },
-        { icon: Calendar, label: 'Visits', href: '/crm/sr/visits' },
       ],
     },
     {
