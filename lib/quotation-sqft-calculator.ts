@@ -13,50 +13,63 @@ export type LeadQuotationSqftSummary = {
 }
 
 /**
- * Extracts the SQFT value from a draft, in priority order:
- * 1. draft.projectSqft (explicitly saved field)
- * 2. Sum of quantitySqft from short quotation rooms
- * 3. Sum of quantity from detail lineItems with unit sqft/sft
- * 4. fallbackSqft (visit projectSqft)
+ * Extracts the SQFT value directly created in a quotation draft:
+ * 1. Sum of quantitySqft from short quotation rooms (non lump-sum items)
+ * 2. Sum of quantity from detail lineItems with unit sqft/sft (included items)
+ * 3. Explicit projectSqft if stored and content is not present
+ * 4. Returns 0 if nothing created in the software
  */
-export function extractDraftSqft(draft: QuotationDraftLike, fallbackSqft = 0): number {
-  // First priority: explicitly stored projectSqft on the draft row itself
-  if (draft.projectSqft && draft.projectSqft > 0) {
+export function extractDraftSqft(draft: QuotationDraftLike, _fallbackSqft = 0): number {
+  if (!draft) return 0
+
+  if (draft.content) {
+    let c = draft.content as Record<string, unknown>
+    if (typeof c === 'string') {
+      try {
+        c = JSON.parse(c)
+      } catch {
+        c = {}
+      }
+    }
+
+    if (typeof c === 'object' && c !== null) {
+      // 1. Short quotation: rooms[].lines[].quantitySqft
+      if (Array.isArray(c.rooms) && c.rooms.length > 0) {
+        let shortSqft = 0
+        for (const room of c.rooms as any[]) {
+          if (room && Array.isArray(room.lines)) {
+            for (const line of room.lines as any[]) {
+              if (!line?.isLumpSum) {
+                shortSqft += Number(line?.quantitySqft) || 0
+              }
+            }
+          }
+        }
+        return Math.round(shortSqft * 100) / 100
+      }
+
+      // 2. Detail quotation: lineItems with unit sqft/sft (included items)
+      if (Array.isArray(c.lineItems) && c.lineItems.length > 0) {
+        let detailSqft = 0
+        for (const item of c.lineItems as any[]) {
+          if (item && item.included !== false) {
+            const unit = String(item.unit || '').trim().toLowerCase()
+            if (unit === 'sqft' || unit === 'sft') {
+              detailSqft += Number(item.quantity) || 0
+            }
+          }
+        }
+        return Math.round(detailSqft * 100) / 100
+      }
+    }
+  }
+
+  // If draft has explicit positive projectSqft and no content with items was found
+  if (draft.projectSqft && Number(draft.projectSqft) > 0) {
     return Number(draft.projectSqft)
   }
 
-  if (draft.content && typeof draft.content === 'object') {
-    const c = draft.content as Record<string, unknown>
-
-    // Some content objects store projectSqft directly in the JSON body
-    if (c.projectSqft && Number(c.projectSqft) > 0) {
-      return Number(c.projectSqft)
-    }
-
-    // Short quotation: rooms[].lines[].quantitySqft
-    if (Array.isArray(c.rooms) && c.rooms.length > 0) {
-      let shortSqft = 0
-      for (const room of c.rooms as any[]) {
-        if (room && Array.isArray(room.lines)) {
-          shortSqft += (room.lines as any[]).reduce(
-            (sum: number, line: any) => sum + (Number(line.quantitySqft) || 0),
-            0,
-          )
-        }
-      }
-      if (shortSqft > 0) return shortSqft
-    }
-
-    // Detail quotation: lineItems with unit sqft/sft (included items)
-    if (Array.isArray(c.lineItems) && c.lineItems.length > 0) {
-      const detailSqft = (c.lineItems as any[])
-        .filter((item: any) => item && item.included !== false && (item.unit === 'sqft' || item.unit === 'sft'))
-        .reduce((sum: number, item: any) => sum + (Number(item.quantity) || 0), 0)
-      if (detailSqft > 0) return detailSqft
-    }
-  }
-
-  return fallbackSqft > 0 ? fallbackSqft : 0
+  return 0
 }
 
 /**
@@ -77,40 +90,36 @@ function isShortDraftKey(key: string): boolean {
 
 export function calculateLeadQuotationSqftSummary(
   drafts: QuotationDraftLike[],
-  fallbackSqft = 0,
+  _fallbackSqft = 0,
 ): LeadQuotationSqftSummary {
   const detailDrafts = drafts.filter((d) => isDetailDraftKey(d.draftKey))
   const shortDrafts = drafts.filter((d) => isShortDraftKey(d.draftKey))
 
-  let totalDetailSqft = 0
-  for (const draft of detailDrafts) {
-    totalDetailSqft += extractDraftSqft(draft, fallbackSqft)
-  }
-  // If no detail drafts exist yet, use visit fallback as best estimate
-  const avgDetailSqft =
-    detailDrafts.length > 0
-      ? Math.round(totalDetailSqft / detailDrafts.length)
-      : fallbackSqft > 0
-        ? fallbackSqft
-        : 0
+  // Detail drafts: calculate created sqft for each draft
+  const detailSqfts = detailDrafts
+    .map((draft) => extractDraftSqft(draft))
+    .filter((sqft) => sqft > 0)
 
-  let totalShortSqft = 0
-  for (const draft of shortDrafts) {
-    totalShortSqft += extractDraftSqft(draft, fallbackSqft)
-  }
+  const avgDetailSqft =
+    detailSqfts.length > 0
+      ? Math.round(detailSqfts.reduce((sum, s) => sum + s, 0) / detailSqfts.length)
+      : 0
+
+  // Short drafts: calculate created sqft for each draft
+  const shortSqfts = shortDrafts
+    .map((draft) => extractDraftSqft(draft))
+    .filter((sqft) => sqft > 0)
+
   const avgShortSqft =
-    shortDrafts.length > 0
-      ? Math.round(totalShortSqft / shortDrafts.length)
-      : fallbackSqft > 0
-        ? fallbackSqft
-        : 0
+    shortSqfts.length > 0
+      ? Math.round(shortSqfts.reduce((sum, s) => sum + s, 0) / shortSqfts.length)
+      : 0
 
   return {
     avgDetailSqft,
     avgShortSqft,
-    detailVersionsCount: detailDrafts.length,
-    shortPackagesCount: shortDrafts.length,
+    detailVersionsCount: detailSqfts.length,
+    shortPackagesCount: shortSqfts.length,
     totalAvgSqft: avgDetailSqft + avgShortSqft,
   }
 }
-

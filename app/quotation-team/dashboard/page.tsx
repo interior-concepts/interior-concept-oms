@@ -206,7 +206,12 @@ export default function QuotationTeamDashboardPage() {
               <RefreshCw className={`mr-1.5 h-4 w-4 ${loading || perfLoading ? 'animate-spin' : ''}`} />
               Refresh
             </Button>
-            <AddQuotationClientModal onClientCreated={() => void loadData()} />
+            <AddQuotationClientModal
+              onClientCreated={() => {
+                void fetchDashboardData(selectedMonth)
+                void fetchPerformanceData(selectedMonth)
+              }}
+            />
             <Button size="sm" asChild variant="outline" className="h-9">
               <Link href="/quotation-team/my-work">
                 View My Work Queue

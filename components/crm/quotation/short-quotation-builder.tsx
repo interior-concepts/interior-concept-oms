@@ -688,6 +688,23 @@ export function ShortQuotationBuilder({
     }))
   }
 
+  const removeRoom = (roomId: string) => {
+    if (!window.confirm('Remove this room and all its items?')) return
+    updateContent((prev) => ({
+      ...prev,
+      rooms: prev.rooms.filter((room) => room.id !== roomId),
+    }))
+  }
+
+  const removeFloor = (floorId: string) => {
+    if (!window.confirm('Remove this floor and all its rooms and items?')) return
+    updateContent((prev) => ({
+      ...prev,
+      floors: prev.floors.filter((floor) => floor.id !== floorId),
+      rooms: prev.rooms.filter((room) => room.floorId !== floorId),
+    }))
+  }
+
   const setPackageTier = (packageTier: ShortQuotationPackage) => {
     if (packageTier === selectedPackageTier) return
     setSelectedPackageTier(packageTier)
@@ -1131,6 +1148,17 @@ export function ShortQuotationBuilder({
                     <Plus className="mr-1.5 h-3.5 w-3.5" />
                     Add Concept from Catalog / Bundle
                   </Button>
+                  {canEdit && (
+                    <Button
+                      type="button"
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => removeFloor(floor.id)}
+                      title="Remove this floor"
+                    >
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                    </Button>
+                  )}
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -1167,6 +1195,7 @@ export function ShortQuotationBuilder({
                               reorderRoomLines={reorderRoomLines}
                               updateLine={updateLine}
                               removeLine={removeLine}
+                              removeRoom={removeRoom}
                             />
                           )
                         })}
@@ -1289,6 +1318,7 @@ type SortableRoomCardProps = {
   reorderRoomLines: (roomId: string, event: DragEndEvent) => void
   updateLine: (roomId: string, lineId: string, patch: Partial<ShortQuotationLine>) => void
   removeLine: (roomId: string, lineId: string) => void
+  removeRoom: (roomId: string) => void
 }
 
 function SortableRoomCard({
@@ -1304,6 +1334,7 @@ function SortableRoomCard({
   reorderRoomLines,
   updateLine,
   removeLine,
+  removeRoom,
 }: SortableRoomCardProps) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: room.id })
 
@@ -1346,21 +1377,34 @@ function SortableRoomCard({
             }
           />
         </div>
-        <span className="text-sm font-medium">
-          Room Total: {formatAmount(roomSummary?.total ?? 0)}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-medium">
+            Room Total: {formatAmount(roomSummary?.total ?? 0)}
+          </span>
+          {canEdit && (
+            <Button
+              type="button"
+              size="icon"
+              variant="ghost"
+              onClick={() => removeRoom(room.id)}
+              title="Remove this room"
+            >
+              <Trash2 className="h-4 w-4 text-destructive" />
+            </Button>
+          )}
+        </div>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[760px] text-sm">
+        <table className="w-full min-w-[800px] table-fixed text-sm">
           <thead className="bg-muted/40 text-left">
             <tr>
-              {canEdit && <th className="w-6 px-1 py-2" />}
-              <th className="px-2 py-2">Name</th>
-              <th className="px-2 py-2">Qty Sft</th>
-              <th className="px-2 py-2">Unit Price</th>
-              <th className="px-2 py-2">Total</th>
-              <th className="px-2 py-2" />
+              {canEdit && <th className="w-9 px-1 py-2" />}
+              <th className="w-[30%] min-w-[180px] px-2 py-2">Name</th>
+              <th className="w-[25%] min-w-[170px] px-2 py-2">Qty Sft</th>
+              <th className="w-[25%] min-w-[160px] px-2 py-2">Unit Price</th>
+              <th className="w-[15%] min-w-[110px] px-2 py-2">Total</th>
+              {canEdit && <th className="w-11 px-2 py-2" />}
             </tr>
           </thead>
           <tbody>
@@ -1451,7 +1495,7 @@ function SortableShortRow({
   return (
     <tr id={`short-line-${line.id}`} ref={setNodeRef} style={rowStyle} className="border-t align-top scroll-mt-28">
       {canEdit && (
-        <td className="px-1 py-2 text-muted-foreground">
+        <td className="w-9 px-1 py-2 text-muted-foreground">
           <button
             type="button"
             className="cursor-grab touch-none rounded p-1 hover:bg-muted active:cursor-grabbing"
@@ -1463,28 +1507,28 @@ function SortableShortRow({
           </button>
         </td>
       )}
-      <td className="px-2 py-2">
+      <td className="w-[30%] min-w-[180px] px-2 py-2">
         <Input
           value={line.name}
           disabled={!canEdit}
           onChange={(event) => updateLine(roomId, line.id, { name: event.target.value })}
         />
         {line.materials || line.catalogItemId ? (
-          <div className="mt-1 flex flex-wrap items-center gap-1.5 text-[11px] text-muted-foreground">
+          <div className="mt-1 flex flex-wrap items-center gap-1.5 text-[11px] text-muted-foreground overflow-hidden">
             {line.catalogItemId ? (
-              <Badge variant="outline" className="text-[10px] text-primary border-primary/30">
+              <Badge variant="outline" className="text-[10px] text-primary border-primary/30 shrink-0">
                 Catalog item
               </Badge>
             ) : null}
             {line.materials ? (
-              <span className="line-clamp-1 italic" title={line.materials}>
+              <span className="line-clamp-1 truncate italic" title={line.materials}>
                 {line.materials}
               </span>
             ) : null}
           </div>
         ) : null}
       </td>
-      <td className="px-2 py-2 min-w-[140px]">
+      <td className="w-[25%] min-w-[170px] px-2 py-2">
         {line.isLumpSum ? (
           <span className="text-xs text-muted-foreground">Lump sum</span>
         ) : (
@@ -1545,7 +1589,7 @@ function SortableShortRow({
           </div>
         )}
       </td>
-      <td className="px-2 py-2">
+      <td className="w-[25%] min-w-[160px] px-2 py-2">
         {line.isLumpSum ? (
           <Input
             type="text"
@@ -1572,7 +1616,7 @@ function SortableShortRow({
           />
         )}
       </td>
-      <td className="px-2 py-2">
+      <td className="w-[15%] min-w-[110px] px-2 py-2">
         {line.isLumpSum ? (
           <Input
             type="text"
@@ -1591,13 +1635,13 @@ function SortableShortRow({
           <span className="font-medium">{formatAmount(line.total)}</span>
         )}
       </td>
-      <td className="px-2 py-2">
-        {canEdit ? (
+      {canEdit && (
+        <td className="w-11 px-2 py-2">
           <Button type="button" size="icon" variant="ghost" onClick={() => removeLine(roomId, line.id)}>
             <Trash2 className="h-4 w-4" />
           </Button>
-        ) : null}
-      </td>
+        </td>
+      )}
     </tr>
   )
 }

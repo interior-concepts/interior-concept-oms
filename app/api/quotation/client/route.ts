@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
     if (!targetSrCrmUserId) {
       try {
         const weeklySr = await getWeeklySeniorCrmAssignment()
-        targetSrCrmUserId = weeklySr.selectedSeniorCrm?.id ?? null
+        targetSrCrmUserId = weeklySr.selected?.id ?? null
       } catch {
         targetSrCrmUserId = null
       }

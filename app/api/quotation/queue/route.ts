@@ -295,7 +295,7 @@ export async function POST(request: NextRequest) {
       await logActivity(tx, {
         leadId: lead.id,
         userId: authResult.actorUserId,
-        type: ActivityType.ASSIGNMENT,
+        type: ActivityType.USER_ASSIGNED,
         description: `Quotation team member claimed lead from queue.`,
       })
 

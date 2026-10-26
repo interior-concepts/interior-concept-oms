@@ -7,6 +7,7 @@ import { buildDetailPreviewUrl } from '@/lib/detail-quotation-preview-sync'
 import { buildShortPreviewUrl } from '@/lib/short-quotation-preview-sync'
 import {
   CalendarClock,
+  CalendarPlus,
   CheckCircle2,
   ClipboardCheck,
   Download,
@@ -27,6 +28,12 @@ import {
   Wrench,
 } from 'lucide-react'
 import { toast } from '@/components/ui/sonner'
+import {
+  FollowUpIntelligenceFields,
+  type FollowUpCategoryValue,
+  type ClientSentimentValue,
+  type ClientObjectionValue,
+} from '@/components/crm/shared/followup-intelligence-fields'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -647,6 +654,25 @@ export function CadPhaseQueueBoard({
   const [projectSizeOpen, setProjectSizeOpen] = useState(false)
   const [projectSizeValue, setProjectSizeValue] = useState('')
 
+  // Follow-up state for meeting modals
+  const [followUpEnabled, setFollowUpEnabled] = useState(false)
+  const [followUpDate, setFollowUpDate] = useState('')
+  const [followUpNotes, setFollowUpNotes] = useState('')
+  const [followUpCategory, setFollowUpCategory] = useState<FollowUpCategoryValue>('GENERAL')
+  const [followUpSentiment, setFollowUpSentiment] = useState<ClientSentimentValue | undefined>(undefined)
+  const [followUpObjection, setFollowUpObjection] = useState<ClientObjectionValue | undefined>(undefined)
+  const [followUpObjectionNote, setFollowUpObjectionNote] = useState('')
+
+  const resetFollowUpState = () => {
+    setFollowUpEnabled(false)
+    setFollowUpDate('')
+    setFollowUpNotes('')
+    setFollowUpCategory('GENERAL')
+    setFollowUpSentiment(undefined)
+    setFollowUpObjection(undefined)
+    setFollowUpObjectionNote('')
+  }
+
   const closedSubStatusOptions = [
     'PROJECT_DROPPED',
     'REJECTED_OFFER',
@@ -1002,6 +1028,7 @@ export function CadPhaseQueueBoard({
     setMeetingAt(toDateTimeLocalInput(new Date()))
     setMeetingMode('ONLINE')
     setMeetingNote('')
+    resetFollowUpState()
     setMeetingOpen(true)
   }
 
@@ -1011,6 +1038,7 @@ export function CadPhaseQueueBoard({
     setMeetingAt(toDateTimeLocalInput(new Date()))
     setMeetingMode('ONLINE')
     setMeetingNote('')
+    resetFollowUpState()
     setMeetingOpen(true)
   }
 
@@ -1093,6 +1121,7 @@ export function CadPhaseQueueBoard({
     setIsDirectAgreementConfirm(directAgreement)
     setAgreementValue('')
     setClientApproval((isBudgetMeeting || directAgreement) ? 'DESIGN_AGREEMENT' : 'NO_APPROVAL')
+    resetFollowUpState()
     setCompleteMeetingOpen(true)
     if (lead.stage === 'DISCOVERY' && lead.subStatus === 'FIRST_MEETING_SET') {
       await loadQuotationMembers()

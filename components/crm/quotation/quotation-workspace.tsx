@@ -73,7 +73,9 @@ export function QuotationWorkspace({
                 <span className="text-xs font-semibold text-cyan-700 dark:text-cyan-400">sqft</span>
               </p>
               <p className="mt-0.5 text-[11px] text-cyan-700/80 dark:text-cyan-400/80">
-                Average taken across {sqftSummary?.shortPackagesCount ?? 0} package tier(s)
+                {sqftSummary && sqftSummary.avgShortSqft > 0
+                  ? 'Calculated from short quotation items'
+                  : '0 sqft created in software'}
               </p>
             </div>
             <div className="rounded-xl bg-cyan-100/80 p-2.5 text-cyan-700 ring-1 ring-cyan-200 dark:bg-cyan-900/40 dark:text-cyan-200 dark:ring-cyan-800">
@@ -93,7 +95,9 @@ export function QuotationWorkspace({
                 <span className="text-xs font-semibold text-purple-700 dark:text-purple-400">sqft</span>
               </p>
               <p className="mt-0.5 text-[11px] text-purple-700/80 dark:text-purple-400/80">
-                Average written across {sqftSummary?.detailVersionsCount ?? 0} type(s)
+                {sqftSummary && sqftSummary.avgDetailSqft > 0
+                  ? 'Calculated from detail quotation items'
+                  : '0 sqft created in software'}
               </p>
             </div>
             <div className="rounded-xl bg-purple-100/80 p-2.5 text-purple-700 ring-1 ring-purple-200 dark:bg-purple-900/40 dark:text-purple-200 dark:ring-purple-800">

@@ -332,10 +332,10 @@ function parseStoredQuotationContent(value: unknown): QuotationStoredContent | n
 }
 
 function toSlotIndex(value: unknown): number {
-  if (typeof value === 'number' && Number.isInteger(value) && value >= 1 && value <= 4) return value
+  if (typeof value === 'number' && Number.isInteger(value) && value >= 1 && value <= 3) return value
   if (typeof value === 'string') {
     const parsed = parseInt(value.trim(), 10)
-    if (parsed >= 1 && parsed <= 4) return parsed
+    if (parsed >= 1 && parsed <= 3) return parsed
   }
   return 1
 }
@@ -485,10 +485,9 @@ export async function GET(request: NextRequest, context: RouteContext) {
       1: 'Premium',
       2: 'Platinum',
       3: 'Luxury',
-      4: 'Mix',
     }
 
-    const availableSlots = [1, 2, 3, 4].map((s) => {
+    const availableSlots = [1, 2, 3].map((s) => {
       const bKey = s === 1 ? 'detail' : `detail:slot:${s}`
       const foundDraft =
         savedDrafts.find((d) => d.draftKey === buildOwnedDraftKey(bKey, authResult.actorUserId)) ||
@@ -510,7 +509,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       }
     })
 
-    const sqftSummary = calculateLeadQuotationSqftSummary(savedDrafts, projectSqft ?? 0)
+    const sqftSummary = calculateLeadQuotationSqftSummary(savedDrafts)
 
     if (!selectedDraft) {
       const shortContent = buildDefaultShortQuotationContent({
@@ -521,7 +520,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       const shortSummary = buildShortQuotationSummary(shortContent)
       const detailContent = buildDefaultQuotationContent({
         templateKey: requestedTemplateKey,
-        quotationType: 'STANDARD',
+        quotationType: 'PREMIUM',
         projectSqft,
       })
       detailContent.versionTitle = DETAIL_TIER_TITLES[requestedSlot] ?? `Tier ${requestedSlot}`
@@ -542,7 +541,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
             status: 'DRAFT' as const,
           },
           defaultDetailDraft: {
-            quotationType: 'STANDARD' as QuotationFileType,
+            quotationType: 'PREMIUM' as QuotationFileType,
             projectSqft,
             content: detailContent,
             grandTotal: detailTotals.grandTotal,
@@ -682,9 +681,6 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       )
     }
 
-    const resolvedProjectSqft =
-      projectSqft && projectSqft > 0 ? projectSqft : lead.visits[0]?.projectSqft ?? null
-
     const isShort = isShortQuotationContent(contentInput)
     const savedQuotationDate = todayShortQuotationDate()
     const calculatedContent = isShort
@@ -696,6 +692,31 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       ...calculatedContent,
       quotationDate: savedQuotationDate,
     }
+
+    const createdSqft = isShort
+      ? (normalizedContent as ShortQuotationContent).rooms?.reduce(
+          (sum, room) =>
+            sum +
+            (room.lines?.reduce((lSum, l) => lSum + (!l.isLumpSum ? Number(l.quantitySqft) || 0 : 0), 0) ?? 0),
+          0,
+        ) ?? 0
+      : (normalizedContent as QuotationDraftContent).lineItems?.reduce((sum, item) => {
+          if (item.included !== false) {
+            const unit = String(item.unit || '').trim().toLowerCase()
+            if (unit === 'sqft' || unit === 'sft') {
+              return sum + (Number(item.quantity) || 0)
+            }
+          }
+          return sum
+        }, 0) ?? 0
+
+    const resolvedProjectSqft =
+      createdSqft > 0
+        ? createdSqft
+        : projectSqft && projectSqft > 0
+          ? projectSqft
+          : null
+
     const grandTotal = isShort
       ? buildShortQuotationSummary(normalizedContent as ShortQuotationContent).grandTotal
       : calculateQuotationTotals(normalizedContent as QuotationDraftContent).grandTotal
@@ -709,11 +730,10 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       1: 'Premium',
       2: 'Platinum',
       3: 'Luxury',
-      4: 'Mix',
     }
 
     if (!isShort && saveAllSlots) {
-      const targetSlots = targetSlotsInput.length > 0 ? targetSlotsInput : [1, 2, 3, 4]
+      const targetSlots = targetSlotsInput.length > 0 ? targetSlotsInput.filter((s: number) => s <= 3) : [1, 2, 3]
       const upsertPromises = targetSlots.map((s: number) => {
         const bKey = s === 1 ? 'detail' : `detail:slot:${s}`
         const dKey = buildOwnedDraftKey(bKey, authResult.actorUserId)

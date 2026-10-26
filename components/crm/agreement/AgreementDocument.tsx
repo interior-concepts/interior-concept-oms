@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     paddingBottom: FOOTER_SPACE,
     paddingLeft: PAGE_SIDE_PADDING,
     paddingRight: PAGE_SIDE_PADDING,
-    fontSize: 9,
+    fontSize: 10,
     fontFamily: 'Noto Sans Bengali',
     color: '#1a1a1a',
     backgroundColor: '#ffffff',
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: PRIMARY,
-    fontSize: 10,
+    fontSize: 11,
     fontFamily: 'Times-Italic',
     letterSpacing: 2,
     marginHorizontal: 12,
@@ -87,14 +87,14 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   metaLabel: {
-    fontSize: 6,
+    fontSize: 7.5,
     color: GOLD,
     fontWeight: 'bold',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   metaValue: {
-    fontSize: 9,
+    fontSize: 10.5,
     color: PRIMARY,
     fontWeight: 'bold',
     textAlign: 'right',
@@ -113,12 +113,12 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   footerText: {
-    fontSize: 6.8,
+    fontSize: 7.8,
     color: '#555555',
     lineHeight: 1.3,
   },
   footerMeta: {
-    fontSize: 6,
+    fontSize: 7,
     color: '#777777',
     marginTop: 4,
   },
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   sectionTitle: {
-    fontSize: 11,
+    fontSize: 12.5,
     fontWeight: 'bold',
     color: PRIMARY,
     letterSpacing: 1.5,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     borderBottomColor: PRIMARY,
   },
   subSectionTitle: {
-    fontSize: 9.5,
+    fontSize: 11,
     fontWeight: 'bold',
     color: PRIMARY,
     textTransform: 'uppercase',
@@ -151,21 +151,21 @@ const styles = StyleSheet.create({
     letterSpacing: 0.8,
   },
   paragraph: {
-    fontSize: 8.5,
+    fontSize: 9.8,
     color: '#262626',
     marginBottom: 6,
     textAlign: 'justify',
     lineHeight: 1.45,
   },
   clauseTitle: {
-    fontSize: 8.5,
+    fontSize: 9.8,
     fontWeight: 'bold',
     color: PRIMARY,
     marginTop: 6,
     marginBottom: 2,
   },
   clauseBody: {
-    fontSize: 8,
+    fontSize: 9.2,
     color: '#333333',
     lineHeight: 1.4,
     textAlign: 'justify',
@@ -188,13 +188,13 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   metaCardKey: {
-    fontSize: 7.5,
+    fontSize: 8.5,
     color: '#555555',
     textTransform: 'uppercase',
     fontWeight: 'bold',
   },
   metaCardVal: {
-    fontSize: 8.5,
+    fontSize: 9.8,
     fontWeight: 'bold',
     color: PRIMARY,
   },
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     borderColor: '#d7d7d7',
   },
   thCol: {
-    fontSize: 8,
+    fontSize: 9.2,
     fontWeight: 'bold',
     color: PRIMARY,
     textTransform: 'uppercase',
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fffdfa',
   },
   tdCol: {
-    fontSize: 8,
+    fontSize: 9.2,
     lineHeight: 1.3,
     paddingVertical: 4,
     paddingHorizontal: 4,
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
   },
   areaHeaderText: {
-    fontSize: 8.5,
+    fontSize: 9.8,
     fontWeight: 'bold',
     color: PRIMARY,
     textTransform: 'uppercase',
@@ -280,13 +280,13 @@ const styles = StyleSheet.create({
     paddingTop: 5,
   },
   sigName: {
-    fontSize: 8.5,
+    fontSize: 9.8,
     fontWeight: 'bold',
     color: PRIMARY,
     textAlign: 'center',
   },
   sigRole: {
-    fontSize: 7.5,
+    fontSize: 8.5,
     color: '#666666',
     textAlign: 'center',
     marginTop: 1,
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   inWordsText: {
-    fontSize: 8.5,
+    fontSize: 9.8,
     fontWeight: 'bold',
     color: '#000000',
     marginTop: 4,
@@ -418,20 +418,20 @@ export function AgreementDocument(props: AgreementPdfProps) {
 
         {/* To Recipient */}
         <View style={{ marginBottom: 10 }}>
-          <Text style={[styles.bold, { fontSize: 10, color: PRIMARY }]}>{props.companyName || 'INTERIOR CONCEPTS'}</Text>
+          <Text style={[styles.bold, { fontSize: 11.5, color: PRIMARY }]}>{props.companyName || 'INTERIOR CONCEPTS'}</Text>
           <Text style={styles.paragraph}>{props.companyAddress || 'Dhaka, Bangladesh'}</Text>
           <Text style={styles.paragraph}>Phone: {props.companyPhones || '01334-935531'}</Text>
         </View>
 
         {/* Subject */}
         <View style={{ backgroundColor: '#f3f8f7', padding: 6, borderLeftWidth: 3, borderLeftColor: PRIMARY, marginBottom: 10 }}>
-          <Text style={[styles.bold, { fontSize: 8.5, color: PRIMARY, letterSpacing: 0.5 }]}>
+          <Text style={[styles.bold, { fontSize: 9.8, color: PRIMARY, letterSpacing: 0.5 }]}>
             {props.introSubject || 'WORK ORDER FOR INTERIOR WORKS'}
           </Text>
         </View>
 
         {/* Letter Body */}
-        <Text style={[styles.bold, { fontSize: 9, marginBottom: 5, color: PRIMARY }]}>{props.introSalutation || 'Dear Interior Concepts,'}</Text>
+        <Text style={[styles.bold, { fontSize: 10.2, marginBottom: 5, color: PRIMARY }]}>{props.introSalutation || 'Dear Interior Concepts,'}</Text>
         <Text style={styles.paragraph}>{props.introAwardText}</Text>
         <Text style={styles.paragraph}>{props.introTermsText}</Text>
         <Text style={styles.paragraph}>{props.introCommenceText}</Text>
@@ -453,10 +453,10 @@ export function AgreementDocument(props: AgreementPdfProps) {
 
         {/* Acceptance Note */}
         <View style={styles.acceptanceBox}>
-          <Text style={[styles.bold, { fontSize: 8, color: PRIMARY, marginBottom: 2 }]}>
+          <Text style={[styles.bold, { fontSize: 9.2, color: PRIMARY, marginBottom: 2 }]}>
             Accepted by {props.companyName || 'Interior Concepts'}:
           </Text>
-          <Text style={{ fontSize: 8, color: '#333333' }}>
+          <Text style={{ fontSize: 9.2, color: '#333333' }}>
             Name: <Text style={styles.bold}>{props.ceoName || 'Shopi Ullah Rashed'}</Text>  |  Designation: <Text style={styles.bold}>{props.ceoDesignation || 'Chief Executive Officer'}</Text>
           </Text>
         </View>
@@ -478,13 +478,13 @@ export function AgreementDocument(props: AgreementPdfProps) {
 
         {/* Parties Card */}
         <View style={styles.metaCard}>
-          <Text style={[styles.bold, { fontSize: 9, color: PRIMARY, marginBottom: 4 }]}>BETWEEN</Text>
+          <Text style={[styles.bold, { fontSize: 10.2, color: PRIMARY, marginBottom: 4 }]}>BETWEEN</Text>
           <Text style={[styles.paragraph, { marginBottom: 8 }]}>
             <Text style={styles.bold}>{props.clientName}</Text>, Owner of the Apartment at{' '}
             <Text style={styles.bold}>{props.siteAddress}</Text> (hereinafter referred to as the &quot;Owner&quot;) of the ONE PART.
           </Text>
 
-          <Text style={[styles.bold, { fontSize: 9, color: PRIMARY, marginBottom: 4 }]}>AND</Text>
+          <Text style={[styles.bold, { fontSize: 10.2, color: PRIMARY, marginBottom: 4 }]}>AND</Text>
           <Text style={[styles.paragraph, { marginBottom: 2 }]}>
             <Text style={styles.bold}>{props.companyName || 'INTERIOR CONCEPTS'}</Text>, having registered address at {props.companyAddress}, Trade License No: {props.tradeLicenseNo}, TIN: {props.tinNo}, represented by Mr. <Text style={styles.bold}>{props.ceoName}</Text>, Designation: {props.ceoDesignation}, NID No: {props.ceoNid} (hereinafter referred to as the &quot;Consultant&quot;) of the OTHER PART.
           </Text>
@@ -494,7 +494,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
         <Text style={styles.subSectionTitle}>Recitals & Scope</Text>
         <Text style={styles.paragraph}>{props.whereasText1}</Text>
         <Text style={styles.paragraph}>{props.whereasText2}</Text>
-        <Text style={[styles.bold, { fontSize: 8.5, color: PRIMARY, marginTop: 4, marginBottom: 4 }]}>
+        <Text style={[styles.bold, { fontSize: 9.8, color: PRIMARY, marginTop: 4, marginBottom: 4 }]}>
           NOW IT IS AGREED BY AND BETWEEN BOTH PARTIES AS FOLLOWS:
         </Text>
         <Text style={styles.paragraph}>{props.agreementScopeText}</Text>
@@ -525,13 +525,13 @@ export function AgreementDocument(props: AgreementPdfProps) {
           </Text>
         </View>
         <View style={styles.grandTotalBar}>
-          <Text style={[styles.bold, { fontSize: 9, color: PRIMARY }]}>GRAND TOTAL</Text>
-          <Text style={[styles.bold, { fontSize: 9, color: PRIMARY }]}>
+          <Text style={[styles.bold, { fontSize: 10.2, color: PRIMARY }]}>GRAND TOTAL</Text>
+          <Text style={[styles.bold, { fontSize: 10.2, color: PRIMARY }]}>
             {grandTotalVal.toLocaleString('en-IN')} BDT
           </Text>
         </View>
         <Text style={styles.inWordsText}>In Words: {props.inWordsText}</Text>
-        <Text style={[styles.paragraph, { fontSize: 7.5, color: '#666666', marginTop: 4 }]}>
+        <Text style={[styles.paragraph, { fontSize: 8.5, color: '#666666', marginTop: 4 }]}>
           {props.projectCostSummaryNote}
         </Text>
 
@@ -547,7 +547,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
             <Text style={[styles.tdCol, { width: '10%', textAlign: 'center' }]}>{step.sl}</Text>
             <View style={[styles.tdCol, { width: '70%' }]}>
               <Text style={styles.bold}>{step.milestone}</Text>
-              {step.details ? <Text style={{ fontSize: 7.5, color: '#555555' }}>{step.details}</Text> : null}
+              {step.details ? <Text style={{ fontSize: 8.5, color: '#555555' }}>{step.details}</Text> : null}
             </View>
             <Text style={[styles.tdCol, styles.tdColLast, styles.bold, { width: '20%', textAlign: 'center' }]}>
               {step.percentage}
@@ -558,7 +558,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
         {/* Duration of Work */}
         <Text style={[styles.subSectionTitle, { marginTop: 12 }]}>Duration of Work</Text>
         <Text style={styles.paragraph}>{props.durationText}</Text>
-        <Text style={[styles.paragraph, { fontSize: 7.8, color: '#555555' }]}>{props.durationDiscussionsText}</Text>
+        <Text style={[styles.paragraph, { fontSize: 8.8, color: '#555555' }]}>{props.durationDiscussionsText}</Text>
 
         <PageFooter agreementCode={agreementCode} updatedAt={props.updatedAt} />
       </Page>
@@ -592,7 +592,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
               <View key={line.sl || lIdx} wrap={false} style={[styles.tRow, lIdx % 2 === 1 ? styles.tRowAlt : {}]}>
                 <Text style={[styles.tdCol, { width: '6%', textAlign: 'center' }]}>{line.sl}</Text>
                 <Text style={[styles.tdCol, styles.bold, { width: '18%' }]}>{line.name}</Text>
-                <Text style={[styles.tdCol, { width: '42%', fontSize: 7.5, color: '#333333' }]}>
+                <Text style={[styles.tdCol, { width: '42%', fontSize: 8.5, color: '#333333' }]}>
                   {line.materials}
                 </Text>
                 <Text style={[styles.tdCol, { width: '10%', textAlign: 'center' }]}>{line.qtySft}</Text>
@@ -614,8 +614,8 @@ export function AgreementDocument(props: AgreementPdfProps) {
           </Text>
         </View>
         <View style={styles.grandTotalBar} wrap={false}>
-          <Text style={[styles.bold, { fontSize: 9, color: PRIMARY }]}>TOTAL AMOUNT:</Text>
-          <Text style={[styles.bold, { fontSize: 9, color: PRIMARY }]}>
+          <Text style={[styles.bold, { fontSize: 10.2, color: PRIMARY }]}>TOTAL AMOUNT:</Text>
+          <Text style={[styles.bold, { fontSize: 10.2, color: PRIMARY }]}>
             {grandTotalVal.toLocaleString('en-IN')} BDT
           </Text>
         </View>
@@ -674,10 +674,10 @@ export function AgreementDocument(props: AgreementPdfProps) {
         <Text style={styles.subSectionTitle}>Other Terms & Conditions</Text>
         {(props.otherTerms || []).map((term, index) => (
           <View key={index} wrap={false} style={{ flexDirection: 'row', marginBottom: 2.5, paddingLeft: 4 }}>
-            <Text style={{ width: 18, fontSize: 7.5, fontWeight: 'bold', color: PRIMARY }}>
+            <Text style={{ width: 18, fontSize: 8.5, fontWeight: 'bold', color: PRIMARY }}>
               {String(index + 1).padStart(2, '0')}.
             </Text>
-            <Text style={{ flex: 1, fontSize: 7.8, color: '#333333', lineHeight: 1.35, textAlign: 'justify' }}>
+            <Text style={{ flex: 1, fontSize: 8.8, color: '#333333', lineHeight: 1.35, textAlign: 'justify' }}>
               {term}
             </Text>
           </View>

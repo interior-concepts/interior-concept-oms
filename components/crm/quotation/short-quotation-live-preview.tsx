@@ -8,6 +8,8 @@ import { ShortQuotationPrint } from '@/components/crm/quotation/short-quotation-
 import { ShortQuotationDocument } from '@/components/crm/quotation/pdf/ShortQuotationDocument'
 import { downloadPdfFromDocument } from '@/components/crm/quotation/pdf/pdf-download'
 import { normalizeShortQuotationContent } from '@/lib/short-quotation-calculations'
+import { loadPlaygroundShortDraft } from '@/lib/quotation-playground-storage'
+import type { ShortQuotationContent } from '@/lib/short-quotation-types'
 import { toast } from '@/components/ui/sonner'
 import {
   readShortPreview,
@@ -42,6 +44,8 @@ export function ShortQuotationLivePreview({
   contextId: string
   packageTier?: string
 }) {
+  const [payload, setPayload] = useState<ShortPreviewPayload | null>(null)
+  const [generatingPdf, setGeneratingPdf] = useState(false)
   const [loading, setLoading] = useState(true)
 
   const cleanPackage = (
