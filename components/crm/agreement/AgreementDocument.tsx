@@ -26,41 +26,25 @@ const BDT_SYMBOL = '৳'
 const DETAIL_ROW_LINE_HEIGHT = 1.15
 const DETAIL_ROW_VERTICAL_PADDING = 3
 
-const isBrowser = typeof window !== 'undefined'
-
-const getFontSrc = (file: string) => {
-  if (typeof window !== 'undefined') {
-    return `${window.location.origin}${file}`
-  }
-  if (typeof process !== 'undefined' && process.cwd) {
-    return `${process.cwd()}/public${file}`
-  }
-  return file
+const getBaseUrl = () => {
+  if (typeof window !== 'undefined') return window.location.origin
+  return 'https://interiorconcepts.com'
 }
 
 Font.register({
   family: 'Noto Sans Bengali',
   fonts: [
-    { src: getFontSrc('/fonts/NotoSansBengali-Regular.ttf') },
-    { src: getFontSrc('/fonts/NotoSansBengali-Regular.ttf'), fontStyle: 'italic' },
-    { src: getFontSrc('/fonts/NotoSansBengali-Bold.ttf'), fontWeight: 'bold' },
-    { src: getFontSrc('/fonts/NotoSansBengali-Bold.ttf'), fontWeight: 'bold', fontStyle: 'italic' },
+    { src: `${getBaseUrl()}/fonts/NotoSansBengali-Regular.ttf` },
+    { src: `${getBaseUrl()}/fonts/NotoSansBengali-Regular.ttf`, fontStyle: 'italic' },
+    { src: `${getBaseUrl()}/fonts/NotoSansBengali-Bold.ttf`, fontWeight: 'bold' },
+    { src: `${getBaseUrl()}/fonts/NotoSansBengali-Bold.ttf`, fontWeight: 'bold', fontStyle: 'italic' },
   ],
 })
 
 Font.registerHyphenationCallback((word) => [word])
 
-const logoSrc = isBrowser
-  ? '/Logo/interior-concept-logobg-removed.png'
-  : typeof process !== 'undefined' && process.cwd
-    ? `${process.cwd()}/public/Logo/interior-concept-logobg-removed.png`
-    : '/Logo/interior-concept-logobg-removed.png'
-
-const watermarkSrc = isBrowser
-  ? '/Logo/interior-concept-icon-light.png'
-  : typeof process !== 'undefined' && process.cwd
-    ? `${process.cwd()}/public/Logo/interior-concept-icon-light.png`
-    : '/Logo/interior-concept-icon-light.png'
+const logoSrc = `${getBaseUrl()}/Logo/interior-concept-logobg-removed.png`
+const watermarkSrc = `${getBaseUrl()}/Logo/interior-concept-icon-light.png`
 
 const styles = StyleSheet.create({
   page: {
