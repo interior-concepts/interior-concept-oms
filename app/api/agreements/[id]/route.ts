@@ -81,6 +81,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
         data: {
           ...defaultAgreement,
           ...savedContent,
+          quotationDraft: savedContent.quotationDraft || detailContent,
           id: agreementDraft.id,
           leadId: lead.id,
           clientId: lead.clientId,

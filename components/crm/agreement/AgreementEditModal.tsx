@@ -34,9 +34,10 @@ import {
   Clock,
   ShieldAlert,
   Users,
+  ScrollText,
 } from 'lucide-react'
 import { toast } from 'sonner'
-import type { AgreementData, PaymentScheduleItem } from '@/lib/agreement-types'
+import type { AgreementData, AgreementPaymentStage, AgreementClauseGroup } from '@/lib/agreement-types'
 import { AgreementDocument } from './AgreementDocument'
 import { downloadPdfFromDocument } from '@/components/crm/quotation/pdf/pdf-download'
 import { amountInWordsTaka } from '@/lib/number-to-words'
@@ -99,7 +100,7 @@ export function AgreementEditModal({
   }
 
   // Payment Schedule handlers
-  const handlePaymentChange = (index: number, field: keyof PaymentScheduleItem, value: string) => {
+  const handlePaymentChange = (index: number, field: keyof AgreementPaymentStage, value: string) => {
     if (!data) return
     const updated = [...(data.paymentSchedule || [])]
     updated[index] = { ...updated[index], [field]: value }
@@ -109,10 +110,9 @@ export function AgreementEditModal({
   const handleAddPaymentRow = () => {
     if (!data) return
     const current = data.paymentSchedule || []
-    const nextSl = String(current.length + 1).padStart(2, '0')
-    const updated: PaymentScheduleItem[] = [
+    const updated: AgreementPaymentStage[] = [
       ...current,
-      { sl: nextSl, milestone: 'Custom Milestone', details: '', percentage: '10%' },
+      { stage: 'Additional Stage Milestone', percentage: '10 %', amount: '0' },
     ]
     setData({ ...data, paymentSchedule: updated })
   }
@@ -120,31 +120,64 @@ export function AgreementEditModal({
   const handleRemovePaymentRow = (index: number) => {
     if (!data) return
     const current = data.paymentSchedule || []
-    const updated = current.filter((_, i) => i !== index).map((row, i) => ({
-      ...row,
-      sl: String(i + 1).padStart(2, '0'),
-    }))
+    const updated = current.filter((_, i) => i !== index)
     setData({ ...data, paymentSchedule: updated })
   }
 
-  // Other Terms handlers
-  const handleTermChange = (index: number, value: string) => {
+  // Annexure handlers
+  const handleAnnexureChange = (index: number, value: string) => {
     if (!data) return
-    const updated = [...(data.otherTerms || [])]
+    const updated = [...(data.annexures || [])]
     updated[index] = value
-    setData({ ...data, otherTerms: updated })
+    setData({ ...data, annexures: updated })
   }
 
-  const handleAddTerm = () => {
+  const handleAddAnnexure = () => {
     if (!data) return
-    const current = data.otherTerms || []
-    setData({ ...data, otherTerms: [...current, 'New term or condition statement.'] })
+    const current = data.annexures || []
+    const nextIdx = current.length + 1
+    setData({ ...data, annexures: [...current, `Annexure A${nextIdx}: New annexure provision.`] })
   }
 
-  const handleRemoveTerm = (index: number) => {
+  const handleRemoveAnnexure = (index: number) => {
     if (!data) return
-    const current = data.otherTerms || []
-    setData({ ...data, otherTerms: current.filter((_, i) => i !== index) })
+    const current = data.annexures || []
+    setData({ ...data, annexures: current.filter((_, i) => i !== index) })
+  }
+
+  // Clause Groups handlers
+  const handleClauseChange = (groupIndex: number, clauseIndex: number, value: string) => {
+    if (!data) return
+    const groups = [...(data.clauseGroups || [])]
+    const clauses = [...(groups[groupIndex]?.clauses || [])]
+    clauses[clauseIndex] = value
+    groups[groupIndex] = { ...groups[groupIndex], clauses }
+    setData({ ...data, clauseGroups: groups })
+  }
+
+  const handleAddClause = (groupIndex: number) => {
+    if (!data) return
+    const groups = [...(data.clauseGroups || [])]
+    const clauses = [...(groups[groupIndex]?.clauses || [])]
+    clauses.push('New Clause: Description and terms of this provision.')
+    groups[groupIndex] = { ...groups[groupIndex], clauses }
+    setData({ ...data, clauseGroups: groups })
+  }
+
+  const handleRemoveClause = (groupIndex: number, clauseIndex: number) => {
+    if (!data) return
+    const groups = [...(data.clauseGroups || [])]
+    const clauses = (groups[groupIndex]?.clauses || []).filter((_, i) => i !== clauseIndex)
+    groups[groupIndex] = { ...groups[groupIndex], clauses }
+    setData({ ...data, clauseGroups: groups })
+  }
+
+  // Witness handlers
+  const handleWitnessChange = (index: number, value: string) => {
+    if (!data) return
+    const updated = [...(data.witnessNames || ['', '', ''])]
+    updated[index] = value
+    setData({ ...data, witnessNames: updated })
   }
 
   // Grand Total change handler
@@ -155,6 +188,7 @@ export function AgreementEditModal({
       ...data,
       grandTotal: val,
       interiorWorkTotal: val,
+      agreementValue: val,
       inWordsText: inWords,
     })
   }
@@ -188,13 +222,13 @@ export function AgreementEditModal({
     if (!data) return
     try {
       setDownloading(true)
-      const safeName = data.clientName.replace(/[^a-z0-9]/gi, '_').toLowerCase()
-      const fileName = `Agreement_${safeName}_${data.agreementDate.replace(/\s+/g, '_')}.pdf`
+      const safeName = (data.clientName || leadName).replace(/[^a-z0-9]/gi, '_').toLowerCase()
+      const fileName = `Agreement_${safeName}.pdf`
       await downloadPdfFromDocument(<AgreementDocument {...data} />, fileName)
-      toast.success(`Agreement PDF downloaded for ${data.clientName}`)
+      toast.success('Agreement PDF downloaded successfully!')
     } catch (err) {
       console.error(err)
-      toast.error(err instanceof Error ? err.message : 'Failed to generate PDF')
+      toast.error(err instanceof Error ? err.message : 'Failed to download PDF')
     } finally {
       setDownloading(false)
     }
@@ -211,7 +245,7 @@ export function AgreementEditModal({
                 Agreement Editor & Management
               </DialogTitle>
               <p className="text-xs text-muted-foreground mt-0.5">
-                Customize agreement clauses, payment schedules, and download the client agreement for{' '}
+                Segmented agreement specifications, clauses, schedule of rates, and client contract for{' '}
                 <span className="font-semibold text-foreground">{leadName}</span>
               </p>
             </div>
@@ -237,26 +271,26 @@ export function AgreementEditModal({
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid grid-cols-6 w-full mb-6">
                 <TabsTrigger value="parties" className="text-xs">
-                  1. Parties & Intro
+                  1. Parties & Recitals
                 </TabsTrigger>
-                <TabsTrigger value="summary" className="text-xs">
-                  2. Preamble
+                <TabsTrigger value="letter" className="text-xs">
+                  2. Work Order Letter
                 </TabsTrigger>
                 <TabsTrigger value="payment" className="text-xs">
-                  3. Payment & Time
+                  3. Payment & Annexures
                 </TabsTrigger>
                 <TabsTrigger value="detail" className="text-xs">
-                  4. Detail Table
+                  4. Detail Schedule
                 </TabsTrigger>
-                <TabsTrigger value="conditions" className="text-xs">
-                  5. Conditions
+                <TabsTrigger value="clauses" className="text-xs">
+                  5. Agreement Clauses
                 </TabsTrigger>
                 <TabsTrigger value="signatures" className="text-xs">
-                  6. Signatures
+                  6. Signatures & Witnesses
                 </TabsTrigger>
               </TabsList>
 
-              {/* TAB 1: PARTIES & INTRO LETTER */}
+              {/* TAB 1: PARTIES & RECITALS */}
               <TabsContent value="parties" className="space-y-4">
                 <div className="rounded-lg border bg-card p-4 space-y-4">
                   <h3 className="text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
@@ -274,13 +308,27 @@ export function AgreementEditModal({
                       />
                     </div>
                     <div>
-                      <Label className="text-xs font-medium">Reference Code</Label>
+                      <Label className="text-xs font-medium">Sub Contract ID</Label>
                       <Input
-                        value={data.referenceNo}
-                        onChange={(e) => handleFieldChange('referenceNo', e.target.value)}
+                        value={data.subContractId}
+                        onChange={(e) => handleFieldChange('subContractId', e.target.value)}
                         className="text-xs mt-1"
                       />
                     </div>
+                    <div>
+                      <Label className="text-xs font-medium">Reference Code</Label>
+                      <Input
+                        value={data.reference}
+                        onChange={(e) => {
+                          handleFieldChange('reference', e.target.value)
+                          handleFieldChange('referenceNo', e.target.value)
+                        }}
+                        className="text-xs mt-1"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
                       <Label className="text-xs font-medium">Agreement Date</Label>
                       <Input
@@ -289,14 +337,14 @@ export function AgreementEditModal({
                         className="text-xs mt-1"
                       />
                     </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
                       <Label className="text-xs font-medium">Client / Owner Name</Label>
                       <Input
-                        value={data.clientName}
-                        onChange={(e) => handleFieldChange('clientName', e.target.value)}
+                        value={data.ownerName || data.clientName}
+                        onChange={(e) => {
+                          handleFieldChange('ownerName', e.target.value)
+                          handleFieldChange('clientName', e.target.value)
+                        }}
                         className="text-xs mt-1"
                       />
                     </div>
@@ -308,19 +356,61 @@ export function AgreementEditModal({
                         className="text-xs mt-1"
                       />
                     </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <Label className="text-xs font-medium">Site Address / Location</Label>
+                      <Label className="text-xs font-medium">Site Address / Project Location</Label>
                       <Input
-                        value={data.siteAddress}
-                        onChange={(e) => handleFieldChange('siteAddress', e.target.value)}
+                        value={data.projectAddress || data.siteAddress}
+                        onChange={(e) => {
+                          handleFieldChange('projectAddress', e.target.value)
+                          handleFieldChange('siteAddress', e.target.value)
+                          handleFieldChange('ownerAddress', e.target.value)
+                        }}
+                        className="text-xs mt-1"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-xs font-medium">Senior CRM / Coordinator</Label>
+                      <Input
+                        value={data.srCrmName}
+                        onChange={(e) => handleFieldChange('srCrmName', e.target.value)}
                         className="text-xs mt-1"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t">
                     <div>
-                      <Label className="text-xs font-medium">Company CEO Signatory</Label>
+                      <Label className="text-xs font-medium">Company Name</Label>
+                      <Input
+                        value={data.companyName}
+                        onChange={(e) => handleFieldChange('companyName', e.target.value)}
+                        className="text-xs mt-1"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-xs font-medium">Trade License No</Label>
+                      <Input
+                        value={data.tradeLicenseNo}
+                        onChange={(e) => handleFieldChange('tradeLicenseNo', e.target.value)}
+                        className="text-xs mt-1"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-xs font-medium">Consultant Representative (GM)</Label>
+                      <Input
+                        value={data.companyRepresentative}
+                        onChange={(e) => handleFieldChange('companyRepresentative', e.target.value)}
+                        className="text-xs mt-1"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <Label className="text-xs font-medium">CEO Signatory Name</Label>
                       <Input
                         value={data.ceoName}
                         onChange={(e) => handleFieldChange('ceoName', e.target.value)}
@@ -328,100 +418,25 @@ export function AgreementEditModal({
                       />
                     </div>
                     <div>
-                      <Label className="text-xs font-medium">Office Admin Witness</Label>
+                      <Label className="text-xs font-medium">Company Address</Label>
                       <Input
-                        value={data.officeAdminName}
-                        onChange={(e) => handleFieldChange('officeAdminName', e.target.value)}
+                        value={data.companyAddress}
+                        onChange={(e) => handleFieldChange('companyAddress', e.target.value)}
                         className="text-xs mt-1"
                       />
                     </div>
                   </div>
                 </div>
 
-                {/* Intro Letter (Work Order) */}
+                {/* Recitals */}
                 <div className="rounded-lg border bg-card p-4 space-y-3">
                   <h3 className="text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
-                    <FileText className="h-4 w-4 text-primary" />
-                    Intro Letter (Work Order Document)
+                    <ScrollText className="h-4 w-4 text-primary" />
+                    Agreement Preamble & Recitals (Page 2)
                   </h3>
 
                   <div>
-                    <Label className="text-xs font-medium">Subject Line</Label>
-                    <Input
-                      value={data.introSubject}
-                      onChange={(e) => handleFieldChange('introSubject', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Salutation</Label>
-                    <Input
-                      value={data.introSalutation}
-                      onChange={(e) => handleFieldChange('introSalutation', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Award Announcement Paragraph</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.introAwardText}
-                      onChange={(e) => handleFieldChange('introAwardText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Governing Terms Paragraph</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.introTermsText}
-                      onChange={(e) => handleFieldChange('introTermsText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Work Commencement Instructions</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.introCommenceText}
-                      onChange={(e) => handleFieldChange('introCommenceText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Token of Acceptance Statement</Label>
-                    <Input
-                      value={data.introAcceptanceText}
-                      onChange={(e) => handleFieldChange('introAcceptanceText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* TAB 2: AGREEMENT SUMMARY & PREAMBLE */}
-              <TabsContent value="summary" className="space-y-4">
-                <div className="rounded-lg border bg-card p-4 space-y-4">
-                  <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
-                    2. Agreement Preamble & Recitals
-                  </h3>
-
-                  <div>
-                    <Label className="text-xs font-medium">Agreement Execution City</Label>
-                    <Input
-                      value={data.agreementPlace}
-                      onChange={(e) => handleFieldChange('agreementPlace', e.target.value)}
-                      className="text-xs mt-1 max-w-xs"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">WHEREAS Clause 1 (Owner Desire)</Label>
+                    <Label className="text-xs font-medium">WHEREAS Clause 1 (Owner Requirement)</Label>
                     <Textarea
                       rows={2}
                       value={data.whereasText1}
@@ -431,7 +446,7 @@ export function AgreementEditModal({
                   </div>
 
                   <div>
-                    <Label className="text-xs font-medium">WHEREAS Clause 2 (Consultant Capability)</Label>
+                    <Label className="text-xs font-medium">WHEREAS Clause 2 (Consultant Qualification)</Label>
                     <Textarea
                       rows={2}
                       value={data.whereasText2}
@@ -439,81 +454,51 @@ export function AgreementEditModal({
                       className="text-xs mt-1"
                     />
                   </div>
+                </div>
+              </TabsContent>
+
+              {/* TAB 2: WORK ORDER LETTER */}
+              <TabsContent value="letter" className="space-y-4">
+                <div className="rounded-lg border bg-card p-4 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
+                        <FileText className="h-4 w-4 text-primary" />
+                        Page 1: Work Order For Interior Works
+                      </h3>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        Formal award letter issued by the Owner to the Consultant
+                      </p>
+                    </div>
+                  </div>
 
                   <div>
-                    <Label className="text-xs font-medium">Agreement Scope & Directive</Label>
+                    <Label className="text-xs font-medium">Full Work Order Letter Body</Label>
+                    <p className="text-[11px] text-muted-foreground mb-1">
+                      Each paragraph separated by a blank line will be rendered on Page 1 before the signature block.
+                    </p>
                     <Textarea
-                      rows={3}
-                      value={data.agreementScopeText}
-                      onChange={(e) => handleFieldChange('agreementScopeText', e.target.value)}
-                      className="text-xs mt-1"
+                      rows={12}
+                      value={data.letterBody}
+                      onChange={(e) => handleFieldChange('letterBody', e.target.value)}
+                      className="text-xs font-mono leading-relaxed mt-1"
                     />
                   </div>
                 </div>
               </TabsContent>
 
-              {/* TAB 3: PAYMENT SCHEDULE & DURATION */}
+              {/* TAB 3: PAYMENT & ANNEXURES */}
               <TabsContent value="payment" className="space-y-4">
-                {/* Duration */}
-                <div className="rounded-lg border bg-card p-4 space-y-3">
-                  <h3 className="text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-primary" />
-                    Project Duration & Handover Terms
-                  </h3>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <Label className="text-xs font-medium">Duration (Working Days)</Label>
-                      <Input
-                        type="number"
-                        value={data.durationWorkingDays}
-                        onChange={(e) => {
-                          const num = parseInt(e.target.value, 10) || 0
-                          handleFieldChange('durationWorkingDays', num)
-                        }}
-                        className="text-xs mt-1"
-                      />
-                    </div>
-                    <div>
-                      <Label className="text-xs font-medium">Duration In Words</Label>
-                      <Input
-                        value={data.durationWorkingDaysWords}
-                        onChange={(e) => handleFieldChange('durationWorkingDaysWords', e.target.value)}
-                        className="text-xs mt-1"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Duration Clause Text</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.durationText}
-                      onChange={(e) => handleFieldChange('durationText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Handover & Adjustment Terms</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.durationDiscussionsText}
-                      onChange={(e) => handleFieldChange('durationDiscussionsText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-                </div>
-
                 {/* Payment Schedule */}
                 <div className="rounded-lg border bg-card p-4 space-y-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
-                        Payment Milestones & Schedule
+                      <h3 className="text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
+                        <Clock className="h-4 w-4 text-primary" />
+                        Payment Milestones & Schedule (Page 3)
                       </h3>
                       <p className="text-xs text-muted-foreground">
-                        Configure client payment stages and percentage breakdown
+                        Structured payment stages with percentage and amount in BDT
                       </p>
                     </div>
                     <Button
@@ -529,29 +514,21 @@ export function AgreementEditModal({
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="w-[10%]">SL</TableHead>
-                        <TableHead className="w-[45%]">Milestone Stage</TableHead>
-                        <TableHead className="w-[30%]">Details / Description</TableHead>
-                        <TableHead className="w-[15%]">Percentage</TableHead>
+                        <TableHead className="w-[8%]">SL</TableHead>
+                        <TableHead className="w-[52%]">Payment Stage Description</TableHead>
+                        <TableHead className="w-[18%] text-center">Percentage</TableHead>
+                        <TableHead className="w-[17%] text-right">Amount (৳)</TableHead>
                         <TableHead className="w-[5%]"></TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {(data.paymentSchedule || []).map((row, idx) => (
                         <TableRow key={idx}>
-                          <TableCell className="font-semibold text-xs">{row.sl}</TableCell>
+                          <TableCell className="font-semibold text-xs">{String(idx + 1).padStart(2, '0')}</TableCell>
                           <TableCell>
                             <Input
-                              value={row.milestone}
-                              onChange={(e) => handlePaymentChange(idx, 'milestone', e.target.value)}
-                              className="h-8 text-xs"
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <Input
-                              value={row.details || ''}
-                              onChange={(e) => handlePaymentChange(idx, 'details', e.target.value)}
-                              placeholder="e.g. (After finishing ceiling)"
+                              value={row.stage}
+                              onChange={(e) => handlePaymentChange(idx, 'stage', e.target.value)}
                               className="h-8 text-xs"
                             />
                           </TableCell>
@@ -560,6 +537,13 @@ export function AgreementEditModal({
                               value={row.percentage}
                               onChange={(e) => handlePaymentChange(idx, 'percentage', e.target.value)}
                               className="h-8 text-xs text-center font-bold"
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Input
+                              value={row.amount}
+                              onChange={(e) => handlePaymentChange(idx, 'amount', e.target.value)}
+                              className="h-8 text-xs text-right font-medium"
                             />
                           </TableCell>
                           <TableCell>
@@ -576,51 +560,98 @@ export function AgreementEditModal({
                       ))}
                     </TableBody>
                   </Table>
+                </div>
 
-                  <div className="pt-2">
-                    <Label className="text-xs font-medium">Costing Summary Note</Label>
-                    <Input
-                      value={data.projectCostSummaryNote}
-                      onChange={(e) => handleFieldChange('projectCostSummaryNote', e.target.value)}
-                      className="text-xs mt-1"
-                    />
+                {/* Annexures */}
+                <div className="rounded-lg border bg-card p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
+                        <ScrollText className="h-4 w-4 text-primary" />
+                        Annexures (Page 3)
+                      </h3>
+                      <p className="text-xs text-muted-foreground">
+                        Specific terms for government charges, completion period, and additional work
+                      </p>
+                    </div>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="gap-1 h-7 text-xs"
+                      onClick={handleAddAnnexure}
+                    >
+                      <Plus className="h-3 w-3" /> Add Annexure
+                    </Button>
                   </div>
+
+                  {(data.annexures || []).map((annexure, idx) => (
+                    <div key={idx} className="flex items-start gap-2">
+                      <span className="text-xs font-bold text-primary mt-2 w-7 shrink-0">
+                        A{idx + 1}:
+                      </span>
+                      <Textarea
+                        rows={2}
+                        value={annexure}
+                        onChange={(e) => handleAnnexureChange(idx, e.target.value)}
+                        className="text-xs flex-1"
+                      />
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="h-8 w-8 text-muted-foreground hover:text-destructive shrink-0 mt-1"
+                        onClick={() => handleRemoveAnnexure(idx)}
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </Button>
+                    </div>
+                  ))}
                 </div>
               </TabsContent>
 
-              {/* TAB 4: DETAIL QUOTATION TABLE & COSTING */}
+              {/* TAB 4: DETAIL QUOTATION SCHEDULE */}
               <TabsContent value="detail" className="space-y-4">
                 <div className="rounded-lg border bg-card p-4 space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
-                        Detail Quotation Line Items & Costing
+                        Detail Schedule of Rates & Grand Total
                       </h3>
                       <p className="text-xs text-muted-foreground">
-                        Extracted directly from the client’s final detail quotation
+                        Synchronized with client quotation draft
                       </p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="gap-1 h-8 text-xs"
-                        onClick={async () => {
-                          try {
-                            const res = await fetch(`/api/agreements/${leadId}?refresh=true`)
-                            const json = await res.json()
-                            if (json.success && json.data) {
-                              setData((prev) => (prev ? { ...prev, items: json.data.items, grandTotal: json.data.grandTotal, interiorWorkTotal: json.data.grandTotal, inWordsText: json.data.inWordsText } : json.data))
-                              toast.success('Quotation items re-synced successfully')
-                            }
-                          } catch {
-                            toast.error('Failed to sync quotation')
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="gap-1 h-8 text-xs"
+                      onClick={async () => {
+                        try {
+                          const res = await fetch(`/api/agreements/${leadId}?refresh=true`)
+                          const json = await res.json()
+                          if (json.success && json.data) {
+                            setData((prev) =>
+                              prev
+                                ? {
+                                    ...prev,
+                                    items: json.data.items,
+                                    grandTotal: json.data.grandTotal,
+                                    interiorWorkTotal: json.data.grandTotal,
+                                    agreementValue: json.data.grandTotal,
+                                    inWordsText: json.data.inWordsText,
+                                    quotationDraft: json.data.quotationDraft,
+                                    quotationTotals: json.data.quotationTotals,
+                                  }
+                                : json.data,
+                            )
+                            toast.success('Quotation draft re-synced successfully')
                           }
-                        }}
-                      >
-                        <RefreshCw className="h-3.5 w-3.5" /> Re-sync from Quotation
-                      </Button>
-                    </div>
+                        } catch {
+                          toast.error('Failed to sync quotation')
+                        }
+                      }}
+                    >
+                      <RefreshCw className="h-3.5 w-3.5" /> Re-sync from Quotation
+                    </Button>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-muted/40 rounded-lg">
@@ -674,186 +705,113 @@ export function AgreementEditModal({
                 </div>
               </TabsContent>
 
-              {/* TAB 5: CONDITIONS */}
-              <TabsContent value="conditions" className="space-y-4">
-                <div className="rounded-lg border bg-card p-4 space-y-4">
-                  <h3 className="text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
-                    <ShieldAlert className="h-4 w-4 text-primary" />
-                    Agreement Conditions & Clauses
-                  </h3>
-
-                  <div>
-                    <Label className="text-xs font-medium">Provisions Regarding Working Procedure</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.workingProcedureText}
-                      onChange={(e) => handleFieldChange('workingProcedureText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Site Inspection Clause</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.siteInspectionText}
-                      onChange={(e) => handleFieldChange('siteInspectionText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Defective Work / Materials Clause</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.defectiveWorkText}
-                      onChange={(e) => handleFieldChange('defectiveWorkText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Inspection of Work Clause</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.inspectionOfWorkText}
-                      onChange={(e) => handleFieldChange('inspectionOfWorkText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Clerical Errors to be Rectified</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.clericalErrorsText}
-                      onChange={(e) => handleFieldChange('clericalErrorsText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Dispute Resolution & Arbitration</Label>
-                    <Textarea
-                      rows={3}
-                      value={data.disputeResolutionText}
-                      onChange={(e) => handleFieldChange('disputeResolutionText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Legal Jurisdiction</Label>
-                    <Input
-                      value={data.jurisdictionText}
-                      onChange={(e) => handleFieldChange('jurisdictionText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Warranty (1 Year Service Guarantee)</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.warrantyText}
-                      onChange={(e) => handleFieldChange('warrantyText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Warranty Exclusions</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.warrantyExclusionsText}
-                      onChange={(e) => handleFieldChange('warrantyExclusionsText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-xs font-medium">Taxes and VAT Terms</Label>
-                    <Textarea
-                      rows={2}
-                      value={data.taxesAndVatText}
-                      onChange={(e) => handleFieldChange('taxesAndVatText', e.target.value)}
-                      className="text-xs mt-1"
-                    />
-                  </div>
-
-                  {/* Other Terms list */}
-                  <div className="pt-3 border-t space-y-2">
-                    <div className="flex items-center justify-between">
-                      <Label className="text-xs font-bold text-foreground uppercase tracking-wider">
-                        Other Terms & Conditions (14 Points)
-                      </Label>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="gap-1 h-7 text-xs"
-                        onClick={handleAddTerm}
-                      >
-                        <Plus className="h-3 w-3" /> Add Point
-                      </Button>
+              {/* TAB 5: AGREEMENT CLAUSES */}
+              <TabsContent value="clauses" className="space-y-4">
+                <div className="rounded-lg border bg-card p-4 space-y-5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-bold text-foreground uppercase tracking-wider flex items-center gap-2">
+                        <ShieldAlert className="h-4 w-4 text-primary" />
+                        Agreement Clauses (Segmented into 4 Sections)
+                      </h3>
+                      <p className="text-xs text-muted-foreground">
+                        Edit, reorder, or add clauses within each designated agreement section
+                      </p>
                     </div>
+                  </div>
 
-                    {(data.otherTerms || []).map((term, idx) => (
-                      <div key={idx} className="flex items-start gap-2">
-                        <span className="text-xs font-bold text-primary mt-2 w-6 shrink-0">
-                          {String(idx + 1).padStart(2, '0')}.
-                        </span>
-                        <Textarea
-                          rows={2}
-                          value={term}
-                          onChange={(e) => handleTermChange(idx, e.target.value)}
-                          className="text-xs flex-1"
-                        />
+                  {(data.clauseGroups || []).map((group, groupIdx) => (
+                    <div key={groupIdx} className="border rounded-lg p-3 bg-muted/20 space-y-3">
+                      <div className="flex items-center justify-between border-b pb-2">
+                        <h4 className="text-xs font-bold text-primary uppercase tracking-wide">
+                          Section {groupIdx + 1}: {group.title}
+                        </h4>
                         <Button
-                          size="icon"
+                          size="sm"
                           variant="ghost"
-                          className="h-8 w-8 text-muted-foreground hover:text-destructive shrink-0 mt-1"
-                          onClick={() => handleRemoveTerm(idx)}
+                          className="h-6 text-xs gap-1 text-primary"
+                          onClick={() => handleAddClause(groupIdx)}
                         >
-                          <Trash2 className="h-3.5 w-3.5" />
+                          <Plus className="h-3 w-3" /> Add Clause
                         </Button>
                       </div>
-                    ))}
-                  </div>
+
+                      <div className="space-y-2">
+                        {group.clauses.map((clause, clauseIdx) => (
+                          <div key={clauseIdx} className="flex items-start gap-2">
+                            <span className="text-xs font-bold text-primary mt-2 w-8 shrink-0">
+                              {groupIdx + 1}.{clauseIdx + 1}
+                            </span>
+                            <Textarea
+                              rows={2}
+                              value={clause}
+                              onChange={(e) => handleClauseChange(groupIdx, clauseIdx, e.target.value)}
+                              className="text-xs flex-1"
+                            />
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              className="h-7 w-7 text-muted-foreground hover:text-destructive shrink-0 mt-1"
+                              onClick={() => handleRemoveClause(groupIdx, clauseIdx)}
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </TabsContent>
 
-              {/* TAB 6: SIGNATURES */}
+              {/* TAB 6: SIGNATURES & WITNESSES */}
               <TabsContent value="signatures" className="space-y-4">
                 <div className="rounded-lg border bg-card p-4 space-y-4">
                   <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
-                    6. Signatures & Witness Titles
+                    Witness Names (Final Signatures Page)
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
-                      <Label className="text-xs font-medium">Witness 1 Title (Owner)</Label>
+                      <Label className="text-xs font-medium">Witness 1</Label>
                       <Input
-                        value={data.witness1Title}
-                        onChange={(e) => handleFieldChange('witness1Title', e.target.value)}
+                        value={data.witnessNames?.[0] || ''}
+                        onChange={(e) => handleWitnessChange(0, e.target.value)}
+                        placeholder="1. __________________"
                         className="text-xs mt-1"
                       />
                     </div>
                     <div>
-                      <Label className="text-xs font-medium">Witness 2 Title (Admin)</Label>
+                      <Label className="text-xs font-medium">Witness 2</Label>
                       <Input
-                        value={data.witness2Title}
-                        onChange={(e) => handleFieldChange('witness2Title', e.target.value)}
+                        value={data.witnessNames?.[1] || ''}
+                        onChange={(e) => handleWitnessChange(1, e.target.value)}
+                        placeholder="2. __________________"
                         className="text-xs mt-1"
                       />
                     </div>
                     <div>
-                      <Label className="text-xs font-medium">Witness 3 Title (CEO)</Label>
+                      <Label className="text-xs font-medium">Witness 3</Label>
                       <Input
-                        value={data.witness3Title}
-                        onChange={(e) => handleFieldChange('witness3Title', e.target.value)}
+                        value={data.witnessNames?.[2] || ''}
+                        onChange={(e) => handleWitnessChange(2, e.target.value)}
+                        placeholder="3. __________________"
                         className="text-xs mt-1"
                       />
                     </div>
+                  </div>
+
+                  <div className="pt-3 border-t">
+                    <Label className="text-xs font-medium">Consultant Declaration & Acknowledgment Statement</Label>
+                    <p className="text-[11px] text-muted-foreground mb-1">
+                      Official statement acknowledged and signed by the Consultant General Manager on the final page.
+                    </p>
+                    <Textarea
+                      rows={5}
+                      value={data.consultantDeclaration}
+                      onChange={(e) => handleFieldChange('consultantDeclaration', e.target.value)}
+                      className="text-xs mt-1"
+                    />
                   </div>
                 </div>
               </TabsContent>
