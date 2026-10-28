@@ -51,16 +51,16 @@ Font.register({
 Font.registerHyphenationCallback((word) => [word])
 
 const logoSrc = isBrowser
-  ? '/Logo/HeaderLogo.png'
+  ? '/Logo/interior-concept-logobg-removed.png'
   : typeof process !== 'undefined' && process.cwd
-    ? `${process.cwd()}/public/Logo/HeaderLogo.png`
-    : '/Logo/HeaderLogo.png'
+    ? `${process.cwd()}/public/Logo/interior-concept-logobg-removed.png`
+    : '/Logo/interior-concept-logobg-removed.png'
 
 const watermarkSrc = isBrowser
-  ? '/android-chrome-512x512.png'
+  ? '/Logo/interior-concept-icon-light.png'
   : typeof process !== 'undefined' && process.cwd
-    ? `${process.cwd()}/public/android-chrome-512x512.png`
-    : '/android-chrome-512x512.png'
+    ? `${process.cwd()}/public/Logo/interior-concept-icon-light.png`
+    : '/Logo/interior-concept-icon-light.png'
 
 const styles = StyleSheet.create({
   page: {
@@ -506,10 +506,10 @@ const GlobalHeader = ({
 )
 
 const GlobalFooter = ({
-  companyName = 'Aesthetic Interior Studio',
-  companyAddress = '183, East Senpara, Mirpur-10, Dhaka-1216',
-  companyPhones = '+88 0132969 4663 · +88 0132969 4660',
-  companyWebsite = 'www.aestheticinteriortech.com',
+  companyName = 'Interior Concepts Studio',
+  companyAddress = 'TA-174/1, Unit 4A, 3rd Floor(Lift-3) Khonikachroy, South Badda Lake View Road, Badda, Dhaka-1212',
+  companyPhones = '+880 1334-935530 | +880 1334-935531',
+  companyWebsite = 'interiorconceptsstudio.com',
   workOrderId,
   reference,
   sidePadding = PAGE_PADDING,
@@ -703,15 +703,17 @@ export function AgreementDocument(props: AgreementPdfProps) {
   const agreementDate = props.agreementDate || formatDateString(new Date().toISOString())
   const clientName = props.ownerName || props.clientName || 'Valued Client'
   const projectAddress = props.projectAddress || props.siteAddress || props.ownerAddress || 'Dhaka, Bangladesh'
-  const companyName = props.companyName || 'Aesthetic Interior'
-  const companyAddress = props.companyAddress || '3rd Floor, 183 East Senpara, Begum Rokeya Sarani, Mirpur-10, Dhaka-1216'
-  const companyPhones = props.companyPhones || '+88 0132969 4663 · +88 0132969 4660'
-  const companyWebsite = props.companyWebsite || 'www.aestheticinteriortech.com'
-  const tradeLicenseNo = props.tradeLicenseNo || 'TRAD/DNCC/037755/2025'
-  const ceoName = props.ceoName || 'Md Johirul Islam'
-  const companyRepresentative = props.companyRepresentative || 'Md. Nazrul Islam'
-  const companyRepresentativeTitle = props.companyRepresentativeTitle || 'General Manager'
-  const srCrmName = props.srCrmName || props.officeAdminName || 'Assistant General Manager (AGM)'
+  const companyName = props.companyName || 'Interior Concepts'
+  const companyAddress = props.companyAddress || 'TA-174/1, Unit 4A, 3rd Floor(Lift-3) Khonikachroy, South Badda Lake View Road, Badda, Dhaka-1212'
+  const companyPhones = props.companyPhones || '+880 1334-935530 | +880 1334-935531'
+  const companyWebsite = props.companyWebsite || 'interiorconceptsstudio.com'
+  const tradeLicenseNo = props.tradeLicenseNo || 'TRAD/DNCC/048385/2025'
+  const tinNo = props.tinNo || '469560437683'
+  const ceoName = props.ceoName || 'Shopi Ullah Rashed'
+  const ceoNid = props.ceoNid || '7762979297'
+  const companyRepresentative = props.companyRepresentative || 'Shopi Ullah Rashed'
+  const companyRepresentativeTitle = props.companyRepresentativeTitle || 'Chief Executive Officer'
+  const srCrmName = props.srCrmName || props.officeAdminName || 'Senior Project Coordinator'
 
   const getAreaGroups = (entry: ReturnType<typeof buildDetailFloorSummaries>[number]) => {
     const isFinishingElectrical =
@@ -872,9 +874,9 @@ export function AgreementDocument(props: AgreementPdfProps) {
           </Text>
           <Text style={styles.paragraph}>
             <Text style={styles.bold}>{companyName.toUpperCase()}</Text>, having registered address at {companyAddress},
-            Trade License No: <Text style={styles.bold}>{tradeLicenseNo}</Text>,
-            Represented by <Text style={styles.bold}>{companyRepresentative}</Text>,
-            Designation: {companyRepresentativeTitle}, (hereinafter referred to as the{' '}
+            Trade License No: <Text style={styles.bold}>{tradeLicenseNo}</Text>. TIN: <Text style={styles.bold}>{tinNo}</Text>,
+            Represented by Mr. <Text style={styles.bold}>{companyRepresentative}</Text>,
+            Designation: {companyRepresentativeTitle}, NID No: <Text style={styles.bold}>{ceoNid}</Text>, (hereinafter referred to as the{' '}
             <Text style={styles.bold}>&quot;Consultant&quot;</Text> which expression shall, unless it be repugnant to the context or meaning
             thereof, be deemed to mean and include its successors and assigns) of the other part.
           </Text>
@@ -1454,23 +1456,6 @@ export function AgreementDocument(props: AgreementPdfProps) {
               <Text style={styles.sigRole}>Chief Executive Officer (CEO)</Text>
               <Text style={styles.sigRole}>{companyName}</Text>
             </View>
-          </View>
-        </View>
-
-        {/* General Manager Official Acknowledgment Block */}
-        <View style={styles.gmCard}>
-          <Text style={[styles.bold, { fontSize: 8, color: PRIMARY, marginBottom: 3, textTransform: 'uppercase' }]}>
-            Consultant Declaration &amp; Acknowledgment
-          </Text>
-          <Text style={[styles.paragraph, { fontSize: 7, color: '#333333', marginBottom: 6, lineHeight: 1.4 }]}>
-            {props.consultantDeclaration ||
-              `I, ${companyRepresentative}, ${companyRepresentativeTitle} of ${companyName}, hereby confirm that I am fully aware of and have reviewed the terms and conditions of this Work Order/Agreement, including the approved scope of work, Schedule of Rates, specifications, payment terms, project timeline, and other contractual requirements. I acknowledge that the contents of this Work Order/Agreement have been duly communicated to and understood by the concerned management and project team of ${companyName}, and that the Company shall execute the Project in accordance with the agreed contractual terms and conditions.`}
-          </Text>
-          <View style={{ marginTop: 6, paddingTop: 3, borderTopWidth: 0.5, borderTopColor: BORDER, width: '45%' }}>
-            <Text style={{ fontSize: 6.5, color: TEXT_MUTED }}>Acknowledged by:</Text>
-            <Text style={[styles.sigName, { marginTop: 1 }]}>{companyRepresentative}</Text>
-            <Text style={styles.sigRole}>{companyRepresentativeTitle} (GM)</Text>
-            <Text style={styles.sigRole}>{companyName}</Text>
           </View>
         </View>
 

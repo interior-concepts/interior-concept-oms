@@ -337,7 +337,7 @@ export function buildDefaultAgreementData(
   const subContractId = `SUB-${lead.id.slice(-8).toUpperCase()}`
   const reference = `AI/${dateCode}/${leadCode}`
 
-  const letterBody = `I, ${clientCleanName}, hereby issue this Work Order to Aesthetic Interior for the execution and completion of the interior works of the above-mentioned Project, based on your submitted quotation and subsequent evaluation and agreement.
+  const letterBody = `I, ${clientCleanName}, hereby issue this Work Order to Interior Concepts for the execution and completion of the interior works of the above-mentioned Project, based on your submitted quotation and subsequent evaluation and agreement.
 
 The works shall be executed in accordance with the approved quotation, Schedule of Rates, Terms & Conditions, drawings, specifications, Consultant’s Declaration, and other agreed project documents, all of which shall form an integral part of this Work Order.
 
@@ -345,7 +345,7 @@ You are hereby instructed to commence the works and coordinate with the Project 
 
 Please sign and return the duplicate copy of this Work Order as formal acknowledgment and acceptance of the Work Order and its terms and conditions.`
 
-  const consultantDeclaration = `I, Md. Nazrul Islam, General Manager of Aesthetic Interior, hereby confirm that I am fully aware of and have reviewed the terms and conditions of this Work Order/Agreement, including the approved scope of work, Schedule of Rates, specifications, payment terms, project timeline, and other contractual requirements. I acknowledge that the contents of this Work Order/Agreement have been duly communicated to and understood by the concerned management and project team of Aesthetic Interior, and that the Company shall execute the Project in accordance with the agreed contractual terms and conditions.`
+  const consultantDeclaration = ``
 
   return {
     leadId: lead.id,
@@ -367,24 +367,24 @@ Please sign and return the duplicate copy of this Work Order as formal acknowled
     projectAddress: siteLocation,
     projectSqft: lead.projectSqft || null,
 
-    companyName: 'AESTHETIC INTERIOR',
-    companyAddress: '3rd Floor, 183 East Senpara, Begum Rokeya Sarani, Mirpur-10, Dhaka-1216',
-    companyPhones: '+88 0132969 4663 · +88 0132969 4660',
-    companyWebsite: 'www.aestheticinteriortech.com',
-    tradeLicenseNo: 'TRAD/DNCC/037755/2025',
+    companyName: 'INTERIOR CONCEPTS',
+    companyAddress: 'TA-174/1, Unit 4A, 3rd Floor(Lift-3) Khonikachroy, South Badda Lake View Road, Badda, Dhaka-1212',
+    companyPhones: '+880 1334-935530 | +880 1334-935531',
+    companyWebsite: 'interiorconceptsstudio.com',
+    tradeLicenseNo: 'TRAD/DNCC/048385/2025',
     tinNo: '469560437683',
-    ceoName: 'Md Johirul Islam',
+    ceoName: 'Shopi Ullah Rashed',
     ceoDesignation: 'Chief Executive Officer (CEO)',
     ceoNid: '7762979297',
-    companyRepresentative: 'Md. Nazrul Islam',
-    companyRepresentativeTitle: 'General Manager',
+    companyRepresentative: 'Shopi Ullah Rashed',
+    companyRepresentativeTitle: 'Chief Executive Officer',
     srCrmName: lead.srCrm?.fullName || 'Senior Project Coordinator',
     officeAdminName: lead.srCrm?.fullName || 'Senior Project Coordinator',
     officeAdminDesignation: 'Office Admin',
 
     // 1. Intro Letter
     introSubject: `WORK ORDER FOR INTERIOR WORKS PROJECT LOCATED AT ${siteLocation.toUpperCase()}.`,
-    introSalutation: 'Dear Aesthetic Interior,',
+    introSalutation: 'Dear Interior Concepts,',
     introAwardText: `I, ${clientCleanName}, am pleased to inform you that your company has been awarded the “Work Order” for the subject project based on your submitted quotation and subsequent evaluation.`,
     introTermsText: 'This Work Order shall be governed by the agreed terms and conditions, approved rates, specifications, and all related documents. The Terms & Conditions, Schedule of Rates, and Consultant’s Declaration shall form an integral and inseparable part of this Work Order.',
     introCommenceText: 'You are hereby requested to commence the work immediately in close coordination with the Project Engineer-in-Charge and/or the Consultant assigned to the project. All works shall be executed in accordance with the approved drawings, specifications, project requirements, and instructions issued by the Engineer-in-Charge.',
@@ -395,7 +395,7 @@ Please sign and return the duplicate copy of this Work Order as formal acknowled
     agreementPlace: 'Dhaka',
     whereasText1: `WHEREAS the Owner is desirous of getting the Interior Design, Work and Execution for their proposed flat at ${siteLocation}.`,
     whereasText2: 'AND WHEREAS the Consultant is a Design and Build Contractor having vast experience in interior turnkey works and has agreed to do the interior works in the above-mentioned site.',
-    agreementScopeText: 'That the Aesthetic Interior shall undertake and complete the design, supply, manufacturing, installation, execution, furnishing, and completion of the interior works of the Project in accordance with the terms and conditions of this Agreement, the approved Schedule of Rates, approved drawings and designs, material specifications, and any written instructions issued by the Owner or the Owner\'s duly authorized representative.',
+    agreementScopeText: 'That the Interior Concepts shall undertake and complete the design, supply, manufacturing, installation, execution, furnishing, and completion of the interior works of the Project in accordance with the terms and conditions of this Agreement, the approved Schedule of Rates, approved drawings and designs, material specifications, and any written instructions issued by the Owner or the Owner\'s duly authorized representative.',
 
     // 3. Costing & Payment Schedule
     projectCostSummaryNote: 'Note: This costing has been prepared exclusive of all applicable VAT, Tax, and other government charges.',
@@ -403,7 +403,7 @@ Please sign and return the duplicate copy of this Work Order as formal acknowled
     annexures,
     durationWorkingDays: 150,
     durationWorkingDaysWords: 'One hundred fifty',
-    durationText: 'Aesthetic Interior shall complete the total interior works as specified in this Agreement and its Annexures within 150 (One hundred fifty) working days. However, must be given the opportunity to work for 10 hours daily. The project completion period shall commence from the day immediately following the \'\'Project receiving ceremony\'\'.',
+    durationText: 'Interior Concepts shall complete the total interior works as specified in this Agreement and its Annexures within 150 (One hundred fifty) working days. However, must be given the opportunity to work for 10 hours daily. The project completion period shall commence from the day immediately following the \'\'Project receiving ceremony\'\'.',
     durationDiscussionsText: 'Any work, item, material, service, modification, alteration, or installation performed or supplied beyond the scope specified in this Agreement and its Annexures shall be considered Additional Work. Such Additional Work shall be charged separately at the applicable rate and/or mutually agreed price and shall be added to the Client’s final bill.',
 
     // 4. Detail Quotation Items
@@ -417,8 +417,8 @@ Please sign and return the duplicate copy of this Work Order as formal acknowled
     // 5. Conditions & Clause Groups
     clauseGroups,
     workingProcedureText: 'The work will be completed based on time schedule. If additional work apart from this agreement, all kinds of additional cost will be applied. If any item of this work agreement is deducted, then those work item costs will be deducted from the final bill.',
-    siteInspectionText: 'Aesthetic Interior confirms that they have inspected the Site before submitting the proposal and satisfied themselves as to the nature of the work to be executed on the site.',
-    defectiveWorkText: 'If any part of the work done by Aesthetic Interior shall be found defective in workmanship or if bad or inferior materials have been used, the Contractor shall rectify or rebuild the same.',
+    siteInspectionText: 'Interior Concepts confirms that they have inspected the Site before submitting the proposal and satisfied themselves as to the nature of the work to be executed on the site.',
+    defectiveWorkText: 'If any part of the work done by Interior Concepts shall be found defective in workmanship or if bad or inferior materials have been used, the Contractor shall rectify or rebuild the same.',
     inspectionOfWorkText: 'During progress of the work, the Site Engineer/Consultant/Architect or any other representative of the Owner shall be entitled at all times to have access to and inspect the work.',
     clericalErrorsText: 'Neither party shall take advantage of any clerical, typographical, or arithmetical error observed in any project-related documents.',
     disputeResolutionText: 'All disputes or differences arising out of or relating to this Agreement shall first be addressed through mutual discussion, holding at least 3 formal discussion meetings.',
@@ -427,8 +427,8 @@ Please sign and return the duplicate copy of this Work Order as formal acknowled
     warrantyExclusionsText: 'Warranty applies only to defects arising from workmanship or materials supplied by the Company. Misuse, unauthorized modification, or normal wear and tear are excluded.',
     taxesAndVatText: 'Agreement prices are exclusive of VAT and TAX.',
     otherTerms: [
-      'Aesthetic Interior shall supply all necessary tools, plants etc. requisite for carrying out any items of work.',
-      'Aesthetic Interior will complete the interior work as per the approved work schedule and coordinate with other contractors involved in the Project.',
+      'Interior Concepts shall supply all necessary tools, plants etc. requisite for carrying out any items of work.',
+      'Interior Concepts will complete the interior work as per the approved work schedule and coordinate with other contractors involved in the Project.',
       'All workmanship must be of good standard and acceptable to Engineer-in-Charge/Consultant.',
       'Running bills will be prepared and submitted based on actual progress of work and agreed payment milestones.',
       'Materials must be best quality and approved by the owner.',
@@ -438,7 +438,7 @@ Please sign and return the duplicate copy of this Work Order as formal acknowled
     witnessNames: ['', '', ''],
     consultantDeclaration,
     witness1Title: 'Owner (Project)',
-    witness2Title: 'Senior CRM / AGM, Aesthetic Interior',
-    witness3Title: 'Chief Executive Officer (CEO), Aesthetic Interior',
+    witness2Title: 'Senior CRM / AGM, Interior Concepts',
+    witness3Title: 'Chief Executive Officer (CEO), Interior Concepts',
   }
 }
