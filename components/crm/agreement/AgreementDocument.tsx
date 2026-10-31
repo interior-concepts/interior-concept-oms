@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 6,
     marginBottom: 20,
-    paddingBottom: 12,
+    paddingBottom: 14,
     borderBottomWidth: 1,
     borderBottomColor: GOLD,
   },
@@ -237,12 +237,13 @@ const styles = StyleSheet.create({
     color: PRIMARY,
     textAlign: 'center',
     letterSpacing: 2,
-    marginBottom: 8,
+    marginBottom: 16,
   },
   agreementSubtitle: {
     fontSize: 9,
     color: TEXT_MUTED,
     textAlign: 'center',
+    marginTop: 4,
   },
   // Parties section (clean, centered, no box)
   partiesContainer: {
@@ -443,18 +444,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
     marginTop: 4,
-    marginBottom: 16,
-    paddingBottom: 10,
+    marginBottom: 18,
+    paddingBottom: 12,
     borderBottomWidth: 1,
     borderBottomColor: GOLD,
   },
   ackTitle: {
     fontFamily: 'Playfair Display',
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
     color: PRIMARY,
     textAlign: 'center',
-    letterSpacing: 1.2,
+    letterSpacing: 1.5,
   },
   witnessSectionHeader: {
     fontSize: 10.5,
@@ -463,8 +464,8 @@ const styles = StyleSheet.create({
     backgroundColor: BG_LIGHT,
     paddingVertical: 4.5,
     paddingHorizontal: 8,
-    marginTop: 20,
-    marginBottom: 12,
+    marginTop: 24,
+    marginBottom: 16,
     borderLeftWidth: 3,
     borderLeftColor: GOLD,
     textTransform: 'uppercase',
@@ -473,25 +474,25 @@ const styles = StyleSheet.create({
   witnessGrid: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 6,
-    marginBottom: 24,
+    marginTop: 8,
+    marginBottom: 36,
   },
   witnessCol: {
     width: '30%',
     borderTopWidth: 0.75,
     borderTopColor: '#94a3b8',
-    paddingTop: 8,
+    paddingTop: 12,
   },
   sigRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10,
+    marginTop: 14,
   },
   sigBlock: {
     width: '45%',
     borderTopWidth: 1,
     borderTopColor: PRIMARY,
-    paddingTop: 8,
+    paddingTop: 10,
   },
   sigName: {
     fontSize: 9.2,
@@ -1632,14 +1633,14 @@ export function AgreementDocument(props: AgreementPdfProps) {
         <View style={styles.witnessGrid}>
           {(props.witnessNames || ['', '', '']).map((name, index) => (
             <View key={index} style={styles.witnessCol}>
-              <Text style={{ fontSize: 7, color: TEXT_MUTED, marginBottom: 14 }}>Witness {index + 1}</Text>
+              <Text style={{ fontSize: 7.5, color: TEXT_MUTED, marginBottom: 20 }}>Witness {index + 1}</Text>
               <Text style={styles.sigName}>{name || `${index + 1}. __________________`}</Text>
               <Text style={styles.sigRole}>Signature &amp; Date</Text>
             </View>
           ))}
         </View>
 
-        <View style={{ marginTop: 10, marginBottom: 20 }}>
+        <View style={{ marginTop: 12, marginBottom: 16 }}>
           <View style={styles.sigRow}>
             <View style={styles.sigBlock}>
               <Text style={styles.sigName}>{clientName}</Text>
