@@ -15,13 +15,13 @@ import {
 import { amountInWordsTaka } from '@/lib/number-to-words'
 
 // ─── Deed-Paper Color Palette ────────────────────────────────────────────────
-const PRIMARY       = '#1a237e'   // Deep Navy (formal deed ink)
-const ACCENT        = '#b8860b'   // Dark Goldenrod
+const PRIMARY       = '#111111'   // Classic Black
+const ACCENT        = '#8a6d2b'   // Warm Antique Gold
 const GOLD          = '#c5a059'   // Deed Gold Accent
 const BORDER        = '#d1c7b7'   // Subtle parchment border line
 const BG_LIGHT      = '#f7faf9'   // Light background 1
 const BG_ALT        = '#fffdfa'   // Light background 2
-const TEXT_DARK     = '#111827'   // Deep readable text
+const TEXT_DARK     = '#111111'   // Black text
 const TEXT_MUTED    = '#4b5563'   // Muted slate text
 const PAGE_BG       = '#ffffff'   // Clean page background
 const PAGE_PADDING  = 30
@@ -171,21 +171,20 @@ const styles = StyleSheet.create({
   workOrderHeaderBox: {
     alignItems: 'center',
     textAlign: 'center',
-    marginTop: 2,
-    marginBottom: 14,
-    paddingBottom: 8,
+    marginTop: 0,
+    marginBottom: 16,
+    paddingBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: GOLD,
   },
   workOrderTitle: {
     fontFamily: 'Playfair Display',
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: 'bold',
     color: PRIMARY,
     textAlign: 'center',
-    textTransform: 'uppercase',
-    letterSpacing: 1.5,
-    marginBottom: 6,
+    letterSpacing: 1.2,
+    marginBottom: 8,
   },
   workOrderMetaRow: {
     flexDirection: 'row',
@@ -205,6 +204,70 @@ const styles = StyleSheet.create({
     borderColor: BORDER,
     borderRadius: 2,
   },
+  // Recipient address header (clean, no box)
+  recipientBlock: {
+    marginBottom: 16,
+    paddingBottom: 4,
+  },
+  recipientTitle: {
+    fontSize: 9,
+    fontWeight: 'bold',
+    color: PRIMARY,
+    marginBottom: 3,
+  },
+  recipientText: {
+    fontSize: 8,
+    color: '#4b5563',
+    lineHeight: 1.4,
+  },
+  // Agreement page header (clean, centered, no box)
+  agreementHeaderBox: {
+    alignItems: 'center',
+    textAlign: 'center',
+    marginTop: 2,
+    marginBottom: 14,
+    paddingBottom: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: GOLD,
+  },
+  agreementTitle: {
+    fontFamily: 'Playfair Display',
+    fontSize: 19,
+    fontWeight: 'bold',
+    color: PRIMARY,
+    textAlign: 'center',
+    letterSpacing: 1.5,
+    marginBottom: 4,
+  },
+  agreementSubtitle: {
+    fontSize: 8.5,
+    color: TEXT_MUTED,
+    textAlign: 'center',
+  },
+  // Parties section (clean, no box)
+  partiesContainer: {
+    marginBottom: 14,
+    paddingVertical: 4,
+  },
+  partyLabel: {
+    fontSize: 8.5,
+    fontWeight: 'bold',
+    color: ACCENT,
+    marginBottom: 2,
+    textTransform: 'uppercase',
+    letterSpacing: 0.8,
+  },
+  // Contract Overview (refined divider style, no box)
+  contractOverviewContainer: {
+    marginTop: 10,
+    marginBottom: 8,
+    paddingTop: 8,
+    borderTopWidth: 1,
+    borderTopColor: GOLD,
+    borderBottomWidth: 1,
+    borderBottomColor: BORDER,
+    paddingBottom: 8,
+  },
   titleBanner: {
     backgroundColor: BG_LIGHT,
     borderLeftWidth: 3.5,
@@ -223,7 +286,6 @@ const styles = StyleSheet.create({
     fontSize: 12.5,
     fontWeight: 'bold',
     color: PRIMARY,
-    textTransform: 'uppercase',
     letterSpacing: 1,
     fontFamily: 'Playfair Display',
   },
@@ -890,7 +952,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
   return (
     <Document title={`Agreement - ${clientName}`} author={companyName}>
       {/* ─── PAGE 1: WORK ORDER FOR INTERIOR WORKS ─────────────────── */}
-      <Page size="A4" style={[styles.page, { paddingBottom: 110 }]}>
+      <Page size="A4" style={[styles.page, { paddingBottom: 120 }]}>
         <DeedPaperFrame />
         <WatermarkBackground />
         <GlobalHeader code={workOrderId} date={agreementDate} title="Work Order" />
@@ -903,15 +965,16 @@ export function AgreementDocument(props: AgreementPdfProps) {
           </View>
         </View>
 
-        <View style={styles.card}>
-          <Text style={[styles.bold, { fontSize: 8.5, textTransform: 'uppercase', marginBottom: 2 }]}>
-            DEAR, {companyName.toUpperCase()}
+        <View style={styles.recipientBlock}>
+          <Text style={styles.recipientTitle}>
+            Dear, {companyName}
           </Text>
-          <Text style={{ fontSize: 7.8, color: '#4b5563' }}>{companyAddress}</Text>
-          <Text style={{ fontSize: 7.8, color: '#4b5563' }}>Phone No: {companyPhones}</Text>
+          <Text style={styles.recipientText}>{companyAddress}</Text>
+          <Text style={styles.recipientText}>Phone No: {companyPhones}</Text>
         </View>
 
-        <View style={{ flex: 1 }}>
+        {/* Center the letter vertically in the available page space */}
+        <View style={{ flex: 1, justifyContent: 'center', marginVertical: 'auto' }}>
           {(props.letterBody || '')
             .split('\n')
             .filter(Boolean)
@@ -954,28 +1017,26 @@ export function AgreementDocument(props: AgreementPdfProps) {
         <WatermarkBackground />
         <GlobalHeader code={workOrderId} date={agreementDate} title="Agreement Paper" />
 
-        <View style={styles.titleBanner}>
-          <Text style={styles.docTitle}>AGREEMENT</Text>
-          <Text style={styles.docSubTitle}>
-            THIS AGREEMENT is made at Dhaka dated at {formatDateString(agreementDate)}.
+        {/* Centered Agreement title in Playfair Display with date caption, NO BOX */}
+        <View style={styles.agreementHeaderBox}>
+          <Text style={styles.agreementTitle}>Agreement</Text>
+          <Text style={styles.agreementSubtitle}>
+            This Agreement is made at Dhaka dated at {formatDateString(agreementDate)}.
           </Text>
         </View>
 
-        <View style={styles.card}>
-          <Text style={[styles.bold, { fontSize: 8.5, color: GOLD, marginBottom: 2, textTransform: 'uppercase' }]}>
-            BETWEEN
-          </Text>
-          <Text style={[styles.paragraph, { marginBottom: 5 }]}>
+        {/* Between and section, clean flow, NO BOX */}
+        <View style={styles.partiesContainer}>
+          <Text style={styles.partyLabel}>BETWEEN</Text>
+          <Text style={[styles.paragraph, { marginBottom: 6 }]}>
             <Text style={styles.bold}>{clientName}</Text>, Owner of the Apartment at{' '}
             {projectAddress}. (Hereinafter referred to as the{' '}
             <Text style={styles.bold}>&quot;Owner&quot;</Text>)
           </Text>
 
-          <Text style={[styles.bold, { fontSize: 8.5, color: GOLD, marginBottom: 2, textTransform: 'uppercase' }]}>
-            AND
-          </Text>
+          <Text style={[styles.partyLabel, { marginTop: 4 }]}>AND</Text>
           <Text style={styles.paragraph}>
-            <Text style={styles.bold}>{companyName.toUpperCase()}</Text>, having registered address at {companyAddress},
+            <Text style={styles.bold}>{companyName}</Text>, having registered address at {companyAddress},
             Trade License No: <Text style={styles.bold}>{tradeLicenseNo}</Text>. TIN: <Text style={styles.bold}>{tinNo}</Text>,
             Represented by Mr. <Text style={styles.bold}>{companyRepresentative}</Text>,
             Designation: {companyRepresentativeTitle}, NID No: <Text style={styles.bold}>{ceoNid}</Text>, (hereinafter referred to as the{' '}
@@ -1022,24 +1083,22 @@ export function AgreementDocument(props: AgreementPdfProps) {
           </View>
         </View>
 
-        <View style={styles.card}>
-          <Text style={[styles.bold, { fontSize: 8, textTransform: 'uppercase', marginBottom: 3 }]}>
-            Contract Overview
-          </Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 2 }}>
-            <Text style={{ fontSize: 7.5, color: TEXT_MUTED }}>
+        {/* Contract Overview - refined divider style, NO BOX */}
+        <View style={styles.contractOverviewContainer}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 4 }}>
+            <Text style={{ fontSize: 8, color: TEXT_MUTED }}>
               Project: <Text style={{ color: PRIMARY, fontWeight: 'bold' }}>{props.projectName || clientName}</Text>
             </Text>
-            <Text style={{ fontSize: 7.5, color: TEXT_MUTED }}>
+            <Text style={{ fontSize: 8, color: TEXT_MUTED }}>
               WO ID: <Text style={{ color: PRIMARY, fontWeight: 'bold' }}>{workOrderId}</Text>
             </Text>
           </View>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={{ fontSize: 7.5, color: TEXT_MUTED }}>
-              Senior CRM: <Text style={{ color: PRIMARY }}>{srCrmName}</Text>
+            <Text style={{ fontSize: 8, color: TEXT_MUTED }}>
+              Senior CRM: <Text style={{ color: PRIMARY, fontWeight: 'bold' }}>{srCrmName}</Text>
             </Text>
-            <Text style={{ fontSize: 7.5, color: TEXT_MUTED }}>
-              Agreement Value: <Text style={{ color: GOLD, fontWeight: 'bold' }}>৳ {formatDetailAmount(finalValue)}</Text>
+            <Text style={{ fontSize: 8, color: TEXT_MUTED }}>
+              Agreement Value: <Text style={{ color: ACCENT, fontWeight: 'bold' }}>৳ {formatDetailAmount(finalValue)}</Text>
             </Text>
           </View>
         </View>
