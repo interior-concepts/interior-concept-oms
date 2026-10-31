@@ -224,38 +224,40 @@ const styles = StyleSheet.create({
   agreementHeaderBox: {
     alignItems: 'center',
     textAlign: 'center',
-    marginTop: 2,
-    marginBottom: 14,
-    paddingBottom: 8,
+    marginTop: 6,
+    marginBottom: 20,
+    paddingBottom: 12,
     borderBottomWidth: 1,
     borderBottomColor: GOLD,
   },
   agreementTitle: {
     fontFamily: 'Playfair Display',
-    fontSize: 19,
+    fontSize: 24,
     fontWeight: 'bold',
     color: PRIMARY,
     textAlign: 'center',
-    letterSpacing: 1.5,
-    marginBottom: 4,
+    letterSpacing: 2,
+    marginBottom: 8,
   },
   agreementSubtitle: {
-    fontSize: 8.5,
+    fontSize: 9,
     color: TEXT_MUTED,
     textAlign: 'center',
   },
-  // Parties section (clean, no box)
+  // Parties section (clean, centered, no box)
   partiesContainer: {
-    marginBottom: 14,
+    marginBottom: 16,
     paddingVertical: 4,
+    alignItems: 'center',
   },
   partyLabel: {
-    fontSize: 8.5,
+    fontSize: 9,
     fontWeight: 'bold',
     color: ACCENT,
-    marginBottom: 2,
+    marginBottom: 4,
+    textAlign: 'center',
     textTransform: 'uppercase',
-    letterSpacing: 0.8,
+    letterSpacing: 1.2,
   },
   // Contract Overview (refined divider style, no box)
   contractOverviewContainer: {
@@ -309,10 +311,10 @@ const styles = StyleSheet.create({
     letterSpacing: 0.8,
   },
   detailSectionTitle: {
-    fontSize: 11,
+    fontSize: 11.5,
     fontWeight: 'bold',
     color: PRIMARY,
-    backgroundColor: BG_LIGHT,
+    backgroundColor: '#f3f8f7',
     paddingVertical: 5,
     paddingHorizontal: 8,
     marginTop: 4,
@@ -320,15 +322,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textTransform: 'uppercase',
     letterSpacing: 2,
-    borderTopWidth: 0.8,
-    borderTopColor: GOLD,
-    borderBottomWidth: 0.8,
-    borderBottomColor: GOLD,
     borderLeftWidth: 3,
-    borderLeftColor: PRIMARY,
+    borderLeftColor: GOLD,
     borderRightWidth: 3,
-    borderRightColor: PRIMARY,
-    fontFamily: 'Playfair Display',
+    borderRightColor: GOLD,
   },
   letterText: {
     marginBottom: 8,
@@ -973,8 +970,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
           <Text style={styles.recipientText}>Phone No: {companyPhones}</Text>
         </View>
 
-        {/* Center the letter vertically in the available page space */}
-        <View style={{ flex: 1, justifyContent: 'center', marginVertical: 'auto' }}>
+        <View style={{ marginBottom: 20 }}>
           {(props.letterBody || '')
             .split('\n')
             .filter(Boolean)
@@ -985,7 +981,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
             ))}
         </View>
 
-        <View style={{ position: 'absolute', bottom: 58, left: PAGE_PADDING, right: PAGE_PADDING }}>
+        <View style={{ position: 'absolute', bottom: 68, left: PAGE_PADDING, right: PAGE_PADDING }}>
           <Text style={[styles.paragraph, { marginBottom: 16 }]}>Thanking you—</Text>
           <View style={styles.sigRow}>
             <View style={styles.sigBlock}>
@@ -1025,17 +1021,17 @@ export function AgreementDocument(props: AgreementPdfProps) {
           </Text>
         </View>
 
-        {/* Between and section, clean flow, NO BOX */}
+        {/* Between and section, clean flow, NO BOX, center-aligned */}
         <View style={styles.partiesContainer}>
           <Text style={styles.partyLabel}>BETWEEN</Text>
-          <Text style={[styles.paragraph, { marginBottom: 6 }]}>
+          <Text style={[styles.paragraph, { marginBottom: 8, textAlign: 'center' }]}>
             <Text style={styles.bold}>{clientName}</Text>, Owner of the Apartment at{' '}
             {projectAddress}. (Hereinafter referred to as the{' '}
             <Text style={styles.bold}>&quot;Owner&quot;</Text>)
           </Text>
 
-          <Text style={[styles.partyLabel, { marginTop: 4 }]}>AND</Text>
-          <Text style={styles.paragraph}>
+          <Text style={[styles.partyLabel, { marginTop: 6 }]}>AND</Text>
+          <Text style={[styles.paragraph, { textAlign: 'center' }]}>
             <Text style={styles.bold}>{companyName}</Text>, having registered address at {companyAddress},
             Trade License No: <Text style={styles.bold}>{tradeLicenseNo}</Text>. TIN: <Text style={styles.bold}>{tinNo}</Text>,
             Represented by Mr. <Text style={styles.bold}>{companyRepresentative}</Text>,
@@ -1541,15 +1537,15 @@ export function AgreementDocument(props: AgreementPdfProps) {
           <GlobalHeader code={workOrderId} date={agreementDate} title="Agreement Clauses" />
 
           <View style={styles.titleBanner}>
-            <Text style={styles.docTitle}>AGREEMENT CLAUSES</Text>
-            <Text style={styles.docSubTitle}>
+            <Text style={[styles.docTitle, { fontSize: 14, fontWeight: 'bold' }]}>Agreement Clauses</Text>
+            <Text style={[styles.docSubTitle, { fontSize: 8.5, marginTop: 2, color: TEXT_MUTED }]}>
               Section {groupIndex + 1}: {group.title}
             </Text>
           </View>
 
           {group.clauses.map((clause, index) => {
             const colonIndex = clause.indexOf(':')
-            const hasHeader = colonIndex > 0 && colonIndex < 45
+            const hasHeader = colonIndex > 0 && colonIndex < 120
             const header = hasHeader ? clause.slice(0, colonIndex + 1) : null
             const body = hasHeader ? clause.slice(colonIndex + 1).trim() : clause
 
