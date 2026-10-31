@@ -438,39 +438,71 @@ const styles = StyleSheet.create({
     lineHeight: 1.5,
     color: '#2d3748',
   },
-  sigRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 14,
+  // Signatures & Acknowledgement page specific styles
+  ackHeaderBox: {
+    alignItems: 'center',
+    textAlign: 'center',
+    marginTop: 4,
+    marginBottom: 16,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: GOLD,
   },
-  sigBlock: {
-    width: '45%',
-    borderTopWidth: 1,
-    borderTopColor: PRIMARY,
-    paddingTop: 5,
-  },
-  sigName: {
-    fontSize: 9.2,
+  ackTitle: {
+    fontFamily: 'Playfair Display',
+    fontSize: 18,
     fontWeight: 'bold',
     color: PRIMARY,
-    marginBottom: 1.5,
+    textAlign: 'center',
+    letterSpacing: 1.2,
   },
-  sigRole: {
-    fontSize: 8.2,
-    color: TEXT_MUTED,
-    lineHeight: 1.3,
+  witnessSectionHeader: {
+    fontSize: 10.5,
+    fontWeight: 'bold',
+    color: PRIMARY,
+    backgroundColor: BG_LIGHT,
+    paddingVertical: 4.5,
+    paddingHorizontal: 8,
+    marginTop: 20,
+    marginBottom: 12,
+    borderLeftWidth: 3,
+    borderLeftColor: GOLD,
+    textTransform: 'uppercase',
+    letterSpacing: 0.8,
   },
   witnessGrid: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 8,
-    marginBottom: 10,
+    marginTop: 6,
+    marginBottom: 24,
   },
   witnessCol: {
     width: '30%',
     borderTopWidth: 0.75,
     borderTopColor: '#94a3b8',
-    paddingTop: 4,
+    paddingTop: 8,
+  },
+  sigRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  sigBlock: {
+    width: '45%',
+    borderTopWidth: 1,
+    borderTopColor: PRIMARY,
+    paddingTop: 8,
+  },
+  sigName: {
+    fontSize: 9.2,
+    fontWeight: 'bold',
+    color: PRIMARY,
+    marginBottom: 2.5,
+  },
+  sigRole: {
+    fontSize: 8.2,
+    color: TEXT_MUTED,
+    lineHeight: 1.35,
   },
   gmCard: {
     marginTop: 10,
@@ -1574,39 +1606,40 @@ export function AgreementDocument(props: AgreementPdfProps) {
       ))}
 
       {/* ─── FINAL PAGE: SIGNATURES, WITNESSES & ACKNOWLEDGEMENT ──── */}
-      <Page size="A4" style={styles.page}>
+      <Page size="A4" style={[styles.page, { paddingBottom: 110 }]}>
         <DeedPaperFrame />
         <WatermarkBackground />
         <GlobalHeader code={workOrderId} date={agreementDate} title="Signatures" />
 
-        <View style={styles.titleBanner}>
-          <Text style={styles.docTitle}>SIGNATURES & ACKNOWLEDGEMENT</Text>
+        {/* Centered Signatures & Acknowledgement in Playfair Display with gold divider */}
+        <View style={styles.ackHeaderBox}>
+          <Text style={styles.ackTitle}>Signatures &amp; Acknowledgement</Text>
         </View>
 
-        <Text style={[styles.paragraph, { marginTop: 4, lineHeight: 1.5 }]}>
+        <Text style={[styles.paragraph, { marginTop: 4, marginBottom: 8, lineHeight: 1.55 }]}>
           <Text style={styles.bold}>IN WITNESS WHEREOF</Text>, the Parties hereto, having read, understood, and agreed to all
           the terms and conditions contained in this Agreement, have caused this Agreement to be duly executed by their
           respective duly authorized representatives on the date first written above.
         </Text>
-        <Text style={[styles.paragraph, { lineHeight: 1.5 }]}>
+        <Text style={[styles.paragraph, { marginBottom: 14, lineHeight: 1.55 }]}>
           The Parties confirm that they have entered into this Agreement voluntarily, with free consent, and with full authority
           to undertake and perform the obligations stated herein. This Agreement shall become effective upon execution by the
           authorized representatives of both Parties and shall be binding upon the Parties and their respective successors and
           permitted assigns, subject to the applicable laws of Bangladesh.
         </Text>
 
-        <Text style={styles.sectionTitle}>Witnesses</Text>
+        <Text style={styles.witnessSectionHeader}>Witnesses</Text>
         <View style={styles.witnessGrid}>
           {(props.witnessNames || ['', '', '']).map((name, index) => (
             <View key={index} style={styles.witnessCol}>
-              <Text style={{ fontSize: 6.5, color: TEXT_MUTED, marginBottom: 10 }}>Witness {index + 1}</Text>
+              <Text style={{ fontSize: 7, color: TEXT_MUTED, marginBottom: 14 }}>Witness {index + 1}</Text>
               <Text style={styles.sigName}>{name || `${index + 1}. __________________`}</Text>
               <Text style={styles.sigRole}>Signature &amp; Date</Text>
             </View>
           ))}
         </View>
 
-        <View style={{ marginTop: 12 }}>
+        <View style={{ marginTop: 10, marginBottom: 20 }}>
           <View style={styles.sigRow}>
             <View style={styles.sigBlock}>
               <Text style={styles.sigName}>{clientName}</Text>
