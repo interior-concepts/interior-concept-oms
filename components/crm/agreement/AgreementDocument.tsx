@@ -14,17 +14,20 @@ import {
 } from '@/lib/detail-quotation-format'
 import { amountInWordsTaka } from '@/lib/number-to-words'
 
-const PRIMARY = '#1f363d'
-const GOLD = '#a57c00'
-const BORDER = '#d7d7d7'
-const BG_LIGHT = '#f7faf9'
-const BG_ALT = '#fffdfa'
-const TEXT_DARK = '#1a202c'
-const TEXT_MUTED = '#64748b'
-const PAGE_PADDING = 28
-const BDT_SYMBOL = '৳'
-const DETAIL_ROW_LINE_HEIGHT = 1.15
-const DETAIL_ROW_VERTICAL_PADDING = 3
+// ─── Deed-Paper Color Palette ────────────────────────────────────────────────
+const PRIMARY       = '#1a237e'   // Deep Navy (formal deed ink)
+const ACCENT        = '#b8860b'   // Dark Goldenrod
+const GOLD          = '#c5a059'   // Deed Gold Accent
+const BORDER        = '#d1c7b7'   // Subtle parchment border line
+const BG_LIGHT      = '#f7faf9'   // Light background 1
+const BG_ALT        = '#fffdfa'   // Light background 2
+const TEXT_DARK     = '#111827'   // Deep readable text
+const TEXT_MUTED    = '#4b5563'   // Muted slate text
+const PAGE_BG       = '#ffffff'   // Clean page background
+const PAGE_PADDING  = 30
+const BDT_SYMBOL    = '৳'
+const DETAIL_ROW_LINE_HEIGHT    = 1.25
+const DETAIL_ROW_VERTICAL_PADDING = 3.5
 
 const getBaseUrl = () => {
   if (typeof window !== 'undefined') return window.location.origin
@@ -41,6 +44,22 @@ Font.register({
   ],
 })
 
+Font.register({
+  family: 'Playfair Display',
+  fonts: [
+    { src: `${getBaseUrl()}/fonts/PlayfairDisplay-Regular.ttf` },
+    { src: `${getBaseUrl()}/fonts/PlayfairDisplay-Bold.ttf`, fontWeight: 'bold' },
+  ],
+})
+
+Font.register({
+  family: 'Roboto Mono',
+  fonts: [
+    { src: `${getBaseUrl()}/fonts/RobotoMono-Regular.ttf` },
+    { src: `${getBaseUrl()}/fonts/RobotoMono-Medium.ttf`, fontWeight: 500 },
+  ],
+})
+
 Font.registerHyphenationCallback((word) => [word])
 
 const logoSrc = `${getBaseUrl()}/Logo/interior-concept-logobg-removed.png`
@@ -48,25 +67,45 @@ const watermarkSrc = `${getBaseUrl()}/Logo/interior-concept-icon-light.png`
 
 const styles = StyleSheet.create({
   page: {
-    paddingTop: 80,
+    paddingTop: 76,
     paddingBottom: 72,
     paddingHorizontal: PAGE_PADDING,
     fontFamily: 'Noto Sans Bengali',
     fontSize: 9.5,
     color: TEXT_DARK,
-    backgroundColor: '#ffffff',
-    lineHeight: 1.5,
+    backgroundColor: PAGE_BG,
+    lineHeight: 1.55,
   },
   detailPage: {
-    paddingTop: 80,
+    paddingTop: 76,
     paddingBottom: 72,
-    paddingLeft: 14,
-    paddingRight: 14,
+    paddingLeft: 16,
+    paddingRight: 16,
     fontFamily: 'Noto Sans Bengali',
     fontSize: 9,
     color: '#000000',
-    backgroundColor: '#ffffff',
+    backgroundColor: PAGE_BG,
     lineHeight: 1.4,
+  },
+  deedFrame: {
+    position: 'absolute',
+    top: 10,
+    bottom: 10,
+    left: 10,
+    right: 10,
+    borderWidth: 1.5,
+    borderColor: GOLD,
+    pointerEvents: 'none',
+  },
+  deedFrameInner: {
+    position: 'absolute',
+    top: 13,
+    bottom: 13,
+    left: 13,
+    right: 13,
+    borderWidth: 0.5,
+    borderColor: BORDER,
+    pointerEvents: 'none',
   },
   watermark: {
     position: 'absolute',
@@ -75,17 +114,17 @@ const styles = StyleSheet.create({
     width: 400,
     height: 400,
     zIndex: -1,
-    opacity: 0.05,
+    opacity: 0.04,
   },
   header: {
     position: 'absolute',
     top: 18,
     left: PAGE_PADDING,
     right: PAGE_PADDING,
-    height: 52,
-    borderBottomWidth: 1.5,
+    height: 50,
+    borderBottomWidth: 1.2,
     borderBottomColor: GOLD,
-    paddingBottom: 8,
+    paddingBottom: 6,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
@@ -97,73 +136,121 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   headerDocTitle: {
-    fontSize: 10.5,
+    fontSize: 10,
     fontWeight: 'bold',
     color: PRIMARY,
     textTransform: 'uppercase',
-    letterSpacing: 1,
+    letterSpacing: 1.2,
+    fontFamily: 'Playfair Display',
   },
   headerSubText: {
-    fontSize: 8,
+    fontSize: 7.5,
     color: TEXT_MUTED,
     marginTop: 1,
   },
   footerFixed: {
     position: 'absolute',
-    bottom: 12,
+    bottom: 14,
     left: PAGE_PADDING,
     right: PAGE_PADDING,
-    height: 38,
-    backgroundColor: '#ffffff',
+    height: 40,
+    backgroundColor: PAGE_BG,
     zIndex: 10,
   },
   footerText: {
     fontSize: 7.5,
-    color: '#666666',
+    color: '#4b5563',
   },
   footerMeta: {
     fontSize: 6.5,
-    color: '#888888',
+    color: '#6b7280',
+    fontFamily: 'Roboto Mono',
+    letterSpacing: 0.3,
+  },
+  // Work Order / Deed specific titles
+  workOrderHeaderBox: {
+    alignItems: 'center',
+    textAlign: 'center',
+    marginTop: 2,
+    marginBottom: 14,
+    paddingBottom: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: GOLD,
+  },
+  workOrderTitle: {
+    fontFamily: 'Playfair Display',
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: PRIMARY,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    letterSpacing: 1.5,
+    marginBottom: 6,
+  },
+  workOrderMetaRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 8,
+  },
+  metaMonoBadge: {
+    fontFamily: 'Roboto Mono',
+    fontSize: 7.8,
+    color: PRIMARY,
+    letterSpacing: 1,
+    backgroundColor: BG_LIGHT,
+    paddingVertical: 2.5,
+    paddingHorizontal: 6,
+    borderWidth: 0.6,
+    borderColor: BORDER,
+    borderRadius: 2,
   },
   titleBanner: {
     backgroundColor: BG_LIGHT,
-    borderLeftWidth: 3,
+    borderLeftWidth: 3.5,
     borderLeftColor: GOLD,
-    paddingVertical: 5,
-    paddingHorizontal: 8,
+    borderRightWidth: 0.5,
+    borderRightColor: BORDER,
+    borderTopWidth: 0.5,
+    borderTopColor: BORDER,
+    borderBottomWidth: 0.5,
+    borderBottomColor: BORDER,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
     marginBottom: 10,
   },
   docTitle: {
-    fontSize: 13.5,
+    fontSize: 12.5,
     fontWeight: 'bold',
     color: PRIMARY,
     textTransform: 'uppercase',
-    letterSpacing: 0.8,
+    letterSpacing: 1,
+    fontFamily: 'Playfair Display',
   },
   docSubTitle: {
-    fontSize: 8.5,
+    fontSize: 8,
     color: TEXT_MUTED,
     marginTop: 2,
   },
   sectionTitle: {
+    fontSize: 10.5,
+    fontWeight: 'bold',
+    color: PRIMARY,
+    backgroundColor: BG_LIGHT,
+    paddingVertical: 4.5,
+    paddingHorizontal: 8,
+    marginTop: 10,
+    marginBottom: 6,
+    borderLeftWidth: 3,
+    borderLeftColor: GOLD,
+    textTransform: 'uppercase',
+    letterSpacing: 0.8,
+  },
+  detailSectionTitle: {
     fontSize: 11,
     fontWeight: 'bold',
     color: PRIMARY,
     backgroundColor: BG_LIGHT,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-    marginTop: 10,
-    marginBottom: 6,
-    borderLeftWidth: 2.5,
-    borderLeftColor: GOLD,
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-  },
-  detailSectionTitle: {
-    fontSize: 11.5,
-    fontWeight: 'bold',
-    color: PRIMARY,
-    backgroundColor: '#f3f8f7',
     paddingVertical: 5,
     paddingHorizontal: 8,
     marginTop: 4,
@@ -171,16 +258,28 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textTransform: 'uppercase',
     letterSpacing: 2,
+    borderTopWidth: 0.8,
+    borderTopColor: GOLD,
+    borderBottomWidth: 0.8,
+    borderBottomColor: GOLD,
     borderLeftWidth: 3,
-    borderLeftColor: GOLD,
+    borderLeftColor: PRIMARY,
     borderRightWidth: 3,
-    borderRightColor: GOLD,
+    borderRightColor: PRIMARY,
+    fontFamily: 'Playfair Display',
+  },
+  letterText: {
+    marginBottom: 8,
+    lineHeight: 1.65,
+    fontSize: 9.5,
+    color: '#1f2937',
+    textAlign: 'justify',
   },
   paragraph: {
     marginBottom: 6,
-    lineHeight: 1.5,
-    fontSize: 9.5,
-    color: '#2d3748',
+    lineHeight: 1.55,
+    fontSize: 9.3,
+    color: '#1f2937',
   },
   bold: {
     fontWeight: 'bold',
@@ -190,9 +289,9 @@ const styles = StyleSheet.create({
     backgroundColor: BG_LIGHT,
     borderWidth: 0.75,
     borderColor: BORDER,
-    borderRadius: 3,
+    borderRadius: 2,
     padding: 8,
-    marginBottom: 8,
+    marginBottom: 10,
   },
   table: {
     width: '100%',
@@ -206,7 +305,7 @@ const styles = StyleSheet.create({
   tHead: {
     flexDirection: 'row',
     backgroundColor: PRIMARY,
-    paddingVertical: 4,
+    paddingVertical: 4.5,
     paddingHorizontal: 5,
   },
   thCol: {
@@ -233,7 +332,7 @@ const styles = StyleSheet.create({
   },
   totalsRow: {
     flexDirection: 'row',
-    borderTopWidth: 1,
+    borderTopWidth: 1.2,
     borderTopColor: PRIMARY,
     backgroundColor: BG_LIGHT,
     paddingVertical: 5,
@@ -242,15 +341,21 @@ const styles = StyleSheet.create({
   },
   inWordsBlock: {
     backgroundColor: BG_LIGHT,
-    borderLeftWidth: 2.5,
+    borderLeftWidth: 3,
     borderLeftColor: GOLD,
+    borderTopWidth: 0.5,
+    borderTopColor: BORDER,
+    borderBottomWidth: 0.5,
+    borderBottomColor: BORDER,
+    borderRightWidth: 0.5,
+    borderRightColor: BORDER,
     paddingVertical: 4,
     paddingHorizontal: 8,
     marginTop: 2,
     marginBottom: 8,
   },
   inWordsText: {
-    fontSize: 9,
+    fontSize: 8.8,
     fontWeight: 'bold',
     color: PRIMARY,
   },
@@ -258,40 +363,41 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 5,
     paddingBottom: 4,
-    borderBottomWidth: 0.4,
-    borderBottomColor: '#edf2f7',
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#e5e7eb',
   },
   clauseNum: {
-    width: 26,
+    width: 28,
     fontSize: 8.5,
     fontWeight: 'bold',
-    color: GOLD,
+    color: ACCENT,
+    fontFamily: 'Roboto Mono',
   },
   clauseBody: {
     flex: 1,
     fontSize: 9,
-    lineHeight: 1.45,
+    lineHeight: 1.5,
     color: '#2d3748',
   },
   sigRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 18,
+    marginTop: 14,
   },
   sigBlock: {
     width: '45%',
-    borderTopWidth: 0.8,
+    borderTopWidth: 1,
     borderTopColor: PRIMARY,
     paddingTop: 5,
   },
   sigName: {
-    fontSize: 9.5,
+    fontSize: 9.2,
     fontWeight: 'bold',
     color: PRIMARY,
     marginBottom: 1.5,
   },
   sigRole: {
-    fontSize: 8.5,
+    fontSize: 8.2,
     color: TEXT_MUTED,
     lineHeight: 1.3,
   },
@@ -303,7 +409,7 @@ const styles = StyleSheet.create({
   },
   witnessCol: {
     width: '30%',
-    borderTopWidth: 0.6,
+    borderTopWidth: 0.75,
     borderTopColor: '#94a3b8',
     paddingTop: 4,
   },
@@ -312,8 +418,8 @@ const styles = StyleSheet.create({
     padding: 8,
     borderWidth: 0.8,
     borderColor: GOLD,
-    backgroundColor: '#fffdfa',
-    borderRadius: 3,
+    backgroundColor: BG_ALT,
+    borderRadius: 2,
   },
 
   // Detail Quotation specific styles
@@ -326,18 +432,18 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0.75,
     borderRightWidth: 0.75,
     borderBottomWidth: 0.75,
-    borderColor: '#d7d7d7',
-    backgroundColor: '#f3f8f7',
+    borderColor: BORDER,
+    backgroundColor: BG_LIGHT,
   },
   detailThCol: {
-    fontSize: 9.5,
+    fontSize: 9,
     fontWeight: 'bold',
     color: PRIMARY,
     textTransform: 'uppercase',
-    paddingVertical: 4,
+    paddingVertical: 4.5,
     paddingHorizontal: 4,
     borderRightWidth: 0.5,
-    borderRightColor: '#d7d7d7',
+    borderRightColor: BORDER,
   },
   thColLast: {
     borderRightWidth: 0,
@@ -348,10 +454,10 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0.75,
     borderRightWidth: 0.75,
     borderBottomWidth: 0.5,
-    borderColor: '#d7d7d7',
+    borderColor: BORDER,
   },
   detailTRowAlt: {
-    backgroundColor: '#fffdfa',
+    backgroundColor: BG_ALT,
   },
   detailTdCol: {
     fontSize: 9,
@@ -360,7 +466,7 @@ const styles = StyleSheet.create({
     paddingBottom: DETAIL_ROW_VERTICAL_PADDING,
     paddingHorizontal: 4,
     borderRightWidth: 0.5,
-    borderRightColor: '#d7d7d7',
+    borderRightColor: BORDER,
     color: '#000000',
   },
   wSl: { width: '6%', textAlign: 'center' },
@@ -371,11 +477,11 @@ const styles = StyleSheet.create({
   wTotal: { width: '12%', textAlign: 'center' },
 
   areaTitleRow: {
-    backgroundColor: '#f3f8f7',
+    backgroundColor: BG_LIGHT,
     borderLeftWidth: 0.75,
     borderRightWidth: 0.75,
     borderBottomWidth: 0.5,
-    borderColor: '#d7d7d7',
+    borderColor: BORDER,
     paddingVertical: 5,
     paddingHorizontal: 8,
   },
@@ -385,14 +491,14 @@ const styles = StyleSheet.create({
     color: PRIMARY,
     textAlign: 'center',
     textTransform: 'uppercase',
-    letterSpacing: 2,
+    letterSpacing: 1.5,
   },
   areaTotalRow: {
-    backgroundColor: '#fff8e6',
+    backgroundColor: BG_ALT,
     borderLeftWidth: 0.75,
     borderRightWidth: 0.75,
     borderBottomWidth: 0.5,
-    borderColor: '#d7d7d7',
+    borderColor: BORDER,
   },
   areaTotalLabel: {
     textAlign: 'right',
@@ -401,7 +507,7 @@ const styles = StyleSheet.create({
   },
   matText: {
     fontSize: 8.5,
-    color: '#444444',
+    color: '#374151',
     lineHeight: DETAIL_ROW_LINE_HEIGHT,
     marginBottom: 0,
   },
@@ -412,7 +518,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 8,
     marginTop: 6,
-    borderTopWidth: 1,
+    borderTopWidth: 1.2,
     borderTopColor: PRIMARY,
   },
   grandTotalLabel: {
@@ -433,7 +539,7 @@ const styles = StyleSheet.create({
   },
   inWords: {
     fontSize: 9,
-    color: '#000000',
+    color: PRIMARY,
     marginTop: 6,
     textAlign: 'left',
     fontFamily: 'Noto Sans Bengali',
@@ -459,6 +565,13 @@ function formatDateString(dateString: string | undefined | null) {
     return dateString
   }
 }
+
+const DeedPaperFrame = () => (
+  <>
+    <View style={styles.deedFrame} fixed />
+    <View style={styles.deedFrameInner} fixed />
+  </>
+)
 
 const WatermarkBackground = () => (
   <View style={styles.watermark} fixed>
@@ -777,36 +890,40 @@ export function AgreementDocument(props: AgreementPdfProps) {
   return (
     <Document title={`Agreement - ${clientName}`} author={companyName}>
       {/* ─── PAGE 1: WORK ORDER FOR INTERIOR WORKS ─────────────────── */}
-      <Page size="A4" style={styles.page}>
+      <Page size="A4" style={[styles.page, { paddingBottom: 110 }]}>
+        <DeedPaperFrame />
         <WatermarkBackground />
         <GlobalHeader code={workOrderId} date={agreementDate} title="Work Order" />
 
-        <View style={styles.titleBanner}>
-          <Text style={styles.docTitle}>WORK ORDER FOR INTERIOR WORKS</Text>
-          <Text style={styles.docSubTitle}>
-            Reference: {reference} · Sub Contract ID: {subContractId}
-          </Text>
+        <View style={styles.workOrderHeaderBox}>
+          <Text style={styles.workOrderTitle}>Work Order for Interior Works</Text>
+          <View style={styles.workOrderMetaRow}>
+            <Text style={styles.metaMonoBadge}>REF: {reference}</Text>
+            <Text style={styles.metaMonoBadge}>SUBCONTRACT ID: {subContractId}</Text>
+          </View>
         </View>
 
         <View style={styles.card}>
           <Text style={[styles.bold, { fontSize: 8.5, textTransform: 'uppercase', marginBottom: 2 }]}>
             DEAR, {companyName.toUpperCase()}
           </Text>
-          <Text style={{ fontSize: 7.8, color: '#4a5568' }}>{companyAddress}</Text>
-          <Text style={{ fontSize: 7.8, color: '#4a5568' }}>Phone No: {companyPhones}</Text>
+          <Text style={{ fontSize: 7.8, color: '#4b5563' }}>{companyAddress}</Text>
+          <Text style={{ fontSize: 7.8, color: '#4b5563' }}>Phone No: {companyPhones}</Text>
         </View>
 
-        {(props.letterBody || '')
-          .split('\n')
-          .filter(Boolean)
-          .map((line, index) => (
-            <Text key={index} style={styles.paragraph}>
-              {line}
-            </Text>
-          ))}
+        <View style={{ flex: 1 }}>
+          {(props.letterBody || '')
+            .split('\n')
+            .filter(Boolean)
+            .map((line, index) => (
+              <Text key={index} style={styles.letterText}>
+                {line}
+              </Text>
+            ))}
+        </View>
 
-        <View style={{ marginTop: 18 }}>
-          <Text style={[styles.paragraph, { marginBottom: 20 }]}>Thanking you—</Text>
+        <View style={{ position: 'absolute', bottom: 58, left: PAGE_PADDING, right: PAGE_PADDING }}>
+          <Text style={[styles.paragraph, { marginBottom: 16 }]}>Thanking you—</Text>
           <View style={styles.sigRow}>
             <View style={styles.sigBlock}>
               <Text style={styles.sigName}>{clientName}</Text>
@@ -833,6 +950,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
 
       {/* ─── PAGE 2: AGREEMENT AND RECITALS ───────────────────────── */}
       <Page size="A4" style={styles.page}>
+        <DeedPaperFrame />
         <WatermarkBackground />
         <GlobalHeader code={workOrderId} date={agreementDate} title="Agreement Paper" />
 
@@ -938,6 +1056,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
 
       {/* ─── PAGE 3: QUOTATION SUMMARY & PAYMENT SCHEDULE ─────────── */}
       <Page size="A4" style={styles.page}>
+        <DeedPaperFrame />
         <WatermarkBackground />
         <GlobalHeader code={workOrderId} date={agreementDate} title="Quotation & Payment" />
 
@@ -1068,12 +1187,13 @@ export function AgreementDocument(props: AgreementPdfProps) {
       {quotation && rows.length > 0 ? (
         rows.map((entry) => (
           <Page key={entry.floor.id} size="A4" style={styles.detailPage}>
+            <DeedPaperFrame />
             <WatermarkBackground />
             <GlobalHeader
               code={workOrderId}
               date={agreementDate}
               title="Schedule of Rates"
-              sidePadding={14}
+              sidePadding={16}
             />
 
             <Text style={styles.detailSectionTitle}>{softWrapPdfText(entry.floor.name)}</Text>
@@ -1294,12 +1414,13 @@ export function AgreementDocument(props: AgreementPdfProps) {
         ))
       ) : fallbackAreaGroups.size > 0 ? (
         <Page size="A4" style={styles.detailPage}>
+          <DeedPaperFrame />
           <WatermarkBackground />
           <GlobalHeader
             code={workOrderId}
             date={agreementDate}
             title="Schedule of Rates"
-            sidePadding={14}
+            sidePadding={16}
           />
 
           <Text style={styles.detailSectionTitle}>INTERIOR FIT-OUT WORKS</Text>
@@ -1356,6 +1477,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
       {/* ─── PAGES AFTER DETAIL QUOTATION: AGREEMENT CLAUSES ───────── */}
       {clauseGroups.map((group, groupIndex) => (
         <Page key={group.title || groupIndex} size="A4" style={styles.page}>
+          <DeedPaperFrame />
           <WatermarkBackground />
           <GlobalHeader code={workOrderId} date={agreementDate} title="Agreement Clauses" />
 
@@ -1398,6 +1520,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
 
       {/* ─── FINAL PAGE: SIGNATURES, WITNESSES & ACKNOWLEDGEMENT ──── */}
       <Page size="A4" style={styles.page}>
+        <DeedPaperFrame />
         <WatermarkBackground />
         <GlobalHeader code={workOrderId} date={agreementDate} title="Signatures" />
 
