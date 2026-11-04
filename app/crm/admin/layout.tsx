@@ -65,6 +65,10 @@ export default async function AdminLayout({
     return <MainLayout role="Admin">{children}</MainLayout>;
   }
 
+  if (departmentNames.has("BOQ")) {
+    redirect("/crm/boq/assigned-task");
+  }
+
   if (departmentNames.has("FINANCE")) {
     return <MainLayout role="Finance">{children}</MainLayout>;
   }

@@ -393,6 +393,7 @@ export type LeadWhereInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestListRelationFilter
   meetingEvents?: Prisma.LeadMeetingEventListRelationFilter
   transactions?: Prisma.TransactionListRelationFilter
+  materialRequisitions?: Prisma.MaterialRequisitionListRelationFilter
 }
 
 export type LeadOrderByWithRelationInput = {
@@ -437,6 +438,7 @@ export type LeadOrderByWithRelationInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestOrderByRelationAggregateInput
   meetingEvents?: Prisma.LeadMeetingEventOrderByRelationAggregateInput
   transactions?: Prisma.TransactionOrderByRelationAggregateInput
+  materialRequisitions?: Prisma.MaterialRequisitionOrderByRelationAggregateInput
 }
 
 export type LeadWhereUniqueInput = Prisma.AtLeast<{
@@ -484,6 +486,7 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestListRelationFilter
   meetingEvents?: Prisma.LeadMeetingEventListRelationFilter
   transactions?: Prisma.TransactionListRelationFilter
+  materialRequisitions?: Prisma.MaterialRequisitionListRelationFilter
 }, "id" | "clientId" | "phone">
 
 export type LeadOrderByWithAggregationInput = {
@@ -588,6 +591,7 @@ export type LeadCreateInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateInput = {
@@ -630,6 +634,7 @@ export type LeadUncheckedCreateInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUpdateInput = {
@@ -671,6 +676,7 @@ export type LeadUpdateInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateInput = {
@@ -713,6 +719,7 @@ export type LeadUncheckedUpdateInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateManyInput = {
@@ -1260,6 +1267,20 @@ export type LeadUpdateOneWithoutTransactionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutTransactionsInput, Prisma.LeadUpdateWithoutTransactionsInput>, Prisma.LeadUncheckedUpdateWithoutTransactionsInput>
 }
 
+export type LeadCreateNestedOneWithoutMaterialRequisitionsInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutMaterialRequisitionsInput, Prisma.LeadUncheckedCreateWithoutMaterialRequisitionsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutMaterialRequisitionsInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneRequiredWithoutMaterialRequisitionsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutMaterialRequisitionsInput, Prisma.LeadUncheckedCreateWithoutMaterialRequisitionsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutMaterialRequisitionsInput
+  upsert?: Prisma.LeadUpsertWithoutMaterialRequisitionsInput
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutMaterialRequisitionsInput, Prisma.LeadUpdateWithoutMaterialRequisitionsInput>, Prisma.LeadUncheckedUpdateWithoutMaterialRequisitionsInput>
+}
+
 export type LeadCreateWithoutAssignmentsInput = {
   id?: string
   clientId?: number
@@ -1299,6 +1320,7 @@ export type LeadCreateWithoutAssignmentsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutAssignmentsInput = {
@@ -1340,6 +1362,7 @@ export type LeadUncheckedCreateWithoutAssignmentsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutAssignmentsInput = {
@@ -1396,6 +1419,7 @@ export type LeadUpdateWithoutAssignmentsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutAssignmentsInput = {
@@ -1437,6 +1461,7 @@ export type LeadUncheckedUpdateWithoutAssignmentsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutStatusHistoryInput = {
@@ -1478,6 +1503,7 @@ export type LeadCreateWithoutStatusHistoryInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutStatusHistoryInput = {
@@ -1519,6 +1545,7 @@ export type LeadUncheckedCreateWithoutStatusHistoryInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutStatusHistoryInput = {
@@ -1575,6 +1602,7 @@ export type LeadUpdateWithoutStatusHistoryInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutStatusHistoryInput = {
@@ -1616,6 +1644,7 @@ export type LeadUncheckedUpdateWithoutStatusHistoryInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutActivitiesInput = {
@@ -1657,6 +1686,7 @@ export type LeadCreateWithoutActivitiesInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutActivitiesInput = {
@@ -1698,6 +1728,7 @@ export type LeadUncheckedCreateWithoutActivitiesInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutActivitiesInput = {
@@ -1754,6 +1785,7 @@ export type LeadUpdateWithoutActivitiesInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutActivitiesInput = {
@@ -1795,6 +1827,7 @@ export type LeadUncheckedUpdateWithoutActivitiesInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutFollowUpsInput = {
@@ -1836,6 +1869,7 @@ export type LeadCreateWithoutFollowUpsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutFollowUpsInput = {
@@ -1877,6 +1911,7 @@ export type LeadUncheckedCreateWithoutFollowUpsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutFollowUpsInput = {
@@ -1933,6 +1968,7 @@ export type LeadUpdateWithoutFollowUpsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutFollowUpsInput = {
@@ -1974,6 +2010,7 @@ export type LeadUncheckedUpdateWithoutFollowUpsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutNotesInput = {
@@ -2015,6 +2052,7 @@ export type LeadCreateWithoutNotesInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutNotesInput = {
@@ -2056,6 +2094,7 @@ export type LeadUncheckedCreateWithoutNotesInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutNotesInput = {
@@ -2112,6 +2151,7 @@ export type LeadUpdateWithoutNotesInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutNotesInput = {
@@ -2153,6 +2193,7 @@ export type LeadUncheckedUpdateWithoutNotesInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutAssigneeInput = {
@@ -2194,6 +2235,7 @@ export type LeadCreateWithoutAssigneeInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutAssigneeInput = {
@@ -2235,6 +2277,7 @@ export type LeadUncheckedCreateWithoutAssigneeInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutAssigneeInput = {
@@ -2286,6 +2329,7 @@ export type LeadCreateWithoutPrimaryOwnerInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutPrimaryOwnerInput = {
@@ -2327,6 +2371,7 @@ export type LeadUncheckedCreateWithoutPrimaryOwnerInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutPrimaryOwnerInput = {
@@ -2440,6 +2485,7 @@ export type LeadCreateWithoutPhaseTasksInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutPhaseTasksInput = {
@@ -2481,6 +2527,7 @@ export type LeadUncheckedCreateWithoutPhaseTasksInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutPhaseTasksInput = {
@@ -2537,6 +2584,7 @@ export type LeadUpdateWithoutPhaseTasksInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutPhaseTasksInput = {
@@ -2578,6 +2626,7 @@ export type LeadUncheckedUpdateWithoutPhaseTasksInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutJrArchitectRequestsInput = {
@@ -2619,6 +2668,7 @@ export type LeadCreateWithoutJrArchitectRequestsInput = {
   phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutJrArchitectRequestsInput = {
@@ -2660,6 +2710,7 @@ export type LeadUncheckedCreateWithoutJrArchitectRequestsInput = {
   phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutJrArchitectRequestsInput = {
@@ -2716,6 +2767,7 @@ export type LeadUpdateWithoutJrArchitectRequestsInput = {
   phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutJrArchitectRequestsInput = {
@@ -2757,6 +2809,7 @@ export type LeadUncheckedUpdateWithoutJrArchitectRequestsInput = {
   phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutMeetingEventsInput = {
@@ -2798,6 +2851,7 @@ export type LeadCreateWithoutMeetingEventsInput = {
   phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutMeetingEventsInput = {
@@ -2839,6 +2893,7 @@ export type LeadUncheckedCreateWithoutMeetingEventsInput = {
   phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutMeetingEventsInput = {
@@ -2895,6 +2950,7 @@ export type LeadUpdateWithoutMeetingEventsInput = {
   phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutMeetingEventsInput = {
@@ -2936,6 +2992,7 @@ export type LeadUncheckedUpdateWithoutMeetingEventsInput = {
   phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutCadWorkSubmissionsInput = {
@@ -2977,6 +3034,7 @@ export type LeadCreateWithoutCadWorkSubmissionsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutCadWorkSubmissionsInput = {
@@ -3018,6 +3076,7 @@ export type LeadUncheckedCreateWithoutCadWorkSubmissionsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutCadWorkSubmissionsInput = {
@@ -3074,6 +3133,7 @@ export type LeadUpdateWithoutCadWorkSubmissionsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutCadWorkSubmissionsInput = {
@@ -3115,6 +3175,7 @@ export type LeadUncheckedUpdateWithoutCadWorkSubmissionsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutQuotationDraftsInput = {
@@ -3156,6 +3217,7 @@ export type LeadCreateWithoutQuotationDraftsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutQuotationDraftsInput = {
@@ -3197,6 +3259,7 @@ export type LeadUncheckedCreateWithoutQuotationDraftsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutQuotationDraftsInput = {
@@ -3253,6 +3316,7 @@ export type LeadUpdateWithoutQuotationDraftsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutQuotationDraftsInput = {
@@ -3294,6 +3358,7 @@ export type LeadUncheckedUpdateWithoutQuotationDraftsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutFurnitureQuotationDraftInput = {
@@ -3335,6 +3400,7 @@ export type LeadCreateWithoutFurnitureQuotationDraftInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutFurnitureQuotationDraftInput = {
@@ -3376,6 +3442,7 @@ export type LeadUncheckedCreateWithoutFurnitureQuotationDraftInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutFurnitureQuotationDraftInput = {
@@ -3432,6 +3499,7 @@ export type LeadUpdateWithoutFurnitureQuotationDraftInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutFurnitureQuotationDraftInput = {
@@ -3473,6 +3541,7 @@ export type LeadUncheckedUpdateWithoutFurnitureQuotationDraftInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutVisitsInput = {
@@ -3514,6 +3583,7 @@ export type LeadCreateWithoutVisitsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutVisitsInput = {
@@ -3555,6 +3625,7 @@ export type LeadUncheckedCreateWithoutVisitsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutVisitsInput = {
@@ -3611,6 +3682,7 @@ export type LeadUpdateWithoutVisitsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutVisitsInput = {
@@ -3652,6 +3724,7 @@ export type LeadUncheckedUpdateWithoutVisitsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutAttachmentsInput = {
@@ -3693,6 +3766,7 @@ export type LeadCreateWithoutAttachmentsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutAttachmentsInput = {
@@ -3734,6 +3808,7 @@ export type LeadUncheckedCreateWithoutAttachmentsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutAttachmentsInput = {
@@ -3790,6 +3865,7 @@ export type LeadUpdateWithoutAttachmentsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutAttachmentsInput = {
@@ -3831,6 +3907,7 @@ export type LeadUncheckedUpdateWithoutAttachmentsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutNotificationsInput = {
@@ -3872,6 +3949,7 @@ export type LeadCreateWithoutNotificationsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutNotificationsInput = {
@@ -3913,6 +3991,7 @@ export type LeadUncheckedCreateWithoutNotificationsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutNotificationsInput = {
@@ -3969,6 +4048,7 @@ export type LeadUpdateWithoutNotificationsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutNotificationsInput = {
@@ -4010,6 +4090,7 @@ export type LeadUncheckedUpdateWithoutNotificationsInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutTransactionsInput = {
@@ -4051,6 +4132,7 @@ export type LeadCreateWithoutTransactionsInput = {
   phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutTransactionsInput = {
@@ -4092,6 +4174,7 @@ export type LeadUncheckedCreateWithoutTransactionsInput = {
   phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutTransactionsInput = {
@@ -4148,6 +4231,7 @@ export type LeadUpdateWithoutTransactionsInput = {
   phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutTransactionsInput = {
@@ -4189,6 +4273,190 @@ export type LeadUncheckedUpdateWithoutTransactionsInput = {
   phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutMaterialRequisitionsInput = {
+  id?: string
+  clientId?: number
+  name: string
+  phone?: string | null
+  email?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  budget?: number | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  location?: string | null
+  remarks?: string | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  accountStatus?: $Enums.AccountStatus | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
+  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutMaterialRequisitionsInput = {
+  id?: string
+  clientId?: number
+  name: string
+  phone?: string | null
+  email?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  budget?: number | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  location?: string | null
+  remarks?: string | null
+  assignedTo?: string | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
+  accountStatus?: $Enums.AccountStatus | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutMaterialRequisitionsInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutMaterialRequisitionsInput, Prisma.LeadUncheckedCreateWithoutMaterialRequisitionsInput>
+}
+
+export type LeadUpsertWithoutMaterialRequisitionsInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutMaterialRequisitionsInput, Prisma.LeadUncheckedUpdateWithoutMaterialRequisitionsInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutMaterialRequisitionsInput, Prisma.LeadUncheckedCreateWithoutMaterialRequisitionsInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutMaterialRequisitionsInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutMaterialRequisitionsInput, Prisma.LeadUncheckedUpdateWithoutMaterialRequisitionsInput>
+}
+
+export type LeadUpdateWithoutMaterialRequisitionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
+  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutMaterialRequisitionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateManyAssigneeInput = {
@@ -4281,6 +4549,7 @@ export type LeadUpdateWithoutAssigneeInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutAssigneeInput = {
@@ -4322,6 +4591,7 @@ export type LeadUncheckedUpdateWithoutAssigneeInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutAssigneeInput = {
@@ -4388,6 +4658,7 @@ export type LeadUpdateWithoutPrimaryOwnerInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutPrimaryOwnerInput = {
@@ -4429,6 +4700,7 @@ export type LeadUncheckedUpdateWithoutPrimaryOwnerInput = {
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutPrimaryOwnerInput = {
@@ -4477,6 +4749,7 @@ export type LeadCountOutputType = {
   jrArchitectRequests: number
   meetingEvents: number
   transactions: number
+  materialRequisitions: number
 }
 
 export type LeadCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4494,6 +4767,7 @@ export type LeadCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   jrArchitectRequests?: boolean | LeadCountOutputTypeCountJrArchitectRequestsArgs
   meetingEvents?: boolean | LeadCountOutputTypeCountMeetingEventsArgs
   transactions?: boolean | LeadCountOutputTypeCountTransactionsArgs
+  materialRequisitions?: boolean | LeadCountOutputTypeCountMaterialRequisitionsArgs
 }
 
 /**
@@ -4604,6 +4878,13 @@ export type LeadCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.TransactionWhereInput
 }
 
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountMaterialRequisitionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MaterialRequisitionWhereInput
+}
+
 
 export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4647,6 +4928,7 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   jrArchitectRequests?: boolean | Prisma.Lead$jrArchitectRequestsArgs<ExtArgs>
   meetingEvents?: boolean | Prisma.Lead$meetingEventsArgs<ExtArgs>
   transactions?: boolean | Prisma.Lead$transactionsArgs<ExtArgs>
+  materialRequisitions?: boolean | Prisma.Lead$materialRequisitionsArgs<ExtArgs>
   _count?: boolean | Prisma.LeadCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
@@ -4754,6 +5036,7 @@ export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   jrArchitectRequests?: boolean | Prisma.Lead$jrArchitectRequestsArgs<ExtArgs>
   meetingEvents?: boolean | Prisma.Lead$meetingEventsArgs<ExtArgs>
   transactions?: boolean | Prisma.Lead$transactionsArgs<ExtArgs>
+  materialRequisitions?: boolean | Prisma.Lead$materialRequisitionsArgs<ExtArgs>
   _count?: boolean | Prisma.LeadCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4785,6 +5068,7 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     jrArchitectRequests: Prisma.$LeadJrArchitectRequestPayload<ExtArgs>[]
     meetingEvents: Prisma.$LeadMeetingEventPayload<ExtArgs>[]
     transactions: Prisma.$TransactionPayload<ExtArgs>[]
+    materialRequisitions: Prisma.$MaterialRequisitionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5222,6 +5506,7 @@ export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Typ
   jrArchitectRequests<T extends Prisma.Lead$jrArchitectRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$jrArchitectRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadJrArchitectRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   meetingEvents<T extends Prisma.Lead$meetingEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$meetingEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMeetingEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   transactions<T extends Prisma.Lead$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  materialRequisitions<T extends Prisma.Lead$materialRequisitionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$materialRequisitionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MaterialRequisitionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6061,6 +6346,30 @@ export type Lead$transactionsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
+}
+
+/**
+ * Lead.materialRequisitions
+ */
+export type Lead$materialRequisitionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MaterialRequisition
+   */
+  select?: Prisma.MaterialRequisitionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MaterialRequisition
+   */
+  omit?: Prisma.MaterialRequisitionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MaterialRequisitionInclude<ExtArgs> | null
+  where?: Prisma.MaterialRequisitionWhereInput
+  orderBy?: Prisma.MaterialRequisitionOrderByWithRelationInput | Prisma.MaterialRequisitionOrderByWithRelationInput[]
+  cursor?: Prisma.MaterialRequisitionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MaterialRequisitionScalarFieldEnum | Prisma.MaterialRequisitionScalarFieldEnum[]
 }
 
 /**

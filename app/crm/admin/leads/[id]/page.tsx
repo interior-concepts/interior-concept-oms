@@ -22,6 +22,7 @@ import { LeadNotesTab } from '@/components/crm/junior/lead-notes-tab'
 import { LeadActivityTab } from '@/components/crm/junior/lead-activity-tab'
 import { LeadFollowupsTab } from '@/components/crm/junior/lead-followups-tab'
 import { LeadActionsPanel } from '@/components/crm/junior/lead-actions-panel'
+import { BoqDepartmentAssignmentPanel } from '@/components/crm/admin/boq-department-assignment-panel'
 import { fetchMeCached } from '@/lib/client-me'
 import { FacebookMessagesDialog } from '@/components/crm/shared/facebook-messages-dialog'
 import { uploadDirectBlobFile } from '@/lib/client-blob-upload'
@@ -1026,7 +1027,17 @@ export default function LeadDetailPage() {
 
         {/* Action Panel - Sidebar */}
         <div className="lg:col-span-1">
-          <LeadActionsPanel
+          <BoqDepartmentAssignmentPanel
+            leadId={leadId}
+            accountStatus={lead.accountStatus}
+            subStatus={subStatus}
+            assignments={assignments}
+            canManage={canManageAssignments}
+            onRefresh={refreshAssignments}
+          />
+
+          <div className="mt-4">
+            <LeadActionsPanel
             leadId={leadId}
             leadLocation={lead.location}
             leadPhone={lead.phone}
@@ -1078,6 +1089,7 @@ export default function LeadDetailPage() {
             onStartFinance={() => setStartFinanceOpen(true)}
             openScheduleOnMount={searchParams.get('openSchedule') === 'true'}
           />
+          </div>
         </div>
       </div>
 

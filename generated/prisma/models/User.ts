@@ -29,6 +29,7 @@ export type UserMinAggregateOutputType = {
   fullName: string | null
   email: string | null
   phone: string | null
+  passwordHash: string | null
   isActive: boolean | null
   clerkUserId: string | null
   approvedById: string | null
@@ -42,6 +43,7 @@ export type UserMaxAggregateOutputType = {
   fullName: string | null
   email: string | null
   phone: string | null
+  passwordHash: string | null
   isActive: boolean | null
   clerkUserId: string | null
   approvedById: string | null
@@ -55,6 +57,7 @@ export type UserCountAggregateOutputType = {
   fullName: number
   email: number
   phone: number
+  passwordHash: number
   isActive: number
   clerkUserId: number
   approvedById: number
@@ -70,6 +73,7 @@ export type UserMinAggregateInputType = {
   fullName?: true
   email?: true
   phone?: true
+  passwordHash?: true
   isActive?: true
   clerkUserId?: true
   approvedById?: true
@@ -83,6 +87,7 @@ export type UserMaxAggregateInputType = {
   fullName?: true
   email?: true
   phone?: true
+  passwordHash?: true
   isActive?: true
   clerkUserId?: true
   approvedById?: true
@@ -96,6 +101,7 @@ export type UserCountAggregateInputType = {
   fullName?: true
   email?: true
   phone?: true
+  passwordHash?: true
   isActive?: true
   clerkUserId?: true
   approvedById?: true
@@ -182,6 +188,7 @@ export type UserGroupByOutputType = {
   fullName: string
   email: string
   phone: string
+  passwordHash: string | null
   isActive: boolean
   clerkUserId: string | null
   approvedById: string | null
@@ -216,6 +223,7 @@ export type UserWhereInput = {
   fullName?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   phone?: Prisma.StringFilter<"User"> | string
+  passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
   clerkUserId?: Prisma.StringNullableFilter<"User"> | string | null
   approvedById?: Prisma.StringNullableFilter<"User"> | string | null
@@ -258,6 +266,9 @@ export type UserWhereInput = {
   deviceTokens?: Prisma.DeviceTokenListRelationFilter
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceListRelationFilter
   quotationPerformances?: Prisma.QuotationUserPerformanceListRelationFilter
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionListRelationFilter
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentListRelationFilter
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -265,6 +276,7 @@ export type UserOrderByWithRelationInput = {
   fullName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   clerkUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   approvedById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -307,6 +319,9 @@ export type UserOrderByWithRelationInput = {
   deviceTokens?: Prisma.DeviceTokenOrderByRelationAggregateInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceOrderByRelationAggregateInput
   quotationPerformances?: Prisma.QuotationUserPerformanceOrderByRelationAggregateInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionOrderByRelationAggregateInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentOrderByRelationAggregateInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -318,6 +333,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   fullName?: Prisma.StringFilter<"User"> | string
   phone?: Prisma.StringFilter<"User"> | string
+  passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
   approvedById?: Prisma.StringNullableFilter<"User"> | string | null
   approvedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -359,6 +375,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   deviceTokens?: Prisma.DeviceTokenListRelationFilter
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceListRelationFilter
   quotationPerformances?: Prisma.QuotationUserPerformanceListRelationFilter
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionListRelationFilter
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentListRelationFilter
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentListRelationFilter
 }, "id" | "email" | "clerkUserId">
 
 export type UserOrderByWithAggregationInput = {
@@ -366,6 +385,7 @@ export type UserOrderByWithAggregationInput = {
   fullName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   clerkUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   approvedById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -385,6 +405,7 @@ export type UserScalarWhereWithAggregatesInput = {
   fullName?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   phone?: Prisma.StringWithAggregatesFilter<"User"> | string
+  passwordHash?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   clerkUserId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   approvedById?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -398,6 +419,7 @@ export type UserCreateInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -439,6 +461,9 @@ export type UserCreateInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -446,6 +471,7 @@ export type UserUncheckedCreateInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -487,6 +513,9 @@ export type UserUncheckedCreateInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUpdateInput = {
@@ -494,6 +523,7 @@ export type UserUpdateInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -535,6 +565,9 @@ export type UserUpdateInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -542,6 +575,7 @@ export type UserUncheckedUpdateInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -583,6 +617,9 @@ export type UserUncheckedUpdateInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -590,6 +627,7 @@ export type UserCreateManyInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -603,6 +641,7 @@ export type UserUpdateManyMutationInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -615,6 +654,7 @@ export type UserUncheckedUpdateManyInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -648,6 +688,7 @@ export type UserCountOrderByAggregateInput = {
   fullName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   clerkUserId?: Prisma.SortOrder
   approvedById?: Prisma.SortOrder
@@ -661,6 +702,7 @@ export type UserMaxOrderByAggregateInput = {
   fullName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   clerkUserId?: Prisma.SortOrder
   approvedById?: Prisma.SortOrder
@@ -674,6 +716,7 @@ export type UserMinOrderByAggregateInput = {
   fullName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   clerkUserId?: Prisma.SortOrder
   approvedById?: Prisma.SortOrder
@@ -1238,11 +1281,56 @@ export type UserUpdateOneRequiredWithoutQuotationPerformancesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutQuotationPerformancesInput, Prisma.UserUpdateWithoutQuotationPerformancesInput>, Prisma.UserUncheckedUpdateWithoutQuotationPerformancesInput>
 }
 
+export type UserCreateNestedOneWithoutMaterialRequisitionsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMaterialRequisitionsCreatedInput, Prisma.UserUncheckedCreateWithoutMaterialRequisitionsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMaterialRequisitionsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMaterialRequisitionsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMaterialRequisitionsCreatedInput, Prisma.UserUncheckedCreateWithoutMaterialRequisitionsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMaterialRequisitionsCreatedInput
+  upsert?: Prisma.UserUpsertWithoutMaterialRequisitionsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMaterialRequisitionsCreatedInput, Prisma.UserUpdateWithoutMaterialRequisitionsCreatedInput>, Prisma.UserUncheckedUpdateWithoutMaterialRequisitionsCreatedInput>
+}
+
+export type UserCreateNestedOneWithoutRequisitionAmendmentsRequestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRequisitionAmendmentsRequestedInput, Prisma.UserUncheckedCreateWithoutRequisitionAmendmentsRequestedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRequisitionAmendmentsRequestedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutRequisitionAmendmentsAcknowledgedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRequisitionAmendmentsAcknowledgedInput, Prisma.UserUncheckedCreateWithoutRequisitionAmendmentsAcknowledgedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRequisitionAmendmentsAcknowledgedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRequisitionAmendmentsRequestedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRequisitionAmendmentsRequestedInput, Prisma.UserUncheckedCreateWithoutRequisitionAmendmentsRequestedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRequisitionAmendmentsRequestedInput
+  upsert?: Prisma.UserUpsertWithoutRequisitionAmendmentsRequestedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRequisitionAmendmentsRequestedInput, Prisma.UserUpdateWithoutRequisitionAmendmentsRequestedInput>, Prisma.UserUncheckedUpdateWithoutRequisitionAmendmentsRequestedInput>
+}
+
+export type UserUpdateOneWithoutRequisitionAmendmentsAcknowledgedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRequisitionAmendmentsAcknowledgedInput, Prisma.UserUncheckedCreateWithoutRequisitionAmendmentsAcknowledgedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRequisitionAmendmentsAcknowledgedInput
+  upsert?: Prisma.UserUpsertWithoutRequisitionAmendmentsAcknowledgedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRequisitionAmendmentsAcknowledgedInput, Prisma.UserUpdateWithoutRequisitionAmendmentsAcknowledgedInput>, Prisma.UserUncheckedUpdateWithoutRequisitionAmendmentsAcknowledgedInput>
+}
+
 export type UserCreateWithoutLeadsInput = {
   id?: string
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -1283,6 +1371,9 @@ export type UserCreateWithoutLeadsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutLeadsInput = {
@@ -1290,6 +1381,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -1330,6 +1422,9 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutLeadsInput = {
@@ -1342,6 +1437,7 @@ export type UserCreateWithoutPrimaryOwnedLeadsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -1382,6 +1478,9 @@ export type UserCreateWithoutPrimaryOwnedLeadsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutPrimaryOwnedLeadsInput = {
@@ -1389,6 +1488,7 @@ export type UserUncheckedCreateWithoutPrimaryOwnedLeadsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -1429,6 +1529,9 @@ export type UserUncheckedCreateWithoutPrimaryOwnedLeadsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutPrimaryOwnedLeadsInput = {
@@ -1452,6 +1555,7 @@ export type UserUpdateWithoutLeadsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1492,6 +1596,9 @@ export type UserUpdateWithoutLeadsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeadsInput = {
@@ -1499,6 +1606,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1539,6 +1647,9 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUpsertWithoutPrimaryOwnedLeadsInput = {
@@ -1557,6 +1668,7 @@ export type UserUpdateWithoutPrimaryOwnedLeadsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1597,6 +1709,9 @@ export type UserUpdateWithoutPrimaryOwnedLeadsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPrimaryOwnedLeadsInput = {
@@ -1604,6 +1719,7 @@ export type UserUncheckedUpdateWithoutPrimaryOwnedLeadsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1644,6 +1760,9 @@ export type UserUncheckedUpdateWithoutPrimaryOwnedLeadsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutLeadAssignmentsInput = {
@@ -1651,6 +1770,7 @@ export type UserCreateWithoutLeadAssignmentsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -1691,6 +1811,9 @@ export type UserCreateWithoutLeadAssignmentsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutLeadAssignmentsInput = {
@@ -1698,6 +1821,7 @@ export type UserUncheckedCreateWithoutLeadAssignmentsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -1738,6 +1862,9 @@ export type UserUncheckedCreateWithoutLeadAssignmentsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutLeadAssignmentsInput = {
@@ -1761,6 +1888,7 @@ export type UserUpdateWithoutLeadAssignmentsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1801,6 +1929,9 @@ export type UserUpdateWithoutLeadAssignmentsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeadAssignmentsInput = {
@@ -1808,6 +1939,7 @@ export type UserUncheckedUpdateWithoutLeadAssignmentsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1848,6 +1980,9 @@ export type UserUncheckedUpdateWithoutLeadAssignmentsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutStatusChangesInput = {
@@ -1855,6 +1990,7 @@ export type UserCreateWithoutStatusChangesInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -1895,6 +2031,9 @@ export type UserCreateWithoutStatusChangesInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutStatusChangesInput = {
@@ -1902,6 +2041,7 @@ export type UserUncheckedCreateWithoutStatusChangesInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -1942,6 +2082,9 @@ export type UserUncheckedCreateWithoutStatusChangesInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutStatusChangesInput = {
@@ -1965,6 +2108,7 @@ export type UserUpdateWithoutStatusChangesInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2005,6 +2149,9 @@ export type UserUpdateWithoutStatusChangesInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStatusChangesInput = {
@@ -2012,6 +2159,7 @@ export type UserUncheckedUpdateWithoutStatusChangesInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2052,6 +2200,9 @@ export type UserUncheckedUpdateWithoutStatusChangesInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutActivitiesInput = {
@@ -2059,6 +2210,7 @@ export type UserCreateWithoutActivitiesInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -2099,6 +2251,9 @@ export type UserCreateWithoutActivitiesInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutActivitiesInput = {
@@ -2106,6 +2261,7 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -2146,6 +2302,9 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutActivitiesInput = {
@@ -2169,6 +2328,7 @@ export type UserUpdateWithoutActivitiesInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2209,6 +2369,9 @@ export type UserUpdateWithoutActivitiesInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivitiesInput = {
@@ -2216,6 +2379,7 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2256,6 +2420,9 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutFollowUpsInput = {
@@ -2263,6 +2430,7 @@ export type UserCreateWithoutFollowUpsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -2303,6 +2471,9 @@ export type UserCreateWithoutFollowUpsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutFollowUpsInput = {
@@ -2310,6 +2481,7 @@ export type UserUncheckedCreateWithoutFollowUpsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -2350,6 +2522,9 @@ export type UserUncheckedCreateWithoutFollowUpsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutFollowUpsInput = {
@@ -2373,6 +2548,7 @@ export type UserUpdateWithoutFollowUpsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2413,6 +2589,9 @@ export type UserUpdateWithoutFollowUpsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowUpsInput = {
@@ -2420,6 +2599,7 @@ export type UserUncheckedUpdateWithoutFollowUpsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2460,6 +2640,9 @@ export type UserUncheckedUpdateWithoutFollowUpsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutNotesInput = {
@@ -2467,6 +2650,7 @@ export type UserCreateWithoutNotesInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -2507,6 +2691,9 @@ export type UserCreateWithoutNotesInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutNotesInput = {
@@ -2514,6 +2701,7 @@ export type UserUncheckedCreateWithoutNotesInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -2554,6 +2742,9 @@ export type UserUncheckedCreateWithoutNotesInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutNotesInput = {
@@ -2577,6 +2768,7 @@ export type UserUpdateWithoutNotesInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2617,6 +2809,9 @@ export type UserUpdateWithoutNotesInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotesInput = {
@@ -2624,6 +2819,7 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2664,6 +2860,9 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutApprovedUsersInput = {
@@ -2671,6 +2870,7 @@ export type UserCreateWithoutApprovedUsersInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -2711,6 +2911,9 @@ export type UserCreateWithoutApprovedUsersInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutApprovedUsersInput = {
@@ -2718,6 +2921,7 @@ export type UserUncheckedCreateWithoutApprovedUsersInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -2758,6 +2962,9 @@ export type UserUncheckedCreateWithoutApprovedUsersInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutApprovedUsersInput = {
@@ -2770,6 +2977,7 @@ export type UserCreateWithoutApprovedByInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -2810,6 +3018,9 @@ export type UserCreateWithoutApprovedByInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutApprovedByInput = {
@@ -2817,6 +3028,7 @@ export type UserUncheckedCreateWithoutApprovedByInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -2857,6 +3069,9 @@ export type UserUncheckedCreateWithoutApprovedByInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutApprovedByInput = {
@@ -2885,6 +3100,7 @@ export type UserUpdateWithoutApprovedUsersInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2925,6 +3141,9 @@ export type UserUpdateWithoutApprovedUsersInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApprovedUsersInput = {
@@ -2932,6 +3151,7 @@ export type UserUncheckedUpdateWithoutApprovedUsersInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2972,6 +3192,9 @@ export type UserUncheckedUpdateWithoutApprovedUsersInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutApprovedByInput = {
@@ -2998,6 +3221,7 @@ export type UserScalarWhereInput = {
   fullName?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   phone?: Prisma.StringFilter<"User"> | string
+  passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
   clerkUserId?: Prisma.StringNullableFilter<"User"> | string | null
   approvedById?: Prisma.StringNullableFilter<"User"> | string | null
@@ -3011,6 +3235,7 @@ export type UserCreateWithoutDeviceTokensInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -3051,6 +3276,9 @@ export type UserCreateWithoutDeviceTokensInput = {
   transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutDeviceTokensInput = {
@@ -3058,6 +3286,7 @@ export type UserUncheckedCreateWithoutDeviceTokensInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -3098,6 +3327,9 @@ export type UserUncheckedCreateWithoutDeviceTokensInput = {
   transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutDeviceTokensInput = {
@@ -3121,6 +3353,7 @@ export type UserUpdateWithoutDeviceTokensInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3161,6 +3394,9 @@ export type UserUpdateWithoutDeviceTokensInput = {
   transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeviceTokensInput = {
@@ -3168,6 +3404,7 @@ export type UserUncheckedUpdateWithoutDeviceTokensInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3208,6 +3445,9 @@ export type UserUncheckedUpdateWithoutDeviceTokensInput = {
   transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutPhaseTasksAssignedInput = {
@@ -3215,6 +3455,7 @@ export type UserCreateWithoutPhaseTasksAssignedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -3255,6 +3496,9 @@ export type UserCreateWithoutPhaseTasksAssignedInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutPhaseTasksAssignedInput = {
@@ -3262,6 +3506,7 @@ export type UserUncheckedCreateWithoutPhaseTasksAssignedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -3302,6 +3547,9 @@ export type UserUncheckedCreateWithoutPhaseTasksAssignedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutPhaseTasksAssignedInput = {
@@ -3314,6 +3562,7 @@ export type UserCreateWithoutPhaseTasksCreatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -3354,6 +3603,9 @@ export type UserCreateWithoutPhaseTasksCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutPhaseTasksCreatedInput = {
@@ -3361,6 +3613,7 @@ export type UserUncheckedCreateWithoutPhaseTasksCreatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -3401,6 +3654,9 @@ export type UserUncheckedCreateWithoutPhaseTasksCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutPhaseTasksCreatedInput = {
@@ -3424,6 +3680,7 @@ export type UserUpdateWithoutPhaseTasksAssignedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3464,6 +3721,9 @@ export type UserUpdateWithoutPhaseTasksAssignedInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhaseTasksAssignedInput = {
@@ -3471,6 +3731,7 @@ export type UserUncheckedUpdateWithoutPhaseTasksAssignedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3511,6 +3772,9 @@ export type UserUncheckedUpdateWithoutPhaseTasksAssignedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUpsertWithoutPhaseTasksCreatedInput = {
@@ -3529,6 +3793,7 @@ export type UserUpdateWithoutPhaseTasksCreatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3569,6 +3834,9 @@ export type UserUpdateWithoutPhaseTasksCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhaseTasksCreatedInput = {
@@ -3576,6 +3844,7 @@ export type UserUncheckedUpdateWithoutPhaseTasksCreatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3616,6 +3885,9 @@ export type UserUncheckedUpdateWithoutPhaseTasksCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutJrArchitectRequestsInput = {
@@ -3623,6 +3895,7 @@ export type UserCreateWithoutJrArchitectRequestsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -3663,6 +3936,9 @@ export type UserCreateWithoutJrArchitectRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutJrArchitectRequestsInput = {
@@ -3670,6 +3946,7 @@ export type UserUncheckedCreateWithoutJrArchitectRequestsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -3710,6 +3987,9 @@ export type UserUncheckedCreateWithoutJrArchitectRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutJrArchitectRequestsInput = {
@@ -3722,6 +4002,7 @@ export type UserCreateWithoutJrArchitectReviewedRequestsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -3762,6 +4043,9 @@ export type UserCreateWithoutJrArchitectReviewedRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutJrArchitectReviewedRequestsInput = {
@@ -3769,6 +4053,7 @@ export type UserUncheckedCreateWithoutJrArchitectReviewedRequestsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -3809,6 +4094,9 @@ export type UserUncheckedCreateWithoutJrArchitectReviewedRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutJrArchitectReviewedRequestsInput = {
@@ -3832,6 +4120,7 @@ export type UserUpdateWithoutJrArchitectRequestsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3872,6 +4161,9 @@ export type UserUpdateWithoutJrArchitectRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJrArchitectRequestsInput = {
@@ -3879,6 +4171,7 @@ export type UserUncheckedUpdateWithoutJrArchitectRequestsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3919,6 +4212,9 @@ export type UserUncheckedUpdateWithoutJrArchitectRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUpsertWithoutJrArchitectReviewedRequestsInput = {
@@ -3937,6 +4233,7 @@ export type UserUpdateWithoutJrArchitectReviewedRequestsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3977,6 +4274,9 @@ export type UserUpdateWithoutJrArchitectReviewedRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJrArchitectReviewedRequestsInput = {
@@ -3984,6 +4284,7 @@ export type UserUncheckedUpdateWithoutJrArchitectReviewedRequestsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4024,6 +4325,9 @@ export type UserUncheckedUpdateWithoutJrArchitectReviewedRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutPhaseReviewsInput = {
@@ -4031,6 +4335,7 @@ export type UserCreateWithoutPhaseReviewsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -4071,6 +4376,9 @@ export type UserCreateWithoutPhaseReviewsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutPhaseReviewsInput = {
@@ -4078,6 +4386,7 @@ export type UserUncheckedCreateWithoutPhaseReviewsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -4118,6 +4427,9 @@ export type UserUncheckedCreateWithoutPhaseReviewsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutPhaseReviewsInput = {
@@ -4141,6 +4453,7 @@ export type UserUpdateWithoutPhaseReviewsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4181,6 +4494,9 @@ export type UserUpdateWithoutPhaseReviewsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhaseReviewsInput = {
@@ -4188,6 +4504,7 @@ export type UserUncheckedUpdateWithoutPhaseReviewsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4228,6 +4545,9 @@ export type UserUncheckedUpdateWithoutPhaseReviewsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutMeetingEventsCreatedInput = {
@@ -4235,6 +4555,7 @@ export type UserCreateWithoutMeetingEventsCreatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -4275,6 +4596,9 @@ export type UserCreateWithoutMeetingEventsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutMeetingEventsCreatedInput = {
@@ -4282,6 +4606,7 @@ export type UserUncheckedCreateWithoutMeetingEventsCreatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -4322,6 +4647,9 @@ export type UserUncheckedCreateWithoutMeetingEventsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutMeetingEventsCreatedInput = {
@@ -4345,6 +4673,7 @@ export type UserUpdateWithoutMeetingEventsCreatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4385,6 +4714,9 @@ export type UserUpdateWithoutMeetingEventsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMeetingEventsCreatedInput = {
@@ -4392,6 +4724,7 @@ export type UserUncheckedUpdateWithoutMeetingEventsCreatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4432,6 +4765,9 @@ export type UserUncheckedUpdateWithoutMeetingEventsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutCadWorkSubmissionsInput = {
@@ -4439,6 +4775,7 @@ export type UserCreateWithoutCadWorkSubmissionsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -4479,6 +4816,9 @@ export type UserCreateWithoutCadWorkSubmissionsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutCadWorkSubmissionsInput = {
@@ -4486,6 +4826,7 @@ export type UserUncheckedCreateWithoutCadWorkSubmissionsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -4526,6 +4867,9 @@ export type UserUncheckedCreateWithoutCadWorkSubmissionsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutCadWorkSubmissionsInput = {
@@ -4549,6 +4893,7 @@ export type UserUpdateWithoutCadWorkSubmissionsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4589,6 +4934,9 @@ export type UserUpdateWithoutCadWorkSubmissionsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCadWorkSubmissionsInput = {
@@ -4596,6 +4944,7 @@ export type UserUncheckedUpdateWithoutCadWorkSubmissionsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4636,6 +4985,9 @@ export type UserUncheckedUpdateWithoutCadWorkSubmissionsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutQuotationDraftsCreatedInput = {
@@ -4643,6 +4995,7 @@ export type UserCreateWithoutQuotationDraftsCreatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -4683,6 +5036,9 @@ export type UserCreateWithoutQuotationDraftsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutQuotationDraftsCreatedInput = {
@@ -4690,6 +5046,7 @@ export type UserUncheckedCreateWithoutQuotationDraftsCreatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -4730,6 +5087,9 @@ export type UserUncheckedCreateWithoutQuotationDraftsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutQuotationDraftsCreatedInput = {
@@ -4742,6 +5102,7 @@ export type UserCreateWithoutQuotationDraftsUpdatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -4782,6 +5143,9 @@ export type UserCreateWithoutQuotationDraftsUpdatedInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutQuotationDraftsUpdatedInput = {
@@ -4789,6 +5153,7 @@ export type UserUncheckedCreateWithoutQuotationDraftsUpdatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -4829,6 +5194,9 @@ export type UserUncheckedCreateWithoutQuotationDraftsUpdatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutQuotationDraftsUpdatedInput = {
@@ -4852,6 +5220,7 @@ export type UserUpdateWithoutQuotationDraftsCreatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4892,6 +5261,9 @@ export type UserUpdateWithoutQuotationDraftsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuotationDraftsCreatedInput = {
@@ -4899,6 +5271,7 @@ export type UserUncheckedUpdateWithoutQuotationDraftsCreatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4939,6 +5312,9 @@ export type UserUncheckedUpdateWithoutQuotationDraftsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUpsertWithoutQuotationDraftsUpdatedInput = {
@@ -4957,6 +5333,7 @@ export type UserUpdateWithoutQuotationDraftsUpdatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4997,6 +5374,9 @@ export type UserUpdateWithoutQuotationDraftsUpdatedInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuotationDraftsUpdatedInput = {
@@ -5004,6 +5384,7 @@ export type UserUncheckedUpdateWithoutQuotationDraftsUpdatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5044,6 +5425,9 @@ export type UserUncheckedUpdateWithoutQuotationDraftsUpdatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutFurnitureQuotationDraftsCreatedInput = {
@@ -5051,6 +5435,7 @@ export type UserCreateWithoutFurnitureQuotationDraftsCreatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -5091,6 +5476,9 @@ export type UserCreateWithoutFurnitureQuotationDraftsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutFurnitureQuotationDraftsCreatedInput = {
@@ -5098,6 +5486,7 @@ export type UserUncheckedCreateWithoutFurnitureQuotationDraftsCreatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -5138,6 +5527,9 @@ export type UserUncheckedCreateWithoutFurnitureQuotationDraftsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutFurnitureQuotationDraftsCreatedInput = {
@@ -5150,6 +5542,7 @@ export type UserCreateWithoutFurnitureQuotationDraftsUpdatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -5190,6 +5583,9 @@ export type UserCreateWithoutFurnitureQuotationDraftsUpdatedInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutFurnitureQuotationDraftsUpdatedInput = {
@@ -5197,6 +5593,7 @@ export type UserUncheckedCreateWithoutFurnitureQuotationDraftsUpdatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -5237,6 +5634,9 @@ export type UserUncheckedCreateWithoutFurnitureQuotationDraftsUpdatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutFurnitureQuotationDraftsUpdatedInput = {
@@ -5260,6 +5660,7 @@ export type UserUpdateWithoutFurnitureQuotationDraftsCreatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5300,6 +5701,9 @@ export type UserUpdateWithoutFurnitureQuotationDraftsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFurnitureQuotationDraftsCreatedInput = {
@@ -5307,6 +5711,7 @@ export type UserUncheckedUpdateWithoutFurnitureQuotationDraftsCreatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5347,6 +5752,9 @@ export type UserUncheckedUpdateWithoutFurnitureQuotationDraftsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUpsertWithoutFurnitureQuotationDraftsUpdatedInput = {
@@ -5365,6 +5773,7 @@ export type UserUpdateWithoutFurnitureQuotationDraftsUpdatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5405,6 +5814,9 @@ export type UserUpdateWithoutFurnitureQuotationDraftsUpdatedInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFurnitureQuotationDraftsUpdatedInput = {
@@ -5412,6 +5824,7 @@ export type UserUncheckedUpdateWithoutFurnitureQuotationDraftsUpdatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5452,6 +5865,9 @@ export type UserUncheckedUpdateWithoutFurnitureQuotationDraftsUpdatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutVisitsAssignedInput = {
@@ -5459,6 +5875,7 @@ export type UserCreateWithoutVisitsAssignedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -5499,6 +5916,9 @@ export type UserCreateWithoutVisitsAssignedInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutVisitsAssignedInput = {
@@ -5506,6 +5926,7 @@ export type UserUncheckedCreateWithoutVisitsAssignedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -5546,6 +5967,9 @@ export type UserUncheckedCreateWithoutVisitsAssignedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutVisitsAssignedInput = {
@@ -5558,6 +5982,7 @@ export type UserCreateWithoutVisitsCreatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -5598,6 +6023,9 @@ export type UserCreateWithoutVisitsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutVisitsCreatedInput = {
@@ -5605,6 +6033,7 @@ export type UserUncheckedCreateWithoutVisitsCreatedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -5645,6 +6074,9 @@ export type UserUncheckedCreateWithoutVisitsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutVisitsCreatedInput = {
@@ -5668,6 +6100,7 @@ export type UserUpdateWithoutVisitsAssignedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5708,6 +6141,9 @@ export type UserUpdateWithoutVisitsAssignedInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVisitsAssignedInput = {
@@ -5715,6 +6151,7 @@ export type UserUncheckedUpdateWithoutVisitsAssignedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5755,6 +6192,9 @@ export type UserUncheckedUpdateWithoutVisitsAssignedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUpsertWithoutVisitsCreatedInput = {
@@ -5773,6 +6213,7 @@ export type UserUpdateWithoutVisitsCreatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5813,6 +6254,9 @@ export type UserUpdateWithoutVisitsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVisitsCreatedInput = {
@@ -5820,6 +6264,7 @@ export type UserUncheckedUpdateWithoutVisitsCreatedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5860,6 +6305,9 @@ export type UserUncheckedUpdateWithoutVisitsCreatedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutVisitUpdateRequestsInput = {
@@ -5867,6 +6315,7 @@ export type UserCreateWithoutVisitUpdateRequestsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -5907,6 +6356,9 @@ export type UserCreateWithoutVisitUpdateRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutVisitUpdateRequestsInput = {
@@ -5914,6 +6366,7 @@ export type UserUncheckedCreateWithoutVisitUpdateRequestsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -5954,6 +6407,9 @@ export type UserUncheckedCreateWithoutVisitUpdateRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutVisitUpdateRequestsInput = {
@@ -5966,6 +6422,7 @@ export type UserCreateWithoutResolvedVisitUpdateRequestsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -6006,6 +6463,9 @@ export type UserCreateWithoutResolvedVisitUpdateRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutResolvedVisitUpdateRequestsInput = {
@@ -6013,6 +6473,7 @@ export type UserUncheckedCreateWithoutResolvedVisitUpdateRequestsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -6053,6 +6514,9 @@ export type UserUncheckedCreateWithoutResolvedVisitUpdateRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutResolvedVisitUpdateRequestsInput = {
@@ -6076,6 +6540,7 @@ export type UserUpdateWithoutVisitUpdateRequestsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6116,6 +6581,9 @@ export type UserUpdateWithoutVisitUpdateRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVisitUpdateRequestsInput = {
@@ -6123,6 +6591,7 @@ export type UserUncheckedUpdateWithoutVisitUpdateRequestsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6163,6 +6632,9 @@ export type UserUncheckedUpdateWithoutVisitUpdateRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUpsertWithoutResolvedVisitUpdateRequestsInput = {
@@ -6181,6 +6653,7 @@ export type UserUpdateWithoutResolvedVisitUpdateRequestsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6221,6 +6694,9 @@ export type UserUpdateWithoutResolvedVisitUpdateRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResolvedVisitUpdateRequestsInput = {
@@ -6228,6 +6704,7 @@ export type UserUncheckedUpdateWithoutResolvedVisitUpdateRequestsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6268,6 +6745,9 @@ export type UserUncheckedUpdateWithoutResolvedVisitUpdateRequestsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutSupportVisitsInput = {
@@ -6275,6 +6755,7 @@ export type UserCreateWithoutSupportVisitsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -6315,6 +6796,9 @@ export type UserCreateWithoutSupportVisitsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutSupportVisitsInput = {
@@ -6322,6 +6806,7 @@ export type UserUncheckedCreateWithoutSupportVisitsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -6362,6 +6847,9 @@ export type UserUncheckedCreateWithoutSupportVisitsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutSupportVisitsInput = {
@@ -6374,6 +6862,7 @@ export type UserCreateWithoutSupportVisitsAssignedByInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -6414,6 +6903,9 @@ export type UserCreateWithoutSupportVisitsAssignedByInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutSupportVisitsAssignedByInput = {
@@ -6421,6 +6913,7 @@ export type UserUncheckedCreateWithoutSupportVisitsAssignedByInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -6461,6 +6954,9 @@ export type UserUncheckedCreateWithoutSupportVisitsAssignedByInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutSupportVisitsAssignedByInput = {
@@ -6484,6 +6980,7 @@ export type UserUpdateWithoutSupportVisitsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6524,6 +7021,9 @@ export type UserUpdateWithoutSupportVisitsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSupportVisitsInput = {
@@ -6531,6 +7031,7 @@ export type UserUncheckedUpdateWithoutSupportVisitsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6571,6 +7072,9 @@ export type UserUncheckedUpdateWithoutSupportVisitsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUpsertWithoutSupportVisitsAssignedByInput = {
@@ -6589,6 +7093,7 @@ export type UserUpdateWithoutSupportVisitsAssignedByInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6629,6 +7134,9 @@ export type UserUpdateWithoutSupportVisitsAssignedByInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSupportVisitsAssignedByInput = {
@@ -6636,6 +7144,7 @@ export type UserUncheckedUpdateWithoutSupportVisitsAssignedByInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6676,6 +7185,9 @@ export type UserUncheckedUpdateWithoutSupportVisitsAssignedByInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutSupportVisitResultsInput = {
@@ -6683,6 +7195,7 @@ export type UserCreateWithoutSupportVisitResultsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -6723,6 +7236,9 @@ export type UserCreateWithoutSupportVisitResultsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutSupportVisitResultsInput = {
@@ -6730,6 +7246,7 @@ export type UserUncheckedCreateWithoutSupportVisitResultsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -6770,6 +7287,9 @@ export type UserUncheckedCreateWithoutSupportVisitResultsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutSupportVisitResultsInput = {
@@ -6793,6 +7313,7 @@ export type UserUpdateWithoutSupportVisitResultsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6833,6 +7354,9 @@ export type UserUpdateWithoutSupportVisitResultsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSupportVisitResultsInput = {
@@ -6840,6 +7364,7 @@ export type UserUncheckedUpdateWithoutSupportVisitResultsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6880,6 +7405,9 @@ export type UserUncheckedUpdateWithoutSupportVisitResultsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -6887,6 +7415,7 @@ export type UserCreateWithoutNotificationsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -6927,6 +7456,9 @@ export type UserCreateWithoutNotificationsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -6934,6 +7466,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -6974,6 +7507,9 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -6986,6 +7522,7 @@ export type UserCreateWithoutSignupNotificationsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -7026,6 +7563,9 @@ export type UserCreateWithoutSignupNotificationsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutSignupNotificationsInput = {
@@ -7033,6 +7573,7 @@ export type UserUncheckedCreateWithoutSignupNotificationsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -7073,6 +7614,9 @@ export type UserUncheckedCreateWithoutSignupNotificationsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutSignupNotificationsInput = {
@@ -7096,6 +7640,7 @@ export type UserUpdateWithoutNotificationsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7136,6 +7681,9 @@ export type UserUpdateWithoutNotificationsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -7143,6 +7691,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7183,6 +7732,9 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUpsertWithoutSignupNotificationsInput = {
@@ -7201,6 +7753,7 @@ export type UserUpdateWithoutSignupNotificationsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7241,6 +7794,9 @@ export type UserUpdateWithoutSignupNotificationsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSignupNotificationsInput = {
@@ -7248,6 +7804,7 @@ export type UserUncheckedUpdateWithoutSignupNotificationsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7288,6 +7845,9 @@ export type UserUncheckedUpdateWithoutSignupNotificationsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutUserRolesInput = {
@@ -7295,6 +7855,7 @@ export type UserCreateWithoutUserRolesInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -7335,6 +7896,9 @@ export type UserCreateWithoutUserRolesInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -7342,6 +7906,7 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -7382,6 +7947,9 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -7405,6 +7973,7 @@ export type UserUpdateWithoutUserRolesInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7445,6 +8014,9 @@ export type UserUpdateWithoutUserRolesInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -7452,6 +8024,7 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7492,6 +8065,9 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutUserDepartmentsInput = {
@@ -7499,6 +8075,7 @@ export type UserCreateWithoutUserDepartmentsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -7539,6 +8116,9 @@ export type UserCreateWithoutUserDepartmentsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutUserDepartmentsInput = {
@@ -7546,6 +8126,7 @@ export type UserUncheckedCreateWithoutUserDepartmentsInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -7586,6 +8167,9 @@ export type UserUncheckedCreateWithoutUserDepartmentsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutUserDepartmentsInput = {
@@ -7609,6 +8193,7 @@ export type UserUpdateWithoutUserDepartmentsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7649,6 +8234,9 @@ export type UserUpdateWithoutUserDepartmentsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserDepartmentsInput = {
@@ -7656,6 +8244,7 @@ export type UserUncheckedUpdateWithoutUserDepartmentsInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7696,6 +8285,9 @@ export type UserUncheckedUpdateWithoutUserDepartmentsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutTransactionsRecordedInput = {
@@ -7703,6 +8295,7 @@ export type UserCreateWithoutTransactionsRecordedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -7743,6 +8336,9 @@ export type UserCreateWithoutTransactionsRecordedInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutTransactionsRecordedInput = {
@@ -7750,6 +8346,7 @@ export type UserUncheckedCreateWithoutTransactionsRecordedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -7790,6 +8387,9 @@ export type UserUncheckedCreateWithoutTransactionsRecordedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutTransactionsRecordedInput = {
@@ -7802,6 +8402,7 @@ export type UserCreateWithoutTransactionsCollectedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -7842,6 +8443,9 @@ export type UserCreateWithoutTransactionsCollectedInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutTransactionsCollectedInput = {
@@ -7849,6 +8453,7 @@ export type UserUncheckedCreateWithoutTransactionsCollectedInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -7889,6 +8494,9 @@ export type UserUncheckedCreateWithoutTransactionsCollectedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutTransactionsCollectedInput = {
@@ -7912,6 +8520,7 @@ export type UserUpdateWithoutTransactionsRecordedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7952,6 +8561,9 @@ export type UserUpdateWithoutTransactionsRecordedInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTransactionsRecordedInput = {
@@ -7959,6 +8571,7 @@ export type UserUncheckedUpdateWithoutTransactionsRecordedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7999,6 +8612,9 @@ export type UserUncheckedUpdateWithoutTransactionsRecordedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUpsertWithoutTransactionsCollectedInput = {
@@ -8017,6 +8633,7 @@ export type UserUpdateWithoutTransactionsCollectedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8057,6 +8674,9 @@ export type UserUpdateWithoutTransactionsCollectedInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTransactionsCollectedInput = {
@@ -8064,6 +8684,7 @@ export type UserUncheckedUpdateWithoutTransactionsCollectedInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8104,6 +8725,9 @@ export type UserUncheckedUpdateWithoutTransactionsCollectedInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutJrArchitectPerformancesInput = {
@@ -8111,6 +8735,7 @@ export type UserCreateWithoutJrArchitectPerformancesInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -8151,6 +8776,9 @@ export type UserCreateWithoutJrArchitectPerformancesInput = {
   transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutJrArchitectPerformancesInput = {
@@ -8158,6 +8786,7 @@ export type UserUncheckedCreateWithoutJrArchitectPerformancesInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -8198,6 +8827,9 @@ export type UserUncheckedCreateWithoutJrArchitectPerformancesInput = {
   transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutJrArchitectPerformancesInput = {
@@ -8221,6 +8853,7 @@ export type UserUpdateWithoutJrArchitectPerformancesInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8261,6 +8894,9 @@ export type UserUpdateWithoutJrArchitectPerformancesInput = {
   transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJrArchitectPerformancesInput = {
@@ -8268,6 +8904,7 @@ export type UserUncheckedUpdateWithoutJrArchitectPerformancesInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8308,6 +8945,9 @@ export type UserUncheckedUpdateWithoutJrArchitectPerformancesInput = {
   transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserCreateWithoutQuotationPerformancesInput = {
@@ -8315,6 +8955,7 @@ export type UserCreateWithoutQuotationPerformancesInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -8355,6 +8996,9 @@ export type UserCreateWithoutQuotationPerformancesInput = {
   transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserUncheckedCreateWithoutQuotationPerformancesInput = {
@@ -8362,6 +9006,7 @@ export type UserUncheckedCreateWithoutQuotationPerformancesInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedById?: string | null
@@ -8402,6 +9047,9 @@ export type UserUncheckedCreateWithoutQuotationPerformancesInput = {
   transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
 }
 
 export type UserCreateOrConnectWithoutQuotationPerformancesInput = {
@@ -8425,6 +9073,7 @@ export type UserUpdateWithoutQuotationPerformancesInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8465,6 +9114,9 @@ export type UserUpdateWithoutQuotationPerformancesInput = {
   transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuotationPerformancesInput = {
@@ -8472,6 +9124,7 @@ export type UserUncheckedUpdateWithoutQuotationPerformancesInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8512,6 +9165,669 @@ export type UserUncheckedUpdateWithoutQuotationPerformancesInput = {
   transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
+}
+
+export type UserCreateWithoutMaterialRequisitionsCreatedInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  passwordHash?: string | null
+  isActive?: boolean
+  clerkUserId?: string | null
+  approvedAt?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedUsersInput
+  approvedUsers?: Prisma.UserCreateNestedManyWithoutApprovedByInput
+  leads?: Prisma.LeadCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadCreateNestedManyWithoutPrimaryOwnerInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutAssignedToInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  statusChanges?: Prisma.LeadStatusHistoryCreateNestedManyWithoutChangedByInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  userDepartments?: Prisma.UserDepartmentCreateNestedManyWithoutUserInput
+  leadAssignments?: Prisma.LeadAssignmentCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitCreateNestedManyWithoutCreatedByInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutResolvedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutSupportUserInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutAssignedByInput
+  supportVisitResults?: Prisma.VisitSupportResultCreateNestedManyWithoutSupportUserInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskCreateNestedManyWithoutCreatedByInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutReviewedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
+  quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
+  transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
+  transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
+}
+
+export type UserUncheckedCreateWithoutMaterialRequisitionsCreatedInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  passwordHash?: string | null
+  isActive?: boolean
+  clerkUserId?: string | null
+  approvedById?: string | null
+  approvedAt?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  approvedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutApprovedByInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutPrimaryOwnerInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutAssignedToInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  userDepartments?: Prisma.UserDepartmentUncheckedCreateNestedManyWithoutUserInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitUncheckedCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitUncheckedCreateNestedManyWithoutCreatedByInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutResolvedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutSupportUserInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutSupportUserInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
+  transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
+  transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
+}
+
+export type UserCreateOrConnectWithoutMaterialRequisitionsCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMaterialRequisitionsCreatedInput, Prisma.UserUncheckedCreateWithoutMaterialRequisitionsCreatedInput>
+}
+
+export type UserUpsertWithoutMaterialRequisitionsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMaterialRequisitionsCreatedInput, Prisma.UserUncheckedUpdateWithoutMaterialRequisitionsCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMaterialRequisitionsCreatedInput, Prisma.UserUncheckedCreateWithoutMaterialRequisitionsCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMaterialRequisitionsCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMaterialRequisitionsCreatedInput, Prisma.UserUncheckedUpdateWithoutMaterialRequisitionsCreatedInput>
+}
+
+export type UserUpdateWithoutMaterialRequisitionsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedUsersNestedInput
+  approvedUsers?: Prisma.UserUpdateManyWithoutApprovedByNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUpdateManyWithoutPrimaryOwnerNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutAssignedToNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  activities?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUpdateManyWithoutChangedByNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  userDepartments?: Prisma.UserDepartmentUpdateManyWithoutUserNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUpdateManyWithoutCreatedByNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutResolvedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUpdateManyWithoutSupportUserNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUpdateManyWithoutAssignedByNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUpdateManyWithoutSupportUserNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUpdateManyWithoutCreatedByNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutReviewedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
+  transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
+  transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMaterialRequisitionsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedUsers?: Prisma.UserUncheckedUpdateManyWithoutApprovedByNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedUpdateManyWithoutPrimaryOwnerNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutAssignedToNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  userDepartments?: Prisma.UserDepartmentUncheckedUpdateManyWithoutUserNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUncheckedUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutResolvedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutSupportUserNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
+  transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
+  transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
+}
+
+export type UserCreateWithoutRequisitionAmendmentsRequestedInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  passwordHash?: string | null
+  isActive?: boolean
+  clerkUserId?: string | null
+  approvedAt?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedUsersInput
+  approvedUsers?: Prisma.UserCreateNestedManyWithoutApprovedByInput
+  leads?: Prisma.LeadCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadCreateNestedManyWithoutPrimaryOwnerInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutAssignedToInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  statusChanges?: Prisma.LeadStatusHistoryCreateNestedManyWithoutChangedByInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  userDepartments?: Prisma.UserDepartmentCreateNestedManyWithoutUserInput
+  leadAssignments?: Prisma.LeadAssignmentCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitCreateNestedManyWithoutCreatedByInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutResolvedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutSupportUserInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutAssignedByInput
+  supportVisitResults?: Prisma.VisitSupportResultCreateNestedManyWithoutSupportUserInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskCreateNestedManyWithoutCreatedByInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutReviewedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
+  quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
+  transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
+  transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
+}
+
+export type UserUncheckedCreateWithoutRequisitionAmendmentsRequestedInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  passwordHash?: string | null
+  isActive?: boolean
+  clerkUserId?: string | null
+  approvedById?: string | null
+  approvedAt?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  approvedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutApprovedByInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutPrimaryOwnerInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutAssignedToInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  userDepartments?: Prisma.UserDepartmentUncheckedCreateNestedManyWithoutUserInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitUncheckedCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitUncheckedCreateNestedManyWithoutCreatedByInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutResolvedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutSupportUserInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutSupportUserInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
+  transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
+  transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
+}
+
+export type UserCreateOrConnectWithoutRequisitionAmendmentsRequestedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRequisitionAmendmentsRequestedInput, Prisma.UserUncheckedCreateWithoutRequisitionAmendmentsRequestedInput>
+}
+
+export type UserCreateWithoutRequisitionAmendmentsAcknowledgedInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  passwordHash?: string | null
+  isActive?: boolean
+  clerkUserId?: string | null
+  approvedAt?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedUsersInput
+  approvedUsers?: Prisma.UserCreateNestedManyWithoutApprovedByInput
+  leads?: Prisma.LeadCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadCreateNestedManyWithoutPrimaryOwnerInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutAssignedToInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  statusChanges?: Prisma.LeadStatusHistoryCreateNestedManyWithoutChangedByInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  userDepartments?: Prisma.UserDepartmentCreateNestedManyWithoutUserInput
+  leadAssignments?: Prisma.LeadAssignmentCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitCreateNestedManyWithoutCreatedByInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutResolvedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutSupportUserInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutAssignedByInput
+  supportVisitResults?: Prisma.VisitSupportResultCreateNestedManyWithoutSupportUserInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskCreateNestedManyWithoutCreatedByInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutReviewedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
+  quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
+  transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
+  transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+}
+
+export type UserUncheckedCreateWithoutRequisitionAmendmentsAcknowledgedInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  passwordHash?: string | null
+  isActive?: boolean
+  clerkUserId?: string | null
+  approvedById?: string | null
+  approvedAt?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  approvedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutApprovedByInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutPrimaryOwnerInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutAssignedToInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  userDepartments?: Prisma.UserDepartmentUncheckedCreateNestedManyWithoutUserInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitUncheckedCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitUncheckedCreateNestedManyWithoutCreatedByInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutResolvedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutSupportUserInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutSupportUserInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
+  transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
+  transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+}
+
+export type UserCreateOrConnectWithoutRequisitionAmendmentsAcknowledgedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRequisitionAmendmentsAcknowledgedInput, Prisma.UserUncheckedCreateWithoutRequisitionAmendmentsAcknowledgedInput>
+}
+
+export type UserUpsertWithoutRequisitionAmendmentsRequestedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRequisitionAmendmentsRequestedInput, Prisma.UserUncheckedUpdateWithoutRequisitionAmendmentsRequestedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRequisitionAmendmentsRequestedInput, Prisma.UserUncheckedCreateWithoutRequisitionAmendmentsRequestedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRequisitionAmendmentsRequestedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRequisitionAmendmentsRequestedInput, Prisma.UserUncheckedUpdateWithoutRequisitionAmendmentsRequestedInput>
+}
+
+export type UserUpdateWithoutRequisitionAmendmentsRequestedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedUsersNestedInput
+  approvedUsers?: Prisma.UserUpdateManyWithoutApprovedByNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUpdateManyWithoutPrimaryOwnerNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutAssignedToNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  activities?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUpdateManyWithoutChangedByNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  userDepartments?: Prisma.UserDepartmentUpdateManyWithoutUserNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUpdateManyWithoutCreatedByNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutResolvedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUpdateManyWithoutSupportUserNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUpdateManyWithoutAssignedByNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUpdateManyWithoutSupportUserNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUpdateManyWithoutCreatedByNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutReviewedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
+  transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
+  transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRequisitionAmendmentsRequestedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedUsers?: Prisma.UserUncheckedUpdateManyWithoutApprovedByNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedUpdateManyWithoutPrimaryOwnerNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutAssignedToNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  userDepartments?: Prisma.UserDepartmentUncheckedUpdateManyWithoutUserNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUncheckedUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutResolvedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutSupportUserNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
+  transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
+  transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
+}
+
+export type UserUpsertWithoutRequisitionAmendmentsAcknowledgedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRequisitionAmendmentsAcknowledgedInput, Prisma.UserUncheckedUpdateWithoutRequisitionAmendmentsAcknowledgedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRequisitionAmendmentsAcknowledgedInput, Prisma.UserUncheckedCreateWithoutRequisitionAmendmentsAcknowledgedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRequisitionAmendmentsAcknowledgedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRequisitionAmendmentsAcknowledgedInput, Prisma.UserUncheckedUpdateWithoutRequisitionAmendmentsAcknowledgedInput>
+}
+
+export type UserUpdateWithoutRequisitionAmendmentsAcknowledgedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedUsersNestedInput
+  approvedUsers?: Prisma.UserUpdateManyWithoutApprovedByNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUpdateManyWithoutPrimaryOwnerNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutAssignedToNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  activities?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUpdateManyWithoutChangedByNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  userDepartments?: Prisma.UserDepartmentUpdateManyWithoutUserNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUpdateManyWithoutCreatedByNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutResolvedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUpdateManyWithoutSupportUserNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUpdateManyWithoutAssignedByNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUpdateManyWithoutSupportUserNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUpdateManyWithoutCreatedByNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutReviewedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
+  transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
+  transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRequisitionAmendmentsAcknowledgedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedUsers?: Prisma.UserUncheckedUpdateManyWithoutApprovedByNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedUpdateManyWithoutPrimaryOwnerNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutAssignedToNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  userDepartments?: Prisma.UserDepartmentUncheckedUpdateManyWithoutUserNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUncheckedUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutResolvedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutSupportUserNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
+  transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
+  transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
 }
 
 export type UserCreateManyApprovedByInput = {
@@ -8519,6 +9835,7 @@ export type UserCreateManyApprovedByInput = {
   fullName: string
   email: string
   phone: string
+  passwordHash?: string | null
   isActive?: boolean
   clerkUserId?: string | null
   approvedAt?: Date | string | null
@@ -8531,6 +9848,7 @@ export type UserUpdateWithoutApprovedByInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8571,6 +9889,9 @@ export type UserUpdateWithoutApprovedByInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApprovedByInput = {
@@ -8578,6 +9899,7 @@ export type UserUncheckedUpdateWithoutApprovedByInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8618,6 +9940,9 @@ export type UserUncheckedUpdateWithoutApprovedByInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
   quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutApprovedByInput = {
@@ -8625,6 +9950,7 @@ export type UserUncheckedUpdateManyWithoutApprovedByInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8673,6 +9999,9 @@ export type UserCountOutputType = {
   deviceTokens: number
   jrArchitectPerformances: number
   quotationPerformances: number
+  materialRequisitionsCreated: number
+  requisitionAmendmentsRequested: number
+  requisitionAmendmentsAcknowledged: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -8711,6 +10040,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   deviceTokens?: boolean | UserCountOutputTypeCountDeviceTokensArgs
   jrArchitectPerformances?: boolean | UserCountOutputTypeCountJrArchitectPerformancesArgs
   quotationPerformances?: boolean | UserCountOutputTypeCountQuotationPerformancesArgs
+  materialRequisitionsCreated?: boolean | UserCountOutputTypeCountMaterialRequisitionsCreatedArgs
+  requisitionAmendmentsRequested?: boolean | UserCountOutputTypeCountRequisitionAmendmentsRequestedArgs
+  requisitionAmendmentsAcknowledged?: boolean | UserCountOutputTypeCountRequisitionAmendmentsAcknowledgedArgs
 }
 
 /**
@@ -8968,12 +10300,34 @@ export type UserCountOutputTypeCountQuotationPerformancesArgs<ExtArgs extends ru
   where?: Prisma.QuotationUserPerformanceWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMaterialRequisitionsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MaterialRequisitionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRequisitionAmendmentsRequestedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RequisitionAmendmentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRequisitionAmendmentsAcknowledgedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RequisitionAmendmentWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   fullName?: boolean
   email?: boolean
   phone?: boolean
+  passwordHash?: boolean
   isActive?: boolean
   clerkUserId?: boolean
   approvedById?: boolean
@@ -9016,6 +10370,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   deviceTokens?: boolean | Prisma.User$deviceTokensArgs<ExtArgs>
   jrArchitectPerformances?: boolean | Prisma.User$jrArchitectPerformancesArgs<ExtArgs>
   quotationPerformances?: boolean | Prisma.User$quotationPerformancesArgs<ExtArgs>
+  materialRequisitionsCreated?: boolean | Prisma.User$materialRequisitionsCreatedArgs<ExtArgs>
+  requisitionAmendmentsRequested?: boolean | Prisma.User$requisitionAmendmentsRequestedArgs<ExtArgs>
+  requisitionAmendmentsAcknowledged?: boolean | Prisma.User$requisitionAmendmentsAcknowledgedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -9024,6 +10381,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   fullName?: boolean
   email?: boolean
   phone?: boolean
+  passwordHash?: boolean
   isActive?: boolean
   clerkUserId?: boolean
   approvedById?: boolean
@@ -9038,6 +10396,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   fullName?: boolean
   email?: boolean
   phone?: boolean
+  passwordHash?: boolean
   isActive?: boolean
   clerkUserId?: boolean
   approvedById?: boolean
@@ -9052,6 +10411,7 @@ export type UserSelectScalar = {
   fullName?: boolean
   email?: boolean
   phone?: boolean
+  passwordHash?: boolean
   isActive?: boolean
   clerkUserId?: boolean
   approvedById?: boolean
@@ -9060,7 +10420,7 @@ export type UserSelectScalar = {
   updated_at?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fullName" | "email" | "phone" | "isActive" | "clerkUserId" | "approvedById" | "approvedAt" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fullName" | "email" | "phone" | "passwordHash" | "isActive" | "clerkUserId" | "approvedById" | "approvedAt" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   approvedBy?: boolean | Prisma.User$approvedByArgs<ExtArgs>
   approvedUsers?: boolean | Prisma.User$approvedUsersArgs<ExtArgs>
@@ -9098,6 +10458,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   deviceTokens?: boolean | Prisma.User$deviceTokensArgs<ExtArgs>
   jrArchitectPerformances?: boolean | Prisma.User$jrArchitectPerformancesArgs<ExtArgs>
   quotationPerformances?: boolean | Prisma.User$quotationPerformancesArgs<ExtArgs>
+  materialRequisitionsCreated?: boolean | Prisma.User$materialRequisitionsCreatedArgs<ExtArgs>
+  requisitionAmendmentsRequested?: boolean | Prisma.User$requisitionAmendmentsRequestedArgs<ExtArgs>
+  requisitionAmendmentsAcknowledged?: boolean | Prisma.User$requisitionAmendmentsAcknowledgedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -9146,12 +10509,16 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     deviceTokens: Prisma.$DeviceTokenPayload<ExtArgs>[]
     jrArchitectPerformances: Prisma.$JrArchitectPerformancePayload<ExtArgs>[]
     quotationPerformances: Prisma.$QuotationUserPerformancePayload<ExtArgs>[]
+    materialRequisitionsCreated: Prisma.$MaterialRequisitionPayload<ExtArgs>[]
+    requisitionAmendmentsRequested: Prisma.$RequisitionAmendmentPayload<ExtArgs>[]
+    requisitionAmendmentsAcknowledged: Prisma.$RequisitionAmendmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     fullName: string
     email: string
     phone: string
+    passwordHash: string | null
     isActive: boolean
     clerkUserId: string | null
     approvedById: string | null
@@ -9588,6 +10955,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   deviceTokens<T extends Prisma.User$deviceTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deviceTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeviceTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   jrArchitectPerformances<T extends Prisma.User$jrArchitectPerformancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jrArchitectPerformancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JrArchitectPerformancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quotationPerformances<T extends Prisma.User$quotationPerformancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$quotationPerformancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationUserPerformancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  materialRequisitionsCreated<T extends Prisma.User$materialRequisitionsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$materialRequisitionsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MaterialRequisitionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  requisitionAmendmentsRequested<T extends Prisma.User$requisitionAmendmentsRequestedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$requisitionAmendmentsRequestedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RequisitionAmendmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  requisitionAmendmentsAcknowledged<T extends Prisma.User$requisitionAmendmentsAcknowledgedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$requisitionAmendmentsAcknowledgedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RequisitionAmendmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9621,6 +10991,7 @@ export interface UserFieldRefs {
   readonly fullName: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly phone: Prisma.FieldRef<"User", 'String'>
+  readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly clerkUserId: Prisma.FieldRef<"User", 'String'>
   readonly approvedById: Prisma.FieldRef<"User", 'String'>
@@ -10879,6 +12250,78 @@ export type User$quotationPerformancesArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.QuotationUserPerformanceScalarFieldEnum | Prisma.QuotationUserPerformanceScalarFieldEnum[]
+}
+
+/**
+ * User.materialRequisitionsCreated
+ */
+export type User$materialRequisitionsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MaterialRequisition
+   */
+  select?: Prisma.MaterialRequisitionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MaterialRequisition
+   */
+  omit?: Prisma.MaterialRequisitionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MaterialRequisitionInclude<ExtArgs> | null
+  where?: Prisma.MaterialRequisitionWhereInput
+  orderBy?: Prisma.MaterialRequisitionOrderByWithRelationInput | Prisma.MaterialRequisitionOrderByWithRelationInput[]
+  cursor?: Prisma.MaterialRequisitionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MaterialRequisitionScalarFieldEnum | Prisma.MaterialRequisitionScalarFieldEnum[]
+}
+
+/**
+ * User.requisitionAmendmentsRequested
+ */
+export type User$requisitionAmendmentsRequestedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RequisitionAmendment
+   */
+  select?: Prisma.RequisitionAmendmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RequisitionAmendment
+   */
+  omit?: Prisma.RequisitionAmendmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RequisitionAmendmentInclude<ExtArgs> | null
+  where?: Prisma.RequisitionAmendmentWhereInput
+  orderBy?: Prisma.RequisitionAmendmentOrderByWithRelationInput | Prisma.RequisitionAmendmentOrderByWithRelationInput[]
+  cursor?: Prisma.RequisitionAmendmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RequisitionAmendmentScalarFieldEnum | Prisma.RequisitionAmendmentScalarFieldEnum[]
+}
+
+/**
+ * User.requisitionAmendmentsAcknowledged
+ */
+export type User$requisitionAmendmentsAcknowledgedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RequisitionAmendment
+   */
+  select?: Prisma.RequisitionAmendmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RequisitionAmendment
+   */
+  omit?: Prisma.RequisitionAmendmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RequisitionAmendmentInclude<ExtArgs> | null
+  where?: Prisma.RequisitionAmendmentWhereInput
+  orderBy?: Prisma.RequisitionAmendmentOrderByWithRelationInput | Prisma.RequisitionAmendmentOrderByWithRelationInput[]
+  cursor?: Prisma.RequisitionAmendmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RequisitionAmendmentScalarFieldEnum | Prisma.RequisitionAmendmentScalarFieldEnum[]
 }
 
 /**

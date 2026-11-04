@@ -97,7 +97,11 @@ export const ModelName = {
   WebsiteTeamMember: 'WebsiteTeamMember',
   QuotationTemplateOverride: 'QuotationTemplateOverride',
   JrArchitectPerformance: 'JrArchitectPerformance',
-  QuotationUserPerformance: 'QuotationUserPerformance'
+  QuotationUserPerformance: 'QuotationUserPerformance',
+  MaterialRequisition: 'MaterialRequisition',
+  MaterialRequisitionItem: 'MaterialRequisitionItem',
+  BoqSavedAccessoryItem: 'BoqSavedAccessoryItem',
+  RequisitionAmendment: 'RequisitionAmendment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -213,6 +217,7 @@ export const UserScalarFieldEnum = {
   fullName: 'fullName',
   email: 'email',
   phone: 'phone',
+  passwordHash: 'passwordHash',
   isActive: 'isActive',
   clerkUserId: 'clerkUserId',
   approvedById: 'approvedById',
@@ -857,6 +862,72 @@ export const QuotationUserPerformanceScalarFieldEnum = {
 } as const
 
 export type QuotationUserPerformanceScalarFieldEnum = (typeof QuotationUserPerformanceScalarFieldEnum)[keyof typeof QuotationUserPerformanceScalarFieldEnum]
+
+
+export const MaterialRequisitionScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  quotationDraftId: 'quotationDraftId',
+  requisitionNo: 'requisitionNo',
+  status: 'status',
+  createdById: 'createdById',
+  notes: 'notes',
+  rejectionReason: 'rejectionReason',
+  cancellationReason: 'cancellationReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MaterialRequisitionScalarFieldEnum = (typeof MaterialRequisitionScalarFieldEnum)[keyof typeof MaterialRequisitionScalarFieldEnum]
+
+
+export const MaterialRequisitionItemScalarFieldEnum = {
+  id: 'id',
+  requisitionId: 'requisitionId',
+  quotationLineItemId: 'quotationLineItemId',
+  stockItemId: 'stockItemId',
+  workCategory: 'workCategory',
+  materialName: 'materialName',
+  specifications: 'specifications',
+  variantAttributes: 'variantAttributes',
+  netQuantity: 'netQuantity',
+  wastagePercent: 'wastagePercent',
+  finalQuantity: 'finalQuantity',
+  unit: 'unit',
+  productionPhase: 'productionPhase',
+  remarks: 'remarks'
+} as const
+
+export type MaterialRequisitionItemScalarFieldEnum = (typeof MaterialRequisitionItemScalarFieldEnum)[keyof typeof MaterialRequisitionItemScalarFieldEnum]
+
+
+export const BoqSavedAccessoryItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  category: 'category',
+  itemCode: 'itemCode',
+  defaultUnit: 'defaultUnit',
+  isActive: 'isActive',
+  serialNo: 'serialNo',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoqSavedAccessoryItemScalarFieldEnum = (typeof BoqSavedAccessoryItemScalarFieldEnum)[keyof typeof BoqSavedAccessoryItemScalarFieldEnum]
+
+
+export const RequisitionAmendmentScalarFieldEnum = {
+  id: 'id',
+  requisitionId: 'requisitionId',
+  requestedById: 'requestedById',
+  changeDescription: 'changeDescription',
+  requestedAt: 'requestedAt',
+  status: 'status',
+  acknowledgedById: 'acknowledgedById',
+  acknowledgedAt: 'acknowledgedAt'
+} as const
+
+export type RequisitionAmendmentScalarFieldEnum = (typeof RequisitionAmendmentScalarFieldEnum)[keyof typeof RequisitionAmendmentScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -56,6 +56,7 @@ model Lead {
   jrArchitectRequests LeadJrArchitectRequest[]
   meetingEvents LeadMeetingEvent[]
   transactions  Transaction[]
+  materialRequisitions MaterialRequisition[]
 
   @@index([assignedTo])
   @@index([primaryOwnerUserId])
@@ -144,6 +145,7 @@ model User {
   fullName    String
   email       String   @unique
   phone       String
+  passwordHash String?
   isActive    Boolean  @default(true)
   clerkUserId String?  @unique
   approvedById String?
@@ -187,6 +189,9 @@ model User {
   deviceTokens DeviceToken[]
   jrArchitectPerformances JrArchitectPerformance[]
   quotationPerformances QuotationUserPerformance[]
+  materialRequisitionsCreated MaterialRequisition[]      @relation("MaterialRequisitionCreatedBy")
+  requisitionAmendmentsRequested RequisitionAmendment[]  @relation("RequisitionAmendmentRequestedBy")
+  requisitionAmendmentsAcknowledged RequisitionAmendment[] @relation("RequisitionAmendmentAcknowledgedBy")
 }
 
 model DeviceToken {
@@ -326,6 +331,7 @@ model QuotationDraft {
   lead      Lead  @relation(fields: [leadId], references: [id], onDelete: Cascade)
   createdBy User  @relation("QuotationDraftCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
   updatedBy User? @relation("QuotationDraftUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  materialRequisitions MaterialRequisition[]
 
   @@unique([leadId, draftKey])
   @@index([createdById])
@@ -1180,4 +1186,103 @@ model QuotationUserPerformance {
   @@index([userId])
   @@index([monthKey])
 }
+
+enum RequisitionWorkCategory {
+  CEILING
+  WALL_PANELING
+  CABINETS_CLOSETS
+  FURNITURE
+  ACCESSORIES
+  ELECTRICAL_WORK
+  PAINT
+  APPLIANCES
+}
+
+enum RequisitionStatus {
+  DRAFT
+  SUBMITTED
+  REJECTED
+  IN_PROCUREMENT
+  FULFILLED
+  CANCELLED
+}
+
+model MaterialRequisition {
+  id                 String                    @id @default(cuid())
+  leadId             String
+  quotationDraftId   String?
+  requisitionNo      String                    @unique
+  status             RequisitionStatus         @default(DRAFT)
+  createdById        String
+  notes              String?
+  rejectionReason    String?
+  cancellationReason String?
+  createdAt          DateTime                  @default(now())
+  updatedAt          DateTime                  @updatedAt
+
+  lead               Lead                      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  quotationDraft     QuotationDraft?           @relation(fields: [quotationDraftId], references: [id])
+  createdBy          User                      @relation("MaterialRequisitionCreatedBy", fields: [createdById], references: [id])
+  items              MaterialRequisitionItem[]
+  amendments         RequisitionAmendment[]
+
+  @@index([leadId])
+  @@index([quotationDraftId])
+  @@index([status])
+}
+
+model MaterialRequisitionItem {
+  id                  String                  @id @default(cuid())
+  requisitionId       String
+  quotationLineItemId String?
+  stockItemId         String?
+  workCategory        RequisitionWorkCategory @default(CABINETS_CLOSETS)
+  materialName        String
+  specifications      String?
+  variantAttributes   Json?
+  netQuantity         Float                   @default(1)
+  wastagePercent      Float                   @default(0)
+  finalQuantity       Float                   @default(1)
+  unit                String                  @default("Pcs")
+  productionPhase     String?
+  remarks             String?
+
+  requisition         MaterialRequisition     @relation(fields: [requisitionId], references: [id], onDelete: Cascade)
+
+  @@index([requisitionId])
+  @@index([workCategory])
+}
+
+model BoqSavedAccessoryItem {
+  id          String   @id @default(cuid())
+  name        String
+  category    String   @default("")
+  itemCode    String   @default("")
+  defaultUnit String   @default("Pcs")
+  isActive    Boolean  @default(true)
+  serialNo    Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isActive, serialNo])
+}
+
+model RequisitionAmendment {
+  id                String              @id @default(cuid())
+  requisitionId     String
+  requestedById     String
+  changeDescription String
+  requestedAt       DateTime            @default(now())
+  status            String              @default("PENDING")
+  acknowledgedById  String?
+  acknowledgedAt    DateTime?
+
+  requisition       MaterialRequisition @relation(fields: [requisitionId], references: [id], onDelete: Cascade)
+  requestedBy       User                @relation("RequisitionAmendmentRequestedBy", fields: [requestedById], references: [id])
+  acknowledgedBy    User?               @relation("RequisitionAmendmentAcknowledgedBy", fields: [acknowledgedById], references: [id])
+
+  @@index([requisitionId])
+  @@index([status])
+}
+
 

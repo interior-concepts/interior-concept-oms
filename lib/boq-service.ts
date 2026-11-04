@@ -1,0 +1,410 @@
+'use server'
+
+import prisma from '@/lib/prisma'
+import { RequisitionWorkCategory, RequisitionStatus, LeadSubStatus, LeadAssignmentDepartment } from '@/generated/prisma/client'
+import type { Prisma } from '@/generated/prisma/client'
+import { requireDatabaseRoles } from '@/lib/authz'
+
+type RequisitionVariantAttributes = Record<string, string | number | boolean | null | undefined>
+
+export type RequisitionItemInput = {
+  id?: string
+  quotationLineItemId?: string
+  workCategory: RequisitionWorkCategory
+  materialName: string
+  specifications?: string
+  variantAttributes?: RequisitionVariantAttributes
+  netQuantity: number
+  wastagePercent: number
+  finalQuantity: number
+  unit: string
+  productionPhase?: string
+  remarks?: string
+}
+
+export async function getBoqDashboardStats() {
+  try {
+    const totalRequisitions = await prisma.materialRequisition.count()
+    const draftCount = await prisma.materialRequisition.count({
+      where: { status: 'DRAFT' },
+    })
+    const submittedCount = await prisma.materialRequisition.count({
+      where: { status: 'SUBMITTED' },
+    })
+    const inProcurementCount = await prisma.materialRequisition.count({
+      where: { status: 'IN_PROCUREMENT' },
+    })
+    const fulfilledCount = await prisma.materialRequisition.count({
+      where: { status: 'FULFILLED' },
+    })
+
+    // Count leads with approved detail quotations
+    const approvedQuotationsCount = await prisma.quotationDraft.count({
+      where: {
+        draftKey: 'detail',
+      },
+    })
+
+    const recentRequisitions = await prisma.materialRequisition.findMany({
+      take: 6,
+      orderBy: { updatedAt: 'desc' },
+      include: {
+        lead: {
+          select: {
+            id: true,
+            name: true,
+            phone: true,
+            location: true,
+            stage: true,
+          },
+        },
+        createdBy: {
+          select: { fullName: true },
+        },
+        _count: {
+          select: { items: true },
+        },
+      },
+    })
+
+    return {
+      totalRequisitions,
+      draftCount,
+      submittedCount,
+      inProcurementCount,
+      fulfilledCount,
+      approvedQuotationsCount,
+      recentRequisitions,
+    }
+  } catch (error) {
+    console.error('Error fetching BOQ dashboard stats:', error)
+    return {
+      totalRequisitions: 0,
+      draftCount: 0,
+      submittedCount: 0,
+      inProcurementCount: 0,
+      fulfilledCount: 0,
+      approvedQuotationsCount: 0,
+      recentRequisitions: [],
+    }
+  }
+}
+
+export async function getBoqAssignedTasks() {
+  try {
+    const authResult = await requireDatabaseRoles([])
+    if (!authResult.ok) return []
+    const currentUserId = authResult.actorUserId
+    const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
+    const actorRoles = new Set(authResult.actorRoles.map((r) => r.trim().toLowerCase()))
+    const isAdmin = actorDepartments.has('ADMIN') || actorRoles.has('admin')
+
+    const leads = await prisma.lead.findMany({
+      where: isAdmin
+        ? {
+            assignments: {
+              some: {
+                department: LeadAssignmentDepartment.BOQ,
+              },
+            },
+          }
+        : {
+            assignments: {
+              some: {
+                department: LeadAssignmentDepartment.BOQ,
+                userId: currentUserId,
+              },
+            },
+          },
+      orderBy: { updated_at: 'desc' },
+      include: {
+        assignee: {
+          select: { id: true, fullName: true, email: true },
+        },
+        assignments: {
+          where: { department: LeadAssignmentDepartment.BOQ },
+          orderBy: { createdAt: 'desc' },
+          take: 1,
+          include: { user: { select: { id: true, fullName: true, email: true } } },
+        },
+        quotationDrafts: {
+          where: { draftKey: { startsWith: 'detail' } },
+          orderBy: { updatedAt: 'desc' },
+          take: 1,
+          select: {
+            id: true,
+            status: true,
+            grandTotal: true,
+            updatedAt: true,
+          },
+        },
+        materialRequisitions: {
+          take: 1,
+          orderBy: { updatedAt: 'desc' },
+          include: {
+            _count: { select: { items: true } },
+          },
+        },
+      },
+    })
+
+    return leads.map((lead) => {
+      const quotation = lead.quotationDrafts[0] || null
+      const requisition = lead.materialRequisitions[0] || null
+
+      return {
+        id: lead.id,
+        name: lead.name,
+        phone: lead.phone || 'N/A',
+        location: lead.location || 'N/A',
+        stage: lead.stage,
+        assigneeName: lead.assignee?.fullName || 'Unassigned',
+        boqAssignee: lead.assignments[0]?.user ?? null,
+        quotationStatus: quotation?.status || 'NO_QUOTATION',
+        quotationTotal: quotation?.grandTotal || 0,
+        requisitionStatus: requisition?.status || 'NOT_STARTED',
+        requisitionItemCount: requisition?._count.items || 0,
+        requisitionId: requisition?.id || null,
+        updatedAt: lead.updated_at,
+      }
+    })
+  } catch (error) {
+    console.error('Error fetching BOQ assigned tasks:', error)
+    return []
+  }
+}
+
+export async function getLeadRequisitionData(leadId: string) {
+  try {
+    const authResult = await requireDatabaseRoles([])
+    if (!authResult.ok) return null
+    const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
+    const actorRoles = new Set(authResult.actorRoles.map((r) => r.trim().toLowerCase()))
+    const actorIsAdmin = actorDepartments.has('ADMIN') || actorRoles.has('admin')
+    if (!actorIsAdmin) {
+      const assigned = await prisma.leadAssignment.findFirst({
+        where: { leadId, department: LeadAssignmentDepartment.BOQ, userId: authResult.actorUserId },
+        select: { id: true },
+      })
+      if (!assigned) return null
+    }
+    const lead = await prisma.lead.findUnique({
+      where: { id: leadId },
+      include: {
+        quotationDrafts: {
+          where: { draftKey: { startsWith: 'detail' } },
+          orderBy: { updatedAt: 'desc' },
+          take: 1,
+        },
+        materialRequisitions: {
+          take: 1,
+          orderBy: { updatedAt: 'desc' },
+          include: {
+            items: {
+              orderBy: { id: 'asc' },
+            },
+            amendments: {
+              orderBy: { requestedAt: 'desc' },
+              include: {
+                requestedBy: { select: { fullName: true } },
+              },
+            },
+          },
+        },
+      },
+    })
+
+    if (!lead) return null
+
+    const detailQuotation = lead.quotationDrafts[0] || null
+    const existingRequisition = lead.materialRequisitions[0] || null
+
+    return {
+      lead: {
+        id: lead.id,
+        name: lead.name,
+        phone: lead.phone,
+        email: lead.email,
+        location: lead.location,
+        budget: lead.budget,
+        stage: lead.stage,
+      },
+      detailQuotation: detailQuotation
+        ? {
+            id: detailQuotation.id,
+            grandTotal: detailQuotation.grandTotal,
+            projectSqft: detailQuotation.projectSqft,
+            status: detailQuotation.status,
+            content: detailQuotation.content,
+          }
+        : null,
+      requisition: existingRequisition
+        ? {
+            id: existingRequisition.id,
+            requisitionNo: existingRequisition.requisitionNo,
+            status: existingRequisition.status,
+            notes: existingRequisition.notes,
+            rejectionReason: existingRequisition.rejectionReason,
+            cancellationReason: existingRequisition.cancellationReason,
+            items: existingRequisition.items,
+            amendments: existingRequisition.amendments,
+          }
+        : null,
+    }
+  } catch (error) {
+    console.error('Error fetching lead requisition data:', error)
+    return null
+  }
+}
+
+export async function saveMaterialRequisition(input: {
+  leadId: string
+  quotationDraftId?: string
+  status?: RequisitionStatus
+  notes?: string
+  items: RequisitionItemInput[]
+}) {
+  try {
+    const authResult = await requireDatabaseRoles([])
+    if (!authResult.ok) return { success: false, error: 'Unauthorized' }
+    const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
+    const actorRoles = new Set(authResult.actorRoles.map((r) => r.trim().toLowerCase()))
+    const actorIsAdmin = actorDepartments.has('ADMIN') || actorRoles.has('admin')
+    if (!actorIsAdmin) {
+      const assigned = await prisma.leadAssignment.findFirst({
+        where: { leadId: input.leadId, department: LeadAssignmentDepartment.BOQ, userId: authResult.actorUserId },
+        select: { id: true },
+      })
+      if (!assigned) return { success: false, error: 'This project is not assigned to you.' }
+    }
+
+    const requisitionNo = `REQ-${Date.now().toString().slice(-6)}`
+
+    // Check if requisition exists for lead
+    const existing = await prisma.materialRequisition.findFirst({
+      where: { leadId: input.leadId },
+    })
+
+    let requisitionId = existing?.id
+
+    if (existing) {
+      // Guard against deleting purchase lines while in procurement or fulfilled (Question 9)
+      if (existing.status === 'IN_PROCUREMENT' || existing.status === 'FULFILLED') {
+        return {
+          success: false,
+          error:
+            'This requisition is currently in procurement. Active supplier orders are attached. Please use "Request Amendment" to propose changes.',
+        }
+      }
+
+      // Update header
+      await prisma.materialRequisition.update({
+        where: { id: existing.id },
+        data: {
+          status: input.status || existing.status,
+          notes: input.notes,
+          quotationDraftId: input.quotationDraftId || existing.quotationDraftId,
+          ...(input.status === 'SUBMITTED' ? { rejectionReason: null } : {}),
+        },
+      })
+      // Clear old items and recreate
+      await prisma.materialRequisitionItem.deleteMany({
+        where: { requisitionId: existing.id },
+      })
+    } else {
+      // Create new header
+      const newReq = await prisma.materialRequisition.create({
+        data: {
+          leadId: input.leadId,
+          quotationDraftId: input.quotationDraftId,
+          requisitionNo,
+          status: input.status || 'DRAFT',
+          notes: input.notes,
+          createdById: authResult.actorUserId,
+        },
+      })
+      requisitionId = newReq.id
+    }
+
+    const nextSubStatus = input.status === RequisitionStatus.SUBMITTED
+      ? LeadSubStatus.BOQ_COMPLETED
+      : LeadSubStatus.BOQ_WORKING
+    await prisma.lead.update({
+      where: { id: input.leadId },
+      data: { subStatus: nextSubStatus },
+    })
+
+    // Insert line items
+    if (requisitionId && input.items.length > 0) {
+      await prisma.materialRequisitionItem.createMany({
+        data: input.items.map((item) => {
+          const parsedNetQuantity = Number(item.netQuantity)
+          const netQuantity = Number.isFinite(parsedNetQuantity) ? parsedNetQuantity : 1
+          const parsedWastagePercent = Number(item.wastagePercent)
+          const parsedFinalQuantity = Number(item.finalQuantity)
+          return {
+            requisitionId: requisitionId!,
+            quotationLineItemId: item.quotationLineItemId,
+            workCategory: item.workCategory,
+            materialName: item.materialName,
+            specifications: item.specifications,
+            variantAttributes: (item.variantAttributes || {}) as Prisma.InputJsonValue,
+            // Zero is used for schedule items whose quantity still needs confirmation.
+            netQuantity,
+            wastagePercent: Number.isFinite(parsedWastagePercent) ? parsedWastagePercent : 0,
+            finalQuantity: Number.isFinite(parsedFinalQuantity) ? parsedFinalQuantity : netQuantity,
+            unit: item.unit || 'Pcs',
+            productionPhase: item.productionPhase,
+            remarks: item.remarks,
+          }
+        }),
+      })
+    }
+
+    return { success: true, requisitionId }
+  } catch (error) {
+    console.error('Error saving material requisition:', error)
+    return { success: false, error: String(error) }
+  }
+}
+
+import { DEFAULT_CABINET_CATALOG, type CabinetCatalogConfig } from '@/lib/boq-cabinet-catalog'
+
+export async function getBoqCabinetCatalog(): Promise<CabinetCatalogConfig> {
+  return DEFAULT_CABINET_CATALOG
+}
+
+export async function createBoqAmendment(leadId: string, changeDescription: string) {
+  try {
+    const authResult = await requireDatabaseRoles([])
+    if (!authResult.ok) return { success: false, error: 'Unauthorized' }
+
+    if (!changeDescription.trim()) {
+      return { success: false, error: 'Change description is required.' }
+    }
+
+    const requisition = await prisma.materialRequisition.findFirst({
+      where: { leadId },
+      select: { id: true },
+    })
+
+    if (!requisition) {
+      return { success: false, error: 'No requisition found for this project.' }
+    }
+
+    const amendment = await prisma.requisitionAmendment.create({
+      data: {
+        requisitionId: requisition.id,
+        changeDescription: changeDescription.trim(),
+        requestedById: authResult.actorUserId,
+        status: 'PENDING',
+      },
+    })
+
+    return { success: true, data: amendment }
+  } catch (error) {
+    console.error('Error creating BOQ amendment:', error)
+    return { success: false, error: 'Failed to submit amendment request.' }
+  }
+}
+

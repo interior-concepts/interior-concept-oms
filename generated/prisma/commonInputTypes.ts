@@ -749,6 +749,40 @@ export type EnumTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumTransactionTypeFilter<$PrismaModel>
 }
 
+export type EnumRequisitionStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.RequisitionStatus | Prisma.EnumRequisitionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RequisitionStatus[] | Prisma.ListEnumRequisitionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RequisitionStatus[] | Prisma.ListEnumRequisitionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRequisitionStatusFilter<$PrismaModel> | $Enums.RequisitionStatus
+}
+
+export type EnumRequisitionStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RequisitionStatus | Prisma.EnumRequisitionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RequisitionStatus[] | Prisma.ListEnumRequisitionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RequisitionStatus[] | Prisma.ListEnumRequisitionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRequisitionStatusWithAggregatesFilter<$PrismaModel> | $Enums.RequisitionStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRequisitionStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRequisitionStatusFilter<$PrismaModel>
+}
+
+export type EnumRequisitionWorkCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.RequisitionWorkCategory | Prisma.EnumRequisitionWorkCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.RequisitionWorkCategory[] | Prisma.ListEnumRequisitionWorkCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RequisitionWorkCategory[] | Prisma.ListEnumRequisitionWorkCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRequisitionWorkCategoryFilter<$PrismaModel> | $Enums.RequisitionWorkCategory
+}
+
+export type EnumRequisitionWorkCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RequisitionWorkCategory | Prisma.EnumRequisitionWorkCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.RequisitionWorkCategory[] | Prisma.ListEnumRequisitionWorkCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RequisitionWorkCategory[] | Prisma.ListEnumRequisitionWorkCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRequisitionWorkCategoryWithAggregatesFilter<$PrismaModel> | $Enums.RequisitionWorkCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRequisitionWorkCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRequisitionWorkCategoryFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1419,6 +1453,40 @@ export type NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel = never> 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTransactionTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTransactionTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumRequisitionStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.RequisitionStatus | Prisma.EnumRequisitionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RequisitionStatus[] | Prisma.ListEnumRequisitionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RequisitionStatus[] | Prisma.ListEnumRequisitionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRequisitionStatusFilter<$PrismaModel> | $Enums.RequisitionStatus
+}
+
+export type NestedEnumRequisitionStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RequisitionStatus | Prisma.EnumRequisitionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RequisitionStatus[] | Prisma.ListEnumRequisitionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RequisitionStatus[] | Prisma.ListEnumRequisitionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRequisitionStatusWithAggregatesFilter<$PrismaModel> | $Enums.RequisitionStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRequisitionStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRequisitionStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumRequisitionWorkCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.RequisitionWorkCategory | Prisma.EnumRequisitionWorkCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.RequisitionWorkCategory[] | Prisma.ListEnumRequisitionWorkCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RequisitionWorkCategory[] | Prisma.ListEnumRequisitionWorkCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRequisitionWorkCategoryFilter<$PrismaModel> | $Enums.RequisitionWorkCategory
+}
+
+export type NestedEnumRequisitionWorkCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RequisitionWorkCategory | Prisma.EnumRequisitionWorkCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.RequisitionWorkCategory[] | Prisma.ListEnumRequisitionWorkCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RequisitionWorkCategory[] | Prisma.ListEnumRequisitionWorkCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRequisitionWorkCategoryWithAggregatesFilter<$PrismaModel> | $Enums.RequisitionWorkCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRequisitionWorkCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRequisitionWorkCategoryFilter<$PrismaModel>
 }
 
 

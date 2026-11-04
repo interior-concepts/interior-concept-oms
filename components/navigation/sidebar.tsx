@@ -169,6 +169,23 @@ const navigationGroups: Record<string, NavGroup[]> = {
       ],
     },
     {
+      id: 'admin-boq',
+      label: 'BOQ Team',
+      defaultOpen: false,
+      items: [
+        {
+          icon: LayoutDashboard,
+          label: 'BOQ Dashboard',
+          href: '/crm/boq/dashboard',
+        },
+        {
+          icon: ClipboardList,
+          label: 'BOQ Assigned Tasks',
+          href: '/crm/boq/assigned-task',
+        },
+      ],
+    },
+    {
       id: 'admin-settings',
       label: 'Settings',
       defaultOpen: false,
@@ -484,6 +501,44 @@ const navigationGroups: Record<string, NavGroup[]> = {
           icon: Settings,
           label: 'Finance Settings',
           href: '/crm/admin/finance/settings',
+        },
+      ],
+    },
+  ],
+  'BOQ Team': [
+    {
+      id: 'boq-overview',
+      label: 'Overview',
+      defaultOpen: true,
+      items: [
+        {
+          icon: LayoutDashboard,
+          label: 'Dashboard',
+          href: '/crm/boq/dashboard',
+        },
+        {
+          icon: ClipboardList,
+          label: 'Assigned Tasks',
+          href: '/crm/boq/assigned-task',
+        },
+      ],
+    },
+  ],
+  'BOQ Department': [
+    {
+      id: 'boq-overview',
+      label: 'Overview',
+      defaultOpen: true,
+      items: [
+        {
+          icon: LayoutDashboard,
+          label: 'Dashboard',
+          href: '/crm/boq/dashboard',
+        },
+        {
+          icon: ClipboardList,
+          label: 'Assigned Tasks',
+          href: '/crm/boq/assigned-task',
         },
       ],
     },

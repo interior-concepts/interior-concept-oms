@@ -142,6 +142,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       'JR_ARCHITECT',
       'VISUALIZER_3D',
       'ACCOUNTS',
+      'BOQ',
     ];
     debugLog('🔎 [POST /api/lead/[id]/assignments] - Validating department');
     if (!validDepartments.includes(department)) {

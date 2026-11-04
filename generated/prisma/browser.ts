@@ -252,3 +252,23 @@ export type JrArchitectPerformance = Prisma.JrArchitectPerformanceModel
  * 
  */
 export type QuotationUserPerformance = Prisma.QuotationUserPerformanceModel
+/**
+ * Model MaterialRequisition
+ * 
+ */
+export type MaterialRequisition = Prisma.MaterialRequisitionModel
+/**
+ * Model MaterialRequisitionItem
+ * 
+ */
+export type MaterialRequisitionItem = Prisma.MaterialRequisitionItemModel
+/**
+ * Model BoqSavedAccessoryItem
+ * 
+ */
+export type BoqSavedAccessoryItem = Prisma.BoqSavedAccessoryItemModel
+/**
+ * Model RequisitionAmendment
+ * 
+ */
+export type RequisitionAmendment = Prisma.RequisitionAmendmentModel

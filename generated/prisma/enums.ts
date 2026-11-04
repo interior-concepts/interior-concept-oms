@@ -348,3 +348,29 @@ export const AccountStatus = {
 } as const
 
 export type AccountStatus = (typeof AccountStatus)[keyof typeof AccountStatus]
+
+
+export const RequisitionWorkCategory = {
+  CEILING: 'CEILING',
+  WALL_PANELING: 'WALL_PANELING',
+  CABINETS_CLOSETS: 'CABINETS_CLOSETS',
+  FURNITURE: 'FURNITURE',
+  ACCESSORIES: 'ACCESSORIES',
+  ELECTRICAL_WORK: 'ELECTRICAL_WORK',
+  PAINT: 'PAINT',
+  APPLIANCES: 'APPLIANCES'
+} as const
+
+export type RequisitionWorkCategory = (typeof RequisitionWorkCategory)[keyof typeof RequisitionWorkCategory]
+
+
+export const RequisitionStatus = {
+  DRAFT: 'DRAFT',
+  SUBMITTED: 'SUBMITTED',
+  REJECTED: 'REJECTED',
+  IN_PROCUREMENT: 'IN_PROCUREMENT',
+  FULFILLED: 'FULFILLED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type RequisitionStatus = (typeof RequisitionStatus)[keyof typeof RequisitionStatus]
