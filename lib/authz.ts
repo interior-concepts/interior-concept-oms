@@ -132,8 +132,9 @@ export async function requireDatabaseRoles(allowedRoles: string[]): Promise<Role
         if (name === 'QUOTATION') return ['QUOTATION', 'QUOTATION_TEAM']
         if (name === 'VISUALIZER_3D') return ['VISUALIZER_3D', '3D_VISUALIZER']
         if (name === '3D_VISUALIZER') return ['3D_VISUALIZER', 'VISUALIZER_3D']
-        if (name === 'BOQ_TEAM' || name === 'BOQ Team' || name === 'BOQ Department') return ['BOQ', 'BOQ_TEAM']
-        if (name === 'BOQ') return ['BOQ', 'BOQ_TEAM']
+        if (name === 'BOQ_TEAM' || name === 'BOQ Team' || name === 'BOQ Department' || name === 'BOQ') {
+          return ['BOQ', 'BOQ_TEAM', 'BOQ Team', 'BOQ Department']
+        }
         return [name]
       }),
     },

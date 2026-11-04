@@ -75,6 +75,9 @@ const getDepartmentPermissionMap = (department: Department): RolePermissionMap =
     'QUOTATION_TEAM': 'bg-cyan-100 dark:bg-cyan-900/40 text-cyan-800 dark:text-cyan-200',
     'VISIT_TEAM': 'bg-indigo-100 dark:bg-indigo-900/40 text-indigo-800 dark:text-indigo-200',
     'ACCOUNTS': 'bg-lime-100 dark:bg-lime-900/40 text-lime-800 dark:text-lime-200',
+    'BOQ': 'bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-200',
+    'BOQ_TEAM': 'bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-200',
+    'BOQ Team': 'bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-200',
   }
 
   const departmentPermissionsMap: Record<string, string[]> = {
@@ -105,6 +108,15 @@ const getDepartmentPermissionMap = (department: Department): RolePermissionMap =
     ],
     'ACCOUNTS': [
       'view_leads', 'view_followups', 'view_activity_log'
+    ],
+    'BOQ': [
+      'view_leads', 'view_followups', 'view_visits'
+    ],
+    'BOQ_TEAM': [
+      'view_leads', 'view_followups', 'view_visits'
+    ],
+    'BOQ Team': [
+      'view_leads', 'view_followups', 'view_visits'
     ],
   }
 

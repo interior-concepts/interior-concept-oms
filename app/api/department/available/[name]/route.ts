@@ -13,6 +13,7 @@ const VALID_DEPARTMENTS = [
   'VISUALIZER_3D',
   'ACCOUNTS',
   'BOQ',
+  'BOQ_TEAM',
 ] as const;
 
 function resolveDepartmentAliases(departmentName: string): string[] {
@@ -21,6 +22,18 @@ function resolveDepartmentAliases(departmentName: string): string[] {
   }
   if (departmentName === 'QUOTATION_TEAM' || departmentName === 'QUOTATION') {
     return ['QUOTATION_TEAM', 'QUOTATION', 'SR_CRM']
+  }
+  if (departmentName === 'BOQ' || departmentName === 'BOQ_TEAM') {
+    return [
+      'BOQ',
+      'BOQ Team',
+      'BOQ Department',
+      'BOQ_TEAM',
+      'BOQ_DEPARTMENT',
+      'boq',
+      'boq team',
+      'Boq Team',
+    ]
   }
   return [departmentName]
 }

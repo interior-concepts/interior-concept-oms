@@ -17,6 +17,7 @@ const DEFAULT_MOCK_DEPARTMENTS = [
   { id: 'dept-visualizer', name: 'VISUALIZER_3D', description: '3D Visualizer' },
   { id: 'dept-finance', name: 'FINANCE', description: 'Finance' },
   { id: 'dept-accounts', name: 'ACCOUNTS', description: 'Accounts' },
+  { id: 'dept-boq', name: 'BOQ', description: 'BOQ Team' },
 ]
 
 const DEFAULT_MOCK_USER = {

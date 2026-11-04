@@ -543,6 +543,44 @@ const navigationGroups: Record<string, NavGroup[]> = {
       ],
     },
   ],
+  'BOQ': [
+    {
+      id: 'boq-overview',
+      label: 'Overview',
+      defaultOpen: true,
+      items: [
+        {
+          icon: LayoutDashboard,
+          label: 'Dashboard',
+          href: '/crm/boq/dashboard',
+        },
+        {
+          icon: ClipboardList,
+          label: 'Assigned Tasks',
+          href: '/crm/boq/assigned-task',
+        },
+      ],
+    },
+  ],
+  'BOQ_TEAM': [
+    {
+      id: 'boq-overview',
+      label: 'Overview',
+      defaultOpen: true,
+      items: [
+        {
+          icon: LayoutDashboard,
+          label: 'Dashboard',
+          href: '/crm/boq/dashboard',
+        },
+        {
+          icon: ClipboardList,
+          label: 'Assigned Tasks',
+          href: '/crm/boq/assigned-task',
+        },
+      ],
+    },
+  ],
 }
 
 export function Sidebar({ open, onOpenChange, role }: SidebarProps) {

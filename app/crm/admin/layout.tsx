@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
 import { MainLayout } from "@/components/layout/mainlayout";
+import { normalizeDepartmentName } from "@/lib/department-normalization";
 
 const CRM_DASHBOARD = "/crm/jr/dashboard";
 const SR_CRM_DASHBOARD = "/crm/sr/dashboard";
@@ -58,7 +59,9 @@ export default async function AdminLayout({
   }
 
   const departmentNames = new Set(
-    user.userDepartments.map((row) => row.department.name),
+    user.userDepartments
+      .map((row) => normalizeDepartmentName(row.department.name))
+      .filter((name): name is string => Boolean(name)),
   );
 
   if (departmentNames.has("ADMIN")) {
@@ -66,7 +69,7 @@ export default async function AdminLayout({
   }
 
   if (departmentNames.has("BOQ")) {
-    redirect("/crm/boq/assigned-task");
+    redirect("/crm/boq/dashboard");
   }
 
   if (departmentNames.has("FINANCE")) {

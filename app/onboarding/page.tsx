@@ -37,6 +37,8 @@ const DEPARTMENT_ROUTES: Record<string, string> = {
   ACCOUNTS: "/crm/admin/finance",
   BOQ: "/crm/boq/dashboard",
   BOQ_TEAM: "/crm/boq/dashboard",
+  "BOQ Team": "/crm/boq/dashboard",
+  "BOQ Department": "/crm/boq/dashboard",
 };
 
 type Department = {
@@ -99,8 +101,9 @@ export default function OnboardingPage() {
   );
 
   const resolveRedirect = (departmentName?: string | null) => {
-    const redirect = !departmentName ? DEFAULT_REDIRECT : DEPARTMENT_ROUTES[departmentName] ?? DEFAULT_REDIRECT;
-    // console.log('[OnboardingPage] resolveRedirect:', { departmentName, redirect });
+    if (!departmentName) return DEFAULT_REDIRECT;
+    const normalized = departmentName.trim().toUpperCase().replace(/\s+/g, '_');
+    const redirect = DEPARTMENT_ROUTES[departmentName] ?? DEPARTMENT_ROUTES[normalized] ?? DEFAULT_REDIRECT;
     return redirect;
   };
 
