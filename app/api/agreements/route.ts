@@ -76,6 +76,7 @@ export async function GET(request: NextRequest) {
                 LeadAssignmentDepartment.SR_CRM,
                 LeadAssignmentDepartment.VISUALIZER_3D,
                 LeadAssignmentDepartment.QUOTATION,
+                LeadAssignmentDepartment.BOQ,
               ],
             },
           },
@@ -132,6 +133,7 @@ export async function GET(request: NextRequest) {
       const srCrm = lead.assignments.find((a) => a.department === LeadAssignmentDepartment.SR_CRM)?.user ?? null
       const visualizer = lead.assignments.find((a) => a.department === LeadAssignmentDepartment.VISUALIZER_3D)?.user ?? null
       const quotation = lead.assignments.find((a) => a.department === LeadAssignmentDepartment.QUOTATION)?.user ?? null
+      const boqAssignee = lead.assignments.find((a) => a.department === LeadAssignmentDepartment.BOQ)?.user ?? null
 
       const quotationFiles = (lead.cadWorkSubmissions || []).flatMap((sub: any) => sub.files || [])
 
@@ -155,6 +157,7 @@ export async function GET(request: NextRequest) {
         srCrm,
         visualizer,
         quotation,
+        boqAssignee,
       }
     })
 

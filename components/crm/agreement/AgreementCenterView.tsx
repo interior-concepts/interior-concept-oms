@@ -35,6 +35,9 @@ import {
   MapPin,
   FileText,
   FileEdit,
+  Check,
+  CheckCircle2,
+  AlertCircle,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { AgreementDocument } from './AgreementDocument'
@@ -62,6 +65,7 @@ type AgreementLead = {
   srCrm: { id: string; fullName: string; email: string } | null
   visualizer: { id: string; fullName: string; email: string } | null
   quotation: { id: string; fullName: string; email: string } | null
+  boqAssignee: { id: string; fullName: string; email: string } | null
 }
 
 function formatDate(dateStr: string | null | undefined): string {
@@ -90,8 +94,32 @@ export function AgreementCenterView({
   const [searchInput, setSearchInput] = useState('')
   const [search, setSearch] = useState('')
   const [typeFilter, setTypeFilter] = useState('ALL')
+  const [boqFilter, setBoqFilter] = useState<'ALL' | 'PENDING' | 'ASSIGNED'>('ALL')
   const [downloadingId, setDownloadingId] = useState<string | null>(null)
   const [editingLead, setEditingLead] = useState<AgreementLead | null>(null)
+
+  const [staff, setStaff] = useState<Array<{ id: string; fullName: string; email: string }>>([])
+  const [staffLoading, setStaffLoading] = useState(true)
+  const [selectedBoq, setSelectedBoq] = useState<Record<string, string>>({})
+  const [savingBoqId, setSavingBoqId] = useState<string | null>(null)
+  const [assignError, setAssignError] = useState<Record<string, string>>({})
+
+  useEffect(() => {
+    const loadStaff = async () => {
+      setStaffLoading(true)
+      try {
+        const response = await fetch('/api/department/available/BOQ', { cache: 'no-store' })
+        const payload = await response.json()
+        if (!response.ok || !payload.success) throw new Error(payload.error ?? 'Failed to load BOQ staff')
+        setStaff(payload.users ?? [])
+      } catch (error) {
+        toast.error(error instanceof Error ? error.message : 'Failed to load BOQ staff')
+      } finally {
+        setStaffLoading(false)
+      }
+    }
+    void loadStaff()
+  }, [])
 
   useEffect(() => {
     const timer = setTimeout(() => setSearch(searchInput.trim()), 300)
@@ -110,7 +138,15 @@ export function AgreementCenterView({
       if (!res.ok || !payload.success) {
         throw new Error(payload.error || 'Failed to fetch agreement leads')
       }
-      setLeads(payload.data || [])
+      const data: AgreementLead[] = payload.data || []
+      setLeads(data)
+      setSelectedBoq((current) => {
+        const next = { ...current }
+        data.forEach((lead) => {
+          if (!(lead.id in next)) next[lead.id] = lead.boqAssignee?.id ?? ''
+        })
+        return next
+      })
     } catch (err) {
       console.error(err)
       toast.error(err instanceof Error ? err.message : 'Failed to fetch agreements')
@@ -122,6 +158,38 @@ export function AgreementCenterView({
   useEffect(() => {
     void fetchLeads()
   }, [fetchLeads])
+
+  const assignBoq = async (lead: AgreementLead) => {
+    const userId = selectedBoq[lead.id]
+    if (!userId) return
+    setSavingBoqId(lead.id)
+    setAssignError((prev) => ({ ...prev, [lead.id]: '' }))
+    try {
+      const response = await fetch(`/api/lead/${lead.id}/assignments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, department: 'BOQ' }),
+      })
+      const payload = await response.json()
+      if (!response.ok || !payload.success) {
+        const errMsg = payload.error ?? 'Failed to assign BOQ staff'
+        setAssignError((prev) => ({ ...prev, [lead.id]: errMsg }))
+        throw new Error(errMsg)
+      }
+      toast.success(lead.boqAssignee ? 'BOQ staff reassigned successfully.' : 'BOQ staff assigned successfully.')
+      await fetchLeads()
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Failed to assign BOQ staff')
+    } finally {
+      setSavingBoqId(null)
+    }
+  }
+
+  const filteredLeads = useMemo(() => {
+    if (boqFilter === 'PENDING') return leads.filter((l) => !l.boqAssignee)
+    if (boqFilter === 'ASSIGNED') return leads.filter((l) => Boolean(l.boqAssignee))
+    return leads
+  }, [leads, boqFilter])
 
   const stats = useMemo(() => {
     const total = leads.length
@@ -238,6 +306,19 @@ export function AgreementCenterView({
               </Select>
             </div>
 
+            <div className="w-full sm:w-56">
+              <Select value={boqFilter} onValueChange={(v) => setBoqFilter(v as any)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="All BOQ Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="ALL">All BOQ Status</SelectItem>
+                  <SelectItem value="PENDING">Pending BOQ Assignment</SelectItem>
+                  <SelectItem value="ASSIGNED">BOQ Assigned</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
             <Button variant="outline" onClick={() => void fetchLeads()} disabled={loading}>
               Refresh
             </Button>
@@ -259,19 +340,23 @@ export function AgreementCenterView({
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-[18%]">Client / Lead</TableHead>
-                    <TableHead className="w-[14%]">Agreement Type</TableHead>
-                    <TableHead className="w-[14%]">Agreed Value</TableHead>
-                    <TableHead className="w-[14%]">Assigned 3D Visualizer</TableHead>
-                    <TableHead className="w-[14%]">SR CRM Owner</TableHead>
-                    <TableHead className="w-[12%]">Current Stage</TableHead>
-                    <TableHead className="w-[14%] text-right">Agreement Paper</TableHead>
+                    <TableHead className="w-[16%]">Client / Lead</TableHead>
+                    <TableHead className="w-[12%]">Agreement Type</TableHead>
+                    <TableHead className="w-[11%]">Agreed Value</TableHead>
+                    <TableHead className="w-[18%]">BOQ Assignment</TableHead>
+                    <TableHead className="w-[12%]">SR CRM Owner</TableHead>
+                    <TableHead className="w-[11%]">Current Stage</TableHead>
+                    <TableHead className="w-[20%] text-right">Agreement Paper</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {leads.map((lead) => {
+                  {filteredLeads.map((lead) => {
                     const isDesign = lead.agreementType?.includes('DESIGN')
                     const isDownloading = downloadingId === lead.id
+                    const currentBoqId = lead.boqAssignee?.id ?? ''
+                    const selectedUserId = selectedBoq[lead.id] ?? currentBoqId
+                    const hasPendingChange = selectedUserId !== currentBoqId && Boolean(selectedUserId)
+                    const saving = savingBoqId === lead.id
 
                     return (
                       <TableRow key={lead.id} className="hover:bg-muted/40 transition">
@@ -320,18 +405,58 @@ export function AgreementCenterView({
                           </span>
                         </TableCell>
 
+                        {/* BOQ Assignment */}
                         <TableCell>
-                          <div className="space-y-0.5">
-                            <p className="text-sm font-medium text-foreground">
-                              {lead.visualizer?.fullName || (
-                                <span className="text-xs italic text-muted-foreground">Unassigned</span>
-                              )}
-                            </p>
-                            {lead.visualizer?.email && (
-                              <p className="text-xs text-muted-foreground truncate max-w-[150px]">
-                                {lead.visualizer.email}
-                              </p>
+                          <div className="space-y-1.5 min-w-[150px]">
+                            <div className="flex items-center gap-1.5">
+                              <Select
+                                value={selectedUserId}
+                                onValueChange={(v) => {
+                                  setSelectedBoq((cur) => ({ ...cur, [lead.id]: v }))
+                                  setAssignError((prev) => ({ ...prev, [lead.id]: '' }))
+                                }}
+                                disabled={staffLoading || saving}
+                              >
+                                <SelectTrigger className="h-8 text-xs flex-1 bg-background">
+                                  <SelectValue placeholder="Select BOQ staff" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {staff.map((user) => (
+                                    <SelectItem key={user.id} value={user.id} className="text-xs">
+                                      {user.fullName}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                              {hasPendingChange ? (
+                                <Button
+                                  size="sm"
+                                  className="h-8 px-2 text-xs shrink-0"
+                                  disabled={saving}
+                                  onClick={() => void assignBoq(lead)}
+                                  title="Confirm BOQ Assignment"
+                                >
+                                  {saving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
+                                  <span className="ml-1 hidden sm:inline">Save</span>
+                                </Button>
+                              ) : null}
+                            </div>
+                            {lead.boqAssignee ? (
+                              <div className="flex items-center gap-1 text-[11px] text-emerald-700 dark:text-emerald-400 font-medium">
+                                <CheckCircle2 className="h-3 w-3 shrink-0" />
+                                <span className="truncate max-w-[170px]" title={lead.boqAssignee.fullName}>
+                                  Current: {lead.boqAssignee.fullName}
+                                </span>
+                              </div>
+                            ) : (
+                              <div className="flex items-center gap-1 text-[11px] text-amber-600 dark:text-amber-400 font-medium">
+                                <AlertCircle className="h-3 w-3 shrink-0" />
+                                <span>Pending BOQ Assignment</span>
+                              </div>
                             )}
+                            {assignError[lead.id] ? (
+                              <div className="text-[11px] text-red-600 dark:text-red-400">{assignError[lead.id]}</div>
+                            ) : null}
                           </div>
                         </TableCell>
 
