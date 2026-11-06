@@ -1,6 +1,6 @@
 'use client'
 
-import { Document, Font, Image, Page, StyleSheet, Text, View } from '@react-pdf/renderer'
+import { Circle, Document, Font, Image, Page, StyleSheet, Svg, Text, View } from '@react-pdf/renderer'
 import type { AgreementData, AgreementClauseGroup } from '@/lib/agreement-types'
 import type { QuotationDraftContent, QuotationTotals } from '@/lib/quotation-types'
 import {
@@ -66,174 +66,144 @@ const logoSrc = `${getBaseUrl()}/Logo/interior-concept-logobg-removed.png`
 const watermarkSrc = `${getBaseUrl()}/Logo/interior-concept-icon-light.png`
 
 const styles = StyleSheet.create({
-  // ─── Cover Page Styles (Premium Bond-Paper Design) ───
+  // ─── Cover Page Styles (Corporate Two-Section Design) ───
   coverPage: {
     position: 'relative',
-    paddingHorizontal: 48,
-    paddingVertical: 50,
-    backgroundColor: '#fcfbfa',
+    padding: 0,
+    backgroundColor: '#ffffff',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
     height: '100%',
+    overflow: 'hidden',
   },
-  coverBorderOuter: {
-    position: 'absolute',
-    top: 20,
-    bottom: 20,
-    left: 20,
-    right: 20,
-    borderWidth: 1.2,
-    borderColor: GOLD,
-    pointerEvents: 'none',
-  },
-  coverBorderInner: {
-    position: 'absolute',
-    top: 25,
-    bottom: 25,
-    left: 25,
-    right: 25,
-    borderWidth: 0.6,
-    borderColor: '#d8ccb8',
-    pointerEvents: 'none',
-  },
-  // Minimal Corner Detailing
-  coverCornerTL: {
-    position: 'absolute',
-    top: 23,
-    left: 23,
-    width: 9,
-    height: 9,
-    borderTopWidth: 1.5,
-    borderLeftWidth: 1.5,
-    borderColor: ACCENT,
-    pointerEvents: 'none',
-  },
-  coverCornerTR: {
-    position: 'absolute',
-    top: 23,
-    right: 23,
-    width: 9,
-    height: 9,
-    borderTopWidth: 1.5,
-    borderRightWidth: 1.5,
-    borderColor: ACCENT,
-    pointerEvents: 'none',
-  },
-  coverCornerBL: {
-    position: 'absolute',
-    bottom: 23,
-    left: 23,
-    width: 9,
-    height: 9,
-    borderBottomWidth: 1.5,
-    borderLeftWidth: 1.5,
-    borderColor: ACCENT,
-    pointerEvents: 'none',
-  },
-  coverCornerBR: {
-    position: 'absolute',
-    bottom: 23,
-    right: 23,
-    width: 9,
-    height: 9,
-    borderBottomWidth: 1.5,
-    borderRightWidth: 1.5,
-    borderColor: ACCENT,
-    pointerEvents: 'none',
-  },
-  coverContentWrapper: {
+  coverUpperSection: {
+    height: '53%',
+    backgroundColor: '#f6f9f8',
+    position: 'relative',
+    overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 40,
+    paddingTop: 46,
+    paddingBottom: 42,
+  },
+  coverUpperContent: {
     width: '100%',
-    zIndex: 1,
+    alignItems: 'center',
+    zIndex: 2,
   },
   coverLogoSection: {
-    marginBottom: 52,
     alignItems: 'center',
+    marginBottom: 0,
   },
   coverLogo: {
     width: 200,
   },
   coverTitleSection: {
-    marginBottom: 54,
     alignItems: 'center',
+    marginBottom: 0,
+    zIndex: 2,
   },
   coverInteriorWorkSub: {
-    fontSize: 8.5,
+    fontSize: 9,
     fontWeight: 'bold',
-    color: ACCENT,
+    color: '#a57c00',
     textTransform: 'uppercase',
-    letterSpacing: 5.5,
-    marginBottom: 6,
+    letterSpacing: 6,
+    marginBottom: 8,
     textAlign: 'center',
   },
   coverTitle: {
     fontFamily: 'Playfair Display',
-    fontSize: 34,
+    fontSize: 38,
     fontWeight: 'bold',
-    color: PRIMARY,
-    letterSpacing: 2,
+    color: '#1f363d',
+    letterSpacing: 2.2,
     textAlign: 'center',
   },
   coverGoldDivider: {
-    width: 44,
-    height: 1.2,
-    backgroundColor: GOLD,
-    marginTop: 10,
+    width: 52,
+    height: 1.5,
+    backgroundColor: '#c5a059',
+    marginTop: 12,
     alignSelf: 'center',
   },
-  coverSection: {
-    marginBottom: 48,
+  coverLowerSection: {
+    height: '47%',
+    backgroundColor: '#16282e',
+    position: 'relative',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
-    maxWidth: 380,
+    justifyContent: 'center',
+    paddingHorizontal: 44,
+    paddingVertical: 32,
   },
-  coverSectionLabel: {
+  coverLowerContent: {
+    width: '100%',
+    maxWidth: 390,
+    alignItems: 'center',
+    zIndex: 2,
+  },
+  coverInfoBlock: {
+    alignItems: 'center',
+    width: '100%',
+  },
+  coverSectionLabelDark: {
     fontSize: 8,
     fontWeight: 'bold',
-    color: ACCENT,
+    color: '#c5a059',
     textTransform: 'uppercase',
-    letterSpacing: 2.2,
-    marginBottom: 6,
+    letterSpacing: 2.5,
+    marginBottom: 5,
     textAlign: 'center',
   },
-  coverClientName: {
+  coverClientNameDark: {
     fontFamily: 'Playfair Display',
-    fontSize: 16,
+    fontSize: 16.5,
     fontWeight: 'bold',
-    color: PRIMARY,
+    color: '#ffffff',
     textAlign: 'center',
     letterSpacing: 0.5,
   },
-  coverClientSub: {
+  coverClientSubDark: {
     fontSize: 9,
-    color: TEXT_MUTED,
+    color: '#cbd5e1',
     marginTop: 4,
     textAlign: 'center',
     lineHeight: 1.45,
+    maxWidth: 340,
   },
-  coverCompanyName: {
+  coverInfoDivider: {
+    width: 48,
+    height: 0.75,
+    backgroundColor: '#c5a059',
+    opacity: 0.45,
+    marginVertical: 18,
+    alignSelf: 'center',
+  },
+  coverCompanyNameDark: {
     fontFamily: 'Playfair Display',
     fontSize: 14.5,
     fontWeight: 'bold',
-    color: PRIMARY,
+    color: '#ffffff',
     textAlign: 'center',
     letterSpacing: 0.5,
   },
-  coverMetaSmall: {
+  coverMetaSmallDark: {
     fontSize: 8.5,
-    color: TEXT_MUTED,
+    color: '#94a3b8',
     marginTop: 4,
     textAlign: 'center',
-    letterSpacing: 0.3,
+    letterSpacing: 0.4,
   },
-  coverMetaSmallDate: {
+  coverMetaSmallDateDark: {
     fontSize: 8,
-    color: ACCENT,
-    marginTop: 3,
+    color: '#c5a059',
+    marginTop: 4,
     textAlign: 'center',
     letterSpacing: 0.5,
   },
@@ -1153,45 +1123,91 @@ export function AgreementDocument(props: AgreementPdfProps) {
 
   return (
     <Document title={`Agreement - ${clientName}`} author={companyName}>
-      {/* ─── FRONT COVER PAGE (PREMIUM BOND-PAPER DESIGN) ────────────── */}
+      {/* ─── FRONT COVER PAGE (CORPORATE TWO-SECTION DESIGN) ────────── */}
       <Page size="A4" style={styles.coverPage}>
-        {/* Sophisticated Bond-Paper Dual-Rule Frame with Corner Detailing */}
-        <View style={styles.coverBorderOuter} />
-        <View style={styles.coverBorderInner} />
-        <View style={styles.coverCornerTL} />
-        <View style={styles.coverCornerTR} />
-        <View style={styles.coverCornerBL} />
-        <View style={styles.coverCornerBR} />
+        {/* UPPER LIGHT SECTION */}
+        <View style={styles.coverUpperSection}>
+          {/* Geometric Decorative Elements: Overlapping Circular Arcs & Rings on Left */}
+          <Svg
+            width={280}
+            height={445}
+            viewBox="0 0 280 445"
+            style={{ position: 'absolute', top: 0, left: 0 }}
+          >
+            {/* 1. Large subtle background arc */}
+            <Circle cx={-30} cy={210} r={190} fill="#1f363d" opacity={0.05} />
+            {/* 2. Primary outer accent ring */}
+            <Circle cx={-20} cy={210} r={150} stroke="#a57c00" strokeWidth={2.5} fill="none" opacity={0.32} />
+            {/* 3. Intersecting shaded arc */}
+            <Circle cx={-10} cy={250} r={110} fill="#1f363d" opacity={0.09} />
+            {/* 4. Secondary inner ring */}
+            <Circle cx={15} cy={230} r={75} stroke="#1f363d" strokeWidth={1.8} fill="none" opacity={0.25} />
+            {/* 5. Delicate gold inner ring */}
+            <Circle cx={25} cy={225} r={48} stroke="#c5a059" strokeWidth={1.2} fill="none" opacity={0.45} />
+            {/* 6. Subtle decorative floating circles */}
+            <Circle cx={155} cy={140} r={4.5} fill="#a57c00" opacity={0.55} />
+            <Circle cx={185} cy={245} r={6.5} fill="#1f363d" opacity={0.18} />
+            <Circle cx={125} cy={305} r={3.5} fill="#a57c00" opacity={0.65} />
+            <Circle cx={195} cy={185} r={2.5} fill="#1f363d" opacity={0.35} />
+          </Svg>
 
-        {/* Centered content blocks with refined visual hierarchy */}
-        <View style={styles.coverContentWrapper}>
-          {/* 1. Logo */}
+          {/* Top Logo */}
           <View style={styles.coverLogoSection}>
             <Image src={logoSrc} style={styles.coverLogo} />
           </View>
 
-          {/* 2. Title: INTERIOR WORK & Agreement */}
+          {/* Prominent Agreement Title */}
           <View style={styles.coverTitleSection}>
             <Text style={styles.coverInteriorWorkSub}>INTERIOR WORK</Text>
             <Text style={styles.coverTitle}>Agreement</Text>
             <View style={styles.coverGoldDivider} />
           </View>
+        </View>
 
-          {/* 3. Prepared For (Client) */}
-          <View style={styles.coverSection}>
-            <Text style={styles.coverSectionLabel}>Prepared For</Text>
-            <Text style={styles.coverClientName}>{clientName}</Text>
-            {projectAddress ? (
-              <Text style={styles.coverClientSub}>{projectAddress}</Text>
-            ) : null}
-          </View>
+        {/* LOWER DARK SECTION */}
+        <View style={styles.coverLowerSection}>
+          {/* Geometric Decorative Elements: Complementary Rings on Bottom-Right */}
+          <Svg
+            width={260}
+            height={360}
+            viewBox="0 0 260 360"
+            style={{ position: 'absolute', bottom: 0, right: 0 }}
+          >
+            {/* Large subtle outline ring */}
+            <Circle cx={260} cy={360} r={200} stroke="#c5a059" strokeWidth={2} fill="none" opacity={0.22} />
+            {/* Concentric darker depth disc */}
+            <Circle cx={260} cy={360} r={140} fill="#0d1b1f" opacity={0.5} />
+            {/* Inner accent ring */}
+            <Circle cx={260} cy={360} r={90} stroke="#a57c00" strokeWidth={1.5} fill="none" opacity={0.38} />
+            {/* Innermost ring */}
+            <Circle cx={260} cy={360} r={50} stroke="#ffffff" strokeWidth={0.75} fill="none" opacity={0.15} />
+            {/* Subtle floating circles */}
+            <Circle cx={110} cy={240} r={4.5} fill="#c5a059" opacity={0.45} />
+            <Circle cx={155} cy={175} r={3} fill="#ffffff" opacity={0.3} />
+            <Circle cx={85} cy={285} r={2.5} fill="#c5a059" opacity={0.55} />
+          </Svg>
 
-          {/* 4. Prepared By (Company) */}
-          <View style={[styles.coverSection, { marginBottom: 0 }]}>
-            <Text style={styles.coverSectionLabel}>Prepared By</Text>
-            <Text style={styles.coverCompanyName}>{companyName}</Text>
-            <Text style={styles.coverMetaSmall}>{companyWebsite}</Text>
-            <Text style={styles.coverMetaSmallDate}>{formatDateString(agreementDate)}</Text>
+          {/* Centered Agreement Information */}
+          <View style={styles.coverLowerContent}>
+            {/* Prepared For Block */}
+            <View style={styles.coverInfoBlock}>
+              <Text style={styles.coverSectionLabelDark}>PREPARED FOR</Text>
+              <Text style={styles.coverClientNameDark}>{clientName}</Text>
+              {projectAddress ? (
+                <Text style={styles.coverClientSubDark}>{projectAddress}</Text>
+              ) : null}
+            </View>
+
+            {/* Separator Divider */}
+            <View style={styles.coverInfoDivider} />
+
+            {/* Prepared By Block */}
+            <View style={styles.coverInfoBlock}>
+              <Text style={styles.coverSectionLabelDark}>PREPARED BY</Text>
+              <Text style={styles.coverCompanyNameDark}>{companyName}</Text>
+              <Text style={styles.coverMetaSmallDark}>{companyWebsite}</Text>
+              <Text style={styles.coverMetaSmallDateDark}>{formatDateString(agreementDate)}</Text>
+            </View>
           </View>
         </View>
       </Page>
