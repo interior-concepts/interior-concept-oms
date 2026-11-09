@@ -135,7 +135,7 @@ export function ShortQuotationPrint({ content }: { content: ShortQuotationConten
           <PageHeader content={content} />
           <SectionTitle>{floorSummary.floor.name}</SectionTitle>
           <div className="flex border-b pb-1.5 pt-2 text-[9px] font-bold uppercase" style={{ color: PRIMARY, borderColor: PRIMARY }}>
-            <span className="w-[8%] text-center">SL</span><span className="w-[42%]">Name</span><span className="w-[12%] text-center">Qty/Sft</span><span className="w-[18%] text-right">Unit Price</span><span className="w-[20%] text-right">Total</span>
+            <span className="w-[8%] text-center">SL</span><span className="w-[42%]">Name</span><span className="w-[12%] text-center">Qty/Sft</span><span className="w-[18%] text-center">Unit Price</span><span className="w-[20%] text-center">Total</span>
           </div>
           {floorSummary.rooms.map((roomSummary) => (
             <Fragment key={roomSummary.room.id}>
@@ -153,8 +153,8 @@ export function ShortQuotationPrint({ content }: { content: ShortQuotationConten
                       </span>
                     ) : (
                       <>
-                        <span className="w-[18%] text-right text-neutral-600">{line.isLumpSum ? <span className="text-[8px] italic">{line.unitPriceLabel?.trim() || 'as per project design'}</span> : formatCurrency(line.unitPrice ?? 0)}</span>
-                        <span className="w-[20%] text-right font-bold" style={{ color: PRIMARY }}>{formatCurrency(line.total)}</span>
+                        <span className="w-[18%] text-center text-neutral-600">{line.isLumpSum ? <span className="text-[8px] italic">{line.unitPriceLabel?.trim() || 'as per project design'}</span> : formatCurrency(line.unitPrice ?? 0)}</span>
+                        <span className="w-[20%] text-center font-bold" style={{ color: PRIMARY }}>{formatCurrency(line.total)}</span>
                       </>
                     )}
                   </div>
