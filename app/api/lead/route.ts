@@ -243,7 +243,7 @@ function parseDateAtStartOfDayUtc(value: string | null): Date | null {
   const normalized = toOptionalString(value);
   if (!normalized) return null;
   if (!/^\d{4}-\d{2}-\d{2}$/.test(normalized)) return null;
-  const date = new Date(`${normalized}T00:00:00.000Z`);
+  const date = new Date(`${normalized}T00:00:00.000+06:00`);
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
@@ -251,7 +251,7 @@ function parseDateAtEndOfDayUtc(value: string | null): Date | null {
   const normalized = toOptionalString(value);
   if (!normalized) return null;
   if (!/^\d{4}-\d{2}-\d{2}$/.test(normalized)) return null;
-  const date = new Date(`${normalized}T23:59:59.999Z`);
+  const date = new Date(`${normalized}T23:59:59.999+06:00`);
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
@@ -382,14 +382,17 @@ export async function GET(request: NextRequest) {
     const hasCreatedFromParam = Boolean(toOptionalString(searchParams.get('createdFrom')));
     const hasCreatedToParam = Boolean(toOptionalString(searchParams.get('createdTo')));
 
-    if ((hasCreatedFromParam && !createdFrom) || (hasCreatedToParam && !createdTo)) {
+    const presetParam = searchParams.get('preset');
+    const isLifetime = presetParam === 'LIFETIME';
+
+    if (!isLifetime && ((hasCreatedFromParam && !createdFrom) || (hasCreatedToParam && !createdTo))) {
       return NextResponse.json(
         { success: false, error: 'Invalid date format. Use YYYY-MM-DD for createdFrom/createdTo.' },
         { status: 400 },
       );
     }
 
-    if (createdFrom && createdTo && createdFrom.getTime() > createdTo.getTime()) {
+    if (!isLifetime && createdFrom && createdTo && createdFrom.getTime() > createdTo.getTime()) {
       return NextResponse.json(
         { success: false, error: 'createdFrom must be before or equal to createdTo.' },
         { status: 400 },
@@ -397,7 +400,7 @@ export async function GET(request: NextRequest) {
     }
 
     const createdAtWhere: Prisma.DateTimeFilter | undefined =
-      createdFrom || createdTo
+      !isLifetime && (createdFrom || createdTo)
         ? {
             ...(createdFrom ? { gte: createdFrom } : {}),
             ...(createdTo ? { lte: createdTo } : {}),
@@ -675,7 +678,6 @@ export async function GET(request: NextRequest) {
         createdAt: Date;
         notes: string | null;
         status: string;
-        category: string;
         assignedTo: { id: string; fullName: string };
       };
 
@@ -794,7 +796,6 @@ export async function GET(request: NextRequest) {
               createdAt: true,
               notes: true,
               status: true,
-              category: true,
               assignedTo: { select: { id: true, fullName: true } },
             },
           }),
@@ -813,7 +814,6 @@ export async function GET(request: NextRequest) {
               createdAt: true,
               notes: true,
               status: true,
-              category: true,
               assignedTo: { select: { id: true, fullName: true } },
             },
           }),

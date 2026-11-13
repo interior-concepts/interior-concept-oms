@@ -55,29 +55,40 @@ import { downloadDetailQuotationWord, downloadShortQuotationWord } from '@/compo
 import { isDetailQuotationContent, isShortQuotationContent } from '@/lib/quotation-document'
 import { calculateQuotationTotals } from '@/lib/quotation-calculations'
 
-const PAGE_SIZE = 20
+const PAGE_SIZE = 50
 const stages = [
   'NEW',
   'NUMBER_COLLECTED',
   'CONTACT_ATTEMPTED',
   'NURTURING',
   'VISIT_PHASE',
+  'PARTIAL_VISIT_PHASE',
   'CAD_PHASE',
   'DISCOVERY',
   'QUOTATION_PHASE',
+  'PARTIAL_QUOTATION_PHASE',
   'BUDGET_PHASE',
   'CONVERSION',
   'VISUALIZATION_PHASE',
+  'PROJECT_SETUP',
+  'MATERIAL_PLANNING',
+  'PROCUREMENT',
+  'SITE_EXECUTION',
+  'QUALITY_CHECK',
+  'HANDOVER',
   'CLOSED',
 ]
 const stageGridStages = [
+  'NEW',
   'NUMBER_COLLECTED',
   'CONTACT_ATTEMPTED',
   'NURTURING',
   'VISIT_PHASE',
+  'PARTIAL_VISIT_PHASE',
   'CAD_PHASE',
   'DISCOVERY',
   'QUOTATION_PHASE',
+  'PARTIAL_QUOTATION_PHASE',
   'BUDGET_PHASE',
   'CONVERSION',
   'VISUALIZATION_PHASE',
@@ -101,6 +112,14 @@ const stageColors: Record<string, string> = {
   CONTACT_ATTEMPTED: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200',
   NURTURING: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200',
   CLOSED: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200',
+  PARTIAL_VISIT_PHASE: 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-200',
+  PARTIAL_QUOTATION_PHASE: 'bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-200',
+  PROJECT_SETUP: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-200',
+  MATERIAL_PLANNING: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200',
+  PROCUREMENT: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200',
+  SITE_EXECUTION: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200',
+  QUALITY_CHECK: 'bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-200',
+  HANDOVER: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200',
 }
 
 const stageRowStyles: Record<string, string> = {
@@ -122,6 +141,12 @@ const stageRowStyles: Record<string, string> = {
   VISIT_CANCELLED: 'bg-red-50/60 hover:bg-red-100/70 dark:bg-red-950/30 dark:hover:bg-red-900/50 border-l-4 border-l-red-500',
   PARTIAL_VISIT_PHASE: 'bg-purple-50/70 hover:bg-purple-100/80 dark:bg-purple-950/30 dark:hover:bg-purple-900/50 border-l-4 border-l-purple-500',
   PARTIAL_QUOTATION_PHASE: 'bg-sky-50/70 hover:bg-sky-100/80 dark:bg-sky-950/30 dark:hover:bg-sky-900/50 border-l-4 border-l-sky-500',
+  PROJECT_SETUP: 'bg-indigo-50/70 hover:bg-indigo-100/80 dark:bg-indigo-950/30 dark:hover:bg-indigo-900/50 border-l-4 border-l-indigo-500',
+  MATERIAL_PLANNING: 'bg-amber-50/70 hover:bg-amber-100/80 dark:bg-amber-950/30 dark:hover:bg-amber-900/50 border-l-4 border-l-amber-500',
+  PROCUREMENT: 'bg-blue-50/70 hover:bg-blue-100/80 dark:bg-blue-950/30 dark:hover:bg-blue-900/50 border-l-4 border-l-blue-500',
+  SITE_EXECUTION: 'bg-emerald-50/80 hover:bg-emerald-100/90 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/60 border-l-4 border-l-emerald-500',
+  QUALITY_CHECK: 'bg-teal-50/70 hover:bg-teal-100/80 dark:bg-teal-950/30 dark:hover:bg-teal-900/50 border-l-4 border-l-teal-500',
+  HANDOVER: 'bg-green-50/80 hover:bg-green-100/90 dark:bg-green-950/40 dark:hover:bg-green-900/60 border-l-4 border-l-green-500',
 }
 
 
@@ -138,6 +163,14 @@ const stageStatConfig: Record<string, { icon: typeof CircleDot; tint: string }> 
   CONTACT_ATTEMPTED: { icon: Handshake, tint: 'text-blue-700 bg-blue-100 dark:bg-blue-900/40 dark:text-blue-200' },
   NURTURING: { icon: Sprout, tint: 'text-yellow-700 bg-yellow-100 dark:bg-yellow-900/40 dark:text-yellow-200' },
   CLOSED: { icon: Archive, tint: 'text-green-700 bg-green-100 dark:bg-green-900/40 dark:text-green-200' },
+  PARTIAL_VISIT_PHASE: { icon: CalendarCheck, tint: 'text-purple-700 bg-purple-100 dark:bg-purple-900/40 dark:text-purple-200' },
+  PARTIAL_QUOTATION_PHASE: { icon: List, tint: 'text-sky-700 bg-sky-100 dark:bg-sky-900/40 dark:text-sky-200' },
+  PROJECT_SETUP: { icon: LayoutGrid, tint: 'text-indigo-700 bg-indigo-100 dark:bg-indigo-900/40 dark:text-indigo-200' },
+  MATERIAL_PLANNING: { icon: List, tint: 'text-amber-700 bg-amber-100 dark:bg-amber-900/40 dark:text-amber-200' },
+  PROCUREMENT: { icon: CircleDot, tint: 'text-blue-700 bg-blue-100 dark:bg-blue-900/40 dark:text-blue-200' },
+  SITE_EXECUTION: { icon: CheckCircle2, tint: 'text-emerald-700 bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-200' },
+  QUALITY_CHECK: { icon: CheckCircle2, tint: 'text-teal-700 bg-teal-100 dark:bg-teal-900/40 dark:text-teal-200' },
+  HANDOVER: { icon: CheckCircle2, tint: 'text-green-700 bg-green-100 dark:bg-green-900/40 dark:text-green-200' },
 }
 
 type DepartmentSummary = {
@@ -187,6 +220,9 @@ const sourceVisualMap: Record<
 
 function formatStageDisplay(stage: string): string {
   if (stage === 'DISCOVERY') return 'Consulting Phase'
+  if (stage === 'VISUALIZATION_PHASE') return '3D Visual'
+  if (stage === 'PARTIAL_VISIT_PHASE') return 'Partial Visit'
+  if (stage === 'PARTIAL_QUOTATION_PHASE') return 'Partial Quotation'
   return stage.replace(/_/g, ' ')
 }
 
@@ -324,7 +360,7 @@ type LeadsCacheEntry = {
 const LEADS_CACHE_TTL_MS = 60_000
 let leadsCache: LeadsCacheEntry | null = null
 const leadsRequestMap = new Map<string, Promise<LeadsResponse>>()
-const DEFAULT_LIFETIME_START_DATE = '2026-03-25'
+const DEFAULT_LIFETIME_START_DATE = '2020-01-01'
 
 function formatDateInput(date: Date): string {
   const year = date.getFullYear()
@@ -646,12 +682,15 @@ export default function LeadsPage() {
         params.set('unassigned', '1')
       }
 
-      if (createdFrom) {
-        params.set('createdFrom', createdFrom)
-      }
-
-      if (createdTo) {
-        params.set('createdTo', createdTo)
+      if (datePreset === 'LIFETIME') {
+        params.set('preset', 'LIFETIME')
+      } else {
+        if (createdFrom) {
+          params.set('createdFrom', createdFrom)
+        }
+        if (createdTo) {
+          params.set('createdTo', createdTo)
+        }
       }
 
       let payloadPromise = leadsRequestMap.get(requestKey)
@@ -1498,10 +1537,26 @@ export default function LeadsPage() {
               )}
 
               {loadingMore ? <p className="mt-4 text-center text-sm text-muted-foreground">Loading more leads...</p> : null}
-              <div ref={sentinelRef} className="h-1" />
-              {!hasMore && leads.length > 0 ? (
-                <p className="py-4 text-center text-xs text-muted-foreground">You have reached the end of the list.</p>
+              {hasMore ? (
+                <div className="py-4 text-center">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      if (nextOffset !== null && !loadingMore) {
+                        void fetchLeads(nextOffset, false)
+                      }
+                    }}
+                    disabled={loadingMore}
+                    className="min-w-[220px]"
+                  >
+                    {loadingMore ? 'Loading more leads...' : `Load More Leads (${leads.length} of ${totalCount})`}
+                  </Button>
+                </div>
+              ) : leads.length > 0 ? (
+                <p className="py-4 text-center text-xs text-muted-foreground">You have reached the end of all {totalCount} leads.</p>
               ) : null}
+              <div ref={sentinelRef} className="h-4" />
             </CardContent>
           </Card>
 
