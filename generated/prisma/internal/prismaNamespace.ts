@@ -439,6 +439,7 @@ export const ModelName = {
   JrArchitectPerformance: 'JrArchitectPerformance',
   QuotationUserPerformance: 'QuotationUserPerformance',
   VisitMemberMonthlyAssessment: 'VisitMemberMonthlyAssessment',
+  DepartmentMemberMonthlySetting: 'DepartmentMemberMonthlySetting',
   Vendor: 'Vendor',
   VendorAgreement: 'VendorAgreement',
   VendorAgreementRevision: 'VendorAgreementRevision',
@@ -449,11 +450,14 @@ export const ModelName = {
   MaterialRequisition: 'MaterialRequisition',
   MaterialRequisitionItem: 'MaterialRequisitionItem',
   BoqSavedAccessoryItem: 'BoqSavedAccessoryItem',
+  BoqSavedApplianceItem: 'BoqSavedApplianceItem',
   RequisitionAmendment: 'RequisitionAmendment',
   Supplier: 'Supplier',
   ProcurementWallet: 'ProcurementWallet',
   ProcurementWalletTransaction: 'ProcurementWalletTransaction',
-  SiteDeliveryLog: 'SiteDeliveryLog'
+  SiteDeliveryLog: 'SiteDeliveryLog',
+  QuotationDailyWorkReport: 'QuotationDailyWorkReport',
+  QuotationWorkActivityLog: 'QuotationWorkActivityLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -469,7 +473,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "lead" | "leadAssignment" | "leadStatusHistory" | "activityLog" | "followUp" | "note" | "user" | "deviceToken" | "agreementValueLog" | "leadPhaseTask" | "leadJrArchitectRequest" | "leadPhaseReview" | "leadMeetingEvent" | "cadWorkSubmission" | "quotationDraft" | "agreementDocument" | "furnitureQuotationDraft" | "furnitureQuotationSavedItem" | "electricalQuotationDraft" | "partialQuotationDraft" | "cadWorkSubmissionFile" | "visit" | "visitUpdateRequest" | "visitResult" | "visitSupportAssignment" | "visitSupportResult" | "attachment" | "leadAttachment" | "supportAttachment" | "notification" | "facebookSyncControl" | "instagramSyncControl" | "whatsAppWebhookControl" | "whatsAppProcessedMessage" | "visitWorkflowControl" | "jrArchitectWorkflowControl" | "whatsAppWebhookEvent" | "role" | "department" | "userRole" | "userDepartment" | "financeAccount" | "transaction" | "conveyanceRequest" | "conveyanceBill" | "cashFlowDaily" | "websiteProject" | "websiteProjectImage" | "websiteVideo" | "websiteTestimonial" | "websiteTeamMember" | "quotationTemplateOverride" | "jrArchitectPerformance" | "quotationUserPerformance" | "visitMemberMonthlyAssessment" | "vendor" | "vendorAgreement" | "vendorAgreementRevision" | "vendorPaymentMilestone" | "vendorPayment" | "stockItem" | "stockMovement" | "materialRequisition" | "materialRequisitionItem" | "boqSavedAccessoryItem" | "requisitionAmendment" | "supplier" | "procurementWallet" | "procurementWalletTransaction" | "siteDeliveryLog"
+    modelProps: "lead" | "leadAssignment" | "leadStatusHistory" | "activityLog" | "followUp" | "note" | "user" | "deviceToken" | "agreementValueLog" | "leadPhaseTask" | "leadJrArchitectRequest" | "leadPhaseReview" | "leadMeetingEvent" | "cadWorkSubmission" | "quotationDraft" | "agreementDocument" | "furnitureQuotationDraft" | "furnitureQuotationSavedItem" | "electricalQuotationDraft" | "partialQuotationDraft" | "cadWorkSubmissionFile" | "visit" | "visitUpdateRequest" | "visitResult" | "visitSupportAssignment" | "visitSupportResult" | "attachment" | "leadAttachment" | "supportAttachment" | "notification" | "facebookSyncControl" | "instagramSyncControl" | "whatsAppWebhookControl" | "whatsAppProcessedMessage" | "visitWorkflowControl" | "jrArchitectWorkflowControl" | "whatsAppWebhookEvent" | "role" | "department" | "userRole" | "userDepartment" | "financeAccount" | "transaction" | "conveyanceRequest" | "conveyanceBill" | "cashFlowDaily" | "websiteProject" | "websiteProjectImage" | "websiteVideo" | "websiteTestimonial" | "websiteTeamMember" | "quotationTemplateOverride" | "jrArchitectPerformance" | "quotationUserPerformance" | "visitMemberMonthlyAssessment" | "departmentMemberMonthlySetting" | "vendor" | "vendorAgreement" | "vendorAgreementRevision" | "vendorPaymentMilestone" | "vendorPayment" | "stockItem" | "stockMovement" | "materialRequisition" | "materialRequisitionItem" | "boqSavedAccessoryItem" | "boqSavedApplianceItem" | "requisitionAmendment" | "supplier" | "procurementWallet" | "procurementWalletTransaction" | "siteDeliveryLog" | "quotationDailyWorkReport" | "quotationWorkActivityLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4543,6 +4547,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DepartmentMemberMonthlySetting: {
+      payload: Prisma.$DepartmentMemberMonthlySettingPayload<ExtArgs>
+      fields: Prisma.DepartmentMemberMonthlySettingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DepartmentMemberMonthlySettingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DepartmentMemberMonthlySettingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DepartmentMemberMonthlySettingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DepartmentMemberMonthlySettingPayload>
+        }
+        findFirst: {
+          args: Prisma.DepartmentMemberMonthlySettingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DepartmentMemberMonthlySettingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DepartmentMemberMonthlySettingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DepartmentMemberMonthlySettingPayload>
+        }
+        findMany: {
+          args: Prisma.DepartmentMemberMonthlySettingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DepartmentMemberMonthlySettingPayload>[]
+        }
+        create: {
+          args: Prisma.DepartmentMemberMonthlySettingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DepartmentMemberMonthlySettingPayload>
+        }
+        createMany: {
+          args: Prisma.DepartmentMemberMonthlySettingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DepartmentMemberMonthlySettingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DepartmentMemberMonthlySettingPayload>[]
+        }
+        delete: {
+          args: Prisma.DepartmentMemberMonthlySettingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DepartmentMemberMonthlySettingPayload>
+        }
+        update: {
+          args: Prisma.DepartmentMemberMonthlySettingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DepartmentMemberMonthlySettingPayload>
+        }
+        deleteMany: {
+          args: Prisma.DepartmentMemberMonthlySettingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DepartmentMemberMonthlySettingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DepartmentMemberMonthlySettingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DepartmentMemberMonthlySettingPayload>[]
+        }
+        upsert: {
+          args: Prisma.DepartmentMemberMonthlySettingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DepartmentMemberMonthlySettingPayload>
+        }
+        aggregate: {
+          args: Prisma.DepartmentMemberMonthlySettingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDepartmentMemberMonthlySetting>
+        }
+        groupBy: {
+          args: Prisma.DepartmentMemberMonthlySettingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DepartmentMemberMonthlySettingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DepartmentMemberMonthlySettingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DepartmentMemberMonthlySettingCountAggregateOutputType> | number
+        }
+      }
+    }
     Vendor: {
       payload: Prisma.$VendorPayload<ExtArgs>
       fields: Prisma.VendorFieldRefs
@@ -5283,6 +5361,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BoqSavedApplianceItem: {
+      payload: Prisma.$BoqSavedApplianceItemPayload<ExtArgs>
+      fields: Prisma.BoqSavedApplianceItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoqSavedApplianceItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoqSavedApplianceItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoqSavedApplianceItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoqSavedApplianceItemPayload>
+        }
+        findFirst: {
+          args: Prisma.BoqSavedApplianceItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoqSavedApplianceItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoqSavedApplianceItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoqSavedApplianceItemPayload>
+        }
+        findMany: {
+          args: Prisma.BoqSavedApplianceItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoqSavedApplianceItemPayload>[]
+        }
+        create: {
+          args: Prisma.BoqSavedApplianceItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoqSavedApplianceItemPayload>
+        }
+        createMany: {
+          args: Prisma.BoqSavedApplianceItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoqSavedApplianceItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoqSavedApplianceItemPayload>[]
+        }
+        delete: {
+          args: Prisma.BoqSavedApplianceItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoqSavedApplianceItemPayload>
+        }
+        update: {
+          args: Prisma.BoqSavedApplianceItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoqSavedApplianceItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoqSavedApplianceItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoqSavedApplianceItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoqSavedApplianceItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoqSavedApplianceItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoqSavedApplianceItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoqSavedApplianceItemPayload>
+        }
+        aggregate: {
+          args: Prisma.BoqSavedApplianceItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoqSavedApplianceItem>
+        }
+        groupBy: {
+          args: Prisma.BoqSavedApplianceItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoqSavedApplianceItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoqSavedApplianceItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoqSavedApplianceItemCountAggregateOutputType> | number
+        }
+      }
+    }
     RequisitionAmendment: {
       payload: Prisma.$RequisitionAmendmentPayload<ExtArgs>
       fields: Prisma.RequisitionAmendmentFieldRefs
@@ -5650,6 +5802,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.SiteDeliveryLogCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SiteDeliveryLogCountAggregateOutputType> | number
+        }
+      }
+    }
+    QuotationDailyWorkReport: {
+      payload: Prisma.$QuotationDailyWorkReportPayload<ExtArgs>
+      fields: Prisma.QuotationDailyWorkReportFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.QuotationDailyWorkReportFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationDailyWorkReportPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.QuotationDailyWorkReportFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationDailyWorkReportPayload>
+        }
+        findFirst: {
+          args: Prisma.QuotationDailyWorkReportFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationDailyWorkReportPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.QuotationDailyWorkReportFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationDailyWorkReportPayload>
+        }
+        findMany: {
+          args: Prisma.QuotationDailyWorkReportFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationDailyWorkReportPayload>[]
+        }
+        create: {
+          args: Prisma.QuotationDailyWorkReportCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationDailyWorkReportPayload>
+        }
+        createMany: {
+          args: Prisma.QuotationDailyWorkReportCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.QuotationDailyWorkReportCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationDailyWorkReportPayload>[]
+        }
+        delete: {
+          args: Prisma.QuotationDailyWorkReportDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationDailyWorkReportPayload>
+        }
+        update: {
+          args: Prisma.QuotationDailyWorkReportUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationDailyWorkReportPayload>
+        }
+        deleteMany: {
+          args: Prisma.QuotationDailyWorkReportDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.QuotationDailyWorkReportUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.QuotationDailyWorkReportUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationDailyWorkReportPayload>[]
+        }
+        upsert: {
+          args: Prisma.QuotationDailyWorkReportUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationDailyWorkReportPayload>
+        }
+        aggregate: {
+          args: Prisma.QuotationDailyWorkReportAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateQuotationDailyWorkReport>
+        }
+        groupBy: {
+          args: Prisma.QuotationDailyWorkReportGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QuotationDailyWorkReportGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.QuotationDailyWorkReportCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QuotationDailyWorkReportCountAggregateOutputType> | number
+        }
+      }
+    }
+    QuotationWorkActivityLog: {
+      payload: Prisma.$QuotationWorkActivityLogPayload<ExtArgs>
+      fields: Prisma.QuotationWorkActivityLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.QuotationWorkActivityLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationWorkActivityLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.QuotationWorkActivityLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationWorkActivityLogPayload>
+        }
+        findFirst: {
+          args: Prisma.QuotationWorkActivityLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationWorkActivityLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.QuotationWorkActivityLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationWorkActivityLogPayload>
+        }
+        findMany: {
+          args: Prisma.QuotationWorkActivityLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationWorkActivityLogPayload>[]
+        }
+        create: {
+          args: Prisma.QuotationWorkActivityLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationWorkActivityLogPayload>
+        }
+        createMany: {
+          args: Prisma.QuotationWorkActivityLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.QuotationWorkActivityLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationWorkActivityLogPayload>[]
+        }
+        delete: {
+          args: Prisma.QuotationWorkActivityLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationWorkActivityLogPayload>
+        }
+        update: {
+          args: Prisma.QuotationWorkActivityLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationWorkActivityLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.QuotationWorkActivityLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.QuotationWorkActivityLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.QuotationWorkActivityLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationWorkActivityLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.QuotationWorkActivityLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuotationWorkActivityLogPayload>
+        }
+        aggregate: {
+          args: Prisma.QuotationWorkActivityLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateQuotationWorkActivityLog>
+        }
+        groupBy: {
+          args: Prisma.QuotationWorkActivityLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QuotationWorkActivityLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.QuotationWorkActivityLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QuotationWorkActivityLogCountAggregateOutputType> | number
         }
       }
     }
@@ -6561,6 +6861,21 @@ export const VisitMemberMonthlyAssessmentScalarFieldEnum = {
 export type VisitMemberMonthlyAssessmentScalarFieldEnum = (typeof VisitMemberMonthlyAssessmentScalarFieldEnum)[keyof typeof VisitMemberMonthlyAssessmentScalarFieldEnum]
 
 
+export const DepartmentMemberMonthlySettingScalarFieldEnum = {
+  id: 'id',
+  department: 'department',
+  userId: 'userId',
+  monthKey: 'monthKey',
+  isEnabled: 'isEnabled',
+  notes: 'notes',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DepartmentMemberMonthlySettingScalarFieldEnum = (typeof DepartmentMemberMonthlySettingScalarFieldEnum)[keyof typeof DepartmentMemberMonthlySettingScalarFieldEnum]
+
+
 export const VendorScalarFieldEnum = {
   id: 'id',
   vendorId: 'vendorId',
@@ -6725,8 +7040,10 @@ export const BoqSavedAccessoryItemScalarFieldEnum = {
   id: 'id',
   name: 'name',
   category: 'category',
+  brand: 'brand',
   itemCode: 'itemCode',
   defaultUnit: 'defaultUnit',
+  imageUrl: 'imageUrl',
   isActive: 'isActive',
   serialNo: 'serialNo',
   createdAt: 'createdAt',
@@ -6734,6 +7051,29 @@ export const BoqSavedAccessoryItemScalarFieldEnum = {
 } as const
 
 export type BoqSavedAccessoryItemScalarFieldEnum = (typeof BoqSavedAccessoryItemScalarFieldEnum)[keyof typeof BoqSavedAccessoryItemScalarFieldEnum]
+
+
+export const BoqSavedApplianceItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  category: 'category',
+  brand: 'brand',
+  modelCode: 'modelCode',
+  brandModelCode: 'brandModelCode',
+  dimW: 'dimW',
+  dimD: 'dimD',
+  dimH: 'dimH',
+  cabinetNicheCutOutSize: 'cabinetNicheCutOutSize',
+  defaultUnitPrice: 'defaultUnitPrice',
+  defaultUnit: 'defaultUnit',
+  imageUrl: 'imageUrl',
+  isActive: 'isActive',
+  serialNo: 'serialNo',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoqSavedApplianceItemScalarFieldEnum = (typeof BoqSavedApplianceItemScalarFieldEnum)[keyof typeof BoqSavedApplianceItemScalarFieldEnum]
 
 
 export const RequisitionAmendmentScalarFieldEnum = {
@@ -6833,6 +7173,38 @@ export const SiteDeliveryLogScalarFieldEnum = {
 } as const
 
 export type SiteDeliveryLogScalarFieldEnum = (typeof SiteDeliveryLogScalarFieldEnum)[keyof typeof SiteDeliveryLogScalarFieldEnum]
+
+
+export const QuotationDailyWorkReportScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  leadId: 'leadId',
+  workDate: 'workDate',
+  dateKey: 'dateKey',
+  weekKey: 'weekKey',
+  workType: 'workType',
+  sqft: 'sqft',
+  isAutoDetected: 'isAutoDetected',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type QuotationDailyWorkReportScalarFieldEnum = (typeof QuotationDailyWorkReportScalarFieldEnum)[keyof typeof QuotationDailyWorkReportScalarFieldEnum]
+
+
+export const QuotationWorkActivityLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  leadId: 'leadId',
+  workType: 'workType',
+  activityDate: 'activityDate',
+  dateKey: 'dateKey',
+  description: 'description',
+  createdAt: 'createdAt'
+} as const
+
+export type QuotationWorkActivityLogScalarFieldEnum = (typeof QuotationWorkActivityLogScalarFieldEnum)[keyof typeof QuotationWorkActivityLogScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -7483,6 +7855,20 @@ export type EnumSiteDeliveryConditionFieldRefInput<$PrismaModel> = FieldRefInput
 export type ListEnumSiteDeliveryConditionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SiteDeliveryCondition[]'>
     
 
+
+/**
+ * Reference to a field of type 'QuotationWorkType'
+ */
+export type EnumQuotationWorkTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QuotationWorkType'>
+    
+
+
+/**
+ * Reference to a field of type 'QuotationWorkType[]'
+ */
+export type ListEnumQuotationWorkTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QuotationWorkType[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -7633,6 +8019,7 @@ export type GlobalOmitConfig = {
   jrArchitectPerformance?: Prisma.JrArchitectPerformanceOmit
   quotationUserPerformance?: Prisma.QuotationUserPerformanceOmit
   visitMemberMonthlyAssessment?: Prisma.VisitMemberMonthlyAssessmentOmit
+  departmentMemberMonthlySetting?: Prisma.DepartmentMemberMonthlySettingOmit
   vendor?: Prisma.VendorOmit
   vendorAgreement?: Prisma.VendorAgreementOmit
   vendorAgreementRevision?: Prisma.VendorAgreementRevisionOmit
@@ -7643,11 +8030,14 @@ export type GlobalOmitConfig = {
   materialRequisition?: Prisma.MaterialRequisitionOmit
   materialRequisitionItem?: Prisma.MaterialRequisitionItemOmit
   boqSavedAccessoryItem?: Prisma.BoqSavedAccessoryItemOmit
+  boqSavedApplianceItem?: Prisma.BoqSavedApplianceItemOmit
   requisitionAmendment?: Prisma.RequisitionAmendmentOmit
   supplier?: Prisma.SupplierOmit
   procurementWallet?: Prisma.ProcurementWalletOmit
   procurementWalletTransaction?: Prisma.ProcurementWalletTransactionOmit
   siteDeliveryLog?: Prisma.SiteDeliveryLogOmit
+  quotationDailyWorkReport?: Prisma.QuotationDailyWorkReportOmit
+  quotationWorkActivityLog?: Prisma.QuotationWorkActivityLogOmit
 }
 
 /* Types for Logging */

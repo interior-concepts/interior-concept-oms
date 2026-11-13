@@ -38,8 +38,10 @@ export type BoqSavedAccessoryItemMinAggregateOutputType = {
   id: string | null
   name: string | null
   category: string | null
+  brand: string | null
   itemCode: string | null
   defaultUnit: string | null
+  imageUrl: string | null
   isActive: boolean | null
   serialNo: number | null
   createdAt: Date | null
@@ -50,8 +52,10 @@ export type BoqSavedAccessoryItemMaxAggregateOutputType = {
   id: string | null
   name: string | null
   category: string | null
+  brand: string | null
   itemCode: string | null
   defaultUnit: string | null
+  imageUrl: string | null
   isActive: boolean | null
   serialNo: number | null
   createdAt: Date | null
@@ -62,8 +66,10 @@ export type BoqSavedAccessoryItemCountAggregateOutputType = {
   id: number
   name: number
   category: number
+  brand: number
   itemCode: number
   defaultUnit: number
+  imageUrl: number
   isActive: number
   serialNo: number
   createdAt: number
@@ -84,8 +90,10 @@ export type BoqSavedAccessoryItemMinAggregateInputType = {
   id?: true
   name?: true
   category?: true
+  brand?: true
   itemCode?: true
   defaultUnit?: true
+  imageUrl?: true
   isActive?: true
   serialNo?: true
   createdAt?: true
@@ -96,8 +104,10 @@ export type BoqSavedAccessoryItemMaxAggregateInputType = {
   id?: true
   name?: true
   category?: true
+  brand?: true
   itemCode?: true
   defaultUnit?: true
+  imageUrl?: true
   isActive?: true
   serialNo?: true
   createdAt?: true
@@ -108,8 +118,10 @@ export type BoqSavedAccessoryItemCountAggregateInputType = {
   id?: true
   name?: true
   category?: true
+  brand?: true
   itemCode?: true
   defaultUnit?: true
+  imageUrl?: true
   isActive?: true
   serialNo?: true
   createdAt?: true
@@ -207,8 +219,10 @@ export type BoqSavedAccessoryItemGroupByOutputType = {
   id: string
   name: string
   category: string
+  brand: string
   itemCode: string
   defaultUnit: string
+  imageUrl: string | null
   isActive: boolean
   serialNo: number
   createdAt: Date
@@ -242,8 +256,10 @@ export type BoqSavedAccessoryItemWhereInput = {
   id?: Prisma.StringFilter<"BoqSavedAccessoryItem"> | string
   name?: Prisma.StringFilter<"BoqSavedAccessoryItem"> | string
   category?: Prisma.StringFilter<"BoqSavedAccessoryItem"> | string
+  brand?: Prisma.StringFilter<"BoqSavedAccessoryItem"> | string
   itemCode?: Prisma.StringFilter<"BoqSavedAccessoryItem"> | string
   defaultUnit?: Prisma.StringFilter<"BoqSavedAccessoryItem"> | string
+  imageUrl?: Prisma.StringNullableFilter<"BoqSavedAccessoryItem"> | string | null
   isActive?: Prisma.BoolFilter<"BoqSavedAccessoryItem"> | boolean
   serialNo?: Prisma.IntFilter<"BoqSavedAccessoryItem"> | number
   createdAt?: Prisma.DateTimeFilter<"BoqSavedAccessoryItem"> | Date | string
@@ -254,8 +270,10 @@ export type BoqSavedAccessoryItemOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  brand?: Prisma.SortOrder
   itemCode?: Prisma.SortOrder
   defaultUnit?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   serialNo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -269,8 +287,10 @@ export type BoqSavedAccessoryItemWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BoqSavedAccessoryItemWhereInput | Prisma.BoqSavedAccessoryItemWhereInput[]
   name?: Prisma.StringFilter<"BoqSavedAccessoryItem"> | string
   category?: Prisma.StringFilter<"BoqSavedAccessoryItem"> | string
+  brand?: Prisma.StringFilter<"BoqSavedAccessoryItem"> | string
   itemCode?: Prisma.StringFilter<"BoqSavedAccessoryItem"> | string
   defaultUnit?: Prisma.StringFilter<"BoqSavedAccessoryItem"> | string
+  imageUrl?: Prisma.StringNullableFilter<"BoqSavedAccessoryItem"> | string | null
   isActive?: Prisma.BoolFilter<"BoqSavedAccessoryItem"> | boolean
   serialNo?: Prisma.IntFilter<"BoqSavedAccessoryItem"> | number
   createdAt?: Prisma.DateTimeFilter<"BoqSavedAccessoryItem"> | Date | string
@@ -281,8 +301,10 @@ export type BoqSavedAccessoryItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  brand?: Prisma.SortOrder
   itemCode?: Prisma.SortOrder
   defaultUnit?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   serialNo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -301,8 +323,10 @@ export type BoqSavedAccessoryItemScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"BoqSavedAccessoryItem"> | string
   name?: Prisma.StringWithAggregatesFilter<"BoqSavedAccessoryItem"> | string
   category?: Prisma.StringWithAggregatesFilter<"BoqSavedAccessoryItem"> | string
+  brand?: Prisma.StringWithAggregatesFilter<"BoqSavedAccessoryItem"> | string
   itemCode?: Prisma.StringWithAggregatesFilter<"BoqSavedAccessoryItem"> | string
   defaultUnit?: Prisma.StringWithAggregatesFilter<"BoqSavedAccessoryItem"> | string
+  imageUrl?: Prisma.StringNullableWithAggregatesFilter<"BoqSavedAccessoryItem"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"BoqSavedAccessoryItem"> | boolean
   serialNo?: Prisma.IntWithAggregatesFilter<"BoqSavedAccessoryItem"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"BoqSavedAccessoryItem"> | Date | string
@@ -313,8 +337,10 @@ export type BoqSavedAccessoryItemCreateInput = {
   id?: string
   name: string
   category?: string
+  brand?: string
   itemCode?: string
   defaultUnit?: string
+  imageUrl?: string | null
   isActive?: boolean
   serialNo?: number
   createdAt?: Date | string
@@ -325,8 +351,10 @@ export type BoqSavedAccessoryItemUncheckedCreateInput = {
   id?: string
   name: string
   category?: string
+  brand?: string
   itemCode?: string
   defaultUnit?: string
+  imageUrl?: string | null
   isActive?: boolean
   serialNo?: number
   createdAt?: Date | string
@@ -337,8 +365,10 @@ export type BoqSavedAccessoryItemUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
+  brand?: Prisma.StringFieldUpdateOperationsInput | string
   itemCode?: Prisma.StringFieldUpdateOperationsInput | string
   defaultUnit?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   serialNo?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -349,8 +379,10 @@ export type BoqSavedAccessoryItemUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
+  brand?: Prisma.StringFieldUpdateOperationsInput | string
   itemCode?: Prisma.StringFieldUpdateOperationsInput | string
   defaultUnit?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   serialNo?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -361,8 +393,10 @@ export type BoqSavedAccessoryItemCreateManyInput = {
   id?: string
   name: string
   category?: string
+  brand?: string
   itemCode?: string
   defaultUnit?: string
+  imageUrl?: string | null
   isActive?: boolean
   serialNo?: number
   createdAt?: Date | string
@@ -373,8 +407,10 @@ export type BoqSavedAccessoryItemUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
+  brand?: Prisma.StringFieldUpdateOperationsInput | string
   itemCode?: Prisma.StringFieldUpdateOperationsInput | string
   defaultUnit?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   serialNo?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -385,8 +421,10 @@ export type BoqSavedAccessoryItemUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
+  brand?: Prisma.StringFieldUpdateOperationsInput | string
   itemCode?: Prisma.StringFieldUpdateOperationsInput | string
   defaultUnit?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   serialNo?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -397,8 +435,10 @@ export type BoqSavedAccessoryItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  brand?: Prisma.SortOrder
   itemCode?: Prisma.SortOrder
   defaultUnit?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   serialNo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -413,8 +453,10 @@ export type BoqSavedAccessoryItemMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  brand?: Prisma.SortOrder
   itemCode?: Prisma.SortOrder
   defaultUnit?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   serialNo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -425,8 +467,10 @@ export type BoqSavedAccessoryItemMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  brand?: Prisma.SortOrder
   itemCode?: Prisma.SortOrder
   defaultUnit?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   serialNo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -443,8 +487,10 @@ export type BoqSavedAccessoryItemSelect<ExtArgs extends runtime.Types.Extensions
   id?: boolean
   name?: boolean
   category?: boolean
+  brand?: boolean
   itemCode?: boolean
   defaultUnit?: boolean
+  imageUrl?: boolean
   isActive?: boolean
   serialNo?: boolean
   createdAt?: boolean
@@ -455,8 +501,10 @@ export type BoqSavedAccessoryItemSelectCreateManyAndReturn<ExtArgs extends runti
   id?: boolean
   name?: boolean
   category?: boolean
+  brand?: boolean
   itemCode?: boolean
   defaultUnit?: boolean
+  imageUrl?: boolean
   isActive?: boolean
   serialNo?: boolean
   createdAt?: boolean
@@ -467,8 +515,10 @@ export type BoqSavedAccessoryItemSelectUpdateManyAndReturn<ExtArgs extends runti
   id?: boolean
   name?: boolean
   category?: boolean
+  brand?: boolean
   itemCode?: boolean
   defaultUnit?: boolean
+  imageUrl?: boolean
   isActive?: boolean
   serialNo?: boolean
   createdAt?: boolean
@@ -479,15 +529,17 @@ export type BoqSavedAccessoryItemSelectScalar = {
   id?: boolean
   name?: boolean
   category?: boolean
+  brand?: boolean
   itemCode?: boolean
   defaultUnit?: boolean
+  imageUrl?: boolean
   isActive?: boolean
   serialNo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BoqSavedAccessoryItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "category" | "itemCode" | "defaultUnit" | "isActive" | "serialNo" | "createdAt" | "updatedAt", ExtArgs["result"]["boqSavedAccessoryItem"]>
+export type BoqSavedAccessoryItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "category" | "brand" | "itemCode" | "defaultUnit" | "imageUrl" | "isActive" | "serialNo" | "createdAt" | "updatedAt", ExtArgs["result"]["boqSavedAccessoryItem"]>
 
 export type $BoqSavedAccessoryItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BoqSavedAccessoryItem"
@@ -496,8 +548,10 @@ export type $BoqSavedAccessoryItemPayload<ExtArgs extends runtime.Types.Extensio
     id: string
     name: string
     category: string
+    brand: string
     itemCode: string
     defaultUnit: string
+    imageUrl: string | null
     isActive: boolean
     serialNo: number
     createdAt: Date
@@ -928,8 +982,10 @@ export interface BoqSavedAccessoryItemFieldRefs {
   readonly id: Prisma.FieldRef<"BoqSavedAccessoryItem", 'String'>
   readonly name: Prisma.FieldRef<"BoqSavedAccessoryItem", 'String'>
   readonly category: Prisma.FieldRef<"BoqSavedAccessoryItem", 'String'>
+  readonly brand: Prisma.FieldRef<"BoqSavedAccessoryItem", 'String'>
   readonly itemCode: Prisma.FieldRef<"BoqSavedAccessoryItem", 'String'>
   readonly defaultUnit: Prisma.FieldRef<"BoqSavedAccessoryItem", 'String'>
+  readonly imageUrl: Prisma.FieldRef<"BoqSavedAccessoryItem", 'String'>
   readonly isActive: Prisma.FieldRef<"BoqSavedAccessoryItem", 'Boolean'>
   readonly serialNo: Prisma.FieldRef<"BoqSavedAccessoryItem", 'Int'>
   readonly createdAt: Prisma.FieldRef<"BoqSavedAccessoryItem", 'DateTime'>

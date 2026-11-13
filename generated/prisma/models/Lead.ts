@@ -411,6 +411,8 @@ export type LeadWhereInput = {
   notes?: Prisma.NoteListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   quotationDrafts?: Prisma.QuotationDraftListRelationFilter
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportListRelationFilter
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogListRelationFilter
   agreementDocument?: Prisma.XOR<Prisma.AgreementDocumentNullableScalarRelationFilter, Prisma.AgreementDocumentWhereInput> | null
   furnitureQuotationDraft?: Prisma.XOR<Prisma.FurnitureQuotationDraftNullableScalarRelationFilter, Prisma.FurnitureQuotationDraftWhereInput> | null
   electricalQuotationDraft?: Prisma.XOR<Prisma.ElectricalQuotationDraftNullableScalarRelationFilter, Prisma.ElectricalQuotationDraftWhereInput> | null
@@ -466,6 +468,8 @@ export type LeadOrderByWithRelationInput = {
   notes?: Prisma.NoteOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   quotationDrafts?: Prisma.QuotationDraftOrderByRelationAggregateInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportOrderByRelationAggregateInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogOrderByRelationAggregateInput
   agreementDocument?: Prisma.AgreementDocumentOrderByWithRelationInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftOrderByWithRelationInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftOrderByWithRelationInput
@@ -524,6 +528,8 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   notes?: Prisma.NoteListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   quotationDrafts?: Prisma.QuotationDraftListRelationFilter
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportListRelationFilter
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogListRelationFilter
   agreementDocument?: Prisma.XOR<Prisma.AgreementDocumentNullableScalarRelationFilter, Prisma.AgreementDocumentWhereInput> | null
   furnitureQuotationDraft?: Prisma.XOR<Prisma.FurnitureQuotationDraftNullableScalarRelationFilter, Prisma.FurnitureQuotationDraftWhereInput> | null
   electricalQuotationDraft?: Prisma.XOR<Prisma.ElectricalQuotationDraftNullableScalarRelationFilter, Prisma.ElectricalQuotationDraftWhereInput> | null
@@ -643,6 +649,8 @@ export type LeadCreateInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -696,6 +704,8 @@ export type LeadUncheckedCreateInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -749,6 +759,8 @@ export type LeadUpdateInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -802,6 +814,8 @@ export type LeadUncheckedUpdateInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -1497,6 +1511,34 @@ export type LeadUpdateOneRequiredWithoutSiteDeliveryLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutSiteDeliveryLogsInput, Prisma.LeadUpdateWithoutSiteDeliveryLogsInput>, Prisma.LeadUncheckedUpdateWithoutSiteDeliveryLogsInput>
 }
 
+export type LeadCreateNestedOneWithoutQuotationDailyWorkReportsInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutQuotationDailyWorkReportsInput, Prisma.LeadUncheckedCreateWithoutQuotationDailyWorkReportsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutQuotationDailyWorkReportsInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneRequiredWithoutQuotationDailyWorkReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutQuotationDailyWorkReportsInput, Prisma.LeadUncheckedCreateWithoutQuotationDailyWorkReportsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutQuotationDailyWorkReportsInput
+  upsert?: Prisma.LeadUpsertWithoutQuotationDailyWorkReportsInput
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutQuotationDailyWorkReportsInput, Prisma.LeadUpdateWithoutQuotationDailyWorkReportsInput>, Prisma.LeadUncheckedUpdateWithoutQuotationDailyWorkReportsInput>
+}
+
+export type LeadCreateNestedOneWithoutQuotationWorkActivityLogsInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutQuotationWorkActivityLogsInput, Prisma.LeadUncheckedCreateWithoutQuotationWorkActivityLogsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutQuotationWorkActivityLogsInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneRequiredWithoutQuotationWorkActivityLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutQuotationWorkActivityLogsInput, Prisma.LeadUncheckedCreateWithoutQuotationWorkActivityLogsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutQuotationWorkActivityLogsInput
+  upsert?: Prisma.LeadUpsertWithoutQuotationWorkActivityLogsInput
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutQuotationWorkActivityLogsInput, Prisma.LeadUpdateWithoutQuotationWorkActivityLogsInput>, Prisma.LeadUncheckedUpdateWithoutQuotationWorkActivityLogsInput>
+}
+
 export type LeadCreateWithoutAssignmentsInput = {
   id?: string
   name: string
@@ -1536,6 +1578,8 @@ export type LeadCreateWithoutAssignmentsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -1588,6 +1632,8 @@ export type LeadUncheckedCreateWithoutAssignmentsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -1656,6 +1702,8 @@ export type LeadUpdateWithoutAssignmentsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -1708,6 +1756,8 @@ export type LeadUncheckedUpdateWithoutAssignmentsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -1760,6 +1810,8 @@ export type LeadCreateWithoutStatusHistoryInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -1812,6 +1864,8 @@ export type LeadUncheckedCreateWithoutStatusHistoryInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -1880,6 +1934,8 @@ export type LeadUpdateWithoutStatusHistoryInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -1932,6 +1988,8 @@ export type LeadUncheckedUpdateWithoutStatusHistoryInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -1984,6 +2042,8 @@ export type LeadCreateWithoutActivitiesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -2036,6 +2096,8 @@ export type LeadUncheckedCreateWithoutActivitiesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -2104,6 +2166,8 @@ export type LeadUpdateWithoutActivitiesInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -2156,6 +2220,8 @@ export type LeadUncheckedUpdateWithoutActivitiesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -2208,6 +2274,8 @@ export type LeadCreateWithoutFollowUpsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -2260,6 +2328,8 @@ export type LeadUncheckedCreateWithoutFollowUpsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -2328,6 +2398,8 @@ export type LeadUpdateWithoutFollowUpsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -2380,6 +2452,8 @@ export type LeadUncheckedUpdateWithoutFollowUpsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -2432,6 +2506,8 @@ export type LeadCreateWithoutNotesInput = {
   statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -2484,6 +2560,8 @@ export type LeadUncheckedCreateWithoutNotesInput = {
   statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -2552,6 +2630,8 @@ export type LeadUpdateWithoutNotesInput = {
   statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -2604,6 +2684,8 @@ export type LeadUncheckedUpdateWithoutNotesInput = {
   statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -2656,6 +2738,8 @@ export type LeadCreateWithoutAssigneeInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -2708,6 +2792,8 @@ export type LeadUncheckedCreateWithoutAssigneeInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -2770,6 +2856,8 @@ export type LeadCreateWithoutPrimaryOwnerInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -2822,6 +2910,8 @@ export type LeadUncheckedCreateWithoutPrimaryOwnerInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -2948,6 +3038,8 @@ export type LeadCreateWithoutAgreementValueLogsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -3000,6 +3092,8 @@ export type LeadUncheckedCreateWithoutAgreementValueLogsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -3068,6 +3162,8 @@ export type LeadUpdateWithoutAgreementValueLogsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -3120,6 +3216,8 @@ export type LeadUncheckedUpdateWithoutAgreementValueLogsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -3172,6 +3270,8 @@ export type LeadCreateWithoutPhaseTasksInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -3224,6 +3324,8 @@ export type LeadUncheckedCreateWithoutPhaseTasksInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -3292,6 +3394,8 @@ export type LeadUpdateWithoutPhaseTasksInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -3344,6 +3448,8 @@ export type LeadUncheckedUpdateWithoutPhaseTasksInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -3396,6 +3502,8 @@ export type LeadCreateWithoutJrArchitectRequestsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -3448,6 +3556,8 @@ export type LeadUncheckedCreateWithoutJrArchitectRequestsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -3516,6 +3626,8 @@ export type LeadUpdateWithoutJrArchitectRequestsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -3568,6 +3680,8 @@ export type LeadUncheckedUpdateWithoutJrArchitectRequestsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -3620,6 +3734,8 @@ export type LeadCreateWithoutMeetingEventsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -3672,6 +3788,8 @@ export type LeadUncheckedCreateWithoutMeetingEventsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -3740,6 +3858,8 @@ export type LeadUpdateWithoutMeetingEventsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -3792,6 +3912,8 @@ export type LeadUncheckedUpdateWithoutMeetingEventsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -3844,6 +3966,8 @@ export type LeadCreateWithoutCadWorkSubmissionsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -3896,6 +4020,8 @@ export type LeadUncheckedCreateWithoutCadWorkSubmissionsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -3964,6 +4090,8 @@ export type LeadUpdateWithoutCadWorkSubmissionsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -4016,6 +4144,8 @@ export type LeadUncheckedUpdateWithoutCadWorkSubmissionsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -4068,6 +4198,8 @@ export type LeadCreateWithoutQuotationDraftsInput = {
   statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -4120,6 +4252,8 @@ export type LeadUncheckedCreateWithoutQuotationDraftsInput = {
   statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -4188,6 +4322,8 @@ export type LeadUpdateWithoutQuotationDraftsInput = {
   statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -4240,6 +4376,8 @@ export type LeadUncheckedUpdateWithoutQuotationDraftsInput = {
   statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -4293,6 +4431,8 @@ export type LeadCreateWithoutAgreementDocumentInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
   partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
@@ -4345,6 +4485,8 @@ export type LeadUncheckedCreateWithoutAgreementDocumentInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -4413,6 +4555,8 @@ export type LeadUpdateWithoutAgreementDocumentInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
   partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -4465,6 +4609,8 @@ export type LeadUncheckedUpdateWithoutAgreementDocumentInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -4517,6 +4663,8 @@ export type LeadCreateWithoutFurnitureQuotationDraftInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
   partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
@@ -4569,6 +4717,8 @@ export type LeadUncheckedCreateWithoutFurnitureQuotationDraftInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -4637,6 +4787,8 @@ export type LeadUpdateWithoutFurnitureQuotationDraftInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
   partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -4689,6 +4841,8 @@ export type LeadUncheckedUpdateWithoutFurnitureQuotationDraftInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -4741,6 +4895,8 @@ export type LeadCreateWithoutElectricalQuotationDraftInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
@@ -4793,6 +4949,8 @@ export type LeadUncheckedCreateWithoutElectricalQuotationDraftInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -4861,6 +5019,8 @@ export type LeadUpdateWithoutElectricalQuotationDraftInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -4913,6 +5073,8 @@ export type LeadUncheckedUpdateWithoutElectricalQuotationDraftInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -4965,6 +5127,8 @@ export type LeadCreateWithoutPartialQuotationDraftInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -5017,6 +5181,8 @@ export type LeadUncheckedCreateWithoutPartialQuotationDraftInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -5085,6 +5251,8 @@ export type LeadUpdateWithoutPartialQuotationDraftInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -5137,6 +5305,8 @@ export type LeadUncheckedUpdateWithoutPartialQuotationDraftInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -5189,6 +5359,8 @@ export type LeadCreateWithoutVisitsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -5241,6 +5413,8 @@ export type LeadUncheckedCreateWithoutVisitsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -5309,6 +5483,8 @@ export type LeadUpdateWithoutVisitsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -5361,6 +5537,8 @@ export type LeadUncheckedUpdateWithoutVisitsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -5412,6 +5590,8 @@ export type LeadCreateWithoutAttachmentsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -5464,6 +5644,8 @@ export type LeadUncheckedCreateWithoutAttachmentsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -5532,6 +5714,8 @@ export type LeadUpdateWithoutAttachmentsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -5584,6 +5768,8 @@ export type LeadUncheckedUpdateWithoutAttachmentsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -5636,6 +5822,8 @@ export type LeadCreateWithoutNotificationsInput = {
   statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -5688,6 +5876,8 @@ export type LeadUncheckedCreateWithoutNotificationsInput = {
   statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -5756,6 +5946,8 @@ export type LeadUpdateWithoutNotificationsInput = {
   statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -5808,6 +6000,8 @@ export type LeadUncheckedUpdateWithoutNotificationsInput = {
   statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -5861,6 +6055,8 @@ export type LeadCreateWithoutTransactionsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -5913,6 +6109,8 @@ export type LeadUncheckedCreateWithoutTransactionsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -5981,6 +6179,8 @@ export type LeadUpdateWithoutTransactionsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -6033,6 +6233,8 @@ export type LeadUncheckedUpdateWithoutTransactionsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -6085,6 +6287,8 @@ export type LeadCreateWithoutVendorAgreementsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -6137,6 +6341,8 @@ export type LeadUncheckedCreateWithoutVendorAgreementsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -6205,6 +6411,8 @@ export type LeadUpdateWithoutVendorAgreementsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -6257,6 +6465,8 @@ export type LeadUncheckedUpdateWithoutVendorAgreementsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -6309,6 +6519,8 @@ export type LeadCreateWithoutStockMovementsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -6361,6 +6573,8 @@ export type LeadUncheckedCreateWithoutStockMovementsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -6429,6 +6643,8 @@ export type LeadUpdateWithoutStockMovementsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -6481,6 +6697,8 @@ export type LeadUncheckedUpdateWithoutStockMovementsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -6533,6 +6751,8 @@ export type LeadCreateWithoutMaterialRequisitionsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -6585,6 +6805,8 @@ export type LeadUncheckedCreateWithoutMaterialRequisitionsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -6653,6 +6875,8 @@ export type LeadUpdateWithoutMaterialRequisitionsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -6705,6 +6929,8 @@ export type LeadUncheckedUpdateWithoutMaterialRequisitionsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -6757,6 +6983,8 @@ export type LeadCreateWithoutProcurementWalletTransactionsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -6809,6 +7037,8 @@ export type LeadUncheckedCreateWithoutProcurementWalletTransactionsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -6877,6 +7107,8 @@ export type LeadUpdateWithoutProcurementWalletTransactionsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -6929,6 +7161,8 @@ export type LeadUncheckedUpdateWithoutProcurementWalletTransactionsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -6981,6 +7215,8 @@ export type LeadCreateWithoutSiteDeliveryLogsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
@@ -7033,6 +7269,8 @@ export type LeadUncheckedCreateWithoutSiteDeliveryLogsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
@@ -7101,6 +7339,8 @@ export type LeadUpdateWithoutSiteDeliveryLogsInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -7153,6 +7393,8 @@ export type LeadUncheckedUpdateWithoutSiteDeliveryLogsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -7163,6 +7405,470 @@ export type LeadUncheckedUpdateWithoutSiteDeliveryLogsInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
   procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutQuotationDailyWorkReportsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
+  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutQuotationDailyWorkReportsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutQuotationDailyWorkReportsInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutQuotationDailyWorkReportsInput, Prisma.LeadUncheckedCreateWithoutQuotationDailyWorkReportsInput>
+}
+
+export type LeadUpsertWithoutQuotationDailyWorkReportsInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutQuotationDailyWorkReportsInput, Prisma.LeadUncheckedUpdateWithoutQuotationDailyWorkReportsInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutQuotationDailyWorkReportsInput, Prisma.LeadUncheckedCreateWithoutQuotationDailyWorkReportsInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutQuotationDailyWorkReportsInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutQuotationDailyWorkReportsInput, Prisma.LeadUncheckedUpdateWithoutQuotationDailyWorkReportsInput>
+}
+
+export type LeadUpdateWithoutQuotationDailyWorkReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
+  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutQuotationDailyWorkReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutQuotationWorkActivityLogsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
+  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutQuotationWorkActivityLogsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutQuotationWorkActivityLogsInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutQuotationWorkActivityLogsInput, Prisma.LeadUncheckedCreateWithoutQuotationWorkActivityLogsInput>
+}
+
+export type LeadUpsertWithoutQuotationWorkActivityLogsInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutQuotationWorkActivityLogsInput, Prisma.LeadUncheckedUpdateWithoutQuotationWorkActivityLogsInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutQuotationWorkActivityLogsInput, Prisma.LeadUncheckedCreateWithoutQuotationWorkActivityLogsInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutQuotationWorkActivityLogsInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutQuotationWorkActivityLogsInput, Prisma.LeadUncheckedUpdateWithoutQuotationWorkActivityLogsInput>
+}
+
+export type LeadUpdateWithoutQuotationWorkActivityLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
+  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutQuotationWorkActivityLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateManyAssigneeInput = {
@@ -7260,6 +7966,8 @@ export type LeadUpdateWithoutAssigneeInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -7312,6 +8020,8 @@ export type LeadUncheckedUpdateWithoutAssigneeInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -7392,6 +8102,8 @@ export type LeadUpdateWithoutPrimaryOwnerInput = {
   notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
@@ -7444,6 +8156,8 @@ export type LeadUncheckedUpdateWithoutPrimaryOwnerInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
   quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutLeadNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
   furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
@@ -7504,6 +8218,8 @@ export type LeadCountOutputType = {
   notes: number
   notifications: number
   quotationDrafts: number
+  quotationDailyWorkReports: number
+  quotationWorkActivityLogs: number
   transactions: number
   visits: number
   vendorAgreements: number
@@ -7527,6 +8243,8 @@ export type LeadCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   notes?: boolean | LeadCountOutputTypeCountNotesArgs
   notifications?: boolean | LeadCountOutputTypeCountNotificationsArgs
   quotationDrafts?: boolean | LeadCountOutputTypeCountQuotationDraftsArgs
+  quotationDailyWorkReports?: boolean | LeadCountOutputTypeCountQuotationDailyWorkReportsArgs
+  quotationWorkActivityLogs?: boolean | LeadCountOutputTypeCountQuotationWorkActivityLogsArgs
   transactions?: boolean | LeadCountOutputTypeCountTransactionsArgs
   visits?: boolean | LeadCountOutputTypeCountVisitsArgs
   vendorAgreements?: boolean | LeadCountOutputTypeCountVendorAgreementsArgs
@@ -7640,6 +8358,20 @@ export type LeadCountOutputTypeCountQuotationDraftsArgs<ExtArgs extends runtime.
 /**
  * LeadCountOutputType without action
  */
+export type LeadCountOutputTypeCountQuotationDailyWorkReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QuotationDailyWorkReportWhereInput
+}
+
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountQuotationWorkActivityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QuotationWorkActivityLogWhereInput
+}
+
+/**
+ * LeadCountOutputType without action
+ */
 export type LeadCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TransactionWhereInput
 }
@@ -7729,6 +8461,8 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   notes?: boolean | Prisma.Lead$notesArgs<ExtArgs>
   notifications?: boolean | Prisma.Lead$notificationsArgs<ExtArgs>
   quotationDrafts?: boolean | Prisma.Lead$quotationDraftsArgs<ExtArgs>
+  quotationDailyWorkReports?: boolean | Prisma.Lead$quotationDailyWorkReportsArgs<ExtArgs>
+  quotationWorkActivityLogs?: boolean | Prisma.Lead$quotationWorkActivityLogsArgs<ExtArgs>
   agreementDocument?: boolean | Prisma.Lead$agreementDocumentArgs<ExtArgs>
   furnitureQuotationDraft?: boolean | Prisma.Lead$furnitureQuotationDraftArgs<ExtArgs>
   electricalQuotationDraft?: boolean | Prisma.Lead$electricalQuotationDraftArgs<ExtArgs>
@@ -7851,6 +8585,8 @@ export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   notes?: boolean | Prisma.Lead$notesArgs<ExtArgs>
   notifications?: boolean | Prisma.Lead$notificationsArgs<ExtArgs>
   quotationDrafts?: boolean | Prisma.Lead$quotationDraftsArgs<ExtArgs>
+  quotationDailyWorkReports?: boolean | Prisma.Lead$quotationDailyWorkReportsArgs<ExtArgs>
+  quotationWorkActivityLogs?: boolean | Prisma.Lead$quotationWorkActivityLogsArgs<ExtArgs>
   agreementDocument?: boolean | Prisma.Lead$agreementDocumentArgs<ExtArgs>
   furnitureQuotationDraft?: boolean | Prisma.Lead$furnitureQuotationDraftArgs<ExtArgs>
   electricalQuotationDraft?: boolean | Prisma.Lead$electricalQuotationDraftArgs<ExtArgs>
@@ -7891,6 +8627,8 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     notes: Prisma.$NotePayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     quotationDrafts: Prisma.$QuotationDraftPayload<ExtArgs>[]
+    quotationDailyWorkReports: Prisma.$QuotationDailyWorkReportPayload<ExtArgs>[]
+    quotationWorkActivityLogs: Prisma.$QuotationWorkActivityLogPayload<ExtArgs>[]
     agreementDocument: Prisma.$AgreementDocumentPayload<ExtArgs> | null
     furnitureQuotationDraft: Prisma.$FurnitureQuotationDraftPayload<ExtArgs> | null
     electricalQuotationDraft: Prisma.$ElectricalQuotationDraftPayload<ExtArgs> | null
@@ -8339,6 +9077,8 @@ export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Typ
   notes<T extends Prisma.Lead$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.Lead$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quotationDrafts<T extends Prisma.Lead$quotationDraftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$quotationDraftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  quotationDailyWorkReports<T extends Prisma.Lead$quotationDailyWorkReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$quotationDailyWorkReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationDailyWorkReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  quotationWorkActivityLogs<T extends Prisma.Lead$quotationWorkActivityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$quotationWorkActivityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationWorkActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   agreementDocument<T extends Prisma.Lead$agreementDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$agreementDocumentArgs<ExtArgs>>): Prisma.Prisma__AgreementDocumentClient<runtime.Types.Result.GetResult<Prisma.$AgreementDocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   furnitureQuotationDraft<T extends Prisma.Lead$furnitureQuotationDraftArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$furnitureQuotationDraftArgs<ExtArgs>>): Prisma.Prisma__FurnitureQuotationDraftClient<runtime.Types.Result.GetResult<Prisma.$FurnitureQuotationDraftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   electricalQuotationDraft<T extends Prisma.Lead$electricalQuotationDraftArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$electricalQuotationDraftArgs<ExtArgs>>): Prisma.Prisma__ElectricalQuotationDraftClient<runtime.Types.Result.GetResult<Prisma.$ElectricalQuotationDraftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -9148,6 +9888,54 @@ export type Lead$quotationDraftsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.QuotationDraftScalarFieldEnum | Prisma.QuotationDraftScalarFieldEnum[]
+}
+
+/**
+ * Lead.quotationDailyWorkReports
+ */
+export type Lead$quotationDailyWorkReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the QuotationDailyWorkReport
+   */
+  select?: Prisma.QuotationDailyWorkReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the QuotationDailyWorkReport
+   */
+  omit?: Prisma.QuotationDailyWorkReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuotationDailyWorkReportInclude<ExtArgs> | null
+  where?: Prisma.QuotationDailyWorkReportWhereInput
+  orderBy?: Prisma.QuotationDailyWorkReportOrderByWithRelationInput | Prisma.QuotationDailyWorkReportOrderByWithRelationInput[]
+  cursor?: Prisma.QuotationDailyWorkReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QuotationDailyWorkReportScalarFieldEnum | Prisma.QuotationDailyWorkReportScalarFieldEnum[]
+}
+
+/**
+ * Lead.quotationWorkActivityLogs
+ */
+export type Lead$quotationWorkActivityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the QuotationWorkActivityLog
+   */
+  select?: Prisma.QuotationWorkActivityLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the QuotationWorkActivityLog
+   */
+  omit?: Prisma.QuotationWorkActivityLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuotationWorkActivityLogInclude<ExtArgs> | null
+  where?: Prisma.QuotationWorkActivityLogWhereInput
+  orderBy?: Prisma.QuotationWorkActivityLogOrderByWithRelationInput | Prisma.QuotationWorkActivityLogOrderByWithRelationInput[]
+  cursor?: Prisma.QuotationWorkActivityLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QuotationWorkActivityLogScalarFieldEnum | Prisma.QuotationWorkActivityLogScalarFieldEnum[]
 }
 
 /**

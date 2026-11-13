@@ -106,6 +106,7 @@ export const ModelName = {
   JrArchitectPerformance: 'JrArchitectPerformance',
   QuotationUserPerformance: 'QuotationUserPerformance',
   VisitMemberMonthlyAssessment: 'VisitMemberMonthlyAssessment',
+  DepartmentMemberMonthlySetting: 'DepartmentMemberMonthlySetting',
   Vendor: 'Vendor',
   VendorAgreement: 'VendorAgreement',
   VendorAgreementRevision: 'VendorAgreementRevision',
@@ -116,11 +117,14 @@ export const ModelName = {
   MaterialRequisition: 'MaterialRequisition',
   MaterialRequisitionItem: 'MaterialRequisitionItem',
   BoqSavedAccessoryItem: 'BoqSavedAccessoryItem',
+  BoqSavedApplianceItem: 'BoqSavedApplianceItem',
   RequisitionAmendment: 'RequisitionAmendment',
   Supplier: 'Supplier',
   ProcurementWallet: 'ProcurementWallet',
   ProcurementWalletTransaction: 'ProcurementWalletTransaction',
-  SiteDeliveryLog: 'SiteDeliveryLog'
+  SiteDeliveryLog: 'SiteDeliveryLog',
+  QuotationDailyWorkReport: 'QuotationDailyWorkReport',
+  QuotationWorkActivityLog: 'QuotationWorkActivityLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1008,6 +1012,21 @@ export const VisitMemberMonthlyAssessmentScalarFieldEnum = {
 export type VisitMemberMonthlyAssessmentScalarFieldEnum = (typeof VisitMemberMonthlyAssessmentScalarFieldEnum)[keyof typeof VisitMemberMonthlyAssessmentScalarFieldEnum]
 
 
+export const DepartmentMemberMonthlySettingScalarFieldEnum = {
+  id: 'id',
+  department: 'department',
+  userId: 'userId',
+  monthKey: 'monthKey',
+  isEnabled: 'isEnabled',
+  notes: 'notes',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DepartmentMemberMonthlySettingScalarFieldEnum = (typeof DepartmentMemberMonthlySettingScalarFieldEnum)[keyof typeof DepartmentMemberMonthlySettingScalarFieldEnum]
+
+
 export const VendorScalarFieldEnum = {
   id: 'id',
   vendorId: 'vendorId',
@@ -1172,8 +1191,10 @@ export const BoqSavedAccessoryItemScalarFieldEnum = {
   id: 'id',
   name: 'name',
   category: 'category',
+  brand: 'brand',
   itemCode: 'itemCode',
   defaultUnit: 'defaultUnit',
+  imageUrl: 'imageUrl',
   isActive: 'isActive',
   serialNo: 'serialNo',
   createdAt: 'createdAt',
@@ -1181,6 +1202,29 @@ export const BoqSavedAccessoryItemScalarFieldEnum = {
 } as const
 
 export type BoqSavedAccessoryItemScalarFieldEnum = (typeof BoqSavedAccessoryItemScalarFieldEnum)[keyof typeof BoqSavedAccessoryItemScalarFieldEnum]
+
+
+export const BoqSavedApplianceItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  category: 'category',
+  brand: 'brand',
+  modelCode: 'modelCode',
+  brandModelCode: 'brandModelCode',
+  dimW: 'dimW',
+  dimD: 'dimD',
+  dimH: 'dimH',
+  cabinetNicheCutOutSize: 'cabinetNicheCutOutSize',
+  defaultUnitPrice: 'defaultUnitPrice',
+  defaultUnit: 'defaultUnit',
+  imageUrl: 'imageUrl',
+  isActive: 'isActive',
+  serialNo: 'serialNo',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoqSavedApplianceItemScalarFieldEnum = (typeof BoqSavedApplianceItemScalarFieldEnum)[keyof typeof BoqSavedApplianceItemScalarFieldEnum]
 
 
 export const RequisitionAmendmentScalarFieldEnum = {
@@ -1280,6 +1324,38 @@ export const SiteDeliveryLogScalarFieldEnum = {
 } as const
 
 export type SiteDeliveryLogScalarFieldEnum = (typeof SiteDeliveryLogScalarFieldEnum)[keyof typeof SiteDeliveryLogScalarFieldEnum]
+
+
+export const QuotationDailyWorkReportScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  leadId: 'leadId',
+  workDate: 'workDate',
+  dateKey: 'dateKey',
+  weekKey: 'weekKey',
+  workType: 'workType',
+  sqft: 'sqft',
+  isAutoDetected: 'isAutoDetected',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type QuotationDailyWorkReportScalarFieldEnum = (typeof QuotationDailyWorkReportScalarFieldEnum)[keyof typeof QuotationDailyWorkReportScalarFieldEnum]
+
+
+export const QuotationWorkActivityLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  leadId: 'leadId',
+  workType: 'workType',
+  activityDate: 'activityDate',
+  dateKey: 'dateKey',
+  description: 'description',
+  createdAt: 'createdAt'
+} as const
+
+export type QuotationWorkActivityLogScalarFieldEnum = (typeof QuotationWorkActivityLogScalarFieldEnum)[keyof typeof QuotationWorkActivityLogScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -1,4 +1,4 @@
-﻿import prisma from '@/lib/prisma'
+import prisma from '@/lib/prisma'
 import {
   LeadAssignmentDepartment,
   LeadPrimaryOwnerDepartment,
@@ -10,6 +10,7 @@ import { requireDatabaseRoles } from '@/lib/authz'
 import { logUserAssigned } from '@/lib/activity-log-service'
 import { autoCompletePendingFollowups } from '@/lib/followup-auto-complete'
 import { hasJrArchitectureLeaderRole } from '@/lib/jr-architecture-roles'
+import { sendPushToUser } from '@/lib/fcm-service'
 
 /*
   POSTMAN TESTING DATA
@@ -53,63 +54,7 @@ import { hasJrArchitectureLeaderRole } from '@/lib/jr-architecture-roles'
       "createdAt": "2026-03-09T08:03:54.636Z",
       "user": {
         "id": "cmmhf6aef0003pku3125gleqh",
-        "fullName": "
-  $m = import prisma from '@/lib/prisma'
-import {
-  LeadAssignmentDepartment,
-  LeadPrimaryOwnerDepartment,
-  LeadStage,
-  LeadSubStatus,
-} from '@/generated/prisma/client'
-import { NextRequest, NextResponse } from 'next/server'
-import { requireDatabaseRoles } from '@/lib/authz'
-import { logUserAssigned } from '@/lib/activity-log-service'
-import { autoCompletePendingFollowups } from '@/lib/followup-auto-complete'
-import { hasJrArchitectureLeaderRole } from '@/lib/jr-architecture-roles'
-
-/*
-  POSTMAN TESTING DATA
-  =====================
-  
-  BASE URL: http://localhost:3000/api/lead/{leadId}/assignments/{department}
-  
-  VALID DEPARTMENTS: ADMIN, SR_CRM, JR_CRM, QUOTATION, VISIT_TEAM, JR_ARCHITECT, VISUALIZER_3D
-  
-  =====================
-  PUT - Update assignment for a specific department
-  =====================
-  URL: http://localhost:3000/api/lead/{leadId}/assignments/{department}
-  Method: PUT
-  Headers: 
-    - Content-Type: application/json
-    - Authorization: Bearer {token}
-  
-  Request Body:
-  {
-    "userId": "cmmhf6aef0003pku3125gleqh"
-  }
-  
-  Example URLs:
-  http://localhost:3000/api/lead/cmmhfdt160000vzwb5ai4ej2g/assignments/sr_crm
-  http://localhost:3000/api/lead/cmmhfdt160000vzwb5ai4ej2g/assignments/JR_CRM
-  
-  Example curl:
-  curl -X PUT http://localhost:3000/api/lead/cmmhfdt160000vzwb5ai4ej2g/assignments/SR_CRM \
-    -H "Content-Type: application/json" \
-    -d '{"userId": "cmmhf6aef0003pku3125gleqh"}'
-  
-  Expected Success Response (200):
-  {
-    "success": true,
-    "data": {
-      "id": "cmmiwa5xo0001fdwby7l7wjo2",
-      "leadId": "cmmhfdt160000vzwb5ai4ej2g",
-      "userId": "cmmhf6aef0003pku3125gleqh",
-      "department": "SR_CRM",
-      "createdAt": "2026-03-09T08:03:54.636Z",
-      "user": {
-        "id": "cmmhf6aef0003pku3125gleqh",
-        "fullName": "interior concept",
+        "fullName": "aesthetic interior",
         "email": "mdalraihan435@gmail.com"
       }
     },
@@ -241,9 +186,13 @@ export async function POST(
     }
 
     const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
-    if (!actorDepartments.has('ADMIN') && !actorDepartments.has('SR_CRM')) {
+    if (
+      !actorDepartments.has('ADMIN') &&
+      !actorDepartments.has('SR_CRM') &&
+      !actorDepartments.has('SPECIALIST_DESIGN_CONSULTANTS')
+    ) {
       return NextResponse.json(
-        { success: false, error: 'Only Admin or Senior CRM can assign a new quotation member' },
+        { success: false, error: 'Only Admin, Senior CRM, or Special Design Consultant can assign a new quotation member' },
         { status: 403 },
       )
     }
@@ -300,10 +249,31 @@ export async function POST(
         action: 'new quotation assignment',
       })
 
-      return assignment
+      return { assignment, leadName: lead.name }
     })
 
-    return NextResponse.json({ success: true, data: result, message: 'New quotation assignment created successfully' })
+    try {
+      await prisma.notification.create({
+        data: {
+          userId: user.id,
+          leadId,
+          type: 'LEAD_ASSIGNED_TO_YOU',
+          title: 'New Quotation assignment',
+          message: `${result.leadName || 'Lead'} has been assigned to you for quotation work.`,
+          scheduledFor: new Date(),
+        },
+      })
+      await sendPushToUser(
+        user.id,
+        'New Quotation assignment',
+        `${result.leadName || 'Lead'} has been assigned to you for quotation work.`,
+        { type: 'QUOTATION_ASSIGNED', leadId },
+      )
+    } catch (notificationError) {
+      console.error('[POST /api/lead/[id]/assignments/[department]] Failed to notify quotation user:', notificationError)
+    }
+
+    return NextResponse.json({ success: true, data: result.assignment, message: 'New quotation assignment created successfully' })
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : 'Failed to create new quotation assignment'
     return NextResponse.json({ success: false, error: errorMsg }, { status: errorMsg.includes('not found') ? 404 : 500 })
@@ -380,9 +350,11 @@ export async function PUT(
       'JR_CRM',
       'QUOTATION',
       'VISIT_TEAM',
+      'SPECIALIST_DESIGN_CONSULTANTS',
       'JR_ARCHITECT',
       'VISUALIZER_3D',
       'ACCOUNTS',
+      'PROJECT_COORDINATOR',
     ]
     if (!validDepartments.includes(department)) {
       return NextResponse.json(
@@ -394,6 +366,28 @@ export async function PUT(
       )
     }
 
+    if (department === 'SPECIALIST_DESIGN_CONSULTANTS') {
+      const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
+      const actorRoles = authResult.actorRoles ?? []
+      const isJrArchitectLeader =
+        actorDepartments.has('JR_ARCHITECT') &&
+        hasJrArchitectureLeaderRole(actorRoles)
+      const canUpdateSdc =
+        actorDepartments.has('ADMIN') ||
+        actorDepartments.has('SPECIALIST_DESIGN_CONSULTANTS') ||
+        isJrArchitectLeader
+
+      if (!canUpdateSdc) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: 'Only Admin, Specialist Design Consultant, or JR Architect leaders can reassign Special Design Consultant',
+          },
+          { status: 403 },
+        )
+      }
+    }
+
     if (department === 'JR_ARCHITECT' || department === 'SR_CRM') {
       const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
       const actorRoles = authResult.actorRoles ?? []
@@ -403,6 +397,7 @@ export async function PUT(
       const canUpdateAssignment =
         actorDepartments.has('ADMIN') ||
         actorDepartments.has('SR_CRM') ||
+        actorDepartments.has('SPECIALIST_DESIGN_CONSULTANTS') ||
         isJrArchitectLeader
 
       if (!canUpdateAssignment) {
@@ -411,8 +406,8 @@ export async function PUT(
             success: false,
             error:
               department === 'JR_ARCHITECT'
-                ? 'Only Admin, Senior CRM, or JR Architect leaders can reassign JR Architect'
-                : 'Only Admin, Senior CRM, or JR Architect leaders can reassign SR CRM',
+                ? 'Only Admin, Senior CRM, Special Design Consultant, or JR Architect leaders can reassign JR Architect'
+                : 'Only Admin, Senior CRM, Special Design Consultant, or JR Architect leaders can reassign SR CRM',
           },
           { status: 403 },
         )
@@ -422,7 +417,9 @@ export async function PUT(
     if (department === 'QUOTATION' || department === 'VISUALIZER_3D') {
       const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
       const canUpdateQuotationAssignment =
-        actorDepartments.has('ADMIN') || actorDepartments.has('SR_CRM') || ((actorDepartments.has('QUOTATION') || actorDepartments.has('QUOTATION_TEAM')) && userId === authResult.actorUserId)
+        actorDepartments.has('ADMIN') ||
+        actorDepartments.has('SR_CRM') ||
+        actorDepartments.has('SPECIALIST_DESIGN_CONSULTANTS')
       const canUpdateVisualizerAssignment =
         canUpdateQuotationAssignment || actorDepartments.has('JR_ARCHITECT')
       const canUpdateCrossDepartmentAssignment =
@@ -436,7 +433,7 @@ export async function PUT(
             success: false,
             error:
               department === 'QUOTATION'
-                ? 'Only Admin or Senior CRM can reassign quotation member'
+                ? 'Only Admin, Senior CRM, or Special Design Consultant can reassign quotation member'
                 : 'Only Admin, Senior CRM, or JR Architect can assign 3D Visualizer',
           },
           { status: 403 },
@@ -507,7 +504,8 @@ export async function PUT(
           department === 'QUOTATION' ||
           department === 'VISUALIZER_3D' ||
           department === 'JR_ARCHITECT' ||
-          department === 'SR_CRM'
+          department === 'SR_CRM' ||
+          department === 'SPECIALIST_DESIGN_CONSULTANTS'
 
         if (!canCreateMissingAssignment) {
           throw new Error('Assignment not found for this lead and department')
@@ -574,6 +572,29 @@ export async function PUT(
     debugLog(
       '✨ [PUT /api/lead/[id]/assignments/[department]] - Assignment updated successfully',
     )
+
+    if (department === 'QUOTATION') {
+      try {
+        await prisma.notification.create({
+          data: {
+            userId: user.id,
+            leadId: lead.id,
+            type: 'LEAD_ASSIGNED_TO_YOU',
+            title: 'Quotation assignment updated',
+            message: `${lead.name} has been assigned to you for quotation work.`,
+            scheduledFor: new Date(),
+          },
+        })
+        await sendPushToUser(
+          user.id,
+          'Quotation assignment updated',
+          `${lead.name} has been assigned to you for quotation work.`,
+          { type: 'QUOTATION_ASSIGNED', leadId: lead.id },
+        )
+      } catch (notificationError) {
+        console.error('[PUT /api/lead/[id]/assignments/[department]] Failed to notify quotation user:', notificationError)
+      }
+    }
 
     return NextResponse.json({
       success: true,
@@ -652,9 +673,11 @@ export async function DELETE(
       'JR_CRM',
       'QUOTATION',
       'VISIT_TEAM',
+      'SPECIALIST_DESIGN_CONSULTANTS',
       'JR_ARCHITECT',
       'VISUALIZER_3D',
       'ACCOUNTS',
+      'PROJECT_COORDINATOR',
     ]
     if (!validDepartments.includes(department)) {
       return NextResponse.json(
@@ -705,10 +728,21 @@ export async function DELETE(
         assignment,
       )
 
+      const postConversionStages: LeadStage[] = [
+        LeadStage.CONVERSION,
+        LeadStage.PROJECT_SETUP,
+        LeadStage.MATERIAL_PLANNING,
+        LeadStage.PROCUREMENT,
+        LeadStage.SITE_EXECUTION,
+        LeadStage.QUALITY_CHECK,
+        LeadStage.HANDOVER,
+        LeadStage.CLOSED,
+      ]
+      const isPostConversionOrClosed = postConversionStages.includes(lead.stage as LeadStage)
+
       if (
         department === 'SR_CRM' &&
-        lead.stage !== LeadStage.CONVERSION &&
-        lead.stage !== LeadStage.CLOSED
+        !isPostConversionOrClosed
       ) {
         throw new Error(
           'SR_CRM assignment is required until lead reaches CONVERSION or CLOSED',

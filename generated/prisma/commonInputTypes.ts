@@ -987,6 +987,23 @@ export type EnumSiteDeliveryConditionWithAggregatesFilter<$PrismaModel = never> 
   _max?: Prisma.NestedEnumSiteDeliveryConditionFilter<$PrismaModel>
 }
 
+export type EnumQuotationWorkTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.QuotationWorkType | Prisma.EnumQuotationWorkTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.QuotationWorkType[] | Prisma.ListEnumQuotationWorkTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.QuotationWorkType[] | Prisma.ListEnumQuotationWorkTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumQuotationWorkTypeFilter<$PrismaModel> | $Enums.QuotationWorkType
+}
+
+export type EnumQuotationWorkTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.QuotationWorkType | Prisma.EnumQuotationWorkTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.QuotationWorkType[] | Prisma.ListEnumQuotationWorkTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.QuotationWorkType[] | Prisma.ListEnumQuotationWorkTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumQuotationWorkTypeWithAggregatesFilter<$PrismaModel> | $Enums.QuotationWorkType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumQuotationWorkTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumQuotationWorkTypeFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1895,6 +1912,23 @@ export type NestedEnumSiteDeliveryConditionWithAggregatesFilter<$PrismaModel = n
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumSiteDeliveryConditionFilter<$PrismaModel>
   _max?: Prisma.NestedEnumSiteDeliveryConditionFilter<$PrismaModel>
+}
+
+export type NestedEnumQuotationWorkTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.QuotationWorkType | Prisma.EnumQuotationWorkTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.QuotationWorkType[] | Prisma.ListEnumQuotationWorkTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.QuotationWorkType[] | Prisma.ListEnumQuotationWorkTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumQuotationWorkTypeFilter<$PrismaModel> | $Enums.QuotationWorkType
+}
+
+export type NestedEnumQuotationWorkTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.QuotationWorkType | Prisma.EnumQuotationWorkTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.QuotationWorkType[] | Prisma.ListEnumQuotationWorkTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.QuotationWorkType[] | Prisma.ListEnumQuotationWorkTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumQuotationWorkTypeWithAggregatesFilter<$PrismaModel> | $Enums.QuotationWorkType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumQuotationWorkTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumQuotationWorkTypeFilter<$PrismaModel>
 }
 
 

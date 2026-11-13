@@ -1,6 +1,9 @@
 import prisma from '@/lib/prisma'
 import { NextResponse } from 'next/server'
 import { requireDatabaseRoles } from '@/lib/authz'
+import { processAgreementAndDiscountSync } from '@/lib/agreement-discount-sync'
+import { LeadAssignmentDepartment, LeadStage, LeadSubStatus } from '@/generated/prisma/client'
+import { getDepartmentNameAliases } from '@/lib/department-normalization'
 
 export async function POST(req: Request) {
   try {
@@ -11,9 +14,22 @@ export async function POST(req: Request) {
     const actor = authResult.actor
 
     const body = await req.json()
-    const { leadId, srCrmId, visualizer3dId, agreementType, agreementValue } = body
+    const {
+      leadId,
+      srCrmId,
+      visualizer3dId,
+      agreementType,
+      agreementValue,
+      discount,
+      discountAmount,
+      discountPercent,
+      discountType,
+      selectedDraftId,
+      selectedDraftKey,
+      slotIndex,
+    } = body
 
-    if (!leadId || !agreementType || agreementValue === undefined) {
+    if (!leadId || !agreementType) {
       return NextResponse.json({ success: false, error: 'Missing required fields' }, { status: 400 })
     }
 
@@ -22,15 +38,34 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Lead not found' }, { status: 404 })
     }
 
+    const discountInput = discountAmount !== undefined ? Number(discountAmount) : discount !== undefined ? Number(discount) : null
+    const discountPercentInput = discountPercent !== undefined && discountPercent !== null ? Number(discountPercent) : null
+    const rawAgreementValue = agreementValue !== undefined && agreementValue !== null && agreementValue !== '' ? Number(agreementValue) : null
+
+    const syncResult = await processAgreementAndDiscountSync({
+      tx: prisma,
+      leadId,
+      actorUserId: actor.id,
+      selectedDraftId: typeof selectedDraftId === 'string' ? selectedDraftId : null,
+      selectedDraftKey: typeof selectedDraftKey === 'string' ? selectedDraftKey : null,
+      slotIndex: typeof slotIndex === 'number' ? slotIndex : typeof slotIndex === 'string' ? parseInt(slotIndex, 10) : null,
+      agreementValueInput: rawAgreementValue,
+      discountType: discountType === 'PERCENTAGE' ? 'PERCENTAGE' : 'FIXED',
+      discountAmountInput: discountInput,
+      discountPercentInput,
+    })
+
+    const finalAgreementValue = syncResult.settledAgreementValue ?? (rawAgreementValue ?? 0)
+
     // 1. Update Lead
     const updatedLead = await prisma.lead.update({
       where: { id: leadId },
       data: {
         agreementType,
-        agreementValue: Number(agreementValue),
+        agreementValue: finalAgreementValue,
         accountStatus: 'PENDING',
-        stage: 'VISUALIZATION_PHASE',
-        subStatus: 'VISUAL_ASSIGNED',
+        stage: LeadStage.CONVERSION,
+        subStatus: LeadSubStatus.CLIENT_CONFIRMED,
         ...(srCrmId ? { primaryOwnerUserId: srCrmId, assignedTo: srCrmId } : {}),
       },
     })
@@ -43,14 +78,14 @@ export async function POST(req: Request) {
         where: {
           leadId_department_userId: {
             leadId,
-            department: 'SR_CRM',
+            department: LeadAssignmentDepartment.SR_CRM,
             userId: srCrmId,
           }
         },
         update: {},
         create: {
           leadId,
-          department: 'SR_CRM',
+          department: LeadAssignmentDepartment.SR_CRM,
           userId: srCrmId,
         }
       })
@@ -61,16 +96,43 @@ export async function POST(req: Request) {
         where: {
           leadId_department_userId: {
             leadId,
-            department: 'VISUALIZER_3D',
+            department: LeadAssignmentDepartment.VISUALIZER_3D,
             userId: visualizer3dId,
           }
         },
         update: {},
         create: {
           leadId,
-          department: 'VISUALIZER_3D',
+          department: LeadAssignmentDepartment.VISUALIZER_3D,
           userId: visualizer3dId,
         }
+      })
+    }
+
+    const accountsUser = await prisma.user.findFirst({
+      where: {
+        isActive: true,
+        userDepartments: { some: { department: { name: 'ACCOUNTS' } } },
+      },
+      select: { id: true },
+      orderBy: [{ fullName: 'asc' }, { created_at: 'asc' }],
+    })
+
+    if (accountsUser) {
+      await prisma.leadAssignment.upsert({
+        where: {
+          leadId_department_userId: {
+            leadId,
+            department: LeadAssignmentDepartment.ACCOUNTS,
+            userId: accountsUser.id,
+          },
+        },
+        update: {},
+        create: {
+          leadId,
+          department: LeadAssignmentDepartment.ACCOUNTS,
+          userId: accountsUser.id,
+        },
       })
     }
 
@@ -80,13 +142,49 @@ export async function POST(req: Request) {
         leadId,
         userId: actor.id,
         type: 'NOTE',
-        description: `Finance started: Agreement Type ${agreementType}, Value ${agreementValue}. Moved to Visualization Phase.`,
+        description: `Agreement confirmed: Type ${agreementType}, Value ${finalAgreementValue}. Sent to Accounts pending first transaction before 3D Visualizer release.`,
       }
     })
 
+    // 4. Auto-assign PROJECT_COORDINATOR for FITOUT agreements
+    if (agreementType === 'FITOUT_AGREEMENT') {
+      const pcUser = await prisma.user.findFirst({
+        where: {
+          isActive: true,
+          userDepartments: {
+            some: {
+              department: {
+                name: { in: getDepartmentNameAliases('PROJECT_COORDINATOR') },
+              },
+            },
+          },
+        },
+        select: { id: true },
+        orderBy: [{ fullName: 'asc' }, { created_at: 'asc' }],
+      })
+      if (pcUser) {
+        await prisma.leadAssignment.upsert({
+          where: {
+            leadId_department_userId: {
+              leadId,
+              department: LeadAssignmentDepartment.PROJECT_COORDINATOR,
+              userId: pcUser.id,
+            },
+          },
+          update: {},
+          create: {
+            leadId,
+            department: LeadAssignmentDepartment.PROJECT_COORDINATOR,
+            userId: pcUser.id,
+          },
+        })
+      }
+    }
+
     return NextResponse.json({ success: true, lead: updatedLead })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[finance/start] error:', error)
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 })
+    const message = error instanceof Error ? error.message : 'Failed to start finance'
+    return NextResponse.json({ success: false, error: message }, { status: 500 })
   }
 }

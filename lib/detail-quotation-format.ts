@@ -2,7 +2,7 @@ import { todayShortQuotationDate } from '@/lib/short-quotation-calculations'
 import type { QuotationDraftContent, QuotationLineItem, QuotationSection } from '@/lib/quotation-types'
 
 export const DEFAULT_DETAIL_INTRO_LETTER = `Dear Sir,
-Yours sincerely, I am interested in working on the interior of your Flat. So, the details of my work are described below.`
+We are delighted to partner with you on transforming your residence into an aesthetic, thoughtfully designed space. Separate cost estimates have been provided for each room to give you a clear breakdown of the budget and scope.`
 
 export const DEFAULT_DETAIL_SUBJECT = 'Quotation for interior decoration work'
 export const DEFAULT_DETAIL_SUMMARY_SUBJECT = 'Quotation for interior decoration work'
@@ -18,34 +18,37 @@ export const DEFAULT_DETAIL_DURATION = `Duration Of Work:
 export const DEFAULT_DRAWING_DESIGN =
   'Drawing Design: All fabrication work will be implemented by approved drawing design, so client should be approved all drawing & design.'
 
-export const DEFAULT_SIGNATORY_NAME = 'Shopi Ullah Rashed'
+export const DEFAULT_SIGNATORY_NAME = 'Md Johirul Islam'
 export const DEFAULT_SIGNATORY_TITLE = 'Chief Executive Officer'
-
-export function normalizeSignatoryName(name: string | null | undefined): string {
-  if (!name || /j[ao]hirul\s+islam/i.test(name)) {
-    return DEFAULT_SIGNATORY_NAME
-  }
-  return name
-}
 
 export type DetailQuotationLayoutMode = 'split-right' | 'split-left' | 'stacked' | 'tabs'
 
 export const DETAIL_QUOTATION_LAYOUT_STORAGE_KEY = 'detail-quotation-layout-mode'
+
+export function getDetailVersionTitle(slotIndex?: number | null): string {
+  if (slotIndex === 1) return 'Premium'
+  if (slotIndex === 2) return 'Platinum'
+  if (slotIndex === 3) return 'Luxury'
+  return slotIndex ? `Version ${slotIndex}` : 'Premium'
+}
 
 export function withDetailQuotationDefaults(
   content: QuotationDraftContent,
 ): QuotationDraftContent {
   return {
     ...content,
-    quotationDate: content.quotationDate ?? todayShortQuotationDate(),
-    subject: content.subject ?? DEFAULT_DETAIL_SUBJECT,
-    introLetter: content.introLetter ?? DEFAULT_DETAIL_INTRO_LETTER,
-    paymentTerms: content.paymentTerms ?? DEFAULT_DETAIL_PAYMENT_TERMS,
-    durationNotes: content.durationNotes ?? DEFAULT_DETAIL_DURATION,
-    drawingDesign: content.drawingDesign ?? DEFAULT_DRAWING_DESIGN,
-    signatoryName: normalizeSignatoryName(content.signatoryName),
-    signatoryTitle: content.signatoryTitle ?? DEFAULT_SIGNATORY_TITLE,
-    summarySubject: content.summarySubject ?? DEFAULT_DETAIL_SUMMARY_SUBJECT,
+    sections: Array.isArray(content?.sections) ? content.sections : [],
+    areas: Array.isArray(content?.areas) ? content.areas : [],
+    lineItems: Array.isArray(content?.lineItems) ? content.lineItems : [],
+    quotationDate: content?.quotationDate ?? todayShortQuotationDate(),
+    subject: content?.subject ?? DEFAULT_DETAIL_SUBJECT,
+    introLetter: content?.introLetter ?? DEFAULT_DETAIL_INTRO_LETTER,
+    paymentTerms: content?.paymentTerms ?? DEFAULT_DETAIL_PAYMENT_TERMS,
+    durationNotes: content?.durationNotes ?? DEFAULT_DETAIL_DURATION,
+    drawingDesign: content?.drawingDesign ?? DEFAULT_DRAWING_DESIGN,
+    signatoryName: content?.signatoryName ?? DEFAULT_SIGNATORY_NAME,
+    signatoryTitle: content?.signatoryTitle ?? DEFAULT_SIGNATORY_TITLE,
+    summarySubject: content?.summarySubject ?? DEFAULT_DETAIL_SUMMARY_SUBJECT,
   }
 }
 
@@ -70,16 +73,17 @@ export function formatDetailQtyCell(line: QuotationLineItem) {
 
 export function formatDetailUnitPriceCell(line: QuotationLineItem) {
   if (isPackageLine(line)) {
-    return line.unitPriceLabel?.trim() || 'as per project design'
+    const raw = line.unitPriceLabel?.trim()
+    return raw && raw !== 'as per project design' ? raw : '--'
   }
-  if (isRateOnlyLine(line)) return `---- ${formatDetailAmount(line.rate)} ----`
+  if (isRateOnlyLine(line)) return formatDetailAmount(line.rate)
   if (line.rate <= 0) return '----'
   return formatDetailAmount(line.rate)
 }
 
 export function formatDetailTotalCell(line: QuotationLineItem) {
-  if (isRateOnlyLine(line)) return '----'
-  if (isPackageLine(line)) return formatDetailAmount(line.amount)
+  if (isRateOnlyLine(line)) return '---'
+  if (!line.amount || line.amount <= 0) return '---'
   return formatDetailAmount(line.amount)
 }
 
@@ -97,7 +101,7 @@ export function buildDetailFloorSummaries(content: QuotationDraftContent): Detai
 
   return floors
     .map((floor) => {
-      const lines = content.lineItems.filter((line) => line.sectionId === floor.id && line.included)
+      const lines = content.lineItems.filter((line) => line.sectionId === floor.id && line.included !== false)
       const total = Math.round(
         lines.reduce((sum, line) => {
           if (isRateOnlyLine(line)) return sum

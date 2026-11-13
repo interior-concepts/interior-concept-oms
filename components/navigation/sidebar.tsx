@@ -109,6 +109,11 @@ const navigationGroups: Record<string, NavGroup[]> = {
           href: '/crm/admin/projects',
         },
         {
+          icon: ClipboardList,
+          label: 'PC Projects (Site)',
+          href: '/crm/pc/projects',
+        },
+        {
           icon: BarChart3,
           label: 'Summary',
           href: '/crm/accounts/summary',
@@ -641,6 +646,84 @@ const navigationGroups: Record<string, NavGroup[]> = {
       ],
     },
   ],
+  'Project Coordinator': [
+    {
+      id: 'pc-overview',
+      label: 'Overview',
+      defaultOpen: true,
+      items: [
+        {
+          icon: LayoutDashboard,
+          label: 'Dashboard',
+          href: '/crm/pc/dashboard',
+        },
+      ],
+    },
+    {
+      id: 'pc-workflow',
+      label: 'Projects',
+      defaultOpen: true,
+      items: [
+        {
+          icon: ClipboardList,
+          label: 'My Projects',
+          href: '/crm/pc/projects',
+        },
+      ],
+    },
+  ],
+  PROJECT_COORDINATOR: [
+    {
+      id: 'pc-overview',
+      label: 'Overview',
+      defaultOpen: true,
+      items: [
+        {
+          icon: LayoutDashboard,
+          label: 'Dashboard',
+          href: '/crm/pc/dashboard',
+        },
+      ],
+    },
+    {
+      id: 'pc-workflow',
+      label: 'Projects',
+      defaultOpen: true,
+      items: [
+        {
+          icon: ClipboardList,
+          label: 'My Projects',
+          href: '/crm/pc/projects',
+        },
+      ],
+    },
+  ],
+  PROJECT_CORDINATOR: [
+    {
+      id: 'pc-overview',
+      label: 'Overview',
+      defaultOpen: true,
+      items: [
+        {
+          icon: LayoutDashboard,
+          label: 'Dashboard',
+          href: '/crm/pc/dashboard',
+        },
+      ],
+    },
+    {
+      id: 'pc-workflow',
+      label: 'Projects',
+      defaultOpen: true,
+      items: [
+        {
+          icon: ClipboardList,
+          label: 'My Projects',
+          href: '/crm/pc/projects',
+        },
+      ],
+    },
+  ],
 }
 
 export function Sidebar({ open, onOpenChange, role }: SidebarProps) {
@@ -672,10 +755,13 @@ export function Sidebar({ open, onOpenChange, role }: SidebarProps) {
 
   // true for any route that lives under /visits
   const isVisits = pathname.startsWith('/visit-team')
+  const isPc = pathname.startsWith('/crm/pc')
 
   const groups = useMemo(() => {
     const baseGroups = isVisits
       ? navigationGroups['Visit Team']
+      : isPc
+      ? navigationGroups['Project Coordinator']
       : navigationGroups[role as keyof typeof navigationGroups] || []
 
     if (!isVisits) {

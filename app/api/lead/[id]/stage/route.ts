@@ -18,8 +18,9 @@ import { canManagePrimaryLeadFlow } from '@/lib/lead-workflow-auth';
 import { ensurePhaseTaskForSubStatus } from '@/lib/lead-phase-task';
 import { createSrCadReviewTodosForCadStart } from '@/lib/sr-cad-todo';
 import { hasJrArchitectureLeaderRole } from '@/lib/jr-architecture-roles';
+import { processAgreementAndDiscountSync } from '@/lib/agreement-discount-sync';
 
-type RouteContext = { params: { id: string } | Promise<{ id: string }> };
+type RouteContext = { params: Promise<{ id: string }> };
 
 const debugLog = (...args: unknown[]) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -36,6 +37,13 @@ type UpdateLeadStageBody = {
   quotationUserId?: unknown;
   agreementType?: unknown;
   agreementValue?: unknown;
+  discount?: unknown;
+  discountAmount?: unknown;
+  discountPercent?: unknown;
+  discountType?: unknown;
+  selectedDraftId?: unknown;
+  selectedDraftKey?: unknown;
+  slotIndex?: unknown;
 };
 
 async function resolveLeadId(context: RouteContext): Promise<string | null> {
@@ -123,6 +131,14 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
     const agreementType = toOptionalString(body.agreementType);
     const agreementValueRaw = body.agreementValue;
     const agreementValue = typeof agreementValueRaw === 'number' ? agreementValueRaw : typeof agreementValueRaw === 'string' ? parseFloat(agreementValueRaw) : null;
+    const discountRaw = body.discountAmount ?? body.discount;
+    const discountInput = typeof discountRaw === 'number' ? discountRaw : typeof discountRaw === 'string' ? parseFloat(discountRaw) : null;
+    const discountPercentRaw = body.discountPercent;
+    const discountPercentInput = typeof discountPercentRaw === 'number' ? discountPercentRaw : typeof discountPercentRaw === 'string' ? parseFloat(discountPercentRaw) : null;
+    const discountType = body.discountType === 'PERCENTAGE' ? 'PERCENTAGE' : 'FIXED';
+    const selectedDraftId = toOptionalString(body.selectedDraftId);
+    const selectedDraftKey = toOptionalString(body.selectedDraftKey);
+    const slotIndexInput = typeof body.slotIndex === 'number' ? body.slotIndex : typeof body.slotIndex === 'string' ? parseInt(body.slotIndex, 10) : null;
     debugLog('📋 [lead/:id/stage][PATCH] - Extracted fields. Stage:', nextStage, 'SubStatus:', requestedSubStatus);
 
     if (!nextStage) {
@@ -148,8 +164,8 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       actorDepartments.some((department) =>
         ['ADMIN', 'SR_CRM', 'JR_ARCHITECT'].includes(department),
       ) &&
-      ((nextStage === LeadStage.VISUALIZATION_PHASE &&
-        requestedSubStatus === LeadSubStatus.VISUAL_ASSIGNED) ||
+      ((nextStage === LeadStage.CONVERSION &&
+        requestedSubStatus === LeadSubStatus.CLIENT_CONFIRMED) ||
         (nextStage === LeadStage.BUDGET_PHASE &&
           requestedSubStatus === LeadSubStatus.REJECTED_OFFER));
     const leadWhere = isBudgetMeetingCompletionRequest || isVisitQueueDropRequest
@@ -163,12 +179,30 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
 
     const existingLead = await prisma.lead.findFirst({
       where: leadWhere,
-      select: { id: true, stage: true, subStatus: true, primaryOwnerUserId: true },
+      select: {
+        id: true,
+        stage: true,
+        subStatus: true,
+        primaryOwnerUserId: true,
+        assignments: {
+          select: { department: true, userId: true },
+        },
+      },
     });
 
     if (!existingLead) {
       return NextResponse.json({ success: false, error: 'Lead not found' }, { status: 404 });
     }
+
+    const isSpecialistDesignConsultant = actorDepartments.includes('SPECIALIST_DESIGN_CONSULTANTS');
+    const isPartialWorkflowLead =
+      existingLead.stage === LeadStage.PARTIAL_VISIT_PHASE ||
+      existingLead.stage === LeadStage.PARTIAL_QUOTATION_PHASE ||
+      nextStage === LeadStage.PARTIAL_VISIT_PHASE ||
+      nextStage === LeadStage.PARTIAL_QUOTATION_PHASE ||
+      existingLead.assignments.some(
+        (a) => a.department === LeadAssignmentDepartment.SPECIALIST_DESIGN_CONSULTANTS,
+      );
 
     const nextSubStatus =
       requestedSubStatus !== undefined
@@ -194,6 +228,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       existingLead.subStatus !== null &&
       cadSubStatuses.has(existingLead.subStatus);
     if (
+      !isPartialWorkflowLead &&
       nextStage === LeadStage.CAD_PHASE &&
       nextSubStatus &&
       nextSubStatus !== LeadSubStatus.CAD_ASSIGNED &&
@@ -204,7 +239,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
         { status: 409 },
       );
     }
-    if (nextStage === LeadStage.CAD_PHASE && nextSubStatus === LeadSubStatus.CAD_ASSIGNED && !requestedJrArchitectUserId) {
+    if (!isPartialWorkflowLead && nextStage === LeadStage.CAD_PHASE && nextSubStatus === LeadSubStatus.CAD_ASSIGNED && !requestedJrArchitectUserId) {
       return NextResponse.json(
         { success: false, error: 'JR Architect assignment is required for CAD Assigned.' },
         { status: 400 },
@@ -243,6 +278,8 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       existingLead.subStatus !== null &&
       quotationSubStatuses.has(existingLead.subStatus);
     if (
+      !isPartialWorkflowLead &&
+      !isSpecialistDesignConsultant &&
       nextStage === LeadStage.QUOTATION_PHASE &&
       nextSubStatus &&
       nextSubStatus !== LeadSubStatus.QUOTATION_ASSIGNED &&
@@ -254,6 +291,8 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       );
     }
     if (
+      !isPartialWorkflowLead &&
+      !isSpecialistDesignConsultant &&
       nextStage === LeadStage.QUOTATION_PHASE &&
       nextSubStatus === LeadSubStatus.QUOTATION_ASSIGNED &&
       !requestedQuotationUserId
@@ -283,7 +322,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
         );
       }
     }
-    if (nextStage === LeadStage.VISIT_PHASE && nextSubStatus === LeadSubStatus.VISIT_COMPLETED) {
+    if ((nextStage === LeadStage.VISIT_PHASE || nextStage === LeadStage.PARTIAL_VISIT_PHASE) && nextSubStatus === LeadSubStatus.VISIT_COMPLETED) {
       return NextResponse.json(
         {
           success: false,
@@ -322,15 +361,35 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
     }
 
     let notifyVisitMemberOfCadId: string | null = null;
+    let notifyQuotationMemberId: string | null = null;
 
     const updatedLead = await prisma.$transaction(async (tx) => {
+      let finalAgreementValue = agreementValue;
+      if (agreementType !== null || agreementValue !== null || (discountInput !== null && discountInput > 0) || (discountPercentInput !== null && discountPercentInput > 0)) {
+        const syncResult = await processAgreementAndDiscountSync({
+          tx,
+          leadId,
+          actorUserId: userId,
+          selectedDraftId,
+          selectedDraftKey,
+          slotIndex: slotIndexInput,
+          agreementValueInput: agreementValue,
+          discountType,
+          discountAmountInput: discountInput,
+          discountPercentInput,
+        });
+        if (syncResult.settledAgreementValue !== null) {
+          finalAgreementValue = syncResult.settledAgreementValue;
+        }
+      }
+
       const updated = await tx.lead.update({
         where: { id: leadId },
         data: {
           stage: nextStage,
           subStatus: nextSubStatus,
           ...(agreementType !== null ? { agreementType } : {}),
-          ...(agreementValue !== null && !isNaN(agreementValue) ? { agreementValue } : {}),
+          ...(finalAgreementValue !== null && !isNaN(finalAgreementValue) ? { agreementValue: finalAgreementValue } : {}),
           ...(agreementType !== null ? { accountStatus: 'PENDING' } : {}),
         },
       });
@@ -355,7 +414,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
         });
       }
 
-      if (requiresSrCrmAssignment(nextStage)) {
+      if (requiresSrCrmAssignment(nextStage) && !isPartialWorkflowLead) {
         await ensureSeniorCrmAssignment({
           tx,
           leadId,
@@ -364,7 +423,10 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       }
 
       const autoHandoffDepartment = handoffDepartmentForSubStatus(nextSubStatus);
-      if (autoHandoffDepartment) {
+      if (
+        autoHandoffDepartment &&
+        (!isPartialWorkflowLead || autoHandoffDepartment !== 'QUOTATION' || requestedQuotationUserId)
+      ) {
         await ensureDepartmentAssignment({
           tx,
           leadId,
@@ -379,12 +441,12 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
         });
       }
 
-      // Auto-assign ACCOUNTS department when an agreement is confirmed
-      if (agreementType !== null) {
+      // Auto-assign PROJECT_COORDINATOR when a FITOUT agreement is confirmed
+      if (agreementType === 'FITOUT_AGREEMENT') {
         await ensureDepartmentAssignment({
           tx,
           leadId,
-          department: LeadAssignmentDepartment.ACCOUNTS,
+          department: LeadAssignmentDepartment.PROJECT_COORDINATOR,
           actorUserId: userId,
         });
       }
@@ -416,15 +478,17 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
           subStatus: nextSubStatus,
           actorUserId: userId,
         });
-        await createSrCadReviewTodosForCadStart({
-          tx,
-          leadId,
-          fromStage: existingLead.stage,
-          fromSubStatus: existingLead.subStatus,
-          toStage: nextStage,
-          toSubStatus: nextSubStatus,
-          triggeredByUserId: userId,
-        });
+        if (!isPartialWorkflowLead) {
+          await createSrCadReviewTodosForCadStart({
+            tx,
+            leadId,
+            fromStage: existingLead.stage,
+            fromSubStatus: existingLead.subStatus,
+            toStage: nextStage,
+            toSubStatus: nextSubStatus,
+            triggeredByUserId: userId,
+          });
+        }
       } catch (error) {
         if (!isMissingOptionalRelationError(error)) throw error;
         console.warn('[lead/:id/stage][PATCH] Optional workflow relation unavailable, continuing stage update');
@@ -449,6 +513,22 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
         }
       }
 
+      if (
+        nextSubStatus === LeadSubStatus.QUOTATION_ASSIGNED ||
+        (nextStage === LeadStage.QUOTATION_PHASE && existingLead.stage !== LeadStage.QUOTATION_PHASE)
+      ) {
+        const quotationAssignment = await tx.leadAssignment.findFirst({
+          where: {
+            leadId,
+            department: LeadAssignmentDepartment.QUOTATION,
+          },
+          select: { userId: true },
+        });
+        if (quotationAssignment) {
+          notifyQuotationMemberId = quotationAssignment.userId;
+        }
+      }
+
       return updated;
     });
 
@@ -462,6 +542,29 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
         );
       } catch (pushErr) {
         console.error('[lead/:id/stage] Failed to send CAD assignment push to visit member:', pushErr);
+      }
+    }
+
+    if (notifyQuotationMemberId) {
+      try {
+        await prisma.notification.create({
+          data: {
+            userId: notifyQuotationMemberId,
+            leadId: updatedLead.id,
+            type: 'LEAD_ASSIGNED_TO_YOU',
+            title: 'New Quotation assignment',
+            message: `${updatedLead.name} has been assigned to you for quotation work.`,
+            scheduledFor: new Date(),
+          },
+        });
+        await sendPushToUser(
+          notifyQuotationMemberId,
+          'New Quotation assignment',
+          `${updatedLead.name} has been assigned to you for quotation work.`,
+          { type: 'QUOTATION_ASSIGNED', leadId: updatedLead.id }
+        );
+      } catch (pushErr) {
+        console.error('[lead/:id/stage] Failed to send Quotation assignment push:', pushErr);
       }
     }
 

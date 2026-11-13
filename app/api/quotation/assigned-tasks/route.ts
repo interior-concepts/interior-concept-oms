@@ -3,8 +3,7 @@ import prisma from '@/lib/prisma'
 import { LeadAssignmentDepartment, LeadStage, LeadSubStatus } from '@/generated/prisma/client'
 import { requireDatabaseRoles } from '@/lib/authz'
 import { calculateLeadQuotationSqftSummary } from '@/lib/quotation-sqft-calculator'
-
-export const dynamic = 'force-dynamic'
+import { normalizeMonthKey } from '@/lib/quotation-performance'
 
 export async function GET(request: Request) {
   try {
@@ -12,12 +11,14 @@ export async function GET(request: Request) {
     if (!authResult.ok) return authResult.response
 
     const actorDepartments = new Set(authResult.actor.userDepartments ?? [])
-    const isAdmin = actorDepartments.has('ADMIN')
-    const isSrCrm = actorDepartments.has('SR_CRM')
-    const isQuotation = actorDepartments.has('QUOTATION') || actorDepartments.has('QUOTATION_TEAM')
-    const isAdminOrSr = isAdmin || isSrCrm
+    const canView =
+      actorDepartments.has('ADMIN') ||
+      actorDepartments.has('SR_CRM') ||
+      actorDepartments.has('QUOTATION') ||
+      actorDepartments.has('QUOTATION_TEAM') ||
+      actorDepartments.has('PROJECT_COORDINATOR')
 
-    if (!isAdminOrSr && !isQuotation) {
+    if (!canView) {
       return NextResponse.json(
         { success: false, error: 'Only quotation team, senior CRM, or admin can access assigned tasks' },
         { status: 403 },
@@ -26,36 +27,17 @@ export async function GET(request: Request) {
 
     const { searchParams } = new URL(request.url)
     const includeHistory = searchParams.get('includeHistory') === '1'
-    const viewAll = searchParams.get('all') === '1'
+    const requestedMonth = searchParams.get('month')
+    const monthKey = requestedMonth ? normalizeMonthKey(requestedMonth) : null
+    const isAdminOrSrCrm =
+      actorDepartments.has('ADMIN') ||
+      actorDepartments.has('SR_CRM') ||
+      actorDepartments.has('PROJECT_COORDINATOR')
 
-    const where: any = {
-      AND: [
-        isAdminOrSr || viewAll
-          ? {
-              OR: [
-                { stage: LeadStage.QUOTATION_PHASE },
-                { stage: LeadStage.BUDGET_PHASE },
-                {
-                  subStatus: {
-                    in: [
-                      LeadSubStatus.QUOTATION_ASSIGNED,
-                      LeadSubStatus.QUOTATION_WORKING,
-                      LeadSubStatus.QUOTATION_COMPLETED,
-                      LeadSubStatus.QUOTATION_CORRECTION,
-                      LeadSubStatus.QUOTATION_APPROVED,
-                    ],
-                  },
-                },
-                {
-                  assignments: {
-                    some: {
-                      department: LeadAssignmentDepartment.QUOTATION,
-                    },
-                  },
-                },
-              ],
-            }
-          : {
+    const whereCondition: any = includeHistory
+      ? {
+          OR: [
+            {
               assignments: {
                 some: {
                   department: LeadAssignmentDepartment.QUOTATION,
@@ -63,20 +45,37 @@ export async function GET(request: Request) {
                 },
               },
             },
-        ...(includeHistory
-          ? []
-          : [
-              {
-                NOT: {
-                  subStatus: LeadSubStatus.QUOTATION_APPROVED,
+            {
+              quotationDrafts: {
+                some: {
+                  OR: [
+                    { createdById: authResult.actorUserId },
+                    { updatedById: authResult.actorUserId },
+                  ],
                 },
               },
-            ]),
-      ],
-    }
+            },
+          ],
+        }
+      : isAdminOrSrCrm
+        ? {
+            assignments: {
+              some: {
+                department: LeadAssignmentDepartment.QUOTATION,
+              },
+            },
+          }
+        : {
+            assignments: {
+              some: {
+                department: LeadAssignmentDepartment.QUOTATION,
+                userId: authResult.actorUserId,
+              },
+            },
+          }
 
     const leads = await prisma.lead.findMany({
-      where,
+      where: whereCondition,
       select: {
         id: true,
         name: true,
@@ -84,6 +83,7 @@ export async function GET(request: Request) {
         location: true,
         stage: true,
         subStatus: true,
+        created_at: true,
         updated_at: true,
         budget: true,
         assignments: {
@@ -94,6 +94,7 @@ export async function GET(request: Request) {
           },
           select: {
             department: true,
+            createdAt: true,
             user: {
               select: { id: true, fullName: true, email: true },
             },
@@ -121,25 +122,56 @@ export async function GET(request: Request) {
           take: 1,
         },
         visits: {
-          where: { status: 'COMPLETED' },
-          select: { projectSqft: true },
+          select: { projectSqft: true, scheduledAt: true },
           orderBy: { scheduledAt: 'desc' },
           take: 1,
         },
         quotationDrafts: {
+          orderBy: { updatedAt: 'desc' },
           select: {
+            id: true,
             draftKey: true,
             projectSqft: true,
             content: true,
+            updatedAt: true,
+            createdById: true,
+            updatedById: true,
           },
         },
       },
       orderBy: { updated_at: 'desc' },
     })
 
-    const tasksData = leads.map((lead: any) => {
-      const fallbackSqft = lead.visits?.[0]?.projectSqft ?? 0
-      const sqftSummary = calculateLeadQuotationSqftSummary(lead.quotationDrafts ?? [], fallbackSqft)
+    const tasksData = leads.map((lead) => {
+      const fallbackSqft = lead.visits[0]?.projectSqft ?? 0
+      const visitDate = lead.visits[0]?.scheduledAt ?? null
+      const visitMonthKey = visitDate
+        ? `${visitDate.getFullYear()}-${String(visitDate.getMonth() + 1).padStart(2, '0')}`
+        : null
+
+      // Compute assignment date based on quotation assignment or lead created_at
+      const quotationAssignments = lead.assignments
+        .filter((a) => a.department === LeadAssignmentDepartment.QUOTATION)
+        .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())
+      const firstAssignmentDate = quotationAssignments[0]?.createdAt ?? lead.created_at
+      const assignedYear = firstAssignmentDate.getFullYear()
+      const assignedMonth = firstAssignmentDate.getMonth() + 1
+      const assignedMonthKey = `${assignedYear}-${String(assignedMonth).padStart(2, '0')}`
+
+      // Filter drafts edited in monthRange by current user if monthRange is provided
+      const userMonthDrafts = lead.quotationDrafts.filter(
+        (d) => d.createdById === authResult.actorUserId || d.updatedById === authResult.actorUserId,
+      )
+
+      const sqftSummary = calculateLeadQuotationSqftSummary(
+        userMonthDrafts.length > 0 ? userMonthDrafts : lead.quotationDrafts,
+        0,
+      )
+
+      const latestDraftUpdate =
+        (userMonthDrafts.length > 0 ? userMonthDrafts[0]?.updatedAt : lead.quotationDrafts[0]?.updatedAt) ??
+        lead.updated_at
+
       return {
         id: lead.id,
         name: lead.name,
@@ -147,34 +179,52 @@ export async function GET(request: Request) {
         location: lead.location,
         stage: lead.stage,
         subStatus: lead.subStatus,
-        updatedAt: lead.updated_at,
+        createdAt: lead.created_at.toISOString(),
+        updatedAt: latestDraftUpdate,
+        assignedAt: firstAssignmentDate.toISOString(),
+        assignedDate: firstAssignmentDate.toISOString(),
+        assignedMonthKey,
+        assignedYear,
+        assignedMonth,
+        visitDate: visitDate?.toISOString() ?? null,
+        visitMonthKey,
         budget: lead.budget,
-        quotationAssignee: ((lead.assignments || []) as any[]).find((a: any) => a.department === 'QUOTATION')?.user ?? null,
-        srCrmAssignee: ((lead.assignments || []) as any[]).find((a: any) => a.department === 'SR_CRM')?.user ?? null,
-        jrArchitectAssignee: ((lead.assignments || []) as any[]).find((a: any) => a.department === 'JR_ARCHITECT')?.user ?? null,
-        latestFirstMeeting: lead.meetingEvents?.[0] ?? null,
+        quotationAssignee: lead.assignments.find((a) => a.department === 'QUOTATION')?.user ?? null,
+        srCrmAssignee: lead.assignments.find((a) => a.department === 'SR_CRM')?.user ?? null,
+        jrArchitectAssignee: lead.assignments.find((a) => a.department === 'JR_ARCHITECT')?.user ?? null,
+        latestFirstMeeting: lead.meetingEvents[0] ?? null,
         projectSqft: fallbackSqft || null,
         avgDetailSqft: sqftSummary.avgDetailSqft,
         avgShortSqft: sqftSummary.avgShortSqft,
         detailVersionsCount: sqftSummary.detailVersionsCount,
         shortPackagesCount: sqftSummary.shortPackagesCount,
-        attachments: lead.attachments ?? [],
+        attachments: lead.attachments,
         canStart:
-          lead.subStatus !== LeadSubStatus.QUOTATION_WORKING &&
-          lead.subStatus !== LeadSubStatus.QUOTATION_COMPLETED &&
-          lead.subStatus !== LeadSubStatus.QUOTATION_APPROVED,
+          (lead.stage as string) === LeadStage.CONVERSION ||
+          lead.subStatus === LeadSubStatus.QUOTATION_ASSIGNED ||
+          lead.subStatus === LeadSubStatus.QUOTATION_CORRECTION,
         canSubmit:
           lead.subStatus === LeadSubStatus.QUOTATION_WORKING ||
-          lead.subStatus === LeadSubStatus.QUOTATION_CORRECTION,
+          (lead.stage as string) === LeadStage.CONVERSION,
       }
     })
 
-    const totalDetailSqft = tasksData.reduce((sum, item) => sum + item.avgDetailSqft, 0)
-    const totalShortSqft = tasksData.reduce((sum, item) => sum + item.avgShortSqft, 0)
+    // Sort by assignedAt descending (latest assigned at the top)
+    tasksData.sort((a, b) => new Date(b.assignedAt).getTime() - new Date(a.assignedAt).getTime())
+
+    const filteredTasksData = requestedMonth === 'NO_VISIT'
+      ? tasksData.filter((task) => !task.visitMonthKey)
+      : monthKey
+        ? tasksData.filter((task) => task.assignedMonthKey === monthKey || task.visitMonthKey === monthKey)
+        : tasksData
+
+    const totalDetailSqft = filteredTasksData.reduce((sum, item) => sum + item.avgDetailSqft, 0)
+    const totalShortSqft = filteredTasksData.reduce((sum, item) => sum + item.avgShortSqft, 0)
 
     return NextResponse.json({
       success: true,
-      data: tasksData,
+      monthKey,
+      data: filteredTasksData,
       metrics: {
         totalDetailSqft,
         totalShortSqft,

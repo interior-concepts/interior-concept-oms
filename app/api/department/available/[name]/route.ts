@@ -1,29 +1,37 @@
 import prisma from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
+import {
+  getDepartmentNameAliases,
+  normalizeDepartmentName,
+} from '@/lib/department-normalization';
 
 const VALID_DEPARTMENTS = [
   'ADMIN',
   'SR_CRM',
   'JR_CRM',
   'QUOTATION_TEAM',
-  'QUOTATION',
   'VISIT_TEAM',
+  'SPECIALIST_DESIGN_CONSULTANTS',
+  'SDC',
   'JR_ARCHITECT',
   '3D_VISUALIZER',
-  'VISUALIZER_3D',
   'ACCOUNTS',
+  'PROJECT_CORDINATOR',
   'BOQ',
-  'BOQ_TEAM',
+  'PROCUREMENT',
 ] as const;
 
 function resolveDepartmentAliases(departmentName: string): string[] {
-  if (departmentName === '3D_VISUALIZER' || departmentName === 'VISUALIZER_3D') {
-    return ['3D_VISUALIZER', 'VISUALIZER_3D']
+  if (departmentName === '3D_VISUALIZER') {
+    return ['3D_VISUALIZER', 'VISUALIZER_3D', '3d_visualizer', 'visualizer_3d']
   }
-  if (departmentName === 'QUOTATION_TEAM' || departmentName === 'QUOTATION') {
-    return ['QUOTATION_TEAM', 'QUOTATION', 'SR_CRM']
+  if (departmentName === 'QUOTATION_TEAM') {
+    return ['QUOTATION_TEAM', 'QUOTATION', 'SR_CRM', 'quotation_team', 'quotation']
   }
-  if (departmentName === 'BOQ' || departmentName === 'BOQ_TEAM') {
+  if (departmentName === 'PROJECT_CORDINATOR') {
+    return ['PROJECT_CORDINATOR', 'PROJECT_COORDINATOR']
+  }
+  if (departmentName === 'BOQ') {
     return [
       'BOQ',
       'BOQ Team',
@@ -32,43 +40,48 @@ function resolveDepartmentAliases(departmentName: string): string[] {
       'BOQ_DEPARTMENT',
       'boq',
       'boq team',
+      'boq department',
+      'Boq',
       'Boq Team',
+      'Boq Department',
     ]
   }
-  return [departmentName]
+  return getDepartmentNameAliases(departmentName)
 }
 
 // GET - Fetch all users in a specific department (by name)
 // Returns dropdown-ready list of all department members
+// Next.js 15: params is always a Promise — destructure and await properly
 export async function GET(
   request: NextRequest,
-  context?: { params: { name: string } | Promise<{ name: string }> }
+  { params }: { params: Promise<{ name: string }> }
 ) {
   try {
-    // console.log('[DEPT-API] Context:', context);
     let nameParam: string | undefined;
 
-    // Handle both sync and async params (different Next.js versions)
-    if (context?.params) {
-      // console.log('[DEPT-API] Params type:', typeof context.params);
-      if (context.params instanceof Promise) {
-        const resolvedParams = await context.params;
-        nameParam = resolvedParams.name;
-        // console.log('[DEPT-API] Resolved async params:', resolvedParams);
-      } else {
-        nameParam = context.params.name;
-        // console.log('[DEPT-API] Sync params:', context.params);
+    // 1. Primary: await the route params (Next.js 15 standard)
+    try {
+      const resolved = await params;
+      nameParam = resolved?.name;
+    } catch {
+      // params resolution failed — fall through to URL fallback
+    }
+
+    // 2. Fallback: extract from actual URL pathname
+    if (!nameParam || nameParam === '[name]') {
+      const pathSegments = request.nextUrl.pathname.split('/');
+      const segment = pathSegments[pathSegments.length - 1];
+      // Only use the segment if it's not a template literal placeholder
+      if (segment && segment !== '[name]') {
+        nameParam = segment;
       }
     }
 
-    // Fallback: extract from URL pathname if params not available
-    if (!nameParam) {
-      const pathSegments = request.nextUrl.pathname.split('/');
-      nameParam = pathSegments[pathSegments.length - 1];
-      // console.log('[DEPT-API] Extracted from URL:', nameParam, 'Path:', request.nextUrl.pathname);
+    // 3. Last resort: Next.js internally passes dynamic segment as ?nxtPname
+    if (!nameParam || nameParam === '[name]') {
+      const nxtPname = request.nextUrl.searchParams.get('nxtPname');
+      if (nxtPname) nameParam = nxtPname;
     }
-
-    // console.log('[DEPT-API] nameParam:', nameParam);
 
     if (!nameParam) {
       return NextResponse.json(
@@ -77,16 +90,13 @@ export async function GET(
       );
     }
 
-    const departmentName = nameParam.toUpperCase();
-    // console.log('[DEPT-API] departmentName:', departmentName);
+    const departmentName = normalizeDepartmentName(nameParam) ?? '';
 
-   
-
-   if (!VALID_DEPARTMENTS.includes(departmentName as (typeof VALID_DEPARTMENTS)[number])) {
+    if (!VALID_DEPARTMENTS.includes(departmentName as (typeof VALID_DEPARTMENTS)[number])) {
       return NextResponse.json(
         {
           success: false,
-         error: `Invalid department. Must be one of: ${VALID_DEPARTMENTS.join(', ')}`,
+          error: `Invalid department. Must be one of: ${VALID_DEPARTMENTS.join(', ')}`,
         },
         { status: 400 }
       );
@@ -94,13 +104,16 @@ export async function GET(
 
     const departmentNames = resolveDepartmentAliases(departmentName)
 
-    // Fetch all users in this department (including compatible aliases)
+    // Fetch all active users in this department (including compatible aliases)
     const userDepartments = await prisma.userDepartment.findMany({
       where: {
         department: {
           name: {
             in: departmentNames,
           },
+        },
+        user: {
+          isActive: true,
         },
       },
       include: {
@@ -110,6 +123,7 @@ export async function GET(
             fullName: true,
             email: true,
             phone: true,
+            isActive: true,
           },
         },
       },
@@ -136,8 +150,6 @@ export async function GET(
         ]),
       ).values(),
     );
-
-    // console.log('[DEPT-API] Final users array:', JSON.stringify(users, null, 2));
 
     const response = NextResponse.json({
       success: true,

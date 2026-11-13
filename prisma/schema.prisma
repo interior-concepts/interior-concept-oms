@@ -49,6 +49,8 @@ model Lead {
   notes                  Note[]
   notifications          Notification[]
   quotationDrafts        QuotationDraft[]
+  quotationDailyWorkReports QuotationDailyWorkReport[]
+  quotationWorkActivityLogs QuotationWorkActivityLog[]
   agreementDocument     AgreementDocument?
   furnitureQuotationDraft FurnitureQuotationDraft?
   electricalQuotationDraft ElectricalQuotationDraft?
@@ -111,18 +113,18 @@ model ActivityLog {
 }
 
 model FollowUp {
-  id            String            @id @default(cuid())
+  id            String         @id @default(cuid())
   leadId        String
   assignedToId  String
   followupDate  DateTime
-  status        FollowUpStatus    @default(PENDING)
+  status        FollowUpStatus @default(PENDING)
   notes         String?
   category      FollowUpCategory  @default(GENERAL)
   sentiment     ClientSentiment?
   objection     ClientObjection?
-  createdAt     DateTime          @default(now())
-  assignedTo    User              @relation(fields: [assignedToId], references: [id], onDelete: Cascade)
-  lead          Lead              @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  createdAt     DateTime       @default(now())
+  assignedTo    User           @relation(fields: [assignedToId], references: [id], onDelete: Cascade)
+  lead          Lead           @relation(fields: [leadId], references: [id], onDelete: Cascade)
   notifications Notification[]
 
   @@index([leadId])
@@ -182,7 +184,10 @@ model User {
   partialQuotationDraftsCreated PartialQuotationDraft[]  @relation("PartialQuotationDraftCreatedBy")
   partialQuotationDraftsUpdated PartialQuotationDraft[]  @relation("PartialQuotationDraftUpdatedBy")
   quotationPerformances       QuotationUserPerformance[]
+  quotationDailyWorkReports   QuotationDailyWorkReport[]
+  quotationWorkActivityLogs   QuotationWorkActivityLog[]
   visitMonthlyAssessments     VisitMemberMonthlyAssessment[]
+  departmentMemberMonthlySettings DepartmentMemberMonthlySetting[]
   transactionsCollected       Transaction[]              @relation("TransactionCollector")
   transactionsRecorded        Transaction[]              @relation("TransactionRecorder")
   approvedBy                  User?                      @relation("UserApprover", fields: [approvedById], references: [id])
@@ -1056,6 +1061,23 @@ model VisitMemberMonthlyAssessment {
   @@index([monthKey])
 }
 
+model DepartmentMemberMonthlySetting {
+  id          String   @id @default(cuid())
+  department  String
+  userId      String
+  monthKey    String
+  isEnabled   Boolean  @default(true)
+  notes       String?
+  updatedById String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([department, userId, monthKey])
+  @@index([department, monthKey])
+  @@index([userId])
+}
+
 enum LeadAssignmentDepartment {
   SR_CRM
   JR_CRM
@@ -1091,6 +1113,12 @@ enum LeadStage {
   VISIT_PHASE
   PARTIAL_VISIT_PHASE
   PARTIAL_QUOTATION_PHASE
+  PROJECT_SETUP
+  MATERIAL_PLANNING
+  PROCUREMENT
+  SITE_EXECUTION
+  QUALITY_CHECK
+  HANDOVER
 }
 
 enum LeadSubStatus {
@@ -1134,6 +1162,23 @@ enum LeadSubStatus {
   VISIT_COMPLETED
   VISIT_RESCHEDULED
   VISIT_CANCELLED
+  TEAM_ASSIGNED
+  INITIAL_SITE_VISIT
+  SITE_READY
+  REQUISITION_DRAFT
+  REQUISITION_VERIFIED
+  ACCOUNTS_BILLED
+  PURCHASE_ORDER_SENT
+  DISPATCHED
+  DELIVERED_TO_SITE
+  WORK_ORDERS_ISSUED
+  WORK_IN_PROGRESS
+  MATERIAL_UTILIZED
+  SNAG_LIST_PENDING
+  RECTIFICATION_DONE
+  CLIENT_WALKTHROUGH
+  FINAL_BILLING
+  COMPLETED
 }
 
 enum FollowUpStatus {
@@ -1598,12 +1643,36 @@ model BoqSavedAccessoryItem {
   id          String   @id @default(cuid())
   name        String
   category    String   @default("")
+  brand       String   @default("")
   itemCode    String   @default("")
   defaultUnit String   @default("Pcs")
+  imageUrl    String?
   isActive    Boolean  @default(true)
   serialNo    Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([isActive, serialNo])
+}
+
+model BoqSavedApplianceItem {
+  id                      String   @id @default(cuid())
+  name                    String
+  category                String   @default("")
+  brand                   String   @default("")
+  modelCode               String   @default("")
+  brandModelCode          String   @default("")
+  dimW                    String   @default("")
+  dimD                    String   @default("")
+  dimH                    String   @default("")
+  cabinetNicheCutOutSize String   @default("")
+  defaultUnitPrice        String   @default("")
+  defaultUnit             String   @default("Nos")
+  imageUrl                String?
+  isActive                Boolean  @default(true)
+  serialNo                Int      @default(0)
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
 
   @@index([isActive, serialNo])
 }
@@ -1768,6 +1837,56 @@ model SiteDeliveryLog {
   @@index([receivedById])
   @@index([deliveryDate])
 }
+
+enum QuotationWorkType {
+  DETAIL
+  SHORT
+  FURNITURE
+  ELECTRICAL
+}
+
+model QuotationDailyWorkReport {
+  id             String            @id @default(cuid())
+  userId         String
+  leadId         String
+  workDate       DateTime
+  dateKey        String
+  weekKey        String
+  workType       QuotationWorkType @default(DETAIL)
+  sqft           Float             @default(0)
+  isAutoDetected Boolean           @default(false)
+  notes          String?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  user           User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lead           Lead              @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, leadId, dateKey, workType])
+  @@index([userId, dateKey])
+  @@index([userId, weekKey])
+  @@index([leadId])
+  @@index([dateKey])
+}
+
+model QuotationWorkActivityLog {
+  id           String            @id @default(cuid())
+  userId       String
+  leadId       String
+  workType     QuotationWorkType
+  activityDate DateTime          @default(now())
+  dateKey      String
+  description  String?
+  createdAt    DateTime          @default(now())
+
+  user         User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lead         Lead              @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([userId, dateKey])
+  @@index([leadId])
+}
+
+
 
 
 

@@ -315,6 +315,11 @@ export type QuotationUserPerformance = Prisma.QuotationUserPerformanceModel
  */
 export type VisitMemberMonthlyAssessment = Prisma.VisitMemberMonthlyAssessmentModel
 /**
+ * Model DepartmentMemberMonthlySetting
+ * 
+ */
+export type DepartmentMemberMonthlySetting = Prisma.DepartmentMemberMonthlySettingModel
+/**
  * Model Vendor
  * 
  */
@@ -365,6 +370,11 @@ export type MaterialRequisitionItem = Prisma.MaterialRequisitionItemModel
  */
 export type BoqSavedAccessoryItem = Prisma.BoqSavedAccessoryItemModel
 /**
+ * Model BoqSavedApplianceItem
+ * 
+ */
+export type BoqSavedApplianceItem = Prisma.BoqSavedApplianceItemModel
+/**
  * Model RequisitionAmendment
  * 
  */
@@ -389,3 +399,13 @@ export type ProcurementWalletTransaction = Prisma.ProcurementWalletTransactionMo
  * 
  */
 export type SiteDeliveryLog = Prisma.SiteDeliveryLogModel
+/**
+ * Model QuotationDailyWorkReport
+ * 
+ */
+export type QuotationDailyWorkReport = Prisma.QuotationDailyWorkReportModel
+/**
+ * Model QuotationWorkActivityLog
+ * 
+ */
+export type QuotationWorkActivityLog = Prisma.QuotationWorkActivityLogModel
