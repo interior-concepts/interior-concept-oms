@@ -6014,7 +6014,11 @@ export const LeadScalarFieldEnum = {
   agreementValue: 'agreementValue',
   accountStatus: 'accountStatus',
   agreementSqft: 'agreementSqft',
-  initialAgreementValue: 'initialAgreementValue'
+  initialAgreementValue: 'initialAgreementValue',
+  sentiment: 'sentiment',
+  objection: 'objection',
+  objectionNote: 'objectionNote',
+  lastContactedAt: 'lastContactedAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
@@ -6062,6 +6066,9 @@ export const FollowUpScalarFieldEnum = {
   followupDate: 'followupDate',
   status: 'status',
   notes: 'notes',
+  category: 'category',
+  sentiment: 'sentiment',
+  objection: 'objection',
   createdAt: 'createdAt'
 } as const
 
@@ -7353,6 +7360,34 @@ export type ListEnumAccountStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 
 
 /**
+ * Reference to a field of type 'ClientSentiment'
+ */
+export type EnumClientSentimentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClientSentiment'>
+    
+
+
+/**
+ * Reference to a field of type 'ClientSentiment[]'
+ */
+export type ListEnumClientSentimentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClientSentiment[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ClientObjection'
+ */
+export type EnumClientObjectionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClientObjection'>
+    
+
+
+/**
+ * Reference to a field of type 'ClientObjection[]'
+ */
+export type ListEnumClientObjectionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClientObjection[]'>
+    
+
+
+/**
  * Reference to a field of type 'LeadAssignmentDepartment'
  */
 export type EnumLeadAssignmentDepartmentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadAssignmentDepartment'>
@@ -7391,6 +7426,20 @@ export type EnumFollowUpStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
  * Reference to a field of type 'FollowUpStatus[]'
  */
 export type ListEnumFollowUpStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FollowUpStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FollowUpCategory'
+ */
+export type EnumFollowUpCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FollowUpCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'FollowUpCategory[]'
+ */
+export type ListEnumFollowUpCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FollowUpCategory[]'>
     
 
 

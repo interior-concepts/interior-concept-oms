@@ -63,6 +63,10 @@ export type LeadMinAggregateOutputType = {
   accountStatus: $Enums.AccountStatus | null
   agreementSqft: number | null
   initialAgreementValue: number | null
+  sentiment: $Enums.ClientSentiment | null
+  objection: $Enums.ClientObjection | null
+  objectionNote: string | null
+  lastContactedAt: Date | null
 }
 
 export type LeadMaxAggregateOutputType = {
@@ -88,6 +92,10 @@ export type LeadMaxAggregateOutputType = {
   accountStatus: $Enums.AccountStatus | null
   agreementSqft: number | null
   initialAgreementValue: number | null
+  sentiment: $Enums.ClientSentiment | null
+  objection: $Enums.ClientObjection | null
+  objectionNote: string | null
+  lastContactedAt: Date | null
 }
 
 export type LeadCountAggregateOutputType = {
@@ -113,6 +121,10 @@ export type LeadCountAggregateOutputType = {
   accountStatus: number
   agreementSqft: number
   initialAgreementValue: number
+  sentiment: number
+  objection: number
+  objectionNote: number
+  lastContactedAt: number
   _all: number
 }
 
@@ -154,6 +166,10 @@ export type LeadMinAggregateInputType = {
   accountStatus?: true
   agreementSqft?: true
   initialAgreementValue?: true
+  sentiment?: true
+  objection?: true
+  objectionNote?: true
+  lastContactedAt?: true
 }
 
 export type LeadMaxAggregateInputType = {
@@ -179,6 +195,10 @@ export type LeadMaxAggregateInputType = {
   accountStatus?: true
   agreementSqft?: true
   initialAgreementValue?: true
+  sentiment?: true
+  objection?: true
+  objectionNote?: true
+  lastContactedAt?: true
 }
 
 export type LeadCountAggregateInputType = {
@@ -204,6 +224,10 @@ export type LeadCountAggregateInputType = {
   accountStatus?: true
   agreementSqft?: true
   initialAgreementValue?: true
+  sentiment?: true
+  objection?: true
+  objectionNote?: true
+  lastContactedAt?: true
   _all?: true
 }
 
@@ -316,6 +340,10 @@ export type LeadGroupByOutputType = {
   accountStatus: $Enums.AccountStatus | null
   agreementSqft: number | null
   initialAgreementValue: number | null
+  sentiment: $Enums.ClientSentiment | null
+  objection: $Enums.ClientObjection | null
+  objectionNote: string | null
+  lastContactedAt: Date | null
   _count: LeadCountAggregateOutputType | null
   _avg: LeadAvgAggregateOutputType | null
   _sum: LeadSumAggregateOutputType | null
@@ -364,6 +392,10 @@ export type LeadWhereInput = {
   accountStatus?: Prisma.EnumAccountStatusNullableFilter<"Lead"> | $Enums.AccountStatus | null
   agreementSqft?: Prisma.FloatNullableFilter<"Lead"> | number | null
   initialAgreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  sentiment?: Prisma.EnumClientSentimentNullableFilter<"Lead"> | $Enums.ClientSentiment | null
+  objection?: Prisma.EnumClientObjectionNullableFilter<"Lead"> | $Enums.ClientObjection | null
+  objectionNote?: Prisma.StringNullableFilter<"Lead"> | string | null
+  lastContactedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   activities?: Prisma.ActivityLogListRelationFilter
   agreementValueLogs?: Prisma.AgreementValueLogListRelationFilter
   cadWorkSubmissions?: Prisma.CadWorkSubmissionListRelationFilter
@@ -417,6 +449,10 @@ export type LeadOrderByWithRelationInput = {
   accountStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   agreementSqft?: Prisma.SortOrderInput | Prisma.SortOrder
   initialAgreementValue?: Prisma.SortOrderInput | Prisma.SortOrder
+  sentiment?: Prisma.SortOrderInput | Prisma.SortOrder
+  objection?: Prisma.SortOrderInput | Prisma.SortOrder
+  objectionNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastContactedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   activities?: Prisma.ActivityLogOrderByRelationAggregateInput
   agreementValueLogs?: Prisma.AgreementValueLogOrderByRelationAggregateInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionOrderByRelationAggregateInput
@@ -473,6 +509,10 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   accountStatus?: Prisma.EnumAccountStatusNullableFilter<"Lead"> | $Enums.AccountStatus | null
   agreementSqft?: Prisma.FloatNullableFilter<"Lead"> | number | null
   initialAgreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  sentiment?: Prisma.EnumClientSentimentNullableFilter<"Lead"> | $Enums.ClientSentiment | null
+  objection?: Prisma.EnumClientObjectionNullableFilter<"Lead"> | $Enums.ClientObjection | null
+  objectionNote?: Prisma.StringNullableFilter<"Lead"> | string | null
+  lastContactedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   activities?: Prisma.ActivityLogListRelationFilter
   agreementValueLogs?: Prisma.AgreementValueLogListRelationFilter
   cadWorkSubmissions?: Prisma.CadWorkSubmissionListRelationFilter
@@ -526,6 +566,10 @@ export type LeadOrderByWithAggregationInput = {
   accountStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   agreementSqft?: Prisma.SortOrderInput | Prisma.SortOrder
   initialAgreementValue?: Prisma.SortOrderInput | Prisma.SortOrder
+  sentiment?: Prisma.SortOrderInput | Prisma.SortOrder
+  objection?: Prisma.SortOrderInput | Prisma.SortOrder
+  objectionNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastContactedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadCountOrderByAggregateInput
   _avg?: Prisma.LeadAvgOrderByAggregateInput
   _max?: Prisma.LeadMaxOrderByAggregateInput
@@ -559,6 +603,10 @@ export type LeadScalarWhereWithAggregatesInput = {
   accountStatus?: Prisma.EnumAccountStatusNullableWithAggregatesFilter<"Lead"> | $Enums.AccountStatus | null
   agreementSqft?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
   initialAgreementValue?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
+  sentiment?: Prisma.EnumClientSentimentNullableWithAggregatesFilter<"Lead"> | $Enums.ClientSentiment | null
+  objection?: Prisma.EnumClientObjectionNullableWithAggregatesFilter<"Lead"> | $Enums.ClientObjection | null
+  objectionNote?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  lastContactedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
 }
 
 export type LeadCreateInput = {
@@ -582,6 +630,10 @@ export type LeadCreateInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -635,6 +687,10 @@ export type LeadUncheckedCreateInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -684,6 +740,10 @@ export type LeadUpdateInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -737,6 +797,10 @@ export type LeadUncheckedUpdateInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -788,6 +852,10 @@ export type LeadCreateManyInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
 }
 
 export type LeadUpdateManyMutationInput = {
@@ -811,6 +879,10 @@ export type LeadUpdateManyMutationInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadUncheckedUpdateManyInput = {
@@ -836,6 +908,10 @@ export type LeadUncheckedUpdateManyInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadCountOrderByAggregateInput = {
@@ -861,6 +937,10 @@ export type LeadCountOrderByAggregateInput = {
   accountStatus?: Prisma.SortOrder
   agreementSqft?: Prisma.SortOrder
   initialAgreementValue?: Prisma.SortOrder
+  sentiment?: Prisma.SortOrder
+  objection?: Prisma.SortOrder
+  objectionNote?: Prisma.SortOrder
+  lastContactedAt?: Prisma.SortOrder
 }
 
 export type LeadAvgOrderByAggregateInput = {
@@ -893,6 +973,10 @@ export type LeadMaxOrderByAggregateInput = {
   accountStatus?: Prisma.SortOrder
   agreementSqft?: Prisma.SortOrder
   initialAgreementValue?: Prisma.SortOrder
+  sentiment?: Prisma.SortOrder
+  objection?: Prisma.SortOrder
+  objectionNote?: Prisma.SortOrder
+  lastContactedAt?: Prisma.SortOrder
 }
 
 export type LeadMinOrderByAggregateInput = {
@@ -918,6 +1002,10 @@ export type LeadMinOrderByAggregateInput = {
   accountStatus?: Prisma.SortOrder
   agreementSqft?: Prisma.SortOrder
   initialAgreementValue?: Prisma.SortOrder
+  sentiment?: Prisma.SortOrder
+  objection?: Prisma.SortOrder
+  objectionNote?: Prisma.SortOrder
+  lastContactedAt?: Prisma.SortOrder
 }
 
 export type LeadSumOrderByAggregateInput = {
@@ -981,6 +1069,18 @@ export type NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput = {
 
 export type NullableEnumAccountStatusFieldUpdateOperationsInput = {
   set?: $Enums.AccountStatus | null
+}
+
+export type NullableEnumClientSentimentFieldUpdateOperationsInput = {
+  set?: $Enums.ClientSentiment | null
+}
+
+export type NullableEnumClientObjectionFieldUpdateOperationsInput = {
+  set?: $Enums.ClientObjection | null
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type LeadCreateNestedOneWithoutAssignmentsInput = {
@@ -1460,6 +1560,10 @@ export type LeadCreateWithoutAssignmentsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -1512,6 +1616,10 @@ export type LeadUncheckedCreateWithoutAssignmentsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -1576,6 +1684,10 @@ export type LeadUpdateWithoutAssignmentsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -1628,6 +1740,10 @@ export type LeadUncheckedUpdateWithoutAssignmentsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -1676,6 +1792,10 @@ export type LeadCreateWithoutStatusHistoryInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -1728,6 +1848,10 @@ export type LeadUncheckedCreateWithoutStatusHistoryInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -1792,6 +1916,10 @@ export type LeadUpdateWithoutStatusHistoryInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -1844,6 +1972,10 @@ export type LeadUncheckedUpdateWithoutStatusHistoryInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -1892,6 +2024,10 @@ export type LeadCreateWithoutActivitiesInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
@@ -1944,6 +2080,10 @@ export type LeadUncheckedCreateWithoutActivitiesInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
@@ -2008,6 +2148,10 @@ export type LeadUpdateWithoutActivitiesInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
@@ -2060,6 +2204,10 @@ export type LeadUncheckedUpdateWithoutActivitiesInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
@@ -2108,6 +2256,10 @@ export type LeadCreateWithoutFollowUpsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -2160,6 +2312,10 @@ export type LeadUncheckedCreateWithoutFollowUpsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -2224,6 +2380,10 @@ export type LeadUpdateWithoutFollowUpsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -2276,6 +2436,10 @@ export type LeadUncheckedUpdateWithoutFollowUpsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -2324,6 +2488,10 @@ export type LeadCreateWithoutNotesInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -2376,6 +2544,10 @@ export type LeadUncheckedCreateWithoutNotesInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -2440,6 +2612,10 @@ export type LeadUpdateWithoutNotesInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -2492,6 +2668,10 @@ export type LeadUncheckedUpdateWithoutNotesInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -2540,6 +2720,10 @@ export type LeadCreateWithoutAssigneeInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -2591,6 +2775,10 @@ export type LeadUncheckedCreateWithoutAssigneeInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -2650,6 +2838,10 @@ export type LeadCreateWithoutPrimaryOwnerInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -2701,6 +2893,10 @@ export type LeadUncheckedCreateWithoutPrimaryOwnerInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -2781,6 +2977,10 @@ export type LeadScalarWhereInput = {
   accountStatus?: Prisma.EnumAccountStatusNullableFilter<"Lead"> | $Enums.AccountStatus | null
   agreementSqft?: Prisma.FloatNullableFilter<"Lead"> | number | null
   initialAgreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  sentiment?: Prisma.EnumClientSentimentNullableFilter<"Lead"> | $Enums.ClientSentiment | null
+  objection?: Prisma.EnumClientObjectionNullableFilter<"Lead"> | $Enums.ClientObjection | null
+  objectionNote?: Prisma.StringNullableFilter<"Lead"> | string | null
+  lastContactedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
 }
 
 export type LeadUpsertWithWhereUniqueWithoutPrimaryOwnerInput = {
@@ -2820,6 +3020,10 @@ export type LeadCreateWithoutAgreementValueLogsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
@@ -2872,6 +3076,10 @@ export type LeadUncheckedCreateWithoutAgreementValueLogsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
@@ -2936,6 +3144,10 @@ export type LeadUpdateWithoutAgreementValueLogsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
@@ -2988,6 +3200,10 @@ export type LeadUncheckedUpdateWithoutAgreementValueLogsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
@@ -3036,6 +3252,10 @@ export type LeadCreateWithoutPhaseTasksInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -3088,6 +3308,10 @@ export type LeadUncheckedCreateWithoutPhaseTasksInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -3152,6 +3376,10 @@ export type LeadUpdateWithoutPhaseTasksInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -3204,6 +3432,10 @@ export type LeadUncheckedUpdateWithoutPhaseTasksInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -3252,6 +3484,10 @@ export type LeadCreateWithoutJrArchitectRequestsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -3304,6 +3540,10 @@ export type LeadUncheckedCreateWithoutJrArchitectRequestsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -3368,6 +3608,10 @@ export type LeadUpdateWithoutJrArchitectRequestsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -3420,6 +3664,10 @@ export type LeadUncheckedUpdateWithoutJrArchitectRequestsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -3468,6 +3716,10 @@ export type LeadCreateWithoutMeetingEventsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -3520,6 +3772,10 @@ export type LeadUncheckedCreateWithoutMeetingEventsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -3584,6 +3840,10 @@ export type LeadUpdateWithoutMeetingEventsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -3636,6 +3896,10 @@ export type LeadUncheckedUpdateWithoutMeetingEventsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -3684,6 +3948,10 @@ export type LeadCreateWithoutCadWorkSubmissionsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
@@ -3736,6 +4004,10 @@ export type LeadUncheckedCreateWithoutCadWorkSubmissionsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
@@ -3800,6 +4072,10 @@ export type LeadUpdateWithoutCadWorkSubmissionsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
@@ -3852,6 +4128,10 @@ export type LeadUncheckedUpdateWithoutCadWorkSubmissionsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
@@ -3900,6 +4180,10 @@ export type LeadCreateWithoutQuotationDraftsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -3952,6 +4236,10 @@ export type LeadUncheckedCreateWithoutQuotationDraftsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -4016,6 +4304,10 @@ export type LeadUpdateWithoutQuotationDraftsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -4068,6 +4360,10 @@ export type LeadUncheckedUpdateWithoutQuotationDraftsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -4116,6 +4412,10 @@ export type LeadCreateWithoutAgreementDocumentInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -4168,6 +4468,10 @@ export type LeadUncheckedCreateWithoutAgreementDocumentInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -4232,6 +4536,10 @@ export type LeadUpdateWithoutAgreementDocumentInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -4284,6 +4592,10 @@ export type LeadUncheckedUpdateWithoutAgreementDocumentInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -4332,6 +4644,10 @@ export type LeadCreateWithoutFurnitureQuotationDraftInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -4384,6 +4700,10 @@ export type LeadUncheckedCreateWithoutFurnitureQuotationDraftInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -4448,6 +4768,10 @@ export type LeadUpdateWithoutFurnitureQuotationDraftInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -4500,6 +4824,10 @@ export type LeadUncheckedUpdateWithoutFurnitureQuotationDraftInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -4548,6 +4876,10 @@ export type LeadCreateWithoutElectricalQuotationDraftInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -4600,6 +4932,10 @@ export type LeadUncheckedCreateWithoutElectricalQuotationDraftInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -4664,6 +5000,10 @@ export type LeadUpdateWithoutElectricalQuotationDraftInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -4716,6 +5056,10 @@ export type LeadUncheckedUpdateWithoutElectricalQuotationDraftInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -4764,6 +5108,10 @@ export type LeadCreateWithoutPartialQuotationDraftInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -4816,6 +5164,10 @@ export type LeadUncheckedCreateWithoutPartialQuotationDraftInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -4880,6 +5232,10 @@ export type LeadUpdateWithoutPartialQuotationDraftInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -4932,6 +5288,10 @@ export type LeadUncheckedUpdateWithoutPartialQuotationDraftInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -4980,6 +5340,10 @@ export type LeadCreateWithoutVisitsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -5032,6 +5396,10 @@ export type LeadUncheckedCreateWithoutVisitsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -5096,6 +5464,10 @@ export type LeadUpdateWithoutVisitsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -5148,6 +5520,10 @@ export type LeadUncheckedUpdateWithoutVisitsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -5196,6 +5572,10 @@ export type LeadCreateWithoutAttachmentsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -5248,6 +5628,10 @@ export type LeadUncheckedCreateWithoutAttachmentsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -5312,6 +5696,10 @@ export type LeadUpdateWithoutAttachmentsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -5364,6 +5752,10 @@ export type LeadUncheckedUpdateWithoutAttachmentsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -5412,6 +5804,10 @@ export type LeadCreateWithoutNotificationsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -5464,6 +5860,10 @@ export type LeadUncheckedCreateWithoutNotificationsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -5528,6 +5928,10 @@ export type LeadUpdateWithoutNotificationsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -5580,6 +5984,10 @@ export type LeadUncheckedUpdateWithoutNotificationsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -5628,6 +6036,10 @@ export type LeadCreateWithoutTransactionsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -5680,6 +6092,10 @@ export type LeadUncheckedCreateWithoutTransactionsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -5744,6 +6160,10 @@ export type LeadUpdateWithoutTransactionsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -5796,6 +6216,10 @@ export type LeadUncheckedUpdateWithoutTransactionsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -5844,6 +6268,10 @@ export type LeadCreateWithoutVendorAgreementsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -5896,6 +6324,10 @@ export type LeadUncheckedCreateWithoutVendorAgreementsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -5960,6 +6392,10 @@ export type LeadUpdateWithoutVendorAgreementsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -6012,6 +6448,10 @@ export type LeadUncheckedUpdateWithoutVendorAgreementsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -6060,6 +6500,10 @@ export type LeadCreateWithoutStockMovementsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -6112,6 +6556,10 @@ export type LeadUncheckedCreateWithoutStockMovementsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -6176,6 +6624,10 @@ export type LeadUpdateWithoutStockMovementsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -6228,6 +6680,10 @@ export type LeadUncheckedUpdateWithoutStockMovementsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -6276,6 +6732,10 @@ export type LeadCreateWithoutMaterialRequisitionsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -6328,6 +6788,10 @@ export type LeadUncheckedCreateWithoutMaterialRequisitionsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -6392,6 +6856,10 @@ export type LeadUpdateWithoutMaterialRequisitionsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -6444,6 +6912,10 @@ export type LeadUncheckedUpdateWithoutMaterialRequisitionsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -6492,6 +6964,10 @@ export type LeadCreateWithoutProcurementWalletTransactionsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -6544,6 +7020,10 @@ export type LeadUncheckedCreateWithoutProcurementWalletTransactionsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -6608,6 +7088,10 @@ export type LeadUpdateWithoutProcurementWalletTransactionsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -6660,6 +7144,10 @@ export type LeadUncheckedUpdateWithoutProcurementWalletTransactionsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -6708,6 +7196,10 @@ export type LeadCreateWithoutSiteDeliveryLogsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -6760,6 +7252,10 @@ export type LeadUncheckedCreateWithoutSiteDeliveryLogsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -6824,6 +7320,10 @@ export type LeadUpdateWithoutSiteDeliveryLogsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -6876,6 +7376,10 @@ export type LeadUncheckedUpdateWithoutSiteDeliveryLogsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -6924,6 +7428,10 @@ export type LeadCreateWithoutQuotationDailyWorkReportsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -6976,6 +7484,10 @@ export type LeadUncheckedCreateWithoutQuotationDailyWorkReportsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -7040,6 +7552,10 @@ export type LeadUpdateWithoutQuotationDailyWorkReportsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -7092,6 +7608,10 @@ export type LeadUncheckedUpdateWithoutQuotationDailyWorkReportsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -7140,6 +7660,10 @@ export type LeadCreateWithoutQuotationWorkActivityLogsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
@@ -7192,6 +7716,10 @@ export type LeadUncheckedCreateWithoutQuotationWorkActivityLogsInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
@@ -7256,6 +7784,10 @@ export type LeadUpdateWithoutQuotationWorkActivityLogsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -7308,6 +7840,10 @@ export type LeadUncheckedUpdateWithoutQuotationWorkActivityLogsInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -7357,6 +7893,10 @@ export type LeadCreateManyAssigneeInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
 }
 
 export type LeadCreateManyPrimaryOwnerInput = {
@@ -7381,6 +7921,10 @@ export type LeadCreateManyPrimaryOwnerInput = {
   accountStatus?: $Enums.AccountStatus | null
   agreementSqft?: number | null
   initialAgreementValue?: number | null
+  sentiment?: $Enums.ClientSentiment | null
+  objection?: $Enums.ClientObjection | null
+  objectionNote?: string | null
+  lastContactedAt?: Date | string | null
 }
 
 export type LeadUpdateWithoutAssigneeInput = {
@@ -7404,6 +7948,10 @@ export type LeadUpdateWithoutAssigneeInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -7455,6 +8003,10 @@ export type LeadUncheckedUpdateWithoutAssigneeInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -7505,6 +8057,10 @@ export type LeadUncheckedUpdateManyWithoutAssigneeInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadUpdateWithoutPrimaryOwnerInput = {
@@ -7528,6 +8084,10 @@ export type LeadUpdateWithoutPrimaryOwnerInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
@@ -7579,6 +8139,10 @@ export type LeadUncheckedUpdateWithoutPrimaryOwnerInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
   agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
@@ -7629,6 +8193,10 @@ export type LeadUncheckedUpdateManyWithoutPrimaryOwnerInput = {
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
+  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
+  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -7874,6 +8442,10 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   accountStatus?: boolean
   agreementSqft?: boolean
   initialAgreementValue?: boolean
+  sentiment?: boolean
+  objection?: boolean
+  objectionNote?: boolean
+  lastContactedAt?: boolean
   activities?: boolean | Prisma.Lead$activitiesArgs<ExtArgs>
   agreementValueLogs?: boolean | Prisma.Lead$agreementValueLogsArgs<ExtArgs>
   cadWorkSubmissions?: boolean | Prisma.Lead$cadWorkSubmissionsArgs<ExtArgs>
@@ -7928,6 +8500,10 @@ export type LeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   accountStatus?: boolean
   agreementSqft?: boolean
   initialAgreementValue?: boolean
+  sentiment?: boolean
+  objection?: boolean
+  objectionNote?: boolean
+  lastContactedAt?: boolean
   assignee?: boolean | Prisma.Lead$assigneeArgs<ExtArgs>
   primaryOwner?: boolean | Prisma.Lead$primaryOwnerArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
@@ -7955,6 +8531,10 @@ export type LeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   accountStatus?: boolean
   agreementSqft?: boolean
   initialAgreementValue?: boolean
+  sentiment?: boolean
+  objection?: boolean
+  objectionNote?: boolean
+  lastContactedAt?: boolean
   assignee?: boolean | Prisma.Lead$assigneeArgs<ExtArgs>
   primaryOwner?: boolean | Prisma.Lead$primaryOwnerArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
@@ -7982,9 +8562,13 @@ export type LeadSelectScalar = {
   accountStatus?: boolean
   agreementSqft?: boolean
   initialAgreementValue?: boolean
+  sentiment?: boolean
+  objection?: boolean
+  objectionNote?: boolean
+  lastContactedAt?: boolean
 }
 
-export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "clientId" | "phone" | "email" | "assignedTo" | "created_at" | "updated_at" | "budget" | "location" | "remarks" | "source" | "stage" | "subStatus" | "primaryOwnerDepartment" | "primaryOwnerUserId" | "quotationType" | "agreementType" | "agreementValue" | "accountStatus" | "agreementSqft" | "initialAgreementValue", ExtArgs["result"]["lead"]>
+export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "clientId" | "phone" | "email" | "assignedTo" | "created_at" | "updated_at" | "budget" | "location" | "remarks" | "source" | "stage" | "subStatus" | "primaryOwnerDepartment" | "primaryOwnerUserId" | "quotationType" | "agreementType" | "agreementValue" | "accountStatus" | "agreementSqft" | "initialAgreementValue" | "sentiment" | "objection" | "objectionNote" | "lastContactedAt", ExtArgs["result"]["lead"]>
 export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   activities?: boolean | Prisma.Lead$activitiesArgs<ExtArgs>
   agreementValueLogs?: boolean | Prisma.Lead$agreementValueLogsArgs<ExtArgs>
@@ -8080,6 +8664,10 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     accountStatus: $Enums.AccountStatus | null
     agreementSqft: number | null
     initialAgreementValue: number | null
+    sentiment: $Enums.ClientSentiment | null
+    objection: $Enums.ClientObjection | null
+    objectionNote: string | null
+    lastContactedAt: Date | null
   }, ExtArgs["result"]["lead"]>
   composites: {}
 }
@@ -8553,6 +9141,10 @@ export interface LeadFieldRefs {
   readonly accountStatus: Prisma.FieldRef<"Lead", 'AccountStatus'>
   readonly agreementSqft: Prisma.FieldRef<"Lead", 'Float'>
   readonly initialAgreementValue: Prisma.FieldRef<"Lead", 'Float'>
+  readonly sentiment: Prisma.FieldRef<"Lead", 'ClientSentiment'>
+  readonly objection: Prisma.FieldRef<"Lead", 'ClientObjection'>
+  readonly objectionNote: Prisma.FieldRef<"Lead", 'String'>
+  readonly lastContactedAt: Prisma.FieldRef<"Lead", 'DateTime'>
 }
     
 

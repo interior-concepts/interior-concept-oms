@@ -165,7 +165,11 @@ export const LeadScalarFieldEnum = {
   agreementValue: 'agreementValue',
   accountStatus: 'accountStatus',
   agreementSqft: 'agreementSqft',
-  initialAgreementValue: 'initialAgreementValue'
+  initialAgreementValue: 'initialAgreementValue',
+  sentiment: 'sentiment',
+  objection: 'objection',
+  objectionNote: 'objectionNote',
+  lastContactedAt: 'lastContactedAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
@@ -213,6 +217,9 @@ export const FollowUpScalarFieldEnum = {
   followupDate: 'followupDate',
   status: 'status',
   notes: 'notes',
+  category: 'category',
+  sentiment: 'sentiment',
+  objection: 'objection',
   createdAt: 'createdAt'
 } as const
 
