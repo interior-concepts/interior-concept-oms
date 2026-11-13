@@ -42,9 +42,7 @@ export type AgreementDetailItem = {
 export type AgreementData = {
   id?: string
   leadId: string
-  clientId: number
-
-  // Meta & Identifiers
+  clientId: string | null
   workOrderId: string
   subContractId: string
   reference: string
@@ -240,7 +238,7 @@ export function defaultAgreementClauseGroups(): AgreementClauseGroup[] {
 export function buildDefaultAgreementData(
   lead: {
     id: string
-    clientId: number
+    clientId: string | null
     name: string
     phone?: string | null
     location?: string | null

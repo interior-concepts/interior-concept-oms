@@ -427,7 +427,7 @@ export async function GET(request: NextRequest) {
               { name: { contains: searchParam, mode: 'insensitive' } },
               { email: { contains: searchParam, mode: 'insensitive' } },
               { phone: { contains: searchParam, mode: 'insensitive' } },
-              ...(isNumericSearchValid ? [{ clientId: numericSearch }] : []),
+              ...(isNumericSearchValid ? [{ clientId: String(numericSearch) }] : []),
             ],
           }
         : {}),
