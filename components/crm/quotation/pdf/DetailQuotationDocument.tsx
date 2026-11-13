@@ -28,7 +28,7 @@ Font.register({
   ],
 });
 
-Font.registerHyphenationCallback((word) => [word])
+Font.registerHyphenationCallback((word: string) => [word])
 
 import type { QuotationDraftContent, QuotationTotals } from '@/lib/quotation-types'
 import {
@@ -534,11 +534,17 @@ export function DetailQuotationDocument({
   clientAddress,
   content,
   totals,
+  agreementSummary,
 }: {
   clientName: string
   clientAddress: string | null
   content: QuotationDraftContent
   totals: QuotationTotals
+  agreementSummary?: {
+    originalQuotationTotal: number
+    honoredAmount: number
+    totalAmount: number
+  }
 }) {
   const floorSummaries = buildDetailFloorSummaries(content)
   const cleanIntro = (content.introLetter || '').replace('Dear Sir,\n', '').replace('Dear Sir,', '').trim();
@@ -610,11 +616,31 @@ export function DetailQuotationDocument({
           ))}
         </View>
 
-        <View style={styles.grandTotalRow}>
-          <Text style={styles.grandTotalLabel}>Grand Total</Text>
-          <Text style={styles.grandTotalValue}>{formatDetailCurrency(totals.grandTotal)}</Text>
-        </View>
-        <Text style={styles.inWords}>In Words: {amountInWordsTaka(totals.grandTotal)}</Text>
+        {agreementSummary ? (
+          <>
+            <View style={styles.grandTotalRow}>
+              <Text style={styles.grandTotalLabel}>TOTAL</Text>
+              <Text style={styles.grandTotalValue}>{formatDetailCurrency(agreementSummary.originalQuotationTotal)}</Text>
+            </View>
+            <View style={styles.grandTotalRow}>
+              <Text style={styles.grandTotalLabel}>HONORED AMOUNT</Text>
+              <Text style={styles.grandTotalValue}>{formatDetailCurrency(agreementSummary.honoredAmount)}</Text>
+            </View>
+            <View style={styles.grandTotalRow}>
+              <Text style={styles.grandTotalLabel}>GRAND TOTAL</Text>
+              <Text style={styles.grandTotalValue}>{formatDetailCurrency(agreementSummary.totalAmount)}</Text>
+            </View>
+            <Text style={styles.inWords}>In Words: {amountInWordsTaka(agreementSummary.totalAmount)}</Text>
+          </>
+        ) : (
+          <>
+            <View style={styles.grandTotalRow}>
+              <Text style={styles.grandTotalLabel}>Grand Total</Text>
+              <Text style={styles.grandTotalValue}>{formatDetailCurrency(totals.grandTotal)}</Text>
+            </View>
+            <Text style={styles.inWords}>In Words: {amountInWordsTaka(totals.grandTotal)}</Text>
+          </>
+        )}
 
         <FooterFixed content={content} />
       </Page>

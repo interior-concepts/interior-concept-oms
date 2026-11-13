@@ -9,6 +9,9 @@ import { fetchMeCached } from '@/lib/client-me'
 
 type LeadCreateModalProps = {
   onCreated?: () => void
+  defaultVisitType?: string
+  defaultScheduleVisit?: boolean
+  buttonLabel?: string
 }
 
 type JrCrmUser = {
@@ -31,10 +34,10 @@ type CreateLeadPayload = {
   budget?: number
   source: string
   assignedToId?: string
-  seniorCrmUserId?: string
   scheduleVisit?: boolean
   visit?: {
     visitTeamUserId?: string
+    visitType?: string
     scheduledAt?: string
     notes?: string
     visitFee?: number
@@ -49,18 +52,28 @@ type ModalBootstrapCache = {
   currentUserId: string | null
   isAdmin: boolean
   isJuniorCrm: boolean
-  isSeniorCrm: boolean
   jrCrmUsers: JrCrmUser[]
 }
 
 const MODAL_BOOTSTRAP_CACHE_TTL_MS = 60_000
 let modalBootstrapCache: ModalBootstrapCache | null = null
 
-export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
+export default function LeadCreateModal({
+  onCreated,
+  defaultVisitType,
+  defaultScheduleVisit = false,
+  buttonLabel = 'Add Lead',
+}: LeadCreateModalProps) {
   const [open, setOpen] = useState(false)
   
   const handleOpenChange = (newOpen: boolean) => {
     setOpen(newOpen)
+    if (newOpen) {
+      if (defaultScheduleVisit) setScheduleVisit(true)
+      if (defaultVisitType) {
+        setVisitForm((prev) => ({ ...prev, visitType: defaultVisitType }))
+      }
+    }
   }
   const [form, setForm] = useState({
     name: '',
@@ -78,10 +91,10 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
   const [currentUserId, setCurrentUserId] = useState<string | null>(null)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isJuniorCrm, setIsJuniorCrm] = useState(false)
-  const [isSeniorCrm, setIsSeniorCrm] = useState(false)
-  const [scheduleVisit, setScheduleVisit] = useState(false)
+  const [scheduleVisit, setScheduleVisit] = useState(defaultScheduleVisit)
   const [visitForm, setVisitForm] = useState({
     visitTeamUserId: '',
+    visitType: defaultVisitType || 'INITIAL_VISIT',
     scheduledAt: '',
     notes: '',
     visitFee: '',
@@ -90,6 +103,7 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
     seniorCrmUserId: '',
   })
   const [visitTeamUsers, setVisitTeamUsers] = useState<JrCrmUser[]>([])
+  const [sdcUsers, setSdcUsers] = useState<JrCrmUser[]>([])
   const [srCrmUsers, setSrCrmUsers] = useState<JrCrmUser[]>([])
   const [visitLoading, setVisitLoading] = useState(false)
   const [visitError, setVisitError] = useState<string | null>(null)
@@ -108,13 +122,9 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
         setCurrentUserId(cached.currentUserId)
         setIsAdmin(cached.isAdmin)
         setIsJuniorCrm(cached.isJuniorCrm)
-        setIsSeniorCrm(cached.isSeniorCrm)
         setJrCrmUsers(cached.jrCrmUsers)
         if (cached.isJuniorCrm && !cached.isAdmin && cached.currentUserId) {
           setForm((prev) => ({ ...prev, jrCrmUserId: cached.currentUserId ?? '' }))
-        }
-        if (cached.isSeniorCrm && cached.currentUserId) {
-          setVisitForm((prev) => ({ ...prev, seniorCrmUserId: cached.currentUserId ?? '' }))
         }
       }
       return
@@ -131,12 +141,10 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
           : []
         const isAdminUser = departments.includes('ADMIN')
         const isJrUser = departments.includes('JR_CRM')
-        const isSrUser = departments.includes('SR_CRM')
 
         setCurrentUserId(meData?.id ?? null)
         setIsAdmin(isAdminUser)
         setIsJuniorCrm(isJrUser)
-        setIsSeniorCrm(isSrUser)
 
         if (jrData?.success && Array.isArray(jrData?.users)) {
           setJrCrmUsers(jrData.users)
@@ -148,16 +156,11 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
           setForm((prev) => ({ ...prev, jrCrmUserId: String(meData.id) }))
         }
 
-        if (isSrUser && meData?.id) {
-          setVisitForm((prev) => ({ ...prev, seniorCrmUserId: String(meData.id) }))
-        }
-
         modalBootstrapCache = {
           savedAt: Date.now(),
           currentUserId: meData?.id ?? null,
           isAdmin: isAdminUser,
           isJuniorCrm: isJrUser,
-          isSeniorCrm: isSrUser,
           jrCrmUsers: jrData?.success && Array.isArray(jrData?.users) ? jrData.users : [],
         }
       })
@@ -171,16 +174,18 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
         if (active) setJrCrmLoading(false)
       })
 
-    // also fetch visit team and sr crm users lazily
+    // also fetch visit team, sr crm, and SDC users lazily
     ;(async () => {
       try {
         setVisitLoading(true)
-        const [vtRes, srRes] = await Promise.all([
+        const [vtRes, srRes, sdcRes] = await Promise.all([
           fetch('/api/department/available/VISIT_TEAM').then((r) => r.json()),
           fetch('/api/department/available/SR_CRM').then((r) => r.json()),
+          fetch('/api/department/available/SPECIALIST_DESIGN_CONSULTANTS').then((r) => r.json()),
         ])
         if (vtRes?.success && Array.isArray(vtRes.users)) setVisitTeamUsers(vtRes.users)
         if (srRes?.success && Array.isArray(srRes.users)) setSrCrmUsers(srRes.users)
+        if (sdcRes?.success && Array.isArray(sdcRes.users)) setSdcUsers(sdcRes.users)
       } catch (err) {
         console.error('Error loading visit team users:', err)
         setVisitError('Failed to load visit team users')
@@ -210,10 +215,6 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
     }
     setLoading(true)
     setError('')
-    const effectiveSeniorCrmUserId =
-      (isSeniorCrm && currentUserId ? currentUserId : undefined) ||
-      (visitForm.seniorCrmUserId || undefined)
-
     const payload: CreateLeadPayload = {
       name: form.name.trim(),
       email: form.email.trim() || undefined,
@@ -222,7 +223,6 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
       budget: form.budget ? Number(form.budget) : undefined,
       source: form.source.trim(),
       assignedToId: form.jrCrmUserId || undefined,
-      seniorCrmUserId: effectiveSeniorCrmUserId,
     }
     if (scheduleVisit) {
       payload.scheduleVisit = true
@@ -241,20 +241,15 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
         setLoading(false)
         return
       }
-      const parsedDate = new Date(visitForm.scheduledAt)
-      if (Number.isNaN(parsedDate.getTime())) {
-        setError('Please choose a valid visit date and time.')
-        setLoading(false)
-        return
-      }
       payload.visit = {
         visitTeamUserId: visitForm.visitTeamUserId || undefined,
-        scheduledAt: parsedDate.toISOString(),
+        visitType: visitForm.visitType || 'INITIAL_VISIT',
+        scheduledAt: visitForm.scheduledAt || undefined,
         notes: visitForm.notes || undefined,
         visitFee: visitForm.visitFee ? Number(visitForm.visitFee) : undefined,
         projectSqft: visitForm.projectSqft ? Number(visitForm.projectSqft) : undefined,
         projectStatus: visitForm.projectStatus || undefined,
-        seniorCrmUserId: visitForm.seniorCrmUserId || effectiveSeniorCrmUserId,
+        seniorCrmUserId: visitForm.visitType === 'PARTIAL_WORK_VISIT' ? undefined : (visitForm.seniorCrmUserId || undefined),
       }
     }
     let data: { success?: boolean; error?: string } = {}
@@ -290,15 +285,7 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
         jrCrmUserId: currentUserId && isJuniorCrm && !isAdmin ? currentUserId : '',
       })
       setScheduleVisit(false)
-      setVisitForm({
-        visitTeamUserId: '',
-        scheduledAt: '',
-        notes: '',
-        visitFee: '',
-        projectSqft: '',
-        projectStatus: '',
-        seniorCrmUserId: isSeniorCrm && currentUserId ? currentUserId : '',
-      })
+      setVisitForm({ visitTeamUserId: '', visitType: 'INITIAL_VISIT', scheduledAt: '', notes: '', visitFee: '', projectSqft: '', projectStatus: '', seniorCrmUserId: '' })
       if (onCreated) onCreated()
     } else {
       setError(data.error || 'Failed to create lead')
@@ -310,7 +297,7 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
       <DialogTrigger asChild>
         <Button className="gap-2 bg-foreground hover:bg-foreground/70 text-background">
           <Plus className="w-4 h-4" />
-          Add Lead
+          {buttonLabel}
         </Button>
       </DialogTrigger>
         <DialogContent className="max-w-md max-h-[calc(100vh-5rem)] overflow-y-auto">
@@ -469,7 +456,27 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
               )}
 
               <div className="space-y-2">
-                <label htmlFor="visitTeamUserId" className="text-sm font-medium text-foreground">Visit Team</label>
+                <label htmlFor="visitType" className="text-sm font-medium text-foreground">Visit Type *</label>
+                <select
+                  id="visitType"
+                  name="visitType"
+                  value={visitForm.visitType}
+                  onChange={(e) => {
+                    setVisitForm({ ...visitForm, visitType: e.target.value, visitTeamUserId: '' })
+                  }}
+                  className="w-full px-3 py-2 border border-gray-200 rounded-md bg-background text-foreground text-sm"
+                >
+                  <option value="INITIAL_VISIT">Initial Visit</option>
+                  <option value="MEP_VISIT">MEP Visit</option>
+                  <option value="PARTIAL_WORK_VISIT">Partial Work Visit</option>
+                  <option value="SECONDARY_VISIT">Secondary Visit</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="visitTeamUserId" className="text-sm font-medium text-foreground">
+                  {visitForm.visitType === 'PARTIAL_WORK_VISIT' ? 'Specialist Design Consultant' : 'Visit Team'}
+                </label>
                 <select
                   id="visitTeamUserId"
                   name="visitTeamUserId"
@@ -478,8 +485,12 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
                   disabled={visitLoading}
                   className="w-full px-3 py-2 border border-gray-200 rounded-md bg-background text-foreground text-sm"
                 >
-                  <option value="">Select visit team member</option>
-                  {visitTeamUsers.map((u) => (
+                  <option value="">
+                    {visitForm.visitType === 'PARTIAL_WORK_VISIT'
+                      ? 'Select SDC member'
+                      : 'Select visit team member'}
+                  </option>
+                  {(visitForm.visitType === 'PARTIAL_WORK_VISIT' ? sdcUsers : visitTeamUsers).map((u) => (
                     <option key={u.id} value={u.id}>{u.fullName} ({u.email})</option>
                   ))}
                 </select>
@@ -523,15 +534,17 @@ export default function LeadCreateModal({ onCreated }: LeadCreateModalProps) {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label htmlFor="seniorCrmUserId" className="text-sm font-medium text-foreground">Senior CRM (optional)</label>
-                <select id="seniorCrmUserId" name="seniorCrmUserId" value={visitForm.seniorCrmUserId} onChange={handleVisitChange} className="w-full px-3 py-2 border border-gray-200 rounded-md bg-background text-foreground text-sm">
-                  <option value="">Auto-assign</option>
-                  {srCrmUsers.map((u) => (
-                    <option key={u.id} value={u.id}>{u.fullName} ({u.email})</option>
-                  ))}
-                </select>
-              </div>
+              {visitForm.visitType !== 'PARTIAL_WORK_VISIT' && (
+                <div className="space-y-2">
+                  <label htmlFor="seniorCrmUserId" className="text-sm font-medium text-foreground">Senior CRM (optional)</label>
+                  <select id="seniorCrmUserId" name="seniorCrmUserId" value={visitForm.seniorCrmUserId} onChange={handleVisitChange} className="w-full px-3 py-2 border border-gray-200 rounded-md bg-background text-foreground text-sm">
+                    <option value="">Auto-assign</option>
+                    {srCrmUsers.map((u) => (
+                      <option key={u.id} value={u.id}>{u.fullName} ({u.email})</option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </div>
           )}
 

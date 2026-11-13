@@ -5,9 +5,9 @@ import type { ComponentType } from 'react'
 import Link from 'next/link'
 import { buildDetailPreviewUrl } from '@/lib/detail-quotation-preview-sync'
 import { buildShortPreviewUrl } from '@/lib/short-quotation-preview-sync'
+import { getSmartDownloadUrl } from '@/lib/download-utils'
 import {
   CalendarClock,
-  CalendarPlus,
   CheckCircle2,
   ClipboardCheck,
   Download,
@@ -28,12 +28,6 @@ import {
   Wrench,
 } from 'lucide-react'
 import { toast } from '@/components/ui/sonner'
-import {
-  FollowUpIntelligenceFields,
-  type FollowUpCategoryValue,
-  type ClientSentimentValue,
-  type ClientObjectionValue,
-} from '@/components/crm/shared/followup-intelligence-fields'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -70,6 +64,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { CadSubmissionDialog } from '@/components/crm/junior/cad-submission-dialog'
 
 type LeadRecord = {
   id: string
@@ -113,6 +108,8 @@ type LeadRecord = {
   cadWorkSubmissions?: Array<{
     id: string
     note: string | null
+    versionNumber?: number
+    versionName?: string | null
     submittedAt: string
     submittedBy: { id: string; fullName: string }
     files: Array<{
@@ -341,8 +338,6 @@ function srCrmVisitTeamBlock(lead: LeadRecord) {
 }
 
 function LeadFilesSection({ lead }: { lead: LeadRecord }) {
-  const [shortPkgModalOpen, setShortPkgModalOpen] = useState(false)
-
   const allSubFiles = (lead.cadWorkSubmissions ?? []).flatMap((sub) =>
     (sub.files ?? []).map((file) => ({
       id: file.id,
@@ -351,6 +346,7 @@ function LeadFilesSection({ lead }: { lead: LeadRecord }) {
       fileType: file.fileType,
       cadFileType: file.cadFileType,
       submittedBy: sub.submittedBy?.fullName,
+      versionName: sub.versionName || (sub.versionNumber ? `V${sub.versionNumber}` : null),
     })),
   )
 
@@ -361,6 +357,7 @@ function LeadFilesSection({ lead }: { lead: LeadRecord }) {
     fileType: att.fileType,
     cadFileType: 'ATTACHMENT',
     submittedBy: 'Team File',
+    versionName: null,
   }))
 
   const combinedFiles = [...allSubFiles, ...allLeadAtts]
@@ -374,8 +371,7 @@ function LeadFilesSection({ lead }: { lead: LeadRecord }) {
   if (jrArchitectFiles.length === 0 && quotationFiles.length === 0 && !lead.hasQuotationDraft) return null
 
   return (
-    <>
-      <div className="mt-3 space-y-2">
+    <div className="mt-3 space-y-2">
       {/* JR Architect Planning Files Block */}
       {jrArchitectFiles.length > 0 && (
         <div className="rounded-lg border border-sky-200/80 bg-gradient-to-br from-sky-50/80 via-white to-blue-50/40 p-3 text-sm dark:border-sky-800/60 dark:from-sky-950/30 dark:via-slate-950 dark:to-blue-950/20">
@@ -392,7 +388,7 @@ function LeadFilesSection({ lead }: { lead: LeadRecord }) {
             {jrArchitectFiles.map((file) => (
               <a
                 key={file.id}
-                href={file.url}
+                href={getSmartDownloadUrl(file.url, file.fileName)}
                 target="_blank"
                 rel="noopener noreferrer"
                 download
@@ -401,6 +397,11 @@ function LeadFilesSection({ lead }: { lead: LeadRecord }) {
               >
                 <FileText className="h-3.5 w-3.5 shrink-0 text-sky-600 dark:text-sky-400" />
                 <span className="max-w-[180px] truncate">{file.fileName}</span>
+                {file.versionName ? (
+                  <Badge variant="outline" className="px-1.5 py-0 text-[9px] font-semibold border-sky-300 text-sky-800 dark:border-sky-700 dark:text-sky-300">
+                    {file.versionName}
+                  </Badge>
+                ) : null}
                 <Badge variant="secondary" className="px-1.5 py-0 text-[9px] font-semibold bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200">
                   {file.cadFileType}
                 </Badge>
@@ -424,10 +425,10 @@ function LeadFilesSection({ lead }: { lead: LeadRecord }) {
             </Badge>
           </div>
           <div className="flex flex-wrap gap-2">
-            {(lead.hasQuotationDraft || true) && (
+            {lead.hasQuotationDraft && (
               <>
                 <a
-                  href={buildDetailPreviewUrl({ context: 'lead', contextId: lead.id })}
+                  href={buildDetailPreviewUrl({ context: 'lead', contextId: lead.id, download: true })}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex min-h-8 max-w-full items-center gap-2 rounded-md border border-amber-300 bg-amber-600 px-2.5 py-1 text-xs font-bold text-white transition hover:bg-amber-700 shadow-sm"
@@ -440,25 +441,26 @@ function LeadFilesSection({ lead }: { lead: LeadRecord }) {
                   </Badge>
                   <Download className="h-3.5 w-3.5 shrink-0 text-white" />
                 </a>
-                <button
-                  type="button"
-                  onClick={() => setShortPkgModalOpen(true)}
-                  className="inline-flex min-h-8 max-w-full items-center gap-2 rounded-md border border-sky-300 bg-sky-600 px-2.5 py-1 text-xs font-bold text-white transition hover:bg-sky-700 shadow-sm cursor-pointer"
-                  title="Select package tier and download Short Quotation PDF"
+                <a
+                  href={buildShortPreviewUrl({ context: 'lead', contextId: lead.id, download: true })}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-8 max-w-full items-center gap-2 rounded-md border border-sky-300 bg-sky-600 px-2.5 py-1 text-xs font-bold text-white transition hover:bg-sky-700 shadow-sm"
+                  title="Download generated Short Quotation PDF"
                 >
                   <FileText className="h-3.5 w-3.5 shrink-0 text-white" />
                   <span className="max-w-[180px] truncate">Short Quotation PDF</span>
                   <Badge variant="secondary" className="px-1.5 py-0 text-[9px] font-bold bg-white text-sky-900">
-                    CHOOSE PKG
+                    LIVE PDF
                   </Badge>
                   <Download className="h-3.5 w-3.5 shrink-0 text-white" />
-                </button>
+                </a>
               </>
             )}
             {quotationFiles.map((file) => (
               <a
                 key={file.id}
-                href={file.url}
+                href={getSmartDownloadUrl(file.url, file.fileName)}
                 target="_blank"
                 rel="noopener noreferrer"
                 download
@@ -474,100 +476,6 @@ function LeadFilesSection({ lead }: { lead: LeadRecord }) {
         </div>
       )}
     </div>
-
-      {/* Short Quotation Package Selection Modal */}
-      <Dialog open={shortPkgModalOpen} onOpenChange={setShortPkgModalOpen}>
-        <DialogContent className="sm:max-w-[500px]">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-sky-700 dark:text-sky-400">
-              <FileText className="h-5 w-5 text-sky-600" />
-              Select Short Quotation Package
-            </DialogTitle>
-            <DialogDescription>
-              Choose which package tier PDF you want to download for{' '}
-              <span className="font-semibold text-foreground">{lead.name}</span>.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-3 py-2">
-            {[
-              {
-                tier: 'PLATINUM',
-                label: '💎 PLATINUM Package',
-                desc: 'High-end finish with premium material specifications',
-                color: 'border-purple-300 bg-purple-50/50 hover:bg-purple-100/60 text-purple-950 dark:border-purple-800 dark:bg-purple-950/30 dark:text-purple-100',
-                badgeColor: 'bg-purple-600 hover:bg-purple-700 text-white',
-              },
-              {
-                tier: 'PREMIUM',
-                label: '⭐ PREMIUM Package',
-                desc: 'Standard high-quality interior package specifications',
-                color: 'border-sky-300 bg-sky-50/50 hover:bg-sky-100/60 text-sky-950 dark:border-sky-800 dark:bg-sky-950/30 dark:text-sky-100',
-                badgeColor: 'bg-sky-600 hover:bg-sky-700 text-white',
-              },
-              {
-                tier: 'LUXURY',
-                label: '👑 LUXURY Package',
-                desc: 'Custom luxury finish & bespoke material package',
-                color: 'border-amber-300 bg-amber-50/50 hover:bg-amber-100/60 text-amber-950 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-100',
-                badgeColor: 'bg-amber-600 hover:bg-amber-700 text-white',
-              },
-            ].map((pkg) => {
-              const allFiles = [
-                ...(lead.cadWorkSubmissions ?? []).flatMap((sub) => sub.files ?? []),
-                ...(lead.attachments ?? []),
-              ]
-              const matchingFile = allFiles.find(
-                (f) =>
-                  f.fileName.toUpperCase().includes(`[SHORT - ${pkg.tier}]`) ||
-                  f.fileName.toUpperCase().includes(`SHORT - ${pkg.tier}`)
-              )
-              const downloadUrl = matchingFile
-                ? matchingFile.url
-                : buildShortPreviewUrl({ context: 'lead', contextId: lead.id, packageTier: pkg.tier })
-              return (
-                <div
-                  key={pkg.tier}
-                  className={`flex items-center justify-between rounded-xl border p-4 transition-all ${pkg.color}`}
-                >
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-sm">{pkg.label}</span>
-                      {matchingFile ? (
-                        <Badge variant="outline" className="text-[10px] bg-white border-green-400 text-green-700">
-                          Uploaded
-                        </Badge>
-                      ) : (
-                        <Badge variant="outline" className="text-[10px] bg-white border-sky-400 text-sky-700">
-                          Live PDF
-                        </Badge>
-                      )}
-                    </div>
-                    <p className="text-xs text-muted-foreground">{pkg.desc}</p>
-                  </div>
-                  <a
-                    href={downloadUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download={matchingFile ? matchingFile.fileName : undefined}
-                    onClick={() => setShortPkgModalOpen(false)}
-                  >
-                    <Button size="sm" className={`gap-1.5 shadow-sm text-xs font-bold ${pkg.badgeColor}`}>
-                      <Download className="h-3.5 w-3.5" />
-                      Download
-                    </Button>
-                  </a>
-                </div>
-              )
-            })}
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setShortPkgModalOpen(false)}>
-              Close
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </>
   )
 }
 
@@ -590,7 +498,8 @@ export function CadPhaseQueueBoard({
   assigneeLabel = 'JR Architect',
   showAssigneeReassign = true,
   showSrCrmFilter = false,
-  hidePhoneInCards = false,
+  mode = 'normal',
+  hidePhoneInCards: _hidePhoneInCards = false,
 }: {
   title: string
   subtitle: string
@@ -601,6 +510,7 @@ export function CadPhaseQueueBoard({
   assigneeLabel?: string
   showAssigneeReassign?: boolean
   showSrCrmFilter?: boolean
+  mode?: 'normal' | 'partial'
   hidePhoneInCards?: boolean
 }) {
   const [searchInput, setSearchInput] = useState('')
@@ -626,6 +536,13 @@ export function CadPhaseQueueBoard({
     'DESIGN_AGREEMENT' | 'FITOUT_AGREEMENT' | 'NO_APPROVAL'
   >('NO_APPROVAL')
   const [agreementValue, setAgreementValue] = useState<number | ''>('')
+  const [discountAmount, setDiscountAmount] = useState<number | ''>('')
+  const [discountType, setDiscountType] = useState<'FIXED' | 'PERCENTAGE'>('FIXED')
+  const [discountPercent, setDiscountPercent] = useState<number | ''>('')
+  const [quotationVersions, setQuotationVersions] = useState<
+    Array<{ slotIndex: number; title: string; subtotal?: number; grandTotal: number; discountAmount?: number; exists: boolean }>
+  >([])
+  const [selectedSlotIndex, setSelectedSlotIndex] = useState<number>(1)
   const [isDirectAgreementConfirm, setIsDirectAgreementConfirm] = useState(false)
   const [quotationMembers, setQuotationMembers] = useState<DepartmentUser[]>([])
   const [visualizerMembers, setVisualizerMembers] = useState<DepartmentUser[]>(
@@ -653,25 +570,7 @@ export function CadPhaseQueueBoard({
   const [viewMode, setViewMode] = useState<'table' | 'card'>('table')
   const [projectSizeOpen, setProjectSizeOpen] = useState(false)
   const [projectSizeValue, setProjectSizeValue] = useState('')
-
-  // Follow-up state for meeting modals
-  const [followUpEnabled, setFollowUpEnabled] = useState(false)
-  const [followUpDate, setFollowUpDate] = useState('')
-  const [followUpNotes, setFollowUpNotes] = useState('')
-  const [followUpCategory, setFollowUpCategory] = useState<FollowUpCategoryValue>('GENERAL')
-  const [followUpSentiment, setFollowUpSentiment] = useState<ClientSentimentValue | undefined>(undefined)
-  const [followUpObjection, setFollowUpObjection] = useState<ClientObjectionValue | undefined>(undefined)
-  const [followUpObjectionNote, setFollowUpObjectionNote] = useState('')
-
-  const resetFollowUpState = () => {
-    setFollowUpEnabled(false)
-    setFollowUpDate('')
-    setFollowUpNotes('')
-    setFollowUpCategory('GENERAL')
-    setFollowUpSentiment(undefined)
-    setFollowUpObjection(undefined)
-    setFollowUpObjectionNote('')
-  }
+  const [viewFilesLead, setViewFilesLead] = useState<LeadRecord | null>(null)
 
   const closedSubStatusOptions = [
     'PROJECT_DROPPED',
@@ -695,12 +594,36 @@ export function CadPhaseQueueBoard({
     return () => window.clearTimeout(timer)
   }, [searchInput])
 
+  useEffect(() => {
+    if (completeMeetingOpen && completeMeetingLead?.id) {
+      fetch(`/api/lead/${completeMeetingLead.id}/quotation-draft`)
+        .then((res) => res.json())
+        .then((payload) => {
+          if (payload?.success && Array.isArray(payload.data?.availableSlots)) {
+            const slots = payload.data.availableSlots.filter((s: any) => s.exists)
+            setQuotationVersions(slots)
+            if (slots.length > 0) {
+              setSelectedSlotIndex(slots[0].slotIndex)
+              const baseValue = (slots[0].subtotal && slots[0].subtotal > 0) ? slots[0].subtotal : slots[0].grandTotal
+              setAgreementValue(baseValue)
+              if (slots[0].discountAmount && slots[0].discountAmount > 0) {
+                setDiscountType('FIXED')
+                setDiscountAmount(slots[0].discountAmount)
+              }
+            }
+          }
+        })
+        .catch((err) => console.error('Failed to load quotation versions:', err))
+    }
+  }, [completeMeetingOpen, completeMeetingLead])
+
   const loadLeads = useCallback(async () => {
     try {
       setLoading(true)
       const params = new URLSearchParams({
         queueType,
       })
+      if (mode === 'partial') params.set('leadType', 'partial')
       if (search) params.set('search', search)
       const response = await fetch(`${queueEndpoint}?${params.toString()}`, {
         cache: 'no-store',
@@ -718,7 +641,7 @@ export function CadPhaseQueueBoard({
     } finally {
       setLoading(false)
     }
-  }, [queueEndpoint, queueType, search])
+  }, [mode, queueEndpoint, queueType, search])
 
   useEffect(() => {
     void loadLeads()
@@ -1028,7 +951,6 @@ export function CadPhaseQueueBoard({
     setMeetingAt(toDateTimeLocalInput(new Date()))
     setMeetingMode('ONLINE')
     setMeetingNote('')
-    resetFollowUpState()
     setMeetingOpen(true)
   }
 
@@ -1038,7 +960,6 @@ export function CadPhaseQueueBoard({
     setMeetingAt(toDateTimeLocalInput(new Date()))
     setMeetingMode('ONLINE')
     setMeetingNote('')
-    resetFollowUpState()
     setMeetingOpen(true)
   }
 
@@ -1121,7 +1042,6 @@ export function CadPhaseQueueBoard({
     setIsDirectAgreementConfirm(directAgreement)
     setAgreementValue('')
     setClientApproval((isBudgetMeeting || directAgreement) ? 'DESIGN_AGREEMENT' : 'NO_APPROVAL')
-    resetFollowUpState()
     setCompleteMeetingOpen(true)
     if (lead.stage === 'DISCOVERY' && lead.subStatus === 'FIRST_MEETING_SET') {
       await loadQuotationMembers()
@@ -1278,7 +1198,7 @@ export function CadPhaseQueueBoard({
         completeMeetingLead.stage === 'QUOTATION_PHASE' &&
         completeMeetingLead.subStatus === 'QUOTATION_APPROVED'
       ) {
-        // Direct agreement from Budget Queue (Quotation Approved stage — skip budget meeting)
+        // Direct agreement from Budget Queue (Quotation Approved stage - skip budget meeting)
         if (clientApproval === 'NO_APPROVAL') {
           toast.error('Please select an agreement type (Design or Fitout) to confirm')
           return
@@ -1303,18 +1223,22 @@ export function CadPhaseQueueBoard({
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            stage: 'VISUALIZATION_PHASE',
-            subStatus: 'VISUAL_ASSIGNED',
-            reason: `Direct agreement confirmed (Quotation Approved → Visualization) with ${clientApproval.replace('_', ' ').toLowerCase()}. ${completeMeetingNote.trim()}`,
+            stage: 'CONVERSION',
+            subStatus: 'CLIENT_CONFIRMED',
+            reason: `Direct agreement confirmed with ${clientApproval.replace('_', ' ').toLowerCase()}. Sent to Accounts pending first transaction before 3D Visualizer release. ${completeMeetingNote.trim()}`,
             agreementType: clientApproval,
             agreementValue: agreementValue !== '' ? agreementValue : undefined,
+            slotIndex: selectedSlotIndex,
+            discountType,
+            discountAmount: discountType === 'FIXED' && discountAmount !== '' ? discountAmount : undefined,
+            discountPercent: discountType === 'PERCENTAGE' && discountPercent !== '' ? discountPercent : undefined,
           }),
         })
         const payload = await response.json()
         if (!response.ok || !payload?.success) {
-          throw new Error(payload?.error ?? 'Failed to move lead to Visualization phase')
+          throw new Error(payload?.error ?? 'Failed to send lead to Accounts pending')
         }
-        toast.success('Agreement confirmed — Lead moved to Agreement Center & Design Queue')
+        toast.success('Agreement confirmed - Lead sent to Accounts pending')
       } else if (
         (completeMeetingLead.stage === 'BUDGET_PHASE' &&
         completeMeetingLead.subStatus === 'BUDGET_MEETING_SET') || isDirectAgreementConfirm
@@ -1350,17 +1274,21 @@ export function CadPhaseQueueBoard({
               stage:
                 clientApproval === 'NO_APPROVAL'
                   ? 'BUDGET_PHASE'
-                  : 'VISUALIZATION_PHASE',
+                  : 'CONVERSION',
               subStatus:
                 clientApproval === 'NO_APPROVAL'
                   ? 'REJECTED_OFFER'
-                  : 'VISUAL_ASSIGNED',
+                  : 'CLIENT_CONFIRMED',
               reason:
                 clientApproval === 'NO_APPROVAL'
                   ? `Budget meeting completed: no approval. ${completeMeetingNote.trim()}`
-                  : `${isDirectAgreementConfirm ? 'Direct agreement confirmed' : 'Budget meeting completed'} with ${clientApproval.replace('_', ' ').toLowerCase()} and assigned to 3D Visualizer. ${completeMeetingNote.trim()}`,
+                  : `${isDirectAgreementConfirm ? 'Direct agreement confirmed' : 'Budget meeting completed'} with ${clientApproval.replace('_', ' ').toLowerCase()}. Sent to Accounts pending first transaction before 3D Visualizer release. ${completeMeetingNote.trim()}`,
               agreementType: clientApproval !== 'NO_APPROVAL' ? clientApproval : undefined,
               agreementValue: clientApproval !== 'NO_APPROVAL' && agreementValue !== '' ? agreementValue : undefined,
+              slotIndex: clientApproval !== 'NO_APPROVAL' ? selectedSlotIndex : undefined,
+              discountType: clientApproval !== 'NO_APPROVAL' ? discountType : undefined,
+              discountAmount: clientApproval !== 'NO_APPROVAL' && discountType === 'FIXED' && discountAmount !== '' ? discountAmount : undefined,
+              discountPercent: clientApproval !== 'NO_APPROVAL' && discountType === 'PERCENTAGE' && discountPercent !== '' ? discountPercent : undefined,
             }),
           },
         )
@@ -1371,7 +1299,7 @@ export function CadPhaseQueueBoard({
         toast.success(
           clientApproval === 'NO_APPROVAL'
             ? 'Budget meeting completed'
-            : 'Agreement confirmed — Lead moved to Agreement Center & Design Queue',
+            : 'Lead sent to Accounts pending',
         )
       } else {
         throw new Error('This lead is not eligible for meeting completion')
@@ -1563,6 +1491,9 @@ export function CadPhaseQueueBoard({
         <DropdownMenuItem asChild>
           <Link href={`${leadBasePath}/${lead.id}`}>Open Lead</Link>
         </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setViewFilesLead(lead)}>
+          View Files & Versions
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => openProjectSizeDialog(lead)}>
           {lead.latestCompletedVisit?.projectSqft ? 'Change' : 'Add'} Project Size
         </DropdownMenuItem>
@@ -1624,9 +1555,21 @@ export function CadPhaseQueueBoard({
                 </DropdownMenuItem>
               </>
             ) : lead.stage === 'BUDGET_PHASE' && lead.subStatus === 'BUDGET_MEETING_SET' ? (
-              <DropdownMenuItem onClick={() => void openCompleteMeetingDialog(lead)}>
-                Complete Meeting
-              </DropdownMenuItem>
+              <>
+                <DropdownMenuItem onClick={() => void openCompleteMeetingDialog(lead)}>
+                  Complete Meeting
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href={`/crm/sr/quotation/${lead.id}?tab=short`}>
+                    Change Quotation (Short)
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href={`/crm/sr/quotation/${lead.id}?tab=detail`}>
+                    Change Quotation (Detail)
+                  </Link>
+                </DropdownMenuItem>
+              </>
             ) : null}
           </>
         ) : null}
@@ -1648,7 +1591,7 @@ export function CadPhaseQueueBoard({
     <div className="min-h-screen bg-background">
       <CrmPageHeader title={title} subtitle={subtitle} />
 
-      <main className="mx-auto max-w-[1440px] px-4 py-6">
+      <main className="w-full px-3 py-4 sm:px-6 lg:px-8">
         <Card className="mb-4 border-border/70">
           <CardContent className="space-y-4 p-4">
             <div className="flex flex-wrap items-center gap-3">
@@ -1843,75 +1786,89 @@ export function CadPhaseQueueBoard({
                     <h3 className="text-sm font-semibold">{group.month}</h3>
                     <Badge variant="secondary">{group.leads.length} leads</Badge>
                   </div>
-                  <Table className="table-fixed text-sm w-full">
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-[15%]">Lead Name</TableHead>
-                        <TableHead className="w-[15%]">Stage</TableHead>
-                        <TableHead className="w-[18%]">Address</TableHead>
-                        <TableHead className="w-[11%]">Visit Date</TableHead>
-                        <TableHead className="w-[13%]">
-                          {isCadQueue ? 'JR Architect' : isDesignQueue ? '3D Visualizer' : 'Quotation'}
-                        </TableHead>
-                        <TableHead className="w-[11%]">SR CRM / Visit</TableHead>
-                        <TableHead className="w-[10%]">Project Size</TableHead>
-                        <TableHead className="w-[7%] text-right">Action</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {group.leads.map((lead) => (
-                        <TableRow key={lead.id}>
-                          <TableCell className="font-medium">
-                            <button
-                              type="button"
-                              onClick={() => openRenameDialog(lead)}
-                              className="max-w-full truncate text-left hover:text-primary hover:underline font-semibold"
-                              title={lead.name}
-                            >
-                              {lead.name}
-                            </button>
-                          </TableCell>
-                          <TableCell>{stageSubStatusBlock(lead)}</TableCell>
-                          <TableCell className="max-w-[200px] overflow-hidden truncate" title={lead.location || 'N/A'}>
-                            <span className="text-muted-foreground">
-                              {lead.location || 'N/A'}
-                            </span>
-                          </TableCell>
-                          <TableCell>{formatDate(lead.latestCompletedVisit?.scheduledAt)}</TableCell>
-                          <TableCell className="truncate" title={
-                            isCadQueue || isDesignQueue
-                              ? (lead.jrArchitectAssignment?.user.fullName ?? 'Unassigned')
-                              : (lead.quotationAssignment?.user.fullName ?? 'Unassigned')
-                          }>
-                            {isCadQueue || isDesignQueue
-                              ? (lead.jrArchitectAssignment?.user.fullName ?? 'Unassigned')
-                              : (lead.quotationAssignment?.user.fullName ?? 'Unassigned')}
-                          </TableCell>
-                          <TableCell>
-                            <button
-                              type="button"
-                              onClick={() => void openReassignSrCrm(lead)}
-                              className="max-w-full text-left transition hover:text-primary hover:underline"
-                            >
-                              {srCrmVisitTeamBlock(lead)}
-                            </button>
-                          </TableCell>
-                          <TableCell>
-                            <button
-                              type="button"
-                              onClick={() => openProjectSizeDialog(lead)}
-                              className="text-left transition hover:text-primary hover:underline"
-                            >
-                              {formatProjectSqft(lead.latestCompletedVisit?.projectSqft)}
-                            </button>
-                          </TableCell>
-                          <TableCell className="text-right">
-                            {renderLeadActionMenu(lead)}
-                          </TableCell>
+                  <div className="overflow-x-auto w-full">
+                    <Table className="min-w-[850px] sm:min-w-full table-fixed text-sm w-full">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-[15%]">Lead Name</TableHead>
+                          <TableHead className="w-[15%]">Stage</TableHead>
+                          <TableHead className="w-[18%]">Address</TableHead>
+                          <TableHead className="w-[11%]">Visit Date</TableHead>
+                          <TableHead className="w-[13%]">
+                            {isCadQueue || isHistoryView ? 'JR Architect' : isDesignQueue ? '3D Visualizer' : 'Quotation'}
+                          </TableHead>
+                          <TableHead className="w-[11%]">SR CRM / Visit</TableHead>
+                          <TableHead className="w-[10%]">Project Size</TableHead>
+                          <TableHead className="w-[7%] text-right">Action</TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                      </TableHeader>
+                      <TableBody>
+                        {group.leads.map((lead) => (
+                          <TableRow key={lead.id}>
+                            <TableCell className="font-medium">
+                              <button
+                                type="button"
+                                onClick={() => openRenameDialog(lead)}
+                                className="max-w-full truncate text-left hover:text-primary hover:underline font-semibold"
+                                title={lead.name}
+                              >
+                                {lead.name}
+                              </button>
+                            </TableCell>
+                            <TableCell>{stageSubStatusBlock(lead)}</TableCell>
+                            <TableCell className="max-w-[200px] overflow-hidden truncate" title={lead.location || 'N/A'}>
+                              <span className="text-muted-foreground">
+                                {lead.location || 'N/A'}
+                              </span>
+                            </TableCell>
+                            <TableCell>{formatDate(lead.latestCompletedVisit?.scheduledAt)}</TableCell>
+                            <TableCell className="truncate" title={
+                              isCadQueue || isDesignQueue || isHistoryView
+                                ? (lead.jrArchitectAssignment?.user.fullName ?? 'Unassigned')
+                                : (lead.quotationAssignment?.user.fullName ?? 'Unassigned')
+                            }>
+                              {isCadQueue || isDesignQueue || isHistoryView
+                                ? (lead.jrArchitectAssignment?.user.fullName ?? 'Unassigned')
+                                : (lead.quotationAssignment?.user.fullName ?? 'Unassigned')}
+                            </TableCell>
+                            <TableCell>
+                              <button
+                                type="button"
+                                onClick={() => void openReassignSrCrm(lead)}
+                                className="max-w-full text-left transition hover:text-primary hover:underline"
+                              >
+                                {srCrmVisitTeamBlock(lead)}
+                              </button>
+                            </TableCell>
+                            <TableCell>
+                              <button
+                                type="button"
+                                onClick={() => openProjectSizeDialog(lead)}
+                                className="text-left transition hover:text-primary hover:underline"
+                              >
+                                {formatProjectSqft(lead.latestCompletedVisit?.projectSqft)}
+                              </button>
+                            </TableCell>
+                            <TableCell className="text-right">
+                              <div className="flex items-center justify-end gap-1">
+                                <Button
+                                  size="sm"
+                                  variant="ghost"
+                                  className="h-8 px-2 text-xs"
+                                  onClick={() => setViewFilesLead(lead)}
+                                  title="View Files & Versions"
+                                >
+                                  <FileText className="mr-1 h-3.5 w-3.5" />
+                                  Files
+                                </Button>
+                                {renderLeadActionMenu(lead)}
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -1951,6 +1908,14 @@ export function CadPhaseQueueBoard({
                         <Link href={`${leadBasePath}/${lead.id}`}>
                           Open Lead
                         </Link>
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setViewFilesLead(lead)}
+                      >
+                        <FileText className="mr-1 h-4 w-4" />
+                        Files & Versions
                       </Button>
                       <Button
                         size="sm"
@@ -2060,6 +2025,26 @@ export function CadPhaseQueueBoard({
                           ) : lead.stage === 'BUDGET_PHASE' &&
                             lead.subStatus === 'BUDGET_MEETING_SET' ? (
                             <>
+                              <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                  <Button size="sm" variant="outline">
+                                    <FileText className="mr-1 h-4 w-4" />
+                                    Change Quotation
+                                  </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                  <DropdownMenuItem asChild>
+                                    <Link href={`/crm/sr/quotation/${lead.id}?tab=short`}>
+                                      Short Quotation
+                                    </Link>
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem asChild>
+                                    <Link href={`/crm/sr/quotation/${lead.id}?tab=detail`}>
+                                      Detail Quotation
+                                    </Link>
+                                  </DropdownMenuItem>
+                                </DropdownMenuContent>
+                              </DropdownMenu>
                               <Button
                                 size="sm"
                                 onClick={() =>
@@ -2094,12 +2079,10 @@ export function CadPhaseQueueBoard({
                   </div>
 
                   <div className="grid gap-2 text-sm text-muted-foreground md:grid-cols-2">
-                    {!hidePhoneInCards ? (
-                      <p className="inline-flex items-center gap-1">
-                        <Phone className="h-3.5 w-3.5" />
-                        {lead.phone || 'No phone'}
-                      </p>
-                    ) : null}
+                    <p className="inline-flex items-center gap-1">
+                      <Phone className="h-3.5 w-3.5" />
+                      {lead.phone || 'No phone'}
+                    </p>
                     <p className="inline-flex items-center gap-1">
                       <CalendarClock className="h-3.5 w-3.5" />
                       Visit Date: {formatDate(lead.latestCompletedVisit?.scheduledAt)}
@@ -2213,6 +2196,14 @@ export function CadPhaseQueueBoard({
                       <Button
                         size="sm"
                         variant="outline"
+                        onClick={() => setViewFilesLead(lead)}
+                      >
+                        <FileText className="mr-1 h-4 w-4" />
+                        Files & Versions
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
                         onClick={() => openProjectSizeDialog(lead)}
                       >
                         {lead.latestCompletedVisit?.projectSqft ? 'Change' : 'Add'} Project Size
@@ -2318,6 +2309,26 @@ export function CadPhaseQueueBoard({
                           ) : lead.stage === 'BUDGET_PHASE' &&
                             lead.subStatus === 'BUDGET_MEETING_SET' ? (
                             <>
+                              <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                  <Button size="sm" variant="outline">
+                                    <FileText className="mr-1 h-4 w-4" />
+                                    Change Quotation
+                                  </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                  <DropdownMenuItem asChild>
+                                    <Link href={`/crm/sr/quotation/${lead.id}?tab=short`}>
+                                      Short Quotation
+                                    </Link>
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem asChild>
+                                    <Link href={`/crm/sr/quotation/${lead.id}?tab=detail`}>
+                                      Detail Quotation
+                                    </Link>
+                                  </DropdownMenuItem>
+                                </DropdownMenuContent>
+                              </DropdownMenu>
                               <Button
                                 size="sm"
                                 onClick={() =>
@@ -2352,12 +2363,10 @@ export function CadPhaseQueueBoard({
                   </div>
 
                   <div className="grid gap-2 text-sm text-muted-foreground md:grid-cols-2">
-                    {!hidePhoneInCards ? (
-                      <p className="inline-flex items-center gap-1">
-                        <Phone className="h-3.5 w-3.5" />
-                        {lead.phone || 'No phone'}
-                      </p>
-                    ) : null}
+                    <p className="inline-flex items-center gap-1">
+                      <Phone className="h-3.5 w-3.5" />
+                      {lead.phone || 'No phone'}
+                    </p>
                     <p className="inline-flex items-center gap-1">
                       <CalendarClock className="h-3.5 w-3.5" />
                       Visit Date: {formatDate(lead.latestCompletedVisit?.scheduledAt)}
@@ -2756,9 +2765,9 @@ export function CadPhaseQueueBoard({
             </DialogTitle>
             <DialogDescription>
               {completeMeetingLead?.stage === 'BUDGET_PHASE'
-                ? 'Complete budget meeting, select client approval, and assign a 3D Visualizer.'
+                ? 'Complete budget meeting, select client approval, and select the 3D Visualizer for release after first transaction.'
                 : isDirectAgreementConfirm
-                  ? 'Confirm agreement details and assign a 3D Visualizer.'
+                  ? 'Confirm agreement details and select the 3D Visualizer for release after first transaction.'
                   : 'Complete first meeting and assign quotation member.'}
             </DialogDescription>
           </DialogHeader>
@@ -2793,19 +2802,130 @@ export function CadPhaseQueueBoard({
                   </Select>
                 </div>
                 {clientApproval !== 'NO_APPROVAL' ? (
-                  <div className="space-y-1">
-                    <Label>Agreement Value (BDT)</Label>
-                    <Input
-                      type="number"
-                      placeholder="e.g. 500000"
-                      value={agreementValue}
-                      onChange={(e) => setAgreementValue(e.target.value === '' ? '' : Number(e.target.value))}
-                    />
-                  </div>
+                  <>
+                    {quotationVersions.length > 0 ? (
+                      <div className="space-y-1">
+                        <Label>Select Quotation Version / Agreement</Label>
+                        <Select
+                          value={String(selectedSlotIndex)}
+                          onValueChange={(val) => {
+                            const idx = Number(val)
+                            setSelectedSlotIndex(idx)
+                            const target = quotationVersions.find((s) => s.slotIndex === idx)
+                            if (target) {
+                              const baseValue = (target.subtotal && target.subtotal > 0) ? target.subtotal : target.grandTotal
+                              setAgreementValue(baseValue)
+                              if (target.discountAmount && target.discountAmount > 0) {
+                                setDiscountType('FIXED')
+                                setDiscountAmount(target.discountAmount)
+                              } else {
+                                setDiscountAmount('')
+                                setDiscountPercent('')
+                              }
+                            }
+                          }}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select quotation version" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {quotationVersions.map((v) => {
+                              const displayVal = (v.subtotal && v.subtotal > 0) ? v.subtotal : v.grandTotal
+                              return (
+                                <SelectItem key={v.slotIndex} value={String(v.slotIndex)}>
+                                  {v.title} — ৳{displayVal.toLocaleString()}
+                                </SelectItem>
+                              )
+                            })}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    ) : null}
+
+                    <div className="space-y-1">
+                      <div className="flex items-center justify-between">
+                        <Label>Quotation Total (BDT)</Label>
+                        {completeMeetingLead?.budget ? (
+                          <span className="text-xs text-muted-foreground">
+                            Base: ৳{(agreementValue !== '' ? Number(agreementValue) : completeMeetingLead.budget).toLocaleString()}
+                          </span>
+                        ) : null}
+                      </div>
+                      <Input
+                        type="number"
+                        readOnly
+                        disabled
+                        className="bg-muted text-muted-foreground cursor-not-allowed"
+                        placeholder={
+                          completeMeetingLead?.budget
+                            ? `Default: ৳${completeMeetingLead.budget}`
+                            : 'e.g. 500000'
+                        }
+                        value={agreementValue}
+                      />
+                      <p className="text-[11px] text-muted-foreground">
+                        Original quotation total before discount. Adding a discount below decreases the final settled price.
+                      </p>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex items-center justify-between">
+                        <Label>Discount</Label>
+                        <div className="flex items-center space-x-1 text-xs">
+                          <Button
+                            type="button"
+                            variant={discountType === 'FIXED' ? 'default' : 'outline'}
+                            size="sm"
+                            className="h-6 px-2 text-xs"
+                            onClick={() => setDiscountType('FIXED')}
+                          >
+                            Fixed (৳)
+                          </Button>
+                          <Button
+                            type="button"
+                            variant={discountType === 'PERCENTAGE' ? 'default' : 'outline'}
+                            size="sm"
+                            className="h-6 px-2 text-xs"
+                            onClick={() => setDiscountType('PERCENTAGE')}
+                          >
+                            Percent (%)
+                          </Button>
+                        </div>
+                      </div>
+                      {discountType === 'FIXED' ? (
+                        <Input
+                          type="number"
+                          placeholder="Discount Amount in BDT (e.g. 50000)"
+                          value={discountAmount}
+                          onChange={(e) => setDiscountAmount(e.target.value === '' ? '' : Number(e.target.value))}
+                        />
+                      ) : (
+                        <Input
+                          type="number"
+                          placeholder="Discount Percentage (e.g. 10 for 10%)"
+                          value={discountPercent}
+                          onChange={(e) => setDiscountPercent(e.target.value === '' ? '' : Number(e.target.value))}
+                        />
+                      )}
+                      {((discountType === 'FIXED' && discountAmount !== '' && Number(discountAmount) > 0) ||
+                        (discountType === 'PERCENTAGE' && discountPercent !== '' && Number(discountPercent) > 0)) ? (
+                        <p className="text-xs text-emerald-600 font-medium pt-0.5">
+                          Settled Agreement Value: ৳
+                          {(() => {
+                            const selectedVer = quotationVersions.find((v) => v.slotIndex === selectedSlotIndex)
+                            const base = agreementValue !== '' ? Number(agreementValue) : ((selectedVer?.subtotal || selectedVer?.grandTotal) || completeMeetingLead?.budget || 0)
+                            const disc = discountType === 'FIXED' ? Number(discountAmount || 0) : Math.round((base * Number(discountPercent || 0)) / 100)
+                            return Math.max(0, base - disc).toLocaleString()
+                          })()}{' '}
+                          (Quotation will be updated automatically)
+                        </p>
+                      ) : null}
+                    </div>
+                  </>
                 ) : null}
                 {clientApproval !== 'NO_APPROVAL' ? (
                   <div className="space-y-1">
-                    <Label>Assign 3D Visualizer</Label>
+                    <Label>Pending 3D Visualizer</Label>
                     <Select
                       value={visualizerMemberId}
                       onValueChange={setVisualizerMemberId}
@@ -2876,6 +2996,16 @@ export function CadPhaseQueueBoard({
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <CadSubmissionDialog
+        open={Boolean(viewFilesLead)}
+        onOpenChange={(open: boolean) => {
+          if (!open) setViewFilesLead(null)
+        }}
+        leadId={viewFilesLead?.id ?? null}
+        leadName={viewFilesLead?.name}
+        onSubmitted={() => void loadLeads()}
+      />
     </div>
   )
 }

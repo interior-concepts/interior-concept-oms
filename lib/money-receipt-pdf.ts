@@ -113,7 +113,7 @@ export async function downloadMoneyReceiptPDF(data: MoneyReceiptData) {
   doc.setFontSize(4.5)
   doc.setTextColor(71, 85, 105)
 
-  const emailStr = "aestheticinteriorstudio@gmail.com"
+  const emailStr = "info@interiorconceptsstudio.com"
   const emailTextW = doc.getTextWidth(emailStr)
 
   // Black Circle Badge dimensions
@@ -397,9 +397,9 @@ export async function downloadMoneyReceiptPDF(data: MoneyReceiptData) {
   doc.setFont("helvetica", "bold")
   doc.setTextColor(0, 0, 0) // Pure Black text
 
-  const webStr = "aestheticinteriorbd.com"
-  const igStr = "aesthetic.interior.studio"
-  const fbStr = "aestheticinteriorofficial"
+  const webStr = "interiorconceptsstudio.com"
+  const igStr = "interiorconcepts.studio"
+  const fbStr = "interiorconceptsofficial"
   const divider = "   |   "
 
   const footerIconDim = 0.046
