@@ -27,127 +27,127 @@ export type AggregateTransaction = {
 }
 
 export type TransactionAvgAggregateOutputType = {
-  serialNo: number | null
   amount: number | null
+  serialNo: number | null
 }
 
 export type TransactionSumAggregateOutputType = {
-  serialNo: number | null
   amount: number | null
+  serialNo: number | null
 }
 
 export type TransactionMinAggregateOutputType = {
   id: string | null
-  serialNo: number | null
-  voucherNo: string | null
   date: Date | null
   type: $Enums.TransactionType | null
-  category: string | null
   particular: string | null
   amount: number | null
-  imageUrl: string | null
-  financeAccountId: string | null
   recordedById: string | null
   leadId: string | null
+  category: string | null
+  serialNo: number | null
+  voucherNo: string | null
   visitId: string | null
   collectedById: string | null
+  financeAccountId: string | null
+  imageUrl: string | null
 }
 
 export type TransactionMaxAggregateOutputType = {
   id: string | null
-  serialNo: number | null
-  voucherNo: string | null
   date: Date | null
   type: $Enums.TransactionType | null
-  category: string | null
   particular: string | null
   amount: number | null
-  imageUrl: string | null
-  financeAccountId: string | null
   recordedById: string | null
   leadId: string | null
+  category: string | null
+  serialNo: number | null
+  voucherNo: string | null
   visitId: string | null
   collectedById: string | null
+  financeAccountId: string | null
+  imageUrl: string | null
 }
 
 export type TransactionCountAggregateOutputType = {
   id: number
-  serialNo: number
-  voucherNo: number
   date: number
   type: number
-  category: number
   particular: number
   amount: number
-  imageUrl: number
-  financeAccountId: number
   recordedById: number
   leadId: number
+  category: number
+  serialNo: number
+  voucherNo: number
   visitId: number
   collectedById: number
+  financeAccountId: number
+  imageUrl: number
   _all: number
 }
 
 
 export type TransactionAvgAggregateInputType = {
-  serialNo?: true
   amount?: true
+  serialNo?: true
 }
 
 export type TransactionSumAggregateInputType = {
-  serialNo?: true
   amount?: true
+  serialNo?: true
 }
 
 export type TransactionMinAggregateInputType = {
   id?: true
-  serialNo?: true
-  voucherNo?: true
   date?: true
   type?: true
-  category?: true
   particular?: true
   amount?: true
-  imageUrl?: true
-  financeAccountId?: true
   recordedById?: true
   leadId?: true
+  category?: true
+  serialNo?: true
+  voucherNo?: true
   visitId?: true
   collectedById?: true
+  financeAccountId?: true
+  imageUrl?: true
 }
 
 export type TransactionMaxAggregateInputType = {
   id?: true
-  serialNo?: true
-  voucherNo?: true
   date?: true
   type?: true
-  category?: true
   particular?: true
   amount?: true
-  imageUrl?: true
-  financeAccountId?: true
   recordedById?: true
   leadId?: true
+  category?: true
+  serialNo?: true
+  voucherNo?: true
   visitId?: true
   collectedById?: true
+  financeAccountId?: true
+  imageUrl?: true
 }
 
 export type TransactionCountAggregateInputType = {
   id?: true
-  serialNo?: true
-  voucherNo?: true
   date?: true
   type?: true
-  category?: true
   particular?: true
   amount?: true
-  imageUrl?: true
-  financeAccountId?: true
   recordedById?: true
   leadId?: true
+  category?: true
+  serialNo?: true
+  voucherNo?: true
   visitId?: true
   collectedById?: true
+  financeAccountId?: true
+  imageUrl?: true
   _all?: true
 }
 
@@ -239,19 +239,19 @@ export type TransactionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type TransactionGroupByOutputType = {
   id: string
-  serialNo: number
-  voucherNo: string | null
   date: Date
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
-  imageUrl: string | null
-  financeAccountId: string | null
   recordedById: string
   leadId: string | null
+  category: string
+  serialNo: number
+  voucherNo: string | null
   visitId: string | null
   collectedById: string | null
+  financeAccountId: string | null
+  imageUrl: string | null
   _count: TransactionCountAggregateOutputType | null
   _avg: TransactionAvgAggregateOutputType | null
   _sum: TransactionSumAggregateOutputType | null
@@ -279,46 +279,50 @@ export type TransactionWhereInput = {
   OR?: Prisma.TransactionWhereInput[]
   NOT?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[]
   id?: Prisma.StringFilter<"Transaction"> | string
-  serialNo?: Prisma.IntFilter<"Transaction"> | number
-  voucherNo?: Prisma.StringNullableFilter<"Transaction"> | string | null
   date?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   type?: Prisma.EnumTransactionTypeFilter<"Transaction"> | $Enums.TransactionType
-  category?: Prisma.StringFilter<"Transaction"> | string
   particular?: Prisma.StringFilter<"Transaction"> | string
   amount?: Prisma.FloatFilter<"Transaction"> | number
-  imageUrl?: Prisma.StringNullableFilter<"Transaction"> | string | null
-  financeAccountId?: Prisma.StringNullableFilter<"Transaction"> | string | null
   recordedById?: Prisma.StringFilter<"Transaction"> | string
   leadId?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  category?: Prisma.StringFilter<"Transaction"> | string
+  serialNo?: Prisma.IntFilter<"Transaction"> | number
+  voucherNo?: Prisma.StringNullableFilter<"Transaction"> | string | null
   visitId?: Prisma.StringNullableFilter<"Transaction"> | string | null
   collectedById?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  financeAccountId?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  imageUrl?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  collectedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   financeAccount?: Prisma.XOR<Prisma.FinanceAccountNullableScalarRelationFilter, Prisma.FinanceAccountWhereInput> | null
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
-  visit?: Prisma.XOR<Prisma.VisitNullableScalarRelationFilter, Prisma.VisitWhereInput> | null
   recordedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  collectedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  visit?: Prisma.XOR<Prisma.VisitNullableScalarRelationFilter, Prisma.VisitWhereInput> | null
+  vendorPayment?: Prisma.XOR<Prisma.VendorPaymentNullableScalarRelationFilter, Prisma.VendorPaymentWhereInput> | null
+  stockMovements?: Prisma.StockMovementListRelationFilter
 }
 
 export type TransactionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  serialNo?: Prisma.SortOrder
-  voucherNo?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  category?: Prisma.SortOrder
   particular?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  financeAccountId?: Prisma.SortOrderInput | Prisma.SortOrder
   recordedById?: Prisma.SortOrder
   leadId?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrder
+  serialNo?: Prisma.SortOrder
+  voucherNo?: Prisma.SortOrderInput | Prisma.SortOrder
   visitId?: Prisma.SortOrderInput | Prisma.SortOrder
   collectedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  financeAccountId?: Prisma.SortOrderInput | Prisma.SortOrder
+  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  collectedBy?: Prisma.UserOrderByWithRelationInput
   financeAccount?: Prisma.FinanceAccountOrderByWithRelationInput
   lead?: Prisma.LeadOrderByWithRelationInput
-  visit?: Prisma.VisitOrderByWithRelationInput
   recordedBy?: Prisma.UserOrderByWithRelationInput
-  collectedBy?: Prisma.UserOrderByWithRelationInput
+  visit?: Prisma.VisitOrderByWithRelationInput
+  vendorPayment?: Prisma.VendorPaymentOrderByWithRelationInput
+  stockMovements?: Prisma.StockMovementOrderByRelationAggregateInput
 }
 
 export type TransactionWhereUniqueInput = Prisma.AtLeast<{
@@ -327,40 +331,42 @@ export type TransactionWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[]
   OR?: Prisma.TransactionWhereInput[]
   NOT?: Prisma.TransactionWhereInput | Prisma.TransactionWhereInput[]
-  serialNo?: Prisma.IntFilter<"Transaction"> | number
   date?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   type?: Prisma.EnumTransactionTypeFilter<"Transaction"> | $Enums.TransactionType
-  category?: Prisma.StringFilter<"Transaction"> | string
   particular?: Prisma.StringFilter<"Transaction"> | string
   amount?: Prisma.FloatFilter<"Transaction"> | number
-  imageUrl?: Prisma.StringNullableFilter<"Transaction"> | string | null
-  financeAccountId?: Prisma.StringNullableFilter<"Transaction"> | string | null
   recordedById?: Prisma.StringFilter<"Transaction"> | string
   leadId?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  category?: Prisma.StringFilter<"Transaction"> | string
+  serialNo?: Prisma.IntFilter<"Transaction"> | number
   visitId?: Prisma.StringNullableFilter<"Transaction"> | string | null
   collectedById?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  financeAccountId?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  imageUrl?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  collectedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   financeAccount?: Prisma.XOR<Prisma.FinanceAccountNullableScalarRelationFilter, Prisma.FinanceAccountWhereInput> | null
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
-  visit?: Prisma.XOR<Prisma.VisitNullableScalarRelationFilter, Prisma.VisitWhereInput> | null
   recordedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  collectedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  visit?: Prisma.XOR<Prisma.VisitNullableScalarRelationFilter, Prisma.VisitWhereInput> | null
+  vendorPayment?: Prisma.XOR<Prisma.VendorPaymentNullableScalarRelationFilter, Prisma.VendorPaymentWhereInput> | null
+  stockMovements?: Prisma.StockMovementListRelationFilter
 }, "id" | "voucherNo">
 
 export type TransactionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  serialNo?: Prisma.SortOrder
-  voucherNo?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  category?: Prisma.SortOrder
   particular?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  financeAccountId?: Prisma.SortOrderInput | Prisma.SortOrder
   recordedById?: Prisma.SortOrder
   leadId?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrder
+  serialNo?: Prisma.SortOrder
+  voucherNo?: Prisma.SortOrderInput | Prisma.SortOrder
   visitId?: Prisma.SortOrderInput | Prisma.SortOrder
   collectedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  financeAccountId?: Prisma.SortOrderInput | Prisma.SortOrder
+  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TransactionCountOrderByAggregateInput
   _avg?: Prisma.TransactionAvgOrderByAggregateInput
   _max?: Prisma.TransactionMaxOrderByAggregateInput
@@ -373,133 +379,141 @@ export type TransactionScalarWhereWithAggregatesInput = {
   OR?: Prisma.TransactionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TransactionScalarWhereWithAggregatesInput | Prisma.TransactionScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
-  serialNo?: Prisma.IntWithAggregatesFilter<"Transaction"> | number
-  voucherNo?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
   date?: Prisma.DateTimeWithAggregatesFilter<"Transaction"> | Date | string
   type?: Prisma.EnumTransactionTypeWithAggregatesFilter<"Transaction"> | $Enums.TransactionType
-  category?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
   particular?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
   amount?: Prisma.FloatWithAggregatesFilter<"Transaction"> | number
-  imageUrl?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
-  financeAccountId?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
   recordedById?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
   leadId?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
+  category?: Prisma.StringWithAggregatesFilter<"Transaction"> | string
+  serialNo?: Prisma.IntWithAggregatesFilter<"Transaction"> | number
+  voucherNo?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
   visitId?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
   collectedById?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
+  financeAccountId?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
+  imageUrl?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
 }
 
 export type TransactionCreateInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   imageUrl?: string | null
+  collectedBy?: Prisma.UserCreateNestedOneWithoutTransactionsCollectedInput
   financeAccount?: Prisma.FinanceAccountCreateNestedOneWithoutTransactionsInput
   lead?: Prisma.LeadCreateNestedOneWithoutTransactionsInput
-  visit?: Prisma.VisitCreateNestedOneWithoutVisitPaymentsInput
   recordedBy: Prisma.UserCreateNestedOneWithoutTransactionsRecordedInput
-  collectedBy?: Prisma.UserCreateNestedOneWithoutTransactionsCollectedInput
+  visit?: Prisma.VisitCreateNestedOneWithoutVisitPaymentsInput
+  vendorPayment?: Prisma.VendorPaymentCreateNestedOneWithoutTransactionInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionUncheckedCreateInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
-  imageUrl?: string | null
-  financeAccountId?: string | null
   recordedById: string
   leadId?: string | null
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   visitId?: string | null
   collectedById?: string | null
+  financeAccountId?: string | null
+  imageUrl?: string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedCreateNestedOneWithoutTransactionInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectedBy?: Prisma.UserUpdateOneWithoutTransactionsCollectedNestedInput
   financeAccount?: Prisma.FinanceAccountUpdateOneWithoutTransactionsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutTransactionsNestedInput
-  visit?: Prisma.VisitUpdateOneWithoutVisitPaymentsNestedInput
   recordedBy?: Prisma.UserUpdateOneRequiredWithoutTransactionsRecordedNestedInput
-  collectedBy?: Prisma.UserUpdateOneWithoutTransactionsCollectedNestedInput
+  visit?: Prisma.VisitUpdateOneWithoutVisitPaymentsNestedInput
+  vendorPayment?: Prisma.VendorPaymentUpdateOneWithoutTransactionNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedById?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedUpdateOneWithoutTransactionNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionCreateManyInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
-  imageUrl?: string | null
-  financeAccountId?: string | null
   recordedById: string
   leadId?: string | null
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   visitId?: string | null
   collectedById?: string | null
+  financeAccountId?: string | null
+  imageUrl?: string | null
 }
 
 export type TransactionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TransactionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedById?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TransactionListRelationFilter = {
@@ -514,63 +528,68 @@ export type TransactionOrderByRelationAggregateInput = {
 
 export type TransactionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  serialNo?: Prisma.SortOrder
-  voucherNo?: Prisma.SortOrder
   date?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  category?: Prisma.SortOrder
   particular?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrder
-  financeAccountId?: Prisma.SortOrder
   recordedById?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  serialNo?: Prisma.SortOrder
+  voucherNo?: Prisma.SortOrder
   visitId?: Prisma.SortOrder
   collectedById?: Prisma.SortOrder
+  financeAccountId?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
 }
 
 export type TransactionAvgOrderByAggregateInput = {
-  serialNo?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  serialNo?: Prisma.SortOrder
 }
 
 export type TransactionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  serialNo?: Prisma.SortOrder
-  voucherNo?: Prisma.SortOrder
   date?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  category?: Prisma.SortOrder
   particular?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrder
-  financeAccountId?: Prisma.SortOrder
   recordedById?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  serialNo?: Prisma.SortOrder
+  voucherNo?: Prisma.SortOrder
   visitId?: Prisma.SortOrder
   collectedById?: Prisma.SortOrder
+  financeAccountId?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
 }
 
 export type TransactionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  serialNo?: Prisma.SortOrder
-  voucherNo?: Prisma.SortOrder
   date?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  category?: Prisma.SortOrder
   particular?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrder
-  financeAccountId?: Prisma.SortOrder
   recordedById?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  serialNo?: Prisma.SortOrder
+  voucherNo?: Prisma.SortOrder
   visitId?: Prisma.SortOrder
   collectedById?: Prisma.SortOrder
+  financeAccountId?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
 }
 
 export type TransactionSumOrderByAggregateInput = {
-  serialNo?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  serialNo?: Prisma.SortOrder
+}
+
+export type TransactionNullableScalarRelationFilter = {
+  is?: Prisma.TransactionWhereInput | null
+  isNot?: Prisma.TransactionWhereInput | null
 }
 
 export type TransactionCreateNestedManyWithoutLeadInput = {
@@ -615,13 +634,6 @@ export type TransactionUncheckedUpdateManyWithoutLeadNestedInput = {
   deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
 }
 
-export type TransactionCreateNestedManyWithoutRecordedByInput = {
-  create?: Prisma.XOR<Prisma.TransactionCreateWithoutRecordedByInput, Prisma.TransactionUncheckedCreateWithoutRecordedByInput> | Prisma.TransactionCreateWithoutRecordedByInput[] | Prisma.TransactionUncheckedCreateWithoutRecordedByInput[]
-  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutRecordedByInput | Prisma.TransactionCreateOrConnectWithoutRecordedByInput[]
-  createMany?: Prisma.TransactionCreateManyRecordedByInputEnvelope
-  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-}
-
 export type TransactionCreateNestedManyWithoutCollectedByInput = {
   create?: Prisma.XOR<Prisma.TransactionCreateWithoutCollectedByInput, Prisma.TransactionUncheckedCreateWithoutCollectedByInput> | Prisma.TransactionCreateWithoutCollectedByInput[] | Prisma.TransactionUncheckedCreateWithoutCollectedByInput[]
   connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutCollectedByInput | Prisma.TransactionCreateOrConnectWithoutCollectedByInput[]
@@ -629,7 +641,7 @@ export type TransactionCreateNestedManyWithoutCollectedByInput = {
   connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
 }
 
-export type TransactionUncheckedCreateNestedManyWithoutRecordedByInput = {
+export type TransactionCreateNestedManyWithoutRecordedByInput = {
   create?: Prisma.XOR<Prisma.TransactionCreateWithoutRecordedByInput, Prisma.TransactionUncheckedCreateWithoutRecordedByInput> | Prisma.TransactionCreateWithoutRecordedByInput[] | Prisma.TransactionUncheckedCreateWithoutRecordedByInput[]
   connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutRecordedByInput | Prisma.TransactionCreateOrConnectWithoutRecordedByInput[]
   createMany?: Prisma.TransactionCreateManyRecordedByInputEnvelope
@@ -643,18 +655,11 @@ export type TransactionUncheckedCreateNestedManyWithoutCollectedByInput = {
   connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
 }
 
-export type TransactionUpdateManyWithoutRecordedByNestedInput = {
+export type TransactionUncheckedCreateNestedManyWithoutRecordedByInput = {
   create?: Prisma.XOR<Prisma.TransactionCreateWithoutRecordedByInput, Prisma.TransactionUncheckedCreateWithoutRecordedByInput> | Prisma.TransactionCreateWithoutRecordedByInput[] | Prisma.TransactionUncheckedCreateWithoutRecordedByInput[]
   connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutRecordedByInput | Prisma.TransactionCreateOrConnectWithoutRecordedByInput[]
-  upsert?: Prisma.TransactionUpsertWithWhereUniqueWithoutRecordedByInput | Prisma.TransactionUpsertWithWhereUniqueWithoutRecordedByInput[]
   createMany?: Prisma.TransactionCreateManyRecordedByInputEnvelope
-  set?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  disconnect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  delete?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
   connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
-  update?: Prisma.TransactionUpdateWithWhereUniqueWithoutRecordedByInput | Prisma.TransactionUpdateWithWhereUniqueWithoutRecordedByInput[]
-  updateMany?: Prisma.TransactionUpdateManyWithWhereWithoutRecordedByInput | Prisma.TransactionUpdateManyWithWhereWithoutRecordedByInput[]
-  deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
 }
 
 export type TransactionUpdateManyWithoutCollectedByNestedInput = {
@@ -671,7 +676,7 @@ export type TransactionUpdateManyWithoutCollectedByNestedInput = {
   deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
 }
 
-export type TransactionUncheckedUpdateManyWithoutRecordedByNestedInput = {
+export type TransactionUpdateManyWithoutRecordedByNestedInput = {
   create?: Prisma.XOR<Prisma.TransactionCreateWithoutRecordedByInput, Prisma.TransactionUncheckedCreateWithoutRecordedByInput> | Prisma.TransactionCreateWithoutRecordedByInput[] | Prisma.TransactionUncheckedCreateWithoutRecordedByInput[]
   connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutRecordedByInput | Prisma.TransactionCreateOrConnectWithoutRecordedByInput[]
   upsert?: Prisma.TransactionUpsertWithWhereUniqueWithoutRecordedByInput | Prisma.TransactionUpsertWithWhereUniqueWithoutRecordedByInput[]
@@ -696,6 +701,20 @@ export type TransactionUncheckedUpdateManyWithoutCollectedByNestedInput = {
   connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
   update?: Prisma.TransactionUpdateWithWhereUniqueWithoutCollectedByInput | Prisma.TransactionUpdateWithWhereUniqueWithoutCollectedByInput[]
   updateMany?: Prisma.TransactionUpdateManyWithWhereWithoutCollectedByInput | Prisma.TransactionUpdateManyWithWhereWithoutCollectedByInput[]
+  deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
+}
+
+export type TransactionUncheckedUpdateManyWithoutRecordedByNestedInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutRecordedByInput, Prisma.TransactionUncheckedCreateWithoutRecordedByInput> | Prisma.TransactionCreateWithoutRecordedByInput[] | Prisma.TransactionUncheckedCreateWithoutRecordedByInput[]
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutRecordedByInput | Prisma.TransactionCreateOrConnectWithoutRecordedByInput[]
+  upsert?: Prisma.TransactionUpsertWithWhereUniqueWithoutRecordedByInput | Prisma.TransactionUpsertWithWhereUniqueWithoutRecordedByInput[]
+  createMany?: Prisma.TransactionCreateManyRecordedByInputEnvelope
+  set?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+  disconnect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+  delete?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+  update?: Prisma.TransactionUpdateWithWhereUniqueWithoutRecordedByInput | Prisma.TransactionUpdateWithWhereUniqueWithoutRecordedByInput[]
+  updateMany?: Prisma.TransactionUpdateManyWithWhereWithoutRecordedByInput | Prisma.TransactionUpdateManyWithWhereWithoutRecordedByInput[]
   deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
 }
 
@@ -787,36 +806,72 @@ export type EnumTransactionTypeFieldUpdateOperationsInput = {
   set?: $Enums.TransactionType
 }
 
+export type TransactionCreateNestedOneWithoutVendorPaymentInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutVendorPaymentInput, Prisma.TransactionUncheckedCreateWithoutVendorPaymentInput>
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutVendorPaymentInput
+  connect?: Prisma.TransactionWhereUniqueInput
+}
+
+export type TransactionUpdateOneWithoutVendorPaymentNestedInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutVendorPaymentInput, Prisma.TransactionUncheckedCreateWithoutVendorPaymentInput>
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutVendorPaymentInput
+  upsert?: Prisma.TransactionUpsertWithoutVendorPaymentInput
+  disconnect?: Prisma.TransactionWhereInput | boolean
+  delete?: Prisma.TransactionWhereInput | boolean
+  connect?: Prisma.TransactionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TransactionUpdateToOneWithWhereWithoutVendorPaymentInput, Prisma.TransactionUpdateWithoutVendorPaymentInput>, Prisma.TransactionUncheckedUpdateWithoutVendorPaymentInput>
+}
+
+export type TransactionCreateNestedOneWithoutStockMovementsInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutStockMovementsInput, Prisma.TransactionUncheckedCreateWithoutStockMovementsInput>
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutStockMovementsInput
+  connect?: Prisma.TransactionWhereUniqueInput
+}
+
+export type TransactionUpdateOneWithoutStockMovementsNestedInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutStockMovementsInput, Prisma.TransactionUncheckedCreateWithoutStockMovementsInput>
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutStockMovementsInput
+  upsert?: Prisma.TransactionUpsertWithoutStockMovementsInput
+  disconnect?: Prisma.TransactionWhereInput | boolean
+  delete?: Prisma.TransactionWhereInput | boolean
+  connect?: Prisma.TransactionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TransactionUpdateToOneWithWhereWithoutStockMovementsInput, Prisma.TransactionUpdateWithoutStockMovementsInput>, Prisma.TransactionUncheckedUpdateWithoutStockMovementsInput>
+}
+
 export type TransactionCreateWithoutLeadInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   imageUrl?: string | null
-  financeAccount?: Prisma.FinanceAccountCreateNestedOneWithoutTransactionsInput
-  visit?: Prisma.VisitCreateNestedOneWithoutVisitPaymentsInput
-  recordedBy: Prisma.UserCreateNestedOneWithoutTransactionsRecordedInput
   collectedBy?: Prisma.UserCreateNestedOneWithoutTransactionsCollectedInput
+  financeAccount?: Prisma.FinanceAccountCreateNestedOneWithoutTransactionsInput
+  recordedBy: Prisma.UserCreateNestedOneWithoutTransactionsRecordedInput
+  visit?: Prisma.VisitCreateNestedOneWithoutVisitPaymentsInput
+  vendorPayment?: Prisma.VendorPaymentCreateNestedOneWithoutTransactionInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionUncheckedCreateWithoutLeadInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
-  imageUrl?: string | null
-  financeAccountId?: string | null
   recordedById: string
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   visitId?: string | null
   collectedById?: string | null
+  financeAccountId?: string | null
+  imageUrl?: string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedCreateNestedOneWithoutTransactionInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionCreateOrConnectWithoutLeadInput = {
@@ -850,93 +905,55 @@ export type TransactionScalarWhereInput = {
   OR?: Prisma.TransactionScalarWhereInput[]
   NOT?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
   id?: Prisma.StringFilter<"Transaction"> | string
-  serialNo?: Prisma.IntFilter<"Transaction"> | number
-  voucherNo?: Prisma.StringNullableFilter<"Transaction"> | string | null
   date?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   type?: Prisma.EnumTransactionTypeFilter<"Transaction"> | $Enums.TransactionType
-  category?: Prisma.StringFilter<"Transaction"> | string
   particular?: Prisma.StringFilter<"Transaction"> | string
   amount?: Prisma.FloatFilter<"Transaction"> | number
-  imageUrl?: Prisma.StringNullableFilter<"Transaction"> | string | null
-  financeAccountId?: Prisma.StringNullableFilter<"Transaction"> | string | null
   recordedById?: Prisma.StringFilter<"Transaction"> | string
   leadId?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  category?: Prisma.StringFilter<"Transaction"> | string
+  serialNo?: Prisma.IntFilter<"Transaction"> | number
+  voucherNo?: Prisma.StringNullableFilter<"Transaction"> | string | null
   visitId?: Prisma.StringNullableFilter<"Transaction"> | string | null
   collectedById?: Prisma.StringNullableFilter<"Transaction"> | string | null
-}
-
-export type TransactionCreateWithoutRecordedByInput = {
-  id?: string
-  serialNo?: number
-  voucherNo?: string | null
-  date?: Date | string
-  type: $Enums.TransactionType
-  category: string
-  particular: string
-  amount: number
-  imageUrl?: string | null
-  financeAccount?: Prisma.FinanceAccountCreateNestedOneWithoutTransactionsInput
-  lead?: Prisma.LeadCreateNestedOneWithoutTransactionsInput
-  visit?: Prisma.VisitCreateNestedOneWithoutVisitPaymentsInput
-  collectedBy?: Prisma.UserCreateNestedOneWithoutTransactionsCollectedInput
-}
-
-export type TransactionUncheckedCreateWithoutRecordedByInput = {
-  id?: string
-  serialNo?: number
-  voucherNo?: string | null
-  date?: Date | string
-  type: $Enums.TransactionType
-  category: string
-  particular: string
-  amount: number
-  imageUrl?: string | null
-  financeAccountId?: string | null
-  leadId?: string | null
-  visitId?: string | null
-  collectedById?: string | null
-}
-
-export type TransactionCreateOrConnectWithoutRecordedByInput = {
-  where: Prisma.TransactionWhereUniqueInput
-  create: Prisma.XOR<Prisma.TransactionCreateWithoutRecordedByInput, Prisma.TransactionUncheckedCreateWithoutRecordedByInput>
-}
-
-export type TransactionCreateManyRecordedByInputEnvelope = {
-  data: Prisma.TransactionCreateManyRecordedByInput | Prisma.TransactionCreateManyRecordedByInput[]
-  skipDuplicates?: boolean
+  financeAccountId?: Prisma.StringNullableFilter<"Transaction"> | string | null
+  imageUrl?: Prisma.StringNullableFilter<"Transaction"> | string | null
 }
 
 export type TransactionCreateWithoutCollectedByInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   imageUrl?: string | null
   financeAccount?: Prisma.FinanceAccountCreateNestedOneWithoutTransactionsInput
   lead?: Prisma.LeadCreateNestedOneWithoutTransactionsInput
-  visit?: Prisma.VisitCreateNestedOneWithoutVisitPaymentsInput
   recordedBy: Prisma.UserCreateNestedOneWithoutTransactionsRecordedInput
+  visit?: Prisma.VisitCreateNestedOneWithoutVisitPaymentsInput
+  vendorPayment?: Prisma.VendorPaymentCreateNestedOneWithoutTransactionInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionUncheckedCreateWithoutCollectedByInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
-  imageUrl?: string | null
-  financeAccountId?: string | null
   recordedById: string
   leadId?: string | null
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   visitId?: string | null
+  financeAccountId?: string | null
+  imageUrl?: string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedCreateNestedOneWithoutTransactionInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionCreateOrConnectWithoutCollectedByInput = {
@@ -949,20 +966,50 @@ export type TransactionCreateManyCollectedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type TransactionUpsertWithWhereUniqueWithoutRecordedByInput = {
+export type TransactionCreateWithoutRecordedByInput = {
+  id?: string
+  date?: Date | string
+  type: $Enums.TransactionType
+  particular: string
+  amount: number
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
+  imageUrl?: string | null
+  collectedBy?: Prisma.UserCreateNestedOneWithoutTransactionsCollectedInput
+  financeAccount?: Prisma.FinanceAccountCreateNestedOneWithoutTransactionsInput
+  lead?: Prisma.LeadCreateNestedOneWithoutTransactionsInput
+  visit?: Prisma.VisitCreateNestedOneWithoutVisitPaymentsInput
+  vendorPayment?: Prisma.VendorPaymentCreateNestedOneWithoutTransactionInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutTransactionInput
+}
+
+export type TransactionUncheckedCreateWithoutRecordedByInput = {
+  id?: string
+  date?: Date | string
+  type: $Enums.TransactionType
+  particular: string
+  amount: number
+  leadId?: string | null
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
+  visitId?: string | null
+  collectedById?: string | null
+  financeAccountId?: string | null
+  imageUrl?: string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedCreateNestedOneWithoutTransactionInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutTransactionInput
+}
+
+export type TransactionCreateOrConnectWithoutRecordedByInput = {
   where: Prisma.TransactionWhereUniqueInput
-  update: Prisma.XOR<Prisma.TransactionUpdateWithoutRecordedByInput, Prisma.TransactionUncheckedUpdateWithoutRecordedByInput>
   create: Prisma.XOR<Prisma.TransactionCreateWithoutRecordedByInput, Prisma.TransactionUncheckedCreateWithoutRecordedByInput>
 }
 
-export type TransactionUpdateWithWhereUniqueWithoutRecordedByInput = {
-  where: Prisma.TransactionWhereUniqueInput
-  data: Prisma.XOR<Prisma.TransactionUpdateWithoutRecordedByInput, Prisma.TransactionUncheckedUpdateWithoutRecordedByInput>
-}
-
-export type TransactionUpdateManyWithWhereWithoutRecordedByInput = {
-  where: Prisma.TransactionScalarWhereInput
-  data: Prisma.XOR<Prisma.TransactionUpdateManyMutationInput, Prisma.TransactionUncheckedUpdateManyWithoutRecordedByInput>
+export type TransactionCreateManyRecordedByInputEnvelope = {
+  data: Prisma.TransactionCreateManyRecordedByInput | Prisma.TransactionCreateManyRecordedByInput[]
+  skipDuplicates?: boolean
 }
 
 export type TransactionUpsertWithWhereUniqueWithoutCollectedByInput = {
@@ -981,36 +1028,56 @@ export type TransactionUpdateManyWithWhereWithoutCollectedByInput = {
   data: Prisma.XOR<Prisma.TransactionUpdateManyMutationInput, Prisma.TransactionUncheckedUpdateManyWithoutCollectedByInput>
 }
 
+export type TransactionUpsertWithWhereUniqueWithoutRecordedByInput = {
+  where: Prisma.TransactionWhereUniqueInput
+  update: Prisma.XOR<Prisma.TransactionUpdateWithoutRecordedByInput, Prisma.TransactionUncheckedUpdateWithoutRecordedByInput>
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutRecordedByInput, Prisma.TransactionUncheckedCreateWithoutRecordedByInput>
+}
+
+export type TransactionUpdateWithWhereUniqueWithoutRecordedByInput = {
+  where: Prisma.TransactionWhereUniqueInput
+  data: Prisma.XOR<Prisma.TransactionUpdateWithoutRecordedByInput, Prisma.TransactionUncheckedUpdateWithoutRecordedByInput>
+}
+
+export type TransactionUpdateManyWithWhereWithoutRecordedByInput = {
+  where: Prisma.TransactionScalarWhereInput
+  data: Prisma.XOR<Prisma.TransactionUpdateManyMutationInput, Prisma.TransactionUncheckedUpdateManyWithoutRecordedByInput>
+}
+
 export type TransactionCreateWithoutVisitInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   imageUrl?: string | null
+  collectedBy?: Prisma.UserCreateNestedOneWithoutTransactionsCollectedInput
   financeAccount?: Prisma.FinanceAccountCreateNestedOneWithoutTransactionsInput
   lead?: Prisma.LeadCreateNestedOneWithoutTransactionsInput
   recordedBy: Prisma.UserCreateNestedOneWithoutTransactionsRecordedInput
-  collectedBy?: Prisma.UserCreateNestedOneWithoutTransactionsCollectedInput
+  vendorPayment?: Prisma.VendorPaymentCreateNestedOneWithoutTransactionInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionUncheckedCreateWithoutVisitInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
-  imageUrl?: string | null
-  financeAccountId?: string | null
   recordedById: string
   leadId?: string | null
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   collectedById?: string | null
+  financeAccountId?: string | null
+  imageUrl?: string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedCreateNestedOneWithoutTransactionInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionCreateOrConnectWithoutVisitInput = {
@@ -1041,34 +1108,38 @@ export type TransactionUpdateManyWithWhereWithoutVisitInput = {
 
 export type TransactionCreateWithoutFinanceAccountInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   imageUrl?: string | null
-  lead?: Prisma.LeadCreateNestedOneWithoutTransactionsInput
-  visit?: Prisma.VisitCreateNestedOneWithoutVisitPaymentsInput
-  recordedBy: Prisma.UserCreateNestedOneWithoutTransactionsRecordedInput
   collectedBy?: Prisma.UserCreateNestedOneWithoutTransactionsCollectedInput
+  lead?: Prisma.LeadCreateNestedOneWithoutTransactionsInput
+  recordedBy: Prisma.UserCreateNestedOneWithoutTransactionsRecordedInput
+  visit?: Prisma.VisitCreateNestedOneWithoutVisitPaymentsInput
+  vendorPayment?: Prisma.VendorPaymentCreateNestedOneWithoutTransactionInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionUncheckedCreateWithoutFinanceAccountInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
-  imageUrl?: string | null
   recordedById: string
   leadId?: string | null
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   visitId?: string | null
   collectedById?: string | null
+  imageUrl?: string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedCreateNestedOneWithoutTransactionInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutTransactionInput
 }
 
 export type TransactionCreateOrConnectWithoutFinanceAccountInput = {
@@ -1097,458 +1168,691 @@ export type TransactionUpdateManyWithWhereWithoutFinanceAccountInput = {
   data: Prisma.XOR<Prisma.TransactionUpdateManyMutationInput, Prisma.TransactionUncheckedUpdateManyWithoutFinanceAccountInput>
 }
 
-export type TransactionCreateManyLeadInput = {
+export type TransactionCreateWithoutVendorPaymentInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   imageUrl?: string | null
-  financeAccountId?: string | null
+  collectedBy?: Prisma.UserCreateNestedOneWithoutTransactionsCollectedInput
+  financeAccount?: Prisma.FinanceAccountCreateNestedOneWithoutTransactionsInput
+  lead?: Prisma.LeadCreateNestedOneWithoutTransactionsInput
+  recordedBy: Prisma.UserCreateNestedOneWithoutTransactionsRecordedInput
+  visit?: Prisma.VisitCreateNestedOneWithoutVisitPaymentsInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutTransactionInput
+}
+
+export type TransactionUncheckedCreateWithoutVendorPaymentInput = {
+  id?: string
+  date?: Date | string
+  type: $Enums.TransactionType
+  particular: string
+  amount: number
   recordedById: string
+  leadId?: string | null
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   visitId?: string | null
   collectedById?: string | null
+  financeAccountId?: string | null
+  imageUrl?: string | null
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutTransactionInput
+}
+
+export type TransactionCreateOrConnectWithoutVendorPaymentInput = {
+  where: Prisma.TransactionWhereUniqueInput
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutVendorPaymentInput, Prisma.TransactionUncheckedCreateWithoutVendorPaymentInput>
+}
+
+export type TransactionUpsertWithoutVendorPaymentInput = {
+  update: Prisma.XOR<Prisma.TransactionUpdateWithoutVendorPaymentInput, Prisma.TransactionUncheckedUpdateWithoutVendorPaymentInput>
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutVendorPaymentInput, Prisma.TransactionUncheckedCreateWithoutVendorPaymentInput>
+  where?: Prisma.TransactionWhereInput
+}
+
+export type TransactionUpdateToOneWithWhereWithoutVendorPaymentInput = {
+  where?: Prisma.TransactionWhereInput
+  data: Prisma.XOR<Prisma.TransactionUpdateWithoutVendorPaymentInput, Prisma.TransactionUncheckedUpdateWithoutVendorPaymentInput>
+}
+
+export type TransactionUpdateWithoutVendorPaymentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+  particular?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectedBy?: Prisma.UserUpdateOneWithoutTransactionsCollectedNestedInput
+  financeAccount?: Prisma.FinanceAccountUpdateOneWithoutTransactionsNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutTransactionsNestedInput
+  recordedBy?: Prisma.UserUpdateOneRequiredWithoutTransactionsRecordedNestedInput
+  visit?: Prisma.VisitUpdateOneWithoutVisitPaymentsNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutTransactionNestedInput
+}
+
+export type TransactionUncheckedUpdateWithoutVendorPaymentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+  particular?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  recordedById?: Prisma.StringFieldUpdateOperationsInput | string
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutTransactionNestedInput
+}
+
+export type TransactionCreateWithoutStockMovementsInput = {
+  id?: string
+  date?: Date | string
+  type: $Enums.TransactionType
+  particular: string
+  amount: number
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
+  imageUrl?: string | null
+  collectedBy?: Prisma.UserCreateNestedOneWithoutTransactionsCollectedInput
+  financeAccount?: Prisma.FinanceAccountCreateNestedOneWithoutTransactionsInput
+  lead?: Prisma.LeadCreateNestedOneWithoutTransactionsInput
+  recordedBy: Prisma.UserCreateNestedOneWithoutTransactionsRecordedInput
+  visit?: Prisma.VisitCreateNestedOneWithoutVisitPaymentsInput
+  vendorPayment?: Prisma.VendorPaymentCreateNestedOneWithoutTransactionInput
+}
+
+export type TransactionUncheckedCreateWithoutStockMovementsInput = {
+  id?: string
+  date?: Date | string
+  type: $Enums.TransactionType
+  particular: string
+  amount: number
+  recordedById: string
+  leadId?: string | null
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
+  visitId?: string | null
+  collectedById?: string | null
+  financeAccountId?: string | null
+  imageUrl?: string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedCreateNestedOneWithoutTransactionInput
+}
+
+export type TransactionCreateOrConnectWithoutStockMovementsInput = {
+  where: Prisma.TransactionWhereUniqueInput
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutStockMovementsInput, Prisma.TransactionUncheckedCreateWithoutStockMovementsInput>
+}
+
+export type TransactionUpsertWithoutStockMovementsInput = {
+  update: Prisma.XOR<Prisma.TransactionUpdateWithoutStockMovementsInput, Prisma.TransactionUncheckedUpdateWithoutStockMovementsInput>
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutStockMovementsInput, Prisma.TransactionUncheckedCreateWithoutStockMovementsInput>
+  where?: Prisma.TransactionWhereInput
+}
+
+export type TransactionUpdateToOneWithWhereWithoutStockMovementsInput = {
+  where?: Prisma.TransactionWhereInput
+  data: Prisma.XOR<Prisma.TransactionUpdateWithoutStockMovementsInput, Prisma.TransactionUncheckedUpdateWithoutStockMovementsInput>
+}
+
+export type TransactionUpdateWithoutStockMovementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+  particular?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectedBy?: Prisma.UserUpdateOneWithoutTransactionsCollectedNestedInput
+  financeAccount?: Prisma.FinanceAccountUpdateOneWithoutTransactionsNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutTransactionsNestedInput
+  recordedBy?: Prisma.UserUpdateOneRequiredWithoutTransactionsRecordedNestedInput
+  visit?: Prisma.VisitUpdateOneWithoutVisitPaymentsNestedInput
+  vendorPayment?: Prisma.VendorPaymentUpdateOneWithoutTransactionNestedInput
+}
+
+export type TransactionUncheckedUpdateWithoutStockMovementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+  particular?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  recordedById?: Prisma.StringFieldUpdateOperationsInput | string
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedUpdateOneWithoutTransactionNestedInput
+}
+
+export type TransactionCreateManyLeadInput = {
+  id?: string
+  date?: Date | string
+  type: $Enums.TransactionType
+  particular: string
+  amount: number
+  recordedById: string
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
+  visitId?: string | null
+  collectedById?: string | null
+  financeAccountId?: string | null
+  imageUrl?: string | null
 }
 
 export type TransactionUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  financeAccount?: Prisma.FinanceAccountUpdateOneWithoutTransactionsNestedInput
-  visit?: Prisma.VisitUpdateOneWithoutVisitPaymentsNestedInput
-  recordedBy?: Prisma.UserUpdateOneRequiredWithoutTransactionsRecordedNestedInput
   collectedBy?: Prisma.UserUpdateOneWithoutTransactionsCollectedNestedInput
+  financeAccount?: Prisma.FinanceAccountUpdateOneWithoutTransactionsNestedInput
+  recordedBy?: Prisma.UserUpdateOneRequiredWithoutTransactionsRecordedNestedInput
+  visit?: Prisma.VisitUpdateOneWithoutVisitPaymentsNestedInput
+  vendorPayment?: Prisma.VendorPaymentUpdateOneWithoutTransactionNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedById?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedUpdateOneWithoutTransactionNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedById?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type TransactionCreateManyRecordedByInput = {
-  id?: string
-  serialNo?: number
-  voucherNo?: string | null
-  date?: Date | string
-  type: $Enums.TransactionType
-  category: string
-  particular: string
-  amount: number
-  imageUrl?: string | null
-  financeAccountId?: string | null
-  leadId?: string | null
-  visitId?: string | null
-  collectedById?: string | null
+  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TransactionCreateManyCollectedByInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
-  imageUrl?: string | null
-  financeAccountId?: string | null
   recordedById: string
   leadId?: string | null
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   visitId?: string | null
+  financeAccountId?: string | null
+  imageUrl?: string | null
 }
 
-export type TransactionUpdateWithoutRecordedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  particular?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  financeAccount?: Prisma.FinanceAccountUpdateOneWithoutTransactionsNestedInput
-  lead?: Prisma.LeadUpdateOneWithoutTransactionsNestedInput
-  visit?: Prisma.VisitUpdateOneWithoutVisitPaymentsNestedInput
-  collectedBy?: Prisma.UserUpdateOneWithoutTransactionsCollectedNestedInput
-}
-
-export type TransactionUncheckedUpdateWithoutRecordedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  particular?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type TransactionUncheckedUpdateManyWithoutRecordedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  particular?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+export type TransactionCreateManyRecordedByInput = {
+  id?: string
+  date?: Date | string
+  type: $Enums.TransactionType
+  particular: string
+  amount: number
+  leadId?: string | null
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
+  visitId?: string | null
+  collectedById?: string | null
+  financeAccountId?: string | null
+  imageUrl?: string | null
 }
 
 export type TransactionUpdateWithoutCollectedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   financeAccount?: Prisma.FinanceAccountUpdateOneWithoutTransactionsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutTransactionsNestedInput
-  visit?: Prisma.VisitUpdateOneWithoutVisitPaymentsNestedInput
   recordedBy?: Prisma.UserUpdateOneRequiredWithoutTransactionsRecordedNestedInput
+  visit?: Prisma.VisitUpdateOneWithoutVisitPaymentsNestedInput
+  vendorPayment?: Prisma.VendorPaymentUpdateOneWithoutTransactionNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateWithoutCollectedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedById?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedUpdateOneWithoutTransactionNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateManyWithoutCollectedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedById?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type TransactionUpdateWithoutRecordedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+  particular?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectedBy?: Prisma.UserUpdateOneWithoutTransactionsCollectedNestedInput
+  financeAccount?: Prisma.FinanceAccountUpdateOneWithoutTransactionsNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutTransactionsNestedInput
+  visit?: Prisma.VisitUpdateOneWithoutVisitPaymentsNestedInput
+  vendorPayment?: Prisma.VendorPaymentUpdateOneWithoutTransactionNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutTransactionNestedInput
+}
+
+export type TransactionUncheckedUpdateWithoutRecordedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+  particular?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedUpdateOneWithoutTransactionNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutTransactionNestedInput
+}
+
+export type TransactionUncheckedUpdateManyWithoutRecordedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+  particular?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TransactionCreateManyVisitInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
-  imageUrl?: string | null
-  financeAccountId?: string | null
   recordedById: string
   leadId?: string | null
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   collectedById?: string | null
+  financeAccountId?: string | null
+  imageUrl?: string | null
 }
 
 export type TransactionUpdateWithoutVisitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  collectedBy?: Prisma.UserUpdateOneWithoutTransactionsCollectedNestedInput
   financeAccount?: Prisma.FinanceAccountUpdateOneWithoutTransactionsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutTransactionsNestedInput
   recordedBy?: Prisma.UserUpdateOneRequiredWithoutTransactionsRecordedNestedInput
-  collectedBy?: Prisma.UserUpdateOneWithoutTransactionsCollectedNestedInput
+  vendorPayment?: Prisma.VendorPaymentUpdateOneWithoutTransactionNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateWithoutVisitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedById?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedUpdateOneWithoutTransactionNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateManyWithoutVisitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedById?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  financeAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TransactionCreateManyFinanceAccountInput = {
   id?: string
-  serialNo?: number
-  voucherNo?: string | null
   date?: Date | string
   type: $Enums.TransactionType
-  category: string
   particular: string
   amount: number
-  imageUrl?: string | null
   recordedById: string
   leadId?: string | null
+  category: string
+  serialNo?: number
+  voucherNo?: string | null
   visitId?: string | null
   collectedById?: string | null
+  imageUrl?: string | null
 }
 
 export type TransactionUpdateWithoutFinanceAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lead?: Prisma.LeadUpdateOneWithoutTransactionsNestedInput
-  visit?: Prisma.VisitUpdateOneWithoutVisitPaymentsNestedInput
-  recordedBy?: Prisma.UserUpdateOneRequiredWithoutTransactionsRecordedNestedInput
   collectedBy?: Prisma.UserUpdateOneWithoutTransactionsCollectedNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutTransactionsNestedInput
+  recordedBy?: Prisma.UserUpdateOneRequiredWithoutTransactionsRecordedNestedInput
+  visit?: Prisma.VisitUpdateOneWithoutVisitPaymentsNestedInput
+  vendorPayment?: Prisma.VendorPaymentUpdateOneWithoutTransactionNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateWithoutFinanceAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedById?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorPayment?: Prisma.VendorPaymentUncheckedUpdateOneWithoutTransactionNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateManyWithoutFinanceAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
-  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   particular?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedById?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNo?: Prisma.IntFieldUpdateOperationsInput | number
+  voucherNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   collectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
+
+/**
+ * Count Type TransactionCountOutputType
+ */
+
+export type TransactionCountOutputType = {
+  stockMovements: number
+}
+
+export type TransactionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  stockMovements?: boolean | TransactionCountOutputTypeCountStockMovementsArgs
+}
+
+/**
+ * TransactionCountOutputType without action
+ */
+export type TransactionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TransactionCountOutputType
+   */
+  select?: Prisma.TransactionCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TransactionCountOutputType without action
+ */
+export type TransactionCountOutputTypeCountStockMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockMovementWhereInput
+}
 
 
 export type TransactionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  serialNo?: boolean
-  voucherNo?: boolean
   date?: boolean
   type?: boolean
-  category?: boolean
   particular?: boolean
   amount?: boolean
-  imageUrl?: boolean
-  financeAccountId?: boolean
   recordedById?: boolean
   leadId?: boolean
+  category?: boolean
+  serialNo?: boolean
+  voucherNo?: boolean
   visitId?: boolean
   collectedById?: boolean
+  financeAccountId?: boolean
+  imageUrl?: boolean
+  collectedBy?: boolean | Prisma.Transaction$collectedByArgs<ExtArgs>
   financeAccount?: boolean | Prisma.Transaction$financeAccountArgs<ExtArgs>
   lead?: boolean | Prisma.Transaction$leadArgs<ExtArgs>
-  visit?: boolean | Prisma.Transaction$visitArgs<ExtArgs>
   recordedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  collectedBy?: boolean | Prisma.Transaction$collectedByArgs<ExtArgs>
+  visit?: boolean | Prisma.Transaction$visitArgs<ExtArgs>
+  vendorPayment?: boolean | Prisma.Transaction$vendorPaymentArgs<ExtArgs>
+  stockMovements?: boolean | Prisma.Transaction$stockMovementsArgs<ExtArgs>
+  _count?: boolean | Prisma.TransactionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
 export type TransactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  serialNo?: boolean
-  voucherNo?: boolean
   date?: boolean
   type?: boolean
-  category?: boolean
   particular?: boolean
   amount?: boolean
-  imageUrl?: boolean
-  financeAccountId?: boolean
   recordedById?: boolean
   leadId?: boolean
+  category?: boolean
+  serialNo?: boolean
+  voucherNo?: boolean
   visitId?: boolean
   collectedById?: boolean
+  financeAccountId?: boolean
+  imageUrl?: boolean
+  collectedBy?: boolean | Prisma.Transaction$collectedByArgs<ExtArgs>
   financeAccount?: boolean | Prisma.Transaction$financeAccountArgs<ExtArgs>
   lead?: boolean | Prisma.Transaction$leadArgs<ExtArgs>
-  visit?: boolean | Prisma.Transaction$visitArgs<ExtArgs>
   recordedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  collectedBy?: boolean | Prisma.Transaction$collectedByArgs<ExtArgs>
+  visit?: boolean | Prisma.Transaction$visitArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
 export type TransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  serialNo?: boolean
-  voucherNo?: boolean
   date?: boolean
   type?: boolean
-  category?: boolean
   particular?: boolean
   amount?: boolean
-  imageUrl?: boolean
-  financeAccountId?: boolean
   recordedById?: boolean
   leadId?: boolean
+  category?: boolean
+  serialNo?: boolean
+  voucherNo?: boolean
   visitId?: boolean
   collectedById?: boolean
+  financeAccountId?: boolean
+  imageUrl?: boolean
+  collectedBy?: boolean | Prisma.Transaction$collectedByArgs<ExtArgs>
   financeAccount?: boolean | Prisma.Transaction$financeAccountArgs<ExtArgs>
   lead?: boolean | Prisma.Transaction$leadArgs<ExtArgs>
-  visit?: boolean | Prisma.Transaction$visitArgs<ExtArgs>
   recordedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  collectedBy?: boolean | Prisma.Transaction$collectedByArgs<ExtArgs>
+  visit?: boolean | Prisma.Transaction$visitArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
 export type TransactionSelectScalar = {
   id?: boolean
-  serialNo?: boolean
-  voucherNo?: boolean
   date?: boolean
   type?: boolean
-  category?: boolean
   particular?: boolean
   amount?: boolean
-  imageUrl?: boolean
-  financeAccountId?: boolean
   recordedById?: boolean
   leadId?: boolean
+  category?: boolean
+  serialNo?: boolean
+  voucherNo?: boolean
   visitId?: boolean
   collectedById?: boolean
+  financeAccountId?: boolean
+  imageUrl?: boolean
 }
 
-export type TransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "serialNo" | "voucherNo" | "date" | "type" | "category" | "particular" | "amount" | "imageUrl" | "financeAccountId" | "recordedById" | "leadId" | "visitId" | "collectedById", ExtArgs["result"]["transaction"]>
+export type TransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "type" | "particular" | "amount" | "recordedById" | "leadId" | "category" | "serialNo" | "voucherNo" | "visitId" | "collectedById" | "financeAccountId" | "imageUrl", ExtArgs["result"]["transaction"]>
 export type TransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  collectedBy?: boolean | Prisma.Transaction$collectedByArgs<ExtArgs>
   financeAccount?: boolean | Prisma.Transaction$financeAccountArgs<ExtArgs>
   lead?: boolean | Prisma.Transaction$leadArgs<ExtArgs>
-  visit?: boolean | Prisma.Transaction$visitArgs<ExtArgs>
   recordedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  collectedBy?: boolean | Prisma.Transaction$collectedByArgs<ExtArgs>
+  visit?: boolean | Prisma.Transaction$visitArgs<ExtArgs>
+  vendorPayment?: boolean | Prisma.Transaction$vendorPaymentArgs<ExtArgs>
+  stockMovements?: boolean | Prisma.Transaction$stockMovementsArgs<ExtArgs>
+  _count?: boolean | Prisma.TransactionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TransactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  collectedBy?: boolean | Prisma.Transaction$collectedByArgs<ExtArgs>
   financeAccount?: boolean | Prisma.Transaction$financeAccountArgs<ExtArgs>
   lead?: boolean | Prisma.Transaction$leadArgs<ExtArgs>
-  visit?: boolean | Prisma.Transaction$visitArgs<ExtArgs>
   recordedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  collectedBy?: boolean | Prisma.Transaction$collectedByArgs<ExtArgs>
+  visit?: boolean | Prisma.Transaction$visitArgs<ExtArgs>
 }
 export type TransactionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  collectedBy?: boolean | Prisma.Transaction$collectedByArgs<ExtArgs>
   financeAccount?: boolean | Prisma.Transaction$financeAccountArgs<ExtArgs>
   lead?: boolean | Prisma.Transaction$leadArgs<ExtArgs>
-  visit?: boolean | Prisma.Transaction$visitArgs<ExtArgs>
   recordedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  collectedBy?: boolean | Prisma.Transaction$collectedByArgs<ExtArgs>
+  visit?: boolean | Prisma.Transaction$visitArgs<ExtArgs>
 }
 
 export type $TransactionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Transaction"
   objects: {
+    collectedBy: Prisma.$UserPayload<ExtArgs> | null
     financeAccount: Prisma.$FinanceAccountPayload<ExtArgs> | null
     lead: Prisma.$LeadPayload<ExtArgs> | null
-    visit: Prisma.$VisitPayload<ExtArgs> | null
     recordedBy: Prisma.$UserPayload<ExtArgs>
-    collectedBy: Prisma.$UserPayload<ExtArgs> | null
+    visit: Prisma.$VisitPayload<ExtArgs> | null
+    vendorPayment: Prisma.$VendorPaymentPayload<ExtArgs> | null
+    stockMovements: Prisma.$StockMovementPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    serialNo: number
-    voucherNo: string | null
     date: Date
     type: $Enums.TransactionType
-    category: string
     particular: string
     amount: number
-    imageUrl: string | null
-    financeAccountId: string | null
     recordedById: string
     leadId: string | null
+    category: string
+    serialNo: number
+    voucherNo: string | null
     visitId: string | null
     collectedById: string | null
+    financeAccountId: string | null
+    imageUrl: string | null
   }, ExtArgs["result"]["transaction"]>
   composites: {}
 }
@@ -1943,11 +2247,13 @@ readonly fields: TransactionFieldRefs;
  */
 export interface Prisma__TransactionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  collectedBy<T extends Prisma.Transaction$collectedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$collectedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   financeAccount<T extends Prisma.Transaction$financeAccountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$financeAccountArgs<ExtArgs>>): Prisma.Prisma__FinanceAccountClient<runtime.Types.Result.GetResult<Prisma.$FinanceAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.Transaction$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$leadArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  visit<T extends Prisma.Transaction$visitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$visitArgs<ExtArgs>>): Prisma.Prisma__VisitClient<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   recordedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  collectedBy<T extends Prisma.Transaction$collectedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$collectedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  visit<T extends Prisma.Transaction$visitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$visitArgs<ExtArgs>>): Prisma.Prisma__VisitClient<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendorPayment<T extends Prisma.Transaction$vendorPaymentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$vendorPaymentArgs<ExtArgs>>): Prisma.Prisma__VendorPaymentClient<runtime.Types.Result.GetResult<Prisma.$VendorPaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  stockMovements<T extends Prisma.Transaction$stockMovementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$stockMovementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockMovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1978,19 +2284,19 @@ export interface Prisma__TransactionClient<T, Null = never, ExtArgs extends runt
  */
 export interface TransactionFieldRefs {
   readonly id: Prisma.FieldRef<"Transaction", 'String'>
-  readonly serialNo: Prisma.FieldRef<"Transaction", 'Int'>
-  readonly voucherNo: Prisma.FieldRef<"Transaction", 'String'>
   readonly date: Prisma.FieldRef<"Transaction", 'DateTime'>
   readonly type: Prisma.FieldRef<"Transaction", 'TransactionType'>
-  readonly category: Prisma.FieldRef<"Transaction", 'String'>
   readonly particular: Prisma.FieldRef<"Transaction", 'String'>
   readonly amount: Prisma.FieldRef<"Transaction", 'Float'>
-  readonly imageUrl: Prisma.FieldRef<"Transaction", 'String'>
-  readonly financeAccountId: Prisma.FieldRef<"Transaction", 'String'>
   readonly recordedById: Prisma.FieldRef<"Transaction", 'String'>
   readonly leadId: Prisma.FieldRef<"Transaction", 'String'>
+  readonly category: Prisma.FieldRef<"Transaction", 'String'>
+  readonly serialNo: Prisma.FieldRef<"Transaction", 'Int'>
+  readonly voucherNo: Prisma.FieldRef<"Transaction", 'String'>
   readonly visitId: Prisma.FieldRef<"Transaction", 'String'>
   readonly collectedById: Prisma.FieldRef<"Transaction", 'String'>
+  readonly financeAccountId: Prisma.FieldRef<"Transaction", 'String'>
+  readonly imageUrl: Prisma.FieldRef<"Transaction", 'String'>
 }
     
 
@@ -2387,6 +2693,25 @@ export type TransactionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * Transaction.collectedBy
+ */
+export type Transaction$collectedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
  * Transaction.financeAccount
  */
 export type Transaction$financeAccountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2444,22 +2769,46 @@ export type Transaction$visitArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Transaction.collectedBy
+ * Transaction.vendorPayment
  */
-export type Transaction$collectedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Transaction$vendorPaymentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User
+   * Select specific fields to fetch from the VendorPayment
    */
-  select?: Prisma.UserSelect<ExtArgs> | null
+  select?: Prisma.VendorPaymentSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User
+   * Omit specific fields from the VendorPayment
    */
-  omit?: Prisma.UserOmit<ExtArgs> | null
+  omit?: Prisma.VendorPaymentOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
+  include?: Prisma.VendorPaymentInclude<ExtArgs> | null
+  where?: Prisma.VendorPaymentWhereInput
+}
+
+/**
+ * Transaction.stockMovements
+ */
+export type Transaction$stockMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockMovement
+   */
+  select?: Prisma.StockMovementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockMovement
+   */
+  omit?: Prisma.StockMovementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockMovementInclude<ExtArgs> | null
+  where?: Prisma.StockMovementWhereInput
+  orderBy?: Prisma.StockMovementOrderByWithRelationInput | Prisma.StockMovementOrderByWithRelationInput[]
+  cursor?: Prisma.StockMovementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockMovementScalarFieldEnum | Prisma.StockMovementScalarFieldEnum[]
 }
 
 /**

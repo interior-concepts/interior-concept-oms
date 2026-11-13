@@ -21,6 +21,9 @@ import {
   FileText,
   BarChart3,
   FileCheck2,
+  Package,
+  Wallet,
+  Receipt,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/components/theme-provider'
@@ -114,6 +117,11 @@ const navigationGroups: Record<string, NavGroup[]> = {
           icon: ClipboardList,
           label: 'Overheads',
           href: '/crm/admin/overheads',
+        },
+        {
+          icon: Users,
+          label: 'Vendors (AP)',
+          href: '/crm/admin/finance/vendors',
         },
       ],
     },
@@ -459,6 +467,11 @@ const navigationGroups: Record<string, NavGroup[]> = {
           href: '/crm/accounts/summary',
         },
         {
+          icon: Users,
+          label: 'Vendors (AP)',
+          href: '/crm/admin/finance/vendors',
+        },
+        {
           icon: Settings,
           label: 'Finance Settings',
           href: '/crm/admin/finance/settings',
@@ -473,14 +486,34 @@ const navigationGroups: Record<string, NavGroup[]> = {
       defaultOpen: true,
       items: [
         {
+          icon: LayoutDashboard,
+          label: 'Dashboard',
+          href: '/crm/accounts/dashboard',
+        },
+        {
           icon: ClipboardList,
           label: 'Finance',
           href: '/crm/admin/finance',
         },
         {
+          icon: Users,
+          label: 'Vendors (AP)',
+          href: '/crm/admin/finance/vendors',
+        },
+        {
+          icon: Package,
+          label: 'Virtual Inventory & Stocks',
+          href: '/crm/accounts/stocks',
+        },
+        {
           icon: BarChart3,
           label: 'Summary',
           href: '/crm/accounts/summary',
+        },
+        {
+          icon: Wallet,
+          label: 'Procurement Wallets',
+          href: '/crm/accounts/procurement-wallets',
         },
         {
           icon: ClipboardList,
@@ -492,11 +525,9 @@ const navigationGroups: Record<string, NavGroup[]> = {
           label: 'Overheads',
           href: '/crm/accounts/overheads',
         },
-        {
-          icon: ClipboardList,
-          label: 'Visit Payments',
-          href: '/crm/accounts/visit-payments',
-        },
+        { icon: ClipboardList, label: 'Visit Payments', href: '/crm/accounts/visit-payments' },
+        { icon: Receipt, label: 'Token Money', href: '/crm/accounts/token-money' },
+        { icon: Wallet, label: 'Conveyance Bills', href: '/crm/accounts/conveyance' },
         {
           icon: Settings,
           label: 'Finance Settings',

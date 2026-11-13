@@ -182,9 +182,9 @@ export type VisitSupportAssignmentWhereInput = {
   supportUserId?: Prisma.StringFilter<"VisitSupportAssignment"> | string
   assignedById?: Prisma.StringFilter<"VisitSupportAssignment"> | string
   createdAt?: Prisma.DateTimeFilter<"VisitSupportAssignment"> | Date | string
-  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
-  supportUser?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   assignedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  supportUser?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
   result?: Prisma.XOR<Prisma.VisitSupportResultNullableScalarRelationFilter, Prisma.VisitSupportResultWhereInput> | null
 }
 
@@ -194,9 +194,9 @@ export type VisitSupportAssignmentOrderByWithRelationInput = {
   supportUserId?: Prisma.SortOrder
   assignedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  visit?: Prisma.VisitOrderByWithRelationInput
-  supportUser?: Prisma.UserOrderByWithRelationInput
   assignedBy?: Prisma.UserOrderByWithRelationInput
+  supportUser?: Prisma.UserOrderByWithRelationInput
+  visit?: Prisma.VisitOrderByWithRelationInput
   result?: Prisma.VisitSupportResultOrderByWithRelationInput
 }
 
@@ -210,9 +210,9 @@ export type VisitSupportAssignmentWhereUniqueInput = Prisma.AtLeast<{
   supportUserId?: Prisma.StringFilter<"VisitSupportAssignment"> | string
   assignedById?: Prisma.StringFilter<"VisitSupportAssignment"> | string
   createdAt?: Prisma.DateTimeFilter<"VisitSupportAssignment"> | Date | string
-  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
-  supportUser?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   assignedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  supportUser?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
   result?: Prisma.XOR<Prisma.VisitSupportResultNullableScalarRelationFilter, Prisma.VisitSupportResultWhereInput> | null
 }, "id" | "visitId_supportUserId">
 
@@ -241,9 +241,9 @@ export type VisitSupportAssignmentScalarWhereWithAggregatesInput = {
 export type VisitSupportAssignmentCreateInput = {
   id?: string
   createdAt?: Date | string
-  visit: Prisma.VisitCreateNestedOneWithoutSupportAssignmentsInput
-  supportUser: Prisma.UserCreateNestedOneWithoutSupportVisitsInput
   assignedBy: Prisma.UserCreateNestedOneWithoutSupportVisitsAssignedByInput
+  supportUser: Prisma.UserCreateNestedOneWithoutSupportVisitsInput
+  visit: Prisma.VisitCreateNestedOneWithoutSupportAssignmentsInput
   result?: Prisma.VisitSupportResultCreateNestedOneWithoutSupportAssignmentInput
 }
 
@@ -259,9 +259,9 @@ export type VisitSupportAssignmentUncheckedCreateInput = {
 export type VisitSupportAssignmentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportAssignmentsNestedInput
-  supportUser?: Prisma.UserUpdateOneRequiredWithoutSupportVisitsNestedInput
   assignedBy?: Prisma.UserUpdateOneRequiredWithoutSupportVisitsAssignedByNestedInput
+  supportUser?: Prisma.UserUpdateOneRequiredWithoutSupportVisitsNestedInput
+  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportAssignmentsNestedInput
   result?: Prisma.VisitSupportResultUpdateOneWithoutSupportAssignmentNestedInput
 }
 
@@ -339,13 +339,6 @@ export type VisitSupportAssignmentScalarRelationFilter = {
   isNot?: Prisma.VisitSupportAssignmentWhereInput
 }
 
-export type VisitSupportAssignmentCreateNestedManyWithoutSupportUserInput = {
-  create?: Prisma.XOR<Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput, Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput> | Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput[] | Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput[]
-  connectOrCreate?: Prisma.VisitSupportAssignmentCreateOrConnectWithoutSupportUserInput | Prisma.VisitSupportAssignmentCreateOrConnectWithoutSupportUserInput[]
-  createMany?: Prisma.VisitSupportAssignmentCreateManySupportUserInputEnvelope
-  connect?: Prisma.VisitSupportAssignmentWhereUniqueInput | Prisma.VisitSupportAssignmentWhereUniqueInput[]
-}
-
 export type VisitSupportAssignmentCreateNestedManyWithoutAssignedByInput = {
   create?: Prisma.XOR<Prisma.VisitSupportAssignmentCreateWithoutAssignedByInput, Prisma.VisitSupportAssignmentUncheckedCreateWithoutAssignedByInput> | Prisma.VisitSupportAssignmentCreateWithoutAssignedByInput[] | Prisma.VisitSupportAssignmentUncheckedCreateWithoutAssignedByInput[]
   connectOrCreate?: Prisma.VisitSupportAssignmentCreateOrConnectWithoutAssignedByInput | Prisma.VisitSupportAssignmentCreateOrConnectWithoutAssignedByInput[]
@@ -353,7 +346,7 @@ export type VisitSupportAssignmentCreateNestedManyWithoutAssignedByInput = {
   connect?: Prisma.VisitSupportAssignmentWhereUniqueInput | Prisma.VisitSupportAssignmentWhereUniqueInput[]
 }
 
-export type VisitSupportAssignmentUncheckedCreateNestedManyWithoutSupportUserInput = {
+export type VisitSupportAssignmentCreateNestedManyWithoutSupportUserInput = {
   create?: Prisma.XOR<Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput, Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput> | Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput[] | Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput[]
   connectOrCreate?: Prisma.VisitSupportAssignmentCreateOrConnectWithoutSupportUserInput | Prisma.VisitSupportAssignmentCreateOrConnectWithoutSupportUserInput[]
   createMany?: Prisma.VisitSupportAssignmentCreateManySupportUserInputEnvelope
@@ -367,18 +360,11 @@ export type VisitSupportAssignmentUncheckedCreateNestedManyWithoutAssignedByInpu
   connect?: Prisma.VisitSupportAssignmentWhereUniqueInput | Prisma.VisitSupportAssignmentWhereUniqueInput[]
 }
 
-export type VisitSupportAssignmentUpdateManyWithoutSupportUserNestedInput = {
+export type VisitSupportAssignmentUncheckedCreateNestedManyWithoutSupportUserInput = {
   create?: Prisma.XOR<Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput, Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput> | Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput[] | Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput[]
   connectOrCreate?: Prisma.VisitSupportAssignmentCreateOrConnectWithoutSupportUserInput | Prisma.VisitSupportAssignmentCreateOrConnectWithoutSupportUserInput[]
-  upsert?: Prisma.VisitSupportAssignmentUpsertWithWhereUniqueWithoutSupportUserInput | Prisma.VisitSupportAssignmentUpsertWithWhereUniqueWithoutSupportUserInput[]
   createMany?: Prisma.VisitSupportAssignmentCreateManySupportUserInputEnvelope
-  set?: Prisma.VisitSupportAssignmentWhereUniqueInput | Prisma.VisitSupportAssignmentWhereUniqueInput[]
-  disconnect?: Prisma.VisitSupportAssignmentWhereUniqueInput | Prisma.VisitSupportAssignmentWhereUniqueInput[]
-  delete?: Prisma.VisitSupportAssignmentWhereUniqueInput | Prisma.VisitSupportAssignmentWhereUniqueInput[]
   connect?: Prisma.VisitSupportAssignmentWhereUniqueInput | Prisma.VisitSupportAssignmentWhereUniqueInput[]
-  update?: Prisma.VisitSupportAssignmentUpdateWithWhereUniqueWithoutSupportUserInput | Prisma.VisitSupportAssignmentUpdateWithWhereUniqueWithoutSupportUserInput[]
-  updateMany?: Prisma.VisitSupportAssignmentUpdateManyWithWhereWithoutSupportUserInput | Prisma.VisitSupportAssignmentUpdateManyWithWhereWithoutSupportUserInput[]
-  deleteMany?: Prisma.VisitSupportAssignmentScalarWhereInput | Prisma.VisitSupportAssignmentScalarWhereInput[]
 }
 
 export type VisitSupportAssignmentUpdateManyWithoutAssignedByNestedInput = {
@@ -395,7 +381,7 @@ export type VisitSupportAssignmentUpdateManyWithoutAssignedByNestedInput = {
   deleteMany?: Prisma.VisitSupportAssignmentScalarWhereInput | Prisma.VisitSupportAssignmentScalarWhereInput[]
 }
 
-export type VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserNestedInput = {
+export type VisitSupportAssignmentUpdateManyWithoutSupportUserNestedInput = {
   create?: Prisma.XOR<Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput, Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput> | Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput[] | Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput[]
   connectOrCreate?: Prisma.VisitSupportAssignmentCreateOrConnectWithoutSupportUserInput | Prisma.VisitSupportAssignmentCreateOrConnectWithoutSupportUserInput[]
   upsert?: Prisma.VisitSupportAssignmentUpsertWithWhereUniqueWithoutSupportUserInput | Prisma.VisitSupportAssignmentUpsertWithWhereUniqueWithoutSupportUserInput[]
@@ -420,6 +406,20 @@ export type VisitSupportAssignmentUncheckedUpdateManyWithoutAssignedByNestedInpu
   connect?: Prisma.VisitSupportAssignmentWhereUniqueInput | Prisma.VisitSupportAssignmentWhereUniqueInput[]
   update?: Prisma.VisitSupportAssignmentUpdateWithWhereUniqueWithoutAssignedByInput | Prisma.VisitSupportAssignmentUpdateWithWhereUniqueWithoutAssignedByInput[]
   updateMany?: Prisma.VisitSupportAssignmentUpdateManyWithWhereWithoutAssignedByInput | Prisma.VisitSupportAssignmentUpdateManyWithWhereWithoutAssignedByInput[]
+  deleteMany?: Prisma.VisitSupportAssignmentScalarWhereInput | Prisma.VisitSupportAssignmentScalarWhereInput[]
+}
+
+export type VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserNestedInput = {
+  create?: Prisma.XOR<Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput, Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput> | Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput[] | Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput[]
+  connectOrCreate?: Prisma.VisitSupportAssignmentCreateOrConnectWithoutSupportUserInput | Prisma.VisitSupportAssignmentCreateOrConnectWithoutSupportUserInput[]
+  upsert?: Prisma.VisitSupportAssignmentUpsertWithWhereUniqueWithoutSupportUserInput | Prisma.VisitSupportAssignmentUpsertWithWhereUniqueWithoutSupportUserInput[]
+  createMany?: Prisma.VisitSupportAssignmentCreateManySupportUserInputEnvelope
+  set?: Prisma.VisitSupportAssignmentWhereUniqueInput | Prisma.VisitSupportAssignmentWhereUniqueInput[]
+  disconnect?: Prisma.VisitSupportAssignmentWhereUniqueInput | Prisma.VisitSupportAssignmentWhereUniqueInput[]
+  delete?: Prisma.VisitSupportAssignmentWhereUniqueInput | Prisma.VisitSupportAssignmentWhereUniqueInput[]
+  connect?: Prisma.VisitSupportAssignmentWhereUniqueInput | Prisma.VisitSupportAssignmentWhereUniqueInput[]
+  update?: Prisma.VisitSupportAssignmentUpdateWithWhereUniqueWithoutSupportUserInput | Prisma.VisitSupportAssignmentUpdateWithWhereUniqueWithoutSupportUserInput[]
+  updateMany?: Prisma.VisitSupportAssignmentUpdateManyWithWhereWithoutSupportUserInput | Prisma.VisitSupportAssignmentUpdateManyWithWhereWithoutSupportUserInput[]
   deleteMany?: Prisma.VisitSupportAssignmentScalarWhereInput | Prisma.VisitSupportAssignmentScalarWhereInput[]
 }
 
@@ -479,37 +479,11 @@ export type VisitSupportAssignmentUpdateOneRequiredWithoutResultNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VisitSupportAssignmentUpdateToOneWithWhereWithoutResultInput, Prisma.VisitSupportAssignmentUpdateWithoutResultInput>, Prisma.VisitSupportAssignmentUncheckedUpdateWithoutResultInput>
 }
 
-export type VisitSupportAssignmentCreateWithoutSupportUserInput = {
-  id?: string
-  createdAt?: Date | string
-  visit: Prisma.VisitCreateNestedOneWithoutSupportAssignmentsInput
-  assignedBy: Prisma.UserCreateNestedOneWithoutSupportVisitsAssignedByInput
-  result?: Prisma.VisitSupportResultCreateNestedOneWithoutSupportAssignmentInput
-}
-
-export type VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput = {
-  id?: string
-  visitId: string
-  assignedById: string
-  createdAt?: Date | string
-  result?: Prisma.VisitSupportResultUncheckedCreateNestedOneWithoutSupportAssignmentInput
-}
-
-export type VisitSupportAssignmentCreateOrConnectWithoutSupportUserInput = {
-  where: Prisma.VisitSupportAssignmentWhereUniqueInput
-  create: Prisma.XOR<Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput, Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput>
-}
-
-export type VisitSupportAssignmentCreateManySupportUserInputEnvelope = {
-  data: Prisma.VisitSupportAssignmentCreateManySupportUserInput | Prisma.VisitSupportAssignmentCreateManySupportUserInput[]
-  skipDuplicates?: boolean
-}
-
 export type VisitSupportAssignmentCreateWithoutAssignedByInput = {
   id?: string
   createdAt?: Date | string
-  visit: Prisma.VisitCreateNestedOneWithoutSupportAssignmentsInput
   supportUser: Prisma.UserCreateNestedOneWithoutSupportVisitsInput
+  visit: Prisma.VisitCreateNestedOneWithoutSupportAssignmentsInput
   result?: Prisma.VisitSupportResultCreateNestedOneWithoutSupportAssignmentInput
 }
 
@@ -531,31 +505,30 @@ export type VisitSupportAssignmentCreateManyAssignedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type VisitSupportAssignmentUpsertWithWhereUniqueWithoutSupportUserInput = {
+export type VisitSupportAssignmentCreateWithoutSupportUserInput = {
+  id?: string
+  createdAt?: Date | string
+  assignedBy: Prisma.UserCreateNestedOneWithoutSupportVisitsAssignedByInput
+  visit: Prisma.VisitCreateNestedOneWithoutSupportAssignmentsInput
+  result?: Prisma.VisitSupportResultCreateNestedOneWithoutSupportAssignmentInput
+}
+
+export type VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput = {
+  id?: string
+  visitId: string
+  assignedById: string
+  createdAt?: Date | string
+  result?: Prisma.VisitSupportResultUncheckedCreateNestedOneWithoutSupportAssignmentInput
+}
+
+export type VisitSupportAssignmentCreateOrConnectWithoutSupportUserInput = {
   where: Prisma.VisitSupportAssignmentWhereUniqueInput
-  update: Prisma.XOR<Prisma.VisitSupportAssignmentUpdateWithoutSupportUserInput, Prisma.VisitSupportAssignmentUncheckedUpdateWithoutSupportUserInput>
   create: Prisma.XOR<Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput, Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput>
 }
 
-export type VisitSupportAssignmentUpdateWithWhereUniqueWithoutSupportUserInput = {
-  where: Prisma.VisitSupportAssignmentWhereUniqueInput
-  data: Prisma.XOR<Prisma.VisitSupportAssignmentUpdateWithoutSupportUserInput, Prisma.VisitSupportAssignmentUncheckedUpdateWithoutSupportUserInput>
-}
-
-export type VisitSupportAssignmentUpdateManyWithWhereWithoutSupportUserInput = {
-  where: Prisma.VisitSupportAssignmentScalarWhereInput
-  data: Prisma.XOR<Prisma.VisitSupportAssignmentUpdateManyMutationInput, Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserInput>
-}
-
-export type VisitSupportAssignmentScalarWhereInput = {
-  AND?: Prisma.VisitSupportAssignmentScalarWhereInput | Prisma.VisitSupportAssignmentScalarWhereInput[]
-  OR?: Prisma.VisitSupportAssignmentScalarWhereInput[]
-  NOT?: Prisma.VisitSupportAssignmentScalarWhereInput | Prisma.VisitSupportAssignmentScalarWhereInput[]
-  id?: Prisma.StringFilter<"VisitSupportAssignment"> | string
-  visitId?: Prisma.StringFilter<"VisitSupportAssignment"> | string
-  supportUserId?: Prisma.StringFilter<"VisitSupportAssignment"> | string
-  assignedById?: Prisma.StringFilter<"VisitSupportAssignment"> | string
-  createdAt?: Prisma.DateTimeFilter<"VisitSupportAssignment"> | Date | string
+export type VisitSupportAssignmentCreateManySupportUserInputEnvelope = {
+  data: Prisma.VisitSupportAssignmentCreateManySupportUserInput | Prisma.VisitSupportAssignmentCreateManySupportUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type VisitSupportAssignmentUpsertWithWhereUniqueWithoutAssignedByInput = {
@@ -574,11 +547,38 @@ export type VisitSupportAssignmentUpdateManyWithWhereWithoutAssignedByInput = {
   data: Prisma.XOR<Prisma.VisitSupportAssignmentUpdateManyMutationInput, Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutAssignedByInput>
 }
 
+export type VisitSupportAssignmentScalarWhereInput = {
+  AND?: Prisma.VisitSupportAssignmentScalarWhereInput | Prisma.VisitSupportAssignmentScalarWhereInput[]
+  OR?: Prisma.VisitSupportAssignmentScalarWhereInput[]
+  NOT?: Prisma.VisitSupportAssignmentScalarWhereInput | Prisma.VisitSupportAssignmentScalarWhereInput[]
+  id?: Prisma.StringFilter<"VisitSupportAssignment"> | string
+  visitId?: Prisma.StringFilter<"VisitSupportAssignment"> | string
+  supportUserId?: Prisma.StringFilter<"VisitSupportAssignment"> | string
+  assignedById?: Prisma.StringFilter<"VisitSupportAssignment"> | string
+  createdAt?: Prisma.DateTimeFilter<"VisitSupportAssignment"> | Date | string
+}
+
+export type VisitSupportAssignmentUpsertWithWhereUniqueWithoutSupportUserInput = {
+  where: Prisma.VisitSupportAssignmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.VisitSupportAssignmentUpdateWithoutSupportUserInput, Prisma.VisitSupportAssignmentUncheckedUpdateWithoutSupportUserInput>
+  create: Prisma.XOR<Prisma.VisitSupportAssignmentCreateWithoutSupportUserInput, Prisma.VisitSupportAssignmentUncheckedCreateWithoutSupportUserInput>
+}
+
+export type VisitSupportAssignmentUpdateWithWhereUniqueWithoutSupportUserInput = {
+  where: Prisma.VisitSupportAssignmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.VisitSupportAssignmentUpdateWithoutSupportUserInput, Prisma.VisitSupportAssignmentUncheckedUpdateWithoutSupportUserInput>
+}
+
+export type VisitSupportAssignmentUpdateManyWithWhereWithoutSupportUserInput = {
+  where: Prisma.VisitSupportAssignmentScalarWhereInput
+  data: Prisma.XOR<Prisma.VisitSupportAssignmentUpdateManyMutationInput, Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserInput>
+}
+
 export type VisitSupportAssignmentCreateWithoutVisitInput = {
   id?: string
   createdAt?: Date | string
-  supportUser: Prisma.UserCreateNestedOneWithoutSupportVisitsInput
   assignedBy: Prisma.UserCreateNestedOneWithoutSupportVisitsAssignedByInput
+  supportUser: Prisma.UserCreateNestedOneWithoutSupportVisitsInput
   result?: Prisma.VisitSupportResultCreateNestedOneWithoutSupportAssignmentInput
 }
 
@@ -619,9 +619,9 @@ export type VisitSupportAssignmentUpdateManyWithWhereWithoutVisitInput = {
 export type VisitSupportAssignmentCreateWithoutResultInput = {
   id?: string
   createdAt?: Date | string
-  visit: Prisma.VisitCreateNestedOneWithoutSupportAssignmentsInput
-  supportUser: Prisma.UserCreateNestedOneWithoutSupportVisitsInput
   assignedBy: Prisma.UserCreateNestedOneWithoutSupportVisitsAssignedByInput
+  supportUser: Prisma.UserCreateNestedOneWithoutSupportVisitsInput
+  visit: Prisma.VisitCreateNestedOneWithoutSupportAssignmentsInput
 }
 
 export type VisitSupportAssignmentUncheckedCreateWithoutResultInput = {
@@ -651,9 +651,9 @@ export type VisitSupportAssignmentUpdateToOneWithWhereWithoutResultInput = {
 export type VisitSupportAssignmentUpdateWithoutResultInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportAssignmentsNestedInput
-  supportUser?: Prisma.UserUpdateOneRequiredWithoutSupportVisitsNestedInput
   assignedBy?: Prisma.UserUpdateOneRequiredWithoutSupportVisitsAssignedByNestedInput
+  supportUser?: Prisma.UserUpdateOneRequiredWithoutSupportVisitsNestedInput
+  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportAssignmentsNestedInput
 }
 
 export type VisitSupportAssignmentUncheckedUpdateWithoutResultInput = {
@@ -664,13 +664,6 @@ export type VisitSupportAssignmentUncheckedUpdateWithoutResultInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type VisitSupportAssignmentCreateManySupportUserInput = {
-  id?: string
-  visitId: string
-  assignedById: string
-  createdAt?: Date | string
-}
-
 export type VisitSupportAssignmentCreateManyAssignedByInput = {
   id?: string
   visitId: string
@@ -678,34 +671,18 @@ export type VisitSupportAssignmentCreateManyAssignedByInput = {
   createdAt?: Date | string
 }
 
-export type VisitSupportAssignmentUpdateWithoutSupportUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportAssignmentsNestedInput
-  assignedBy?: Prisma.UserUpdateOneRequiredWithoutSupportVisitsAssignedByNestedInput
-  result?: Prisma.VisitSupportResultUpdateOneWithoutSupportAssignmentNestedInput
-}
-
-export type VisitSupportAssignmentUncheckedUpdateWithoutSupportUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  visitId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedById?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  result?: Prisma.VisitSupportResultUncheckedUpdateOneWithoutSupportAssignmentNestedInput
-}
-
-export type VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  visitId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedById?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type VisitSupportAssignmentCreateManySupportUserInput = {
+  id?: string
+  visitId: string
+  assignedById: string
+  createdAt?: Date | string
 }
 
 export type VisitSupportAssignmentUpdateWithoutAssignedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportAssignmentsNestedInput
   supportUser?: Prisma.UserUpdateOneRequiredWithoutSupportVisitsNestedInput
+  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportAssignmentsNestedInput
   result?: Prisma.VisitSupportResultUpdateOneWithoutSupportAssignmentNestedInput
 }
 
@@ -724,6 +701,29 @@ export type VisitSupportAssignmentUncheckedUpdateManyWithoutAssignedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type VisitSupportAssignmentUpdateWithoutSupportUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedBy?: Prisma.UserUpdateOneRequiredWithoutSupportVisitsAssignedByNestedInput
+  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportAssignmentsNestedInput
+  result?: Prisma.VisitSupportResultUpdateOneWithoutSupportAssignmentNestedInput
+}
+
+export type VisitSupportAssignmentUncheckedUpdateWithoutSupportUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  visitId?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  result?: Prisma.VisitSupportResultUncheckedUpdateOneWithoutSupportAssignmentNestedInput
+}
+
+export type VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  visitId?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type VisitSupportAssignmentCreateManyVisitInput = {
   id?: string
   supportUserId: string
@@ -734,8 +734,8 @@ export type VisitSupportAssignmentCreateManyVisitInput = {
 export type VisitSupportAssignmentUpdateWithoutVisitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  supportUser?: Prisma.UserUpdateOneRequiredWithoutSupportVisitsNestedInput
   assignedBy?: Prisma.UserUpdateOneRequiredWithoutSupportVisitsAssignedByNestedInput
+  supportUser?: Prisma.UserUpdateOneRequiredWithoutSupportVisitsNestedInput
   result?: Prisma.VisitSupportResultUpdateOneWithoutSupportAssignmentNestedInput
 }
 
@@ -762,9 +762,9 @@ export type VisitSupportAssignmentSelect<ExtArgs extends runtime.Types.Extension
   supportUserId?: boolean
   assignedById?: boolean
   createdAt?: boolean
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
-  supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   assignedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   result?: boolean | Prisma.VisitSupportAssignment$resultArgs<ExtArgs>
 }, ExtArgs["result"]["visitSupportAssignment"]>
 
@@ -774,9 +774,9 @@ export type VisitSupportAssignmentSelectCreateManyAndReturn<ExtArgs extends runt
   supportUserId?: boolean
   assignedById?: boolean
   createdAt?: boolean
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
-  supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   assignedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visitSupportAssignment"]>
 
 export type VisitSupportAssignmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -785,9 +785,9 @@ export type VisitSupportAssignmentSelectUpdateManyAndReturn<ExtArgs extends runt
   supportUserId?: boolean
   assignedById?: boolean
   createdAt?: boolean
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
-  supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   assignedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visitSupportAssignment"]>
 
 export type VisitSupportAssignmentSelectScalar = {
@@ -800,28 +800,28 @@ export type VisitSupportAssignmentSelectScalar = {
 
 export type VisitSupportAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "visitId" | "supportUserId" | "assignedById" | "createdAt", ExtArgs["result"]["visitSupportAssignment"]>
 export type VisitSupportAssignmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
-  supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   assignedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   result?: boolean | Prisma.VisitSupportAssignment$resultArgs<ExtArgs>
 }
 export type VisitSupportAssignmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
-  supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   assignedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }
 export type VisitSupportAssignmentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
-  supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   assignedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }
 
 export type $VisitSupportAssignmentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "VisitSupportAssignment"
   objects: {
-    visit: Prisma.$VisitPayload<ExtArgs>
-    supportUser: Prisma.$UserPayload<ExtArgs>
     assignedBy: Prisma.$UserPayload<ExtArgs>
+    supportUser: Prisma.$UserPayload<ExtArgs>
+    visit: Prisma.$VisitPayload<ExtArgs>
     result: Prisma.$VisitSupportResultPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1224,9 +1224,9 @@ readonly fields: VisitSupportAssignmentFieldRefs;
  */
 export interface Prisma__VisitSupportAssignmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  visit<T extends Prisma.VisitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitDefaultArgs<ExtArgs>>): Prisma.Prisma__VisitClient<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  supportUser<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   assignedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  supportUser<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  visit<T extends Prisma.VisitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitDefaultArgs<ExtArgs>>): Prisma.Prisma__VisitClient<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   result<T extends Prisma.VisitSupportAssignment$resultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitSupportAssignment$resultArgs<ExtArgs>>): Prisma.Prisma__VisitSupportResultClient<runtime.Types.Result.GetResult<Prisma.$VisitSupportResultPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

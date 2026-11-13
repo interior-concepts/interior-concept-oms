@@ -183,6 +183,7 @@ export type FinanceAccountWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"FinanceAccount"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FinanceAccount"> | Date | string
   transactions?: Prisma.TransactionListRelationFilter
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionListRelationFilter
 }
 
 export type FinanceAccountOrderByWithRelationInput = {
@@ -192,6 +193,7 @@ export type FinanceAccountOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   transactions?: Prisma.TransactionOrderByRelationAggregateInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionOrderByRelationAggregateInput
 }
 
 export type FinanceAccountWhereUniqueInput = Prisma.AtLeast<{
@@ -204,6 +206,7 @@ export type FinanceAccountWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"FinanceAccount"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FinanceAccount"> | Date | string
   transactions?: Prisma.TransactionListRelationFilter
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionListRelationFilter
 }, "id" | "name">
 
 export type FinanceAccountOrderByWithAggregationInput = {
@@ -235,6 +238,7 @@ export type FinanceAccountCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   transactions?: Prisma.TransactionCreateNestedManyWithoutFinanceAccountInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutFinanceAccountInput
 }
 
 export type FinanceAccountUncheckedCreateInput = {
@@ -244,6 +248,7 @@ export type FinanceAccountUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutFinanceAccountInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutFinanceAccountInput
 }
 
 export type FinanceAccountUpdateInput = {
@@ -253,6 +258,7 @@ export type FinanceAccountUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUpdateManyWithoutFinanceAccountNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutFinanceAccountNestedInput
 }
 
 export type FinanceAccountUncheckedUpdateInput = {
@@ -262,6 +268,7 @@ export type FinanceAccountUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutFinanceAccountNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutFinanceAccountNestedInput
 }
 
 export type FinanceAccountCreateManyInput = {
@@ -333,12 +340,29 @@ export type FinanceAccountUpdateOneWithoutTransactionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FinanceAccountUpdateToOneWithWhereWithoutTransactionsInput, Prisma.FinanceAccountUpdateWithoutTransactionsInput>, Prisma.FinanceAccountUncheckedUpdateWithoutTransactionsInput>
 }
 
+export type FinanceAccountCreateNestedOneWithoutProcurementWalletTransactionsInput = {
+  create?: Prisma.XOR<Prisma.FinanceAccountCreateWithoutProcurementWalletTransactionsInput, Prisma.FinanceAccountUncheckedCreateWithoutProcurementWalletTransactionsInput>
+  connectOrCreate?: Prisma.FinanceAccountCreateOrConnectWithoutProcurementWalletTransactionsInput
+  connect?: Prisma.FinanceAccountWhereUniqueInput
+}
+
+export type FinanceAccountUpdateOneWithoutProcurementWalletTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.FinanceAccountCreateWithoutProcurementWalletTransactionsInput, Prisma.FinanceAccountUncheckedCreateWithoutProcurementWalletTransactionsInput>
+  connectOrCreate?: Prisma.FinanceAccountCreateOrConnectWithoutProcurementWalletTransactionsInput
+  upsert?: Prisma.FinanceAccountUpsertWithoutProcurementWalletTransactionsInput
+  disconnect?: Prisma.FinanceAccountWhereInput | boolean
+  delete?: Prisma.FinanceAccountWhereInput | boolean
+  connect?: Prisma.FinanceAccountWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FinanceAccountUpdateToOneWithWhereWithoutProcurementWalletTransactionsInput, Prisma.FinanceAccountUpdateWithoutProcurementWalletTransactionsInput>, Prisma.FinanceAccountUncheckedUpdateWithoutProcurementWalletTransactionsInput>
+}
+
 export type FinanceAccountCreateWithoutTransactionsInput = {
   id?: string
   name: string
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutFinanceAccountInput
 }
 
 export type FinanceAccountUncheckedCreateWithoutTransactionsInput = {
@@ -347,6 +371,7 @@ export type FinanceAccountUncheckedCreateWithoutTransactionsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutFinanceAccountInput
 }
 
 export type FinanceAccountCreateOrConnectWithoutTransactionsInput = {
@@ -371,6 +396,7 @@ export type FinanceAccountUpdateWithoutTransactionsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutFinanceAccountNestedInput
 }
 
 export type FinanceAccountUncheckedUpdateWithoutTransactionsInput = {
@@ -379,6 +405,59 @@ export type FinanceAccountUncheckedUpdateWithoutTransactionsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutFinanceAccountNestedInput
+}
+
+export type FinanceAccountCreateWithoutProcurementWalletTransactionsInput = {
+  id?: string
+  name: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  transactions?: Prisma.TransactionCreateNestedManyWithoutFinanceAccountInput
+}
+
+export type FinanceAccountUncheckedCreateWithoutProcurementWalletTransactionsInput = {
+  id?: string
+  name: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutFinanceAccountInput
+}
+
+export type FinanceAccountCreateOrConnectWithoutProcurementWalletTransactionsInput = {
+  where: Prisma.FinanceAccountWhereUniqueInput
+  create: Prisma.XOR<Prisma.FinanceAccountCreateWithoutProcurementWalletTransactionsInput, Prisma.FinanceAccountUncheckedCreateWithoutProcurementWalletTransactionsInput>
+}
+
+export type FinanceAccountUpsertWithoutProcurementWalletTransactionsInput = {
+  update: Prisma.XOR<Prisma.FinanceAccountUpdateWithoutProcurementWalletTransactionsInput, Prisma.FinanceAccountUncheckedUpdateWithoutProcurementWalletTransactionsInput>
+  create: Prisma.XOR<Prisma.FinanceAccountCreateWithoutProcurementWalletTransactionsInput, Prisma.FinanceAccountUncheckedCreateWithoutProcurementWalletTransactionsInput>
+  where?: Prisma.FinanceAccountWhereInput
+}
+
+export type FinanceAccountUpdateToOneWithWhereWithoutProcurementWalletTransactionsInput = {
+  where?: Prisma.FinanceAccountWhereInput
+  data: Prisma.XOR<Prisma.FinanceAccountUpdateWithoutProcurementWalletTransactionsInput, Prisma.FinanceAccountUncheckedUpdateWithoutProcurementWalletTransactionsInput>
+}
+
+export type FinanceAccountUpdateWithoutProcurementWalletTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transactions?: Prisma.TransactionUpdateManyWithoutFinanceAccountNestedInput
+}
+
+export type FinanceAccountUncheckedUpdateWithoutProcurementWalletTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutFinanceAccountNestedInput
 }
 
 
@@ -388,10 +467,12 @@ export type FinanceAccountUncheckedUpdateWithoutTransactionsInput = {
 
 export type FinanceAccountCountOutputType = {
   transactions: number
+  procurementWalletTransactions: number
 }
 
 export type FinanceAccountCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   transactions?: boolean | FinanceAccountCountOutputTypeCountTransactionsArgs
+  procurementWalletTransactions?: boolean | FinanceAccountCountOutputTypeCountProcurementWalletTransactionsArgs
 }
 
 /**
@@ -411,6 +492,13 @@ export type FinanceAccountCountOutputTypeCountTransactionsArgs<ExtArgs extends r
   where?: Prisma.TransactionWhereInput
 }
 
+/**
+ * FinanceAccountCountOutputType without action
+ */
+export type FinanceAccountCountOutputTypeCountProcurementWalletTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProcurementWalletTransactionWhereInput
+}
+
 
 export type FinanceAccountSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -419,6 +507,7 @@ export type FinanceAccountSelect<ExtArgs extends runtime.Types.Extensions.Intern
   createdAt?: boolean
   updatedAt?: boolean
   transactions?: boolean | Prisma.FinanceAccount$transactionsArgs<ExtArgs>
+  procurementWalletTransactions?: boolean | Prisma.FinanceAccount$procurementWalletTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.FinanceAccountCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["financeAccount"]>
 
@@ -449,6 +538,7 @@ export type FinanceAccountSelectScalar = {
 export type FinanceAccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["financeAccount"]>
 export type FinanceAccountInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   transactions?: boolean | Prisma.FinanceAccount$transactionsArgs<ExtArgs>
+  procurementWalletTransactions?: boolean | Prisma.FinanceAccount$procurementWalletTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.FinanceAccountCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FinanceAccountIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -458,6 +548,7 @@ export type $FinanceAccountPayload<ExtArgs extends runtime.Types.Extensions.Inte
   name: "FinanceAccount"
   objects: {
     transactions: Prisma.$TransactionPayload<ExtArgs>[]
+    procurementWalletTransactions: Prisma.$ProcurementWalletTransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -860,6 +951,7 @@ readonly fields: FinanceAccountFieldRefs;
 export interface Prisma__FinanceAccountClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   transactions<T extends Prisma.FinanceAccount$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FinanceAccount$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  procurementWalletTransactions<T extends Prisma.FinanceAccount$procurementWalletTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FinanceAccount$procurementWalletTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcurementWalletTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1303,6 +1395,30 @@ export type FinanceAccount$transactionsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
+}
+
+/**
+ * FinanceAccount.procurementWalletTransactions
+ */
+export type FinanceAccount$procurementWalletTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProcurementWalletTransaction
+   */
+  select?: Prisma.ProcurementWalletTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProcurementWalletTransaction
+   */
+  omit?: Prisma.ProcurementWalletTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcurementWalletTransactionInclude<ExtArgs> | null
+  where?: Prisma.ProcurementWalletTransactionWhereInput
+  orderBy?: Prisma.ProcurementWalletTransactionOrderByWithRelationInput | Prisma.ProcurementWalletTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.ProcurementWalletTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProcurementWalletTransactionScalarFieldEnum | Prisma.ProcurementWalletTransactionScalarFieldEnum[]
 }
 
 /**

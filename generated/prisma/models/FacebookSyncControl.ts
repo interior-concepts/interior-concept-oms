@@ -27,46 +27,40 @@ export type AggregateFacebookSyncControl = {
 }
 
 export type FacebookSyncControlAvgAggregateOutputType = {
-  latestIntervalMinutes: number | null
-  latestBatchLimit: number | null
-  backfillIntervalMinutes: number | null
-  backfillBatchLimit: number | null
   fallbackIntervalMinutes: number | null
   batchLimit: number | null
   lastSyncFetched: number | null
   lastSyncCreated: number | null
+  jrCrmRoundRobinOffset: number | null
+  latestIntervalMinutes: number | null
+  latestBatchLimit: number | null
+  backfillIntervalMinutes: number | null
+  backfillBatchLimit: number | null
   lastLatestSyncFetched: number | null
   lastLatestSyncCreated: number | null
   lastBackfillSyncFetched: number | null
   lastBackfillSyncCreated: number | null
-  jrCrmRoundRobinOffset: number | null
 }
 
 export type FacebookSyncControlSumAggregateOutputType = {
-  latestIntervalMinutes: number | null
-  latestBatchLimit: number | null
-  backfillIntervalMinutes: number | null
-  backfillBatchLimit: number | null
   fallbackIntervalMinutes: number | null
   batchLimit: number | null
   lastSyncFetched: number | null
   lastSyncCreated: number | null
+  jrCrmRoundRobinOffset: number | null
+  latestIntervalMinutes: number | null
+  latestBatchLimit: number | null
+  backfillIntervalMinutes: number | null
+  backfillBatchLimit: number | null
   lastLatestSyncFetched: number | null
   lastLatestSyncCreated: number | null
   lastBackfillSyncFetched: number | null
   lastBackfillSyncCreated: number | null
-  jrCrmRoundRobinOffset: number | null
 }
 
 export type FacebookSyncControlMinAggregateOutputType = {
   id: string | null
   enabled: boolean | null
-  latestEnabled: boolean | null
-  latestIntervalMinutes: number | null
-  latestBatchLimit: number | null
-  backfillEnabled: boolean | null
-  backfillIntervalMinutes: number | null
-  backfillBatchLimit: number | null
   fallbackEnabled: boolean | null
   fallbackIntervalMinutes: number | null
   batchLimit: number | null
@@ -76,6 +70,17 @@ export type FacebookSyncControlMinAggregateOutputType = {
   lastSyncCreated: number | null
   lastSyncError: string | null
   lastSyncTrigger: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  incrementalCursor: string | null
+  incrementalWatermark: Date | null
+  jrCrmRoundRobinOffset: number | null
+  latestEnabled: boolean | null
+  latestIntervalMinutes: number | null
+  latestBatchLimit: number | null
+  backfillEnabled: boolean | null
+  backfillIntervalMinutes: number | null
+  backfillBatchLimit: number | null
   lastLatestSyncAt: Date | null
   lastLatestSyncStatus: string | null
   lastLatestSyncFetched: number | null
@@ -88,22 +93,11 @@ export type FacebookSyncControlMinAggregateOutputType = {
   lastBackfillSyncError: string | null
   latestWatermark: Date | null
   backfillCursor: string | null
-  incrementalCursor: string | null
-  incrementalWatermark: Date | null
-  jrCrmRoundRobinOffset: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type FacebookSyncControlMaxAggregateOutputType = {
   id: string | null
   enabled: boolean | null
-  latestEnabled: boolean | null
-  latestIntervalMinutes: number | null
-  latestBatchLimit: number | null
-  backfillEnabled: boolean | null
-  backfillIntervalMinutes: number | null
-  backfillBatchLimit: number | null
   fallbackEnabled: boolean | null
   fallbackIntervalMinutes: number | null
   batchLimit: number | null
@@ -113,6 +107,17 @@ export type FacebookSyncControlMaxAggregateOutputType = {
   lastSyncCreated: number | null
   lastSyncError: string | null
   lastSyncTrigger: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  incrementalCursor: string | null
+  incrementalWatermark: Date | null
+  jrCrmRoundRobinOffset: number | null
+  latestEnabled: boolean | null
+  latestIntervalMinutes: number | null
+  latestBatchLimit: number | null
+  backfillEnabled: boolean | null
+  backfillIntervalMinutes: number | null
+  backfillBatchLimit: number | null
   lastLatestSyncAt: Date | null
   lastLatestSyncStatus: string | null
   lastLatestSyncFetched: number | null
@@ -125,22 +130,11 @@ export type FacebookSyncControlMaxAggregateOutputType = {
   lastBackfillSyncError: string | null
   latestWatermark: Date | null
   backfillCursor: string | null
-  incrementalCursor: string | null
-  incrementalWatermark: Date | null
-  jrCrmRoundRobinOffset: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type FacebookSyncControlCountAggregateOutputType = {
   id: number
   enabled: number
-  latestEnabled: number
-  latestIntervalMinutes: number
-  latestBatchLimit: number
-  backfillEnabled: number
-  backfillIntervalMinutes: number
-  backfillBatchLimit: number
   fallbackEnabled: number
   fallbackIntervalMinutes: number
   batchLimit: number
@@ -150,6 +144,17 @@ export type FacebookSyncControlCountAggregateOutputType = {
   lastSyncCreated: number
   lastSyncError: number
   lastSyncTrigger: number
+  createdAt: number
+  updatedAt: number
+  incrementalCursor: number
+  incrementalWatermark: number
+  jrCrmRoundRobinOffset: number
+  latestEnabled: number
+  latestIntervalMinutes: number
+  latestBatchLimit: number
+  backfillEnabled: number
+  backfillIntervalMinutes: number
+  backfillBatchLimit: number
   lastLatestSyncAt: number
   lastLatestSyncStatus: number
   lastLatestSyncFetched: number
@@ -162,56 +167,45 @@ export type FacebookSyncControlCountAggregateOutputType = {
   lastBackfillSyncError: number
   latestWatermark: number
   backfillCursor: number
-  incrementalCursor: number
-  incrementalWatermark: number
-  jrCrmRoundRobinOffset: number
-  createdAt: number
-  updatedAt: number
   _all: number
 }
 
 
 export type FacebookSyncControlAvgAggregateInputType = {
-  latestIntervalMinutes?: true
-  latestBatchLimit?: true
-  backfillIntervalMinutes?: true
-  backfillBatchLimit?: true
   fallbackIntervalMinutes?: true
   batchLimit?: true
   lastSyncFetched?: true
   lastSyncCreated?: true
+  jrCrmRoundRobinOffset?: true
+  latestIntervalMinutes?: true
+  latestBatchLimit?: true
+  backfillIntervalMinutes?: true
+  backfillBatchLimit?: true
   lastLatestSyncFetched?: true
   lastLatestSyncCreated?: true
   lastBackfillSyncFetched?: true
   lastBackfillSyncCreated?: true
-  jrCrmRoundRobinOffset?: true
 }
 
 export type FacebookSyncControlSumAggregateInputType = {
-  latestIntervalMinutes?: true
-  latestBatchLimit?: true
-  backfillIntervalMinutes?: true
-  backfillBatchLimit?: true
   fallbackIntervalMinutes?: true
   batchLimit?: true
   lastSyncFetched?: true
   lastSyncCreated?: true
+  jrCrmRoundRobinOffset?: true
+  latestIntervalMinutes?: true
+  latestBatchLimit?: true
+  backfillIntervalMinutes?: true
+  backfillBatchLimit?: true
   lastLatestSyncFetched?: true
   lastLatestSyncCreated?: true
   lastBackfillSyncFetched?: true
   lastBackfillSyncCreated?: true
-  jrCrmRoundRobinOffset?: true
 }
 
 export type FacebookSyncControlMinAggregateInputType = {
   id?: true
   enabled?: true
-  latestEnabled?: true
-  latestIntervalMinutes?: true
-  latestBatchLimit?: true
-  backfillEnabled?: true
-  backfillIntervalMinutes?: true
-  backfillBatchLimit?: true
   fallbackEnabled?: true
   fallbackIntervalMinutes?: true
   batchLimit?: true
@@ -221,6 +215,17 @@ export type FacebookSyncControlMinAggregateInputType = {
   lastSyncCreated?: true
   lastSyncError?: true
   lastSyncTrigger?: true
+  createdAt?: true
+  updatedAt?: true
+  incrementalCursor?: true
+  incrementalWatermark?: true
+  jrCrmRoundRobinOffset?: true
+  latestEnabled?: true
+  latestIntervalMinutes?: true
+  latestBatchLimit?: true
+  backfillEnabled?: true
+  backfillIntervalMinutes?: true
+  backfillBatchLimit?: true
   lastLatestSyncAt?: true
   lastLatestSyncStatus?: true
   lastLatestSyncFetched?: true
@@ -233,22 +238,11 @@ export type FacebookSyncControlMinAggregateInputType = {
   lastBackfillSyncError?: true
   latestWatermark?: true
   backfillCursor?: true
-  incrementalCursor?: true
-  incrementalWatermark?: true
-  jrCrmRoundRobinOffset?: true
-  createdAt?: true
-  updatedAt?: true
 }
 
 export type FacebookSyncControlMaxAggregateInputType = {
   id?: true
   enabled?: true
-  latestEnabled?: true
-  latestIntervalMinutes?: true
-  latestBatchLimit?: true
-  backfillEnabled?: true
-  backfillIntervalMinutes?: true
-  backfillBatchLimit?: true
   fallbackEnabled?: true
   fallbackIntervalMinutes?: true
   batchLimit?: true
@@ -258,6 +252,17 @@ export type FacebookSyncControlMaxAggregateInputType = {
   lastSyncCreated?: true
   lastSyncError?: true
   lastSyncTrigger?: true
+  createdAt?: true
+  updatedAt?: true
+  incrementalCursor?: true
+  incrementalWatermark?: true
+  jrCrmRoundRobinOffset?: true
+  latestEnabled?: true
+  latestIntervalMinutes?: true
+  latestBatchLimit?: true
+  backfillEnabled?: true
+  backfillIntervalMinutes?: true
+  backfillBatchLimit?: true
   lastLatestSyncAt?: true
   lastLatestSyncStatus?: true
   lastLatestSyncFetched?: true
@@ -270,22 +275,11 @@ export type FacebookSyncControlMaxAggregateInputType = {
   lastBackfillSyncError?: true
   latestWatermark?: true
   backfillCursor?: true
-  incrementalCursor?: true
-  incrementalWatermark?: true
-  jrCrmRoundRobinOffset?: true
-  createdAt?: true
-  updatedAt?: true
 }
 
 export type FacebookSyncControlCountAggregateInputType = {
   id?: true
   enabled?: true
-  latestEnabled?: true
-  latestIntervalMinutes?: true
-  latestBatchLimit?: true
-  backfillEnabled?: true
-  backfillIntervalMinutes?: true
-  backfillBatchLimit?: true
   fallbackEnabled?: true
   fallbackIntervalMinutes?: true
   batchLimit?: true
@@ -295,6 +289,17 @@ export type FacebookSyncControlCountAggregateInputType = {
   lastSyncCreated?: true
   lastSyncError?: true
   lastSyncTrigger?: true
+  createdAt?: true
+  updatedAt?: true
+  incrementalCursor?: true
+  incrementalWatermark?: true
+  jrCrmRoundRobinOffset?: true
+  latestEnabled?: true
+  latestIntervalMinutes?: true
+  latestBatchLimit?: true
+  backfillEnabled?: true
+  backfillIntervalMinutes?: true
+  backfillBatchLimit?: true
   lastLatestSyncAt?: true
   lastLatestSyncStatus?: true
   lastLatestSyncFetched?: true
@@ -307,11 +312,6 @@ export type FacebookSyncControlCountAggregateInputType = {
   lastBackfillSyncError?: true
   latestWatermark?: true
   backfillCursor?: true
-  incrementalCursor?: true
-  incrementalWatermark?: true
-  jrCrmRoundRobinOffset?: true
-  createdAt?: true
-  updatedAt?: true
   _all?: true
 }
 
@@ -404,12 +404,6 @@ export type FacebookSyncControlGroupByArgs<ExtArgs extends runtime.Types.Extensi
 export type FacebookSyncControlGroupByOutputType = {
   id: string
   enabled: boolean
-  latestEnabled: boolean
-  latestIntervalMinutes: number
-  latestBatchLimit: number
-  backfillEnabled: boolean
-  backfillIntervalMinutes: number
-  backfillBatchLimit: number
   fallbackEnabled: boolean
   fallbackIntervalMinutes: number
   batchLimit: number
@@ -419,6 +413,17 @@ export type FacebookSyncControlGroupByOutputType = {
   lastSyncCreated: number | null
   lastSyncError: string | null
   lastSyncTrigger: string | null
+  createdAt: Date
+  updatedAt: Date
+  incrementalCursor: string | null
+  incrementalWatermark: Date | null
+  jrCrmRoundRobinOffset: number
+  latestEnabled: boolean
+  latestIntervalMinutes: number
+  latestBatchLimit: number
+  backfillEnabled: boolean
+  backfillIntervalMinutes: number
+  backfillBatchLimit: number
   lastLatestSyncAt: Date | null
   lastLatestSyncStatus: string | null
   lastLatestSyncFetched: number | null
@@ -431,11 +436,6 @@ export type FacebookSyncControlGroupByOutputType = {
   lastBackfillSyncError: string | null
   latestWatermark: Date | null
   backfillCursor: string | null
-  incrementalCursor: string | null
-  incrementalWatermark: Date | null
-  jrCrmRoundRobinOffset: number
-  createdAt: Date
-  updatedAt: Date
   _count: FacebookSyncControlCountAggregateOutputType | null
   _avg: FacebookSyncControlAvgAggregateOutputType | null
   _sum: FacebookSyncControlSumAggregateOutputType | null
@@ -464,12 +464,6 @@ export type FacebookSyncControlWhereInput = {
   NOT?: Prisma.FacebookSyncControlWhereInput | Prisma.FacebookSyncControlWhereInput[]
   id?: Prisma.StringFilter<"FacebookSyncControl"> | string
   enabled?: Prisma.BoolFilter<"FacebookSyncControl"> | boolean
-  latestEnabled?: Prisma.BoolFilter<"FacebookSyncControl"> | boolean
-  latestIntervalMinutes?: Prisma.IntFilter<"FacebookSyncControl"> | number
-  latestBatchLimit?: Prisma.IntFilter<"FacebookSyncControl"> | number
-  backfillEnabled?: Prisma.BoolFilter<"FacebookSyncControl"> | boolean
-  backfillIntervalMinutes?: Prisma.IntFilter<"FacebookSyncControl"> | number
-  backfillBatchLimit?: Prisma.IntFilter<"FacebookSyncControl"> | number
   fallbackEnabled?: Prisma.BoolFilter<"FacebookSyncControl"> | boolean
   fallbackIntervalMinutes?: Prisma.IntFilter<"FacebookSyncControl"> | number
   batchLimit?: Prisma.IntFilter<"FacebookSyncControl"> | number
@@ -479,6 +473,17 @@ export type FacebookSyncControlWhereInput = {
   lastSyncCreated?: Prisma.IntNullableFilter<"FacebookSyncControl"> | number | null
   lastSyncError?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
   lastSyncTrigger?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"FacebookSyncControl"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"FacebookSyncControl"> | Date | string
+  incrementalCursor?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
+  incrementalWatermark?: Prisma.DateTimeNullableFilter<"FacebookSyncControl"> | Date | string | null
+  jrCrmRoundRobinOffset?: Prisma.IntFilter<"FacebookSyncControl"> | number
+  latestEnabled?: Prisma.BoolFilter<"FacebookSyncControl"> | boolean
+  latestIntervalMinutes?: Prisma.IntFilter<"FacebookSyncControl"> | number
+  latestBatchLimit?: Prisma.IntFilter<"FacebookSyncControl"> | number
+  backfillEnabled?: Prisma.BoolFilter<"FacebookSyncControl"> | boolean
+  backfillIntervalMinutes?: Prisma.IntFilter<"FacebookSyncControl"> | number
+  backfillBatchLimit?: Prisma.IntFilter<"FacebookSyncControl"> | number
   lastLatestSyncAt?: Prisma.DateTimeNullableFilter<"FacebookSyncControl"> | Date | string | null
   lastLatestSyncStatus?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
   lastLatestSyncFetched?: Prisma.IntNullableFilter<"FacebookSyncControl"> | number | null
@@ -491,22 +496,11 @@ export type FacebookSyncControlWhereInput = {
   lastBackfillSyncError?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
   latestWatermark?: Prisma.DateTimeNullableFilter<"FacebookSyncControl"> | Date | string | null
   backfillCursor?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
-  incrementalCursor?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
-  incrementalWatermark?: Prisma.DateTimeNullableFilter<"FacebookSyncControl"> | Date | string | null
-  jrCrmRoundRobinOffset?: Prisma.IntFilter<"FacebookSyncControl"> | number
-  createdAt?: Prisma.DateTimeFilter<"FacebookSyncControl"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"FacebookSyncControl"> | Date | string
 }
 
 export type FacebookSyncControlOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   enabled?: Prisma.SortOrder
-  latestEnabled?: Prisma.SortOrder
-  latestIntervalMinutes?: Prisma.SortOrder
-  latestBatchLimit?: Prisma.SortOrder
-  backfillEnabled?: Prisma.SortOrder
-  backfillIntervalMinutes?: Prisma.SortOrder
-  backfillBatchLimit?: Prisma.SortOrder
   fallbackEnabled?: Prisma.SortOrder
   fallbackIntervalMinutes?: Prisma.SortOrder
   batchLimit?: Prisma.SortOrder
@@ -516,6 +510,17 @@ export type FacebookSyncControlOrderByWithRelationInput = {
   lastSyncCreated?: Prisma.SortOrderInput | Prisma.SortOrder
   lastSyncError?: Prisma.SortOrderInput | Prisma.SortOrder
   lastSyncTrigger?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  incrementalCursor?: Prisma.SortOrderInput | Prisma.SortOrder
+  incrementalWatermark?: Prisma.SortOrderInput | Prisma.SortOrder
+  jrCrmRoundRobinOffset?: Prisma.SortOrder
+  latestEnabled?: Prisma.SortOrder
+  latestIntervalMinutes?: Prisma.SortOrder
+  latestBatchLimit?: Prisma.SortOrder
+  backfillEnabled?: Prisma.SortOrder
+  backfillIntervalMinutes?: Prisma.SortOrder
+  backfillBatchLimit?: Prisma.SortOrder
   lastLatestSyncAt?: Prisma.SortOrderInput | Prisma.SortOrder
   lastLatestSyncStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   lastLatestSyncFetched?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -528,11 +533,6 @@ export type FacebookSyncControlOrderByWithRelationInput = {
   lastBackfillSyncError?: Prisma.SortOrderInput | Prisma.SortOrder
   latestWatermark?: Prisma.SortOrderInput | Prisma.SortOrder
   backfillCursor?: Prisma.SortOrderInput | Prisma.SortOrder
-  incrementalCursor?: Prisma.SortOrderInput | Prisma.SortOrder
-  incrementalWatermark?: Prisma.SortOrderInput | Prisma.SortOrder
-  jrCrmRoundRobinOffset?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type FacebookSyncControlWhereUniqueInput = Prisma.AtLeast<{
@@ -541,12 +541,6 @@ export type FacebookSyncControlWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.FacebookSyncControlWhereInput[]
   NOT?: Prisma.FacebookSyncControlWhereInput | Prisma.FacebookSyncControlWhereInput[]
   enabled?: Prisma.BoolFilter<"FacebookSyncControl"> | boolean
-  latestEnabled?: Prisma.BoolFilter<"FacebookSyncControl"> | boolean
-  latestIntervalMinutes?: Prisma.IntFilter<"FacebookSyncControl"> | number
-  latestBatchLimit?: Prisma.IntFilter<"FacebookSyncControl"> | number
-  backfillEnabled?: Prisma.BoolFilter<"FacebookSyncControl"> | boolean
-  backfillIntervalMinutes?: Prisma.IntFilter<"FacebookSyncControl"> | number
-  backfillBatchLimit?: Prisma.IntFilter<"FacebookSyncControl"> | number
   fallbackEnabled?: Prisma.BoolFilter<"FacebookSyncControl"> | boolean
   fallbackIntervalMinutes?: Prisma.IntFilter<"FacebookSyncControl"> | number
   batchLimit?: Prisma.IntFilter<"FacebookSyncControl"> | number
@@ -556,6 +550,17 @@ export type FacebookSyncControlWhereUniqueInput = Prisma.AtLeast<{
   lastSyncCreated?: Prisma.IntNullableFilter<"FacebookSyncControl"> | number | null
   lastSyncError?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
   lastSyncTrigger?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"FacebookSyncControl"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"FacebookSyncControl"> | Date | string
+  incrementalCursor?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
+  incrementalWatermark?: Prisma.DateTimeNullableFilter<"FacebookSyncControl"> | Date | string | null
+  jrCrmRoundRobinOffset?: Prisma.IntFilter<"FacebookSyncControl"> | number
+  latestEnabled?: Prisma.BoolFilter<"FacebookSyncControl"> | boolean
+  latestIntervalMinutes?: Prisma.IntFilter<"FacebookSyncControl"> | number
+  latestBatchLimit?: Prisma.IntFilter<"FacebookSyncControl"> | number
+  backfillEnabled?: Prisma.BoolFilter<"FacebookSyncControl"> | boolean
+  backfillIntervalMinutes?: Prisma.IntFilter<"FacebookSyncControl"> | number
+  backfillBatchLimit?: Prisma.IntFilter<"FacebookSyncControl"> | number
   lastLatestSyncAt?: Prisma.DateTimeNullableFilter<"FacebookSyncControl"> | Date | string | null
   lastLatestSyncStatus?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
   lastLatestSyncFetched?: Prisma.IntNullableFilter<"FacebookSyncControl"> | number | null
@@ -568,22 +573,11 @@ export type FacebookSyncControlWhereUniqueInput = Prisma.AtLeast<{
   lastBackfillSyncError?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
   latestWatermark?: Prisma.DateTimeNullableFilter<"FacebookSyncControl"> | Date | string | null
   backfillCursor?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
-  incrementalCursor?: Prisma.StringNullableFilter<"FacebookSyncControl"> | string | null
-  incrementalWatermark?: Prisma.DateTimeNullableFilter<"FacebookSyncControl"> | Date | string | null
-  jrCrmRoundRobinOffset?: Prisma.IntFilter<"FacebookSyncControl"> | number
-  createdAt?: Prisma.DateTimeFilter<"FacebookSyncControl"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"FacebookSyncControl"> | Date | string
 }, "id">
 
 export type FacebookSyncControlOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   enabled?: Prisma.SortOrder
-  latestEnabled?: Prisma.SortOrder
-  latestIntervalMinutes?: Prisma.SortOrder
-  latestBatchLimit?: Prisma.SortOrder
-  backfillEnabled?: Prisma.SortOrder
-  backfillIntervalMinutes?: Prisma.SortOrder
-  backfillBatchLimit?: Prisma.SortOrder
   fallbackEnabled?: Prisma.SortOrder
   fallbackIntervalMinutes?: Prisma.SortOrder
   batchLimit?: Prisma.SortOrder
@@ -593,6 +587,17 @@ export type FacebookSyncControlOrderByWithAggregationInput = {
   lastSyncCreated?: Prisma.SortOrderInput | Prisma.SortOrder
   lastSyncError?: Prisma.SortOrderInput | Prisma.SortOrder
   lastSyncTrigger?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  incrementalCursor?: Prisma.SortOrderInput | Prisma.SortOrder
+  incrementalWatermark?: Prisma.SortOrderInput | Prisma.SortOrder
+  jrCrmRoundRobinOffset?: Prisma.SortOrder
+  latestEnabled?: Prisma.SortOrder
+  latestIntervalMinutes?: Prisma.SortOrder
+  latestBatchLimit?: Prisma.SortOrder
+  backfillEnabled?: Prisma.SortOrder
+  backfillIntervalMinutes?: Prisma.SortOrder
+  backfillBatchLimit?: Prisma.SortOrder
   lastLatestSyncAt?: Prisma.SortOrderInput | Prisma.SortOrder
   lastLatestSyncStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   lastLatestSyncFetched?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -605,11 +610,6 @@ export type FacebookSyncControlOrderByWithAggregationInput = {
   lastBackfillSyncError?: Prisma.SortOrderInput | Prisma.SortOrder
   latestWatermark?: Prisma.SortOrderInput | Prisma.SortOrder
   backfillCursor?: Prisma.SortOrderInput | Prisma.SortOrder
-  incrementalCursor?: Prisma.SortOrderInput | Prisma.SortOrder
-  incrementalWatermark?: Prisma.SortOrderInput | Prisma.SortOrder
-  jrCrmRoundRobinOffset?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   _count?: Prisma.FacebookSyncControlCountOrderByAggregateInput
   _avg?: Prisma.FacebookSyncControlAvgOrderByAggregateInput
   _max?: Prisma.FacebookSyncControlMaxOrderByAggregateInput
@@ -623,12 +623,6 @@ export type FacebookSyncControlScalarWhereWithAggregatesInput = {
   NOT?: Prisma.FacebookSyncControlScalarWhereWithAggregatesInput | Prisma.FacebookSyncControlScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"FacebookSyncControl"> | string
   enabled?: Prisma.BoolWithAggregatesFilter<"FacebookSyncControl"> | boolean
-  latestEnabled?: Prisma.BoolWithAggregatesFilter<"FacebookSyncControl"> | boolean
-  latestIntervalMinutes?: Prisma.IntWithAggregatesFilter<"FacebookSyncControl"> | number
-  latestBatchLimit?: Prisma.IntWithAggregatesFilter<"FacebookSyncControl"> | number
-  backfillEnabled?: Prisma.BoolWithAggregatesFilter<"FacebookSyncControl"> | boolean
-  backfillIntervalMinutes?: Prisma.IntWithAggregatesFilter<"FacebookSyncControl"> | number
-  backfillBatchLimit?: Prisma.IntWithAggregatesFilter<"FacebookSyncControl"> | number
   fallbackEnabled?: Prisma.BoolWithAggregatesFilter<"FacebookSyncControl"> | boolean
   fallbackIntervalMinutes?: Prisma.IntWithAggregatesFilter<"FacebookSyncControl"> | number
   batchLimit?: Prisma.IntWithAggregatesFilter<"FacebookSyncControl"> | number
@@ -638,6 +632,17 @@ export type FacebookSyncControlScalarWhereWithAggregatesInput = {
   lastSyncCreated?: Prisma.IntNullableWithAggregatesFilter<"FacebookSyncControl"> | number | null
   lastSyncError?: Prisma.StringNullableWithAggregatesFilter<"FacebookSyncControl"> | string | null
   lastSyncTrigger?: Prisma.StringNullableWithAggregatesFilter<"FacebookSyncControl"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"FacebookSyncControl"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"FacebookSyncControl"> | Date | string
+  incrementalCursor?: Prisma.StringNullableWithAggregatesFilter<"FacebookSyncControl"> | string | null
+  incrementalWatermark?: Prisma.DateTimeNullableWithAggregatesFilter<"FacebookSyncControl"> | Date | string | null
+  jrCrmRoundRobinOffset?: Prisma.IntWithAggregatesFilter<"FacebookSyncControl"> | number
+  latestEnabled?: Prisma.BoolWithAggregatesFilter<"FacebookSyncControl"> | boolean
+  latestIntervalMinutes?: Prisma.IntWithAggregatesFilter<"FacebookSyncControl"> | number
+  latestBatchLimit?: Prisma.IntWithAggregatesFilter<"FacebookSyncControl"> | number
+  backfillEnabled?: Prisma.BoolWithAggregatesFilter<"FacebookSyncControl"> | boolean
+  backfillIntervalMinutes?: Prisma.IntWithAggregatesFilter<"FacebookSyncControl"> | number
+  backfillBatchLimit?: Prisma.IntWithAggregatesFilter<"FacebookSyncControl"> | number
   lastLatestSyncAt?: Prisma.DateTimeNullableWithAggregatesFilter<"FacebookSyncControl"> | Date | string | null
   lastLatestSyncStatus?: Prisma.StringNullableWithAggregatesFilter<"FacebookSyncControl"> | string | null
   lastLatestSyncFetched?: Prisma.IntNullableWithAggregatesFilter<"FacebookSyncControl"> | number | null
@@ -650,22 +655,11 @@ export type FacebookSyncControlScalarWhereWithAggregatesInput = {
   lastBackfillSyncError?: Prisma.StringNullableWithAggregatesFilter<"FacebookSyncControl"> | string | null
   latestWatermark?: Prisma.DateTimeNullableWithAggregatesFilter<"FacebookSyncControl"> | Date | string | null
   backfillCursor?: Prisma.StringNullableWithAggregatesFilter<"FacebookSyncControl"> | string | null
-  incrementalCursor?: Prisma.StringNullableWithAggregatesFilter<"FacebookSyncControl"> | string | null
-  incrementalWatermark?: Prisma.DateTimeNullableWithAggregatesFilter<"FacebookSyncControl"> | Date | string | null
-  jrCrmRoundRobinOffset?: Prisma.IntWithAggregatesFilter<"FacebookSyncControl"> | number
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"FacebookSyncControl"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"FacebookSyncControl"> | Date | string
 }
 
 export type FacebookSyncControlCreateInput = {
   id?: string
   enabled?: boolean
-  latestEnabled?: boolean
-  latestIntervalMinutes?: number
-  latestBatchLimit?: number
-  backfillEnabled?: boolean
-  backfillIntervalMinutes?: number
-  backfillBatchLimit?: number
   fallbackEnabled?: boolean
   fallbackIntervalMinutes?: number
   batchLimit?: number
@@ -675,6 +669,17 @@ export type FacebookSyncControlCreateInput = {
   lastSyncCreated?: number | null
   lastSyncError?: string | null
   lastSyncTrigger?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  incrementalCursor?: string | null
+  incrementalWatermark?: Date | string | null
+  jrCrmRoundRobinOffset?: number
+  latestEnabled?: boolean
+  latestIntervalMinutes?: number
+  latestBatchLimit?: number
+  backfillEnabled?: boolean
+  backfillIntervalMinutes?: number
+  backfillBatchLimit?: number
   lastLatestSyncAt?: Date | string | null
   lastLatestSyncStatus?: string | null
   lastLatestSyncFetched?: number | null
@@ -687,22 +692,11 @@ export type FacebookSyncControlCreateInput = {
   lastBackfillSyncError?: string | null
   latestWatermark?: Date | string | null
   backfillCursor?: string | null
-  incrementalCursor?: string | null
-  incrementalWatermark?: Date | string | null
-  jrCrmRoundRobinOffset?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type FacebookSyncControlUncheckedCreateInput = {
   id?: string
   enabled?: boolean
-  latestEnabled?: boolean
-  latestIntervalMinutes?: number
-  latestBatchLimit?: number
-  backfillEnabled?: boolean
-  backfillIntervalMinutes?: number
-  backfillBatchLimit?: number
   fallbackEnabled?: boolean
   fallbackIntervalMinutes?: number
   batchLimit?: number
@@ -712,6 +706,17 @@ export type FacebookSyncControlUncheckedCreateInput = {
   lastSyncCreated?: number | null
   lastSyncError?: string | null
   lastSyncTrigger?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  incrementalCursor?: string | null
+  incrementalWatermark?: Date | string | null
+  jrCrmRoundRobinOffset?: number
+  latestEnabled?: boolean
+  latestIntervalMinutes?: number
+  latestBatchLimit?: number
+  backfillEnabled?: boolean
+  backfillIntervalMinutes?: number
+  backfillBatchLimit?: number
   lastLatestSyncAt?: Date | string | null
   lastLatestSyncStatus?: string | null
   lastLatestSyncFetched?: number | null
@@ -724,22 +729,11 @@ export type FacebookSyncControlUncheckedCreateInput = {
   lastBackfillSyncError?: string | null
   latestWatermark?: Date | string | null
   backfillCursor?: string | null
-  incrementalCursor?: string | null
-  incrementalWatermark?: Date | string | null
-  jrCrmRoundRobinOffset?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type FacebookSyncControlUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latestEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latestIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
-  latestBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  backfillEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  backfillIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
-  backfillBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
   fallbackEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fallbackIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   batchLimit?: Prisma.IntFieldUpdateOperationsInput | number
@@ -749,6 +743,17 @@ export type FacebookSyncControlUpdateInput = {
   lastSyncCreated?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lastSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSyncTrigger?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  incrementalCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  incrementalWatermark?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  jrCrmRoundRobinOffset?: Prisma.IntFieldUpdateOperationsInput | number
+  latestEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latestIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  latestBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
+  backfillEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backfillIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  backfillBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
   lastLatestSyncAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLatestSyncStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLatestSyncFetched?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -761,22 +766,11 @@ export type FacebookSyncControlUpdateInput = {
   lastBackfillSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latestWatermark?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   backfillCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  incrementalCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  incrementalWatermark?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  jrCrmRoundRobinOffset?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FacebookSyncControlUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latestEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latestIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
-  latestBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  backfillEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  backfillIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
-  backfillBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
   fallbackEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fallbackIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   batchLimit?: Prisma.IntFieldUpdateOperationsInput | number
@@ -786,6 +780,17 @@ export type FacebookSyncControlUncheckedUpdateInput = {
   lastSyncCreated?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lastSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSyncTrigger?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  incrementalCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  incrementalWatermark?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  jrCrmRoundRobinOffset?: Prisma.IntFieldUpdateOperationsInput | number
+  latestEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latestIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  latestBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
+  backfillEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backfillIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  backfillBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
   lastLatestSyncAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLatestSyncStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLatestSyncFetched?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -798,22 +803,11 @@ export type FacebookSyncControlUncheckedUpdateInput = {
   lastBackfillSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latestWatermark?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   backfillCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  incrementalCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  incrementalWatermark?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  jrCrmRoundRobinOffset?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FacebookSyncControlCreateManyInput = {
   id?: string
   enabled?: boolean
-  latestEnabled?: boolean
-  latestIntervalMinutes?: number
-  latestBatchLimit?: number
-  backfillEnabled?: boolean
-  backfillIntervalMinutes?: number
-  backfillBatchLimit?: number
   fallbackEnabled?: boolean
   fallbackIntervalMinutes?: number
   batchLimit?: number
@@ -823,6 +817,17 @@ export type FacebookSyncControlCreateManyInput = {
   lastSyncCreated?: number | null
   lastSyncError?: string | null
   lastSyncTrigger?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  incrementalCursor?: string | null
+  incrementalWatermark?: Date | string | null
+  jrCrmRoundRobinOffset?: number
+  latestEnabled?: boolean
+  latestIntervalMinutes?: number
+  latestBatchLimit?: number
+  backfillEnabled?: boolean
+  backfillIntervalMinutes?: number
+  backfillBatchLimit?: number
   lastLatestSyncAt?: Date | string | null
   lastLatestSyncStatus?: string | null
   lastLatestSyncFetched?: number | null
@@ -835,22 +840,11 @@ export type FacebookSyncControlCreateManyInput = {
   lastBackfillSyncError?: string | null
   latestWatermark?: Date | string | null
   backfillCursor?: string | null
-  incrementalCursor?: string | null
-  incrementalWatermark?: Date | string | null
-  jrCrmRoundRobinOffset?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type FacebookSyncControlUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latestEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latestIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
-  latestBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  backfillEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  backfillIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
-  backfillBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
   fallbackEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fallbackIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   batchLimit?: Prisma.IntFieldUpdateOperationsInput | number
@@ -860,6 +854,17 @@ export type FacebookSyncControlUpdateManyMutationInput = {
   lastSyncCreated?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lastSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSyncTrigger?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  incrementalCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  incrementalWatermark?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  jrCrmRoundRobinOffset?: Prisma.IntFieldUpdateOperationsInput | number
+  latestEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latestIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  latestBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
+  backfillEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backfillIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  backfillBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
   lastLatestSyncAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLatestSyncStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLatestSyncFetched?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -872,22 +877,11 @@ export type FacebookSyncControlUpdateManyMutationInput = {
   lastBackfillSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latestWatermark?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   backfillCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  incrementalCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  incrementalWatermark?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  jrCrmRoundRobinOffset?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FacebookSyncControlUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latestEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latestIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
-  latestBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  backfillEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  backfillIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
-  backfillBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
   fallbackEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fallbackIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   batchLimit?: Prisma.IntFieldUpdateOperationsInput | number
@@ -897,6 +891,17 @@ export type FacebookSyncControlUncheckedUpdateManyInput = {
   lastSyncCreated?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lastSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSyncTrigger?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  incrementalCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  incrementalWatermark?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  jrCrmRoundRobinOffset?: Prisma.IntFieldUpdateOperationsInput | number
+  latestEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latestIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  latestBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
+  backfillEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  backfillIntervalMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  backfillBatchLimit?: Prisma.IntFieldUpdateOperationsInput | number
   lastLatestSyncAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLatestSyncStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastLatestSyncFetched?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -909,22 +914,11 @@ export type FacebookSyncControlUncheckedUpdateManyInput = {
   lastBackfillSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latestWatermark?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   backfillCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  incrementalCursor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  incrementalWatermark?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  jrCrmRoundRobinOffset?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FacebookSyncControlCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   enabled?: Prisma.SortOrder
-  latestEnabled?: Prisma.SortOrder
-  latestIntervalMinutes?: Prisma.SortOrder
-  latestBatchLimit?: Prisma.SortOrder
-  backfillEnabled?: Prisma.SortOrder
-  backfillIntervalMinutes?: Prisma.SortOrder
-  backfillBatchLimit?: Prisma.SortOrder
   fallbackEnabled?: Prisma.SortOrder
   fallbackIntervalMinutes?: Prisma.SortOrder
   batchLimit?: Prisma.SortOrder
@@ -934,6 +928,17 @@ export type FacebookSyncControlCountOrderByAggregateInput = {
   lastSyncCreated?: Prisma.SortOrder
   lastSyncError?: Prisma.SortOrder
   lastSyncTrigger?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  incrementalCursor?: Prisma.SortOrder
+  incrementalWatermark?: Prisma.SortOrder
+  jrCrmRoundRobinOffset?: Prisma.SortOrder
+  latestEnabled?: Prisma.SortOrder
+  latestIntervalMinutes?: Prisma.SortOrder
+  latestBatchLimit?: Prisma.SortOrder
+  backfillEnabled?: Prisma.SortOrder
+  backfillIntervalMinutes?: Prisma.SortOrder
+  backfillBatchLimit?: Prisma.SortOrder
   lastLatestSyncAt?: Prisma.SortOrder
   lastLatestSyncStatus?: Prisma.SortOrder
   lastLatestSyncFetched?: Prisma.SortOrder
@@ -946,38 +951,27 @@ export type FacebookSyncControlCountOrderByAggregateInput = {
   lastBackfillSyncError?: Prisma.SortOrder
   latestWatermark?: Prisma.SortOrder
   backfillCursor?: Prisma.SortOrder
-  incrementalCursor?: Prisma.SortOrder
-  incrementalWatermark?: Prisma.SortOrder
-  jrCrmRoundRobinOffset?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type FacebookSyncControlAvgOrderByAggregateInput = {
-  latestIntervalMinutes?: Prisma.SortOrder
-  latestBatchLimit?: Prisma.SortOrder
-  backfillIntervalMinutes?: Prisma.SortOrder
-  backfillBatchLimit?: Prisma.SortOrder
   fallbackIntervalMinutes?: Prisma.SortOrder
   batchLimit?: Prisma.SortOrder
   lastSyncFetched?: Prisma.SortOrder
   lastSyncCreated?: Prisma.SortOrder
+  jrCrmRoundRobinOffset?: Prisma.SortOrder
+  latestIntervalMinutes?: Prisma.SortOrder
+  latestBatchLimit?: Prisma.SortOrder
+  backfillIntervalMinutes?: Prisma.SortOrder
+  backfillBatchLimit?: Prisma.SortOrder
   lastLatestSyncFetched?: Prisma.SortOrder
   lastLatestSyncCreated?: Prisma.SortOrder
   lastBackfillSyncFetched?: Prisma.SortOrder
   lastBackfillSyncCreated?: Prisma.SortOrder
-  jrCrmRoundRobinOffset?: Prisma.SortOrder
 }
 
 export type FacebookSyncControlMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   enabled?: Prisma.SortOrder
-  latestEnabled?: Prisma.SortOrder
-  latestIntervalMinutes?: Prisma.SortOrder
-  latestBatchLimit?: Prisma.SortOrder
-  backfillEnabled?: Prisma.SortOrder
-  backfillIntervalMinutes?: Prisma.SortOrder
-  backfillBatchLimit?: Prisma.SortOrder
   fallbackEnabled?: Prisma.SortOrder
   fallbackIntervalMinutes?: Prisma.SortOrder
   batchLimit?: Prisma.SortOrder
@@ -987,6 +981,17 @@ export type FacebookSyncControlMaxOrderByAggregateInput = {
   lastSyncCreated?: Prisma.SortOrder
   lastSyncError?: Prisma.SortOrder
   lastSyncTrigger?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  incrementalCursor?: Prisma.SortOrder
+  incrementalWatermark?: Prisma.SortOrder
+  jrCrmRoundRobinOffset?: Prisma.SortOrder
+  latestEnabled?: Prisma.SortOrder
+  latestIntervalMinutes?: Prisma.SortOrder
+  latestBatchLimit?: Prisma.SortOrder
+  backfillEnabled?: Prisma.SortOrder
+  backfillIntervalMinutes?: Prisma.SortOrder
+  backfillBatchLimit?: Prisma.SortOrder
   lastLatestSyncAt?: Prisma.SortOrder
   lastLatestSyncStatus?: Prisma.SortOrder
   lastLatestSyncFetched?: Prisma.SortOrder
@@ -999,22 +1004,11 @@ export type FacebookSyncControlMaxOrderByAggregateInput = {
   lastBackfillSyncError?: Prisma.SortOrder
   latestWatermark?: Prisma.SortOrder
   backfillCursor?: Prisma.SortOrder
-  incrementalCursor?: Prisma.SortOrder
-  incrementalWatermark?: Prisma.SortOrder
-  jrCrmRoundRobinOffset?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type FacebookSyncControlMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   enabled?: Prisma.SortOrder
-  latestEnabled?: Prisma.SortOrder
-  latestIntervalMinutes?: Prisma.SortOrder
-  latestBatchLimit?: Prisma.SortOrder
-  backfillEnabled?: Prisma.SortOrder
-  backfillIntervalMinutes?: Prisma.SortOrder
-  backfillBatchLimit?: Prisma.SortOrder
   fallbackEnabled?: Prisma.SortOrder
   fallbackIntervalMinutes?: Prisma.SortOrder
   batchLimit?: Prisma.SortOrder
@@ -1024,6 +1018,17 @@ export type FacebookSyncControlMinOrderByAggregateInput = {
   lastSyncCreated?: Prisma.SortOrder
   lastSyncError?: Prisma.SortOrder
   lastSyncTrigger?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  incrementalCursor?: Prisma.SortOrder
+  incrementalWatermark?: Prisma.SortOrder
+  jrCrmRoundRobinOffset?: Prisma.SortOrder
+  latestEnabled?: Prisma.SortOrder
+  latestIntervalMinutes?: Prisma.SortOrder
+  latestBatchLimit?: Prisma.SortOrder
+  backfillEnabled?: Prisma.SortOrder
+  backfillIntervalMinutes?: Prisma.SortOrder
+  backfillBatchLimit?: Prisma.SortOrder
   lastLatestSyncAt?: Prisma.SortOrder
   lastLatestSyncStatus?: Prisma.SortOrder
   lastLatestSyncFetched?: Prisma.SortOrder
@@ -1036,27 +1041,22 @@ export type FacebookSyncControlMinOrderByAggregateInput = {
   lastBackfillSyncError?: Prisma.SortOrder
   latestWatermark?: Prisma.SortOrder
   backfillCursor?: Prisma.SortOrder
-  incrementalCursor?: Prisma.SortOrder
-  incrementalWatermark?: Prisma.SortOrder
-  jrCrmRoundRobinOffset?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type FacebookSyncControlSumOrderByAggregateInput = {
-  latestIntervalMinutes?: Prisma.SortOrder
-  latestBatchLimit?: Prisma.SortOrder
-  backfillIntervalMinutes?: Prisma.SortOrder
-  backfillBatchLimit?: Prisma.SortOrder
   fallbackIntervalMinutes?: Prisma.SortOrder
   batchLimit?: Prisma.SortOrder
   lastSyncFetched?: Prisma.SortOrder
   lastSyncCreated?: Prisma.SortOrder
+  jrCrmRoundRobinOffset?: Prisma.SortOrder
+  latestIntervalMinutes?: Prisma.SortOrder
+  latestBatchLimit?: Prisma.SortOrder
+  backfillIntervalMinutes?: Prisma.SortOrder
+  backfillBatchLimit?: Prisma.SortOrder
   lastLatestSyncFetched?: Prisma.SortOrder
   lastLatestSyncCreated?: Prisma.SortOrder
   lastBackfillSyncFetched?: Prisma.SortOrder
   lastBackfillSyncCreated?: Prisma.SortOrder
-  jrCrmRoundRobinOffset?: Prisma.SortOrder
 }
 
 
@@ -1064,12 +1064,6 @@ export type FacebookSyncControlSumOrderByAggregateInput = {
 export type FacebookSyncControlSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   enabled?: boolean
-  latestEnabled?: boolean
-  latestIntervalMinutes?: boolean
-  latestBatchLimit?: boolean
-  backfillEnabled?: boolean
-  backfillIntervalMinutes?: boolean
-  backfillBatchLimit?: boolean
   fallbackEnabled?: boolean
   fallbackIntervalMinutes?: boolean
   batchLimit?: boolean
@@ -1079,6 +1073,17 @@ export type FacebookSyncControlSelect<ExtArgs extends runtime.Types.Extensions.I
   lastSyncCreated?: boolean
   lastSyncError?: boolean
   lastSyncTrigger?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  incrementalCursor?: boolean
+  incrementalWatermark?: boolean
+  jrCrmRoundRobinOffset?: boolean
+  latestEnabled?: boolean
+  latestIntervalMinutes?: boolean
+  latestBatchLimit?: boolean
+  backfillEnabled?: boolean
+  backfillIntervalMinutes?: boolean
+  backfillBatchLimit?: boolean
   lastLatestSyncAt?: boolean
   lastLatestSyncStatus?: boolean
   lastLatestSyncFetched?: boolean
@@ -1091,22 +1096,11 @@ export type FacebookSyncControlSelect<ExtArgs extends runtime.Types.Extensions.I
   lastBackfillSyncError?: boolean
   latestWatermark?: boolean
   backfillCursor?: boolean
-  incrementalCursor?: boolean
-  incrementalWatermark?: boolean
-  jrCrmRoundRobinOffset?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["facebookSyncControl"]>
 
 export type FacebookSyncControlSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   enabled?: boolean
-  latestEnabled?: boolean
-  latestIntervalMinutes?: boolean
-  latestBatchLimit?: boolean
-  backfillEnabled?: boolean
-  backfillIntervalMinutes?: boolean
-  backfillBatchLimit?: boolean
   fallbackEnabled?: boolean
   fallbackIntervalMinutes?: boolean
   batchLimit?: boolean
@@ -1116,6 +1110,17 @@ export type FacebookSyncControlSelectCreateManyAndReturn<ExtArgs extends runtime
   lastSyncCreated?: boolean
   lastSyncError?: boolean
   lastSyncTrigger?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  incrementalCursor?: boolean
+  incrementalWatermark?: boolean
+  jrCrmRoundRobinOffset?: boolean
+  latestEnabled?: boolean
+  latestIntervalMinutes?: boolean
+  latestBatchLimit?: boolean
+  backfillEnabled?: boolean
+  backfillIntervalMinutes?: boolean
+  backfillBatchLimit?: boolean
   lastLatestSyncAt?: boolean
   lastLatestSyncStatus?: boolean
   lastLatestSyncFetched?: boolean
@@ -1128,22 +1133,11 @@ export type FacebookSyncControlSelectCreateManyAndReturn<ExtArgs extends runtime
   lastBackfillSyncError?: boolean
   latestWatermark?: boolean
   backfillCursor?: boolean
-  incrementalCursor?: boolean
-  incrementalWatermark?: boolean
-  jrCrmRoundRobinOffset?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["facebookSyncControl"]>
 
 export type FacebookSyncControlSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   enabled?: boolean
-  latestEnabled?: boolean
-  latestIntervalMinutes?: boolean
-  latestBatchLimit?: boolean
-  backfillEnabled?: boolean
-  backfillIntervalMinutes?: boolean
-  backfillBatchLimit?: boolean
   fallbackEnabled?: boolean
   fallbackIntervalMinutes?: boolean
   batchLimit?: boolean
@@ -1153,6 +1147,17 @@ export type FacebookSyncControlSelectUpdateManyAndReturn<ExtArgs extends runtime
   lastSyncCreated?: boolean
   lastSyncError?: boolean
   lastSyncTrigger?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  incrementalCursor?: boolean
+  incrementalWatermark?: boolean
+  jrCrmRoundRobinOffset?: boolean
+  latestEnabled?: boolean
+  latestIntervalMinutes?: boolean
+  latestBatchLimit?: boolean
+  backfillEnabled?: boolean
+  backfillIntervalMinutes?: boolean
+  backfillBatchLimit?: boolean
   lastLatestSyncAt?: boolean
   lastLatestSyncStatus?: boolean
   lastLatestSyncFetched?: boolean
@@ -1165,22 +1170,11 @@ export type FacebookSyncControlSelectUpdateManyAndReturn<ExtArgs extends runtime
   lastBackfillSyncError?: boolean
   latestWatermark?: boolean
   backfillCursor?: boolean
-  incrementalCursor?: boolean
-  incrementalWatermark?: boolean
-  jrCrmRoundRobinOffset?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["facebookSyncControl"]>
 
 export type FacebookSyncControlSelectScalar = {
   id?: boolean
   enabled?: boolean
-  latestEnabled?: boolean
-  latestIntervalMinutes?: boolean
-  latestBatchLimit?: boolean
-  backfillEnabled?: boolean
-  backfillIntervalMinutes?: boolean
-  backfillBatchLimit?: boolean
   fallbackEnabled?: boolean
   fallbackIntervalMinutes?: boolean
   batchLimit?: boolean
@@ -1190,6 +1184,17 @@ export type FacebookSyncControlSelectScalar = {
   lastSyncCreated?: boolean
   lastSyncError?: boolean
   lastSyncTrigger?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  incrementalCursor?: boolean
+  incrementalWatermark?: boolean
+  jrCrmRoundRobinOffset?: boolean
+  latestEnabled?: boolean
+  latestIntervalMinutes?: boolean
+  latestBatchLimit?: boolean
+  backfillEnabled?: boolean
+  backfillIntervalMinutes?: boolean
+  backfillBatchLimit?: boolean
   lastLatestSyncAt?: boolean
   lastLatestSyncStatus?: boolean
   lastLatestSyncFetched?: boolean
@@ -1202,14 +1207,9 @@ export type FacebookSyncControlSelectScalar = {
   lastBackfillSyncError?: boolean
   latestWatermark?: boolean
   backfillCursor?: boolean
-  incrementalCursor?: boolean
-  incrementalWatermark?: boolean
-  jrCrmRoundRobinOffset?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }
 
-export type FacebookSyncControlOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "enabled" | "latestEnabled" | "latestIntervalMinutes" | "latestBatchLimit" | "backfillEnabled" | "backfillIntervalMinutes" | "backfillBatchLimit" | "fallbackEnabled" | "fallbackIntervalMinutes" | "batchLimit" | "lastSyncAt" | "lastSyncStatus" | "lastSyncFetched" | "lastSyncCreated" | "lastSyncError" | "lastSyncTrigger" | "lastLatestSyncAt" | "lastLatestSyncStatus" | "lastLatestSyncFetched" | "lastLatestSyncCreated" | "lastLatestSyncError" | "lastBackfillSyncAt" | "lastBackfillSyncStatus" | "lastBackfillSyncFetched" | "lastBackfillSyncCreated" | "lastBackfillSyncError" | "latestWatermark" | "backfillCursor" | "incrementalCursor" | "incrementalWatermark" | "jrCrmRoundRobinOffset" | "createdAt" | "updatedAt", ExtArgs["result"]["facebookSyncControl"]>
+export type FacebookSyncControlOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "enabled" | "fallbackEnabled" | "fallbackIntervalMinutes" | "batchLimit" | "lastSyncAt" | "lastSyncStatus" | "lastSyncFetched" | "lastSyncCreated" | "lastSyncError" | "lastSyncTrigger" | "createdAt" | "updatedAt" | "incrementalCursor" | "incrementalWatermark" | "jrCrmRoundRobinOffset" | "latestEnabled" | "latestIntervalMinutes" | "latestBatchLimit" | "backfillEnabled" | "backfillIntervalMinutes" | "backfillBatchLimit" | "lastLatestSyncAt" | "lastLatestSyncStatus" | "lastLatestSyncFetched" | "lastLatestSyncCreated" | "lastLatestSyncError" | "lastBackfillSyncAt" | "lastBackfillSyncStatus" | "lastBackfillSyncFetched" | "lastBackfillSyncCreated" | "lastBackfillSyncError" | "latestWatermark" | "backfillCursor", ExtArgs["result"]["facebookSyncControl"]>
 
 export type $FacebookSyncControlPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FacebookSyncControl"
@@ -1217,12 +1217,6 @@ export type $FacebookSyncControlPayload<ExtArgs extends runtime.Types.Extensions
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     enabled: boolean
-    latestEnabled: boolean
-    latestIntervalMinutes: number
-    latestBatchLimit: number
-    backfillEnabled: boolean
-    backfillIntervalMinutes: number
-    backfillBatchLimit: number
     fallbackEnabled: boolean
     fallbackIntervalMinutes: number
     batchLimit: number
@@ -1232,6 +1226,17 @@ export type $FacebookSyncControlPayload<ExtArgs extends runtime.Types.Extensions
     lastSyncCreated: number | null
     lastSyncError: string | null
     lastSyncTrigger: string | null
+    createdAt: Date
+    updatedAt: Date
+    incrementalCursor: string | null
+    incrementalWatermark: Date | null
+    jrCrmRoundRobinOffset: number
+    latestEnabled: boolean
+    latestIntervalMinutes: number
+    latestBatchLimit: number
+    backfillEnabled: boolean
+    backfillIntervalMinutes: number
+    backfillBatchLimit: number
     lastLatestSyncAt: Date | null
     lastLatestSyncStatus: string | null
     lastLatestSyncFetched: number | null
@@ -1244,11 +1249,6 @@ export type $FacebookSyncControlPayload<ExtArgs extends runtime.Types.Extensions
     lastBackfillSyncError: string | null
     latestWatermark: Date | null
     backfillCursor: string | null
-    incrementalCursor: string | null
-    incrementalWatermark: Date | null
-    jrCrmRoundRobinOffset: number
-    createdAt: Date
-    updatedAt: Date
   }, ExtArgs["result"]["facebookSyncControl"]>
   composites: {}
 }
@@ -1674,12 +1674,6 @@ export interface Prisma__FacebookSyncControlClient<T, Null = never, ExtArgs exte
 export interface FacebookSyncControlFieldRefs {
   readonly id: Prisma.FieldRef<"FacebookSyncControl", 'String'>
   readonly enabled: Prisma.FieldRef<"FacebookSyncControl", 'Boolean'>
-  readonly latestEnabled: Prisma.FieldRef<"FacebookSyncControl", 'Boolean'>
-  readonly latestIntervalMinutes: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
-  readonly latestBatchLimit: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
-  readonly backfillEnabled: Prisma.FieldRef<"FacebookSyncControl", 'Boolean'>
-  readonly backfillIntervalMinutes: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
-  readonly backfillBatchLimit: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
   readonly fallbackEnabled: Prisma.FieldRef<"FacebookSyncControl", 'Boolean'>
   readonly fallbackIntervalMinutes: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
   readonly batchLimit: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
@@ -1689,6 +1683,17 @@ export interface FacebookSyncControlFieldRefs {
   readonly lastSyncCreated: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
   readonly lastSyncError: Prisma.FieldRef<"FacebookSyncControl", 'String'>
   readonly lastSyncTrigger: Prisma.FieldRef<"FacebookSyncControl", 'String'>
+  readonly createdAt: Prisma.FieldRef<"FacebookSyncControl", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"FacebookSyncControl", 'DateTime'>
+  readonly incrementalCursor: Prisma.FieldRef<"FacebookSyncControl", 'String'>
+  readonly incrementalWatermark: Prisma.FieldRef<"FacebookSyncControl", 'DateTime'>
+  readonly jrCrmRoundRobinOffset: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
+  readonly latestEnabled: Prisma.FieldRef<"FacebookSyncControl", 'Boolean'>
+  readonly latestIntervalMinutes: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
+  readonly latestBatchLimit: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
+  readonly backfillEnabled: Prisma.FieldRef<"FacebookSyncControl", 'Boolean'>
+  readonly backfillIntervalMinutes: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
+  readonly backfillBatchLimit: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
   readonly lastLatestSyncAt: Prisma.FieldRef<"FacebookSyncControl", 'DateTime'>
   readonly lastLatestSyncStatus: Prisma.FieldRef<"FacebookSyncControl", 'String'>
   readonly lastLatestSyncFetched: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
@@ -1701,11 +1706,6 @@ export interface FacebookSyncControlFieldRefs {
   readonly lastBackfillSyncError: Prisma.FieldRef<"FacebookSyncControl", 'String'>
   readonly latestWatermark: Prisma.FieldRef<"FacebookSyncControl", 'DateTime'>
   readonly backfillCursor: Prisma.FieldRef<"FacebookSyncControl", 'String'>
-  readonly incrementalCursor: Prisma.FieldRef<"FacebookSyncControl", 'String'>
-  readonly incrementalWatermark: Prisma.FieldRef<"FacebookSyncControl", 'DateTime'>
-  readonly jrCrmRoundRobinOffset: Prisma.FieldRef<"FacebookSyncControl", 'Int'>
-  readonly createdAt: Prisma.FieldRef<"FacebookSyncControl", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"FacebookSyncControl", 'DateTime'>
 }
     
 

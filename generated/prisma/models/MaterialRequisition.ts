@@ -235,6 +235,7 @@ export type MaterialRequisitionWhereInput = {
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   items?: Prisma.MaterialRequisitionItemListRelationFilter
   amendments?: Prisma.RequisitionAmendmentListRelationFilter
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionListRelationFilter
 }
 
 export type MaterialRequisitionOrderByWithRelationInput = {
@@ -254,6 +255,7 @@ export type MaterialRequisitionOrderByWithRelationInput = {
   createdBy?: Prisma.UserOrderByWithRelationInput
   items?: Prisma.MaterialRequisitionItemOrderByRelationAggregateInput
   amendments?: Prisma.RequisitionAmendmentOrderByRelationAggregateInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionOrderByRelationAggregateInput
 }
 
 export type MaterialRequisitionWhereUniqueInput = Prisma.AtLeast<{
@@ -276,6 +278,7 @@ export type MaterialRequisitionWhereUniqueInput = Prisma.AtLeast<{
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   items?: Prisma.MaterialRequisitionItemListRelationFilter
   amendments?: Prisma.RequisitionAmendmentListRelationFilter
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionListRelationFilter
 }, "id" | "requisitionNo">
 
 export type MaterialRequisitionOrderByWithAggregationInput = {
@@ -326,6 +329,7 @@ export type MaterialRequisitionCreateInput = {
   createdBy: Prisma.UserCreateNestedOneWithoutMaterialRequisitionsCreatedInput
   items?: Prisma.MaterialRequisitionItemCreateNestedManyWithoutRequisitionInput
   amendments?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequisitionInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutMaterialRequisitionInput
 }
 
 export type MaterialRequisitionUncheckedCreateInput = {
@@ -342,6 +346,7 @@ export type MaterialRequisitionUncheckedCreateInput = {
   updatedAt?: Date | string
   items?: Prisma.MaterialRequisitionItemUncheckedCreateNestedManyWithoutRequisitionInput
   amendments?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequisitionInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutMaterialRequisitionInput
 }
 
 export type MaterialRequisitionUpdateInput = {
@@ -358,6 +363,7 @@ export type MaterialRequisitionUpdateInput = {
   createdBy?: Prisma.UserUpdateOneRequiredWithoutMaterialRequisitionsCreatedNestedInput
   items?: Prisma.MaterialRequisitionItemUpdateManyWithoutRequisitionNestedInput
   amendments?: Prisma.RequisitionAmendmentUpdateManyWithoutRequisitionNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutMaterialRequisitionNestedInput
 }
 
 export type MaterialRequisitionUncheckedUpdateInput = {
@@ -374,6 +380,7 @@ export type MaterialRequisitionUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.MaterialRequisitionItemUncheckedUpdateManyWithoutRequisitionNestedInput
   amendments?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequisitionNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutMaterialRequisitionNestedInput
 }
 
 export type MaterialRequisitionCreateManyInput = {
@@ -470,6 +477,11 @@ export type MaterialRequisitionMinOrderByAggregateInput = {
 export type MaterialRequisitionScalarRelationFilter = {
   is?: Prisma.MaterialRequisitionWhereInput
   isNot?: Prisma.MaterialRequisitionWhereInput
+}
+
+export type MaterialRequisitionNullableScalarRelationFilter = {
+  is?: Prisma.MaterialRequisitionWhereInput | null
+  isNot?: Prisma.MaterialRequisitionWhereInput | null
 }
 
 export type MaterialRequisitionCreateNestedManyWithoutLeadInput = {
@@ -630,6 +642,22 @@ export type MaterialRequisitionUpdateOneRequiredWithoutAmendmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MaterialRequisitionUpdateToOneWithWhereWithoutAmendmentsInput, Prisma.MaterialRequisitionUpdateWithoutAmendmentsInput>, Prisma.MaterialRequisitionUncheckedUpdateWithoutAmendmentsInput>
 }
 
+export type MaterialRequisitionCreateNestedOneWithoutProcurementWalletTransactionsInput = {
+  create?: Prisma.XOR<Prisma.MaterialRequisitionCreateWithoutProcurementWalletTransactionsInput, Prisma.MaterialRequisitionUncheckedCreateWithoutProcurementWalletTransactionsInput>
+  connectOrCreate?: Prisma.MaterialRequisitionCreateOrConnectWithoutProcurementWalletTransactionsInput
+  connect?: Prisma.MaterialRequisitionWhereUniqueInput
+}
+
+export type MaterialRequisitionUpdateOneWithoutProcurementWalletTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.MaterialRequisitionCreateWithoutProcurementWalletTransactionsInput, Prisma.MaterialRequisitionUncheckedCreateWithoutProcurementWalletTransactionsInput>
+  connectOrCreate?: Prisma.MaterialRequisitionCreateOrConnectWithoutProcurementWalletTransactionsInput
+  upsert?: Prisma.MaterialRequisitionUpsertWithoutProcurementWalletTransactionsInput
+  disconnect?: Prisma.MaterialRequisitionWhereInput | boolean
+  delete?: Prisma.MaterialRequisitionWhereInput | boolean
+  connect?: Prisma.MaterialRequisitionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MaterialRequisitionUpdateToOneWithWhereWithoutProcurementWalletTransactionsInput, Prisma.MaterialRequisitionUpdateWithoutProcurementWalletTransactionsInput>, Prisma.MaterialRequisitionUncheckedUpdateWithoutProcurementWalletTransactionsInput>
+}
+
 export type MaterialRequisitionCreateWithoutLeadInput = {
   id?: string
   requisitionNo: string
@@ -643,6 +671,7 @@ export type MaterialRequisitionCreateWithoutLeadInput = {
   createdBy: Prisma.UserCreateNestedOneWithoutMaterialRequisitionsCreatedInput
   items?: Prisma.MaterialRequisitionItemCreateNestedManyWithoutRequisitionInput
   amendments?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequisitionInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutMaterialRequisitionInput
 }
 
 export type MaterialRequisitionUncheckedCreateWithoutLeadInput = {
@@ -658,6 +687,7 @@ export type MaterialRequisitionUncheckedCreateWithoutLeadInput = {
   updatedAt?: Date | string
   items?: Prisma.MaterialRequisitionItemUncheckedCreateNestedManyWithoutRequisitionInput
   amendments?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequisitionInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutMaterialRequisitionInput
 }
 
 export type MaterialRequisitionCreateOrConnectWithoutLeadInput = {
@@ -716,6 +746,7 @@ export type MaterialRequisitionCreateWithoutCreatedByInput = {
   quotationDraft?: Prisma.QuotationDraftCreateNestedOneWithoutMaterialRequisitionsInput
   items?: Prisma.MaterialRequisitionItemCreateNestedManyWithoutRequisitionInput
   amendments?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequisitionInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutMaterialRequisitionInput
 }
 
 export type MaterialRequisitionUncheckedCreateWithoutCreatedByInput = {
@@ -731,6 +762,7 @@ export type MaterialRequisitionUncheckedCreateWithoutCreatedByInput = {
   updatedAt?: Date | string
   items?: Prisma.MaterialRequisitionItemUncheckedCreateNestedManyWithoutRequisitionInput
   amendments?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequisitionInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutMaterialRequisitionInput
 }
 
 export type MaterialRequisitionCreateOrConnectWithoutCreatedByInput = {
@@ -772,6 +804,7 @@ export type MaterialRequisitionCreateWithoutQuotationDraftInput = {
   createdBy: Prisma.UserCreateNestedOneWithoutMaterialRequisitionsCreatedInput
   items?: Prisma.MaterialRequisitionItemCreateNestedManyWithoutRequisitionInput
   amendments?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequisitionInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutMaterialRequisitionInput
 }
 
 export type MaterialRequisitionUncheckedCreateWithoutQuotationDraftInput = {
@@ -787,6 +820,7 @@ export type MaterialRequisitionUncheckedCreateWithoutQuotationDraftInput = {
   updatedAt?: Date | string
   items?: Prisma.MaterialRequisitionItemUncheckedCreateNestedManyWithoutRequisitionInput
   amendments?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequisitionInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutMaterialRequisitionInput
 }
 
 export type MaterialRequisitionCreateOrConnectWithoutQuotationDraftInput = {
@@ -828,6 +862,7 @@ export type MaterialRequisitionCreateWithoutItemsInput = {
   quotationDraft?: Prisma.QuotationDraftCreateNestedOneWithoutMaterialRequisitionsInput
   createdBy: Prisma.UserCreateNestedOneWithoutMaterialRequisitionsCreatedInput
   amendments?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequisitionInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutMaterialRequisitionInput
 }
 
 export type MaterialRequisitionUncheckedCreateWithoutItemsInput = {
@@ -843,6 +878,7 @@ export type MaterialRequisitionUncheckedCreateWithoutItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   amendments?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequisitionInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutMaterialRequisitionInput
 }
 
 export type MaterialRequisitionCreateOrConnectWithoutItemsInput = {
@@ -874,6 +910,7 @@ export type MaterialRequisitionUpdateWithoutItemsInput = {
   quotationDraft?: Prisma.QuotationDraftUpdateOneWithoutMaterialRequisitionsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutMaterialRequisitionsCreatedNestedInput
   amendments?: Prisma.RequisitionAmendmentUpdateManyWithoutRequisitionNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutMaterialRequisitionNestedInput
 }
 
 export type MaterialRequisitionUncheckedUpdateWithoutItemsInput = {
@@ -889,6 +926,7 @@ export type MaterialRequisitionUncheckedUpdateWithoutItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   amendments?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequisitionNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutMaterialRequisitionNestedInput
 }
 
 export type MaterialRequisitionCreateWithoutAmendmentsInput = {
@@ -904,6 +942,7 @@ export type MaterialRequisitionCreateWithoutAmendmentsInput = {
   quotationDraft?: Prisma.QuotationDraftCreateNestedOneWithoutMaterialRequisitionsInput
   createdBy: Prisma.UserCreateNestedOneWithoutMaterialRequisitionsCreatedInput
   items?: Prisma.MaterialRequisitionItemCreateNestedManyWithoutRequisitionInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutMaterialRequisitionInput
 }
 
 export type MaterialRequisitionUncheckedCreateWithoutAmendmentsInput = {
@@ -919,6 +958,7 @@ export type MaterialRequisitionUncheckedCreateWithoutAmendmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.MaterialRequisitionItemUncheckedCreateNestedManyWithoutRequisitionInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutMaterialRequisitionInput
 }
 
 export type MaterialRequisitionCreateOrConnectWithoutAmendmentsInput = {
@@ -950,6 +990,7 @@ export type MaterialRequisitionUpdateWithoutAmendmentsInput = {
   quotationDraft?: Prisma.QuotationDraftUpdateOneWithoutMaterialRequisitionsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutMaterialRequisitionsCreatedNestedInput
   items?: Prisma.MaterialRequisitionItemUpdateManyWithoutRequisitionNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutMaterialRequisitionNestedInput
 }
 
 export type MaterialRequisitionUncheckedUpdateWithoutAmendmentsInput = {
@@ -965,6 +1006,87 @@ export type MaterialRequisitionUncheckedUpdateWithoutAmendmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.MaterialRequisitionItemUncheckedUpdateManyWithoutRequisitionNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutMaterialRequisitionNestedInput
+}
+
+export type MaterialRequisitionCreateWithoutProcurementWalletTransactionsInput = {
+  id?: string
+  requisitionNo: string
+  status?: $Enums.RequisitionStatus
+  notes?: string | null
+  rejectionReason?: string | null
+  cancellationReason?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lead: Prisma.LeadCreateNestedOneWithoutMaterialRequisitionsInput
+  quotationDraft?: Prisma.QuotationDraftCreateNestedOneWithoutMaterialRequisitionsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutMaterialRequisitionsCreatedInput
+  items?: Prisma.MaterialRequisitionItemCreateNestedManyWithoutRequisitionInput
+  amendments?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequisitionInput
+}
+
+export type MaterialRequisitionUncheckedCreateWithoutProcurementWalletTransactionsInput = {
+  id?: string
+  leadId: string
+  quotationDraftId?: string | null
+  requisitionNo: string
+  status?: $Enums.RequisitionStatus
+  createdById: string
+  notes?: string | null
+  rejectionReason?: string | null
+  cancellationReason?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.MaterialRequisitionItemUncheckedCreateNestedManyWithoutRequisitionInput
+  amendments?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequisitionInput
+}
+
+export type MaterialRequisitionCreateOrConnectWithoutProcurementWalletTransactionsInput = {
+  where: Prisma.MaterialRequisitionWhereUniqueInput
+  create: Prisma.XOR<Prisma.MaterialRequisitionCreateWithoutProcurementWalletTransactionsInput, Prisma.MaterialRequisitionUncheckedCreateWithoutProcurementWalletTransactionsInput>
+}
+
+export type MaterialRequisitionUpsertWithoutProcurementWalletTransactionsInput = {
+  update: Prisma.XOR<Prisma.MaterialRequisitionUpdateWithoutProcurementWalletTransactionsInput, Prisma.MaterialRequisitionUncheckedUpdateWithoutProcurementWalletTransactionsInput>
+  create: Prisma.XOR<Prisma.MaterialRequisitionCreateWithoutProcurementWalletTransactionsInput, Prisma.MaterialRequisitionUncheckedCreateWithoutProcurementWalletTransactionsInput>
+  where?: Prisma.MaterialRequisitionWhereInput
+}
+
+export type MaterialRequisitionUpdateToOneWithWhereWithoutProcurementWalletTransactionsInput = {
+  where?: Prisma.MaterialRequisitionWhereInput
+  data: Prisma.XOR<Prisma.MaterialRequisitionUpdateWithoutProcurementWalletTransactionsInput, Prisma.MaterialRequisitionUncheckedUpdateWithoutProcurementWalletTransactionsInput>
+}
+
+export type MaterialRequisitionUpdateWithoutProcurementWalletTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  requisitionNo?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumRequisitionStatusFieldUpdateOperationsInput | $Enums.RequisitionStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lead?: Prisma.LeadUpdateOneRequiredWithoutMaterialRequisitionsNestedInput
+  quotationDraft?: Prisma.QuotationDraftUpdateOneWithoutMaterialRequisitionsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutMaterialRequisitionsCreatedNestedInput
+  items?: Prisma.MaterialRequisitionItemUpdateManyWithoutRequisitionNestedInput
+  amendments?: Prisma.RequisitionAmendmentUpdateManyWithoutRequisitionNestedInput
+}
+
+export type MaterialRequisitionUncheckedUpdateWithoutProcurementWalletTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  quotationDraftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requisitionNo?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumRequisitionStatusFieldUpdateOperationsInput | $Enums.RequisitionStatus
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.MaterialRequisitionItemUncheckedUpdateManyWithoutRequisitionNestedInput
+  amendments?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequisitionNestedInput
 }
 
 export type MaterialRequisitionCreateManyLeadInput = {
@@ -993,6 +1115,7 @@ export type MaterialRequisitionUpdateWithoutLeadInput = {
   createdBy?: Prisma.UserUpdateOneRequiredWithoutMaterialRequisitionsCreatedNestedInput
   items?: Prisma.MaterialRequisitionItemUpdateManyWithoutRequisitionNestedInput
   amendments?: Prisma.RequisitionAmendmentUpdateManyWithoutRequisitionNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutMaterialRequisitionNestedInput
 }
 
 export type MaterialRequisitionUncheckedUpdateWithoutLeadInput = {
@@ -1008,6 +1131,7 @@ export type MaterialRequisitionUncheckedUpdateWithoutLeadInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.MaterialRequisitionItemUncheckedUpdateManyWithoutRequisitionNestedInput
   amendments?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequisitionNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutMaterialRequisitionNestedInput
 }
 
 export type MaterialRequisitionUncheckedUpdateManyWithoutLeadInput = {
@@ -1049,6 +1173,7 @@ export type MaterialRequisitionUpdateWithoutCreatedByInput = {
   quotationDraft?: Prisma.QuotationDraftUpdateOneWithoutMaterialRequisitionsNestedInput
   items?: Prisma.MaterialRequisitionItemUpdateManyWithoutRequisitionNestedInput
   amendments?: Prisma.RequisitionAmendmentUpdateManyWithoutRequisitionNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutMaterialRequisitionNestedInput
 }
 
 export type MaterialRequisitionUncheckedUpdateWithoutCreatedByInput = {
@@ -1064,6 +1189,7 @@ export type MaterialRequisitionUncheckedUpdateWithoutCreatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.MaterialRequisitionItemUncheckedUpdateManyWithoutRequisitionNestedInput
   amendments?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequisitionNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutMaterialRequisitionNestedInput
 }
 
 export type MaterialRequisitionUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1105,6 +1231,7 @@ export type MaterialRequisitionUpdateWithoutQuotationDraftInput = {
   createdBy?: Prisma.UserUpdateOneRequiredWithoutMaterialRequisitionsCreatedNestedInput
   items?: Prisma.MaterialRequisitionItemUpdateManyWithoutRequisitionNestedInput
   amendments?: Prisma.RequisitionAmendmentUpdateManyWithoutRequisitionNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutMaterialRequisitionNestedInput
 }
 
 export type MaterialRequisitionUncheckedUpdateWithoutQuotationDraftInput = {
@@ -1120,6 +1247,7 @@ export type MaterialRequisitionUncheckedUpdateWithoutQuotationDraftInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.MaterialRequisitionItemUncheckedUpdateManyWithoutRequisitionNestedInput
   amendments?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequisitionNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutMaterialRequisitionNestedInput
 }
 
 export type MaterialRequisitionUncheckedUpdateManyWithoutQuotationDraftInput = {
@@ -1143,11 +1271,13 @@ export type MaterialRequisitionUncheckedUpdateManyWithoutQuotationDraftInput = {
 export type MaterialRequisitionCountOutputType = {
   items: number
   amendments: number
+  procurementWalletTransactions: number
 }
 
 export type MaterialRequisitionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   items?: boolean | MaterialRequisitionCountOutputTypeCountItemsArgs
   amendments?: boolean | MaterialRequisitionCountOutputTypeCountAmendmentsArgs
+  procurementWalletTransactions?: boolean | MaterialRequisitionCountOutputTypeCountProcurementWalletTransactionsArgs
 }
 
 /**
@@ -1174,6 +1304,13 @@ export type MaterialRequisitionCountOutputTypeCountAmendmentsArgs<ExtArgs extend
   where?: Prisma.RequisitionAmendmentWhereInput
 }
 
+/**
+ * MaterialRequisitionCountOutputType without action
+ */
+export type MaterialRequisitionCountOutputTypeCountProcurementWalletTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProcurementWalletTransactionWhereInput
+}
+
 
 export type MaterialRequisitionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1192,6 +1329,7 @@ export type MaterialRequisitionSelect<ExtArgs extends runtime.Types.Extensions.I
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   items?: boolean | Prisma.MaterialRequisition$itemsArgs<ExtArgs>
   amendments?: boolean | Prisma.MaterialRequisition$amendmentsArgs<ExtArgs>
+  procurementWalletTransactions?: boolean | Prisma.MaterialRequisition$procurementWalletTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.MaterialRequisitionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["materialRequisition"]>
 
@@ -1250,6 +1388,7 @@ export type MaterialRequisitionInclude<ExtArgs extends runtime.Types.Extensions.
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   items?: boolean | Prisma.MaterialRequisition$itemsArgs<ExtArgs>
   amendments?: boolean | Prisma.MaterialRequisition$amendmentsArgs<ExtArgs>
+  procurementWalletTransactions?: boolean | Prisma.MaterialRequisition$procurementWalletTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.MaterialRequisitionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MaterialRequisitionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1271,6 +1410,7 @@ export type $MaterialRequisitionPayload<ExtArgs extends runtime.Types.Extensions
     createdBy: Prisma.$UserPayload<ExtArgs>
     items: Prisma.$MaterialRequisitionItemPayload<ExtArgs>[]
     amendments: Prisma.$RequisitionAmendmentPayload<ExtArgs>[]
+    procurementWalletTransactions: Prisma.$ProcurementWalletTransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1683,6 +1823,7 @@ export interface Prisma__MaterialRequisitionClient<T, Null = never, ExtArgs exte
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   items<T extends Prisma.MaterialRequisition$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MaterialRequisition$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MaterialRequisitionItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   amendments<T extends Prisma.MaterialRequisition$amendmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MaterialRequisition$amendmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RequisitionAmendmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  procurementWalletTransactions<T extends Prisma.MaterialRequisition$procurementWalletTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MaterialRequisition$procurementWalletTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcurementWalletTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2183,6 +2324,30 @@ export type MaterialRequisition$amendmentsArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.RequisitionAmendmentScalarFieldEnum | Prisma.RequisitionAmendmentScalarFieldEnum[]
+}
+
+/**
+ * MaterialRequisition.procurementWalletTransactions
+ */
+export type MaterialRequisition$procurementWalletTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProcurementWalletTransaction
+   */
+  select?: Prisma.ProcurementWalletTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProcurementWalletTransaction
+   */
+  omit?: Prisma.ProcurementWalletTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcurementWalletTransactionInclude<ExtArgs> | null
+  where?: Prisma.ProcurementWalletTransactionWhereInput
+  orderBy?: Prisma.ProcurementWalletTransactionOrderByWithRelationInput | Prisma.ProcurementWalletTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.ProcurementWalletTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProcurementWalletTransactionScalarFieldEnum | Prisma.ProcurementWalletTransactionScalarFieldEnum[]
 }
 
 /**

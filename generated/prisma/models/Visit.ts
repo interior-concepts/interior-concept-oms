@@ -27,13 +27,13 @@ export type AggregateVisit = {
 }
 
 export type VisitAvgAggregateOutputType = {
-  visitFee: number | null
   projectSqft: number | null
+  visitFee: number | null
 }
 
 export type VisitSumAggregateOutputType = {
-  visitFee: number | null
   projectSqft: number | null
+  visitFee: number | null
 }
 
 export type VisitMinAggregateOutputType = {
@@ -41,15 +41,16 @@ export type VisitMinAggregateOutputType = {
   leadId: string | null
   assignedToId: string | null
   scheduledAt: Date | null
-  visitFee: number | null
   status: $Enums.VisitStatus | null
-  projectSqft: number | null
-  projectStatus: $Enums.ProjectStatus | null
+  visitType: $Enums.VisitType | null
   location: string | null
   notes: string | null
   createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  projectSqft: number | null
+  projectStatus: $Enums.ProjectStatus | null
+  visitFee: number | null
 }
 
 export type VisitMaxAggregateOutputType = {
@@ -57,15 +58,16 @@ export type VisitMaxAggregateOutputType = {
   leadId: string | null
   assignedToId: string | null
   scheduledAt: Date | null
-  visitFee: number | null
   status: $Enums.VisitStatus | null
-  projectSqft: number | null
-  projectStatus: $Enums.ProjectStatus | null
+  visitType: $Enums.VisitType | null
   location: string | null
   notes: string | null
   createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  projectSqft: number | null
+  projectStatus: $Enums.ProjectStatus | null
+  visitFee: number | null
 }
 
 export type VisitCountAggregateOutputType = {
@@ -73,27 +75,28 @@ export type VisitCountAggregateOutputType = {
   leadId: number
   assignedToId: number
   scheduledAt: number
-  visitFee: number
   status: number
-  projectSqft: number
-  projectStatus: number
+  visitType: number
   location: number
   notes: number
   createdById: number
   createdAt: number
   updatedAt: number
+  projectSqft: number
+  projectStatus: number
+  visitFee: number
   _all: number
 }
 
 
 export type VisitAvgAggregateInputType = {
-  visitFee?: true
   projectSqft?: true
+  visitFee?: true
 }
 
 export type VisitSumAggregateInputType = {
-  visitFee?: true
   projectSqft?: true
+  visitFee?: true
 }
 
 export type VisitMinAggregateInputType = {
@@ -101,15 +104,16 @@ export type VisitMinAggregateInputType = {
   leadId?: true
   assignedToId?: true
   scheduledAt?: true
-  visitFee?: true
   status?: true
-  projectSqft?: true
-  projectStatus?: true
+  visitType?: true
   location?: true
   notes?: true
   createdById?: true
   createdAt?: true
   updatedAt?: true
+  projectSqft?: true
+  projectStatus?: true
+  visitFee?: true
 }
 
 export type VisitMaxAggregateInputType = {
@@ -117,15 +121,16 @@ export type VisitMaxAggregateInputType = {
   leadId?: true
   assignedToId?: true
   scheduledAt?: true
-  visitFee?: true
   status?: true
-  projectSqft?: true
-  projectStatus?: true
+  visitType?: true
   location?: true
   notes?: true
   createdById?: true
   createdAt?: true
   updatedAt?: true
+  projectSqft?: true
+  projectStatus?: true
+  visitFee?: true
 }
 
 export type VisitCountAggregateInputType = {
@@ -133,15 +138,16 @@ export type VisitCountAggregateInputType = {
   leadId?: true
   assignedToId?: true
   scheduledAt?: true
-  visitFee?: true
   status?: true
-  projectSqft?: true
-  projectStatus?: true
+  visitType?: true
   location?: true
   notes?: true
   createdById?: true
   createdAt?: true
   updatedAt?: true
+  projectSqft?: true
+  projectStatus?: true
+  visitFee?: true
   _all?: true
 }
 
@@ -236,15 +242,16 @@ export type VisitGroupByOutputType = {
   leadId: string
   assignedToId: string | null
   scheduledAt: Date
-  visitFee: number
   status: $Enums.VisitStatus
-  projectSqft: number | null
-  projectStatus: $Enums.ProjectStatus | null
+  visitType: $Enums.VisitType
   location: string
   notes: string | null
   createdById: string
   createdAt: Date
   updatedAt: Date
+  projectSqft: number | null
+  projectStatus: $Enums.ProjectStatus | null
+  visitFee: number
   _count: VisitCountAggregateOutputType | null
   _avg: VisitAvgAggregateOutputType | null
   _sum: VisitSumAggregateOutputType | null
@@ -275,25 +282,26 @@ export type VisitWhereInput = {
   leadId?: Prisma.StringFilter<"Visit"> | string
   assignedToId?: Prisma.StringNullableFilter<"Visit"> | string | null
   scheduledAt?: Prisma.DateTimeFilter<"Visit"> | Date | string
-  visitFee?: Prisma.FloatFilter<"Visit"> | number
   status?: Prisma.EnumVisitStatusFilter<"Visit"> | $Enums.VisitStatus
-  projectSqft?: Prisma.FloatNullableFilter<"Visit"> | number | null
-  projectStatus?: Prisma.EnumProjectStatusNullableFilter<"Visit"> | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFilter<"Visit"> | $Enums.VisitType
   location?: Prisma.StringFilter<"Visit"> | string
   notes?: Prisma.StringNullableFilter<"Visit"> | string | null
   createdById?: Prisma.StringFilter<"Visit"> | string
   createdAt?: Prisma.DateTimeFilter<"Visit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Visit"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
-  assignedTo?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  result?: Prisma.XOR<Prisma.VisitResultNullableScalarRelationFilter, Prisma.VisitResultWhereInput> | null
+  projectSqft?: Prisma.FloatNullableFilter<"Visit"> | number | null
+  projectStatus?: Prisma.EnumProjectStatusNullableFilter<"Visit"> | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFilter<"Visit"> | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskListRelationFilter
-  updateRequests?: Prisma.VisitUpdateRequestListRelationFilter
-  supportAssignments?: Prisma.VisitSupportAssignmentListRelationFilter
-  supportResults?: Prisma.VisitSupportResultListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   visitPayments?: Prisma.TransactionListRelationFilter
+  assignedTo?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
+  result?: Prisma.XOR<Prisma.VisitResultNullableScalarRelationFilter, Prisma.VisitResultWhereInput> | null
+  supportAssignments?: Prisma.VisitSupportAssignmentListRelationFilter
+  supportResults?: Prisma.VisitSupportResultListRelationFilter
+  updateRequests?: Prisma.VisitUpdateRequestListRelationFilter
 }
 
 export type VisitOrderByWithRelationInput = {
@@ -301,25 +309,26 @@ export type VisitOrderByWithRelationInput = {
   leadId?: Prisma.SortOrder
   assignedToId?: Prisma.SortOrderInput | Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
-  visitFee?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  projectSqft?: Prisma.SortOrderInput | Prisma.SortOrder
-  projectStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  visitType?: Prisma.SortOrder
   location?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  lead?: Prisma.LeadOrderByWithRelationInput
-  assignedTo?: Prisma.UserOrderByWithRelationInput
-  createdBy?: Prisma.UserOrderByWithRelationInput
-  result?: Prisma.VisitResultOrderByWithRelationInput
+  projectSqft?: Prisma.SortOrderInput | Prisma.SortOrder
+  projectStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  visitFee?: Prisma.SortOrder
   cadPhaseTasks?: Prisma.LeadPhaseTaskOrderByRelationAggregateInput
-  updateRequests?: Prisma.VisitUpdateRequestOrderByRelationAggregateInput
-  supportAssignments?: Prisma.VisitSupportAssignmentOrderByRelationAggregateInput
-  supportResults?: Prisma.VisitSupportResultOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   visitPayments?: Prisma.TransactionOrderByRelationAggregateInput
+  assignedTo?: Prisma.UserOrderByWithRelationInput
+  createdBy?: Prisma.UserOrderByWithRelationInput
+  lead?: Prisma.LeadOrderByWithRelationInput
+  result?: Prisma.VisitResultOrderByWithRelationInput
+  supportAssignments?: Prisma.VisitSupportAssignmentOrderByRelationAggregateInput
+  supportResults?: Prisma.VisitSupportResultOrderByRelationAggregateInput
+  updateRequests?: Prisma.VisitUpdateRequestOrderByRelationAggregateInput
 }
 
 export type VisitWhereUniqueInput = Prisma.AtLeast<{
@@ -330,25 +339,26 @@ export type VisitWhereUniqueInput = Prisma.AtLeast<{
   leadId?: Prisma.StringFilter<"Visit"> | string
   assignedToId?: Prisma.StringNullableFilter<"Visit"> | string | null
   scheduledAt?: Prisma.DateTimeFilter<"Visit"> | Date | string
-  visitFee?: Prisma.FloatFilter<"Visit"> | number
   status?: Prisma.EnumVisitStatusFilter<"Visit"> | $Enums.VisitStatus
-  projectSqft?: Prisma.FloatNullableFilter<"Visit"> | number | null
-  projectStatus?: Prisma.EnumProjectStatusNullableFilter<"Visit"> | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFilter<"Visit"> | $Enums.VisitType
   location?: Prisma.StringFilter<"Visit"> | string
   notes?: Prisma.StringNullableFilter<"Visit"> | string | null
   createdById?: Prisma.StringFilter<"Visit"> | string
   createdAt?: Prisma.DateTimeFilter<"Visit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Visit"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
-  assignedTo?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  result?: Prisma.XOR<Prisma.VisitResultNullableScalarRelationFilter, Prisma.VisitResultWhereInput> | null
+  projectSqft?: Prisma.FloatNullableFilter<"Visit"> | number | null
+  projectStatus?: Prisma.EnumProjectStatusNullableFilter<"Visit"> | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFilter<"Visit"> | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskListRelationFilter
-  updateRequests?: Prisma.VisitUpdateRequestListRelationFilter
-  supportAssignments?: Prisma.VisitSupportAssignmentListRelationFilter
-  supportResults?: Prisma.VisitSupportResultListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   visitPayments?: Prisma.TransactionListRelationFilter
+  assignedTo?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
+  result?: Prisma.XOR<Prisma.VisitResultNullableScalarRelationFilter, Prisma.VisitResultWhereInput> | null
+  supportAssignments?: Prisma.VisitSupportAssignmentListRelationFilter
+  supportResults?: Prisma.VisitSupportResultListRelationFilter
+  updateRequests?: Prisma.VisitUpdateRequestListRelationFilter
 }, "id">
 
 export type VisitOrderByWithAggregationInput = {
@@ -356,15 +366,16 @@ export type VisitOrderByWithAggregationInput = {
   leadId?: Prisma.SortOrder
   assignedToId?: Prisma.SortOrderInput | Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
-  visitFee?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  projectSqft?: Prisma.SortOrderInput | Prisma.SortOrder
-  projectStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  visitType?: Prisma.SortOrder
   location?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  projectSqft?: Prisma.SortOrderInput | Prisma.SortOrder
+  projectStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  visitFee?: Prisma.SortOrder
   _count?: Prisma.VisitCountOrderByAggregateInput
   _avg?: Prisma.VisitAvgOrderByAggregateInput
   _max?: Prisma.VisitMaxOrderByAggregateInput
@@ -380,38 +391,40 @@ export type VisitScalarWhereWithAggregatesInput = {
   leadId?: Prisma.StringWithAggregatesFilter<"Visit"> | string
   assignedToId?: Prisma.StringNullableWithAggregatesFilter<"Visit"> | string | null
   scheduledAt?: Prisma.DateTimeWithAggregatesFilter<"Visit"> | Date | string
-  visitFee?: Prisma.FloatWithAggregatesFilter<"Visit"> | number
   status?: Prisma.EnumVisitStatusWithAggregatesFilter<"Visit"> | $Enums.VisitStatus
-  projectSqft?: Prisma.FloatNullableWithAggregatesFilter<"Visit"> | number | null
-  projectStatus?: Prisma.EnumProjectStatusNullableWithAggregatesFilter<"Visit"> | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeWithAggregatesFilter<"Visit"> | $Enums.VisitType
   location?: Prisma.StringWithAggregatesFilter<"Visit"> | string
   notes?: Prisma.StringNullableWithAggregatesFilter<"Visit"> | string | null
   createdById?: Prisma.StringWithAggregatesFilter<"Visit"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Visit"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Visit"> | Date | string
+  projectSqft?: Prisma.FloatNullableWithAggregatesFilter<"Visit"> | number | null
+  projectStatus?: Prisma.EnumProjectStatusNullableWithAggregatesFilter<"Visit"> | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatWithAggregatesFilter<"Visit"> | number
 }
 
 export type VisitCreateInput = {
   id?: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
-  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
-  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
-  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionCreateNestedManyWithoutVisitInput
+  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
+  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
+  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
 }
 
 export type VisitUncheckedCreateInput = {
@@ -419,45 +432,47 @@ export type VisitUncheckedCreateInput = {
   leadId: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionUncheckedCreateNestedManyWithoutVisitInput
+  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
 }
 
 export type VisitUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
-  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
-  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUpdateManyWithoutVisitNestedInput
+  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
+  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateInput = {
@@ -465,22 +480,23 @@ export type VisitUncheckedUpdateInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUncheckedUpdateManyWithoutVisitNestedInput
+  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitCreateManyInput = {
@@ -488,28 +504,30 @@ export type VisitCreateManyInput = {
   leadId: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
 }
 
 export type VisitUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type VisitUncheckedUpdateManyInput = {
@@ -517,15 +535,16 @@ export type VisitUncheckedUpdateManyInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type VisitListRelationFilter = {
@@ -548,20 +567,21 @@ export type VisitCountOrderByAggregateInput = {
   leadId?: Prisma.SortOrder
   assignedToId?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
-  visitFee?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  projectSqft?: Prisma.SortOrder
-  projectStatus?: Prisma.SortOrder
+  visitType?: Prisma.SortOrder
   location?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  projectSqft?: Prisma.SortOrder
+  projectStatus?: Prisma.SortOrder
+  visitFee?: Prisma.SortOrder
 }
 
 export type VisitAvgOrderByAggregateInput = {
-  visitFee?: Prisma.SortOrder
   projectSqft?: Prisma.SortOrder
+  visitFee?: Prisma.SortOrder
 }
 
 export type VisitMaxOrderByAggregateInput = {
@@ -569,15 +589,16 @@ export type VisitMaxOrderByAggregateInput = {
   leadId?: Prisma.SortOrder
   assignedToId?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
-  visitFee?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  projectSqft?: Prisma.SortOrder
-  projectStatus?: Prisma.SortOrder
+  visitType?: Prisma.SortOrder
   location?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  projectSqft?: Prisma.SortOrder
+  projectStatus?: Prisma.SortOrder
+  visitFee?: Prisma.SortOrder
 }
 
 export type VisitMinOrderByAggregateInput = {
@@ -585,20 +606,21 @@ export type VisitMinOrderByAggregateInput = {
   leadId?: Prisma.SortOrder
   assignedToId?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
-  visitFee?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  projectSqft?: Prisma.SortOrder
-  projectStatus?: Prisma.SortOrder
+  visitType?: Prisma.SortOrder
   location?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  projectSqft?: Prisma.SortOrder
+  projectStatus?: Prisma.SortOrder
+  visitFee?: Prisma.SortOrder
 }
 
 export type VisitSumOrderByAggregateInput = {
-  visitFee?: Prisma.SortOrder
   projectSqft?: Prisma.SortOrder
+  visitFee?: Prisma.SortOrder
 }
 
 export type VisitScalarRelationFilter = {
@@ -752,6 +774,10 @@ export type EnumVisitStatusFieldUpdateOperationsInput = {
   set?: $Enums.VisitStatus
 }
 
+export type EnumVisitTypeFieldUpdateOperationsInput = {
+  set?: $Enums.VisitType
+}
+
 export type NullableEnumProjectStatusFieldUpdateOperationsInput = {
   set?: $Enums.ProjectStatus | null
 }
@@ -847,45 +873,47 @@ export type VisitUpdateOneWithoutVisitPaymentsNestedInput = {
 export type VisitCreateWithoutLeadInput = {
   id?: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
+  cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVisitInput
+  visitPayments?: Prisma.TransactionCreateNestedManyWithoutVisitInput
   assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
   createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
   result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
-  cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
   supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
   supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutVisitInput
-  visitPayments?: Prisma.TransactionCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
 }
 
 export type VisitUncheckedCreateWithoutLeadInput = {
   id?: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionUncheckedCreateNestedManyWithoutVisitInput
+  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
 }
 
 export type VisitCreateOrConnectWithoutLeadInput = {
@@ -922,59 +950,62 @@ export type VisitScalarWhereInput = {
   leadId?: Prisma.StringFilter<"Visit"> | string
   assignedToId?: Prisma.StringNullableFilter<"Visit"> | string | null
   scheduledAt?: Prisma.DateTimeFilter<"Visit"> | Date | string
-  visitFee?: Prisma.FloatFilter<"Visit"> | number
   status?: Prisma.EnumVisitStatusFilter<"Visit"> | $Enums.VisitStatus
-  projectSqft?: Prisma.FloatNullableFilter<"Visit"> | number | null
-  projectStatus?: Prisma.EnumProjectStatusNullableFilter<"Visit"> | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFilter<"Visit"> | $Enums.VisitType
   location?: Prisma.StringFilter<"Visit"> | string
   notes?: Prisma.StringNullableFilter<"Visit"> | string | null
   createdById?: Prisma.StringFilter<"Visit"> | string
   createdAt?: Prisma.DateTimeFilter<"Visit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Visit"> | Date | string
+  projectSqft?: Prisma.FloatNullableFilter<"Visit"> | number | null
+  projectStatus?: Prisma.EnumProjectStatusNullableFilter<"Visit"> | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFilter<"Visit"> | number
 }
 
 export type VisitCreateWithoutAssignedToInput = {
   id?: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
-  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
-  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionCreateNestedManyWithoutVisitInput
+  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
+  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
 }
 
 export type VisitUncheckedCreateWithoutAssignedToInput = {
   id?: string
   leadId: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionUncheckedCreateNestedManyWithoutVisitInput
+  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
 }
 
 export type VisitCreateOrConnectWithoutAssignedToInput = {
@@ -990,23 +1021,24 @@ export type VisitCreateManyAssignedToInputEnvelope = {
 export type VisitCreateWithoutCreatedByInput = {
   id?: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
-  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
-  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionCreateNestedManyWithoutVisitInput
+  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
+  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
+  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
 }
 
 export type VisitUncheckedCreateWithoutCreatedByInput = {
@@ -1014,21 +1046,22 @@ export type VisitUncheckedCreateWithoutCreatedByInput = {
   leadId: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionUncheckedCreateNestedManyWithoutVisitInput
+  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
 }
 
 export type VisitCreateOrConnectWithoutCreatedByInput = {
@@ -1076,23 +1109,24 @@ export type VisitUpdateManyWithWhereWithoutCreatedByInput = {
 export type VisitCreateWithoutCadPhaseTasksInput = {
   id?: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
-  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
-  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
-  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   notifications?: Prisma.NotificationCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionCreateNestedManyWithoutVisitInput
+  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
+  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
+  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
 }
 
 export type VisitUncheckedCreateWithoutCadPhaseTasksInput = {
@@ -1100,21 +1134,22 @@ export type VisitUncheckedCreateWithoutCadPhaseTasksInput = {
   leadId: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionUncheckedCreateNestedManyWithoutVisitInput
+  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
 }
 
 export type VisitCreateOrConnectWithoutCadPhaseTasksInput = {
@@ -1136,23 +1171,24 @@ export type VisitUpdateToOneWithWhereWithoutCadPhaseTasksInput = {
 export type VisitUpdateWithoutCadPhaseTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
-  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
-  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   notifications?: Prisma.NotificationUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUpdateManyWithoutVisitNestedInput
+  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
+  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateWithoutCadPhaseTasksInput = {
@@ -1160,43 +1196,45 @@ export type VisitUncheckedUpdateWithoutCadPhaseTasksInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUncheckedUpdateManyWithoutVisitNestedInput
+  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitCreateWithoutUpdateRequestsInput = {
   id?: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
-  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
-  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
-  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionCreateNestedManyWithoutVisitInput
+  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
+  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
+  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
 }
 
 export type VisitUncheckedCreateWithoutUpdateRequestsInput = {
@@ -1204,21 +1242,22 @@ export type VisitUncheckedCreateWithoutUpdateRequestsInput = {
   leadId: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutSourceVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionUncheckedCreateNestedManyWithoutVisitInput
+  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
 }
 
 export type VisitCreateOrConnectWithoutUpdateRequestsInput = {
@@ -1240,23 +1279,24 @@ export type VisitUpdateToOneWithWhereWithoutUpdateRequestsInput = {
 export type VisitUpdateWithoutUpdateRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
-  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
-  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUpdateManyWithoutVisitNestedInput
+  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
+  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateWithoutUpdateRequestsInput = {
@@ -1264,43 +1304,45 @@ export type VisitUncheckedUpdateWithoutUpdateRequestsInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutSourceVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUncheckedUpdateManyWithoutVisitNestedInput
+  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitCreateWithoutResultInput = {
   id?: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
-  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
-  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionCreateNestedManyWithoutVisitInput
+  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
+  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
+  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
 }
 
 export type VisitUncheckedCreateWithoutResultInput = {
@@ -1308,21 +1350,22 @@ export type VisitUncheckedCreateWithoutResultInput = {
   leadId: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionUncheckedCreateNestedManyWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
 }
 
 export type VisitCreateOrConnectWithoutResultInput = {
@@ -1344,23 +1387,24 @@ export type VisitUpdateToOneWithWhereWithoutResultInput = {
 export type VisitUpdateWithoutResultInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
-  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUpdateManyWithoutVisitNestedInput
+  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateWithoutResultInput = {
@@ -1368,43 +1412,45 @@ export type VisitUncheckedUpdateWithoutResultInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUncheckedUpdateManyWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitCreateWithoutSupportAssignmentsInput = {
   id?: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
-  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
-  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
-  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionCreateNestedManyWithoutVisitInput
+  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
+  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
+  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
 }
 
 export type VisitUncheckedCreateWithoutSupportAssignmentsInput = {
@@ -1412,21 +1458,22 @@ export type VisitUncheckedCreateWithoutSupportAssignmentsInput = {
   leadId: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
-  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionUncheckedCreateNestedManyWithoutVisitInput
+  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
 }
 
 export type VisitCreateOrConnectWithoutSupportAssignmentsInput = {
@@ -1448,23 +1495,24 @@ export type VisitUpdateToOneWithWhereWithoutSupportAssignmentsInput = {
 export type VisitUpdateWithoutSupportAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
-  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
-  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUpdateManyWithoutVisitNestedInput
+  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
+  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateWithoutSupportAssignmentsInput = {
@@ -1472,43 +1520,45 @@ export type VisitUncheckedUpdateWithoutSupportAssignmentsInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUncheckedUpdateManyWithoutVisitNestedInput
+  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitCreateWithoutSupportResultsInput = {
   id?: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
-  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
-  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
-  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionCreateNestedManyWithoutVisitInput
+  assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
+  createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
+  result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
 }
 
 export type VisitUncheckedCreateWithoutSupportResultsInput = {
@@ -1516,21 +1566,22 @@ export type VisitUncheckedCreateWithoutSupportResultsInput = {
   leadId: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVisitInput
   visitPayments?: Prisma.TransactionUncheckedCreateNestedManyWithoutVisitInput
+  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
 }
 
 export type VisitCreateOrConnectWithoutSupportResultsInput = {
@@ -1552,23 +1603,24 @@ export type VisitUpdateToOneWithWhereWithoutSupportResultsInput = {
 export type VisitUpdateWithoutSupportResultsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
-  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
-  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUpdateManyWithoutVisitNestedInput
+  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
+  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateWithoutSupportResultsInput = {
@@ -1576,43 +1628,45 @@ export type VisitUncheckedUpdateWithoutSupportResultsInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUncheckedUpdateManyWithoutVisitNestedInput
+  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitCreateWithoutNotificationsInput = {
   id?: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
+  cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
+  visitPayments?: Prisma.TransactionCreateNestedManyWithoutVisitInput
   assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
   createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
   result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
-  cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
   supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
   supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
-  visitPayments?: Prisma.TransactionCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
 }
 
 export type VisitUncheckedCreateWithoutNotificationsInput = {
@@ -1620,21 +1674,22 @@ export type VisitUncheckedCreateWithoutNotificationsInput = {
   leadId: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
+  visitPayments?: Prisma.TransactionUncheckedCreateNestedManyWithoutVisitInput
+  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
   supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
   supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
-  visitPayments?: Prisma.TransactionUncheckedCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
 }
 
 export type VisitCreateOrConnectWithoutNotificationsInput = {
@@ -1656,23 +1711,24 @@ export type VisitUpdateToOneWithWhereWithoutNotificationsInput = {
 export type VisitUpdateWithoutNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
+  visitPayments?: Prisma.TransactionUpdateManyWithoutVisitNestedInput
   assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
   result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
-  cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
   supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
   supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
-  visitPayments?: Prisma.TransactionUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateWithoutNotificationsInput = {
@@ -1680,43 +1736,45 @@ export type VisitUncheckedUpdateWithoutNotificationsInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
+  visitPayments?: Prisma.TransactionUncheckedUpdateManyWithoutVisitNestedInput
+  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
   supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
   supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
-  visitPayments?: Prisma.TransactionUncheckedUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitCreateWithoutVisitPaymentsInput = {
   id?: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
+  cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVisitInput
   assignedTo?: Prisma.UserCreateNestedOneWithoutVisitsAssignedInput
   createdBy: Prisma.UserCreateNestedOneWithoutVisitsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutVisitsInput
   result?: Prisma.VisitResultCreateNestedOneWithoutVisitInput
-  cadPhaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
   supportAssignments?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutVisitInput
   supportResults?: Prisma.VisitSupportResultCreateNestedManyWithoutVisitInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutVisitInput
 }
 
 export type VisitUncheckedCreateWithoutVisitPaymentsInput = {
@@ -1724,21 +1782,22 @@ export type VisitUncheckedCreateWithoutVisitPaymentsInput = {
   leadId: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutSourceVisitInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVisitInput
+  result?: Prisma.VisitResultUncheckedCreateNestedOneWithoutVisitInput
   supportAssignments?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutVisitInput
   supportResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutVisitInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVisitInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutVisitInput
 }
 
 export type VisitCreateOrConnectWithoutVisitPaymentsInput = {
@@ -1760,23 +1819,24 @@ export type VisitUpdateToOneWithWhereWithoutVisitPaymentsInput = {
 export type VisitUpdateWithoutVisitPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVisitNestedInput
   assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
   result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
-  cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
   supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
   supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateWithoutVisitPaymentsInput = {
@@ -1784,110 +1844,116 @@ export type VisitUncheckedUpdateWithoutVisitPaymentsInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVisitNestedInput
+  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
   supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
   supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitCreateManyLeadInput = {
   id?: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
 }
 
 export type VisitUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVisitNestedInput
+  visitPayments?: Prisma.TransactionUpdateManyWithoutVisitNestedInput
   assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
   result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
-  cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
   supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
   supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutVisitNestedInput
-  visitPayments?: Prisma.TransactionUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUncheckedUpdateManyWithoutVisitNestedInput
+  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type VisitCreateManyAssignedToInput = {
   id?: string
   leadId: string
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
 }
 
 export type VisitCreateManyCreatedByInput = {
@@ -1895,95 +1961,100 @@ export type VisitCreateManyCreatedByInput = {
   leadId: string
   assignedToId?: string | null
   scheduledAt: Date | string
-  visitFee?: number
   status?: $Enums.VisitStatus
-  projectSqft?: number | null
-  projectStatus?: $Enums.ProjectStatus | null
+  visitType?: $Enums.VisitType
   location: string
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  projectSqft?: number | null
+  projectStatus?: $Enums.ProjectStatus | null
+  visitFee?: number
 }
 
 export type VisitUpdateWithoutAssignedToInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
-  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUpdateManyWithoutVisitNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutVisitsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
+  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateWithoutAssignedToInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUncheckedUpdateManyWithoutVisitNestedInput
+  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateManyWithoutAssignedToInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type VisitUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
-  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
-  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUpdateManyWithoutVisitNestedInput
+  assignedTo?: Prisma.UserUpdateOneWithoutVisitsAssignedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutVisitsNestedInput
+  result?: Prisma.VisitResultUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateWithoutCreatedByInput = {
@@ -1991,21 +2062,22 @@ export type VisitUncheckedUpdateWithoutCreatedByInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   cadPhaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutSourceVisitNestedInput
-  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
-  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
-  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVisitNestedInput
   visitPayments?: Prisma.TransactionUncheckedUpdateManyWithoutVisitNestedInput
+  result?: Prisma.VisitResultUncheckedUpdateOneWithoutVisitNestedInput
+  supportAssignments?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutVisitNestedInput
+  supportResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutVisitNestedInput
+  updateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutVisitNestedInput
 }
 
 export type VisitUncheckedUpdateManyWithoutCreatedByInput = {
@@ -2013,14 +2085,15 @@ export type VisitUncheckedUpdateManyWithoutCreatedByInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumVisitStatusFieldUpdateOperationsInput | $Enums.VisitStatus
-  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
   location?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  projectStatus?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  visitFee?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 
@@ -2030,20 +2103,20 @@ export type VisitUncheckedUpdateManyWithoutCreatedByInput = {
 
 export type VisitCountOutputType = {
   cadPhaseTasks: number
-  updateRequests: number
-  supportAssignments: number
-  supportResults: number
   notifications: number
   visitPayments: number
+  supportAssignments: number
+  supportResults: number
+  updateRequests: number
 }
 
 export type VisitCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cadPhaseTasks?: boolean | VisitCountOutputTypeCountCadPhaseTasksArgs
-  updateRequests?: boolean | VisitCountOutputTypeCountUpdateRequestsArgs
-  supportAssignments?: boolean | VisitCountOutputTypeCountSupportAssignmentsArgs
-  supportResults?: boolean | VisitCountOutputTypeCountSupportResultsArgs
   notifications?: boolean | VisitCountOutputTypeCountNotificationsArgs
   visitPayments?: boolean | VisitCountOutputTypeCountVisitPaymentsArgs
+  supportAssignments?: boolean | VisitCountOutputTypeCountSupportAssignmentsArgs
+  supportResults?: boolean | VisitCountOutputTypeCountSupportResultsArgs
+  updateRequests?: boolean | VisitCountOutputTypeCountUpdateRequestsArgs
 }
 
 /**
@@ -2066,8 +2139,15 @@ export type VisitCountOutputTypeCountCadPhaseTasksArgs<ExtArgs extends runtime.T
 /**
  * VisitCountOutputType without action
  */
-export type VisitCountOutputTypeCountUpdateRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.VisitUpdateRequestWhereInput
+export type VisitCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * VisitCountOutputType without action
+ */
+export type VisitCountOutputTypeCountVisitPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TransactionWhereInput
 }
 
 /**
@@ -2087,15 +2167,8 @@ export type VisitCountOutputTypeCountSupportResultsArgs<ExtArgs extends runtime.
 /**
  * VisitCountOutputType without action
  */
-export type VisitCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.NotificationWhereInput
-}
-
-/**
- * VisitCountOutputType without action
- */
-export type VisitCountOutputTypeCountVisitPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TransactionWhereInput
+export type VisitCountOutputTypeCountUpdateRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VisitUpdateRequestWhereInput
 }
 
 
@@ -2104,25 +2177,26 @@ export type VisitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   leadId?: boolean
   assignedToId?: boolean
   scheduledAt?: boolean
-  visitFee?: boolean
   status?: boolean
-  projectSqft?: boolean
-  projectStatus?: boolean
+  visitType?: boolean
   location?: boolean
   notes?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
-  assignedTo?: boolean | Prisma.Visit$assignedToArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  result?: boolean | Prisma.Visit$resultArgs<ExtArgs>
+  projectSqft?: boolean
+  projectStatus?: boolean
+  visitFee?: boolean
   cadPhaseTasks?: boolean | Prisma.Visit$cadPhaseTasksArgs<ExtArgs>
-  updateRequests?: boolean | Prisma.Visit$updateRequestsArgs<ExtArgs>
-  supportAssignments?: boolean | Prisma.Visit$supportAssignmentsArgs<ExtArgs>
-  supportResults?: boolean | Prisma.Visit$supportResultsArgs<ExtArgs>
   notifications?: boolean | Prisma.Visit$notificationsArgs<ExtArgs>
   visitPayments?: boolean | Prisma.Visit$visitPaymentsArgs<ExtArgs>
+  assignedTo?: boolean | Prisma.Visit$assignedToArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  result?: boolean | Prisma.Visit$resultArgs<ExtArgs>
+  supportAssignments?: boolean | Prisma.Visit$supportAssignmentsArgs<ExtArgs>
+  supportResults?: boolean | Prisma.Visit$supportResultsArgs<ExtArgs>
+  updateRequests?: boolean | Prisma.Visit$updateRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.VisitCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visit"]>
 
@@ -2131,18 +2205,19 @@ export type VisitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   leadId?: boolean
   assignedToId?: boolean
   scheduledAt?: boolean
-  visitFee?: boolean
   status?: boolean
-  projectSqft?: boolean
-  projectStatus?: boolean
+  visitType?: boolean
   location?: boolean
   notes?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  projectSqft?: boolean
+  projectStatus?: boolean
+  visitFee?: boolean
   assignedTo?: boolean | Prisma.Visit$assignedToArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visit"]>
 
 export type VisitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2150,18 +2225,19 @@ export type VisitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   leadId?: boolean
   assignedToId?: boolean
   scheduledAt?: boolean
-  visitFee?: boolean
   status?: boolean
-  projectSqft?: boolean
-  projectStatus?: boolean
+  visitType?: boolean
   location?: boolean
   notes?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  projectSqft?: boolean
+  projectStatus?: boolean
+  visitFee?: boolean
   assignedTo?: boolean | Prisma.Visit$assignedToArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visit"]>
 
 export type VisitSelectScalar = {
@@ -2169,70 +2245,72 @@ export type VisitSelectScalar = {
   leadId?: boolean
   assignedToId?: boolean
   scheduledAt?: boolean
-  visitFee?: boolean
   status?: boolean
-  projectSqft?: boolean
-  projectStatus?: boolean
+  visitType?: boolean
   location?: boolean
   notes?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  projectSqft?: boolean
+  projectStatus?: boolean
+  visitFee?: boolean
 }
 
-export type VisitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "assignedToId" | "scheduledAt" | "visitFee" | "status" | "projectSqft" | "projectStatus" | "location" | "notes" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["visit"]>
+export type VisitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "assignedToId" | "scheduledAt" | "status" | "visitType" | "location" | "notes" | "createdById" | "createdAt" | "updatedAt" | "projectSqft" | "projectStatus" | "visitFee", ExtArgs["result"]["visit"]>
 export type VisitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
-  assignedTo?: boolean | Prisma.Visit$assignedToArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  result?: boolean | Prisma.Visit$resultArgs<ExtArgs>
   cadPhaseTasks?: boolean | Prisma.Visit$cadPhaseTasksArgs<ExtArgs>
-  updateRequests?: boolean | Prisma.Visit$updateRequestsArgs<ExtArgs>
-  supportAssignments?: boolean | Prisma.Visit$supportAssignmentsArgs<ExtArgs>
-  supportResults?: boolean | Prisma.Visit$supportResultsArgs<ExtArgs>
   notifications?: boolean | Prisma.Visit$notificationsArgs<ExtArgs>
   visitPayments?: boolean | Prisma.Visit$visitPaymentsArgs<ExtArgs>
+  assignedTo?: boolean | Prisma.Visit$assignedToArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  result?: boolean | Prisma.Visit$resultArgs<ExtArgs>
+  supportAssignments?: boolean | Prisma.Visit$supportAssignmentsArgs<ExtArgs>
+  supportResults?: boolean | Prisma.Visit$supportResultsArgs<ExtArgs>
+  updateRequests?: boolean | Prisma.Visit$updateRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.VisitCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VisitIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   assignedTo?: boolean | Prisma.Visit$assignedToArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }
 export type VisitIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   assignedTo?: boolean | Prisma.Visit$assignedToArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }
 
 export type $VisitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Visit"
   objects: {
-    lead: Prisma.$LeadPayload<ExtArgs>
-    assignedTo: Prisma.$UserPayload<ExtArgs> | null
-    createdBy: Prisma.$UserPayload<ExtArgs>
-    result: Prisma.$VisitResultPayload<ExtArgs> | null
     cadPhaseTasks: Prisma.$LeadPhaseTaskPayload<ExtArgs>[]
-    updateRequests: Prisma.$VisitUpdateRequestPayload<ExtArgs>[]
-    supportAssignments: Prisma.$VisitSupportAssignmentPayload<ExtArgs>[]
-    supportResults: Prisma.$VisitSupportResultPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     visitPayments: Prisma.$TransactionPayload<ExtArgs>[]
+    assignedTo: Prisma.$UserPayload<ExtArgs> | null
+    createdBy: Prisma.$UserPayload<ExtArgs>
+    lead: Prisma.$LeadPayload<ExtArgs>
+    result: Prisma.$VisitResultPayload<ExtArgs> | null
+    supportAssignments: Prisma.$VisitSupportAssignmentPayload<ExtArgs>[]
+    supportResults: Prisma.$VisitSupportResultPayload<ExtArgs>[]
+    updateRequests: Prisma.$VisitUpdateRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     leadId: string
     assignedToId: string | null
     scheduledAt: Date
-    visitFee: number
     status: $Enums.VisitStatus
-    projectSqft: number | null
-    projectStatus: $Enums.ProjectStatus | null
+    visitType: $Enums.VisitType
     location: string
     notes: string | null
     createdById: string
     createdAt: Date
     updatedAt: Date
+    projectSqft: number | null
+    projectStatus: $Enums.ProjectStatus | null
+    visitFee: number
   }, ExtArgs["result"]["visit"]>
   composites: {}
 }
@@ -2627,16 +2705,16 @@ readonly fields: VisitFieldRefs;
  */
 export interface Prisma__VisitClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  lead<T extends Prisma.LeadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  assignedTo<T extends Prisma.Visit$assignedToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$assignedToArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  result<T extends Prisma.Visit$resultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$resultArgs<ExtArgs>>): Prisma.Prisma__VisitResultClient<runtime.Types.Result.GetResult<Prisma.$VisitResultPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   cadPhaseTasks<T extends Prisma.Visit$cadPhaseTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$cadPhaseTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPhaseTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  updateRequests<T extends Prisma.Visit$updateRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$updateRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitUpdateRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  supportAssignments<T extends Prisma.Visit$supportAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$supportAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitSupportAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  supportResults<T extends Prisma.Visit$supportResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$supportResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitSupportResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.Visit$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   visitPayments<T extends Prisma.Visit$visitPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$visitPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assignedTo<T extends Prisma.Visit$assignedToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$assignedToArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  result<T extends Prisma.Visit$resultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$resultArgs<ExtArgs>>): Prisma.Prisma__VisitResultClient<runtime.Types.Result.GetResult<Prisma.$VisitResultPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  supportAssignments<T extends Prisma.Visit$supportAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$supportAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitSupportAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  supportResults<T extends Prisma.Visit$supportResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$supportResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitSupportResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updateRequests<T extends Prisma.Visit$updateRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visit$updateRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitUpdateRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2670,15 +2748,16 @@ export interface VisitFieldRefs {
   readonly leadId: Prisma.FieldRef<"Visit", 'String'>
   readonly assignedToId: Prisma.FieldRef<"Visit", 'String'>
   readonly scheduledAt: Prisma.FieldRef<"Visit", 'DateTime'>
-  readonly visitFee: Prisma.FieldRef<"Visit", 'Float'>
   readonly status: Prisma.FieldRef<"Visit", 'VisitStatus'>
-  readonly projectSqft: Prisma.FieldRef<"Visit", 'Float'>
-  readonly projectStatus: Prisma.FieldRef<"Visit", 'ProjectStatus'>
+  readonly visitType: Prisma.FieldRef<"Visit", 'VisitType'>
   readonly location: Prisma.FieldRef<"Visit", 'String'>
   readonly notes: Prisma.FieldRef<"Visit", 'String'>
   readonly createdById: Prisma.FieldRef<"Visit", 'String'>
   readonly createdAt: Prisma.FieldRef<"Visit", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Visit", 'DateTime'>
+  readonly projectSqft: Prisma.FieldRef<"Visit", 'Float'>
+  readonly projectStatus: Prisma.FieldRef<"Visit", 'ProjectStatus'>
+  readonly visitFee: Prisma.FieldRef<"Visit", 'Float'>
 }
     
 
@@ -3075,6 +3154,78 @@ export type VisitDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Visit.cadPhaseTasks
+ */
+export type Visit$cadPhaseTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadPhaseTask
+   */
+  select?: Prisma.LeadPhaseTaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadPhaseTask
+   */
+  omit?: Prisma.LeadPhaseTaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadPhaseTaskInclude<ExtArgs> | null
+  where?: Prisma.LeadPhaseTaskWhereInput
+  orderBy?: Prisma.LeadPhaseTaskOrderByWithRelationInput | Prisma.LeadPhaseTaskOrderByWithRelationInput[]
+  cursor?: Prisma.LeadPhaseTaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadPhaseTaskScalarFieldEnum | Prisma.LeadPhaseTaskScalarFieldEnum[]
+}
+
+/**
+ * Visit.notifications
+ */
+export type Visit$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * Visit.visitPayments
+ */
+export type Visit$visitPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Transaction
+   */
+  select?: Prisma.TransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Transaction
+   */
+  omit?: Prisma.TransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null
+  where?: Prisma.TransactionWhereInput
+  orderBy?: Prisma.TransactionOrderByWithRelationInput | Prisma.TransactionOrderByWithRelationInput[]
+  cursor?: Prisma.TransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
+}
+
+/**
  * Visit.assignedTo
  */
 export type Visit$assignedToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3110,54 +3261,6 @@ export type Visit$resultArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.VisitResultInclude<ExtArgs> | null
   where?: Prisma.VisitResultWhereInput
-}
-
-/**
- * Visit.cadPhaseTasks
- */
-export type Visit$cadPhaseTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadPhaseTask
-   */
-  select?: Prisma.LeadPhaseTaskSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadPhaseTask
-   */
-  omit?: Prisma.LeadPhaseTaskOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadPhaseTaskInclude<ExtArgs> | null
-  where?: Prisma.LeadPhaseTaskWhereInput
-  orderBy?: Prisma.LeadPhaseTaskOrderByWithRelationInput | Prisma.LeadPhaseTaskOrderByWithRelationInput[]
-  cursor?: Prisma.LeadPhaseTaskWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadPhaseTaskScalarFieldEnum | Prisma.LeadPhaseTaskScalarFieldEnum[]
-}
-
-/**
- * Visit.updateRequests
- */
-export type Visit$updateRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the VisitUpdateRequest
-   */
-  select?: Prisma.VisitUpdateRequestSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the VisitUpdateRequest
-   */
-  omit?: Prisma.VisitUpdateRequestOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.VisitUpdateRequestInclude<ExtArgs> | null
-  where?: Prisma.VisitUpdateRequestWhereInput
-  orderBy?: Prisma.VisitUpdateRequestOrderByWithRelationInput | Prisma.VisitUpdateRequestOrderByWithRelationInput[]
-  cursor?: Prisma.VisitUpdateRequestWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.VisitUpdateRequestScalarFieldEnum | Prisma.VisitUpdateRequestScalarFieldEnum[]
 }
 
 /**
@@ -3209,51 +3312,27 @@ export type Visit$supportResultsArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * Visit.notifications
+ * Visit.updateRequests
  */
-export type Visit$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Visit$updateRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Notification
+   * Select specific fields to fetch from the VisitUpdateRequest
    */
-  select?: Prisma.NotificationSelect<ExtArgs> | null
+  select?: Prisma.VisitUpdateRequestSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Notification
+   * Omit specific fields from the VisitUpdateRequest
    */
-  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  omit?: Prisma.VisitUpdateRequestOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NotificationInclude<ExtArgs> | null
-  where?: Prisma.NotificationWhereInput
-  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
-  cursor?: Prisma.NotificationWhereUniqueInput
+  include?: Prisma.VisitUpdateRequestInclude<ExtArgs> | null
+  where?: Prisma.VisitUpdateRequestWhereInput
+  orderBy?: Prisma.VisitUpdateRequestOrderByWithRelationInput | Prisma.VisitUpdateRequestOrderByWithRelationInput[]
+  cursor?: Prisma.VisitUpdateRequestWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
-}
-
-/**
- * Visit.visitPayments
- */
-export type Visit$visitPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Transaction
-   */
-  select?: Prisma.TransactionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Transaction
-   */
-  omit?: Prisma.TransactionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TransactionInclude<ExtArgs> | null
-  where?: Prisma.TransactionWhereInput
-  orderBy?: Prisma.TransactionOrderByWithRelationInput | Prisma.TransactionOrderByWithRelationInput[]
-  cursor?: Prisma.TransactionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
+  distinct?: Prisma.VisitUpdateRequestScalarFieldEnum | Prisma.VisitUpdateRequestScalarFieldEnum[]
 }
 
 /**

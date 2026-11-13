@@ -222,8 +222,8 @@ export type LeadMeetingEventWhereInput = {
   createdById?: Prisma.StringFilter<"LeadMeetingEvent"> | string
   createdAt?: Prisma.DateTimeFilter<"LeadMeetingEvent"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LeadMeetingEvent"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
 }
 
 export type LeadMeetingEventOrderByWithRelationInput = {
@@ -237,8 +237,8 @@ export type LeadMeetingEventOrderByWithRelationInput = {
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  lead?: Prisma.LeadOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  lead?: Prisma.LeadOrderByWithRelationInput
 }
 
 export type LeadMeetingEventWhereUniqueInput = Prisma.AtLeast<{
@@ -255,8 +255,8 @@ export type LeadMeetingEventWhereUniqueInput = Prisma.AtLeast<{
   createdById?: Prisma.StringFilter<"LeadMeetingEvent"> | string
   createdAt?: Prisma.DateTimeFilter<"LeadMeetingEvent"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LeadMeetingEvent"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
 }, "id">
 
 export type LeadMeetingEventOrderByWithAggregationInput = {
@@ -300,8 +300,8 @@ export type LeadMeetingEventCreateInput = {
   endsAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutMeetingEventsInput
   createdBy: Prisma.UserCreateNestedOneWithoutMeetingEventsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutMeetingEventsInput
 }
 
 export type LeadMeetingEventUncheckedCreateInput = {
@@ -326,8 +326,8 @@ export type LeadMeetingEventUpdateInput = {
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutMeetingEventsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutMeetingEventsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutMeetingEventsNestedInput
 }
 
 export type LeadMeetingEventUncheckedUpdateInput = {
@@ -742,8 +742,8 @@ export type LeadMeetingEventSelect<ExtArgs extends runtime.Types.Extensions.Inte
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadMeetingEvent"]>
 
 export type LeadMeetingEventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -757,8 +757,8 @@ export type LeadMeetingEventSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadMeetingEvent"]>
 
 export type LeadMeetingEventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -772,8 +772,8 @@ export type LeadMeetingEventSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadMeetingEvent"]>
 
 export type LeadMeetingEventSelectScalar = {
@@ -791,23 +791,23 @@ export type LeadMeetingEventSelectScalar = {
 
 export type LeadMeetingEventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "type" | "title" | "notes" | "startsAt" | "endsAt" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["leadMeetingEvent"]>
 export type LeadMeetingEventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }
 export type LeadMeetingEventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }
 export type LeadMeetingEventIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }
 
 export type $LeadMeetingEventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadMeetingEvent"
   objects: {
-    lead: Prisma.$LeadPayload<ExtArgs>
     createdBy: Prisma.$UserPayload<ExtArgs>
+    lead: Prisma.$LeadPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1214,8 +1214,8 @@ readonly fields: LeadMeetingEventFieldRefs;
  */
 export interface Prisma__LeadMeetingEventClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  lead<T extends Prisma.LeadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

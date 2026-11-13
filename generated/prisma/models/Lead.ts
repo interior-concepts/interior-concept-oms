@@ -27,191 +27,183 @@ export type AggregateLead = {
 }
 
 export type LeadAvgAggregateOutputType = {
-  clientId: number | null
   budget: number | null
   agreementValue: number | null
+  agreementSqft: number | null
+  initialAgreementValue: number | null
 }
 
 export type LeadSumAggregateOutputType = {
-  clientId: number | null
   budget: number | null
   agreementValue: number | null
+  agreementSqft: number | null
+  initialAgreementValue: number | null
 }
 
 export type LeadMinAggregateOutputType = {
   id: string | null
-  clientId: number | null
   name: string | null
+  clientId: string | null
   phone: string | null
   email: string | null
+  assignedTo: string | null
+  created_at: Date | null
+  updated_at: Date | null
+  budget: number | null
+  location: string | null
+  remarks: string | null
   source: string | null
   stage: $Enums.LeadStage | null
   subStatus: $Enums.LeadSubStatus | null
-  budget: number | null
+  primaryOwnerDepartment: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId: string | null
   quotationType: string | null
   agreementType: string | null
   agreementValue: number | null
-  location: string | null
-  remarks: string | null
-  assignedTo: string | null
-  primaryOwnerDepartment: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId: string | null
   accountStatus: $Enums.AccountStatus | null
-  sentiment: $Enums.ClientSentiment | null
-  objection: $Enums.ClientObjection | null
-  objectionNote: string | null
-  lastContactedAt: Date | null
-  created_at: Date | null
-  updated_at: Date | null
+  agreementSqft: number | null
+  initialAgreementValue: number | null
 }
 
 export type LeadMaxAggregateOutputType = {
   id: string | null
-  clientId: number | null
   name: string | null
+  clientId: string | null
   phone: string | null
   email: string | null
+  assignedTo: string | null
+  created_at: Date | null
+  updated_at: Date | null
+  budget: number | null
+  location: string | null
+  remarks: string | null
   source: string | null
   stage: $Enums.LeadStage | null
   subStatus: $Enums.LeadSubStatus | null
-  budget: number | null
+  primaryOwnerDepartment: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId: string | null
   quotationType: string | null
   agreementType: string | null
   agreementValue: number | null
-  location: string | null
-  remarks: string | null
-  assignedTo: string | null
-  primaryOwnerDepartment: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId: string | null
   accountStatus: $Enums.AccountStatus | null
-  sentiment: $Enums.ClientSentiment | null
-  objection: $Enums.ClientObjection | null
-  objectionNote: string | null
-  lastContactedAt: Date | null
-  created_at: Date | null
-  updated_at: Date | null
+  agreementSqft: number | null
+  initialAgreementValue: number | null
 }
 
 export type LeadCountAggregateOutputType = {
   id: number
-  clientId: number
   name: number
+  clientId: number
   phone: number
   email: number
+  assignedTo: number
+  created_at: number
+  updated_at: number
+  budget: number
+  location: number
+  remarks: number
   source: number
   stage: number
   subStatus: number
-  budget: number
+  primaryOwnerDepartment: number
+  primaryOwnerUserId: number
   quotationType: number
   agreementType: number
   agreementValue: number
-  location: number
-  remarks: number
-  assignedTo: number
-  primaryOwnerDepartment: number
-  primaryOwnerUserId: number
   accountStatus: number
-  sentiment: number
-  objection: number
-  objectionNote: number
-  lastContactedAt: number
-  created_at: number
-  updated_at: number
+  agreementSqft: number
+  initialAgreementValue: number
   _all: number
 }
 
 
 export type LeadAvgAggregateInputType = {
-  clientId?: true
   budget?: true
   agreementValue?: true
+  agreementSqft?: true
+  initialAgreementValue?: true
 }
 
 export type LeadSumAggregateInputType = {
-  clientId?: true
   budget?: true
   agreementValue?: true
+  agreementSqft?: true
+  initialAgreementValue?: true
 }
 
 export type LeadMinAggregateInputType = {
   id?: true
-  clientId?: true
   name?: true
+  clientId?: true
   phone?: true
   email?: true
+  assignedTo?: true
+  created_at?: true
+  updated_at?: true
+  budget?: true
+  location?: true
+  remarks?: true
   source?: true
   stage?: true
   subStatus?: true
-  budget?: true
+  primaryOwnerDepartment?: true
+  primaryOwnerUserId?: true
   quotationType?: true
   agreementType?: true
   agreementValue?: true
-  location?: true
-  remarks?: true
-  assignedTo?: true
-  primaryOwnerDepartment?: true
-  primaryOwnerUserId?: true
   accountStatus?: true
-  sentiment?: true
-  objection?: true
-  objectionNote?: true
-  lastContactedAt?: true
-  created_at?: true
-  updated_at?: true
+  agreementSqft?: true
+  initialAgreementValue?: true
 }
 
 export type LeadMaxAggregateInputType = {
   id?: true
-  clientId?: true
   name?: true
+  clientId?: true
   phone?: true
   email?: true
+  assignedTo?: true
+  created_at?: true
+  updated_at?: true
+  budget?: true
+  location?: true
+  remarks?: true
   source?: true
   stage?: true
   subStatus?: true
-  budget?: true
+  primaryOwnerDepartment?: true
+  primaryOwnerUserId?: true
   quotationType?: true
   agreementType?: true
   agreementValue?: true
-  location?: true
-  remarks?: true
-  assignedTo?: true
-  primaryOwnerDepartment?: true
-  primaryOwnerUserId?: true
   accountStatus?: true
-  sentiment?: true
-  objection?: true
-  objectionNote?: true
-  lastContactedAt?: true
-  created_at?: true
-  updated_at?: true
+  agreementSqft?: true
+  initialAgreementValue?: true
 }
 
 export type LeadCountAggregateInputType = {
   id?: true
-  clientId?: true
   name?: true
+  clientId?: true
   phone?: true
   email?: true
+  assignedTo?: true
+  created_at?: true
+  updated_at?: true
+  budget?: true
+  location?: true
+  remarks?: true
   source?: true
   stage?: true
   subStatus?: true
-  budget?: true
+  primaryOwnerDepartment?: true
+  primaryOwnerUserId?: true
   quotationType?: true
   agreementType?: true
   agreementValue?: true
-  location?: true
-  remarks?: true
-  assignedTo?: true
-  primaryOwnerDepartment?: true
-  primaryOwnerUserId?: true
   accountStatus?: true
-  sentiment?: true
-  objection?: true
-  objectionNote?: true
-  lastContactedAt?: true
-  created_at?: true
-  updated_at?: true
+  agreementSqft?: true
+  initialAgreementValue?: true
   _all?: true
 }
 
@@ -303,29 +295,27 @@ export type LeadGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type LeadGroupByOutputType = {
   id: string
-  clientId: number
   name: string
+  clientId: string | null
   phone: string | null
   email: string | null
+  assignedTo: string | null
+  created_at: Date
+  updated_at: Date
+  budget: number | null
+  location: string | null
+  remarks: string | null
   source: string | null
   stage: $Enums.LeadStage
   subStatus: $Enums.LeadSubStatus | null
-  budget: number | null
+  primaryOwnerDepartment: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId: string | null
   quotationType: string | null
   agreementType: string | null
   agreementValue: number | null
-  location: string | null
-  remarks: string | null
-  assignedTo: string | null
-  primaryOwnerDepartment: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId: string | null
   accountStatus: $Enums.AccountStatus | null
-  sentiment: $Enums.ClientSentiment | null
-  objection: $Enums.ClientObjection | null
-  objectionNote: string | null
-  lastContactedAt: Date | null
-  created_at: Date
-  updated_at: Date
+  agreementSqft: number | null
+  initialAgreementValue: number | null
   _count: LeadCountAggregateOutputType | null
   _avg: LeadAvgAggregateOutputType | null
   _sum: LeadSumAggregateOutputType | null
@@ -353,167 +343,183 @@ export type LeadWhereInput = {
   OR?: Prisma.LeadWhereInput[]
   NOT?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
   id?: Prisma.StringFilter<"Lead"> | string
-  clientId?: Prisma.IntFilter<"Lead"> | number
   name?: Prisma.StringFilter<"Lead"> | string
+  clientId?: Prisma.StringNullableFilter<"Lead"> | string | null
   phone?: Prisma.StringNullableFilter<"Lead"> | string | null
   email?: Prisma.StringNullableFilter<"Lead"> | string | null
+  assignedTo?: Prisma.StringNullableFilter<"Lead"> | string | null
+  created_at?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  budget?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  location?: Prisma.StringNullableFilter<"Lead"> | string | null
+  remarks?: Prisma.StringNullableFilter<"Lead"> | string | null
   source?: Prisma.StringNullableFilter<"Lead"> | string | null
   stage?: Prisma.EnumLeadStageFilter<"Lead"> | $Enums.LeadStage
   subStatus?: Prisma.EnumLeadSubStatusNullableFilter<"Lead"> | $Enums.LeadSubStatus | null
-  budget?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  primaryOwnerDepartment?: Prisma.EnumLeadPrimaryOwnerDepartmentNullableFilter<"Lead"> | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.StringNullableFilter<"Lead"> | string | null
   quotationType?: Prisma.StringNullableFilter<"Lead"> | string | null
   agreementType?: Prisma.StringNullableFilter<"Lead"> | string | null
   agreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
-  location?: Prisma.StringNullableFilter<"Lead"> | string | null
-  remarks?: Prisma.StringNullableFilter<"Lead"> | string | null
-  assignedTo?: Prisma.StringNullableFilter<"Lead"> | string | null
-  primaryOwnerDepartment?: Prisma.EnumLeadPrimaryOwnerDepartmentNullableFilter<"Lead"> | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.StringNullableFilter<"Lead"> | string | null
   accountStatus?: Prisma.EnumAccountStatusNullableFilter<"Lead"> | $Enums.AccountStatus | null
-  sentiment?: Prisma.EnumClientSentimentNullableFilter<"Lead"> | $Enums.ClientSentiment | null
-  objection?: Prisma.EnumClientObjectionNullableFilter<"Lead"> | $Enums.ClientObjection | null
-  objectionNote?: Prisma.StringNullableFilter<"Lead"> | string | null
-  lastContactedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
-  created_at?: Prisma.DateTimeFilter<"Lead"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  agreementSqft?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  initialAgreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  activities?: Prisma.ActivityLogListRelationFilter
+  agreementValueLogs?: Prisma.AgreementValueLogListRelationFilter
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionListRelationFilter
+  followUps?: Prisma.FollowUpListRelationFilter
   assignee?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   primaryOwner?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  followUps?: Prisma.FollowUpListRelationFilter
-  notes?: Prisma.NoteListRelationFilter
-  activities?: Prisma.ActivityLogListRelationFilter
-  statusHistory?: Prisma.LeadStatusHistoryListRelationFilter
   assignments?: Prisma.LeadAssignmentListRelationFilter
-  visits?: Prisma.VisitListRelationFilter
   attachments?: Prisma.LeadAttachmentListRelationFilter
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionListRelationFilter
-  quotationDrafts?: Prisma.QuotationDraftListRelationFilter
-  furnitureQuotationDraft?: Prisma.XOR<Prisma.FurnitureQuotationDraftNullableScalarRelationFilter, Prisma.FurnitureQuotationDraftWhereInput> | null
-  notifications?: Prisma.NotificationListRelationFilter
-  phaseTasks?: Prisma.LeadPhaseTaskListRelationFilter
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestListRelationFilter
   meetingEvents?: Prisma.LeadMeetingEventListRelationFilter
+  phaseTasks?: Prisma.LeadPhaseTaskListRelationFilter
+  statusHistory?: Prisma.LeadStatusHistoryListRelationFilter
+  notes?: Prisma.NoteListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  quotationDrafts?: Prisma.QuotationDraftListRelationFilter
+  agreementDocument?: Prisma.XOR<Prisma.AgreementDocumentNullableScalarRelationFilter, Prisma.AgreementDocumentWhereInput> | null
+  furnitureQuotationDraft?: Prisma.XOR<Prisma.FurnitureQuotationDraftNullableScalarRelationFilter, Prisma.FurnitureQuotationDraftWhereInput> | null
+  electricalQuotationDraft?: Prisma.XOR<Prisma.ElectricalQuotationDraftNullableScalarRelationFilter, Prisma.ElectricalQuotationDraftWhereInput> | null
+  partialQuotationDraft?: Prisma.XOR<Prisma.PartialQuotationDraftNullableScalarRelationFilter, Prisma.PartialQuotationDraftWhereInput> | null
   transactions?: Prisma.TransactionListRelationFilter
+  visits?: Prisma.VisitListRelationFilter
+  vendorAgreements?: Prisma.VendorAgreementListRelationFilter
+  stockMovements?: Prisma.StockMovementListRelationFilter
   materialRequisitions?: Prisma.MaterialRequisitionListRelationFilter
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionListRelationFilter
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogListRelationFilter
 }
 
 export type LeadOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  clientId?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
+  assignedTo?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+  budget?: Prisma.SortOrderInput | Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
+  remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrderInput | Prisma.SortOrder
   stage?: Prisma.SortOrder
   subStatus?: Prisma.SortOrderInput | Prisma.SortOrder
-  budget?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryOwnerDepartment?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryOwnerUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   quotationType?: Prisma.SortOrderInput | Prisma.SortOrder
   agreementType?: Prisma.SortOrderInput | Prisma.SortOrder
   agreementValue?: Prisma.SortOrderInput | Prisma.SortOrder
-  location?: Prisma.SortOrderInput | Prisma.SortOrder
-  remarks?: Prisma.SortOrderInput | Prisma.SortOrder
-  assignedTo?: Prisma.SortOrderInput | Prisma.SortOrder
-  primaryOwnerDepartment?: Prisma.SortOrderInput | Prisma.SortOrder
-  primaryOwnerUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   accountStatus?: Prisma.SortOrderInput | Prisma.SortOrder
-  sentiment?: Prisma.SortOrderInput | Prisma.SortOrder
-  objection?: Prisma.SortOrderInput | Prisma.SortOrder
-  objectionNote?: Prisma.SortOrderInput | Prisma.SortOrder
-  lastContactedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  agreementSqft?: Prisma.SortOrderInput | Prisma.SortOrder
+  initialAgreementValue?: Prisma.SortOrderInput | Prisma.SortOrder
+  activities?: Prisma.ActivityLogOrderByRelationAggregateInput
+  agreementValueLogs?: Prisma.AgreementValueLogOrderByRelationAggregateInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionOrderByRelationAggregateInput
+  followUps?: Prisma.FollowUpOrderByRelationAggregateInput
   assignee?: Prisma.UserOrderByWithRelationInput
   primaryOwner?: Prisma.UserOrderByWithRelationInput
-  followUps?: Prisma.FollowUpOrderByRelationAggregateInput
-  notes?: Prisma.NoteOrderByRelationAggregateInput
-  activities?: Prisma.ActivityLogOrderByRelationAggregateInput
-  statusHistory?: Prisma.LeadStatusHistoryOrderByRelationAggregateInput
   assignments?: Prisma.LeadAssignmentOrderByRelationAggregateInput
-  visits?: Prisma.VisitOrderByRelationAggregateInput
   attachments?: Prisma.LeadAttachmentOrderByRelationAggregateInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionOrderByRelationAggregateInput
-  quotationDrafts?: Prisma.QuotationDraftOrderByRelationAggregateInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftOrderByWithRelationInput
-  notifications?: Prisma.NotificationOrderByRelationAggregateInput
-  phaseTasks?: Prisma.LeadPhaseTaskOrderByRelationAggregateInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestOrderByRelationAggregateInput
   meetingEvents?: Prisma.LeadMeetingEventOrderByRelationAggregateInput
+  phaseTasks?: Prisma.LeadPhaseTaskOrderByRelationAggregateInput
+  statusHistory?: Prisma.LeadStatusHistoryOrderByRelationAggregateInput
+  notes?: Prisma.NoteOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  quotationDrafts?: Prisma.QuotationDraftOrderByRelationAggregateInput
+  agreementDocument?: Prisma.AgreementDocumentOrderByWithRelationInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftOrderByWithRelationInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftOrderByWithRelationInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftOrderByWithRelationInput
   transactions?: Prisma.TransactionOrderByRelationAggregateInput
+  visits?: Prisma.VisitOrderByRelationAggregateInput
+  vendorAgreements?: Prisma.VendorAgreementOrderByRelationAggregateInput
+  stockMovements?: Prisma.StockMovementOrderByRelationAggregateInput
   materialRequisitions?: Prisma.MaterialRequisitionOrderByRelationAggregateInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionOrderByRelationAggregateInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogOrderByRelationAggregateInput
 }
 
 export type LeadWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  clientId?: number
   phone?: string
   AND?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
   OR?: Prisma.LeadWhereInput[]
   NOT?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
   name?: Prisma.StringFilter<"Lead"> | string
+  clientId?: Prisma.StringNullableFilter<"Lead"> | string | null
   email?: Prisma.StringNullableFilter<"Lead"> | string | null
+  assignedTo?: Prisma.StringNullableFilter<"Lead"> | string | null
+  created_at?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  budget?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  location?: Prisma.StringNullableFilter<"Lead"> | string | null
+  remarks?: Prisma.StringNullableFilter<"Lead"> | string | null
   source?: Prisma.StringNullableFilter<"Lead"> | string | null
   stage?: Prisma.EnumLeadStageFilter<"Lead"> | $Enums.LeadStage
   subStatus?: Prisma.EnumLeadSubStatusNullableFilter<"Lead"> | $Enums.LeadSubStatus | null
-  budget?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  primaryOwnerDepartment?: Prisma.EnumLeadPrimaryOwnerDepartmentNullableFilter<"Lead"> | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.StringNullableFilter<"Lead"> | string | null
   quotationType?: Prisma.StringNullableFilter<"Lead"> | string | null
   agreementType?: Prisma.StringNullableFilter<"Lead"> | string | null
   agreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
-  location?: Prisma.StringNullableFilter<"Lead"> | string | null
-  remarks?: Prisma.StringNullableFilter<"Lead"> | string | null
-  assignedTo?: Prisma.StringNullableFilter<"Lead"> | string | null
-  primaryOwnerDepartment?: Prisma.EnumLeadPrimaryOwnerDepartmentNullableFilter<"Lead"> | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.StringNullableFilter<"Lead"> | string | null
   accountStatus?: Prisma.EnumAccountStatusNullableFilter<"Lead"> | $Enums.AccountStatus | null
-  sentiment?: Prisma.EnumClientSentimentNullableFilter<"Lead"> | $Enums.ClientSentiment | null
-  objection?: Prisma.EnumClientObjectionNullableFilter<"Lead"> | $Enums.ClientObjection | null
-  objectionNote?: Prisma.StringNullableFilter<"Lead"> | string | null
-  lastContactedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
-  created_at?: Prisma.DateTimeFilter<"Lead"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  agreementSqft?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  initialAgreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  activities?: Prisma.ActivityLogListRelationFilter
+  agreementValueLogs?: Prisma.AgreementValueLogListRelationFilter
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionListRelationFilter
+  followUps?: Prisma.FollowUpListRelationFilter
   assignee?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   primaryOwner?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  followUps?: Prisma.FollowUpListRelationFilter
-  notes?: Prisma.NoteListRelationFilter
-  activities?: Prisma.ActivityLogListRelationFilter
-  statusHistory?: Prisma.LeadStatusHistoryListRelationFilter
   assignments?: Prisma.LeadAssignmentListRelationFilter
-  visits?: Prisma.VisitListRelationFilter
   attachments?: Prisma.LeadAttachmentListRelationFilter
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionListRelationFilter
-  quotationDrafts?: Prisma.QuotationDraftListRelationFilter
-  furnitureQuotationDraft?: Prisma.XOR<Prisma.FurnitureQuotationDraftNullableScalarRelationFilter, Prisma.FurnitureQuotationDraftWhereInput> | null
-  notifications?: Prisma.NotificationListRelationFilter
-  phaseTasks?: Prisma.LeadPhaseTaskListRelationFilter
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestListRelationFilter
   meetingEvents?: Prisma.LeadMeetingEventListRelationFilter
+  phaseTasks?: Prisma.LeadPhaseTaskListRelationFilter
+  statusHistory?: Prisma.LeadStatusHistoryListRelationFilter
+  notes?: Prisma.NoteListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  quotationDrafts?: Prisma.QuotationDraftListRelationFilter
+  agreementDocument?: Prisma.XOR<Prisma.AgreementDocumentNullableScalarRelationFilter, Prisma.AgreementDocumentWhereInput> | null
+  furnitureQuotationDraft?: Prisma.XOR<Prisma.FurnitureQuotationDraftNullableScalarRelationFilter, Prisma.FurnitureQuotationDraftWhereInput> | null
+  electricalQuotationDraft?: Prisma.XOR<Prisma.ElectricalQuotationDraftNullableScalarRelationFilter, Prisma.ElectricalQuotationDraftWhereInput> | null
+  partialQuotationDraft?: Prisma.XOR<Prisma.PartialQuotationDraftNullableScalarRelationFilter, Prisma.PartialQuotationDraftWhereInput> | null
   transactions?: Prisma.TransactionListRelationFilter
+  visits?: Prisma.VisitListRelationFilter
+  vendorAgreements?: Prisma.VendorAgreementListRelationFilter
+  stockMovements?: Prisma.StockMovementListRelationFilter
   materialRequisitions?: Prisma.MaterialRequisitionListRelationFilter
-}, "id" | "clientId" | "phone">
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionListRelationFilter
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogListRelationFilter
+}, "id" | "phone">
 
 export type LeadOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  clientId?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
+  assignedTo?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+  budget?: Prisma.SortOrderInput | Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
+  remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrderInput | Prisma.SortOrder
   stage?: Prisma.SortOrder
   subStatus?: Prisma.SortOrderInput | Prisma.SortOrder
-  budget?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryOwnerDepartment?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryOwnerUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   quotationType?: Prisma.SortOrderInput | Prisma.SortOrder
   agreementType?: Prisma.SortOrderInput | Prisma.SortOrder
   agreementValue?: Prisma.SortOrderInput | Prisma.SortOrder
-  location?: Prisma.SortOrderInput | Prisma.SortOrder
-  remarks?: Prisma.SortOrderInput | Prisma.SortOrder
-  assignedTo?: Prisma.SortOrderInput | Prisma.SortOrder
-  primaryOwnerDepartment?: Prisma.SortOrderInput | Prisma.SortOrder
-  primaryOwnerUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   accountStatus?: Prisma.SortOrderInput | Prisma.SortOrder
-  sentiment?: Prisma.SortOrderInput | Prisma.SortOrder
-  objection?: Prisma.SortOrderInput | Prisma.SortOrder
-  objectionNote?: Prisma.SortOrderInput | Prisma.SortOrder
-  lastContactedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  agreementSqft?: Prisma.SortOrderInput | Prisma.SortOrder
+  initialAgreementValue?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadCountOrderByAggregateInput
   _avg?: Prisma.LeadAvgOrderByAggregateInput
   _max?: Prisma.LeadMaxOrderByAggregateInput
@@ -526,371 +532,385 @@ export type LeadScalarWhereWithAggregatesInput = {
   OR?: Prisma.LeadScalarWhereWithAggregatesInput[]
   NOT?: Prisma.LeadScalarWhereWithAggregatesInput | Prisma.LeadScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Lead"> | string
-  clientId?: Prisma.IntWithAggregatesFilter<"Lead"> | number
   name?: Prisma.StringWithAggregatesFilter<"Lead"> | string
+  clientId?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  assignedTo?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
+  budget?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
+  location?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  remarks?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   source?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   stage?: Prisma.EnumLeadStageWithAggregatesFilter<"Lead"> | $Enums.LeadStage
   subStatus?: Prisma.EnumLeadSubStatusNullableWithAggregatesFilter<"Lead"> | $Enums.LeadSubStatus | null
-  budget?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
+  primaryOwnerDepartment?: Prisma.EnumLeadPrimaryOwnerDepartmentNullableWithAggregatesFilter<"Lead"> | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   quotationType?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   agreementType?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   agreementValue?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
-  location?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
-  remarks?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
-  assignedTo?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
-  primaryOwnerDepartment?: Prisma.EnumLeadPrimaryOwnerDepartmentNullableWithAggregatesFilter<"Lead"> | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   accountStatus?: Prisma.EnumAccountStatusNullableWithAggregatesFilter<"Lead"> | $Enums.AccountStatus | null
-  sentiment?: Prisma.EnumClientSentimentNullableWithAggregatesFilter<"Lead"> | $Enums.ClientSentiment | null
-  objection?: Prisma.EnumClientObjectionNullableWithAggregatesFilter<"Lead"> | $Enums.ClientObjection | null
-  objectionNote?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
-  lastContactedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
-  created_at?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
-  updated_at?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
+  agreementSqft?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
+  initialAgreementValue?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
 }
 
 export type LeadCreateInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateManyInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
 }
 
 export type LeadUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type LeadUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type LeadCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  clientId?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  assignedTo?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  remarks?: Prisma.SortOrder
   source?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   subStatus?: Prisma.SortOrder
-  budget?: Prisma.SortOrder
+  primaryOwnerDepartment?: Prisma.SortOrder
+  primaryOwnerUserId?: Prisma.SortOrder
   quotationType?: Prisma.SortOrder
   agreementType?: Prisma.SortOrder
   agreementValue?: Prisma.SortOrder
-  location?: Prisma.SortOrder
-  remarks?: Prisma.SortOrder
-  assignedTo?: Prisma.SortOrder
-  primaryOwnerDepartment?: Prisma.SortOrder
-  primaryOwnerUserId?: Prisma.SortOrder
   accountStatus?: Prisma.SortOrder
-  sentiment?: Prisma.SortOrder
-  objection?: Prisma.SortOrder
-  objectionNote?: Prisma.SortOrder
-  lastContactedAt?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  agreementSqft?: Prisma.SortOrder
+  initialAgreementValue?: Prisma.SortOrder
 }
 
 export type LeadAvgOrderByAggregateInput = {
-  clientId?: Prisma.SortOrder
   budget?: Prisma.SortOrder
   agreementValue?: Prisma.SortOrder
+  agreementSqft?: Prisma.SortOrder
+  initialAgreementValue?: Prisma.SortOrder
 }
 
 export type LeadMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  clientId?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  assignedTo?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  remarks?: Prisma.SortOrder
   source?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   subStatus?: Prisma.SortOrder
-  budget?: Prisma.SortOrder
+  primaryOwnerDepartment?: Prisma.SortOrder
+  primaryOwnerUserId?: Prisma.SortOrder
   quotationType?: Prisma.SortOrder
   agreementType?: Prisma.SortOrder
   agreementValue?: Prisma.SortOrder
-  location?: Prisma.SortOrder
-  remarks?: Prisma.SortOrder
-  assignedTo?: Prisma.SortOrder
-  primaryOwnerDepartment?: Prisma.SortOrder
-  primaryOwnerUserId?: Prisma.SortOrder
   accountStatus?: Prisma.SortOrder
-  sentiment?: Prisma.SortOrder
-  objection?: Prisma.SortOrder
-  objectionNote?: Prisma.SortOrder
-  lastContactedAt?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  agreementSqft?: Prisma.SortOrder
+  initialAgreementValue?: Prisma.SortOrder
 }
 
 export type LeadMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  clientId?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  assignedTo?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  remarks?: Prisma.SortOrder
   source?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   subStatus?: Prisma.SortOrder
-  budget?: Prisma.SortOrder
+  primaryOwnerDepartment?: Prisma.SortOrder
+  primaryOwnerUserId?: Prisma.SortOrder
   quotationType?: Prisma.SortOrder
   agreementType?: Prisma.SortOrder
   agreementValue?: Prisma.SortOrder
-  location?: Prisma.SortOrder
-  remarks?: Prisma.SortOrder
-  assignedTo?: Prisma.SortOrder
-  primaryOwnerDepartment?: Prisma.SortOrder
-  primaryOwnerUserId?: Prisma.SortOrder
   accountStatus?: Prisma.SortOrder
-  sentiment?: Prisma.SortOrder
-  objection?: Prisma.SortOrder
-  objectionNote?: Prisma.SortOrder
-  lastContactedAt?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  agreementSqft?: Prisma.SortOrder
+  initialAgreementValue?: Prisma.SortOrder
 }
 
 export type LeadSumOrderByAggregateInput = {
-  clientId?: Prisma.SortOrder
   budget?: Prisma.SortOrder
   agreementValue?: Prisma.SortOrder
+  agreementSqft?: Prisma.SortOrder
+  initialAgreementValue?: Prisma.SortOrder
 }
 
 export type LeadScalarRelationFilter = {
@@ -921,12 +941,8 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
-export type EnumLeadStageFieldUpdateOperationsInput = {
-  set?: $Enums.LeadStage
-}
-
-export type NullableEnumLeadSubStatusFieldUpdateOperationsInput = {
-  set?: $Enums.LeadSubStatus | null
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type NullableFloatFieldUpdateOperationsInput = {
@@ -937,36 +953,20 @@ export type NullableFloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type EnumLeadStageFieldUpdateOperationsInput = {
+  set?: $Enums.LeadStage
+}
+
+export type NullableEnumLeadSubStatusFieldUpdateOperationsInput = {
+  set?: $Enums.LeadSubStatus | null
+}
+
 export type NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput = {
   set?: $Enums.LeadPrimaryOwnerDepartment | null
 }
 
 export type NullableEnumAccountStatusFieldUpdateOperationsInput = {
   set?: $Enums.AccountStatus | null
-}
-
-export type NullableEnumClientSentimentFieldUpdateOperationsInput = {
-  set?: $Enums.ClientSentiment | null
-}
-
-export type NullableEnumClientObjectionFieldUpdateOperationsInput = {
-  set?: $Enums.ClientObjection | null
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 export type LeadCreateNestedOneWithoutAssignmentsInput = {
@@ -1123,6 +1123,20 @@ export type LeadUncheckedUpdateManyWithoutPrimaryOwnerNestedInput = {
   deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
 }
 
+export type LeadCreateNestedOneWithoutAgreementValueLogsInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutAgreementValueLogsInput, Prisma.LeadUncheckedCreateWithoutAgreementValueLogsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutAgreementValueLogsInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneRequiredWithoutAgreementValueLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutAgreementValueLogsInput, Prisma.LeadUncheckedCreateWithoutAgreementValueLogsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutAgreementValueLogsInput
+  upsert?: Prisma.LeadUpsertWithoutAgreementValueLogsInput
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutAgreementValueLogsInput, Prisma.LeadUpdateWithoutAgreementValueLogsInput>, Prisma.LeadUncheckedUpdateWithoutAgreementValueLogsInput>
+}
+
 export type LeadCreateNestedOneWithoutPhaseTasksInput = {
   create?: Prisma.XOR<Prisma.LeadCreateWithoutPhaseTasksInput, Prisma.LeadUncheckedCreateWithoutPhaseTasksInput>
   connectOrCreate?: Prisma.LeadCreateOrConnectWithoutPhaseTasksInput
@@ -1193,6 +1207,20 @@ export type LeadUpdateOneRequiredWithoutQuotationDraftsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutQuotationDraftsInput, Prisma.LeadUpdateWithoutQuotationDraftsInput>, Prisma.LeadUncheckedUpdateWithoutQuotationDraftsInput>
 }
 
+export type LeadCreateNestedOneWithoutAgreementDocumentInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutAgreementDocumentInput, Prisma.LeadUncheckedCreateWithoutAgreementDocumentInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutAgreementDocumentInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneRequiredWithoutAgreementDocumentNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutAgreementDocumentInput, Prisma.LeadUncheckedCreateWithoutAgreementDocumentInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutAgreementDocumentInput
+  upsert?: Prisma.LeadUpsertWithoutAgreementDocumentInput
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutAgreementDocumentInput, Prisma.LeadUpdateWithoutAgreementDocumentInput>, Prisma.LeadUncheckedUpdateWithoutAgreementDocumentInput>
+}
+
 export type LeadCreateNestedOneWithoutFurnitureQuotationDraftInput = {
   create?: Prisma.XOR<Prisma.LeadCreateWithoutFurnitureQuotationDraftInput, Prisma.LeadUncheckedCreateWithoutFurnitureQuotationDraftInput>
   connectOrCreate?: Prisma.LeadCreateOrConnectWithoutFurnitureQuotationDraftInput
@@ -1205,6 +1233,34 @@ export type LeadUpdateOneRequiredWithoutFurnitureQuotationDraftNestedInput = {
   upsert?: Prisma.LeadUpsertWithoutFurnitureQuotationDraftInput
   connect?: Prisma.LeadWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutFurnitureQuotationDraftInput, Prisma.LeadUpdateWithoutFurnitureQuotationDraftInput>, Prisma.LeadUncheckedUpdateWithoutFurnitureQuotationDraftInput>
+}
+
+export type LeadCreateNestedOneWithoutElectricalQuotationDraftInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutElectricalQuotationDraftInput, Prisma.LeadUncheckedCreateWithoutElectricalQuotationDraftInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutElectricalQuotationDraftInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneRequiredWithoutElectricalQuotationDraftNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutElectricalQuotationDraftInput, Prisma.LeadUncheckedCreateWithoutElectricalQuotationDraftInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutElectricalQuotationDraftInput
+  upsert?: Prisma.LeadUpsertWithoutElectricalQuotationDraftInput
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutElectricalQuotationDraftInput, Prisma.LeadUpdateWithoutElectricalQuotationDraftInput>, Prisma.LeadUncheckedUpdateWithoutElectricalQuotationDraftInput>
+}
+
+export type LeadCreateNestedOneWithoutPartialQuotationDraftInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutPartialQuotationDraftInput, Prisma.LeadUncheckedCreateWithoutPartialQuotationDraftInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutPartialQuotationDraftInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneRequiredWithoutPartialQuotationDraftNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutPartialQuotationDraftInput, Prisma.LeadUncheckedCreateWithoutPartialQuotationDraftInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutPartialQuotationDraftInput
+  upsert?: Prisma.LeadUpsertWithoutPartialQuotationDraftInput
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutPartialQuotationDraftInput, Prisma.LeadUpdateWithoutPartialQuotationDraftInput>, Prisma.LeadUncheckedUpdateWithoutPartialQuotationDraftInput>
 }
 
 export type LeadCreateNestedOneWithoutVisitsInput = {
@@ -1267,6 +1323,36 @@ export type LeadUpdateOneWithoutTransactionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutTransactionsInput, Prisma.LeadUpdateWithoutTransactionsInput>, Prisma.LeadUncheckedUpdateWithoutTransactionsInput>
 }
 
+export type LeadCreateNestedOneWithoutVendorAgreementsInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutVendorAgreementsInput, Prisma.LeadUncheckedCreateWithoutVendorAgreementsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutVendorAgreementsInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneRequiredWithoutVendorAgreementsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutVendorAgreementsInput, Prisma.LeadUncheckedCreateWithoutVendorAgreementsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutVendorAgreementsInput
+  upsert?: Prisma.LeadUpsertWithoutVendorAgreementsInput
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutVendorAgreementsInput, Prisma.LeadUpdateWithoutVendorAgreementsInput>, Prisma.LeadUncheckedUpdateWithoutVendorAgreementsInput>
+}
+
+export type LeadCreateNestedOneWithoutStockMovementsInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutStockMovementsInput, Prisma.LeadUncheckedCreateWithoutStockMovementsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutStockMovementsInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneWithoutStockMovementsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutStockMovementsInput, Prisma.LeadUncheckedCreateWithoutStockMovementsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutStockMovementsInput
+  upsert?: Prisma.LeadUpsertWithoutStockMovementsInput
+  disconnect?: Prisma.LeadWhereInput | boolean
+  delete?: Prisma.LeadWhereInput | boolean
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutStockMovementsInput, Prisma.LeadUpdateWithoutStockMovementsInput>, Prisma.LeadUncheckedUpdateWithoutStockMovementsInput>
+}
+
 export type LeadCreateNestedOneWithoutMaterialRequisitionsInput = {
   create?: Prisma.XOR<Prisma.LeadCreateWithoutMaterialRequisitionsInput, Prisma.LeadUncheckedCreateWithoutMaterialRequisitionsInput>
   connectOrCreate?: Prisma.LeadCreateOrConnectWithoutMaterialRequisitionsInput
@@ -1281,88 +1367,130 @@ export type LeadUpdateOneRequiredWithoutMaterialRequisitionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutMaterialRequisitionsInput, Prisma.LeadUpdateWithoutMaterialRequisitionsInput>, Prisma.LeadUncheckedUpdateWithoutMaterialRequisitionsInput>
 }
 
+export type LeadCreateNestedOneWithoutProcurementWalletTransactionsInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutProcurementWalletTransactionsInput, Prisma.LeadUncheckedCreateWithoutProcurementWalletTransactionsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutProcurementWalletTransactionsInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneWithoutProcurementWalletTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutProcurementWalletTransactionsInput, Prisma.LeadUncheckedCreateWithoutProcurementWalletTransactionsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutProcurementWalletTransactionsInput
+  upsert?: Prisma.LeadUpsertWithoutProcurementWalletTransactionsInput
+  disconnect?: Prisma.LeadWhereInput | boolean
+  delete?: Prisma.LeadWhereInput | boolean
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutProcurementWalletTransactionsInput, Prisma.LeadUpdateWithoutProcurementWalletTransactionsInput>, Prisma.LeadUncheckedUpdateWithoutProcurementWalletTransactionsInput>
+}
+
+export type LeadCreateNestedOneWithoutSiteDeliveryLogsInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutSiteDeliveryLogsInput, Prisma.LeadUncheckedCreateWithoutSiteDeliveryLogsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutSiteDeliveryLogsInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneRequiredWithoutSiteDeliveryLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutSiteDeliveryLogsInput, Prisma.LeadUncheckedCreateWithoutSiteDeliveryLogsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutSiteDeliveryLogsInput
+  upsert?: Prisma.LeadUpsertWithoutSiteDeliveryLogsInput
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutSiteDeliveryLogsInput, Prisma.LeadUpdateWithoutSiteDeliveryLogsInput>, Prisma.LeadUncheckedUpdateWithoutSiteDeliveryLogsInput>
+}
+
 export type LeadCreateWithoutAssignmentsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutAssignmentsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutAssignmentsInput = {
@@ -1384,168 +1512,193 @@ export type LeadUpdateToOneWithWhereWithoutAssignmentsInput = {
 export type LeadUpdateWithoutAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutStatusHistoryInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutStatusHistoryInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutStatusHistoryInput = {
@@ -1567,168 +1720,193 @@ export type LeadUpdateToOneWithWhereWithoutStatusHistoryInput = {
 export type LeadUpdateWithoutStatusHistoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutStatusHistoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutActivitiesInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutActivitiesInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutActivitiesInput = {
@@ -1750,168 +1928,193 @@ export type LeadUpdateToOneWithWhereWithoutActivitiesInput = {
 export type LeadUpdateWithoutActivitiesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutActivitiesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutFollowUpsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutFollowUpsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutFollowUpsInput = {
@@ -1933,168 +2136,193 @@ export type LeadUpdateToOneWithWhereWithoutFollowUpsInput = {
 export type LeadUpdateWithoutFollowUpsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutFollowUpsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutNotesInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutNotesInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutNotesInput = {
@@ -2116,168 +2344,193 @@ export type LeadUpdateToOneWithWhereWithoutNotesInput = {
 export type LeadUpdateWithoutNotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutNotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutAssigneeInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutAssigneeInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutAssigneeInput = {
@@ -2292,86 +2545,98 @@ export type LeadCreateManyAssigneeInputEnvelope = {
 
 export type LeadCreateWithoutPrimaryOwnerInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutPrimaryOwnerInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutPrimaryOwnerInput = {
@@ -2405,29 +2670,27 @@ export type LeadScalarWhereInput = {
   OR?: Prisma.LeadScalarWhereInput[]
   NOT?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
   id?: Prisma.StringFilter<"Lead"> | string
-  clientId?: Prisma.IntFilter<"Lead"> | number
   name?: Prisma.StringFilter<"Lead"> | string
+  clientId?: Prisma.StringNullableFilter<"Lead"> | string | null
   phone?: Prisma.StringNullableFilter<"Lead"> | string | null
   email?: Prisma.StringNullableFilter<"Lead"> | string | null
+  assignedTo?: Prisma.StringNullableFilter<"Lead"> | string | null
+  created_at?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  budget?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  location?: Prisma.StringNullableFilter<"Lead"> | string | null
+  remarks?: Prisma.StringNullableFilter<"Lead"> | string | null
   source?: Prisma.StringNullableFilter<"Lead"> | string | null
   stage?: Prisma.EnumLeadStageFilter<"Lead"> | $Enums.LeadStage
   subStatus?: Prisma.EnumLeadSubStatusNullableFilter<"Lead"> | $Enums.LeadSubStatus | null
-  budget?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  primaryOwnerDepartment?: Prisma.EnumLeadPrimaryOwnerDepartmentNullableFilter<"Lead"> | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.StringNullableFilter<"Lead"> | string | null
   quotationType?: Prisma.StringNullableFilter<"Lead"> | string | null
   agreementType?: Prisma.StringNullableFilter<"Lead"> | string | null
   agreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
-  location?: Prisma.StringNullableFilter<"Lead"> | string | null
-  remarks?: Prisma.StringNullableFilter<"Lead"> | string | null
-  assignedTo?: Prisma.StringNullableFilter<"Lead"> | string | null
-  primaryOwnerDepartment?: Prisma.EnumLeadPrimaryOwnerDepartmentNullableFilter<"Lead"> | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.StringNullableFilter<"Lead"> | string | null
   accountStatus?: Prisma.EnumAccountStatusNullableFilter<"Lead"> | $Enums.AccountStatus | null
-  sentiment?: Prisma.EnumClientSentimentNullableFilter<"Lead"> | $Enums.ClientSentiment | null
-  objection?: Prisma.EnumClientObjectionNullableFilter<"Lead"> | $Enums.ClientObjection | null
-  objectionNote?: Prisma.StringNullableFilter<"Lead"> | string | null
-  lastContactedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
-  created_at?: Prisma.DateTimeFilter<"Lead"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  agreementSqft?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  initialAgreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
 }
 
 export type LeadUpsertWithWhereUniqueWithoutPrimaryOwnerInput = {
@@ -2446,88 +2709,308 @@ export type LeadUpdateManyWithWhereWithoutPrimaryOwnerInput = {
   data: Prisma.XOR<Prisma.LeadUpdateManyMutationInput, Prisma.LeadUncheckedUpdateManyWithoutPrimaryOwnerInput>
 }
 
-export type LeadCreateWithoutPhaseTasksInput = {
+export type LeadCreateWithoutAgreementValueLogsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutAgreementValueLogsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutAgreementValueLogsInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutAgreementValueLogsInput, Prisma.LeadUncheckedCreateWithoutAgreementValueLogsInput>
+}
+
+export type LeadUpsertWithoutAgreementValueLogsInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutAgreementValueLogsInput, Prisma.LeadUncheckedUpdateWithoutAgreementValueLogsInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutAgreementValueLogsInput, Prisma.LeadUncheckedCreateWithoutAgreementValueLogsInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutAgreementValueLogsInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutAgreementValueLogsInput, Prisma.LeadUncheckedUpdateWithoutAgreementValueLogsInput>
+}
+
+export type LeadUpdateWithoutAgreementValueLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
+  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutAgreementValueLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutPhaseTasksInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
+  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutPhaseTasksInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutPhaseTasksInput = {
@@ -2549,168 +3032,193 @@ export type LeadUpdateToOneWithWhereWithoutPhaseTasksInput = {
 export type LeadUpdateWithoutPhaseTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutPhaseTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutJrArchitectRequestsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutJrArchitectRequestsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutJrArchitectRequestsInput = {
@@ -2732,168 +3240,193 @@ export type LeadUpdateToOneWithWhereWithoutJrArchitectRequestsInput = {
 export type LeadUpdateWithoutJrArchitectRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutJrArchitectRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutMeetingEventsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutMeetingEventsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutMeetingEventsInput = {
@@ -2915,168 +3448,193 @@ export type LeadUpdateToOneWithWhereWithoutMeetingEventsInput = {
 export type LeadUpdateWithoutMeetingEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutMeetingEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutCadWorkSubmissionsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutCadWorkSubmissionsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutCadWorkSubmissionsInput = {
@@ -3098,168 +3656,193 @@ export type LeadUpdateToOneWithWhereWithoutCadWorkSubmissionsInput = {
 export type LeadUpdateWithoutCadWorkSubmissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutCadWorkSubmissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutQuotationDraftsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutQuotationDraftsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutQuotationDraftsInput = {
@@ -3281,168 +3864,401 @@ export type LeadUpdateToOneWithWhereWithoutQuotationDraftsInput = {
 export type LeadUpdateWithoutQuotationDraftsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutQuotationDraftsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutAgreementDocumentInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
+  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutAgreementDocumentInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutAgreementDocumentInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutAgreementDocumentInput, Prisma.LeadUncheckedCreateWithoutAgreementDocumentInput>
+}
+
+export type LeadUpsertWithoutAgreementDocumentInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutAgreementDocumentInput, Prisma.LeadUncheckedUpdateWithoutAgreementDocumentInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutAgreementDocumentInput, Prisma.LeadUncheckedCreateWithoutAgreementDocumentInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutAgreementDocumentInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutAgreementDocumentInput, Prisma.LeadUncheckedUpdateWithoutAgreementDocumentInput>
+}
+
+export type LeadUpdateWithoutAgreementDocumentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
+  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutAgreementDocumentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutFurnitureQuotationDraftInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutFurnitureQuotationDraftInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutFurnitureQuotationDraftInput = {
@@ -3464,168 +4280,609 @@ export type LeadUpdateToOneWithWhereWithoutFurnitureQuotationDraftInput = {
 export type LeadUpdateWithoutFurnitureQuotationDraftInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutFurnitureQuotationDraftInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutElectricalQuotationDraftInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
+  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutElectricalQuotationDraftInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutElectricalQuotationDraftInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutElectricalQuotationDraftInput, Prisma.LeadUncheckedCreateWithoutElectricalQuotationDraftInput>
+}
+
+export type LeadUpsertWithoutElectricalQuotationDraftInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutElectricalQuotationDraftInput, Prisma.LeadUncheckedUpdateWithoutElectricalQuotationDraftInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutElectricalQuotationDraftInput, Prisma.LeadUncheckedCreateWithoutElectricalQuotationDraftInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutElectricalQuotationDraftInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutElectricalQuotationDraftInput, Prisma.LeadUncheckedUpdateWithoutElectricalQuotationDraftInput>
+}
+
+export type LeadUpdateWithoutElectricalQuotationDraftInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
+  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutElectricalQuotationDraftInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutPartialQuotationDraftInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
+  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutPartialQuotationDraftInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutPartialQuotationDraftInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutPartialQuotationDraftInput, Prisma.LeadUncheckedCreateWithoutPartialQuotationDraftInput>
+}
+
+export type LeadUpsertWithoutPartialQuotationDraftInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutPartialQuotationDraftInput, Prisma.LeadUncheckedUpdateWithoutPartialQuotationDraftInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutPartialQuotationDraftInput, Prisma.LeadUncheckedCreateWithoutPartialQuotationDraftInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutPartialQuotationDraftInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutPartialQuotationDraftInput, Prisma.LeadUncheckedUpdateWithoutPartialQuotationDraftInput>
+}
+
+export type LeadUpdateWithoutPartialQuotationDraftInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
+  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutPartialQuotationDraftInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutVisitsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutVisitsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutVisitsInput = {
@@ -3647,168 +4904,193 @@ export type LeadUpdateToOneWithWhereWithoutVisitsInput = {
 export type LeadUpdateWithoutVisitsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutVisitsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutAttachmentsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutAttachmentsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutAttachmentsInput = {
@@ -3830,168 +5112,193 @@ export type LeadUpdateToOneWithWhereWithoutAttachmentsInput = {
 export type LeadUpdateWithoutAttachmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutAttachmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutNotificationsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutNotificationsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutNotificationsInput = {
@@ -4013,168 +5320,193 @@ export type LeadUpdateToOneWithWhereWithoutNotificationsInput = {
 export type LeadUpdateWithoutNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutTransactionsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutTransactionsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutTransactionsInput = {
@@ -4196,168 +5528,609 @@ export type LeadUpdateToOneWithWhereWithoutTransactionsInput = {
 export type LeadUpdateWithoutTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutVendorAgreementsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
+  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutVendorAgreementsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutVendorAgreementsInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutVendorAgreementsInput, Prisma.LeadUncheckedCreateWithoutVendorAgreementsInput>
+}
+
+export type LeadUpsertWithoutVendorAgreementsInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutVendorAgreementsInput, Prisma.LeadUncheckedUpdateWithoutVendorAgreementsInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutVendorAgreementsInput, Prisma.LeadUncheckedCreateWithoutVendorAgreementsInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutVendorAgreementsInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutVendorAgreementsInput, Prisma.LeadUncheckedUpdateWithoutVendorAgreementsInput>
+}
+
+export type LeadUpdateWithoutVendorAgreementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
+  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutVendorAgreementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutStockMovementsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
+  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutStockMovementsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutStockMovementsInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutStockMovementsInput, Prisma.LeadUncheckedCreateWithoutStockMovementsInput>
+}
+
+export type LeadUpsertWithoutStockMovementsInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutStockMovementsInput, Prisma.LeadUncheckedUpdateWithoutStockMovementsInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutStockMovementsInput, Prisma.LeadUncheckedCreateWithoutStockMovementsInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutStockMovementsInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutStockMovementsInput, Prisma.LeadUncheckedUpdateWithoutStockMovementsInput>
+}
+
+export type LeadUpdateWithoutStockMovementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
+  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutStockMovementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutMaterialRequisitionsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
   assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
   primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
-  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
   assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
   attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutMaterialRequisitionsInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
   activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
-  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
-  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
-  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutMaterialRequisitionsInput = {
@@ -4379,354 +6152,801 @@ export type LeadUpdateToOneWithWhereWithoutMaterialRequisitionsInput = {
 export type LeadUpdateWithoutMaterialRequisitionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
   assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
   primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
-  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
   assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
   attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
-  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutMaterialRequisitionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutProcurementWalletTransactionsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
+  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutProcurementWalletTransactionsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutProcurementWalletTransactionsInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutProcurementWalletTransactionsInput, Prisma.LeadUncheckedCreateWithoutProcurementWalletTransactionsInput>
+}
+
+export type LeadUpsertWithoutProcurementWalletTransactionsInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutProcurementWalletTransactionsInput, Prisma.LeadUncheckedUpdateWithoutProcurementWalletTransactionsInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutProcurementWalletTransactionsInput, Prisma.LeadUncheckedCreateWithoutProcurementWalletTransactionsInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutProcurementWalletTransactionsInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutProcurementWalletTransactionsInput, Prisma.LeadUncheckedUpdateWithoutProcurementWalletTransactionsInput>
+}
+
+export type LeadUpdateWithoutProcurementWalletTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
+  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutProcurementWalletTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutSiteDeliveryLogsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutLeadInput
+  assignee?: Prisma.UserCreateNestedOneWithoutLeadsInput
+  primaryOwner?: Prisma.UserCreateNestedOneWithoutPrimaryOwnedLeadsInput
+  assignments?: Prisma.LeadAssignmentCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutSiteDeliveryLogsInput = {
+  id?: string
+  name: string
+  clientId?: string | null
+  phone?: string | null
+  email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
+  source?: string | null
+  stage?: $Enums.LeadStage
+  subStatus?: $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
+  quotationType?: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
+  accountStatus?: $Enums.AccountStatus | null
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutLeadInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutLeadInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutLeadInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutLeadInput
+  assignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutLeadInput
+  attachments?: Prisma.LeadAttachmentUncheckedCreateNestedManyWithoutLeadInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutLeadInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutLeadInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutLeadInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutLeadInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutLeadInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedCreateNestedOneWithoutLeadInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedCreateNestedOneWithoutLeadInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLeadInput
+  visits?: Prisma.VisitUncheckedCreateNestedManyWithoutLeadInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutLeadInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutLeadInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutLeadInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutSiteDeliveryLogsInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutSiteDeliveryLogsInput, Prisma.LeadUncheckedCreateWithoutSiteDeliveryLogsInput>
+}
+
+export type LeadUpsertWithoutSiteDeliveryLogsInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutSiteDeliveryLogsInput, Prisma.LeadUncheckedUpdateWithoutSiteDeliveryLogsInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutSiteDeliveryLogsInput, Prisma.LeadUncheckedCreateWithoutSiteDeliveryLogsInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutSiteDeliveryLogsInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutSiteDeliveryLogsInput, Prisma.LeadUncheckedUpdateWithoutSiteDeliveryLogsInput>
+}
+
+export type LeadUpdateWithoutSiteDeliveryLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
+  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutSiteDeliveryLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
+  meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateManyAssigneeInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: string | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: string | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
 }
 
 export type LeadCreateManyPrimaryOwnerInput = {
   id?: string
-  clientId?: number
   name: string
+  clientId?: string | null
   phone?: string | null
   email?: string | null
+  assignedTo?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  budget?: number | null
+  location?: string | null
+  remarks?: string | null
   source?: string | null
   stage?: $Enums.LeadStage
   subStatus?: $Enums.LeadSubStatus | null
-  budget?: number | null
+  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: string | null
   agreementType?: string | null
   agreementValue?: number | null
-  location?: string | null
-  remarks?: string | null
-  assignedTo?: string | null
-  primaryOwnerDepartment?: $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: $Enums.AccountStatus | null
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
-  objectionNote?: string | null
-  lastContactedAt?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
+  agreementSqft?: number | null
+  initialAgreementValue?: number | null
 }
 
 export type LeadUpdateWithoutAssigneeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  primaryOwner?: Prisma.UserUpdateOneWithoutPrimaryOwnedLeadsNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutAssigneeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutAssigneeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
+  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
-  primaryOwnerUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type LeadUpdateWithoutPrimaryOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutLeadNestedInput
+  assignee?: Prisma.UserUpdateOneWithoutLeadsNestedInput
+  assignments?: Prisma.LeadAssignmentUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutPrimaryOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutLeadNestedInput
-  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
-  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
-  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
-  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutLeadNestedInput
   cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutLeadNestedInput
-  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
-  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
-  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutLeadNestedInput
+  assignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutLeadNestedInput
+  attachments?: Prisma.LeadAttachmentUncheckedUpdateManyWithoutLeadNestedInput
   jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutLeadNestedInput
   meetingEvents?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutLeadNestedInput
+  phaseTasks?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutLeadNestedInput
+  statusHistory?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutLeadNestedInput
+  quotationDrafts?: Prisma.QuotationDraftUncheckedUpdateManyWithoutLeadNestedInput
+  agreementDocument?: Prisma.AgreementDocumentUncheckedUpdateOneWithoutLeadNestedInput
+  furnitureQuotationDraft?: Prisma.FurnitureQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  electricalQuotationDraft?: Prisma.ElectricalQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
+  partialQuotationDraft?: Prisma.PartialQuotationDraftUncheckedUpdateOneWithoutLeadNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLeadNestedInput
+  visits?: Prisma.VisitUncheckedUpdateManyWithoutLeadNestedInput
+  vendorAgreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutLeadNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutLeadNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutLeadNestedInput
+  procurementWalletTransactions?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutLeadNestedInput
+  siteDeliveryLogs?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutPrimaryOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stage?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   subStatus?: Prisma.NullableEnumLeadSubStatusFieldUpdateOperationsInput | $Enums.LeadSubStatus | null
-  budget?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   quotationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryOwnerDepartment?: Prisma.NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput | $Enums.LeadPrimaryOwnerDepartment | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
-  objectionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 
@@ -4735,39 +6955,49 @@ export type LeadUncheckedUpdateManyWithoutPrimaryOwnerInput = {
  */
 
 export type LeadCountOutputType = {
-  followUps: number
-  notes: number
   activities: number
-  statusHistory: number
-  assignments: number
-  visits: number
-  attachments: number
+  agreementValueLogs: number
   cadWorkSubmissions: number
-  quotationDrafts: number
-  notifications: number
-  phaseTasks: number
+  followUps: number
+  assignments: number
+  attachments: number
   jrArchitectRequests: number
   meetingEvents: number
+  phaseTasks: number
+  statusHistory: number
+  notes: number
+  notifications: number
+  quotationDrafts: number
   transactions: number
+  visits: number
+  vendorAgreements: number
+  stockMovements: number
   materialRequisitions: number
+  procurementWalletTransactions: number
+  siteDeliveryLogs: number
 }
 
 export type LeadCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  followUps?: boolean | LeadCountOutputTypeCountFollowUpsArgs
-  notes?: boolean | LeadCountOutputTypeCountNotesArgs
   activities?: boolean | LeadCountOutputTypeCountActivitiesArgs
-  statusHistory?: boolean | LeadCountOutputTypeCountStatusHistoryArgs
-  assignments?: boolean | LeadCountOutputTypeCountAssignmentsArgs
-  visits?: boolean | LeadCountOutputTypeCountVisitsArgs
-  attachments?: boolean | LeadCountOutputTypeCountAttachmentsArgs
+  agreementValueLogs?: boolean | LeadCountOutputTypeCountAgreementValueLogsArgs
   cadWorkSubmissions?: boolean | LeadCountOutputTypeCountCadWorkSubmissionsArgs
-  quotationDrafts?: boolean | LeadCountOutputTypeCountQuotationDraftsArgs
-  notifications?: boolean | LeadCountOutputTypeCountNotificationsArgs
-  phaseTasks?: boolean | LeadCountOutputTypeCountPhaseTasksArgs
+  followUps?: boolean | LeadCountOutputTypeCountFollowUpsArgs
+  assignments?: boolean | LeadCountOutputTypeCountAssignmentsArgs
+  attachments?: boolean | LeadCountOutputTypeCountAttachmentsArgs
   jrArchitectRequests?: boolean | LeadCountOutputTypeCountJrArchitectRequestsArgs
   meetingEvents?: boolean | LeadCountOutputTypeCountMeetingEventsArgs
+  phaseTasks?: boolean | LeadCountOutputTypeCountPhaseTasksArgs
+  statusHistory?: boolean | LeadCountOutputTypeCountStatusHistoryArgs
+  notes?: boolean | LeadCountOutputTypeCountNotesArgs
+  notifications?: boolean | LeadCountOutputTypeCountNotificationsArgs
+  quotationDrafts?: boolean | LeadCountOutputTypeCountQuotationDraftsArgs
   transactions?: boolean | LeadCountOutputTypeCountTransactionsArgs
+  visits?: boolean | LeadCountOutputTypeCountVisitsArgs
+  vendorAgreements?: boolean | LeadCountOutputTypeCountVendorAgreementsArgs
+  stockMovements?: boolean | LeadCountOutputTypeCountStockMovementsArgs
   materialRequisitions?: boolean | LeadCountOutputTypeCountMaterialRequisitionsArgs
+  procurementWalletTransactions?: boolean | LeadCountOutputTypeCountProcurementWalletTransactionsArgs
+  siteDeliveryLogs?: boolean | LeadCountOutputTypeCountSiteDeliveryLogsArgs
 }
 
 /**
@@ -4783,20 +7013,6 @@ export type LeadCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * LeadCountOutputType without action
  */
-export type LeadCountOutputTypeCountFollowUpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FollowUpWhereInput
-}
-
-/**
- * LeadCountOutputType without action
- */
-export type LeadCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.NoteWhereInput
-}
-
-/**
- * LeadCountOutputType without action
- */
 export type LeadCountOutputTypeCountActivitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ActivityLogWhereInput
 }
@@ -4804,29 +7020,8 @@ export type LeadCountOutputTypeCountActivitiesArgs<ExtArgs extends runtime.Types
 /**
  * LeadCountOutputType without action
  */
-export type LeadCountOutputTypeCountStatusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadStatusHistoryWhereInput
-}
-
-/**
- * LeadCountOutputType without action
- */
-export type LeadCountOutputTypeCountAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadAssignmentWhereInput
-}
-
-/**
- * LeadCountOutputType without action
- */
-export type LeadCountOutputTypeCountVisitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.VisitWhereInput
-}
-
-/**
- * LeadCountOutputType without action
- */
-export type LeadCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadAttachmentWhereInput
+export type LeadCountOutputTypeCountAgreementValueLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AgreementValueLogWhereInput
 }
 
 /**
@@ -4839,22 +7034,22 @@ export type LeadCountOutputTypeCountCadWorkSubmissionsArgs<ExtArgs extends runti
 /**
  * LeadCountOutputType without action
  */
-export type LeadCountOutputTypeCountQuotationDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.QuotationDraftWhereInput
+export type LeadCountOutputTypeCountFollowUpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FollowUpWhereInput
 }
 
 /**
  * LeadCountOutputType without action
  */
-export type LeadCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.NotificationWhereInput
+export type LeadCountOutputTypeCountAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadAssignmentWhereInput
 }
 
 /**
  * LeadCountOutputType without action
  */
-export type LeadCountOutputTypeCountPhaseTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadPhaseTaskWhereInput
+export type LeadCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadAttachmentWhereInput
 }
 
 /**
@@ -4874,8 +7069,64 @@ export type LeadCountOutputTypeCountMeetingEventsArgs<ExtArgs extends runtime.Ty
 /**
  * LeadCountOutputType without action
  */
+export type LeadCountOutputTypeCountPhaseTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadPhaseTaskWhereInput
+}
+
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountStatusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadStatusHistoryWhereInput
+}
+
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NoteWhereInput
+}
+
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountQuotationDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QuotationDraftWhereInput
+}
+
+/**
+ * LeadCountOutputType without action
+ */
 export type LeadCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TransactionWhereInput
+}
+
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountVisitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VisitWhereInput
+}
+
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountVendorAgreementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VendorAgreementWhereInput
+}
+
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountStockMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockMovementWhereInput
 }
 
 /**
@@ -4885,158 +7136,180 @@ export type LeadCountOutputTypeCountMaterialRequisitionsArgs<ExtArgs extends run
   where?: Prisma.MaterialRequisitionWhereInput
 }
 
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountProcurementWalletTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProcurementWalletTransactionWhereInput
+}
+
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountSiteDeliveryLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SiteDeliveryLogWhereInput
+}
+
 
 export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  clientId?: boolean
   name?: boolean
+  clientId?: boolean
   phone?: boolean
   email?: boolean
+  assignedTo?: boolean
+  created_at?: boolean
+  updated_at?: boolean
+  budget?: boolean
+  location?: boolean
+  remarks?: boolean
   source?: boolean
   stage?: boolean
   subStatus?: boolean
-  budget?: boolean
+  primaryOwnerDepartment?: boolean
+  primaryOwnerUserId?: boolean
   quotationType?: boolean
   agreementType?: boolean
   agreementValue?: boolean
-  location?: boolean
-  remarks?: boolean
-  assignedTo?: boolean
-  primaryOwnerDepartment?: boolean
-  primaryOwnerUserId?: boolean
   accountStatus?: boolean
-  sentiment?: boolean
-  objection?: boolean
-  objectionNote?: boolean
-  lastContactedAt?: boolean
-  created_at?: boolean
-  updated_at?: boolean
+  agreementSqft?: boolean
+  initialAgreementValue?: boolean
+  activities?: boolean | Prisma.Lead$activitiesArgs<ExtArgs>
+  agreementValueLogs?: boolean | Prisma.Lead$agreementValueLogsArgs<ExtArgs>
+  cadWorkSubmissions?: boolean | Prisma.Lead$cadWorkSubmissionsArgs<ExtArgs>
+  followUps?: boolean | Prisma.Lead$followUpsArgs<ExtArgs>
   assignee?: boolean | Prisma.Lead$assigneeArgs<ExtArgs>
   primaryOwner?: boolean | Prisma.Lead$primaryOwnerArgs<ExtArgs>
-  followUps?: boolean | Prisma.Lead$followUpsArgs<ExtArgs>
-  notes?: boolean | Prisma.Lead$notesArgs<ExtArgs>
-  activities?: boolean | Prisma.Lead$activitiesArgs<ExtArgs>
-  statusHistory?: boolean | Prisma.Lead$statusHistoryArgs<ExtArgs>
   assignments?: boolean | Prisma.Lead$assignmentsArgs<ExtArgs>
-  visits?: boolean | Prisma.Lead$visitsArgs<ExtArgs>
   attachments?: boolean | Prisma.Lead$attachmentsArgs<ExtArgs>
-  cadWorkSubmissions?: boolean | Prisma.Lead$cadWorkSubmissionsArgs<ExtArgs>
-  quotationDrafts?: boolean | Prisma.Lead$quotationDraftsArgs<ExtArgs>
-  furnitureQuotationDraft?: boolean | Prisma.Lead$furnitureQuotationDraftArgs<ExtArgs>
-  notifications?: boolean | Prisma.Lead$notificationsArgs<ExtArgs>
-  phaseTasks?: boolean | Prisma.Lead$phaseTasksArgs<ExtArgs>
   jrArchitectRequests?: boolean | Prisma.Lead$jrArchitectRequestsArgs<ExtArgs>
   meetingEvents?: boolean | Prisma.Lead$meetingEventsArgs<ExtArgs>
+  phaseTasks?: boolean | Prisma.Lead$phaseTasksArgs<ExtArgs>
+  statusHistory?: boolean | Prisma.Lead$statusHistoryArgs<ExtArgs>
+  notes?: boolean | Prisma.Lead$notesArgs<ExtArgs>
+  notifications?: boolean | Prisma.Lead$notificationsArgs<ExtArgs>
+  quotationDrafts?: boolean | Prisma.Lead$quotationDraftsArgs<ExtArgs>
+  agreementDocument?: boolean | Prisma.Lead$agreementDocumentArgs<ExtArgs>
+  furnitureQuotationDraft?: boolean | Prisma.Lead$furnitureQuotationDraftArgs<ExtArgs>
+  electricalQuotationDraft?: boolean | Prisma.Lead$electricalQuotationDraftArgs<ExtArgs>
+  partialQuotationDraft?: boolean | Prisma.Lead$partialQuotationDraftArgs<ExtArgs>
   transactions?: boolean | Prisma.Lead$transactionsArgs<ExtArgs>
+  visits?: boolean | Prisma.Lead$visitsArgs<ExtArgs>
+  vendorAgreements?: boolean | Prisma.Lead$vendorAgreementsArgs<ExtArgs>
+  stockMovements?: boolean | Prisma.Lead$stockMovementsArgs<ExtArgs>
   materialRequisitions?: boolean | Prisma.Lead$materialRequisitionsArgs<ExtArgs>
+  procurementWalletTransactions?: boolean | Prisma.Lead$procurementWalletTransactionsArgs<ExtArgs>
+  siteDeliveryLogs?: boolean | Prisma.Lead$siteDeliveryLogsArgs<ExtArgs>
   _count?: boolean | Prisma.LeadCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
 export type LeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  clientId?: boolean
   name?: boolean
+  clientId?: boolean
   phone?: boolean
   email?: boolean
+  assignedTo?: boolean
+  created_at?: boolean
+  updated_at?: boolean
+  budget?: boolean
+  location?: boolean
+  remarks?: boolean
   source?: boolean
   stage?: boolean
   subStatus?: boolean
-  budget?: boolean
+  primaryOwnerDepartment?: boolean
+  primaryOwnerUserId?: boolean
   quotationType?: boolean
   agreementType?: boolean
   agreementValue?: boolean
-  location?: boolean
-  remarks?: boolean
-  assignedTo?: boolean
-  primaryOwnerDepartment?: boolean
-  primaryOwnerUserId?: boolean
   accountStatus?: boolean
-  sentiment?: boolean
-  objection?: boolean
-  objectionNote?: boolean
-  lastContactedAt?: boolean
-  created_at?: boolean
-  updated_at?: boolean
+  agreementSqft?: boolean
+  initialAgreementValue?: boolean
   assignee?: boolean | Prisma.Lead$assigneeArgs<ExtArgs>
   primaryOwner?: boolean | Prisma.Lead$primaryOwnerArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
 export type LeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  clientId?: boolean
   name?: boolean
+  clientId?: boolean
   phone?: boolean
   email?: boolean
+  assignedTo?: boolean
+  created_at?: boolean
+  updated_at?: boolean
+  budget?: boolean
+  location?: boolean
+  remarks?: boolean
   source?: boolean
   stage?: boolean
   subStatus?: boolean
-  budget?: boolean
+  primaryOwnerDepartment?: boolean
+  primaryOwnerUserId?: boolean
   quotationType?: boolean
   agreementType?: boolean
   agreementValue?: boolean
-  location?: boolean
-  remarks?: boolean
-  assignedTo?: boolean
-  primaryOwnerDepartment?: boolean
-  primaryOwnerUserId?: boolean
   accountStatus?: boolean
-  sentiment?: boolean
-  objection?: boolean
-  objectionNote?: boolean
-  lastContactedAt?: boolean
-  created_at?: boolean
-  updated_at?: boolean
+  agreementSqft?: boolean
+  initialAgreementValue?: boolean
   assignee?: boolean | Prisma.Lead$assigneeArgs<ExtArgs>
   primaryOwner?: boolean | Prisma.Lead$primaryOwnerArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
 export type LeadSelectScalar = {
   id?: boolean
-  clientId?: boolean
   name?: boolean
+  clientId?: boolean
   phone?: boolean
   email?: boolean
+  assignedTo?: boolean
+  created_at?: boolean
+  updated_at?: boolean
+  budget?: boolean
+  location?: boolean
+  remarks?: boolean
   source?: boolean
   stage?: boolean
   subStatus?: boolean
-  budget?: boolean
+  primaryOwnerDepartment?: boolean
+  primaryOwnerUserId?: boolean
   quotationType?: boolean
   agreementType?: boolean
   agreementValue?: boolean
-  location?: boolean
-  remarks?: boolean
-  assignedTo?: boolean
-  primaryOwnerDepartment?: boolean
-  primaryOwnerUserId?: boolean
   accountStatus?: boolean
-  sentiment?: boolean
-  objection?: boolean
-  objectionNote?: boolean
-  lastContactedAt?: boolean
-  created_at?: boolean
-  updated_at?: boolean
+  agreementSqft?: boolean
+  initialAgreementValue?: boolean
 }
 
-export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clientId" | "name" | "phone" | "email" | "source" | "stage" | "subStatus" | "budget" | "quotationType" | "agreementType" | "agreementValue" | "location" | "remarks" | "assignedTo" | "primaryOwnerDepartment" | "primaryOwnerUserId" | "accountStatus" | "sentiment" | "objection" | "objectionNote" | "lastContactedAt" | "created_at" | "updated_at", ExtArgs["result"]["lead"]>
+export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "clientId" | "phone" | "email" | "assignedTo" | "created_at" | "updated_at" | "budget" | "location" | "remarks" | "source" | "stage" | "subStatus" | "primaryOwnerDepartment" | "primaryOwnerUserId" | "quotationType" | "agreementType" | "agreementValue" | "accountStatus" | "agreementSqft" | "initialAgreementValue", ExtArgs["result"]["lead"]>
 export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  activities?: boolean | Prisma.Lead$activitiesArgs<ExtArgs>
+  agreementValueLogs?: boolean | Prisma.Lead$agreementValueLogsArgs<ExtArgs>
+  cadWorkSubmissions?: boolean | Prisma.Lead$cadWorkSubmissionsArgs<ExtArgs>
+  followUps?: boolean | Prisma.Lead$followUpsArgs<ExtArgs>
   assignee?: boolean | Prisma.Lead$assigneeArgs<ExtArgs>
   primaryOwner?: boolean | Prisma.Lead$primaryOwnerArgs<ExtArgs>
-  followUps?: boolean | Prisma.Lead$followUpsArgs<ExtArgs>
-  notes?: boolean | Prisma.Lead$notesArgs<ExtArgs>
-  activities?: boolean | Prisma.Lead$activitiesArgs<ExtArgs>
-  statusHistory?: boolean | Prisma.Lead$statusHistoryArgs<ExtArgs>
   assignments?: boolean | Prisma.Lead$assignmentsArgs<ExtArgs>
-  visits?: boolean | Prisma.Lead$visitsArgs<ExtArgs>
   attachments?: boolean | Prisma.Lead$attachmentsArgs<ExtArgs>
-  cadWorkSubmissions?: boolean | Prisma.Lead$cadWorkSubmissionsArgs<ExtArgs>
-  quotationDrafts?: boolean | Prisma.Lead$quotationDraftsArgs<ExtArgs>
-  furnitureQuotationDraft?: boolean | Prisma.Lead$furnitureQuotationDraftArgs<ExtArgs>
-  notifications?: boolean | Prisma.Lead$notificationsArgs<ExtArgs>
-  phaseTasks?: boolean | Prisma.Lead$phaseTasksArgs<ExtArgs>
   jrArchitectRequests?: boolean | Prisma.Lead$jrArchitectRequestsArgs<ExtArgs>
   meetingEvents?: boolean | Prisma.Lead$meetingEventsArgs<ExtArgs>
+  phaseTasks?: boolean | Prisma.Lead$phaseTasksArgs<ExtArgs>
+  statusHistory?: boolean | Prisma.Lead$statusHistoryArgs<ExtArgs>
+  notes?: boolean | Prisma.Lead$notesArgs<ExtArgs>
+  notifications?: boolean | Prisma.Lead$notificationsArgs<ExtArgs>
+  quotationDrafts?: boolean | Prisma.Lead$quotationDraftsArgs<ExtArgs>
+  agreementDocument?: boolean | Prisma.Lead$agreementDocumentArgs<ExtArgs>
+  furnitureQuotationDraft?: boolean | Prisma.Lead$furnitureQuotationDraftArgs<ExtArgs>
+  electricalQuotationDraft?: boolean | Prisma.Lead$electricalQuotationDraftArgs<ExtArgs>
+  partialQuotationDraft?: boolean | Prisma.Lead$partialQuotationDraftArgs<ExtArgs>
   transactions?: boolean | Prisma.Lead$transactionsArgs<ExtArgs>
+  visits?: boolean | Prisma.Lead$visitsArgs<ExtArgs>
+  vendorAgreements?: boolean | Prisma.Lead$vendorAgreementsArgs<ExtArgs>
+  stockMovements?: boolean | Prisma.Lead$stockMovementsArgs<ExtArgs>
   materialRequisitions?: boolean | Prisma.Lead$materialRequisitionsArgs<ExtArgs>
+  procurementWalletTransactions?: boolean | Prisma.Lead$procurementWalletTransactionsArgs<ExtArgs>
+  siteDeliveryLogs?: boolean | Prisma.Lead$siteDeliveryLogsArgs<ExtArgs>
   _count?: boolean | Prisma.LeadCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5051,50 +7324,56 @@ export type LeadIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Lead"
   objects: {
+    activities: Prisma.$ActivityLogPayload<ExtArgs>[]
+    agreementValueLogs: Prisma.$AgreementValueLogPayload<ExtArgs>[]
+    cadWorkSubmissions: Prisma.$CadWorkSubmissionPayload<ExtArgs>[]
+    followUps: Prisma.$FollowUpPayload<ExtArgs>[]
     assignee: Prisma.$UserPayload<ExtArgs> | null
     primaryOwner: Prisma.$UserPayload<ExtArgs> | null
-    followUps: Prisma.$FollowUpPayload<ExtArgs>[]
-    notes: Prisma.$NotePayload<ExtArgs>[]
-    activities: Prisma.$ActivityLogPayload<ExtArgs>[]
-    statusHistory: Prisma.$LeadStatusHistoryPayload<ExtArgs>[]
     assignments: Prisma.$LeadAssignmentPayload<ExtArgs>[]
-    visits: Prisma.$VisitPayload<ExtArgs>[]
     attachments: Prisma.$LeadAttachmentPayload<ExtArgs>[]
-    cadWorkSubmissions: Prisma.$CadWorkSubmissionPayload<ExtArgs>[]
-    quotationDrafts: Prisma.$QuotationDraftPayload<ExtArgs>[]
-    furnitureQuotationDraft: Prisma.$FurnitureQuotationDraftPayload<ExtArgs> | null
-    notifications: Prisma.$NotificationPayload<ExtArgs>[]
-    phaseTasks: Prisma.$LeadPhaseTaskPayload<ExtArgs>[]
     jrArchitectRequests: Prisma.$LeadJrArchitectRequestPayload<ExtArgs>[]
     meetingEvents: Prisma.$LeadMeetingEventPayload<ExtArgs>[]
+    phaseTasks: Prisma.$LeadPhaseTaskPayload<ExtArgs>[]
+    statusHistory: Prisma.$LeadStatusHistoryPayload<ExtArgs>[]
+    notes: Prisma.$NotePayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    quotationDrafts: Prisma.$QuotationDraftPayload<ExtArgs>[]
+    agreementDocument: Prisma.$AgreementDocumentPayload<ExtArgs> | null
+    furnitureQuotationDraft: Prisma.$FurnitureQuotationDraftPayload<ExtArgs> | null
+    electricalQuotationDraft: Prisma.$ElectricalQuotationDraftPayload<ExtArgs> | null
+    partialQuotationDraft: Prisma.$PartialQuotationDraftPayload<ExtArgs> | null
     transactions: Prisma.$TransactionPayload<ExtArgs>[]
+    visits: Prisma.$VisitPayload<ExtArgs>[]
+    vendorAgreements: Prisma.$VendorAgreementPayload<ExtArgs>[]
+    stockMovements: Prisma.$StockMovementPayload<ExtArgs>[]
     materialRequisitions: Prisma.$MaterialRequisitionPayload<ExtArgs>[]
+    procurementWalletTransactions: Prisma.$ProcurementWalletTransactionPayload<ExtArgs>[]
+    siteDeliveryLogs: Prisma.$SiteDeliveryLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    clientId: number
     name: string
+    clientId: string | null
     phone: string | null
     email: string | null
+    assignedTo: string | null
+    created_at: Date
+    updated_at: Date
+    budget: number | null
+    location: string | null
+    remarks: string | null
     source: string | null
     stage: $Enums.LeadStage
     subStatus: $Enums.LeadSubStatus | null
-    budget: number | null
+    primaryOwnerDepartment: $Enums.LeadPrimaryOwnerDepartment | null
+    primaryOwnerUserId: string | null
     quotationType: string | null
     agreementType: string | null
     agreementValue: number | null
-    location: string | null
-    remarks: string | null
-    assignedTo: string | null
-    primaryOwnerDepartment: $Enums.LeadPrimaryOwnerDepartment | null
-    primaryOwnerUserId: string | null
     accountStatus: $Enums.AccountStatus | null
-    sentiment: $Enums.ClientSentiment | null
-    objection: $Enums.ClientObjection | null
-    objectionNote: string | null
-    lastContactedAt: Date | null
-    created_at: Date
-    updated_at: Date
+    agreementSqft: number | null
+    initialAgreementValue: number | null
   }, ExtArgs["result"]["lead"]>
   composites: {}
 }
@@ -5489,24 +7768,32 @@ readonly fields: LeadFieldRefs;
  */
 export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  activities<T extends Prisma.Lead$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  agreementValueLogs<T extends Prisma.Lead$agreementValueLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$agreementValueLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AgreementValueLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cadWorkSubmissions<T extends Prisma.Lead$cadWorkSubmissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$cadWorkSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CadWorkSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  followUps<T extends Prisma.Lead$followUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$followUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignee<T extends Prisma.Lead$assigneeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$assigneeArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   primaryOwner<T extends Prisma.Lead$primaryOwnerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$primaryOwnerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  followUps<T extends Prisma.Lead$followUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$followUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  notes<T extends Prisma.Lead$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  activities<T extends Prisma.Lead$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  statusHistory<T extends Prisma.Lead$statusHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$statusHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignments<T extends Prisma.Lead$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  visits<T extends Prisma.Lead$visitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$visitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   attachments<T extends Prisma.Lead$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  cadWorkSubmissions<T extends Prisma.Lead$cadWorkSubmissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$cadWorkSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CadWorkSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  quotationDrafts<T extends Prisma.Lead$quotationDraftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$quotationDraftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  furnitureQuotationDraft<T extends Prisma.Lead$furnitureQuotationDraftArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$furnitureQuotationDraftArgs<ExtArgs>>): Prisma.Prisma__FurnitureQuotationDraftClient<runtime.Types.Result.GetResult<Prisma.$FurnitureQuotationDraftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  notifications<T extends Prisma.Lead$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  phaseTasks<T extends Prisma.Lead$phaseTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$phaseTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPhaseTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   jrArchitectRequests<T extends Prisma.Lead$jrArchitectRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$jrArchitectRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadJrArchitectRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   meetingEvents<T extends Prisma.Lead$meetingEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$meetingEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMeetingEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  phaseTasks<T extends Prisma.Lead$phaseTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$phaseTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPhaseTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  statusHistory<T extends Prisma.Lead$statusHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$statusHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notes<T extends Prisma.Lead$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.Lead$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  quotationDrafts<T extends Prisma.Lead$quotationDraftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$quotationDraftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  agreementDocument<T extends Prisma.Lead$agreementDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$agreementDocumentArgs<ExtArgs>>): Prisma.Prisma__AgreementDocumentClient<runtime.Types.Result.GetResult<Prisma.$AgreementDocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  furnitureQuotationDraft<T extends Prisma.Lead$furnitureQuotationDraftArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$furnitureQuotationDraftArgs<ExtArgs>>): Prisma.Prisma__FurnitureQuotationDraftClient<runtime.Types.Result.GetResult<Prisma.$FurnitureQuotationDraftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  electricalQuotationDraft<T extends Prisma.Lead$electricalQuotationDraftArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$electricalQuotationDraftArgs<ExtArgs>>): Prisma.Prisma__ElectricalQuotationDraftClient<runtime.Types.Result.GetResult<Prisma.$ElectricalQuotationDraftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  partialQuotationDraft<T extends Prisma.Lead$partialQuotationDraftArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$partialQuotationDraftArgs<ExtArgs>>): Prisma.Prisma__PartialQuotationDraftClient<runtime.Types.Result.GetResult<Prisma.$PartialQuotationDraftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   transactions<T extends Prisma.Lead$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  visits<T extends Prisma.Lead$visitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$visitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendorAgreements<T extends Prisma.Lead$vendorAgreementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$vendorAgreementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorAgreementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockMovements<T extends Prisma.Lead$stockMovementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$stockMovementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockMovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   materialRequisitions<T extends Prisma.Lead$materialRequisitionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$materialRequisitionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MaterialRequisitionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  procurementWalletTransactions<T extends Prisma.Lead$procurementWalletTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$procurementWalletTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcurementWalletTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  siteDeliveryLogs<T extends Prisma.Lead$siteDeliveryLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$siteDeliveryLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteDeliveryLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5537,29 +7824,27 @@ export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface LeadFieldRefs {
   readonly id: Prisma.FieldRef<"Lead", 'String'>
-  readonly clientId: Prisma.FieldRef<"Lead", 'Int'>
   readonly name: Prisma.FieldRef<"Lead", 'String'>
+  readonly clientId: Prisma.FieldRef<"Lead", 'String'>
   readonly phone: Prisma.FieldRef<"Lead", 'String'>
   readonly email: Prisma.FieldRef<"Lead", 'String'>
+  readonly assignedTo: Prisma.FieldRef<"Lead", 'String'>
+  readonly created_at: Prisma.FieldRef<"Lead", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"Lead", 'DateTime'>
+  readonly budget: Prisma.FieldRef<"Lead", 'Float'>
+  readonly location: Prisma.FieldRef<"Lead", 'String'>
+  readonly remarks: Prisma.FieldRef<"Lead", 'String'>
   readonly source: Prisma.FieldRef<"Lead", 'String'>
   readonly stage: Prisma.FieldRef<"Lead", 'LeadStage'>
   readonly subStatus: Prisma.FieldRef<"Lead", 'LeadSubStatus'>
-  readonly budget: Prisma.FieldRef<"Lead", 'Float'>
+  readonly primaryOwnerDepartment: Prisma.FieldRef<"Lead", 'LeadPrimaryOwnerDepartment'>
+  readonly primaryOwnerUserId: Prisma.FieldRef<"Lead", 'String'>
   readonly quotationType: Prisma.FieldRef<"Lead", 'String'>
   readonly agreementType: Prisma.FieldRef<"Lead", 'String'>
   readonly agreementValue: Prisma.FieldRef<"Lead", 'Float'>
-  readonly location: Prisma.FieldRef<"Lead", 'String'>
-  readonly remarks: Prisma.FieldRef<"Lead", 'String'>
-  readonly assignedTo: Prisma.FieldRef<"Lead", 'String'>
-  readonly primaryOwnerDepartment: Prisma.FieldRef<"Lead", 'LeadPrimaryOwnerDepartment'>
-  readonly primaryOwnerUserId: Prisma.FieldRef<"Lead", 'String'>
   readonly accountStatus: Prisma.FieldRef<"Lead", 'AccountStatus'>
-  readonly sentiment: Prisma.FieldRef<"Lead", 'ClientSentiment'>
-  readonly objection: Prisma.FieldRef<"Lead", 'ClientObjection'>
-  readonly objectionNote: Prisma.FieldRef<"Lead", 'String'>
-  readonly lastContactedAt: Prisma.FieldRef<"Lead", 'DateTime'>
-  readonly created_at: Prisma.FieldRef<"Lead", 'DateTime'>
-  readonly updated_at: Prisma.FieldRef<"Lead", 'DateTime'>
+  readonly agreementSqft: Prisma.FieldRef<"Lead", 'Float'>
+  readonly initialAgreementValue: Prisma.FieldRef<"Lead", 'Float'>
 }
     
 
@@ -5956,6 +8241,102 @@ export type LeadDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * Lead.activities
+ */
+export type Lead$activitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ActivityLog
+   */
+  select?: Prisma.ActivityLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ActivityLog
+   */
+  omit?: Prisma.ActivityLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActivityLogInclude<ExtArgs> | null
+  where?: Prisma.ActivityLogWhereInput
+  orderBy?: Prisma.ActivityLogOrderByWithRelationInput | Prisma.ActivityLogOrderByWithRelationInput[]
+  cursor?: Prisma.ActivityLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ActivityLogScalarFieldEnum | Prisma.ActivityLogScalarFieldEnum[]
+}
+
+/**
+ * Lead.agreementValueLogs
+ */
+export type Lead$agreementValueLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AgreementValueLog
+   */
+  select?: Prisma.AgreementValueLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AgreementValueLog
+   */
+  omit?: Prisma.AgreementValueLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgreementValueLogInclude<ExtArgs> | null
+  where?: Prisma.AgreementValueLogWhereInput
+  orderBy?: Prisma.AgreementValueLogOrderByWithRelationInput | Prisma.AgreementValueLogOrderByWithRelationInput[]
+  cursor?: Prisma.AgreementValueLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AgreementValueLogScalarFieldEnum | Prisma.AgreementValueLogScalarFieldEnum[]
+}
+
+/**
+ * Lead.cadWorkSubmissions
+ */
+export type Lead$cadWorkSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CadWorkSubmission
+   */
+  select?: Prisma.CadWorkSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CadWorkSubmission
+   */
+  omit?: Prisma.CadWorkSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CadWorkSubmissionInclude<ExtArgs> | null
+  where?: Prisma.CadWorkSubmissionWhereInput
+  orderBy?: Prisma.CadWorkSubmissionOrderByWithRelationInput | Prisma.CadWorkSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.CadWorkSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CadWorkSubmissionScalarFieldEnum | Prisma.CadWorkSubmissionScalarFieldEnum[]
+}
+
+/**
+ * Lead.followUps
+ */
+export type Lead$followUpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FollowUp
+   */
+  select?: Prisma.FollowUpSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FollowUp
+   */
+  omit?: Prisma.FollowUpOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FollowUpInclude<ExtArgs> | null
+  where?: Prisma.FollowUpWhereInput
+  orderBy?: Prisma.FollowUpOrderByWithRelationInput | Prisma.FollowUpOrderByWithRelationInput[]
+  cursor?: Prisma.FollowUpWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FollowUpScalarFieldEnum | Prisma.FollowUpScalarFieldEnum[]
+}
+
+/**
  * Lead.assignee
  */
 export type Lead$assigneeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5994,102 +8375,6 @@ export type Lead$primaryOwnerArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Lead.followUps
- */
-export type Lead$followUpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FollowUp
-   */
-  select?: Prisma.FollowUpSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FollowUp
-   */
-  omit?: Prisma.FollowUpOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FollowUpInclude<ExtArgs> | null
-  where?: Prisma.FollowUpWhereInput
-  orderBy?: Prisma.FollowUpOrderByWithRelationInput | Prisma.FollowUpOrderByWithRelationInput[]
-  cursor?: Prisma.FollowUpWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FollowUpScalarFieldEnum | Prisma.FollowUpScalarFieldEnum[]
-}
-
-/**
- * Lead.notes
- */
-export type Lead$notesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Note
-   */
-  select?: Prisma.NoteSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Note
-   */
-  omit?: Prisma.NoteOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.NoteInclude<ExtArgs> | null
-  where?: Prisma.NoteWhereInput
-  orderBy?: Prisma.NoteOrderByWithRelationInput | Prisma.NoteOrderByWithRelationInput[]
-  cursor?: Prisma.NoteWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.NoteScalarFieldEnum | Prisma.NoteScalarFieldEnum[]
-}
-
-/**
- * Lead.activities
- */
-export type Lead$activitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ActivityLog
-   */
-  select?: Prisma.ActivityLogSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ActivityLog
-   */
-  omit?: Prisma.ActivityLogOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ActivityLogInclude<ExtArgs> | null
-  where?: Prisma.ActivityLogWhereInput
-  orderBy?: Prisma.ActivityLogOrderByWithRelationInput | Prisma.ActivityLogOrderByWithRelationInput[]
-  cursor?: Prisma.ActivityLogWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ActivityLogScalarFieldEnum | Prisma.ActivityLogScalarFieldEnum[]
-}
-
-/**
- * Lead.statusHistory
- */
-export type Lead$statusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadStatusHistory
-   */
-  select?: Prisma.LeadStatusHistorySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadStatusHistory
-   */
-  omit?: Prisma.LeadStatusHistoryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadStatusHistoryInclude<ExtArgs> | null
-  where?: Prisma.LeadStatusHistoryWhereInput
-  orderBy?: Prisma.LeadStatusHistoryOrderByWithRelationInput | Prisma.LeadStatusHistoryOrderByWithRelationInput[]
-  cursor?: Prisma.LeadStatusHistoryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadStatusHistoryScalarFieldEnum | Prisma.LeadStatusHistoryScalarFieldEnum[]
-}
-
-/**
  * Lead.assignments
  */
 export type Lead$assignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6114,30 +8399,6 @@ export type Lead$assignmentsArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Lead.visits
- */
-export type Lead$visitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Visit
-   */
-  select?: Prisma.VisitSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Visit
-   */
-  omit?: Prisma.VisitOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.VisitInclude<ExtArgs> | null
-  where?: Prisma.VisitWhereInput
-  orderBy?: Prisma.VisitOrderByWithRelationInput | Prisma.VisitOrderByWithRelationInput[]
-  cursor?: Prisma.VisitWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.VisitScalarFieldEnum | Prisma.VisitScalarFieldEnum[]
-}
-
-/**
  * Lead.attachments
  */
 export type Lead$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6159,121 +8420,6 @@ export type Lead$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.LeadAttachmentScalarFieldEnum | Prisma.LeadAttachmentScalarFieldEnum[]
-}
-
-/**
- * Lead.cadWorkSubmissions
- */
-export type Lead$cadWorkSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the CadWorkSubmission
-   */
-  select?: Prisma.CadWorkSubmissionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the CadWorkSubmission
-   */
-  omit?: Prisma.CadWorkSubmissionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CadWorkSubmissionInclude<ExtArgs> | null
-  where?: Prisma.CadWorkSubmissionWhereInput
-  orderBy?: Prisma.CadWorkSubmissionOrderByWithRelationInput | Prisma.CadWorkSubmissionOrderByWithRelationInput[]
-  cursor?: Prisma.CadWorkSubmissionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CadWorkSubmissionScalarFieldEnum | Prisma.CadWorkSubmissionScalarFieldEnum[]
-}
-
-/**
- * Lead.quotationDrafts
- */
-export type Lead$quotationDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the QuotationDraft
-   */
-  select?: Prisma.QuotationDraftSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the QuotationDraft
-   */
-  omit?: Prisma.QuotationDraftOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.QuotationDraftInclude<ExtArgs> | null
-  where?: Prisma.QuotationDraftWhereInput
-  orderBy?: Prisma.QuotationDraftOrderByWithRelationInput | Prisma.QuotationDraftOrderByWithRelationInput[]
-  cursor?: Prisma.QuotationDraftWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.QuotationDraftScalarFieldEnum | Prisma.QuotationDraftScalarFieldEnum[]
-}
-
-/**
- * Lead.furnitureQuotationDraft
- */
-export type Lead$furnitureQuotationDraftArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FurnitureQuotationDraft
-   */
-  select?: Prisma.FurnitureQuotationDraftSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FurnitureQuotationDraft
-   */
-  omit?: Prisma.FurnitureQuotationDraftOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FurnitureQuotationDraftInclude<ExtArgs> | null
-  where?: Prisma.FurnitureQuotationDraftWhereInput
-}
-
-/**
- * Lead.notifications
- */
-export type Lead$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Notification
-   */
-  select?: Prisma.NotificationSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Notification
-   */
-  omit?: Prisma.NotificationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.NotificationInclude<ExtArgs> | null
-  where?: Prisma.NotificationWhereInput
-  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
-  cursor?: Prisma.NotificationWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
-}
-
-/**
- * Lead.phaseTasks
- */
-export type Lead$phaseTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadPhaseTask
-   */
-  select?: Prisma.LeadPhaseTaskSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadPhaseTask
-   */
-  omit?: Prisma.LeadPhaseTaskOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadPhaseTaskInclude<ExtArgs> | null
-  where?: Prisma.LeadPhaseTaskWhereInput
-  orderBy?: Prisma.LeadPhaseTaskOrderByWithRelationInput | Prisma.LeadPhaseTaskOrderByWithRelationInput[]
-  cursor?: Prisma.LeadPhaseTaskWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadPhaseTaskScalarFieldEnum | Prisma.LeadPhaseTaskScalarFieldEnum[]
 }
 
 /**
@@ -6325,6 +8471,202 @@ export type Lead$meetingEventsArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * Lead.phaseTasks
+ */
+export type Lead$phaseTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadPhaseTask
+   */
+  select?: Prisma.LeadPhaseTaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadPhaseTask
+   */
+  omit?: Prisma.LeadPhaseTaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadPhaseTaskInclude<ExtArgs> | null
+  where?: Prisma.LeadPhaseTaskWhereInput
+  orderBy?: Prisma.LeadPhaseTaskOrderByWithRelationInput | Prisma.LeadPhaseTaskOrderByWithRelationInput[]
+  cursor?: Prisma.LeadPhaseTaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadPhaseTaskScalarFieldEnum | Prisma.LeadPhaseTaskScalarFieldEnum[]
+}
+
+/**
+ * Lead.statusHistory
+ */
+export type Lead$statusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadStatusHistory
+   */
+  select?: Prisma.LeadStatusHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadStatusHistory
+   */
+  omit?: Prisma.LeadStatusHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadStatusHistoryInclude<ExtArgs> | null
+  where?: Prisma.LeadStatusHistoryWhereInput
+  orderBy?: Prisma.LeadStatusHistoryOrderByWithRelationInput | Prisma.LeadStatusHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.LeadStatusHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadStatusHistoryScalarFieldEnum | Prisma.LeadStatusHistoryScalarFieldEnum[]
+}
+
+/**
+ * Lead.notes
+ */
+export type Lead$notesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Note
+   */
+  select?: Prisma.NoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Note
+   */
+  omit?: Prisma.NoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NoteInclude<ExtArgs> | null
+  where?: Prisma.NoteWhereInput
+  orderBy?: Prisma.NoteOrderByWithRelationInput | Prisma.NoteOrderByWithRelationInput[]
+  cursor?: Prisma.NoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NoteScalarFieldEnum | Prisma.NoteScalarFieldEnum[]
+}
+
+/**
+ * Lead.notifications
+ */
+export type Lead$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * Lead.quotationDrafts
+ */
+export type Lead$quotationDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the QuotationDraft
+   */
+  select?: Prisma.QuotationDraftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the QuotationDraft
+   */
+  omit?: Prisma.QuotationDraftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuotationDraftInclude<ExtArgs> | null
+  where?: Prisma.QuotationDraftWhereInput
+  orderBy?: Prisma.QuotationDraftOrderByWithRelationInput | Prisma.QuotationDraftOrderByWithRelationInput[]
+  cursor?: Prisma.QuotationDraftWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QuotationDraftScalarFieldEnum | Prisma.QuotationDraftScalarFieldEnum[]
+}
+
+/**
+ * Lead.agreementDocument
+ */
+export type Lead$agreementDocumentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AgreementDocument
+   */
+  select?: Prisma.AgreementDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AgreementDocument
+   */
+  omit?: Prisma.AgreementDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgreementDocumentInclude<ExtArgs> | null
+  where?: Prisma.AgreementDocumentWhereInput
+}
+
+/**
+ * Lead.furnitureQuotationDraft
+ */
+export type Lead$furnitureQuotationDraftArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FurnitureQuotationDraft
+   */
+  select?: Prisma.FurnitureQuotationDraftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FurnitureQuotationDraft
+   */
+  omit?: Prisma.FurnitureQuotationDraftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FurnitureQuotationDraftInclude<ExtArgs> | null
+  where?: Prisma.FurnitureQuotationDraftWhereInput
+}
+
+/**
+ * Lead.electricalQuotationDraft
+ */
+export type Lead$electricalQuotationDraftArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ElectricalQuotationDraft
+   */
+  select?: Prisma.ElectricalQuotationDraftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ElectricalQuotationDraft
+   */
+  omit?: Prisma.ElectricalQuotationDraftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ElectricalQuotationDraftInclude<ExtArgs> | null
+  where?: Prisma.ElectricalQuotationDraftWhereInput
+}
+
+/**
+ * Lead.partialQuotationDraft
+ */
+export type Lead$partialQuotationDraftArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PartialQuotationDraft
+   */
+  select?: Prisma.PartialQuotationDraftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PartialQuotationDraft
+   */
+  omit?: Prisma.PartialQuotationDraftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PartialQuotationDraftInclude<ExtArgs> | null
+  where?: Prisma.PartialQuotationDraftWhereInput
+}
+
+/**
  * Lead.transactions
  */
 export type Lead$transactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6349,6 +8691,78 @@ export type Lead$transactionsArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
+ * Lead.visits
+ */
+export type Lead$visitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Visit
+   */
+  select?: Prisma.VisitSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Visit
+   */
+  omit?: Prisma.VisitOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VisitInclude<ExtArgs> | null
+  where?: Prisma.VisitWhereInput
+  orderBy?: Prisma.VisitOrderByWithRelationInput | Prisma.VisitOrderByWithRelationInput[]
+  cursor?: Prisma.VisitWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VisitScalarFieldEnum | Prisma.VisitScalarFieldEnum[]
+}
+
+/**
+ * Lead.vendorAgreements
+ */
+export type Lead$vendorAgreementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VendorAgreement
+   */
+  select?: Prisma.VendorAgreementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VendorAgreement
+   */
+  omit?: Prisma.VendorAgreementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VendorAgreementInclude<ExtArgs> | null
+  where?: Prisma.VendorAgreementWhereInput
+  orderBy?: Prisma.VendorAgreementOrderByWithRelationInput | Prisma.VendorAgreementOrderByWithRelationInput[]
+  cursor?: Prisma.VendorAgreementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VendorAgreementScalarFieldEnum | Prisma.VendorAgreementScalarFieldEnum[]
+}
+
+/**
+ * Lead.stockMovements
+ */
+export type Lead$stockMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockMovement
+   */
+  select?: Prisma.StockMovementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockMovement
+   */
+  omit?: Prisma.StockMovementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockMovementInclude<ExtArgs> | null
+  where?: Prisma.StockMovementWhereInput
+  orderBy?: Prisma.StockMovementOrderByWithRelationInput | Prisma.StockMovementOrderByWithRelationInput[]
+  cursor?: Prisma.StockMovementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockMovementScalarFieldEnum | Prisma.StockMovementScalarFieldEnum[]
+}
+
+/**
  * Lead.materialRequisitions
  */
 export type Lead$materialRequisitionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6370,6 +8784,54 @@ export type Lead$materialRequisitionsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.MaterialRequisitionScalarFieldEnum | Prisma.MaterialRequisitionScalarFieldEnum[]
+}
+
+/**
+ * Lead.procurementWalletTransactions
+ */
+export type Lead$procurementWalletTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProcurementWalletTransaction
+   */
+  select?: Prisma.ProcurementWalletTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProcurementWalletTransaction
+   */
+  omit?: Prisma.ProcurementWalletTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcurementWalletTransactionInclude<ExtArgs> | null
+  where?: Prisma.ProcurementWalletTransactionWhereInput
+  orderBy?: Prisma.ProcurementWalletTransactionOrderByWithRelationInput | Prisma.ProcurementWalletTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.ProcurementWalletTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProcurementWalletTransactionScalarFieldEnum | Prisma.ProcurementWalletTransactionScalarFieldEnum[]
+}
+
+/**
+ * Lead.siteDeliveryLogs
+ */
+export type Lead$siteDeliveryLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SiteDeliveryLog
+   */
+  select?: Prisma.SiteDeliveryLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SiteDeliveryLog
+   */
+  omit?: Prisma.SiteDeliveryLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SiteDeliveryLogInclude<ExtArgs> | null
+  where?: Prisma.SiteDeliveryLogWhereInput
+  orderBy?: Prisma.SiteDeliveryLogOrderByWithRelationInput | Prisma.SiteDeliveryLogOrderByWithRelationInput[]
+  cursor?: Prisma.SiteDeliveryLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SiteDeliveryLogScalarFieldEnum | Prisma.SiteDeliveryLogScalarFieldEnum[]
 }
 
 /**

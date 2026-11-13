@@ -214,10 +214,10 @@ export type VisitSupportResultWhereInput = {
   projectStatus?: Prisma.StringFilter<"VisitSupportResult"> | string
   extraConcern?: Prisma.StringNullableFilter<"VisitSupportResult"> | string | null
   completedAt?: Prisma.DateTimeFilter<"VisitSupportResult"> | Date | string
-  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
+  files?: Prisma.SupportAttachmentListRelationFilter
   supportAssignment?: Prisma.XOR<Prisma.VisitSupportAssignmentScalarRelationFilter, Prisma.VisitSupportAssignmentWhereInput>
   supportUser?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  files?: Prisma.SupportAttachmentListRelationFilter
+  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
 }
 
 export type VisitSupportResultOrderByWithRelationInput = {
@@ -230,10 +230,10 @@ export type VisitSupportResultOrderByWithRelationInput = {
   projectStatus?: Prisma.SortOrder
   extraConcern?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrder
-  visit?: Prisma.VisitOrderByWithRelationInput
+  files?: Prisma.SupportAttachmentOrderByRelationAggregateInput
   supportAssignment?: Prisma.VisitSupportAssignmentOrderByWithRelationInput
   supportUser?: Prisma.UserOrderByWithRelationInput
-  files?: Prisma.SupportAttachmentOrderByRelationAggregateInput
+  visit?: Prisma.VisitOrderByWithRelationInput
 }
 
 export type VisitSupportResultWhereUniqueInput = Prisma.AtLeast<{
@@ -250,10 +250,10 @@ export type VisitSupportResultWhereUniqueInput = Prisma.AtLeast<{
   projectStatus?: Prisma.StringFilter<"VisitSupportResult"> | string
   extraConcern?: Prisma.StringNullableFilter<"VisitSupportResult"> | string | null
   completedAt?: Prisma.DateTimeFilter<"VisitSupportResult"> | Date | string
-  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
+  files?: Prisma.SupportAttachmentListRelationFilter
   supportAssignment?: Prisma.XOR<Prisma.VisitSupportAssignmentScalarRelationFilter, Prisma.VisitSupportAssignmentWhereInput>
   supportUser?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  files?: Prisma.SupportAttachmentListRelationFilter
+  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
 }, "id" | "supportAssignmentId" | "visitId_supportUserId">
 
 export type VisitSupportResultOrderByWithAggregationInput = {
@@ -293,10 +293,10 @@ export type VisitSupportResultCreateInput = {
   projectStatus: string
   extraConcern?: string | null
   completedAt?: Date | string
-  visit: Prisma.VisitCreateNestedOneWithoutSupportResultsInput
+  files?: Prisma.SupportAttachmentCreateNestedManyWithoutSupportResultInput
   supportAssignment: Prisma.VisitSupportAssignmentCreateNestedOneWithoutResultInput
   supportUser: Prisma.UserCreateNestedOneWithoutSupportVisitResultsInput
-  files?: Prisma.SupportAttachmentCreateNestedManyWithoutSupportResultInput
+  visit: Prisma.VisitCreateNestedOneWithoutSupportResultsInput
 }
 
 export type VisitSupportResultUncheckedCreateInput = {
@@ -319,10 +319,10 @@ export type VisitSupportResultUpdateInput = {
   projectStatus?: Prisma.StringFieldUpdateOperationsInput | string
   extraConcern?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportResultsNestedInput
+  files?: Prisma.SupportAttachmentUpdateManyWithoutSupportResultNestedInput
   supportAssignment?: Prisma.VisitSupportAssignmentUpdateOneRequiredWithoutResultNestedInput
   supportUser?: Prisma.UserUpdateOneRequiredWithoutSupportVisitResultsNestedInput
-  files?: Prisma.SupportAttachmentUpdateManyWithoutSupportResultNestedInput
+  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportResultsNestedInput
 }
 
 export type VisitSupportResultUncheckedUpdateInput = {
@@ -569,9 +569,9 @@ export type VisitSupportResultCreateWithoutSupportUserInput = {
   projectStatus: string
   extraConcern?: string | null
   completedAt?: Date | string
-  visit: Prisma.VisitCreateNestedOneWithoutSupportResultsInput
-  supportAssignment: Prisma.VisitSupportAssignmentCreateNestedOneWithoutResultInput
   files?: Prisma.SupportAttachmentCreateNestedManyWithoutSupportResultInput
+  supportAssignment: Prisma.VisitSupportAssignmentCreateNestedOneWithoutResultInput
+  visit: Prisma.VisitCreateNestedOneWithoutSupportResultsInput
 }
 
 export type VisitSupportResultUncheckedCreateWithoutSupportUserInput = {
@@ -634,9 +634,9 @@ export type VisitSupportResultCreateWithoutVisitInput = {
   projectStatus: string
   extraConcern?: string | null
   completedAt?: Date | string
+  files?: Prisma.SupportAttachmentCreateNestedManyWithoutSupportResultInput
   supportAssignment: Prisma.VisitSupportAssignmentCreateNestedOneWithoutResultInput
   supportUser: Prisma.UserCreateNestedOneWithoutSupportVisitResultsInput
-  files?: Prisma.SupportAttachmentCreateNestedManyWithoutSupportResultInput
 }
 
 export type VisitSupportResultUncheckedCreateWithoutVisitInput = {
@@ -684,9 +684,9 @@ export type VisitSupportResultCreateWithoutSupportAssignmentInput = {
   projectStatus: string
   extraConcern?: string | null
   completedAt?: Date | string
-  visit: Prisma.VisitCreateNestedOneWithoutSupportResultsInput
-  supportUser: Prisma.UserCreateNestedOneWithoutSupportVisitResultsInput
   files?: Prisma.SupportAttachmentCreateNestedManyWithoutSupportResultInput
+  supportUser: Prisma.UserCreateNestedOneWithoutSupportVisitResultsInput
+  visit: Prisma.VisitCreateNestedOneWithoutSupportResultsInput
 }
 
 export type VisitSupportResultUncheckedCreateWithoutSupportAssignmentInput = {
@@ -724,9 +724,9 @@ export type VisitSupportResultUpdateWithoutSupportAssignmentInput = {
   projectStatus?: Prisma.StringFieldUpdateOperationsInput | string
   extraConcern?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportResultsNestedInput
-  supportUser?: Prisma.UserUpdateOneRequiredWithoutSupportVisitResultsNestedInput
   files?: Prisma.SupportAttachmentUpdateManyWithoutSupportResultNestedInput
+  supportUser?: Prisma.UserUpdateOneRequiredWithoutSupportVisitResultsNestedInput
+  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportResultsNestedInput
 }
 
 export type VisitSupportResultUncheckedUpdateWithoutSupportAssignmentInput = {
@@ -748,9 +748,9 @@ export type VisitSupportResultCreateWithoutFilesInput = {
   projectStatus: string
   extraConcern?: string | null
   completedAt?: Date | string
-  visit: Prisma.VisitCreateNestedOneWithoutSupportResultsInput
   supportAssignment: Prisma.VisitSupportAssignmentCreateNestedOneWithoutResultInput
   supportUser: Prisma.UserCreateNestedOneWithoutSupportVisitResultsInput
+  visit: Prisma.VisitCreateNestedOneWithoutSupportResultsInput
 }
 
 export type VisitSupportResultUncheckedCreateWithoutFilesInput = {
@@ -788,9 +788,9 @@ export type VisitSupportResultUpdateWithoutFilesInput = {
   projectStatus?: Prisma.StringFieldUpdateOperationsInput | string
   extraConcern?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportResultsNestedInput
   supportAssignment?: Prisma.VisitSupportAssignmentUpdateOneRequiredWithoutResultNestedInput
   supportUser?: Prisma.UserUpdateOneRequiredWithoutSupportVisitResultsNestedInput
+  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportResultsNestedInput
 }
 
 export type VisitSupportResultUncheckedUpdateWithoutFilesInput = {
@@ -823,9 +823,9 @@ export type VisitSupportResultUpdateWithoutSupportUserInput = {
   projectStatus?: Prisma.StringFieldUpdateOperationsInput | string
   extraConcern?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportResultsNestedInput
-  supportAssignment?: Prisma.VisitSupportAssignmentUpdateOneRequiredWithoutResultNestedInput
   files?: Prisma.SupportAttachmentUpdateManyWithoutSupportResultNestedInput
+  supportAssignment?: Prisma.VisitSupportAssignmentUpdateOneRequiredWithoutResultNestedInput
+  visit?: Prisma.VisitUpdateOneRequiredWithoutSupportResultsNestedInput
 }
 
 export type VisitSupportResultUncheckedUpdateWithoutSupportUserInput = {
@@ -869,9 +869,9 @@ export type VisitSupportResultUpdateWithoutVisitInput = {
   projectStatus?: Prisma.StringFieldUpdateOperationsInput | string
   extraConcern?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  files?: Prisma.SupportAttachmentUpdateManyWithoutSupportResultNestedInput
   supportAssignment?: Prisma.VisitSupportAssignmentUpdateOneRequiredWithoutResultNestedInput
   supportUser?: Prisma.UserUpdateOneRequiredWithoutSupportVisitResultsNestedInput
-  files?: Prisma.SupportAttachmentUpdateManyWithoutSupportResultNestedInput
 }
 
 export type VisitSupportResultUncheckedUpdateWithoutVisitInput = {
@@ -938,10 +938,10 @@ export type VisitSupportResultSelect<ExtArgs extends runtime.Types.Extensions.In
   projectStatus?: boolean
   extraConcern?: boolean
   completedAt?: boolean
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
+  files?: boolean | Prisma.VisitSupportResult$filesArgs<ExtArgs>
   supportAssignment?: boolean | Prisma.VisitSupportAssignmentDefaultArgs<ExtArgs>
   supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  files?: boolean | Prisma.VisitSupportResult$filesArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.VisitSupportResultCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visitSupportResult"]>
 
@@ -955,9 +955,9 @@ export type VisitSupportResultSelectCreateManyAndReturn<ExtArgs extends runtime.
   projectStatus?: boolean
   extraConcern?: boolean
   completedAt?: boolean
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   supportAssignment?: boolean | Prisma.VisitSupportAssignmentDefaultArgs<ExtArgs>
   supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visitSupportResult"]>
 
 export type VisitSupportResultSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -970,9 +970,9 @@ export type VisitSupportResultSelectUpdateManyAndReturn<ExtArgs extends runtime.
   projectStatus?: boolean
   extraConcern?: boolean
   completedAt?: boolean
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   supportAssignment?: boolean | Prisma.VisitSupportAssignmentDefaultArgs<ExtArgs>
   supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visitSupportResult"]>
 
 export type VisitSupportResultSelectScalar = {
@@ -989,30 +989,30 @@ export type VisitSupportResultSelectScalar = {
 
 export type VisitSupportResultOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "visitId" | "supportAssignmentId" | "supportUserId" | "clientName" | "projectArea" | "projectStatus" | "extraConcern" | "completedAt", ExtArgs["result"]["visitSupportResult"]>
 export type VisitSupportResultInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
+  files?: boolean | Prisma.VisitSupportResult$filesArgs<ExtArgs>
   supportAssignment?: boolean | Prisma.VisitSupportAssignmentDefaultArgs<ExtArgs>
   supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  files?: boolean | Prisma.VisitSupportResult$filesArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.VisitSupportResultCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VisitSupportResultIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   supportAssignment?: boolean | Prisma.VisitSupportAssignmentDefaultArgs<ExtArgs>
   supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }
 export type VisitSupportResultIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   supportAssignment?: boolean | Prisma.VisitSupportAssignmentDefaultArgs<ExtArgs>
   supportUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }
 
 export type $VisitSupportResultPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "VisitSupportResult"
   objects: {
-    visit: Prisma.$VisitPayload<ExtArgs>
+    files: Prisma.$SupportAttachmentPayload<ExtArgs>[]
     supportAssignment: Prisma.$VisitSupportAssignmentPayload<ExtArgs>
     supportUser: Prisma.$UserPayload<ExtArgs>
-    files: Prisma.$SupportAttachmentPayload<ExtArgs>[]
+    visit: Prisma.$VisitPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1418,10 +1418,10 @@ readonly fields: VisitSupportResultFieldRefs;
  */
 export interface Prisma__VisitSupportResultClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  visit<T extends Prisma.VisitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitDefaultArgs<ExtArgs>>): Prisma.Prisma__VisitClient<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  files<T extends Prisma.VisitSupportResult$filesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitSupportResult$filesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SupportAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   supportAssignment<T extends Prisma.VisitSupportAssignmentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitSupportAssignmentDefaultArgs<ExtArgs>>): Prisma.Prisma__VisitSupportAssignmentClient<runtime.Types.Result.GetResult<Prisma.$VisitSupportAssignmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   supportUser<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  files<T extends Prisma.VisitSupportResult$filesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitSupportResult$filesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SupportAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  visit<T extends Prisma.VisitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitDefaultArgs<ExtArgs>>): Prisma.Prisma__VisitClient<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

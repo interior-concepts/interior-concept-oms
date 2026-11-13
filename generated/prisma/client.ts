@@ -80,6 +80,11 @@ export type User = Prisma.UserModel
  */
 export type DeviceToken = Prisma.DeviceTokenModel
 /**
+ * Model AgreementValueLog
+ * 
+ */
+export type AgreementValueLog = Prisma.AgreementValueLogModel
+/**
  * Model LeadPhaseTask
  * 
  */
@@ -110,6 +115,11 @@ export type CadWorkSubmission = Prisma.CadWorkSubmissionModel
  */
 export type QuotationDraft = Prisma.QuotationDraftModel
 /**
+ * Model AgreementDocument
+ * 
+ */
+export type AgreementDocument = Prisma.AgreementDocumentModel
+/**
  * Model FurnitureQuotationDraft
  * 
  */
@@ -119,6 +129,16 @@ export type FurnitureQuotationDraft = Prisma.FurnitureQuotationDraftModel
  * 
  */
 export type FurnitureQuotationSavedItem = Prisma.FurnitureQuotationSavedItemModel
+/**
+ * Model ElectricalQuotationDraft
+ * 
+ */
+export type ElectricalQuotationDraft = Prisma.ElectricalQuotationDraftModel
+/**
+ * Model PartialQuotationDraft
+ * 
+ */
+export type PartialQuotationDraft = Prisma.PartialQuotationDraftModel
 /**
  * Model CadWorkSubmissionFile
  * 
@@ -195,6 +215,11 @@ export type WhatsAppProcessedMessage = Prisma.WhatsAppProcessedMessageModel
  */
 export type VisitWorkflowControl = Prisma.VisitWorkflowControlModel
 /**
+ * Model JrArchitectWorkflowControl
+ * 
+ */
+export type JrArchitectWorkflowControl = Prisma.JrArchitectWorkflowControlModel
+/**
  * Model WhatsAppWebhookEvent
  * 
  */
@@ -229,6 +254,16 @@ export type FinanceAccount = Prisma.FinanceAccountModel
  * 
  */
 export type Transaction = Prisma.TransactionModel
+/**
+ * Model ConveyanceRequest
+ * 
+ */
+export type ConveyanceRequest = Prisma.ConveyanceRequestModel
+/**
+ * Model ConveyanceBill
+ * 
+ */
+export type ConveyanceBill = Prisma.ConveyanceBillModel
 /**
  * Model CashFlowDaily
  * 
@@ -275,6 +310,46 @@ export type JrArchitectPerformance = Prisma.JrArchitectPerformanceModel
  */
 export type QuotationUserPerformance = Prisma.QuotationUserPerformanceModel
 /**
+ * Model VisitMemberMonthlyAssessment
+ * 
+ */
+export type VisitMemberMonthlyAssessment = Prisma.VisitMemberMonthlyAssessmentModel
+/**
+ * Model Vendor
+ * 
+ */
+export type Vendor = Prisma.VendorModel
+/**
+ * Model VendorAgreement
+ * 
+ */
+export type VendorAgreement = Prisma.VendorAgreementModel
+/**
+ * Model VendorAgreementRevision
+ * 
+ */
+export type VendorAgreementRevision = Prisma.VendorAgreementRevisionModel
+/**
+ * Model VendorPaymentMilestone
+ * 
+ */
+export type VendorPaymentMilestone = Prisma.VendorPaymentMilestoneModel
+/**
+ * Model VendorPayment
+ * 
+ */
+export type VendorPayment = Prisma.VendorPaymentModel
+/**
+ * Model StockItem
+ * 
+ */
+export type StockItem = Prisma.StockItemModel
+/**
+ * Model StockMovement
+ * 
+ */
+export type StockMovement = Prisma.StockMovementModel
+/**
  * Model MaterialRequisition
  * 
  */
@@ -294,3 +369,23 @@ export type BoqSavedAccessoryItem = Prisma.BoqSavedAccessoryItemModel
  * 
  */
 export type RequisitionAmendment = Prisma.RequisitionAmendmentModel
+/**
+ * Model Supplier
+ * 
+ */
+export type Supplier = Prisma.SupplierModel
+/**
+ * Model ProcurementWallet
+ * 
+ */
+export type ProcurementWallet = Prisma.ProcurementWalletModel
+/**
+ * Model ProcurementWalletTransaction
+ * 
+ */
+export type ProcurementWalletTransaction = Prisma.ProcurementWalletTransactionModel
+/**
+ * Model SiteDeliveryLog
+ * 
+ */
+export type SiteDeliveryLog = Prisma.SiteDeliveryLogModel

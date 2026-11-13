@@ -27,31 +27,31 @@ export type AggregateVisitWorkflowControl = {
 export type VisitWorkflowControlMinAggregateOutputType = {
   id: string | null
   supportDataEnabled: boolean | null
-  weeklySeniorCrmAutomationEnabled: boolean | null
-  weeklySeniorCrmUserId: string | null
-  weeklySeniorCrmWeekStart: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  weeklySeniorCrmUserId: string | null
+  weeklySeniorCrmWeekStart: Date | null
+  weeklySeniorCrmAutomationEnabled: boolean | null
 }
 
 export type VisitWorkflowControlMaxAggregateOutputType = {
   id: string | null
   supportDataEnabled: boolean | null
-  weeklySeniorCrmAutomationEnabled: boolean | null
-  weeklySeniorCrmUserId: string | null
-  weeklySeniorCrmWeekStart: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  weeklySeniorCrmUserId: string | null
+  weeklySeniorCrmWeekStart: Date | null
+  weeklySeniorCrmAutomationEnabled: boolean | null
 }
 
 export type VisitWorkflowControlCountAggregateOutputType = {
   id: number
   supportDataEnabled: number
-  weeklySeniorCrmAutomationEnabled: number
-  weeklySeniorCrmUserId: number
-  weeklySeniorCrmWeekStart: number
   createdAt: number
   updatedAt: number
+  weeklySeniorCrmUserId: number
+  weeklySeniorCrmWeekStart: number
+  weeklySeniorCrmAutomationEnabled: number
   _all: number
 }
 
@@ -59,31 +59,31 @@ export type VisitWorkflowControlCountAggregateOutputType = {
 export type VisitWorkflowControlMinAggregateInputType = {
   id?: true
   supportDataEnabled?: true
-  weeklySeniorCrmAutomationEnabled?: true
-  weeklySeniorCrmUserId?: true
-  weeklySeniorCrmWeekStart?: true
   createdAt?: true
   updatedAt?: true
+  weeklySeniorCrmUserId?: true
+  weeklySeniorCrmWeekStart?: true
+  weeklySeniorCrmAutomationEnabled?: true
 }
 
 export type VisitWorkflowControlMaxAggregateInputType = {
   id?: true
   supportDataEnabled?: true
-  weeklySeniorCrmAutomationEnabled?: true
-  weeklySeniorCrmUserId?: true
-  weeklySeniorCrmWeekStart?: true
   createdAt?: true
   updatedAt?: true
+  weeklySeniorCrmUserId?: true
+  weeklySeniorCrmWeekStart?: true
+  weeklySeniorCrmAutomationEnabled?: true
 }
 
 export type VisitWorkflowControlCountAggregateInputType = {
   id?: true
   supportDataEnabled?: true
-  weeklySeniorCrmAutomationEnabled?: true
-  weeklySeniorCrmUserId?: true
-  weeklySeniorCrmWeekStart?: true
   createdAt?: true
   updatedAt?: true
+  weeklySeniorCrmUserId?: true
+  weeklySeniorCrmWeekStart?: true
+  weeklySeniorCrmAutomationEnabled?: true
   _all?: true
 }
 
@@ -162,11 +162,11 @@ export type VisitWorkflowControlGroupByArgs<ExtArgs extends runtime.Types.Extens
 export type VisitWorkflowControlGroupByOutputType = {
   id: string
   supportDataEnabled: boolean
-  weeklySeniorCrmAutomationEnabled: boolean
-  weeklySeniorCrmUserId: string | null
-  weeklySeniorCrmWeekStart: Date | null
   createdAt: Date
   updatedAt: Date
+  weeklySeniorCrmUserId: string | null
+  weeklySeniorCrmWeekStart: Date | null
+  weeklySeniorCrmAutomationEnabled: boolean
   _count: VisitWorkflowControlCountAggregateOutputType | null
   _min: VisitWorkflowControlMinAggregateOutputType | null
   _max: VisitWorkflowControlMaxAggregateOutputType | null
@@ -193,21 +193,21 @@ export type VisitWorkflowControlWhereInput = {
   NOT?: Prisma.VisitWorkflowControlWhereInput | Prisma.VisitWorkflowControlWhereInput[]
   id?: Prisma.StringFilter<"VisitWorkflowControl"> | string
   supportDataEnabled?: Prisma.BoolFilter<"VisitWorkflowControl"> | boolean
-  weeklySeniorCrmAutomationEnabled?: Prisma.BoolFilter<"VisitWorkflowControl"> | boolean
-  weeklySeniorCrmUserId?: Prisma.StringNullableFilter<"VisitWorkflowControl"> | string | null
-  weeklySeniorCrmWeekStart?: Prisma.DateTimeNullableFilter<"VisitWorkflowControl"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"VisitWorkflowControl"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VisitWorkflowControl"> | Date | string
+  weeklySeniorCrmUserId?: Prisma.StringNullableFilter<"VisitWorkflowControl"> | string | null
+  weeklySeniorCrmWeekStart?: Prisma.DateTimeNullableFilter<"VisitWorkflowControl"> | Date | string | null
+  weeklySeniorCrmAutomationEnabled?: Prisma.BoolFilter<"VisitWorkflowControl"> | boolean
 }
 
 export type VisitWorkflowControlOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   supportDataEnabled?: Prisma.SortOrder
-  weeklySeniorCrmAutomationEnabled?: Prisma.SortOrder
-  weeklySeniorCrmUserId?: Prisma.SortOrderInput | Prisma.SortOrder
-  weeklySeniorCrmWeekStart?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  weeklySeniorCrmUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  weeklySeniorCrmWeekStart?: Prisma.SortOrderInput | Prisma.SortOrder
+  weeklySeniorCrmAutomationEnabled?: Prisma.SortOrder
 }
 
 export type VisitWorkflowControlWhereUniqueInput = Prisma.AtLeast<{
@@ -216,21 +216,21 @@ export type VisitWorkflowControlWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.VisitWorkflowControlWhereInput[]
   NOT?: Prisma.VisitWorkflowControlWhereInput | Prisma.VisitWorkflowControlWhereInput[]
   supportDataEnabled?: Prisma.BoolFilter<"VisitWorkflowControl"> | boolean
-  weeklySeniorCrmAutomationEnabled?: Prisma.BoolFilter<"VisitWorkflowControl"> | boolean
-  weeklySeniorCrmUserId?: Prisma.StringNullableFilter<"VisitWorkflowControl"> | string | null
-  weeklySeniorCrmWeekStart?: Prisma.DateTimeNullableFilter<"VisitWorkflowControl"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"VisitWorkflowControl"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VisitWorkflowControl"> | Date | string
+  weeklySeniorCrmUserId?: Prisma.StringNullableFilter<"VisitWorkflowControl"> | string | null
+  weeklySeniorCrmWeekStart?: Prisma.DateTimeNullableFilter<"VisitWorkflowControl"> | Date | string | null
+  weeklySeniorCrmAutomationEnabled?: Prisma.BoolFilter<"VisitWorkflowControl"> | boolean
 }, "id">
 
 export type VisitWorkflowControlOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   supportDataEnabled?: Prisma.SortOrder
-  weeklySeniorCrmAutomationEnabled?: Prisma.SortOrder
-  weeklySeniorCrmUserId?: Prisma.SortOrderInput | Prisma.SortOrder
-  weeklySeniorCrmWeekStart?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  weeklySeniorCrmUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  weeklySeniorCrmWeekStart?: Prisma.SortOrderInput | Prisma.SortOrder
+  weeklySeniorCrmAutomationEnabled?: Prisma.SortOrder
   _count?: Prisma.VisitWorkflowControlCountOrderByAggregateInput
   _max?: Prisma.VisitWorkflowControlMaxOrderByAggregateInput
   _min?: Prisma.VisitWorkflowControlMinOrderByAggregateInput
@@ -242,111 +242,111 @@ export type VisitWorkflowControlScalarWhereWithAggregatesInput = {
   NOT?: Prisma.VisitWorkflowControlScalarWhereWithAggregatesInput | Prisma.VisitWorkflowControlScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"VisitWorkflowControl"> | string
   supportDataEnabled?: Prisma.BoolWithAggregatesFilter<"VisitWorkflowControl"> | boolean
-  weeklySeniorCrmAutomationEnabled?: Prisma.BoolWithAggregatesFilter<"VisitWorkflowControl"> | boolean
-  weeklySeniorCrmUserId?: Prisma.StringNullableWithAggregatesFilter<"VisitWorkflowControl"> | string | null
-  weeklySeniorCrmWeekStart?: Prisma.DateTimeNullableWithAggregatesFilter<"VisitWorkflowControl"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"VisitWorkflowControl"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"VisitWorkflowControl"> | Date | string
+  weeklySeniorCrmUserId?: Prisma.StringNullableWithAggregatesFilter<"VisitWorkflowControl"> | string | null
+  weeklySeniorCrmWeekStart?: Prisma.DateTimeNullableWithAggregatesFilter<"VisitWorkflowControl"> | Date | string | null
+  weeklySeniorCrmAutomationEnabled?: Prisma.BoolWithAggregatesFilter<"VisitWorkflowControl"> | boolean
 }
 
 export type VisitWorkflowControlCreateInput = {
   id?: string
   supportDataEnabled?: boolean
-  weeklySeniorCrmAutomationEnabled?: boolean
-  weeklySeniorCrmUserId?: string | null
-  weeklySeniorCrmWeekStart?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  weeklySeniorCrmUserId?: string | null
+  weeklySeniorCrmWeekStart?: Date | string | null
+  weeklySeniorCrmAutomationEnabled?: boolean
 }
 
 export type VisitWorkflowControlUncheckedCreateInput = {
   id?: string
   supportDataEnabled?: boolean
-  weeklySeniorCrmAutomationEnabled?: boolean
-  weeklySeniorCrmUserId?: string | null
-  weeklySeniorCrmWeekStart?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  weeklySeniorCrmUserId?: string | null
+  weeklySeniorCrmWeekStart?: Date | string | null
+  weeklySeniorCrmAutomationEnabled?: boolean
 }
 
 export type VisitWorkflowControlUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   supportDataEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  weeklySeniorCrmAutomationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  weeklySeniorCrmUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weeklySeniorCrmWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weeklySeniorCrmUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weeklySeniorCrmWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklySeniorCrmAutomationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type VisitWorkflowControlUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   supportDataEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  weeklySeniorCrmAutomationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  weeklySeniorCrmUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weeklySeniorCrmWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weeklySeniorCrmUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weeklySeniorCrmWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklySeniorCrmAutomationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type VisitWorkflowControlCreateManyInput = {
   id?: string
   supportDataEnabled?: boolean
-  weeklySeniorCrmAutomationEnabled?: boolean
-  weeklySeniorCrmUserId?: string | null
-  weeklySeniorCrmWeekStart?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  weeklySeniorCrmUserId?: string | null
+  weeklySeniorCrmWeekStart?: Date | string | null
+  weeklySeniorCrmAutomationEnabled?: boolean
 }
 
 export type VisitWorkflowControlUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   supportDataEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  weeklySeniorCrmAutomationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  weeklySeniorCrmUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weeklySeniorCrmWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weeklySeniorCrmUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weeklySeniorCrmWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklySeniorCrmAutomationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type VisitWorkflowControlUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   supportDataEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  weeklySeniorCrmAutomationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  weeklySeniorCrmUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weeklySeniorCrmWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weeklySeniorCrmUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weeklySeniorCrmWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklySeniorCrmAutomationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type VisitWorkflowControlCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   supportDataEnabled?: Prisma.SortOrder
-  weeklySeniorCrmAutomationEnabled?: Prisma.SortOrder
-  weeklySeniorCrmUserId?: Prisma.SortOrder
-  weeklySeniorCrmWeekStart?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  weeklySeniorCrmUserId?: Prisma.SortOrder
+  weeklySeniorCrmWeekStart?: Prisma.SortOrder
+  weeklySeniorCrmAutomationEnabled?: Prisma.SortOrder
 }
 
 export type VisitWorkflowControlMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   supportDataEnabled?: Prisma.SortOrder
-  weeklySeniorCrmAutomationEnabled?: Prisma.SortOrder
-  weeklySeniorCrmUserId?: Prisma.SortOrder
-  weeklySeniorCrmWeekStart?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  weeklySeniorCrmUserId?: Prisma.SortOrder
+  weeklySeniorCrmWeekStart?: Prisma.SortOrder
+  weeklySeniorCrmAutomationEnabled?: Prisma.SortOrder
 }
 
 export type VisitWorkflowControlMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   supportDataEnabled?: Prisma.SortOrder
-  weeklySeniorCrmAutomationEnabled?: Prisma.SortOrder
-  weeklySeniorCrmUserId?: Prisma.SortOrder
-  weeklySeniorCrmWeekStart?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  weeklySeniorCrmUserId?: Prisma.SortOrder
+  weeklySeniorCrmWeekStart?: Prisma.SortOrder
+  weeklySeniorCrmAutomationEnabled?: Prisma.SortOrder
 }
 
 
@@ -354,44 +354,44 @@ export type VisitWorkflowControlMinOrderByAggregateInput = {
 export type VisitWorkflowControlSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   supportDataEnabled?: boolean
-  weeklySeniorCrmAutomationEnabled?: boolean
-  weeklySeniorCrmUserId?: boolean
-  weeklySeniorCrmWeekStart?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  weeklySeniorCrmUserId?: boolean
+  weeklySeniorCrmWeekStart?: boolean
+  weeklySeniorCrmAutomationEnabled?: boolean
 }, ExtArgs["result"]["visitWorkflowControl"]>
 
 export type VisitWorkflowControlSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   supportDataEnabled?: boolean
-  weeklySeniorCrmAutomationEnabled?: boolean
-  weeklySeniorCrmUserId?: boolean
-  weeklySeniorCrmWeekStart?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  weeklySeniorCrmUserId?: boolean
+  weeklySeniorCrmWeekStart?: boolean
+  weeklySeniorCrmAutomationEnabled?: boolean
 }, ExtArgs["result"]["visitWorkflowControl"]>
 
 export type VisitWorkflowControlSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   supportDataEnabled?: boolean
-  weeklySeniorCrmAutomationEnabled?: boolean
-  weeklySeniorCrmUserId?: boolean
-  weeklySeniorCrmWeekStart?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  weeklySeniorCrmUserId?: boolean
+  weeklySeniorCrmWeekStart?: boolean
+  weeklySeniorCrmAutomationEnabled?: boolean
 }, ExtArgs["result"]["visitWorkflowControl"]>
 
 export type VisitWorkflowControlSelectScalar = {
   id?: boolean
   supportDataEnabled?: boolean
-  weeklySeniorCrmAutomationEnabled?: boolean
-  weeklySeniorCrmUserId?: boolean
-  weeklySeniorCrmWeekStart?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  weeklySeniorCrmUserId?: boolean
+  weeklySeniorCrmWeekStart?: boolean
+  weeklySeniorCrmAutomationEnabled?: boolean
 }
 
-export type VisitWorkflowControlOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "supportDataEnabled" | "weeklySeniorCrmAutomationEnabled" | "weeklySeniorCrmUserId" | "weeklySeniorCrmWeekStart" | "createdAt" | "updatedAt", ExtArgs["result"]["visitWorkflowControl"]>
+export type VisitWorkflowControlOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "supportDataEnabled" | "createdAt" | "updatedAt" | "weeklySeniorCrmUserId" | "weeklySeniorCrmWeekStart" | "weeklySeniorCrmAutomationEnabled", ExtArgs["result"]["visitWorkflowControl"]>
 
 export type $VisitWorkflowControlPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "VisitWorkflowControl"
@@ -399,11 +399,11 @@ export type $VisitWorkflowControlPayload<ExtArgs extends runtime.Types.Extension
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     supportDataEnabled: boolean
-    weeklySeniorCrmAutomationEnabled: boolean
-    weeklySeniorCrmUserId: string | null
-    weeklySeniorCrmWeekStart: Date | null
     createdAt: Date
     updatedAt: Date
+    weeklySeniorCrmUserId: string | null
+    weeklySeniorCrmWeekStart: Date | null
+    weeklySeniorCrmAutomationEnabled: boolean
   }, ExtArgs["result"]["visitWorkflowControl"]>
   composites: {}
 }
@@ -829,11 +829,11 @@ export interface Prisma__VisitWorkflowControlClient<T, Null = never, ExtArgs ext
 export interface VisitWorkflowControlFieldRefs {
   readonly id: Prisma.FieldRef<"VisitWorkflowControl", 'String'>
   readonly supportDataEnabled: Prisma.FieldRef<"VisitWorkflowControl", 'Boolean'>
-  readonly weeklySeniorCrmAutomationEnabled: Prisma.FieldRef<"VisitWorkflowControl", 'Boolean'>
-  readonly weeklySeniorCrmUserId: Prisma.FieldRef<"VisitWorkflowControl", 'String'>
-  readonly weeklySeniorCrmWeekStart: Prisma.FieldRef<"VisitWorkflowControl", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"VisitWorkflowControl", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"VisitWorkflowControl", 'DateTime'>
+  readonly weeklySeniorCrmUserId: Prisma.FieldRef<"VisitWorkflowControl", 'String'>
+  readonly weeklySeniorCrmWeekStart: Prisma.FieldRef<"VisitWorkflowControl", 'DateTime'>
+  readonly weeklySeniorCrmAutomationEnabled: Prisma.FieldRef<"VisitWorkflowControl", 'Boolean'>
 }
     
 

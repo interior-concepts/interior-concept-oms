@@ -20,8 +20,18 @@ export type CadWorkSubmissionModel = runtime.Types.Result.DefaultSelection<Prism
 
 export type AggregateCadWorkSubmission = {
   _count: CadWorkSubmissionCountAggregateOutputType | null
+  _avg: CadWorkSubmissionAvgAggregateOutputType | null
+  _sum: CadWorkSubmissionSumAggregateOutputType | null
   _min: CadWorkSubmissionMinAggregateOutputType | null
   _max: CadWorkSubmissionMaxAggregateOutputType | null
+}
+
+export type CadWorkSubmissionAvgAggregateOutputType = {
+  versionNumber: number | null
+}
+
+export type CadWorkSubmissionSumAggregateOutputType = {
+  versionNumber: number | null
 }
 
 export type CadWorkSubmissionMinAggregateOutputType = {
@@ -29,6 +39,9 @@ export type CadWorkSubmissionMinAggregateOutputType = {
   leadId: string | null
   submittedById: string | null
   note: string | null
+  versionNumber: number | null
+  versionName: string | null
+  department: $Enums.LeadAssignmentDepartment | null
   submittedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -39,6 +52,9 @@ export type CadWorkSubmissionMaxAggregateOutputType = {
   leadId: string | null
   submittedById: string | null
   note: string | null
+  versionNumber: number | null
+  versionName: string | null
+  department: $Enums.LeadAssignmentDepartment | null
   submittedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -49,6 +65,9 @@ export type CadWorkSubmissionCountAggregateOutputType = {
   leadId: number
   submittedById: number
   note: number
+  versionNumber: number
+  versionName: number
+  department: number
   submittedAt: number
   createdAt: number
   updatedAt: number
@@ -56,11 +75,22 @@ export type CadWorkSubmissionCountAggregateOutputType = {
 }
 
 
+export type CadWorkSubmissionAvgAggregateInputType = {
+  versionNumber?: true
+}
+
+export type CadWorkSubmissionSumAggregateInputType = {
+  versionNumber?: true
+}
+
 export type CadWorkSubmissionMinAggregateInputType = {
   id?: true
   leadId?: true
   submittedById?: true
   note?: true
+  versionNumber?: true
+  versionName?: true
+  department?: true
   submittedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -71,6 +101,9 @@ export type CadWorkSubmissionMaxAggregateInputType = {
   leadId?: true
   submittedById?: true
   note?: true
+  versionNumber?: true
+  versionName?: true
+  department?: true
   submittedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -81,6 +114,9 @@ export type CadWorkSubmissionCountAggregateInputType = {
   leadId?: true
   submittedById?: true
   note?: true
+  versionNumber?: true
+  versionName?: true
+  department?: true
   submittedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -125,6 +161,18 @@ export type CadWorkSubmissionAggregateArgs<ExtArgs extends runtime.Types.Extensi
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: CadWorkSubmissionAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: CadWorkSubmissionSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: CadWorkSubmissionMinAggregateInputType
@@ -155,6 +203,8 @@ export type CadWorkSubmissionGroupByArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   _count?: CadWorkSubmissionCountAggregateInputType | true
+  _avg?: CadWorkSubmissionAvgAggregateInputType
+  _sum?: CadWorkSubmissionSumAggregateInputType
   _min?: CadWorkSubmissionMinAggregateInputType
   _max?: CadWorkSubmissionMaxAggregateInputType
 }
@@ -164,10 +214,15 @@ export type CadWorkSubmissionGroupByOutputType = {
   leadId: string
   submittedById: string
   note: string | null
+  versionNumber: number
+  versionName: string | null
+  department: $Enums.LeadAssignmentDepartment
   submittedAt: Date
   createdAt: Date
   updatedAt: Date
   _count: CadWorkSubmissionCountAggregateOutputType | null
+  _avg: CadWorkSubmissionAvgAggregateOutputType | null
+  _sum: CadWorkSubmissionSumAggregateOutputType | null
   _min: CadWorkSubmissionMinAggregateOutputType | null
   _max: CadWorkSubmissionMaxAggregateOutputType | null
 }
@@ -195,6 +250,9 @@ export type CadWorkSubmissionWhereInput = {
   leadId?: Prisma.StringFilter<"CadWorkSubmission"> | string
   submittedById?: Prisma.StringFilter<"CadWorkSubmission"> | string
   note?: Prisma.StringNullableFilter<"CadWorkSubmission"> | string | null
+  versionNumber?: Prisma.IntFilter<"CadWorkSubmission"> | number
+  versionName?: Prisma.StringNullableFilter<"CadWorkSubmission"> | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFilter<"CadWorkSubmission"> | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFilter<"CadWorkSubmission"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"CadWorkSubmission"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CadWorkSubmission"> | Date | string
@@ -208,6 +266,9 @@ export type CadWorkSubmissionOrderByWithRelationInput = {
   leadId?: Prisma.SortOrder
   submittedById?: Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
+  versionNumber?: Prisma.SortOrder
+  versionName?: Prisma.SortOrderInput | Prisma.SortOrder
+  department?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -224,6 +285,9 @@ export type CadWorkSubmissionWhereUniqueInput = Prisma.AtLeast<{
   leadId?: Prisma.StringFilter<"CadWorkSubmission"> | string
   submittedById?: Prisma.StringFilter<"CadWorkSubmission"> | string
   note?: Prisma.StringNullableFilter<"CadWorkSubmission"> | string | null
+  versionNumber?: Prisma.IntFilter<"CadWorkSubmission"> | number
+  versionName?: Prisma.StringNullableFilter<"CadWorkSubmission"> | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFilter<"CadWorkSubmission"> | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFilter<"CadWorkSubmission"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"CadWorkSubmission"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CadWorkSubmission"> | Date | string
@@ -237,12 +301,17 @@ export type CadWorkSubmissionOrderByWithAggregationInput = {
   leadId?: Prisma.SortOrder
   submittedById?: Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
+  versionNumber?: Prisma.SortOrder
+  versionName?: Prisma.SortOrderInput | Prisma.SortOrder
+  department?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CadWorkSubmissionCountOrderByAggregateInput
+  _avg?: Prisma.CadWorkSubmissionAvgOrderByAggregateInput
   _max?: Prisma.CadWorkSubmissionMaxOrderByAggregateInput
   _min?: Prisma.CadWorkSubmissionMinOrderByAggregateInput
+  _sum?: Prisma.CadWorkSubmissionSumOrderByAggregateInput
 }
 
 export type CadWorkSubmissionScalarWhereWithAggregatesInput = {
@@ -253,6 +322,9 @@ export type CadWorkSubmissionScalarWhereWithAggregatesInput = {
   leadId?: Prisma.StringWithAggregatesFilter<"CadWorkSubmission"> | string
   submittedById?: Prisma.StringWithAggregatesFilter<"CadWorkSubmission"> | string
   note?: Prisma.StringNullableWithAggregatesFilter<"CadWorkSubmission"> | string | null
+  versionNumber?: Prisma.IntWithAggregatesFilter<"CadWorkSubmission"> | number
+  versionName?: Prisma.StringNullableWithAggregatesFilter<"CadWorkSubmission"> | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentWithAggregatesFilter<"CadWorkSubmission"> | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeWithAggregatesFilter<"CadWorkSubmission"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CadWorkSubmission"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CadWorkSubmission"> | Date | string
@@ -261,6 +333,9 @@ export type CadWorkSubmissionScalarWhereWithAggregatesInput = {
 export type CadWorkSubmissionCreateInput = {
   id?: string
   note?: string | null
+  versionNumber?: number
+  versionName?: string | null
+  department?: $Enums.LeadAssignmentDepartment
   submittedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -274,6 +349,9 @@ export type CadWorkSubmissionUncheckedCreateInput = {
   leadId: string
   submittedById: string
   note?: string | null
+  versionNumber?: number
+  versionName?: string | null
+  department?: $Enums.LeadAssignmentDepartment
   submittedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -283,6 +361,9 @@ export type CadWorkSubmissionUncheckedCreateInput = {
 export type CadWorkSubmissionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  versionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFieldUpdateOperationsInput | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -296,6 +377,9 @@ export type CadWorkSubmissionUncheckedUpdateInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   submittedById?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  versionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFieldUpdateOperationsInput | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -307,6 +391,9 @@ export type CadWorkSubmissionCreateManyInput = {
   leadId: string
   submittedById: string
   note?: string | null
+  versionNumber?: number
+  versionName?: string | null
+  department?: $Enums.LeadAssignmentDepartment
   submittedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -315,6 +402,9 @@ export type CadWorkSubmissionCreateManyInput = {
 export type CadWorkSubmissionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  versionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFieldUpdateOperationsInput | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -325,6 +415,9 @@ export type CadWorkSubmissionUncheckedUpdateManyInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   submittedById?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  versionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFieldUpdateOperationsInput | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -345,9 +438,16 @@ export type CadWorkSubmissionCountOrderByAggregateInput = {
   leadId?: Prisma.SortOrder
   submittedById?: Prisma.SortOrder
   note?: Prisma.SortOrder
+  versionNumber?: Prisma.SortOrder
+  versionName?: Prisma.SortOrder
+  department?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type CadWorkSubmissionAvgOrderByAggregateInput = {
+  versionNumber?: Prisma.SortOrder
 }
 
 export type CadWorkSubmissionMaxOrderByAggregateInput = {
@@ -355,6 +455,9 @@ export type CadWorkSubmissionMaxOrderByAggregateInput = {
   leadId?: Prisma.SortOrder
   submittedById?: Prisma.SortOrder
   note?: Prisma.SortOrder
+  versionNumber?: Prisma.SortOrder
+  versionName?: Prisma.SortOrder
+  department?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -365,9 +468,16 @@ export type CadWorkSubmissionMinOrderByAggregateInput = {
   leadId?: Prisma.SortOrder
   submittedById?: Prisma.SortOrder
   note?: Prisma.SortOrder
+  versionNumber?: Prisma.SortOrder
+  versionName?: Prisma.SortOrder
+  department?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type CadWorkSubmissionSumOrderByAggregateInput = {
+  versionNumber?: Prisma.SortOrder
 }
 
 export type CadWorkSubmissionScalarRelationFilter = {
@@ -476,6 +586,9 @@ export type CadWorkSubmissionUpdateOneRequiredWithoutFilesNestedInput = {
 export type CadWorkSubmissionCreateWithoutLeadInput = {
   id?: string
   note?: string | null
+  versionNumber?: number
+  versionName?: string | null
+  department?: $Enums.LeadAssignmentDepartment
   submittedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -487,6 +600,9 @@ export type CadWorkSubmissionUncheckedCreateWithoutLeadInput = {
   id?: string
   submittedById: string
   note?: string | null
+  versionNumber?: number
+  versionName?: string | null
+  department?: $Enums.LeadAssignmentDepartment
   submittedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -527,6 +643,9 @@ export type CadWorkSubmissionScalarWhereInput = {
   leadId?: Prisma.StringFilter<"CadWorkSubmission"> | string
   submittedById?: Prisma.StringFilter<"CadWorkSubmission"> | string
   note?: Prisma.StringNullableFilter<"CadWorkSubmission"> | string | null
+  versionNumber?: Prisma.IntFilter<"CadWorkSubmission"> | number
+  versionName?: Prisma.StringNullableFilter<"CadWorkSubmission"> | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFilter<"CadWorkSubmission"> | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFilter<"CadWorkSubmission"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"CadWorkSubmission"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CadWorkSubmission"> | Date | string
@@ -535,6 +654,9 @@ export type CadWorkSubmissionScalarWhereInput = {
 export type CadWorkSubmissionCreateWithoutSubmittedByInput = {
   id?: string
   note?: string | null
+  versionNumber?: number
+  versionName?: string | null
+  department?: $Enums.LeadAssignmentDepartment
   submittedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -546,6 +668,9 @@ export type CadWorkSubmissionUncheckedCreateWithoutSubmittedByInput = {
   id?: string
   leadId: string
   note?: string | null
+  versionNumber?: number
+  versionName?: string | null
+  department?: $Enums.LeadAssignmentDepartment
   submittedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -581,6 +706,9 @@ export type CadWorkSubmissionUpdateManyWithWhereWithoutSubmittedByInput = {
 export type CadWorkSubmissionCreateWithoutFilesInput = {
   id?: string
   note?: string | null
+  versionNumber?: number
+  versionName?: string | null
+  department?: $Enums.LeadAssignmentDepartment
   submittedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -593,6 +721,9 @@ export type CadWorkSubmissionUncheckedCreateWithoutFilesInput = {
   leadId: string
   submittedById: string
   note?: string | null
+  versionNumber?: number
+  versionName?: string | null
+  department?: $Enums.LeadAssignmentDepartment
   submittedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -617,6 +748,9 @@ export type CadWorkSubmissionUpdateToOneWithWhereWithoutFilesInput = {
 export type CadWorkSubmissionUpdateWithoutFilesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  versionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFieldUpdateOperationsInput | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -629,6 +763,9 @@ export type CadWorkSubmissionUncheckedUpdateWithoutFilesInput = {
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   submittedById?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  versionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFieldUpdateOperationsInput | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -638,6 +775,9 @@ export type CadWorkSubmissionCreateManyLeadInput = {
   id?: string
   submittedById: string
   note?: string | null
+  versionNumber?: number
+  versionName?: string | null
+  department?: $Enums.LeadAssignmentDepartment
   submittedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -646,6 +786,9 @@ export type CadWorkSubmissionCreateManyLeadInput = {
 export type CadWorkSubmissionUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  versionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFieldUpdateOperationsInput | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -657,6 +800,9 @@ export type CadWorkSubmissionUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   submittedById?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  versionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFieldUpdateOperationsInput | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -667,6 +813,9 @@ export type CadWorkSubmissionUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   submittedById?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  versionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFieldUpdateOperationsInput | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -676,6 +825,9 @@ export type CadWorkSubmissionCreateManySubmittedByInput = {
   id?: string
   leadId: string
   note?: string | null
+  versionNumber?: number
+  versionName?: string | null
+  department?: $Enums.LeadAssignmentDepartment
   submittedAt?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -684,6 +836,9 @@ export type CadWorkSubmissionCreateManySubmittedByInput = {
 export type CadWorkSubmissionUpdateWithoutSubmittedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  versionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFieldUpdateOperationsInput | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -695,6 +850,9 @@ export type CadWorkSubmissionUncheckedUpdateWithoutSubmittedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  versionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFieldUpdateOperationsInput | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -705,6 +863,9 @@ export type CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  versionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  department?: Prisma.EnumLeadAssignmentDepartmentFieldUpdateOperationsInput | $Enums.LeadAssignmentDepartment
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -746,6 +907,9 @@ export type CadWorkSubmissionSelect<ExtArgs extends runtime.Types.Extensions.Int
   leadId?: boolean
   submittedById?: boolean
   note?: boolean
+  versionNumber?: boolean
+  versionName?: boolean
+  department?: boolean
   submittedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -760,6 +924,9 @@ export type CadWorkSubmissionSelectCreateManyAndReturn<ExtArgs extends runtime.T
   leadId?: boolean
   submittedById?: boolean
   note?: boolean
+  versionNumber?: boolean
+  versionName?: boolean
+  department?: boolean
   submittedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -772,6 +939,9 @@ export type CadWorkSubmissionSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   leadId?: boolean
   submittedById?: boolean
   note?: boolean
+  versionNumber?: boolean
+  versionName?: boolean
+  department?: boolean
   submittedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -784,12 +954,15 @@ export type CadWorkSubmissionSelectScalar = {
   leadId?: boolean
   submittedById?: boolean
   note?: boolean
+  versionNumber?: boolean
+  versionName?: boolean
+  department?: boolean
   submittedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CadWorkSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "submittedById" | "note" | "submittedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["cadWorkSubmission"]>
+export type CadWorkSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "submittedById" | "note" | "versionNumber" | "versionName" | "department" | "submittedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["cadWorkSubmission"]>
 export type CadWorkSubmissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   submittedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -817,6 +990,9 @@ export type $CadWorkSubmissionPayload<ExtArgs extends runtime.Types.Extensions.I
     leadId: string
     submittedById: string
     note: string | null
+    versionNumber: number
+    versionName: string | null
+    department: $Enums.LeadAssignmentDepartment
     submittedAt: Date
     createdAt: Date
     updatedAt: Date
@@ -1250,6 +1426,9 @@ export interface CadWorkSubmissionFieldRefs {
   readonly leadId: Prisma.FieldRef<"CadWorkSubmission", 'String'>
   readonly submittedById: Prisma.FieldRef<"CadWorkSubmission", 'String'>
   readonly note: Prisma.FieldRef<"CadWorkSubmission", 'String'>
+  readonly versionNumber: Prisma.FieldRef<"CadWorkSubmission", 'Int'>
+  readonly versionName: Prisma.FieldRef<"CadWorkSubmission", 'String'>
+  readonly department: Prisma.FieldRef<"CadWorkSubmission", 'LeadAssignmentDepartment'>
   readonly submittedAt: Prisma.FieldRef<"CadWorkSubmission", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"CadWorkSubmission", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CadWorkSubmission", 'DateTime'>

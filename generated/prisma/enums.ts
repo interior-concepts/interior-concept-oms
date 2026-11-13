@@ -9,19 +9,30 @@
 * 🟢 You can import this file directly.
 */
 
+export const VisitType = {
+  INITIAL_VISIT: 'INITIAL_VISIT',
+  MEP_VISIT: 'MEP_VISIT',
+  PARTIAL_WORK_VISIT: 'PARTIAL_WORK_VISIT',
+  SECONDARY_VISIT: 'SECONDARY_VISIT'
+} as const
+
+export type VisitType = (typeof VisitType)[keyof typeof VisitType]
+
+
 export const LeadAssignmentDepartment = {
-  ADMIN: 'ADMIN',
   SR_CRM: 'SR_CRM',
   JR_CRM: 'JR_CRM',
   QUOTATION: 'QUOTATION',
   VISIT_TEAM: 'VISIT_TEAM',
+  SPECIALIST_DESIGN_CONSULTANTS: 'SPECIALIST_DESIGN_CONSULTANTS',
   JR_ARCHITECT: 'JR_ARCHITECT',
   VISUALIZER_3D: 'VISUALIZER_3D',
+  ADMIN: 'ADMIN',
   ACCOUNTS: 'ACCOUNTS',
   PROJECT_COORDINATOR: 'PROJECT_COORDINATOR',
-  SPECIALIST_DESIGN_CONSULTANTS: 'SPECIALIST_DESIGN_CONSULTANTS',
+  PROCUREMENT: 'PROCUREMENT',
   BOQ: 'BOQ',
-  PROCUREMENT: 'PROCUREMENT'
+  SITE_ENGINEER: 'SITE_ENGINEER'
 } as const
 
 export type LeadAssignmentDepartment = (typeof LeadAssignmentDepartment)[keyof typeof LeadAssignmentDepartment]
@@ -29,21 +40,21 @@ export type LeadAssignmentDepartment = (typeof LeadAssignmentDepartment)[keyof t
 
 export const LeadStage = {
   NEW: 'NEW',
+  CONTACT_ATTEMPTED: 'CONTACT_ATTEMPTED',
+  NURTURING: 'NURTURING',
+  VISIT_SCHEDULED: 'VISIT_SCHEDULED',
+  CLOSED: 'CLOSED',
   NUMBER_COLLECTED: 'NUMBER_COLLECTED',
+  VISIT_COMPLETED: 'VISIT_COMPLETED',
+  VISIT_RESCHEDULED: 'VISIT_RESCHEDULED',
+  VISIT_CANCELLED: 'VISIT_CANCELLED',
   DISCOVERY: 'DISCOVERY',
   CAD_PHASE: 'CAD_PHASE',
   QUOTATION_PHASE: 'QUOTATION_PHASE',
   BUDGET_PHASE: 'BUDGET_PHASE',
-  VISIT_PHASE: 'VISIT_PHASE',
   VISUALIZATION_PHASE: 'VISUALIZATION_PHASE',
   CONVERSION: 'CONVERSION',
-  CONTACT_ATTEMPTED: 'CONTACT_ATTEMPTED',
-  NURTURING: 'NURTURING',
-  VISIT_SCHEDULED: 'VISIT_SCHEDULED',
-  VISIT_RESCHEDULED: 'VISIT_RESCHEDULED',
-  VISIT_COMPLETED: 'VISIT_COMPLETED',
-  VISIT_CANCELLED: 'VISIT_CANCELLED',
-  CLOSED: 'CLOSED',
+  VISIT_PHASE: 'VISIT_PHASE',
   PARTIAL_VISIT_PHASE: 'PARTIAL_VISIT_PHASE',
   PARTIAL_QUOTATION_PHASE: 'PARTIAL_QUOTATION_PHASE'
 } as const
@@ -56,6 +67,11 @@ export const LeadSubStatus = {
   NO_ANSWER: 'NO_ANSWER',
   WARM_LEAD: 'WARM_LEAD',
   FUTURE_CLIENT: 'FUTURE_CLIENT',
+  SMALL_BUDGET: 'SMALL_BUDGET',
+  DEAD_LEAD: 'DEAD_LEAD',
+  INVALID: 'INVALID',
+  NOT_INTERESTED: 'NOT_INTERESTED',
+  LOST: 'LOST',
   FIRST_MEETING_SET: 'FIRST_MEETING_SET',
   PROPOSAL_SENT: 'PROPOSAL_SENT',
   LAYOUT_REVISION: 'LAYOUT_REVISION',
@@ -82,16 +98,11 @@ export const LeadSubStatus = {
   VISUAL_COMPLETED: 'VISUAL_COMPLETED',
   CLIENT_APPROVED: 'CLIENT_APPROVED',
   VISUAL_CORRECTION: 'VISUAL_CORRECTION',
+  PROJECT_DROPPED: 'PROJECT_DROPPED',
   VISIT_SCHEDULED: 'VISIT_SCHEDULED',
   VISIT_COMPLETED: 'VISIT_COMPLETED',
   VISIT_RESCHEDULED: 'VISIT_RESCHEDULED',
-  VISIT_CANCELLED: 'VISIT_CANCELLED',
-  PROJECT_DROPPED: 'PROJECT_DROPPED',
-  SMALL_BUDGET: 'SMALL_BUDGET',
-  DEAD_LEAD: 'DEAD_LEAD',
-  INVALID: 'INVALID',
-  NOT_INTERESTED: 'NOT_INTERESTED',
-  LOST: 'LOST'
+  VISIT_CANCELLED: 'VISIT_CANCELLED'
 } as const
 
 export type LeadSubStatus = (typeof LeadSubStatus)[keyof typeof LeadSubStatus]
@@ -100,44 +111,11 @@ export type LeadSubStatus = (typeof LeadSubStatus)[keyof typeof LeadSubStatus]
 export const FollowUpStatus = {
   PENDING: 'PENDING',
   DONE: 'DONE',
-  LATELY_DONE: 'LATELY_DONE',
-  MISSED: 'MISSED'
+  MISSED: 'MISSED',
+  LATELY_DONE: 'LATELY_DONE'
 } as const
 
 export type FollowUpStatus = (typeof FollowUpStatus)[keyof typeof FollowUpStatus]
-
-
-export const FollowUpCategory = {
-  LAYOUT_REVIEW: 'LAYOUT_REVIEW',
-  BUDGET_NEGOTIATION: 'BUDGET_NEGOTIATION',
-  SITE_VISIT: 'SITE_VISIT',
-  CONTRACT_SIGNING: 'CONTRACT_SIGNING',
-  GENERAL: 'GENERAL'
-} as const
-
-export type FollowUpCategory = (typeof FollowUpCategory)[keyof typeof FollowUpCategory]
-
-
-export const ClientSentiment = {
-  HOT: 'HOT',
-  WARM: 'WARM',
-  COLD: 'COLD',
-  AT_RISK: 'AT_RISK'
-} as const
-
-export type ClientSentiment = (typeof ClientSentiment)[keyof typeof ClientSentiment]
-
-
-export const ClientObjection = {
-  BUDGET_TOO_HIGH: 'BUDGET_TOO_HIGH',
-  COMPETITOR_COMPARISON: 'COMPETITOR_COMPARISON',
-  DESIGN_REVISION_NEEDED: 'DESIGN_REVISION_NEEDED',
-  SPACE_PLANNING_QUERY: 'SPACE_PLANNING_QUERY',
-  TIMELINE_DELAY: 'TIMELINE_DELAY',
-  OTHER: 'OTHER'
-} as const
-
-export type ClientObjection = (typeof ClientObjection)[keyof typeof ClientObjection]
 
 
 export const LeadPrimaryOwnerDepartment = {
@@ -220,9 +198,9 @@ export const ActivityType = {
   STATUS_CHANGE: 'STATUS_CHANGE',
   NOTE: 'NOTE',
   FOLLOWUP_SET: 'FOLLOWUP_SET',
+  LEAD_CREATED: 'LEAD_CREATED',
   FOLLOWUP_COMPLETED: 'FOLLOWUP_COMPLETED',
   VISIT_SCHEDULED: 'VISIT_SCHEDULED',
-  LEAD_CREATED: 'LEAD_CREATED',
   USER_ASSIGNED: 'USER_ASSIGNED',
   SR_TAKEOVER: 'SR_TAKEOVER',
   PHASE_DEADLINE_SET: 'PHASE_DEADLINE_SET',
@@ -350,6 +328,79 @@ export const AccountStatus = {
 export type AccountStatus = (typeof AccountStatus)[keyof typeof AccountStatus]
 
 
+export const VendorStatus = {
+  ACTIVE: 'ACTIVE',
+  DISABLED: 'DISABLED'
+} as const
+
+export type VendorStatus = (typeof VendorStatus)[keyof typeof VendorStatus]
+
+
+export const VendorType = {
+  SUPPLIER: 'SUPPLIER',
+  CONTRACTOR: 'CONTRACTOR',
+  PAINTER: 'PAINTER',
+  CARPENTER: 'CARPENTER',
+  SERVICE_PROVIDER: 'SERVICE_PROVIDER',
+  FREELANCER: 'FREELANCER',
+  OTHER: 'OTHER'
+} as const
+
+export type VendorType = (typeof VendorType)[keyof typeof VendorType]
+
+
+export const VendorWorkStatus = {
+  NOT_STARTED: 'NOT_STARTED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  WORK_DONE: 'WORK_DONE',
+  CLOSED: 'CLOSED'
+} as const
+
+export type VendorWorkStatus = (typeof VendorWorkStatus)[keyof typeof VendorWorkStatus]
+
+
+export const VendorPaymentMethod = {
+  CASH: 'CASH',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  CHEQUE: 'CHEQUE',
+  MOBILE_BANKING: 'MOBILE_BANKING'
+} as const
+
+export type VendorPaymentMethod = (typeof VendorPaymentMethod)[keyof typeof VendorPaymentMethod]
+
+
+export const StockCategory = {
+  STATIONERY_OFFICE: 'STATIONERY_OFFICE',
+  PANTRY_HYGIENE: 'PANTRY_HYGIENE',
+  IT_EQUIPMENT: 'IT_EQUIPMENT',
+  BOARD: 'BOARD',
+  LAMINATE_HPL: 'LAMINATE_HPL',
+  HARDWARE: 'HARDWARE',
+  FITTINGS: 'FITTINGS',
+  PAINT_FINISHES: 'PAINT_FINISHES',
+  LIGHTING_ELECTRICAL: 'LIGHTING_ELECTRICAL',
+  GLASS_MIRROR: 'GLASS_MIRROR',
+  RAW_MATERIALS: 'RAW_MATERIALS',
+  TOOLS_CONSUMABLES: 'TOOLS_CONSUMABLES',
+  OTHER: 'OTHER'
+} as const
+
+export type StockCategory = (typeof StockCategory)[keyof typeof StockCategory]
+
+
+export const StockMovementType = {
+  STOCK_IN: 'STOCK_IN',
+  DEPARTMENT_ISSUE: 'DEPARTMENT_ISSUE',
+  STAFF_ISSUE: 'STAFF_ISSUE',
+  PROJECT_ISSUE: 'PROJECT_ISSUE',
+  PROJECT_RETURN: 'PROJECT_RETURN',
+  VENDOR_RETURN: 'VENDOR_RETURN',
+  ADJUSTMENT: 'ADJUSTMENT'
+} as const
+
+export type StockMovementType = (typeof StockMovementType)[keyof typeof StockMovementType]
+
+
 export const RequisitionWorkCategory = {
   CEILING: 'CEILING',
   WALL_PANELING: 'WALL_PANELING',
@@ -374,3 +425,49 @@ export const RequisitionStatus = {
 } as const
 
 export type RequisitionStatus = (typeof RequisitionStatus)[keyof typeof RequisitionStatus]
+
+
+export const SupplierStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type SupplierStatus = (typeof SupplierStatus)[keyof typeof SupplierStatus]
+
+
+export const ProcurementWalletTxType = {
+  DISBURSEMENT: 'DISBURSEMENT',
+  EXPENSE: 'EXPENSE',
+  REIMBURSEMENT: 'REIMBURSEMENT',
+  RETURN_TO_ACCOUNTS: 'RETURN_TO_ACCOUNTS'
+} as const
+
+export type ProcurementWalletTxType = (typeof ProcurementWalletTxType)[keyof typeof ProcurementWalletTxType]
+
+
+export const ProcurementPaidFrom = {
+  COMPANY_ADVANCE: 'COMPANY_ADVANCE',
+  PERSONAL_POCKET: 'PERSONAL_POCKET'
+} as const
+
+export type ProcurementPaidFrom = (typeof ProcurementPaidFrom)[keyof typeof ProcurementPaidFrom]
+
+
+export const ProcurementTxStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  SETTLED: 'SETTLED'
+} as const
+
+export type ProcurementTxStatus = (typeof ProcurementTxStatus)[keyof typeof ProcurementTxStatus]
+
+
+export const SiteDeliveryCondition = {
+  GOOD: 'GOOD',
+  PARTIAL: 'PARTIAL',
+  DAMAGED: 'DAMAGED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type SiteDeliveryCondition = (typeof SiteDeliveryCondition)[keyof typeof SiteDeliveryCondition]

@@ -232,8 +232,8 @@ export type LeadPhaseReviewWhereInput = {
   reviewedById?: Prisma.StringFilter<"LeadPhaseReview"> | string
   decision?: Prisma.EnumLeadPhaseReviewDecisionFilter<"LeadPhaseReview"> | $Enums.LeadPhaseReviewDecision
   comment?: Prisma.StringNullableFilter<"LeadPhaseReview"> | string | null
-  task?: Prisma.XOR<Prisma.LeadPhaseTaskScalarRelationFilter, Prisma.LeadPhaseTaskWhereInput>
   reviewedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  task?: Prisma.XOR<Prisma.LeadPhaseTaskScalarRelationFilter, Prisma.LeadPhaseTaskWhereInput>
 }
 
 export type LeadPhaseReviewOrderByWithRelationInput = {
@@ -244,8 +244,8 @@ export type LeadPhaseReviewOrderByWithRelationInput = {
   reviewedById?: Prisma.SortOrder
   decision?: Prisma.SortOrder
   comment?: Prisma.SortOrderInput | Prisma.SortOrder
-  task?: Prisma.LeadPhaseTaskOrderByWithRelationInput
   reviewedBy?: Prisma.UserOrderByWithRelationInput
+  task?: Prisma.LeadPhaseTaskOrderByWithRelationInput
 }
 
 export type LeadPhaseReviewWhereUniqueInput = Prisma.AtLeast<{
@@ -260,8 +260,8 @@ export type LeadPhaseReviewWhereUniqueInput = Prisma.AtLeast<{
   reviewedById?: Prisma.StringFilter<"LeadPhaseReview"> | string
   decision?: Prisma.EnumLeadPhaseReviewDecisionFilter<"LeadPhaseReview"> | $Enums.LeadPhaseReviewDecision
   comment?: Prisma.StringNullableFilter<"LeadPhaseReview"> | string | null
-  task?: Prisma.XOR<Prisma.LeadPhaseTaskScalarRelationFilter, Prisma.LeadPhaseTaskWhereInput>
   reviewedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  task?: Prisma.XOR<Prisma.LeadPhaseTaskScalarRelationFilter, Prisma.LeadPhaseTaskWhereInput>
 }, "id" | "taskId_roundNo">
 
 export type LeadPhaseReviewOrderByWithAggregationInput = {
@@ -298,8 +298,8 @@ export type LeadPhaseReviewCreateInput = {
   submittedAt?: Date | string
   decision: $Enums.LeadPhaseReviewDecision
   comment?: string | null
-  task: Prisma.LeadPhaseTaskCreateNestedOneWithoutReviewsInput
   reviewedBy: Prisma.UserCreateNestedOneWithoutPhaseReviewsInput
+  task: Prisma.LeadPhaseTaskCreateNestedOneWithoutReviewsInput
 }
 
 export type LeadPhaseReviewUncheckedCreateInput = {
@@ -318,8 +318,8 @@ export type LeadPhaseReviewUpdateInput = {
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decision?: Prisma.EnumLeadPhaseReviewDecisionFieldUpdateOperationsInput | $Enums.LeadPhaseReviewDecision
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  task?: Prisma.LeadPhaseTaskUpdateOneRequiredWithoutReviewsNestedInput
   reviewedBy?: Prisma.UserUpdateOneRequiredWithoutPhaseReviewsNestedInput
+  task?: Prisma.LeadPhaseTaskUpdateOneRequiredWithoutReviewsNestedInput
 }
 
 export type LeadPhaseReviewUncheckedUpdateInput = {
@@ -684,8 +684,8 @@ export type LeadPhaseReviewSelect<ExtArgs extends runtime.Types.Extensions.Inter
   reviewedById?: boolean
   decision?: boolean
   comment?: boolean
-  task?: boolean | Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  task?: boolean | Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadPhaseReview"]>
 
 export type LeadPhaseReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -696,8 +696,8 @@ export type LeadPhaseReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   reviewedById?: boolean
   decision?: boolean
   comment?: boolean
-  task?: boolean | Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  task?: boolean | Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadPhaseReview"]>
 
 export type LeadPhaseReviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -708,8 +708,8 @@ export type LeadPhaseReviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   reviewedById?: boolean
   decision?: boolean
   comment?: boolean
-  task?: boolean | Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  task?: boolean | Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadPhaseReview"]>
 
 export type LeadPhaseReviewSelectScalar = {
@@ -724,23 +724,23 @@ export type LeadPhaseReviewSelectScalar = {
 
 export type LeadPhaseReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "taskId" | "roundNo" | "submittedAt" | "reviewedById" | "decision" | "comment", ExtArgs["result"]["leadPhaseReview"]>
 export type LeadPhaseReviewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  task?: boolean | Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  task?: boolean | Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>
 }
 export type LeadPhaseReviewIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  task?: boolean | Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  task?: boolean | Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>
 }
 export type LeadPhaseReviewIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  task?: boolean | Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  task?: boolean | Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>
 }
 
 export type $LeadPhaseReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadPhaseReview"
   objects: {
-    task: Prisma.$LeadPhaseTaskPayload<ExtArgs>
     reviewedBy: Prisma.$UserPayload<ExtArgs>
+    task: Prisma.$LeadPhaseTaskPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1144,8 +1144,8 @@ readonly fields: LeadPhaseReviewFieldRefs;
  */
 export interface Prisma__LeadPhaseReviewClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  task<T extends Prisma.LeadPhaseTaskDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadPhaseTaskClient<runtime.Types.Result.GetResult<Prisma.$LeadPhaseTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reviewedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  task<T extends Prisma.LeadPhaseTaskDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadPhaseTaskDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadPhaseTaskClient<runtime.Types.Result.GetResult<Prisma.$LeadPhaseTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

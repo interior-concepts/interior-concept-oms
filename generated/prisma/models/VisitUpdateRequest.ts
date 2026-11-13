@@ -222,9 +222,9 @@ export type VisitUpdateRequestWhereInput = {
   resolvedById?: Prisma.StringNullableFilter<"VisitUpdateRequest"> | string | null
   createdAt?: Prisma.DateTimeFilter<"VisitUpdateRequest"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableFilter<"VisitUpdateRequest"> | Date | string | null
-  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
   requestedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   resolvedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
 }
 
 export type VisitUpdateRequestOrderByWithRelationInput = {
@@ -238,9 +238,9 @@ export type VisitUpdateRequestOrderByWithRelationInput = {
   resolvedById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  visit?: Prisma.VisitOrderByWithRelationInput
   requestedBy?: Prisma.UserOrderByWithRelationInput
   resolvedBy?: Prisma.UserOrderByWithRelationInput
+  visit?: Prisma.VisitOrderByWithRelationInput
 }
 
 export type VisitUpdateRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -257,9 +257,9 @@ export type VisitUpdateRequestWhereUniqueInput = Prisma.AtLeast<{
   resolvedById?: Prisma.StringNullableFilter<"VisitUpdateRequest"> | string | null
   createdAt?: Prisma.DateTimeFilter<"VisitUpdateRequest"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableFilter<"VisitUpdateRequest"> | Date | string | null
-  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
   requestedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   resolvedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
 }, "id">
 
 export type VisitUpdateRequestOrderByWithAggregationInput = {
@@ -302,9 +302,9 @@ export type VisitUpdateRequestCreateInput = {
   requestedScheduleAt?: Date | string | null
   createdAt?: Date | string
   resolvedAt?: Date | string | null
-  visit: Prisma.VisitCreateNestedOneWithoutUpdateRequestsInput
   requestedBy: Prisma.UserCreateNestedOneWithoutVisitUpdateRequestsInput
   resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedVisitUpdateRequestsInput
+  visit: Prisma.VisitCreateNestedOneWithoutUpdateRequestsInput
 }
 
 export type VisitUpdateRequestUncheckedCreateInput = {
@@ -328,9 +328,9 @@ export type VisitUpdateRequestUpdateInput = {
   requestedScheduleAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  visit?: Prisma.VisitUpdateOneRequiredWithoutUpdateRequestsNestedInput
   requestedBy?: Prisma.UserUpdateOneRequiredWithoutVisitUpdateRequestsNestedInput
   resolvedBy?: Prisma.UserUpdateOneWithoutResolvedVisitUpdateRequestsNestedInput
+  visit?: Prisma.VisitUpdateOneRequiredWithoutUpdateRequestsNestedInput
 }
 
 export type VisitUpdateRequestUncheckedUpdateInput = {
@@ -573,8 +573,8 @@ export type VisitUpdateRequestCreateWithoutRequestedByInput = {
   requestedScheduleAt?: Date | string | null
   createdAt?: Date | string
   resolvedAt?: Date | string | null
-  visit: Prisma.VisitCreateNestedOneWithoutUpdateRequestsInput
   resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedVisitUpdateRequestsInput
+  visit: Prisma.VisitCreateNestedOneWithoutUpdateRequestsInput
 }
 
 export type VisitUpdateRequestUncheckedCreateWithoutRequestedByInput = {
@@ -607,8 +607,8 @@ export type VisitUpdateRequestCreateWithoutResolvedByInput = {
   requestedScheduleAt?: Date | string | null
   createdAt?: Date | string
   resolvedAt?: Date | string | null
-  visit: Prisma.VisitCreateNestedOneWithoutUpdateRequestsInput
   requestedBy: Prisma.UserCreateNestedOneWithoutVisitUpdateRequestsInput
+  visit: Prisma.VisitCreateNestedOneWithoutUpdateRequestsInput
 }
 
 export type VisitUpdateRequestUncheckedCreateWithoutResolvedByInput = {
@@ -763,8 +763,8 @@ export type VisitUpdateRequestUpdateWithoutRequestedByInput = {
   requestedScheduleAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  visit?: Prisma.VisitUpdateOneRequiredWithoutUpdateRequestsNestedInput
   resolvedBy?: Prisma.UserUpdateOneWithoutResolvedVisitUpdateRequestsNestedInput
+  visit?: Prisma.VisitUpdateOneRequiredWithoutUpdateRequestsNestedInput
 }
 
 export type VisitUpdateRequestUncheckedUpdateWithoutRequestedByInput = {
@@ -799,8 +799,8 @@ export type VisitUpdateRequestUpdateWithoutResolvedByInput = {
   requestedScheduleAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  visit?: Prisma.VisitUpdateOneRequiredWithoutUpdateRequestsNestedInput
   requestedBy?: Prisma.UserUpdateOneRequiredWithoutVisitUpdateRequestsNestedInput
+  visit?: Prisma.VisitUpdateOneRequiredWithoutUpdateRequestsNestedInput
 }
 
 export type VisitUpdateRequestUncheckedUpdateWithoutResolvedByInput = {
@@ -888,9 +888,9 @@ export type VisitUpdateRequestSelect<ExtArgs extends runtime.Types.Extensions.In
   resolvedById?: boolean
   createdAt?: boolean
   resolvedAt?: boolean
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   requestedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   resolvedBy?: boolean | Prisma.VisitUpdateRequest$resolvedByArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visitUpdateRequest"]>
 
 export type VisitUpdateRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -904,9 +904,9 @@ export type VisitUpdateRequestSelectCreateManyAndReturn<ExtArgs extends runtime.
   resolvedById?: boolean
   createdAt?: boolean
   resolvedAt?: boolean
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   requestedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   resolvedBy?: boolean | Prisma.VisitUpdateRequest$resolvedByArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visitUpdateRequest"]>
 
 export type VisitUpdateRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -920,9 +920,9 @@ export type VisitUpdateRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.
   resolvedById?: boolean
   createdAt?: boolean
   resolvedAt?: boolean
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   requestedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   resolvedBy?: boolean | Prisma.VisitUpdateRequest$resolvedByArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visitUpdateRequest"]>
 
 export type VisitUpdateRequestSelectScalar = {
@@ -940,27 +940,27 @@ export type VisitUpdateRequestSelectScalar = {
 
 export type VisitUpdateRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "visitId" | "type" | "status" | "reason" | "requestedScheduleAt" | "requestedById" | "resolvedById" | "createdAt" | "resolvedAt", ExtArgs["result"]["visitUpdateRequest"]>
 export type VisitUpdateRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   requestedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   resolvedBy?: boolean | Prisma.VisitUpdateRequest$resolvedByArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }
 export type VisitUpdateRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   requestedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   resolvedBy?: boolean | Prisma.VisitUpdateRequest$resolvedByArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }
 export type VisitUpdateRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   requestedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   resolvedBy?: boolean | Prisma.VisitUpdateRequest$resolvedByArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }
 
 export type $VisitUpdateRequestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "VisitUpdateRequest"
   objects: {
-    visit: Prisma.$VisitPayload<ExtArgs>
     requestedBy: Prisma.$UserPayload<ExtArgs>
     resolvedBy: Prisma.$UserPayload<ExtArgs> | null
+    visit: Prisma.$VisitPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1367,9 +1367,9 @@ readonly fields: VisitUpdateRequestFieldRefs;
  */
 export interface Prisma__VisitUpdateRequestClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  visit<T extends Prisma.VisitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitDefaultArgs<ExtArgs>>): Prisma.Prisma__VisitClient<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   requestedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   resolvedBy<T extends Prisma.VisitUpdateRequest$resolvedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitUpdateRequest$resolvedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  visit<T extends Prisma.VisitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitDefaultArgs<ExtArgs>>): Prisma.Prisma__VisitClient<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

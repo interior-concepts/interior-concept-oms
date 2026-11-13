@@ -293,6 +293,7 @@ export type MaterialRequisitionItemWhereInput = {
   productionPhase?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
   remarks?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
   requisition?: Prisma.XOR<Prisma.MaterialRequisitionScalarRelationFilter, Prisma.MaterialRequisitionWhereInput>
+  stockItem?: Prisma.XOR<Prisma.StockItemNullableScalarRelationFilter, Prisma.StockItemWhereInput> | null
 }
 
 export type MaterialRequisitionItemOrderByWithRelationInput = {
@@ -311,6 +312,7 @@ export type MaterialRequisitionItemOrderByWithRelationInput = {
   productionPhase?: Prisma.SortOrderInput | Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   requisition?: Prisma.MaterialRequisitionOrderByWithRelationInput
+  stockItem?: Prisma.StockItemOrderByWithRelationInput
 }
 
 export type MaterialRequisitionItemWhereUniqueInput = Prisma.AtLeast<{
@@ -332,6 +334,7 @@ export type MaterialRequisitionItemWhereUniqueInput = Prisma.AtLeast<{
   productionPhase?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
   remarks?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
   requisition?: Prisma.XOR<Prisma.MaterialRequisitionScalarRelationFilter, Prisma.MaterialRequisitionWhereInput>
+  stockItem?: Prisma.XOR<Prisma.StockItemNullableScalarRelationFilter, Prisma.StockItemWhereInput> | null
 }, "id">
 
 export type MaterialRequisitionItemOrderByWithAggregationInput = {
@@ -379,7 +382,6 @@ export type MaterialRequisitionItemScalarWhereWithAggregatesInput = {
 export type MaterialRequisitionItemCreateInput = {
   id?: string
   quotationLineItemId?: string | null
-  stockItemId?: string | null
   workCategory?: $Enums.RequisitionWorkCategory
   materialName: string
   specifications?: string | null
@@ -391,6 +393,7 @@ export type MaterialRequisitionItemCreateInput = {
   productionPhase?: string | null
   remarks?: string | null
   requisition: Prisma.MaterialRequisitionCreateNestedOneWithoutItemsInput
+  stockItem?: Prisma.StockItemCreateNestedOneWithoutRequisitionItemsInput
 }
 
 export type MaterialRequisitionItemUncheckedCreateInput = {
@@ -413,7 +416,6 @@ export type MaterialRequisitionItemUncheckedCreateInput = {
 export type MaterialRequisitionItemUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quotationLineItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stockItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workCategory?: Prisma.EnumRequisitionWorkCategoryFieldUpdateOperationsInput | $Enums.RequisitionWorkCategory
   materialName?: Prisma.StringFieldUpdateOperationsInput | string
   specifications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -425,6 +427,7 @@ export type MaterialRequisitionItemUpdateInput = {
   productionPhase?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requisition?: Prisma.MaterialRequisitionUpdateOneRequiredWithoutItemsNestedInput
+  stockItem?: Prisma.StockItemUpdateOneWithoutRequisitionItemsNestedInput
 }
 
 export type MaterialRequisitionItemUncheckedUpdateInput = {
@@ -464,7 +467,6 @@ export type MaterialRequisitionItemCreateManyInput = {
 export type MaterialRequisitionItemUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quotationLineItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stockItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workCategory?: Prisma.EnumRequisitionWorkCategoryFieldUpdateOperationsInput | $Enums.RequisitionWorkCategory
   materialName?: Prisma.StringFieldUpdateOperationsInput | string
   specifications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -565,6 +567,48 @@ export type MaterialRequisitionItemSumOrderByAggregateInput = {
   finalQuantity?: Prisma.SortOrder
 }
 
+export type MaterialRequisitionItemCreateNestedManyWithoutStockItemInput = {
+  create?: Prisma.XOR<Prisma.MaterialRequisitionItemCreateWithoutStockItemInput, Prisma.MaterialRequisitionItemUncheckedCreateWithoutStockItemInput> | Prisma.MaterialRequisitionItemCreateWithoutStockItemInput[] | Prisma.MaterialRequisitionItemUncheckedCreateWithoutStockItemInput[]
+  connectOrCreate?: Prisma.MaterialRequisitionItemCreateOrConnectWithoutStockItemInput | Prisma.MaterialRequisitionItemCreateOrConnectWithoutStockItemInput[]
+  createMany?: Prisma.MaterialRequisitionItemCreateManyStockItemInputEnvelope
+  connect?: Prisma.MaterialRequisitionItemWhereUniqueInput | Prisma.MaterialRequisitionItemWhereUniqueInput[]
+}
+
+export type MaterialRequisitionItemUncheckedCreateNestedManyWithoutStockItemInput = {
+  create?: Prisma.XOR<Prisma.MaterialRequisitionItemCreateWithoutStockItemInput, Prisma.MaterialRequisitionItemUncheckedCreateWithoutStockItemInput> | Prisma.MaterialRequisitionItemCreateWithoutStockItemInput[] | Prisma.MaterialRequisitionItemUncheckedCreateWithoutStockItemInput[]
+  connectOrCreate?: Prisma.MaterialRequisitionItemCreateOrConnectWithoutStockItemInput | Prisma.MaterialRequisitionItemCreateOrConnectWithoutStockItemInput[]
+  createMany?: Prisma.MaterialRequisitionItemCreateManyStockItemInputEnvelope
+  connect?: Prisma.MaterialRequisitionItemWhereUniqueInput | Prisma.MaterialRequisitionItemWhereUniqueInput[]
+}
+
+export type MaterialRequisitionItemUpdateManyWithoutStockItemNestedInput = {
+  create?: Prisma.XOR<Prisma.MaterialRequisitionItemCreateWithoutStockItemInput, Prisma.MaterialRequisitionItemUncheckedCreateWithoutStockItemInput> | Prisma.MaterialRequisitionItemCreateWithoutStockItemInput[] | Prisma.MaterialRequisitionItemUncheckedCreateWithoutStockItemInput[]
+  connectOrCreate?: Prisma.MaterialRequisitionItemCreateOrConnectWithoutStockItemInput | Prisma.MaterialRequisitionItemCreateOrConnectWithoutStockItemInput[]
+  upsert?: Prisma.MaterialRequisitionItemUpsertWithWhereUniqueWithoutStockItemInput | Prisma.MaterialRequisitionItemUpsertWithWhereUniqueWithoutStockItemInput[]
+  createMany?: Prisma.MaterialRequisitionItemCreateManyStockItemInputEnvelope
+  set?: Prisma.MaterialRequisitionItemWhereUniqueInput | Prisma.MaterialRequisitionItemWhereUniqueInput[]
+  disconnect?: Prisma.MaterialRequisitionItemWhereUniqueInput | Prisma.MaterialRequisitionItemWhereUniqueInput[]
+  delete?: Prisma.MaterialRequisitionItemWhereUniqueInput | Prisma.MaterialRequisitionItemWhereUniqueInput[]
+  connect?: Prisma.MaterialRequisitionItemWhereUniqueInput | Prisma.MaterialRequisitionItemWhereUniqueInput[]
+  update?: Prisma.MaterialRequisitionItemUpdateWithWhereUniqueWithoutStockItemInput | Prisma.MaterialRequisitionItemUpdateWithWhereUniqueWithoutStockItemInput[]
+  updateMany?: Prisma.MaterialRequisitionItemUpdateManyWithWhereWithoutStockItemInput | Prisma.MaterialRequisitionItemUpdateManyWithWhereWithoutStockItemInput[]
+  deleteMany?: Prisma.MaterialRequisitionItemScalarWhereInput | Prisma.MaterialRequisitionItemScalarWhereInput[]
+}
+
+export type MaterialRequisitionItemUncheckedUpdateManyWithoutStockItemNestedInput = {
+  create?: Prisma.XOR<Prisma.MaterialRequisitionItemCreateWithoutStockItemInput, Prisma.MaterialRequisitionItemUncheckedCreateWithoutStockItemInput> | Prisma.MaterialRequisitionItemCreateWithoutStockItemInput[] | Prisma.MaterialRequisitionItemUncheckedCreateWithoutStockItemInput[]
+  connectOrCreate?: Prisma.MaterialRequisitionItemCreateOrConnectWithoutStockItemInput | Prisma.MaterialRequisitionItemCreateOrConnectWithoutStockItemInput[]
+  upsert?: Prisma.MaterialRequisitionItemUpsertWithWhereUniqueWithoutStockItemInput | Prisma.MaterialRequisitionItemUpsertWithWhereUniqueWithoutStockItemInput[]
+  createMany?: Prisma.MaterialRequisitionItemCreateManyStockItemInputEnvelope
+  set?: Prisma.MaterialRequisitionItemWhereUniqueInput | Prisma.MaterialRequisitionItemWhereUniqueInput[]
+  disconnect?: Prisma.MaterialRequisitionItemWhereUniqueInput | Prisma.MaterialRequisitionItemWhereUniqueInput[]
+  delete?: Prisma.MaterialRequisitionItemWhereUniqueInput | Prisma.MaterialRequisitionItemWhereUniqueInput[]
+  connect?: Prisma.MaterialRequisitionItemWhereUniqueInput | Prisma.MaterialRequisitionItemWhereUniqueInput[]
+  update?: Prisma.MaterialRequisitionItemUpdateWithWhereUniqueWithoutStockItemInput | Prisma.MaterialRequisitionItemUpdateWithWhereUniqueWithoutStockItemInput[]
+  updateMany?: Prisma.MaterialRequisitionItemUpdateManyWithWhereWithoutStockItemInput | Prisma.MaterialRequisitionItemUpdateManyWithWhereWithoutStockItemInput[]
+  deleteMany?: Prisma.MaterialRequisitionItemScalarWhereInput | Prisma.MaterialRequisitionItemScalarWhereInput[]
+}
+
 export type MaterialRequisitionItemCreateNestedManyWithoutRequisitionInput = {
   create?: Prisma.XOR<Prisma.MaterialRequisitionItemCreateWithoutRequisitionInput, Prisma.MaterialRequisitionItemUncheckedCreateWithoutRequisitionInput> | Prisma.MaterialRequisitionItemCreateWithoutRequisitionInput[] | Prisma.MaterialRequisitionItemUncheckedCreateWithoutRequisitionInput[]
   connectOrCreate?: Prisma.MaterialRequisitionItemCreateOrConnectWithoutRequisitionInput | Prisma.MaterialRequisitionItemCreateOrConnectWithoutRequisitionInput[]
@@ -611,10 +655,9 @@ export type EnumRequisitionWorkCategoryFieldUpdateOperationsInput = {
   set?: $Enums.RequisitionWorkCategory
 }
 
-export type MaterialRequisitionItemCreateWithoutRequisitionInput = {
+export type MaterialRequisitionItemCreateWithoutStockItemInput = {
   id?: string
   quotationLineItemId?: string | null
-  stockItemId?: string | null
   workCategory?: $Enums.RequisitionWorkCategory
   materialName: string
   specifications?: string | null
@@ -625,6 +668,85 @@ export type MaterialRequisitionItemCreateWithoutRequisitionInput = {
   unit?: string
   productionPhase?: string | null
   remarks?: string | null
+  requisition: Prisma.MaterialRequisitionCreateNestedOneWithoutItemsInput
+}
+
+export type MaterialRequisitionItemUncheckedCreateWithoutStockItemInput = {
+  id?: string
+  requisitionId: string
+  quotationLineItemId?: string | null
+  workCategory?: $Enums.RequisitionWorkCategory
+  materialName: string
+  specifications?: string | null
+  variantAttributes?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  netQuantity?: number
+  wastagePercent?: number
+  finalQuantity?: number
+  unit?: string
+  productionPhase?: string | null
+  remarks?: string | null
+}
+
+export type MaterialRequisitionItemCreateOrConnectWithoutStockItemInput = {
+  where: Prisma.MaterialRequisitionItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.MaterialRequisitionItemCreateWithoutStockItemInput, Prisma.MaterialRequisitionItemUncheckedCreateWithoutStockItemInput>
+}
+
+export type MaterialRequisitionItemCreateManyStockItemInputEnvelope = {
+  data: Prisma.MaterialRequisitionItemCreateManyStockItemInput | Prisma.MaterialRequisitionItemCreateManyStockItemInput[]
+  skipDuplicates?: boolean
+}
+
+export type MaterialRequisitionItemUpsertWithWhereUniqueWithoutStockItemInput = {
+  where: Prisma.MaterialRequisitionItemWhereUniqueInput
+  update: Prisma.XOR<Prisma.MaterialRequisitionItemUpdateWithoutStockItemInput, Prisma.MaterialRequisitionItemUncheckedUpdateWithoutStockItemInput>
+  create: Prisma.XOR<Prisma.MaterialRequisitionItemCreateWithoutStockItemInput, Prisma.MaterialRequisitionItemUncheckedCreateWithoutStockItemInput>
+}
+
+export type MaterialRequisitionItemUpdateWithWhereUniqueWithoutStockItemInput = {
+  where: Prisma.MaterialRequisitionItemWhereUniqueInput
+  data: Prisma.XOR<Prisma.MaterialRequisitionItemUpdateWithoutStockItemInput, Prisma.MaterialRequisitionItemUncheckedUpdateWithoutStockItemInput>
+}
+
+export type MaterialRequisitionItemUpdateManyWithWhereWithoutStockItemInput = {
+  where: Prisma.MaterialRequisitionItemScalarWhereInput
+  data: Prisma.XOR<Prisma.MaterialRequisitionItemUpdateManyMutationInput, Prisma.MaterialRequisitionItemUncheckedUpdateManyWithoutStockItemInput>
+}
+
+export type MaterialRequisitionItemScalarWhereInput = {
+  AND?: Prisma.MaterialRequisitionItemScalarWhereInput | Prisma.MaterialRequisitionItemScalarWhereInput[]
+  OR?: Prisma.MaterialRequisitionItemScalarWhereInput[]
+  NOT?: Prisma.MaterialRequisitionItemScalarWhereInput | Prisma.MaterialRequisitionItemScalarWhereInput[]
+  id?: Prisma.StringFilter<"MaterialRequisitionItem"> | string
+  requisitionId?: Prisma.StringFilter<"MaterialRequisitionItem"> | string
+  quotationLineItemId?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
+  stockItemId?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
+  workCategory?: Prisma.EnumRequisitionWorkCategoryFilter<"MaterialRequisitionItem"> | $Enums.RequisitionWorkCategory
+  materialName?: Prisma.StringFilter<"MaterialRequisitionItem"> | string
+  specifications?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
+  variantAttributes?: Prisma.JsonNullableFilter<"MaterialRequisitionItem">
+  netQuantity?: Prisma.FloatFilter<"MaterialRequisitionItem"> | number
+  wastagePercent?: Prisma.FloatFilter<"MaterialRequisitionItem"> | number
+  finalQuantity?: Prisma.FloatFilter<"MaterialRequisitionItem"> | number
+  unit?: Prisma.StringFilter<"MaterialRequisitionItem"> | string
+  productionPhase?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
+  remarks?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
+}
+
+export type MaterialRequisitionItemCreateWithoutRequisitionInput = {
+  id?: string
+  quotationLineItemId?: string | null
+  workCategory?: $Enums.RequisitionWorkCategory
+  materialName: string
+  specifications?: string | null
+  variantAttributes?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  netQuantity?: number
+  wastagePercent?: number
+  finalQuantity?: number
+  unit?: string
+  productionPhase?: string | null
+  remarks?: string | null
+  stockItem?: Prisma.StockItemCreateNestedOneWithoutRequisitionItemsInput
 }
 
 export type MaterialRequisitionItemUncheckedCreateWithoutRequisitionInput = {
@@ -669,24 +791,68 @@ export type MaterialRequisitionItemUpdateManyWithWhereWithoutRequisitionInput = 
   data: Prisma.XOR<Prisma.MaterialRequisitionItemUpdateManyMutationInput, Prisma.MaterialRequisitionItemUncheckedUpdateManyWithoutRequisitionInput>
 }
 
-export type MaterialRequisitionItemScalarWhereInput = {
-  AND?: Prisma.MaterialRequisitionItemScalarWhereInput | Prisma.MaterialRequisitionItemScalarWhereInput[]
-  OR?: Prisma.MaterialRequisitionItemScalarWhereInput[]
-  NOT?: Prisma.MaterialRequisitionItemScalarWhereInput | Prisma.MaterialRequisitionItemScalarWhereInput[]
-  id?: Prisma.StringFilter<"MaterialRequisitionItem"> | string
-  requisitionId?: Prisma.StringFilter<"MaterialRequisitionItem"> | string
-  quotationLineItemId?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
-  stockItemId?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
-  workCategory?: Prisma.EnumRequisitionWorkCategoryFilter<"MaterialRequisitionItem"> | $Enums.RequisitionWorkCategory
-  materialName?: Prisma.StringFilter<"MaterialRequisitionItem"> | string
-  specifications?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
-  variantAttributes?: Prisma.JsonNullableFilter<"MaterialRequisitionItem">
-  netQuantity?: Prisma.FloatFilter<"MaterialRequisitionItem"> | number
-  wastagePercent?: Prisma.FloatFilter<"MaterialRequisitionItem"> | number
-  finalQuantity?: Prisma.FloatFilter<"MaterialRequisitionItem"> | number
-  unit?: Prisma.StringFilter<"MaterialRequisitionItem"> | string
-  productionPhase?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
-  remarks?: Prisma.StringNullableFilter<"MaterialRequisitionItem"> | string | null
+export type MaterialRequisitionItemCreateManyStockItemInput = {
+  id?: string
+  requisitionId: string
+  quotationLineItemId?: string | null
+  workCategory?: $Enums.RequisitionWorkCategory
+  materialName: string
+  specifications?: string | null
+  variantAttributes?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  netQuantity?: number
+  wastagePercent?: number
+  finalQuantity?: number
+  unit?: string
+  productionPhase?: string | null
+  remarks?: string | null
+}
+
+export type MaterialRequisitionItemUpdateWithoutStockItemInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  quotationLineItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workCategory?: Prisma.EnumRequisitionWorkCategoryFieldUpdateOperationsInput | $Enums.RequisitionWorkCategory
+  materialName?: Prisma.StringFieldUpdateOperationsInput | string
+  specifications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variantAttributes?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  netQuantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  wastagePercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  finalQuantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  productionPhase?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requisition?: Prisma.MaterialRequisitionUpdateOneRequiredWithoutItemsNestedInput
+}
+
+export type MaterialRequisitionItemUncheckedUpdateWithoutStockItemInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  requisitionId?: Prisma.StringFieldUpdateOperationsInput | string
+  quotationLineItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workCategory?: Prisma.EnumRequisitionWorkCategoryFieldUpdateOperationsInput | $Enums.RequisitionWorkCategory
+  materialName?: Prisma.StringFieldUpdateOperationsInput | string
+  specifications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variantAttributes?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  netQuantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  wastagePercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  finalQuantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  productionPhase?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type MaterialRequisitionItemUncheckedUpdateManyWithoutStockItemInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  requisitionId?: Prisma.StringFieldUpdateOperationsInput | string
+  quotationLineItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workCategory?: Prisma.EnumRequisitionWorkCategoryFieldUpdateOperationsInput | $Enums.RequisitionWorkCategory
+  materialName?: Prisma.StringFieldUpdateOperationsInput | string
+  specifications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variantAttributes?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  netQuantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  wastagePercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  finalQuantity?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  productionPhase?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MaterialRequisitionItemCreateManyRequisitionInput = {
@@ -708,7 +874,6 @@ export type MaterialRequisitionItemCreateManyRequisitionInput = {
 export type MaterialRequisitionItemUpdateWithoutRequisitionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quotationLineItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stockItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workCategory?: Prisma.EnumRequisitionWorkCategoryFieldUpdateOperationsInput | $Enums.RequisitionWorkCategory
   materialName?: Prisma.StringFieldUpdateOperationsInput | string
   specifications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -719,6 +884,7 @@ export type MaterialRequisitionItemUpdateWithoutRequisitionInput = {
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   productionPhase?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stockItem?: Prisma.StockItemUpdateOneWithoutRequisitionItemsNestedInput
 }
 
 export type MaterialRequisitionItemUncheckedUpdateWithoutRequisitionInput = {
@@ -771,6 +937,7 @@ export type MaterialRequisitionItemSelect<ExtArgs extends runtime.Types.Extensio
   productionPhase?: boolean
   remarks?: boolean
   requisition?: boolean | Prisma.MaterialRequisitionDefaultArgs<ExtArgs>
+  stockItem?: boolean | Prisma.MaterialRequisitionItem$stockItemArgs<ExtArgs>
 }, ExtArgs["result"]["materialRequisitionItem"]>
 
 export type MaterialRequisitionItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -789,6 +956,7 @@ export type MaterialRequisitionItemSelectCreateManyAndReturn<ExtArgs extends run
   productionPhase?: boolean
   remarks?: boolean
   requisition?: boolean | Prisma.MaterialRequisitionDefaultArgs<ExtArgs>
+  stockItem?: boolean | Prisma.MaterialRequisitionItem$stockItemArgs<ExtArgs>
 }, ExtArgs["result"]["materialRequisitionItem"]>
 
 export type MaterialRequisitionItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -807,6 +975,7 @@ export type MaterialRequisitionItemSelectUpdateManyAndReturn<ExtArgs extends run
   productionPhase?: boolean
   remarks?: boolean
   requisition?: boolean | Prisma.MaterialRequisitionDefaultArgs<ExtArgs>
+  stockItem?: boolean | Prisma.MaterialRequisitionItem$stockItemArgs<ExtArgs>
 }, ExtArgs["result"]["materialRequisitionItem"]>
 
 export type MaterialRequisitionItemSelectScalar = {
@@ -829,18 +998,22 @@ export type MaterialRequisitionItemSelectScalar = {
 export type MaterialRequisitionItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "requisitionId" | "quotationLineItemId" | "stockItemId" | "workCategory" | "materialName" | "specifications" | "variantAttributes" | "netQuantity" | "wastagePercent" | "finalQuantity" | "unit" | "productionPhase" | "remarks", ExtArgs["result"]["materialRequisitionItem"]>
 export type MaterialRequisitionItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requisition?: boolean | Prisma.MaterialRequisitionDefaultArgs<ExtArgs>
+  stockItem?: boolean | Prisma.MaterialRequisitionItem$stockItemArgs<ExtArgs>
 }
 export type MaterialRequisitionItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requisition?: boolean | Prisma.MaterialRequisitionDefaultArgs<ExtArgs>
+  stockItem?: boolean | Prisma.MaterialRequisitionItem$stockItemArgs<ExtArgs>
 }
 export type MaterialRequisitionItemIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requisition?: boolean | Prisma.MaterialRequisitionDefaultArgs<ExtArgs>
+  stockItem?: boolean | Prisma.MaterialRequisitionItem$stockItemArgs<ExtArgs>
 }
 
 export type $MaterialRequisitionItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MaterialRequisitionItem"
   objects: {
     requisition: Prisma.$MaterialRequisitionPayload<ExtArgs>
+    stockItem: Prisma.$StockItemPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1252,6 +1425,7 @@ readonly fields: MaterialRequisitionItemFieldRefs;
 export interface Prisma__MaterialRequisitionItemClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   requisition<T extends Prisma.MaterialRequisitionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MaterialRequisitionDefaultArgs<ExtArgs>>): Prisma.Prisma__MaterialRequisitionClient<runtime.Types.Result.GetResult<Prisma.$MaterialRequisitionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  stockItem<T extends Prisma.MaterialRequisitionItem$stockItemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MaterialRequisitionItem$stockItemArgs<ExtArgs>>): Prisma.Prisma__StockItemClient<runtime.Types.Result.GetResult<Prisma.$StockItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1688,6 +1862,25 @@ export type MaterialRequisitionItemDeleteManyArgs<ExtArgs extends runtime.Types.
    * Limit how many MaterialRequisitionItems to delete.
    */
   limit?: number
+}
+
+/**
+ * MaterialRequisitionItem.stockItem
+ */
+export type MaterialRequisitionItem$stockItemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockItem
+   */
+  select?: Prisma.StockItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockItem
+   */
+  omit?: Prisma.StockItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockItemInclude<ExtArgs> | null
+  where?: Prisma.StockItemWhereInput
 }
 
 /**

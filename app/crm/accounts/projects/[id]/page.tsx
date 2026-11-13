@@ -1,13 +1,21 @@
-﻿'use client'
+'use client'
 
-import { useEffect, useState, useMemo } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { ArrowLeft, FileDown, Loader2, MapPin, Phone, X } from 'lucide-react'
+import { ArrowLeft, Download, ExternalLink, Eye, FileDown, FileText, History, Loader2, MapPin, Minus, Phone, Plus, Send, ShieldCheck, Sparkles, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import { DateRangePicker, type DateRange } from '@/components/ui/date-range-picker'
+import { toast } from '@/components/ui/sonner'
+import { buildDetailPreviewUrl } from '@/lib/detail-quotation-preview-sync'
+import { buildShortPreviewUrl } from '@/lib/short-quotation-preview-sync'
+import ProjectVendorsTab from '@/components/vendors/project-vendors-tab'
+import ProjectVirtualInventoryTab from '@/components/crm/projects/project-virtual-inventory-tab'
+import { downloadMoneyReceiptPDF } from '@/lib/money-receipt-pdf'
 
 const CATEGORY_LABELS: Record<string, string> = {
   CLIENT_DEPOSIT: 'Client Deposit',
@@ -61,20 +69,57 @@ function formatCategory(cat: string) {
   return CATEGORY_LABELS[cat] || cat
 }
 
+function getDraftSlotIndex(draftKey?: string | null): number {
+  if (!draftKey) return 1
+  const pcMatch = draftKey.match(/^pc:slot:(\d+)$/)
+  if (pcMatch) return parseInt(pcMatch[1], 10)
+  const detailMatch = draftKey.match(/^detail:slot:(\d+)$/)
+  if (detailMatch) return parseInt(detailMatch[1], 10)
+  return 1
+}
+
 export default function ProjectDetailPage() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
 
   const [report, setReport] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const [releaseActionLoading, setReleaseActionLoading] = useState(false)
   const [modalFilter, setModalFilter] = useState<{ type: 'CATEGORY' | 'INFLOW' | 'OUTFLOW', value?: string } | null>(null)
+
+  // Agreement Value Adjustment state
+  const [agreementHistoryModalOpen, setAgreementHistoryModalOpen] = useState(false)
+  const [adjustModalOpen, setAdjustModalOpen] = useState(false)
+  const [adjustType, setAdjustType] = useState<'ADD' | 'DECREASE'>('ADD')
+  const [adjustAmount, setAdjustAmount] = useState('')
+  const [adjustNote, setAdjustNote] = useState('')
+  const [adjustSubmitting, setAdjustSubmitting] = useState(false)
+  const [syncDraftId, setSyncDraftId] = useState<string | null>(null)
+  const [syncVersionTitle, setSyncVersionTitle] = useState<string | null>(null)
+  const [syncTargetValue, setSyncTargetValue] = useState<number | null>(null)
 
   // Date range filter state
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined)
 
-  useEffect(() => {
+  const handleDownloadReceipt = (tx: any) => {
+    void downloadMoneyReceiptPDF({
+      receiptNo: tx.voucherNo ? `MR-${tx.voucherNo}` : `MR-${tx.serialNo || tx.id.slice(-6).toUpperCase()}`,
+      voucherNo: tx.voucherNo,
+      serialNo: tx.serialNo,
+      date: tx.date,
+      payerName: report?.lead?.name || tx.particular,
+      payerPhone: report?.lead?.phone || null,
+      payerAddress: report?.lead?.location || null,
+      paymentMethod: tx.category === 'SITE_VISIT_PAYMENT' ? 'CASH' : 'BANK_TRANSFER',
+      referenceNo: tx.voucherNo || (tx.serialNo ? `VCH-${tx.serialNo}` : undefined),
+      purpose: formatCategory(tx.category) || tx.particular,
+      amount: tx.amount,
+    })
+  }
+
+  const loadProjectReport = useCallback(async (showLoading = true) => {
     if (!id) return
-    setLoading(true)
+    if (showLoading) setLoading(true)
 
     let url = `/api/finance/reports?mode=project&leadId=${id}`
     if (dateRange?.from) {
@@ -86,14 +131,25 @@ export default function ProjectDetailPage() {
       url += `&endDate=${toStr}`
     }
 
-    fetch(url)
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.success) setReport(data)
-      })
-      .catch(console.error)
-      .finally(() => setLoading(false))
-  }, [id, dateRange])
+    try {
+      const response = await fetch(url, { cache: 'no-store' })
+      const data = await response.json()
+      if (data.success) {
+        setReport(data)
+      } else {
+        toast.error(data.error || 'Failed to load project data')
+      }
+    } catch (error) {
+      console.error(error)
+      toast.error('Failed to load project data')
+    } finally {
+      if (showLoading) setLoading(false)
+    }
+  }, [dateRange, id])
+
+  useEffect(() => {
+    void loadProjectReport()
+  }, [loadProjectReport])
 
   // All financial values and filtered transactions are pre-calculated by backend API
   const isDateFiltered = Boolean(report?.isFiltered || dateRange?.from || dateRange?.to)
@@ -110,6 +166,176 @@ export default function ProjectDetailPage() {
 
   const project = report?.project ?? null
   const netResult = displayTotalPaid - displayTotalExpense
+  const visualizerRelease = report?.visualizerRelease ?? null
+
+  const initialAgreementValue = report?.initialAgreementValue ?? agreementValue
+  const agreementLogs = report?.agreementLogs ?? []
+  const agreementAdjustmentTotal = report?.agreementAdjustmentTotal ?? 0
+  const latestSyncedLog = agreementLogs.find((l: any) => l.quotationDraftId || l.versionTitle)
+
+  const handleSaveAgreementAdjustment = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!id) return
+    const numAmount = parseFloat(adjustAmount.replace(/,/g, ''))
+    if (isNaN(numAmount) || numAmount <= 0) {
+      toast.error('Please enter a valid amount')
+      return
+    }
+
+    const finalDelta = adjustType === 'ADD' ? numAmount : -numAmount
+    setAdjustSubmitting(true)
+
+    try {
+      const res = await fetch(`/api/accounts/projects/${id}/agreement-log`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          targetAgreementValue: syncTargetValue ?? undefined,
+          amount: finalDelta,
+          note: adjustNote,
+          quotationDraftId: syncDraftId || undefined,
+          versionTitle: syncVersionTitle || undefined,
+        }),
+      })
+
+      const data = await res.json()
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Failed to update agreement value')
+      }
+
+      toast.success(adjustType === 'ADD' ? 'Work added to agreement value' : 'Work removed from agreement value')
+      setAdjustModalOpen(false)
+      setAdjustAmount('')
+      setAdjustNote('')
+      setSyncDraftId(null)
+      setSyncVersionTitle(null)
+      setSyncTargetValue(null)
+      await loadProjectReport(false)
+    } catch (err: any) {
+      toast.error(err.message || 'Failed to update agreement value')
+    } finally {
+      setAdjustSubmitting(false)
+    }
+  }
+
+  const handleDownloadAgreementHistoryPDF = async () => {
+    const { default: jsPDF } = await import('jspdf')
+    const { default: autoTable } = await import('jspdf-autotable')
+    const doc = new jsPDF({ orientation: 'portrait' })
+    const pageW = doc.internal.pageSize.getWidth()
+    const clientName = project?.name || 'Client Project'
+    const dateStr = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+
+    const logoImg = new Image()
+    logoImg.src = "/Logo/HeaderLogo.png"
+    await new Promise((resolve) => {
+      logoImg.onload = resolve
+      logoImg.onerror = resolve
+    })
+
+    // Header Logo
+    doc.addImage(logoImg, "PNG", 14, 14, 43.2, 8)
+
+    doc.setFontSize(12)
+    doc.setFont('helvetica', 'bold')
+    doc.setTextColor(30, 41, 59)
+    doc.text('AGREEMENT VALUE LOG', pageW - 14, 18, { align: 'right' })
+
+    doc.setFontSize(8)
+    doc.setFont('helvetica', 'normal')
+    doc.setTextColor(100, 116, 139)
+    doc.text(`Project: ${clientName}`, 14, 30)
+    let detailsY = 35
+    if (project?.location) {
+      doc.text(`Location: ${project.location}`, 14, detailsY)
+      detailsY += 5
+    }
+    doc.text(`Generated On: ${dateStr}`, 14, detailsY)
+    detailsY += 7
+
+    // Summary Box
+    doc.setFontSize(9)
+    doc.setFont('helvetica', 'bold')
+    doc.setTextColor(30, 41, 59)
+    doc.text(`Original Agreement Value: ${(initialAgreementValue ?? 0).toLocaleString()} BDT`, 14, detailsY)
+    detailsY += 5
+    doc.text(`Total Adjustments: ${(agreementAdjustmentTotal > 0 ? '+' : '')}${(agreementAdjustmentTotal ?? 0).toLocaleString()} BDT`, 14, detailsY)
+    detailsY += 5
+    doc.text(`Current Agreement Value: ${(agreementValue ?? 0).toLocaleString()} BDT`, 14, detailsY)
+    detailsY += 7
+
+    // Build log rows with running total (oldest to newest calculation)
+    const sortedAsc = [...agreementLogs].sort((a: any, b: any) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+    let currentRunning = initialAgreementValue ?? 0
+
+    const tableRows = sortedAsc.map((log: any) => {
+      const isAdd = log.amount > 0
+      currentRunning += log.amount
+      return [
+        { content: new Date(log.createdAt).toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) },
+        { content: isAdd ? 'Add Work (+)' : 'Remove Work (-)', styles: { textColor: isAdd ? [5, 150, 105] : [220, 38, 38], fontStyle: 'bold' } },
+        { content: `${isAdd ? '+' : ''}${log.amount.toLocaleString()} BDT`, styles: { halign: 'right', textColor: isAdd ? [5, 150, 105] : [220, 38, 38], fontStyle: 'bold' } },
+        { content: `${currentRunning.toLocaleString()} BDT`, styles: { halign: 'right', fontStyle: 'bold' } },
+        { content: log.note || '—' },
+        { content: log.createdBy?.fullName || 'System' },
+      ]
+    })
+
+    autoTable(doc, {
+      startY: detailsY,
+      head: [['Date & Time', 'Type', 'Amount', 'New Balance', 'Particulars / Note', 'Logged By']],
+      body: tableRows as any[],
+      theme: 'grid',
+      headStyles: { fillColor: [15, 23, 42], textColor: [255, 255, 255], fontStyle: 'bold' },
+      styles: { fontSize: 8, cellPadding: 3 },
+    })
+
+    doc.save(`${clientName.replace(/\s+/g, '_')}_Agreement_Value_Log.pdf`)
+  }
+
+  const requestVisualizerRelease = async () => {
+    if (!id) return
+    setReleaseActionLoading(true)
+    try {
+      const response = await fetch(`/api/accounts/projects/${id}/visualizer-release-request`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reason: 'Accounts requested release before first transaction.' }),
+      })
+      const data = await response.json()
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Failed to request admin approval')
+      }
+      toast.success(data.message || 'Admin approval requested')
+      await loadProjectReport(false)
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Failed to request admin approval')
+    } finally {
+      setReleaseActionLoading(false)
+    }
+  }
+
+  const releaseVisualizerNow = async () => {
+    if (!id) return
+    setReleaseActionLoading(true)
+    try {
+      const response = await fetch(`/api/accounts/projects/${id}/release-visualizer`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reason: 'Admin released before first transaction.' }),
+      })
+      const data = await response.json()
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Failed to release 3D Visualizer')
+      }
+      toast.success(data.message || '3D Visualizer released')
+      await loadProjectReport(false)
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Failed to release 3D Visualizer')
+    } finally {
+      setReleaseActionLoading(false)
+    }
+  }
 
   const setPresetRange = (preset: 'ALL' | 'TODAY' | 'THIS_MONTH' | 'LAST_7_DAYS' | 'LAST_30_DAYS') => {
     const today = new Date()
@@ -183,7 +409,7 @@ export default function ProjectDetailPage() {
     if (modalFilter.type === 'OUTFLOW') filterTitle = 'Outflow Transactions'
 
     const logoImg = new Image()
-    logoImg.src = "/Logo/interior-concept-logobg-removed.png"
+    logoImg.src = "/Logo/HeaderLogo.png"
     await new Promise((resolve) => {
       logoImg.onload = resolve
       logoImg.onerror = resolve
@@ -211,8 +437,25 @@ export default function ProjectDetailPage() {
     doc.setFont('helvetica', 'normal')
     doc.setTextColor(71, 85, 105)
     let detailsY = 41
+    if (project?.location) {
+      doc.text(`Location: ${project.location}`, 14, detailsY)
+      detailsY += 5
+    }
+    if (project?.phone) {
+      doc.text(`Phone: ${project.phone}`, 14, detailsY)
+      detailsY += 5
+    }
     doc.text(`Filter: ${filterTitle}`, 14, detailsY)
-    
+    detailsY += 5
+
+    // Agreement Value / Budget at top in bold
+    doc.setFontSize(10)
+    doc.setFont('helvetica', 'bold')
+    doc.setTextColor(30, 41, 59)
+    const formattedAgreement = agreementValue !== null ? `${agreementValue.toLocaleString()} BDT` : 'Not Defined'
+    doc.text(`Agreement Value / Budget: ${formattedAgreement}`, 14, detailsY)
+    detailsY += 6
+
     doc.setDrawColor(226, 232, 240)
     doc.setLineWidth(0.5)
     doc.line(14, detailsY + 2, pageW - 14, detailsY + 2)
@@ -221,9 +464,11 @@ export default function ProjectDetailPage() {
 
     const bodyRows = filteredTransactions.map((tx: any) => {
       const isInflow = tx.type === 'INFLOW'
+      const accountName = tx.financeAccount?.name || '—'
       return [
         { content: new Date(tx.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) },
         { content: formatCategory(tx.category) },
+        { content: accountName },
         {
           content: isInflow ? tx.amount.toLocaleString() : '—',
           styles: { textColor: isInflow ? [5, 150, 105] : [100, 100, 100], fontStyle: isInflow ? 'bold' : 'normal', halign: 'right' },
@@ -235,22 +480,38 @@ export default function ProjectDetailPage() {
       ]
     })
 
+    const modalInflowPercent = agreementValue && agreementValue > 0 ? ((modalTotalInflow / agreementValue) * 100).toFixed(1) : null
+
     autoTable(doc, {
       startY: afterCatY + 10,
-      head: [['Date', 'Category', 'Inflow', 'Outflow']],
+      head: [['Date', 'Category', 'Account', 'Inflow', 'Outflow']],
       body: bodyRows as any[],
       theme: 'grid',
       foot: [
         [
-          { content: 'Total Inflow', colSpan: 2, styles: { halign: 'right', fontStyle: 'bold', textColor: [0, 0, 0] } },
-          { content: modalTotalInflow.toLocaleString(), styles: { halign: 'right', textColor: [0, 0, 0], fontStyle: 'bold' } },
-          { content: '—', styles: { halign: 'right', textColor: [0, 0, 0] } },
+          { content: 'Total Inflow (Period)', colSpan: 3, styles: { halign: 'right', fontStyle: 'bold', textColor: [30, 41, 59] } },
+          {
+            content: `${modalTotalInflow.toLocaleString()} BDT${modalInflowPercent ? ` (${modalInflowPercent}% of Agreement)` : ''}`,
+            colSpan: 2,
+            styles: { halign: 'right', fontStyle: 'bold', textColor: [5, 150, 105] }
+          },
         ],
         [
-          { content: 'Total Outflow', colSpan: 2, styles: { halign: 'right', fontStyle: 'bold', textColor: [0, 0, 0] } },
-          { content: '—', styles: { halign: 'right', textColor: [0, 0, 0] } },
-          { content: modalTotalOutflow.toLocaleString(), styles: { halign: 'right', textColor: [0, 0, 0], fontStyle: 'bold' } },
-        ]
+          { content: 'Total Outflow (Period)', colSpan: 3, styles: { halign: 'right', fontStyle: 'bold', textColor: [30, 41, 59] } },
+          {
+            content: `${modalTotalOutflow.toLocaleString()} BDT`,
+            colSpan: 2,
+            styles: { halign: 'right', fontStyle: 'bold', textColor: [220, 38, 38] }
+          },
+        ],
+        [
+          { content: 'Payment Due', colSpan: 3, styles: { halign: 'right', fontStyle: 'bold', textColor: [30, 41, 59] } },
+          {
+            content: displayDue !== null ? `${displayDue.toLocaleString()} BDT` : 'N/A',
+            colSpan: 2,
+            styles: { halign: 'right', fontStyle: 'bold', textColor: [220, 38, 38] }
+          },
+        ],
       ],
       headStyles: { 
         fillColor: [255, 255, 255], 
@@ -268,17 +529,18 @@ export default function ProjectDetailPage() {
         lineWidth: 0.1,
       },
       footStyles: { 
-        fillColor: [255, 255, 255],
+        fillColor: [248, 250, 252],
         textColor: [0, 0, 0],
-        fontSize: 9,
+        fontSize: 8.5,
         lineColor: [200, 200, 200],
         lineWidth: 0.1,
       },
       columnStyles: {
-        0: { cellWidth: 35 },
-        1: { cellWidth: 'auto' },
-        2: { cellWidth: 30, halign: 'right' },
+        0: { cellWidth: 28 },
+        1: { cellWidth: 35 },
+        2: { cellWidth: 'auto' },
         3: { cellWidth: 30, halign: 'right' },
+        4: { cellWidth: 30, halign: 'right' },
       },
       didParseCell: (data: any) => {
         if (data.section === 'body' && data.column.index === 1) {
@@ -323,7 +585,7 @@ export default function ProjectDetailPage() {
     const fmtD = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
     const logoImg = new Image()
-    logoImg.src = "/Logo/interior-concept-logobg-removed.png"
+    logoImg.src = "/Logo/HeaderLogo.png"
     await new Promise((resolve) => {
       logoImg.onload = resolve
       logoImg.onerror = resolve
@@ -810,13 +1072,108 @@ export default function ProjectDetailPage() {
           <div className="text-center py-12 text-muted-foreground">Failed to load project data.</div>
         ) : (
           <>
+            {visualizerRelease?.pending ? (
+              <Card className="border-amber-300 bg-amber-50/60 dark:border-amber-800 dark:bg-amber-950/30">
+                <CardContent className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="font-semibold text-amber-900 dark:text-amber-100">
+                      Pending first transaction before 3D Visualizer release
+                    </p>
+                    <p className="mt-1 text-sm text-amber-800/80 dark:text-amber-100/80">
+                      Selected visualizer: {visualizerRelease.visualizer?.fullName ?? 'Not selected yet'}. This project stays in Accounts until the first inflow is recorded.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {visualizerRelease.canRequestAdminApproval ? (
+                      <Button
+                        variant="outline"
+                        className="gap-2 border-amber-400 bg-background"
+                        disabled={releaseActionLoading}
+                        onClick={() => void requestVisualizerRelease()}
+                      >
+                        {releaseActionLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                        Ask Admin
+                      </Button>
+                    ) : null}
+                    {visualizerRelease.canAdminRelease ? (
+                      <Button
+                        className="gap-2"
+                        disabled={releaseActionLoading}
+                        onClick={() => void releaseVisualizerNow()}
+                      >
+                        {releaseActionLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldCheck className="h-4 w-4" />}
+                        Release 3D Visualizer
+                      </Button>
+                    ) : null}
+                  </div>
+                </CardContent>
+              </Card>
+            ) : null}
+
             {/* Summary Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            <Card>
+            <Card 
+              className="relative overflow-hidden cursor-pointer hover:border-primary/50 transition-colors"
+              onClick={() => setAgreementHistoryModalOpen(true)}
+            >
               <CardContent className="pt-6">
-                <div className="text-xs text-muted-foreground mb-1">Agreement Value / Budget</div>
+                <div className="flex items-center justify-between mb-1">
+                  <div className="text-xs text-muted-foreground">Agreement Value / Budget</div>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="h-6 px-1.5 text-[11px] text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/50"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setAgreementHistoryModalOpen(true)
+                    }}
+                  >
+                    <History className="h-3 w-3 mr-1" />
+                    History
+                  </Button>
+                </div>
                 <div className="text-xl font-bold">
                   {agreementValue !== null ? `${agreementValue.toLocaleString()} BDT` : 'Not Defined'}
+                </div>
+                {agreementValue !== null && (
+                  <div className="mt-2 text-[11px] text-muted-foreground flex flex-wrap items-center justify-between gap-1 border-t pt-1.5 border-border/60">
+                    <span>Original: <strong className="font-semibold text-foreground">{initialAgreementValue ? `${initialAgreementValue.toLocaleString()} BDT` : 'N/A'}</strong></span>
+                    {agreementAdjustmentTotal !== 0 && (
+                      <Badge variant="outline" className={`text-[10px] px-1.5 py-0 ${agreementAdjustmentTotal > 0 ? 'text-emerald-600 border-emerald-300 bg-emerald-50 dark:bg-emerald-950/30' : 'text-rose-600 border-rose-300 bg-rose-50 dark:bg-rose-950/30'}`}>
+                        {agreementAdjustmentTotal > 0 ? `+${agreementAdjustmentTotal.toLocaleString()}` : `${agreementAdjustmentTotal.toLocaleString()}`} BDT
+                      </Badge>
+                    )}
+                  </div>
+                )}
+                <div className="mt-3 flex gap-1.5">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="flex-1 h-7 text-xs gap-1 border-emerald-300 hover:bg-emerald-50 text-emerald-700 dark:hover:bg-emerald-950/30"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setAdjustType('ADD')
+                      setAdjustAmount('')
+                      setAdjustNote('')
+                      setAdjustModalOpen(true)
+                    }}
+                  >
+                    <Plus className="h-3 w-3" /> Add Work
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="flex-1 h-7 text-xs gap-1 border-rose-300 hover:bg-rose-50 text-rose-700 dark:hover:bg-rose-950/30"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setAdjustType('DECREASE')
+                      setAdjustAmount('')
+                      setAdjustNote('')
+                      setAdjustModalOpen(true)
+                    }}
+                  >
+                    <Minus className="h-3 w-3" /> Remove Work
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -858,6 +1215,224 @@ export default function ProjectDetailPage() {
               </CardContent>
             </Card>
           </div>
+
+          {/* Saved Quotation Software Documents & PC Versions */}
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-base flex items-center gap-2">
+                    <FileText className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                    PC Quotation Versions & Agreement Values
+                  </CardTitle>
+                  <CardDescription>
+                    Access, preview, and download all quotation versions created for this project, and sync revised agreement values.
+                  </CardDescription>
+                </div>
+                {report?.project?.quotationType && (
+                  <Badge variant="outline" className="text-xs uppercase">
+                    {report.project.quotationType}
+                  </Badge>
+                )}
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {(() => {
+                const drafts = report?.quotationDrafts || report?.project?.quotationDrafts || []
+                if (drafts.length === 0) {
+                  return (
+                    <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border/80 bg-muted/20 p-3">
+                      <p className="text-xs text-muted-foreground">
+                        Generate or download quotation software PDF preview for this project:
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        <a
+                          href={buildDetailPreviewUrl({ context: 'lead', contextId: String(id), download: true })}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button size="sm" variant="default" className="gap-2 text-xs">
+                            <Download className="h-3.5 w-3.5" />
+                            Download Detail Quotation PDF
+                          </Button>
+                        </a>
+                        <a
+                          href={buildShortPreviewUrl({ context: 'lead', contextId: String(id), download: true })}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button size="sm" variant="outline" className="gap-2 text-xs">
+                            <Download className="h-3.5 w-3.5" />
+                            Download Short Quotation PDF
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
+                  )
+                }
+
+                const baselineDraft = drafts.find((d: any) => getDraftSlotIndex(d.draftKey) === 1) || drafts[drafts.length - 1]
+                const baselineTotal = baselineDraft?.grandTotal || initialAgreementValue || 0
+
+                return (
+                  <div className="space-y-2.5">
+                    {drafts.map((draft: any, idx: number) => {
+                      const slotIndex = getDraftSlotIndex(draft.draftKey)
+                      const contentObj = (draft.content as Record<string, unknown>) ?? {}
+                      const vTitle = typeof contentObj.versionTitle === 'string' && contentObj.versionTitle
+                        ? contentObj.versionTitle
+                        : `Version ${slotIndex}`
+                      const isLatest = idx === 0
+                      const delta = draft.grandTotal - baselineTotal
+
+                      const isCurrentSynced = latestSyncedLog
+                        ? (latestSyncedLog.quotationDraftId === draft.id || latestSyncedLog.versionTitle === vTitle)
+                        : (draft.grandTotal === (agreementValue ?? 0))
+
+                      const previewUrl = buildDetailPreviewUrl({ context: 'lead', contextId: String(id), slotIndex, download: false })
+                      const downloadUrl = buildDetailPreviewUrl({ context: 'lead', contextId: String(id), slotIndex, download: true })
+
+                      return (
+                        <div
+                          key={draft.id}
+                          className={`p-3 rounded-lg border text-xs transition-colors ${
+                            isLatest
+                              ? 'border-blue-400/60 bg-blue-50/40 dark:bg-blue-950/20'
+                              : 'border-border bg-card hover:bg-muted/30'
+                          }`}
+                        >
+                          <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                            <div className="flex items-center gap-2">
+                              <Badge variant={isLatest ? 'default' : 'outline'} className="text-xs font-bold">
+                                {vTitle}
+                              </Badge>
+                              {isLatest && (
+                                <Badge variant="secondary" className="text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
+                                  ★ Latest Version
+                                </Badge>
+                              )}
+                              <span className="font-bold text-sm text-foreground">
+                                ৳{draft.grandTotal.toLocaleString()} BDT
+                              </span>
+                              {delta !== 0 ? (
+                                <span className={`text-xs font-semibold ${delta > 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
+                                  ({delta > 0 ? `+৳${delta.toLocaleString()}` : `-৳${Math.abs(delta).toLocaleString()}`})
+                                </span>
+                              ) : (
+                                <span className="text-xs text-muted-foreground font-medium">(Baseline)</span>
+                              )}
+                            </div>
+                            <div className="text-[11px] text-muted-foreground">
+                              Updated: {new Date(draft.updatedAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                            </div>
+                          </div>
+
+                          <div className="flex flex-wrap items-center justify-between gap-2 border-t pt-2 border-border/50">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <a href={downloadUrl} target="_blank" rel="noopener noreferrer">
+                                <Button size="sm" variant={isLatest ? 'default' : 'outline'} className="h-7 text-xs gap-1.5 px-2.5 font-semibold">
+                                  <Download className="h-3.5 w-3.5" /> Download PDF ({vTitle})
+                                </Button>
+                              </a>
+                              <a href={previewUrl} target="_blank" rel="noopener noreferrer">
+                                <Button size="sm" variant="outline" className="h-7 text-xs gap-1.5 px-2.5">
+                                  <ExternalLink className="h-3.5 w-3.5" /> Preview PDF
+                                </Button>
+                              </a>
+                            </div>
+
+                            <div>
+                              {isCurrentSynced ? (
+                                <Badge variant="secondary" className="text-[10px] bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-300 font-bold px-2 py-0.5">
+                                  ✓ Synced to Agreement
+                                </Badge>
+                              ) : (
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  className="h-7 text-xs px-2.5 font-semibold gap-1 text-primary border-primary/40 hover:bg-primary/10"
+                                  onClick={() => {
+                                    const currentAgr = agreementValue ?? 0
+                                    const diff = draft.grandTotal - currentAgr
+                                    const absDiff = Math.abs(diff)
+                                    setAdjustType(diff >= 0 ? 'ADD' : 'DECREASE')
+                                    setAdjustAmount(absDiff > 0 ? String(absDiff) : String(draft.grandTotal))
+                                    setSyncTargetValue(draft.grandTotal)
+                                    setAdjustNote(`Sync PC ${vTitle}: Agreement Value updated from ৳${currentAgr.toLocaleString()} to ৳${draft.grandTotal.toLocaleString()}`)
+                                    setSyncDraftId(draft.id)
+                                    setSyncVersionTitle(vTitle)
+                                    setAdjustModalOpen(true)
+                                  }}
+                                >
+                                  <Sparkles className="h-3 w-3" /> Sync to Agreement
+                                </Button>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })}
+
+                    <div className="pt-1 flex justify-end">
+                      <a
+                        href={buildShortPreviewUrl({ context: 'lead', contextId: String(id), download: true })}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button size="sm" variant="ghost" className="text-xs text-muted-foreground gap-1.5">
+                          <Download className="h-3.5 w-3.5" /> Download Short Quotation PDF
+                        </Button>
+                      </a>
+                    </div>
+                  </div>
+                )
+              })()}
+
+              {/* File Attachments (Uploaded Quotations) */}
+              {report?.project?.attachments &&
+                report.project.attachments.filter(
+                  (att: any) =>
+                    att.category === 'QUOTATION' ||
+                    att.category === 'quotation-work' ||
+                    att.fileType?.includes('pdf') ||
+                    att.fileName?.toLowerCase().includes('quotation')
+                ).length > 0 && (
+                  <div className="pt-2 border-t border-border/60">
+                    <p className="text-xs font-semibold text-muted-foreground mb-2">Uploaded Quotation Files:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {report.project.attachments
+                        .filter(
+                          (att: any) =>
+                            att.category === 'QUOTATION' ||
+                            att.category === 'quotation-work' ||
+                            att.fileType?.includes('pdf') ||
+                            att.fileName?.toLowerCase().includes('quotation')
+                        )
+                        .map((att: any) => (
+                          <a key={att.id} href={att.url} target="_blank" rel="noopener noreferrer" download>
+                            <Button size="sm" variant="secondary" className="gap-2 text-xs h-8">
+                              <Download className="h-3.5 w-3.5" />
+                              {att.fileName}
+                            </Button>
+                          </a>
+                        ))}
+                    </div>
+                  </div>
+                )}
+            </CardContent>
+          </Card>
+
+          {/* Vendor & Accounts Payable Section */}
+          {id && <ProjectVendorsTab leadId={id} />}
+
+          {/* Virtual Inventory & Site Materials Section */}
+          {id && (
+            <ProjectVirtualInventoryTab
+              leadId={id}
+              leadName={project?.name}
+              onCostUpdated={() => void loadProjectReport(false)}
+            />
+          )}
 
           {/* Category Breakdown */}
           {Object.keys(activeCategoryTotals).length > 0 && (
@@ -911,6 +1486,7 @@ export default function ProjectDetailPage() {
                       <th className="p-3">Account</th>
                       <th className="p-3">Recorder</th>
                       <th className="p-3 text-center">Image</th>
+                      <th className="p-3 text-center">Receipt</th>
                       <th 
                         className="p-3 text-right text-emerald-600 dark:text-emerald-400 cursor-pointer hover:underline"
                         onClick={() => setModalFilter({ type: 'INFLOW' })}
@@ -928,7 +1504,7 @@ export default function ProjectDetailPage() {
                   <tbody className="divide-y divide-border">
                     {filteredTransactionsByDate.length === 0 ? (
                       <tr>
-                        <td colSpan={8} className="p-8 text-center text-muted-foreground">
+                        <td colSpan={9} className="p-8 text-center text-muted-foreground">
                           No transaction logs found for this project in the selected period.
                         </td>
                       </tr>
@@ -954,13 +1530,31 @@ export default function ProjectDetailPage() {
                           <td className="p-3 text-sm max-w-[150px] lg:max-w-[250px] truncate" title={tx.particular}>
                             {tx.particular}
                           </td>
-                          <td className="p-3 text-xs">{tx.financeAccount?.name || 'Unknown'}</td>
+                          <td className="p-3 text-xs font-medium">
+                            {tx.financeAccount?.name || (tx.particular?.includes('Virtual Inventory') ? 'Virtual Inventory' : '—')}
+                          </td>
                           <td className="p-3 text-xs text-muted-foreground whitespace-nowrap">{tx.recordedBy?.fullName || 'Unknown'}</td>
                           <td className="p-3 text-xs text-center">
                             {tx.imageUrl ? (
                               <a href={tx.imageUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center text-blue-500 hover:text-blue-700 transition-colors">
                                 View
                               </a>
+                            ) : (
+                              <span className="text-muted-foreground/50">—</span>
+                            )}
+                          </td>
+                          <td className="p-3 text-xs text-center">
+                            {tx.type === 'INFLOW' ? (
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                className="h-7 text-xs gap-1 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/30"
+                                onClick={() => handleDownloadReceipt(tx)}
+                                title="Download Money Receipt"
+                              >
+                                <FileDown className="w-3.5 h-3.5" />
+                                Receipt
+                              </Button>
                             ) : (
                               <span className="text-muted-foreground/50">—</span>
                             )}
@@ -978,14 +1572,14 @@ export default function ProjectDetailPage() {
                   {filteredTransactionsByDate.length > 0 && (
                     <tfoot className="border-t-2 border-border bg-muted/50">
                       <tr className="cursor-pointer hover:bg-muted/80 transition-colors" onClick={() => setModalFilter({ type: 'INFLOW' })}>
-                        <td colSpan={6} className="p-3 font-bold text-sm text-right">Total Inflow</td>
+                        <td colSpan={7} className="p-3 font-bold text-sm text-right">Total Inflow</td>
                         <td className="p-3 text-right font-bold tabular-nums text-emerald-600 dark:text-emerald-400 text-sm">
                           {activeTotalInflow.toLocaleString()} BDT
                         </td>
                         <td className="p-3 text-right text-muted-foreground">-</td>
                       </tr>
                       <tr className="border-t border-border cursor-pointer hover:bg-muted/80 transition-colors" onClick={() => setModalFilter({ type: 'OUTFLOW' })}>
-                        <td colSpan={6} className="p-3 font-bold text-sm text-right">Total Outflow</td>
+                        <td colSpan={7} className="p-3 font-bold text-sm text-right">Total Outflow</td>
                         <td className="p-3 text-right text-muted-foreground">-</td>
                         <td className="p-3 text-right font-bold tabular-nums text-rose-500 text-sm">
                           {activeTotalOutflow.toLocaleString()} BDT
@@ -993,7 +1587,7 @@ export default function ProjectDetailPage() {
                       </tr>
                       {displayProfit !== null && (
                         <tr className="border-t-2 border-border">
-                          <td colSpan={6} className="p-3 font-bold text-sm text-right">
+                          <td colSpan={7} className="p-3 font-bold text-sm text-right">
                             {displayProfit >= 0 ? 'Total Profit' : 'Total Loss'}
                           </td>
                           <td colSpan={2} className={`p-3 text-right font-bold tabular-nums text-sm ${displayProfit >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
@@ -1106,6 +1700,300 @@ export default function ProjectDetailPage() {
               )}
             </table>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Agreement Value History Modal */}
+      <Dialog open={agreementHistoryModalOpen} onOpenChange={setAgreementHistoryModalOpen}>
+        <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <div className="flex items-center justify-between pr-6">
+              <div>
+                <DialogTitle className="text-lg font-bold">Agreement Value Adjustment History</DialogTitle>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Project: <strong className="text-foreground">{project?.name || 'Client Project'}</strong>
+                </p>
+              </div>
+              <Button
+                size="sm"
+                variant="outline"
+                className="gap-1.5 text-xs"
+                onClick={() => void handleDownloadAgreementHistoryPDF()}
+              >
+                <FileDown className="h-4 w-4" /> Download PDF
+              </Button>
+            </div>
+          </DialogHeader>
+
+          {/* Summary Box */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 bg-muted/40 rounded-lg border border-border my-2 text-center sm:text-left">
+            <div>
+              <div className="text-[11px] text-muted-foreground">Original Value</div>
+              <div className="text-sm font-bold">{initialAgreementValue ? `${initialAgreementValue.toLocaleString()} BDT` : 'N/A'}</div>
+            </div>
+            <div>
+              <div className="text-[11px] text-muted-foreground">Total Adjustments</div>
+              <div className={`text-sm font-bold ${agreementAdjustmentTotal > 0 ? 'text-emerald-600' : agreementAdjustmentTotal < 0 ? 'text-rose-600' : ''}`}>
+                {agreementAdjustmentTotal > 0 ? `+${agreementAdjustmentTotal.toLocaleString()}` : `${agreementAdjustmentTotal.toLocaleString()}`} BDT
+              </div>
+            </div>
+            <div>
+              <div className="text-[11px] text-muted-foreground">Current Agreement Value</div>
+              <div className="text-sm font-bold text-primary">{agreementValue ? `${agreementValue.toLocaleString()} BDT` : 'N/A'}</div>
+            </div>
+          </div>
+
+          {/* PC Quotation Versions Sync Section */}
+          {report?.quotationDrafts && report.quotationDrafts.length > 0 ? (
+            <div className="my-3 p-3 bg-muted/20 rounded-lg border border-border">
+              <div className="text-xs font-bold flex items-center justify-between mb-2">
+                <span>PC Quotation Versions & Scope Changes</span>
+                <span className="text-[11px] font-normal text-muted-foreground">Sync revisions & download PDFs</span>
+              </div>
+              <div className="space-y-2">
+                {report.quotationDrafts.map((draft: any) => {
+                  const slotIndex = getDraftSlotIndex(draft.draftKey)
+                  const contentObj = (draft.content as Record<string, unknown>) ?? {}
+                  const vTitle = typeof contentObj.versionTitle === 'string' && contentObj.versionTitle ? contentObj.versionTitle : `Version ${slotIndex}`
+                  const currentAgr = agreementValue ?? 0
+                  const diff = draft.grandTotal - currentAgr
+
+                  const isCurrentSynced = latestSyncedLog
+                    ? (latestSyncedLog.quotationDraftId === draft.id || latestSyncedLog.versionTitle === vTitle)
+                    : (draft.grandTotal === currentAgr)
+
+                  const previewUrl = buildDetailPreviewUrl({ context: 'lead', contextId: String(id), slotIndex, download: false })
+                  const downloadUrl = buildDetailPreviewUrl({ context: 'lead', contextId: String(id), slotIndex, download: true })
+
+                  return (
+                    <div key={draft.id} className="flex flex-wrap items-center justify-between gap-2 p-2 bg-background rounded border text-xs">
+                      <div className="flex items-center gap-2">
+                        <Badge variant="outline" className="text-[10px] font-bold">
+                          {vTitle}
+                        </Badge>
+                        <span className="font-semibold text-foreground">৳{draft.grandTotal.toLocaleString()} BDT</span>
+                        {!isCurrentSynced ? (
+                          <span className={`text-[11px] font-medium ${diff > 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
+                            ({diff > 0 ? `+৳${diff.toLocaleString()} vs Current` : `-৳${Math.abs(diff).toLocaleString()} vs Current`})
+                          </span>
+                        ) : (
+                          <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">(Current Active Agreement)</span>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <a href={downloadUrl} target="_blank" rel="noopener noreferrer">
+                          <Button size="sm" variant="outline" className="h-6 text-[11px] px-2 gap-1">
+                            <Download className="h-3 w-3" /> PDF
+                          </Button>
+                        </a>
+                        <a href={previewUrl} target="_blank" rel="noopener noreferrer">
+                          <Button size="sm" variant="ghost" className="h-6 text-[11px] px-1.5 gap-1 text-muted-foreground">
+                            <ExternalLink className="h-3 w-3" /> Preview
+                          </Button>
+                        </a>
+                        {isCurrentSynced ? (
+                          <Badge variant="secondary" className="text-[10px] bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-300 font-bold px-2 py-0.5">
+                            ✓ Synced
+                          </Badge>
+                        ) : (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="h-6 text-[11px] px-2 font-semibold gap-1 text-primary border-primary/40 hover:bg-primary/10"
+                            onClick={() => {
+                              const absDiff = Math.abs(diff)
+                              setAdjustType(diff >= 0 ? 'ADD' : 'DECREASE')
+                              setAdjustAmount(absDiff > 0 ? String(absDiff) : String(draft.grandTotal))
+                              setSyncTargetValue(draft.grandTotal)
+                              setAdjustNote(`Sync PC ${vTitle}: Agreement Value updated from ৳${currentAgr.toLocaleString()} to ৳${draft.grandTotal.toLocaleString()}`)
+                              setSyncDraftId(draft.id)
+                              setSyncVersionTitle(vTitle)
+                              setAdjustModalOpen(true)
+                            }}
+                          >
+                            <Sparkles className="h-3 w-3" /> Sync to Agreement
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          ) : null}
+
+          <div className="flex justify-end gap-2 my-1">
+            <Button
+              size="sm"
+              variant="outline"
+              className="h-8 text-xs gap-1 border-emerald-300 text-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/30"
+              onClick={() => {
+                setAdjustType('ADD')
+                setAdjustAmount('')
+                setAdjustNote('')
+                setSyncTargetValue(null)
+                setAdjustModalOpen(true)
+              }}
+            >
+              <Plus className="h-3.5 w-3.5" /> Add Work
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              className="h-8 text-xs gap-1 border-rose-300 text-rose-700 hover:bg-rose-50 dark:hover:bg-rose-950/30"
+              onClick={() => {
+                setAdjustType('DECREASE')
+                setAdjustAmount('')
+                setAdjustNote('')
+                setSyncTargetValue(null)
+                setAdjustModalOpen(true)
+              }}
+            >
+              <Minus className="h-3.5 w-3.5" /> Remove Work
+            </Button>
+          </div>
+
+          {/* Logs Table */}
+          <div className="overflow-x-auto border border-border rounded-lg mt-2">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-muted text-muted-foreground font-semibold uppercase tracking-wider border-b border-border">
+                <tr>
+                  <th className="p-2.5">Date & Time</th>
+                  <th className="p-2.5">Type & Amount</th>
+                  <th className="p-2.5 text-right">Running Total</th>
+                  <th className="p-2.5">Particulars / Reason</th>
+                  <th className="p-2.5">Logged By</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {agreementLogs.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="p-6 text-center text-muted-foreground">
+                      No adjustments logged yet. Initial agreement value: {initialAgreementValue ? `${initialAgreementValue.toLocaleString()} BDT` : 'N/A'}.
+                    </td>
+                  </tr>
+                ) : (
+                  (() => {
+                    const sortedAsc = [...agreementLogs].sort((a: any, b: any) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+                    let runningBal = initialAgreementValue ?? 0
+                    const logsWithBal = sortedAsc.map((log: any) => {
+                      runningBal += log.amount
+                      return { ...log, runningBalance: runningBal }
+                    }).reverse()
+
+                    return logsWithBal.map((log: any) => {
+                      const isAdd = log.amount > 0
+                      return (
+                        <tr key={log.id} className="hover:bg-muted/20 transition-colors">
+                          <td className="p-2.5 text-muted-foreground whitespace-nowrap">
+                            {new Date(log.createdAt).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
+                          </td>
+                          <td className="p-2.5 font-bold">
+                            <span className={isAdd ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}>
+                              {isAdd ? `+${log.amount.toLocaleString()}` : `${log.amount.toLocaleString()}`} BDT
+                            </span>
+                          </td>
+                          <td className="p-2.5 text-right font-bold tabular-nums">
+                            {log.runningBalance.toLocaleString()} BDT
+                          </td>
+                          <td className="p-2.5 max-w-[200px] truncate" title={log.note || ''}>
+                            {log.note || <span className="text-muted-foreground/60">—</span>}
+                          </td>
+                          <td className="p-2.5 text-muted-foreground whitespace-nowrap">
+                            {log.createdBy?.fullName || 'System'}
+                          </td>
+                        </tr>
+                      )
+                    })
+                  })()
+                )}
+              </tbody>
+            </table>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add / Remove Work Dialog */}
+      <Dialog open={adjustModalOpen} onOpenChange={setAdjustModalOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-base font-bold">
+              {adjustType === 'ADD' ? 'Add Work (Increase Agreement)' : 'Remove Work (Reduce Agreement)'}
+            </DialogTitle>
+          </DialogHeader>
+
+          <form onSubmit={handleSaveAgreementAdjustment} className="space-y-4 py-2">
+            <div className="flex gap-2">
+              <Button
+                type="button"
+                variant={adjustType === 'ADD' ? 'default' : 'outline'}
+                className={`flex-1 gap-1 ${adjustType === 'ADD' ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : ''}`}
+                onClick={() => setAdjustType('ADD')}
+              >
+                <Plus className="h-4 w-4" /> Add Work
+              </Button>
+              <Button
+                type="button"
+                variant={adjustType === 'DECREASE' ? 'default' : 'outline'}
+                className={`flex-1 gap-1 ${adjustType === 'DECREASE' ? 'bg-rose-600 hover:bg-rose-700 text-white' : ''}`}
+                onClick={() => setAdjustType('DECREASE')}
+              >
+                <Minus className="h-4 w-4" /> Remove Work
+              </Button>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-foreground">
+                {adjustType === 'ADD' ? 'Amount to Add (BDT)' : 'Amount to Remove (BDT)'} *
+              </label>
+              <Input
+                type="number"
+                min="1"
+                step="any"
+                required
+                placeholder="e.g. 50000"
+                value={adjustAmount}
+                onChange={(e) => setAdjustAmount(e.target.value)}
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-foreground">
+                Particulars / Reason for Adjustment
+              </label>
+              <Textarea
+                rows={3}
+                placeholder="e.g. Added 20 sqft ceiling work in dining area per client request"
+                value={adjustNote}
+                onChange={(e) => setAdjustNote(e.target.value)}
+              />
+            </div>
+
+            <DialogFooter className="gap-2 pt-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setAdjustModalOpen(false)}
+                disabled={adjustSubmitting}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                disabled={adjustSubmitting}
+                className={adjustType === 'ADD' ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : 'bg-rose-600 hover:bg-rose-700 text-white'}
+              >
+                {adjustSubmitting ? <Loader2 className="h-4 w-4 animate-spin mr-1.5" /> : null}
+                {adjustType === 'ADD' ? 'Save Work Addition' : 'Save Work Removal'}
+              </Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </div>

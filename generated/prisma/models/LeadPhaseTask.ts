@@ -38,54 +38,54 @@ export type LeadPhaseTaskMinAggregateOutputType = {
   id: string | null
   leadId: string | null
   phaseType: $Enums.LeadPhaseType | null
-  workDetails: string | null
   assigneeUserId: string | null
-  startedAt: Date | null
   dueAt: Date | null
   status: $Enums.LeadPhaseTaskStatus | null
-  completedAt: Date | null
-  lastSrActionAt: Date | null
-  sourceVisitId: string | null
   currentReviewRound: number | null
   createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  workDetails: string | null
+  startedAt: Date | null
+  completedAt: Date | null
+  lastSrActionAt: Date | null
+  sourceVisitId: string | null
 }
 
 export type LeadPhaseTaskMaxAggregateOutputType = {
   id: string | null
   leadId: string | null
   phaseType: $Enums.LeadPhaseType | null
-  workDetails: string | null
   assigneeUserId: string | null
-  startedAt: Date | null
   dueAt: Date | null
   status: $Enums.LeadPhaseTaskStatus | null
-  completedAt: Date | null
-  lastSrActionAt: Date | null
-  sourceVisitId: string | null
   currentReviewRound: number | null
   createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  workDetails: string | null
+  startedAt: Date | null
+  completedAt: Date | null
+  lastSrActionAt: Date | null
+  sourceVisitId: string | null
 }
 
 export type LeadPhaseTaskCountAggregateOutputType = {
   id: number
   leadId: number
   phaseType: number
-  workDetails: number
   assigneeUserId: number
-  startedAt: number
   dueAt: number
   status: number
-  completedAt: number
-  lastSrActionAt: number
-  sourceVisitId: number
   currentReviewRound: number
   createdById: number
   createdAt: number
   updatedAt: number
+  workDetails: number
+  startedAt: number
+  completedAt: number
+  lastSrActionAt: number
+  sourceVisitId: number
   _all: number
 }
 
@@ -102,54 +102,54 @@ export type LeadPhaseTaskMinAggregateInputType = {
   id?: true
   leadId?: true
   phaseType?: true
-  workDetails?: true
   assigneeUserId?: true
-  startedAt?: true
   dueAt?: true
   status?: true
-  completedAt?: true
-  lastSrActionAt?: true
-  sourceVisitId?: true
   currentReviewRound?: true
   createdById?: true
   createdAt?: true
   updatedAt?: true
+  workDetails?: true
+  startedAt?: true
+  completedAt?: true
+  lastSrActionAt?: true
+  sourceVisitId?: true
 }
 
 export type LeadPhaseTaskMaxAggregateInputType = {
   id?: true
   leadId?: true
   phaseType?: true
-  workDetails?: true
   assigneeUserId?: true
-  startedAt?: true
   dueAt?: true
   status?: true
-  completedAt?: true
-  lastSrActionAt?: true
-  sourceVisitId?: true
   currentReviewRound?: true
   createdById?: true
   createdAt?: true
   updatedAt?: true
+  workDetails?: true
+  startedAt?: true
+  completedAt?: true
+  lastSrActionAt?: true
+  sourceVisitId?: true
 }
 
 export type LeadPhaseTaskCountAggregateInputType = {
   id?: true
   leadId?: true
   phaseType?: true
-  workDetails?: true
   assigneeUserId?: true
-  startedAt?: true
   dueAt?: true
   status?: true
-  completedAt?: true
-  lastSrActionAt?: true
-  sourceVisitId?: true
   currentReviewRound?: true
   createdById?: true
   createdAt?: true
   updatedAt?: true
+  workDetails?: true
+  startedAt?: true
+  completedAt?: true
+  lastSrActionAt?: true
+  sourceVisitId?: true
   _all?: true
 }
 
@@ -243,18 +243,18 @@ export type LeadPhaseTaskGroupByOutputType = {
   id: string
   leadId: string
   phaseType: $Enums.LeadPhaseType
-  workDetails: string | null
   assigneeUserId: string
-  startedAt: Date
   dueAt: Date
   status: $Enums.LeadPhaseTaskStatus
-  completedAt: Date | null
-  lastSrActionAt: Date | null
-  sourceVisitId: string | null
   currentReviewRound: number
   createdById: string
   createdAt: Date
   updatedAt: Date
+  workDetails: string | null
+  startedAt: Date
+  completedAt: Date | null
+  lastSrActionAt: Date | null
+  sourceVisitId: string | null
   _count: LeadPhaseTaskCountAggregateOutputType | null
   _avg: LeadPhaseTaskAvgAggregateOutputType | null
   _sum: LeadPhaseTaskSumAggregateOutputType | null
@@ -284,46 +284,46 @@ export type LeadPhaseTaskWhereInput = {
   id?: Prisma.StringFilter<"LeadPhaseTask"> | string
   leadId?: Prisma.StringFilter<"LeadPhaseTask"> | string
   phaseType?: Prisma.EnumLeadPhaseTypeFilter<"LeadPhaseTask"> | $Enums.LeadPhaseType
-  workDetails?: Prisma.StringNullableFilter<"LeadPhaseTask"> | string | null
   assigneeUserId?: Prisma.StringFilter<"LeadPhaseTask"> | string
-  startedAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
   dueAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFilter<"LeadPhaseTask"> | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.DateTimeNullableFilter<"LeadPhaseTask"> | Date | string | null
-  lastSrActionAt?: Prisma.DateTimeNullableFilter<"LeadPhaseTask"> | Date | string | null
-  sourceVisitId?: Prisma.StringNullableFilter<"LeadPhaseTask"> | string | null
   currentReviewRound?: Prisma.IntFilter<"LeadPhaseTask"> | number
   createdById?: Prisma.StringFilter<"LeadPhaseTask"> | string
   createdAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
+  workDetails?: Prisma.StringNullableFilter<"LeadPhaseTask"> | string | null
+  startedAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
+  completedAt?: Prisma.DateTimeNullableFilter<"LeadPhaseTask"> | Date | string | null
+  lastSrActionAt?: Prisma.DateTimeNullableFilter<"LeadPhaseTask"> | Date | string | null
+  sourceVisitId?: Prisma.StringNullableFilter<"LeadPhaseTask"> | string | null
+  reviews?: Prisma.LeadPhaseReviewListRelationFilter
   assignee?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
   sourceVisit?: Prisma.XOR<Prisma.VisitNullableScalarRelationFilter, Prisma.VisitWhereInput> | null
-  reviews?: Prisma.LeadPhaseReviewListRelationFilter
 }
 
 export type LeadPhaseTaskOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   phaseType?: Prisma.SortOrder
-  workDetails?: Prisma.SortOrderInput | Prisma.SortOrder
   assigneeUserId?: Prisma.SortOrder
-  startedAt?: Prisma.SortOrder
   dueAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  lastSrActionAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  sourceVisitId?: Prisma.SortOrderInput | Prisma.SortOrder
   currentReviewRound?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  lead?: Prisma.LeadOrderByWithRelationInput
+  workDetails?: Prisma.SortOrderInput | Prisma.SortOrder
+  startedAt?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastSrActionAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceVisitId?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviews?: Prisma.LeadPhaseReviewOrderByRelationAggregateInput
   assignee?: Prisma.UserOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  lead?: Prisma.LeadOrderByWithRelationInput
   sourceVisit?: Prisma.VisitOrderByWithRelationInput
-  reviews?: Prisma.LeadPhaseReviewOrderByRelationAggregateInput
 }
 
 export type LeadPhaseTaskWhereUniqueInput = Prisma.AtLeast<{
@@ -333,41 +333,41 @@ export type LeadPhaseTaskWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LeadPhaseTaskWhereInput | Prisma.LeadPhaseTaskWhereInput[]
   leadId?: Prisma.StringFilter<"LeadPhaseTask"> | string
   phaseType?: Prisma.EnumLeadPhaseTypeFilter<"LeadPhaseTask"> | $Enums.LeadPhaseType
-  workDetails?: Prisma.StringNullableFilter<"LeadPhaseTask"> | string | null
   assigneeUserId?: Prisma.StringFilter<"LeadPhaseTask"> | string
-  startedAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
   dueAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFilter<"LeadPhaseTask"> | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.DateTimeNullableFilter<"LeadPhaseTask"> | Date | string | null
-  lastSrActionAt?: Prisma.DateTimeNullableFilter<"LeadPhaseTask"> | Date | string | null
-  sourceVisitId?: Prisma.StringNullableFilter<"LeadPhaseTask"> | string | null
   currentReviewRound?: Prisma.IntFilter<"LeadPhaseTask"> | number
   createdById?: Prisma.StringFilter<"LeadPhaseTask"> | string
   createdAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
+  workDetails?: Prisma.StringNullableFilter<"LeadPhaseTask"> | string | null
+  startedAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
+  completedAt?: Prisma.DateTimeNullableFilter<"LeadPhaseTask"> | Date | string | null
+  lastSrActionAt?: Prisma.DateTimeNullableFilter<"LeadPhaseTask"> | Date | string | null
+  sourceVisitId?: Prisma.StringNullableFilter<"LeadPhaseTask"> | string | null
+  reviews?: Prisma.LeadPhaseReviewListRelationFilter
   assignee?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
   sourceVisit?: Prisma.XOR<Prisma.VisitNullableScalarRelationFilter, Prisma.VisitWhereInput> | null
-  reviews?: Prisma.LeadPhaseReviewListRelationFilter
 }, "id">
 
 export type LeadPhaseTaskOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   phaseType?: Prisma.SortOrder
-  workDetails?: Prisma.SortOrderInput | Prisma.SortOrder
   assigneeUserId?: Prisma.SortOrder
-  startedAt?: Prisma.SortOrder
   dueAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  lastSrActionAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  sourceVisitId?: Prisma.SortOrderInput | Prisma.SortOrder
   currentReviewRound?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  workDetails?: Prisma.SortOrderInput | Prisma.SortOrder
+  startedAt?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastSrActionAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceVisitId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadPhaseTaskCountOrderByAggregateInput
   _avg?: Prisma.LeadPhaseTaskAvgOrderByAggregateInput
   _max?: Prisma.LeadPhaseTaskMaxOrderByAggregateInput
@@ -382,93 +382,93 @@ export type LeadPhaseTaskScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"LeadPhaseTask"> | string
   leadId?: Prisma.StringWithAggregatesFilter<"LeadPhaseTask"> | string
   phaseType?: Prisma.EnumLeadPhaseTypeWithAggregatesFilter<"LeadPhaseTask"> | $Enums.LeadPhaseType
-  workDetails?: Prisma.StringNullableWithAggregatesFilter<"LeadPhaseTask"> | string | null
   assigneeUserId?: Prisma.StringWithAggregatesFilter<"LeadPhaseTask"> | string
-  startedAt?: Prisma.DateTimeWithAggregatesFilter<"LeadPhaseTask"> | Date | string
   dueAt?: Prisma.DateTimeWithAggregatesFilter<"LeadPhaseTask"> | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusWithAggregatesFilter<"LeadPhaseTask"> | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadPhaseTask"> | Date | string | null
-  lastSrActionAt?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadPhaseTask"> | Date | string | null
-  sourceVisitId?: Prisma.StringNullableWithAggregatesFilter<"LeadPhaseTask"> | string | null
   currentReviewRound?: Prisma.IntWithAggregatesFilter<"LeadPhaseTask"> | number
   createdById?: Prisma.StringWithAggregatesFilter<"LeadPhaseTask"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"LeadPhaseTask"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"LeadPhaseTask"> | Date | string
+  workDetails?: Prisma.StringNullableWithAggregatesFilter<"LeadPhaseTask"> | string | null
+  startedAt?: Prisma.DateTimeWithAggregatesFilter<"LeadPhaseTask"> | Date | string
+  completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadPhaseTask"> | Date | string | null
+  lastSrActionAt?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadPhaseTask"> | Date | string | null
+  sourceVisitId?: Prisma.StringNullableWithAggregatesFilter<"LeadPhaseTask"> | string | null
 }
 
 export type LeadPhaseTaskCreateInput = {
   id?: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
   currentReviewRound?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutPhaseTasksInput
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
+  reviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutTaskInput
   assignee: Prisma.UserCreateNestedOneWithoutPhaseTasksAssignedInput
   createdBy: Prisma.UserCreateNestedOneWithoutPhaseTasksCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutPhaseTasksInput
   sourceVisit?: Prisma.VisitCreateNestedOneWithoutCadPhaseTasksInput
-  reviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutTaskInput
 }
 
 export type LeadPhaseTaskUncheckedCreateInput = {
   id?: string
   leadId: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
   assigneeUserId: string
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
-  sourceVisitId?: string | null
   currentReviewRound?: number
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
+  sourceVisitId?: string | null
   reviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutTaskInput
 }
 
 export type LeadPhaseTaskUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutPhaseTasksNestedInput
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviews?: Prisma.LeadPhaseReviewUpdateManyWithoutTaskNestedInput
   assignee?: Prisma.UserUpdateOneRequiredWithoutPhaseTasksAssignedNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutPhaseTasksCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutPhaseTasksNestedInput
   sourceVisit?: Prisma.VisitUpdateOneWithoutCadPhaseTasksNestedInput
-  reviews?: Prisma.LeadPhaseReviewUpdateManyWithoutTaskNestedInput
 }
 
 export type LeadPhaseTaskUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assigneeUserId?: Prisma.StringFieldUpdateOperationsInput | string
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutTaskNestedInput
 }
 
@@ -476,50 +476,50 @@ export type LeadPhaseTaskCreateManyInput = {
   id?: string
   leadId: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
   assigneeUserId: string
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
-  sourceVisitId?: string | null
   currentReviewRound?: number
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
+  sourceVisitId?: string | null
 }
 
 export type LeadPhaseTaskUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadPhaseTaskUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assigneeUserId?: Prisma.StringFieldUpdateOperationsInput | string
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type LeadPhaseTaskListRelationFilter = {
@@ -536,18 +536,18 @@ export type LeadPhaseTaskCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   phaseType?: Prisma.SortOrder
-  workDetails?: Prisma.SortOrder
   assigneeUserId?: Prisma.SortOrder
-  startedAt?: Prisma.SortOrder
   dueAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  completedAt?: Prisma.SortOrder
-  lastSrActionAt?: Prisma.SortOrder
-  sourceVisitId?: Prisma.SortOrder
   currentReviewRound?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  workDetails?: Prisma.SortOrder
+  startedAt?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
+  lastSrActionAt?: Prisma.SortOrder
+  sourceVisitId?: Prisma.SortOrder
 }
 
 export type LeadPhaseTaskAvgOrderByAggregateInput = {
@@ -558,36 +558,36 @@ export type LeadPhaseTaskMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   phaseType?: Prisma.SortOrder
-  workDetails?: Prisma.SortOrder
   assigneeUserId?: Prisma.SortOrder
-  startedAt?: Prisma.SortOrder
   dueAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  completedAt?: Prisma.SortOrder
-  lastSrActionAt?: Prisma.SortOrder
-  sourceVisitId?: Prisma.SortOrder
   currentReviewRound?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  workDetails?: Prisma.SortOrder
+  startedAt?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
+  lastSrActionAt?: Prisma.SortOrder
+  sourceVisitId?: Prisma.SortOrder
 }
 
 export type LeadPhaseTaskMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   phaseType?: Prisma.SortOrder
-  workDetails?: Prisma.SortOrder
   assigneeUserId?: Prisma.SortOrder
-  startedAt?: Prisma.SortOrder
   dueAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  completedAt?: Prisma.SortOrder
-  lastSrActionAt?: Prisma.SortOrder
-  sourceVisitId?: Prisma.SortOrder
   currentReviewRound?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  workDetails?: Prisma.SortOrder
+  startedAt?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
+  lastSrActionAt?: Prisma.SortOrder
+  sourceVisitId?: Prisma.SortOrder
 }
 
 export type LeadPhaseTaskSumOrderByAggregateInput = {
@@ -733,6 +733,14 @@ export type EnumLeadPhaseTaskStatusFieldUpdateOperationsInput = {
   set?: $Enums.LeadPhaseTaskStatus
 }
 
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type LeadPhaseTaskCreateNestedOneWithoutReviewsInput = {
   create?: Prisma.XOR<Prisma.LeadPhaseTaskCreateWithoutReviewsInput, Prisma.LeadPhaseTaskUncheckedCreateWithoutReviewsInput>
   connectOrCreate?: Prisma.LeadPhaseTaskCreateOrConnectWithoutReviewsInput
@@ -792,36 +800,36 @@ export type LeadPhaseTaskUncheckedUpdateManyWithoutSourceVisitNestedInput = {
 export type LeadPhaseTaskCreateWithoutLeadInput = {
   id?: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
   currentReviewRound?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
+  reviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutTaskInput
   assignee: Prisma.UserCreateNestedOneWithoutPhaseTasksAssignedInput
   createdBy: Prisma.UserCreateNestedOneWithoutPhaseTasksCreatedInput
   sourceVisit?: Prisma.VisitCreateNestedOneWithoutCadPhaseTasksInput
-  reviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutTaskInput
 }
 
 export type LeadPhaseTaskUncheckedCreateWithoutLeadInput = {
   id?: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
   assigneeUserId: string
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
-  sourceVisitId?: string | null
   currentReviewRound?: number
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
+  sourceVisitId?: string | null
   reviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutTaskInput
 }
 
@@ -858,53 +866,53 @@ export type LeadPhaseTaskScalarWhereInput = {
   id?: Prisma.StringFilter<"LeadPhaseTask"> | string
   leadId?: Prisma.StringFilter<"LeadPhaseTask"> | string
   phaseType?: Prisma.EnumLeadPhaseTypeFilter<"LeadPhaseTask"> | $Enums.LeadPhaseType
-  workDetails?: Prisma.StringNullableFilter<"LeadPhaseTask"> | string | null
   assigneeUserId?: Prisma.StringFilter<"LeadPhaseTask"> | string
-  startedAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
   dueAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFilter<"LeadPhaseTask"> | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.DateTimeNullableFilter<"LeadPhaseTask"> | Date | string | null
-  lastSrActionAt?: Prisma.DateTimeNullableFilter<"LeadPhaseTask"> | Date | string | null
-  sourceVisitId?: Prisma.StringNullableFilter<"LeadPhaseTask"> | string | null
   currentReviewRound?: Prisma.IntFilter<"LeadPhaseTask"> | number
   createdById?: Prisma.StringFilter<"LeadPhaseTask"> | string
   createdAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
+  workDetails?: Prisma.StringNullableFilter<"LeadPhaseTask"> | string | null
+  startedAt?: Prisma.DateTimeFilter<"LeadPhaseTask"> | Date | string
+  completedAt?: Prisma.DateTimeNullableFilter<"LeadPhaseTask"> | Date | string | null
+  lastSrActionAt?: Prisma.DateTimeNullableFilter<"LeadPhaseTask"> | Date | string | null
+  sourceVisitId?: Prisma.StringNullableFilter<"LeadPhaseTask"> | string | null
 }
 
 export type LeadPhaseTaskCreateWithoutAssigneeInput = {
   id?: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
   currentReviewRound?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutPhaseTasksInput
-  createdBy: Prisma.UserCreateNestedOneWithoutPhaseTasksCreatedInput
-  sourceVisit?: Prisma.VisitCreateNestedOneWithoutCadPhaseTasksInput
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
   reviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutTaskInput
+  createdBy: Prisma.UserCreateNestedOneWithoutPhaseTasksCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutPhaseTasksInput
+  sourceVisit?: Prisma.VisitCreateNestedOneWithoutCadPhaseTasksInput
 }
 
 export type LeadPhaseTaskUncheckedCreateWithoutAssigneeInput = {
   id?: string
   leadId: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
-  sourceVisitId?: string | null
   currentReviewRound?: number
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
+  sourceVisitId?: string | null
   reviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutTaskInput
 }
 
@@ -921,36 +929,36 @@ export type LeadPhaseTaskCreateManyAssigneeInputEnvelope = {
 export type LeadPhaseTaskCreateWithoutCreatedByInput = {
   id?: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
   currentReviewRound?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutPhaseTasksInput
-  assignee: Prisma.UserCreateNestedOneWithoutPhaseTasksAssignedInput
-  sourceVisit?: Prisma.VisitCreateNestedOneWithoutCadPhaseTasksInput
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
   reviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutTaskInput
+  assignee: Prisma.UserCreateNestedOneWithoutPhaseTasksAssignedInput
+  lead: Prisma.LeadCreateNestedOneWithoutPhaseTasksInput
+  sourceVisit?: Prisma.VisitCreateNestedOneWithoutCadPhaseTasksInput
 }
 
 export type LeadPhaseTaskUncheckedCreateWithoutCreatedByInput = {
   id?: string
   leadId: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
   assigneeUserId: string
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
-  sourceVisitId?: string | null
   currentReviewRound?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
+  sourceVisitId?: string | null
   reviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutTaskInput
 }
 
@@ -999,18 +1007,18 @@ export type LeadPhaseTaskUpdateManyWithWhereWithoutCreatedByInput = {
 export type LeadPhaseTaskCreateWithoutReviewsInput = {
   id?: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
   currentReviewRound?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutPhaseTasksInput
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
   assignee: Prisma.UserCreateNestedOneWithoutPhaseTasksAssignedInput
   createdBy: Prisma.UserCreateNestedOneWithoutPhaseTasksCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutPhaseTasksInput
   sourceVisit?: Prisma.VisitCreateNestedOneWithoutCadPhaseTasksInput
 }
 
@@ -1018,18 +1026,18 @@ export type LeadPhaseTaskUncheckedCreateWithoutReviewsInput = {
   id?: string
   leadId: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
   assigneeUserId: string
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
-  sourceVisitId?: string | null
   currentReviewRound?: number
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
+  sourceVisitId?: string | null
 }
 
 export type LeadPhaseTaskCreateOrConnectWithoutReviewsInput = {
@@ -1051,18 +1059,18 @@ export type LeadPhaseTaskUpdateToOneWithWhereWithoutReviewsInput = {
 export type LeadPhaseTaskUpdateWithoutReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutPhaseTasksNestedInput
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   assignee?: Prisma.UserUpdateOneRequiredWithoutPhaseTasksAssignedNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutPhaseTasksCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutPhaseTasksNestedInput
   sourceVisit?: Prisma.VisitUpdateOneWithoutCadPhaseTasksNestedInput
 }
 
@@ -1070,53 +1078,53 @@ export type LeadPhaseTaskUncheckedUpdateWithoutReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assigneeUserId?: Prisma.StringFieldUpdateOperationsInput | string
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type LeadPhaseTaskCreateWithoutSourceVisitInput = {
   id?: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
   currentReviewRound?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutPhaseTasksInput
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
+  reviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutTaskInput
   assignee: Prisma.UserCreateNestedOneWithoutPhaseTasksAssignedInput
   createdBy: Prisma.UserCreateNestedOneWithoutPhaseTasksCreatedInput
-  reviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutTaskInput
+  lead: Prisma.LeadCreateNestedOneWithoutPhaseTasksInput
 }
 
 export type LeadPhaseTaskUncheckedCreateWithoutSourceVisitInput = {
   id?: string
   leadId: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
   assigneeUserId: string
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
   currentReviewRound?: number
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
   reviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutTaskInput
 }
 
@@ -1149,140 +1157,140 @@ export type LeadPhaseTaskUpdateManyWithWhereWithoutSourceVisitInput = {
 export type LeadPhaseTaskCreateManyLeadInput = {
   id?: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
   assigneeUserId: string
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
-  sourceVisitId?: string | null
   currentReviewRound?: number
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
+  sourceVisitId?: string | null
 }
 
 export type LeadPhaseTaskUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviews?: Prisma.LeadPhaseReviewUpdateManyWithoutTaskNestedInput
   assignee?: Prisma.UserUpdateOneRequiredWithoutPhaseTasksAssignedNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutPhaseTasksCreatedNestedInput
   sourceVisit?: Prisma.VisitUpdateOneWithoutCadPhaseTasksNestedInput
-  reviews?: Prisma.LeadPhaseReviewUpdateManyWithoutTaskNestedInput
 }
 
 export type LeadPhaseTaskUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assigneeUserId?: Prisma.StringFieldUpdateOperationsInput | string
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutTaskNestedInput
 }
 
 export type LeadPhaseTaskUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assigneeUserId?: Prisma.StringFieldUpdateOperationsInput | string
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type LeadPhaseTaskCreateManyAssigneeInput = {
   id?: string
   leadId: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
-  sourceVisitId?: string | null
   currentReviewRound?: number
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
+  sourceVisitId?: string | null
 }
 
 export type LeadPhaseTaskCreateManyCreatedByInput = {
   id?: string
   leadId: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
   assigneeUserId: string
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
-  sourceVisitId?: string | null
   currentReviewRound?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
+  sourceVisitId?: string | null
 }
 
 export type LeadPhaseTaskUpdateWithoutAssigneeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutPhaseTasksNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutPhaseTasksCreatedNestedInput
-  sourceVisit?: Prisma.VisitUpdateOneWithoutCadPhaseTasksNestedInput
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviews?: Prisma.LeadPhaseReviewUpdateManyWithoutTaskNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutPhaseTasksCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutPhaseTasksNestedInput
+  sourceVisit?: Prisma.VisitUpdateOneWithoutCadPhaseTasksNestedInput
 }
 
 export type LeadPhaseTaskUncheckedUpdateWithoutAssigneeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutTaskNestedInput
 }
 
@@ -1290,52 +1298,52 @@ export type LeadPhaseTaskUncheckedUpdateManyWithoutAssigneeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type LeadPhaseTaskUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutPhaseTasksNestedInput
-  assignee?: Prisma.UserUpdateOneRequiredWithoutPhaseTasksAssignedNestedInput
-  sourceVisit?: Prisma.VisitUpdateOneWithoutCadPhaseTasksNestedInput
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviews?: Prisma.LeadPhaseReviewUpdateManyWithoutTaskNestedInput
+  assignee?: Prisma.UserUpdateOneRequiredWithoutPhaseTasksAssignedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutPhaseTasksNestedInput
+  sourceVisit?: Prisma.VisitUpdateOneWithoutCadPhaseTasksNestedInput
 }
 
 export type LeadPhaseTaskUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assigneeUserId?: Prisma.StringFieldUpdateOperationsInput | string
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutTaskNestedInput
 }
 
@@ -1343,69 +1351,69 @@ export type LeadPhaseTaskUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assigneeUserId?: Prisma.StringFieldUpdateOperationsInput | string
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sourceVisitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type LeadPhaseTaskCreateManySourceVisitInput = {
   id?: string
   leadId: string
   phaseType: $Enums.LeadPhaseType
-  workDetails?: string | null
   assigneeUserId: string
-  startedAt?: Date | string
   dueAt: Date | string
   status?: $Enums.LeadPhaseTaskStatus
-  completedAt?: Date | string | null
-  lastSrActionAt?: Date | string | null
   currentReviewRound?: number
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  workDetails?: string | null
+  startedAt?: Date | string
+  completedAt?: Date | string | null
+  lastSrActionAt?: Date | string | null
 }
 
 export type LeadPhaseTaskUpdateWithoutSourceVisitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutPhaseTasksNestedInput
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviews?: Prisma.LeadPhaseReviewUpdateManyWithoutTaskNestedInput
   assignee?: Prisma.UserUpdateOneRequiredWithoutPhaseTasksAssignedNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutPhaseTasksCreatedNestedInput
-  reviews?: Prisma.LeadPhaseReviewUpdateManyWithoutTaskNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutPhaseTasksNestedInput
 }
 
 export type LeadPhaseTaskUncheckedUpdateWithoutSourceVisitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assigneeUserId?: Prisma.StringFieldUpdateOperationsInput | string
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutTaskNestedInput
 }
 
@@ -1413,17 +1421,17 @@ export type LeadPhaseTaskUncheckedUpdateManyWithoutSourceVisitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
   phaseType?: Prisma.EnumLeadPhaseTypeFieldUpdateOperationsInput | $Enums.LeadPhaseType
-  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assigneeUserId?: Prisma.StringFieldUpdateOperationsInput | string
-  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumLeadPhaseTaskStatusFieldUpdateOperationsInput | $Enums.LeadPhaseTaskStatus
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentReviewRound?: Prisma.IntFieldUpdateOperationsInput | number
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSrActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1461,23 +1469,23 @@ export type LeadPhaseTaskSelect<ExtArgs extends runtime.Types.Extensions.Interna
   id?: boolean
   leadId?: boolean
   phaseType?: boolean
-  workDetails?: boolean
   assigneeUserId?: boolean
-  startedAt?: boolean
   dueAt?: boolean
   status?: boolean
-  completedAt?: boolean
-  lastSrActionAt?: boolean
-  sourceVisitId?: boolean
   currentReviewRound?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  workDetails?: boolean
+  startedAt?: boolean
+  completedAt?: boolean
+  lastSrActionAt?: boolean
+  sourceVisitId?: boolean
+  reviews?: boolean | Prisma.LeadPhaseTask$reviewsArgs<ExtArgs>
   assignee?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   sourceVisit?: boolean | Prisma.LeadPhaseTask$sourceVisitArgs<ExtArgs>
-  reviews?: boolean | Prisma.LeadPhaseTask$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.LeadPhaseTaskCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadPhaseTask"]>
 
@@ -1485,21 +1493,21 @@ export type LeadPhaseTaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   leadId?: boolean
   phaseType?: boolean
-  workDetails?: boolean
   assigneeUserId?: boolean
-  startedAt?: boolean
   dueAt?: boolean
   status?: boolean
-  completedAt?: boolean
-  lastSrActionAt?: boolean
-  sourceVisitId?: boolean
   currentReviewRound?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  workDetails?: boolean
+  startedAt?: boolean
+  completedAt?: boolean
+  lastSrActionAt?: boolean
+  sourceVisitId?: boolean
   assignee?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   sourceVisit?: boolean | Prisma.LeadPhaseTask$sourceVisitArgs<ExtArgs>
 }, ExtArgs["result"]["leadPhaseTask"]>
 
@@ -1507,21 +1515,21 @@ export type LeadPhaseTaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   leadId?: boolean
   phaseType?: boolean
-  workDetails?: boolean
   assigneeUserId?: boolean
-  startedAt?: boolean
   dueAt?: boolean
   status?: boolean
-  completedAt?: boolean
-  lastSrActionAt?: boolean
-  sourceVisitId?: boolean
   currentReviewRound?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  workDetails?: boolean
+  startedAt?: boolean
+  completedAt?: boolean
+  lastSrActionAt?: boolean
+  sourceVisitId?: boolean
   assignee?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   sourceVisit?: boolean | Prisma.LeadPhaseTask$sourceVisitArgs<ExtArgs>
 }, ExtArgs["result"]["leadPhaseTask"]>
 
@@ -1529,67 +1537,67 @@ export type LeadPhaseTaskSelectScalar = {
   id?: boolean
   leadId?: boolean
   phaseType?: boolean
-  workDetails?: boolean
   assigneeUserId?: boolean
-  startedAt?: boolean
   dueAt?: boolean
   status?: boolean
-  completedAt?: boolean
-  lastSrActionAt?: boolean
-  sourceVisitId?: boolean
   currentReviewRound?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  workDetails?: boolean
+  startedAt?: boolean
+  completedAt?: boolean
+  lastSrActionAt?: boolean
+  sourceVisitId?: boolean
 }
 
-export type LeadPhaseTaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "phaseType" | "workDetails" | "assigneeUserId" | "startedAt" | "dueAt" | "status" | "completedAt" | "lastSrActionAt" | "sourceVisitId" | "currentReviewRound" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["leadPhaseTask"]>
+export type LeadPhaseTaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "phaseType" | "assigneeUserId" | "dueAt" | "status" | "currentReviewRound" | "createdById" | "createdAt" | "updatedAt" | "workDetails" | "startedAt" | "completedAt" | "lastSrActionAt" | "sourceVisitId", ExtArgs["result"]["leadPhaseTask"]>
 export type LeadPhaseTaskInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  reviews?: boolean | Prisma.LeadPhaseTask$reviewsArgs<ExtArgs>
   assignee?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   sourceVisit?: boolean | Prisma.LeadPhaseTask$sourceVisitArgs<ExtArgs>
-  reviews?: boolean | Prisma.LeadPhaseTask$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.LeadPhaseTaskCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadPhaseTaskIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   assignee?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   sourceVisit?: boolean | Prisma.LeadPhaseTask$sourceVisitArgs<ExtArgs>
 }
 export type LeadPhaseTaskIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   assignee?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   sourceVisit?: boolean | Prisma.LeadPhaseTask$sourceVisitArgs<ExtArgs>
 }
 
 export type $LeadPhaseTaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadPhaseTask"
   objects: {
-    lead: Prisma.$LeadPayload<ExtArgs>
+    reviews: Prisma.$LeadPhaseReviewPayload<ExtArgs>[]
     assignee: Prisma.$UserPayload<ExtArgs>
     createdBy: Prisma.$UserPayload<ExtArgs>
+    lead: Prisma.$LeadPayload<ExtArgs>
     sourceVisit: Prisma.$VisitPayload<ExtArgs> | null
-    reviews: Prisma.$LeadPhaseReviewPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     leadId: string
     phaseType: $Enums.LeadPhaseType
-    workDetails: string | null
     assigneeUserId: string
-    startedAt: Date
     dueAt: Date
     status: $Enums.LeadPhaseTaskStatus
-    completedAt: Date | null
-    lastSrActionAt: Date | null
-    sourceVisitId: string | null
     currentReviewRound: number
     createdById: string
     createdAt: Date
     updatedAt: Date
+    workDetails: string | null
+    startedAt: Date
+    completedAt: Date | null
+    lastSrActionAt: Date | null
+    sourceVisitId: string | null
   }, ExtArgs["result"]["leadPhaseTask"]>
   composites: {}
 }
@@ -1984,11 +1992,11 @@ readonly fields: LeadPhaseTaskFieldRefs;
  */
 export interface Prisma__LeadPhaseTaskClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  lead<T extends Prisma.LeadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  reviews<T extends Prisma.LeadPhaseTask$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadPhaseTask$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPhaseReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignee<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   sourceVisit<T extends Prisma.LeadPhaseTask$sourceVisitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadPhaseTask$sourceVisitArgs<ExtArgs>>): Prisma.Prisma__VisitClient<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  reviews<T extends Prisma.LeadPhaseTask$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadPhaseTask$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPhaseReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2021,18 +2029,18 @@ export interface LeadPhaseTaskFieldRefs {
   readonly id: Prisma.FieldRef<"LeadPhaseTask", 'String'>
   readonly leadId: Prisma.FieldRef<"LeadPhaseTask", 'String'>
   readonly phaseType: Prisma.FieldRef<"LeadPhaseTask", 'LeadPhaseType'>
-  readonly workDetails: Prisma.FieldRef<"LeadPhaseTask", 'String'>
   readonly assigneeUserId: Prisma.FieldRef<"LeadPhaseTask", 'String'>
-  readonly startedAt: Prisma.FieldRef<"LeadPhaseTask", 'DateTime'>
   readonly dueAt: Prisma.FieldRef<"LeadPhaseTask", 'DateTime'>
   readonly status: Prisma.FieldRef<"LeadPhaseTask", 'LeadPhaseTaskStatus'>
-  readonly completedAt: Prisma.FieldRef<"LeadPhaseTask", 'DateTime'>
-  readonly lastSrActionAt: Prisma.FieldRef<"LeadPhaseTask", 'DateTime'>
-  readonly sourceVisitId: Prisma.FieldRef<"LeadPhaseTask", 'String'>
   readonly currentReviewRound: Prisma.FieldRef<"LeadPhaseTask", 'Int'>
   readonly createdById: Prisma.FieldRef<"LeadPhaseTask", 'String'>
   readonly createdAt: Prisma.FieldRef<"LeadPhaseTask", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"LeadPhaseTask", 'DateTime'>
+  readonly workDetails: Prisma.FieldRef<"LeadPhaseTask", 'String'>
+  readonly startedAt: Prisma.FieldRef<"LeadPhaseTask", 'DateTime'>
+  readonly completedAt: Prisma.FieldRef<"LeadPhaseTask", 'DateTime'>
+  readonly lastSrActionAt: Prisma.FieldRef<"LeadPhaseTask", 'DateTime'>
+  readonly sourceVisitId: Prisma.FieldRef<"LeadPhaseTask", 'String'>
 }
     
 
@@ -2429,25 +2437,6 @@ export type LeadPhaseTaskDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
- * LeadPhaseTask.sourceVisit
- */
-export type LeadPhaseTask$sourceVisitArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Visit
-   */
-  select?: Prisma.VisitSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Visit
-   */
-  omit?: Prisma.VisitOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.VisitInclude<ExtArgs> | null
-  where?: Prisma.VisitWhereInput
-}
-
-/**
  * LeadPhaseTask.reviews
  */
 export type LeadPhaseTask$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2469,6 +2458,25 @@ export type LeadPhaseTask$reviewsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.LeadPhaseReviewScalarFieldEnum | Prisma.LeadPhaseReviewScalarFieldEnum[]
+}
+
+/**
+ * LeadPhaseTask.sourceVisit
+ */
+export type LeadPhaseTask$sourceVisitArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Visit
+   */
+  select?: Prisma.VisitSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Visit
+   */
+  omit?: Prisma.VisitOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VisitInclude<ExtArgs> | null
+  where?: Prisma.VisitWhereInput
 }
 
 /**

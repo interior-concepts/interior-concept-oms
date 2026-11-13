@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -21,7 +21,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { toast } from '@/components/ui/sonner'
-import { LayoutGrid, Loader2, TableIcon } from 'lucide-react'
+import { LayoutGrid, Loader2, TableIcon, TrendingUp, TrendingDown, Wallet } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
@@ -39,11 +39,48 @@ type ProjectData = {
   srCrmName: string
 }
 
+type Stats = {
+  totalReceived: number
+  totalReceivable: number
+  totalPayable: number
+  totalAgreementValue: number
+}
+
+function StatCard({
+  title,
+  value,
+  icon,
+  colorClass,
+  subtext,
+}: {
+  title: string
+  value: number
+  icon: React.ReactNode
+  colorClass: string
+  subtext?: string
+}) {
+  return (
+    <Card className="flex-1 min-w-[180px]">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
+        <div className={`h-8 w-8 rounded-full flex items-center justify-center ${colorClass}`}>
+          {icon}
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className={`text-2xl font-bold tabular-nums ${colorClass.replace('bg-', 'text-').replace('/20', '')}`}>
+          ৳{value.toLocaleString()}
+        </div>
+        {subtext && <p className="text-xs text-muted-foreground mt-1">{subtext}</p>}
+      </CardContent>
+    </Card>
+  )
+}
+
 export default function AccountsProjectsPage() {
   const router = useRouter()
-  const pathname = usePathname() || ''
-  const projectDetailBasePath = pathname.startsWith('/crm/admin') ? '/crm/admin/projects' : '/crm/accounts/projects'
   const [projects, setProjects] = useState<ProjectData[]>([])
+  const [stats, setStats] = useState<Stats | null>(null)
   const [loading, setLoading] = useState(true)
   const [updatingId, setUpdatingId] = useState<string | null>(null)
   const [viewMode, setViewMode] = useState<'table' | 'card'>('table')
@@ -57,6 +94,7 @@ export default function AccountsProjectsPage() {
       const data = await response.json()
       if (data.success) {
         setProjects(data.data)
+        setStats(data.stats ?? null)
       } else {
         toast.error(data.error || 'Failed to fetch projects')
       }
@@ -102,6 +140,48 @@ export default function AccountsProjectsPage() {
         subtitle="Overview of all confirmed projects and their financial status."
       />
       <div className="flex flex-col gap-4 p-4 md:gap-8 md:p-8 w-full flex-1">
+
+        {/* ── Financial Stats ───────────────────────────────── */}
+        <div className="flex flex-wrap gap-4">
+          {loading && !stats ? (
+            [1, 2, 3].map((i) => (
+              <Card key={i} className="flex-1 min-w-[180px]">
+                <CardHeader className="pb-2">
+                  <div className="h-4 w-28 rounded bg-muted animate-pulse" />
+                </CardHeader>
+                <CardContent>
+                  <div className="h-8 w-32 rounded bg-muted animate-pulse" />
+                </CardContent>
+              </Card>
+            ))
+          ) : stats ? (
+            <>
+              <StatCard
+                title="Account Received"
+                value={stats.totalReceived}
+                icon={<TrendingUp className="h-4 w-4 text-emerald-600" />}
+                colorClass="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                subtext="Total payments collected"
+              />
+              <StatCard
+                title="Account Receivable"
+                value={stats.totalReceivable}
+                icon={<Wallet className="h-4 w-4 text-amber-600" />}
+                colorClass="bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                subtext="Remaining to collect from clients"
+              />
+              <StatCard
+                title="Account Payable"
+                value={stats.totalPayable}
+                icon={<TrendingDown className="h-4 w-4 text-rose-600" />}
+                colorClass="bg-rose-500/10 text-rose-600 dark:text-rose-400"
+                subtext="Total outflow across all projects"
+              />
+            </>
+          ) : null}
+        </div>
+
+        {/* ── Toolbar ───────────────────────────────────────── */}
         <div className="flex flex-wrap items-center gap-4 border-b pb-4">
           <div className="flex items-center space-x-2 rounded-md border p-1 w-fit">
             <Button
@@ -179,11 +259,12 @@ export default function AccountsProjectsPage() {
                       <TableRow
                         key={project.id}
                         className="cursor-pointer hover:bg-muted/40 transition-colors"
-                        onClick={() => router.push(`${projectDetailBasePath}/${project.id}`)}
+                        onClick={() => router.push(`/crm/accounts/projects/${project.id}`)}
                       >
                         <TableCell className="font-medium">
                           <Link
-                            href={`${projectDetailBasePath}/${project.id}`}
+                            href={`/crm/accounts/projects/${project.id}`}
+                            prefetch={false}
                             className="text-primary hover:underline font-semibold"
                           >
                             {project.name}
@@ -262,14 +343,15 @@ export default function AccountsProjectsPage() {
                 <Card
                   key={project.id}
                   className="flex flex-col hover:shadow-md transition-shadow cursor-pointer hover:bg-muted/40"
-                  onClick={() => router.push(`${projectDetailBasePath}/${project.id}`)}
+                  onClick={() => router.push(`/crm/accounts/projects/${project.id}`)}
                 >
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between">
                       <div>
                         <CardTitle className="text-base">
                           <Link
-                            href={`${projectDetailBasePath}/${project.id}`}
+                            href={`/crm/accounts/projects/${project.id}`}
+                            prefetch={false}
                             className="text-primary hover:underline font-semibold"
                           >
                             {project.name}
@@ -370,7 +452,8 @@ export default function AccountsProjectsPage() {
                     })()}
 
                     <Link
-                      href={`${projectDetailBasePath}/${project.id}`}
+                      href={`/crm/accounts/projects/${project.id}`}
+                      prefetch={false}
                       className="w-full text-center text-xs text-primary hover:underline py-1"
                     >
                       View Ledger →

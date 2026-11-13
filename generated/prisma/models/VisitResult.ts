@@ -29,13 +29,13 @@ export type VisitResultMinAggregateOutputType = {
   visitId: string | null
   summary: string | null
   clientMood: string | null
+  completedAt: Date | null
   clientPotentiality: string | null
   projectType: string | null
   clientPersonality: string | null
   budgetRange: string | null
   timelineUrgency: string | null
   stylePreference: string | null
-  completedAt: Date | null
 }
 
 export type VisitResultMaxAggregateOutputType = {
@@ -43,13 +43,13 @@ export type VisitResultMaxAggregateOutputType = {
   visitId: string | null
   summary: string | null
   clientMood: string | null
+  completedAt: Date | null
   clientPotentiality: string | null
   projectType: string | null
   clientPersonality: string | null
   budgetRange: string | null
   timelineUrgency: string | null
   stylePreference: string | null
-  completedAt: Date | null
 }
 
 export type VisitResultCountAggregateOutputType = {
@@ -58,13 +58,13 @@ export type VisitResultCountAggregateOutputType = {
   summary: number
   measurements: number
   clientMood: number
+  completedAt: number
   clientPotentiality: number
   projectType: number
   clientPersonality: number
   budgetRange: number
   timelineUrgency: number
   stylePreference: number
-  completedAt: number
   _all: number
 }
 
@@ -74,13 +74,13 @@ export type VisitResultMinAggregateInputType = {
   visitId?: true
   summary?: true
   clientMood?: true
+  completedAt?: true
   clientPotentiality?: true
   projectType?: true
   clientPersonality?: true
   budgetRange?: true
   timelineUrgency?: true
   stylePreference?: true
-  completedAt?: true
 }
 
 export type VisitResultMaxAggregateInputType = {
@@ -88,13 +88,13 @@ export type VisitResultMaxAggregateInputType = {
   visitId?: true
   summary?: true
   clientMood?: true
+  completedAt?: true
   clientPotentiality?: true
   projectType?: true
   clientPersonality?: true
   budgetRange?: true
   timelineUrgency?: true
   stylePreference?: true
-  completedAt?: true
 }
 
 export type VisitResultCountAggregateInputType = {
@@ -103,13 +103,13 @@ export type VisitResultCountAggregateInputType = {
   summary?: true
   measurements?: true
   clientMood?: true
+  completedAt?: true
   clientPotentiality?: true
   projectType?: true
   clientPersonality?: true
   budgetRange?: true
   timelineUrgency?: true
   stylePreference?: true
-  completedAt?: true
   _all?: true
 }
 
@@ -191,13 +191,13 @@ export type VisitResultGroupByOutputType = {
   summary: string
   measurements: runtime.JsonValue | null
   clientMood: string | null
+  completedAt: Date
   clientPotentiality: string | null
   projectType: string | null
   clientPersonality: string | null
   budgetRange: string | null
   timelineUrgency: string | null
   stylePreference: string | null
-  completedAt: Date
   _count: VisitResultCountAggregateOutputType | null
   _min: VisitResultMinAggregateOutputType | null
   _max: VisitResultMaxAggregateOutputType | null
@@ -227,15 +227,15 @@ export type VisitResultWhereInput = {
   summary?: Prisma.StringFilter<"VisitResult"> | string
   measurements?: Prisma.JsonNullableFilter<"VisitResult">
   clientMood?: Prisma.StringNullableFilter<"VisitResult"> | string | null
+  completedAt?: Prisma.DateTimeFilter<"VisitResult"> | Date | string
   clientPotentiality?: Prisma.StringNullableFilter<"VisitResult"> | string | null
   projectType?: Prisma.StringNullableFilter<"VisitResult"> | string | null
   clientPersonality?: Prisma.StringNullableFilter<"VisitResult"> | string | null
   budgetRange?: Prisma.StringNullableFilter<"VisitResult"> | string | null
   timelineUrgency?: Prisma.StringNullableFilter<"VisitResult"> | string | null
   stylePreference?: Prisma.StringNullableFilter<"VisitResult"> | string | null
-  completedAt?: Prisma.DateTimeFilter<"VisitResult"> | Date | string
-  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
   files?: Prisma.AttachmentListRelationFilter
+  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
 }
 
 export type VisitResultOrderByWithRelationInput = {
@@ -244,15 +244,15 @@ export type VisitResultOrderByWithRelationInput = {
   summary?: Prisma.SortOrder
   measurements?: Prisma.SortOrderInput | Prisma.SortOrder
   clientMood?: Prisma.SortOrderInput | Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   clientPotentiality?: Prisma.SortOrderInput | Prisma.SortOrder
   projectType?: Prisma.SortOrderInput | Prisma.SortOrder
   clientPersonality?: Prisma.SortOrderInput | Prisma.SortOrder
   budgetRange?: Prisma.SortOrderInput | Prisma.SortOrder
   timelineUrgency?: Prisma.SortOrderInput | Prisma.SortOrder
   stylePreference?: Prisma.SortOrderInput | Prisma.SortOrder
-  completedAt?: Prisma.SortOrder
-  visit?: Prisma.VisitOrderByWithRelationInput
   files?: Prisma.AttachmentOrderByRelationAggregateInput
+  visit?: Prisma.VisitOrderByWithRelationInput
 }
 
 export type VisitResultWhereUniqueInput = Prisma.AtLeast<{
@@ -264,15 +264,15 @@ export type VisitResultWhereUniqueInput = Prisma.AtLeast<{
   summary?: Prisma.StringFilter<"VisitResult"> | string
   measurements?: Prisma.JsonNullableFilter<"VisitResult">
   clientMood?: Prisma.StringNullableFilter<"VisitResult"> | string | null
+  completedAt?: Prisma.DateTimeFilter<"VisitResult"> | Date | string
   clientPotentiality?: Prisma.StringNullableFilter<"VisitResult"> | string | null
   projectType?: Prisma.StringNullableFilter<"VisitResult"> | string | null
   clientPersonality?: Prisma.StringNullableFilter<"VisitResult"> | string | null
   budgetRange?: Prisma.StringNullableFilter<"VisitResult"> | string | null
   timelineUrgency?: Prisma.StringNullableFilter<"VisitResult"> | string | null
   stylePreference?: Prisma.StringNullableFilter<"VisitResult"> | string | null
-  completedAt?: Prisma.DateTimeFilter<"VisitResult"> | Date | string
-  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
   files?: Prisma.AttachmentListRelationFilter
+  visit?: Prisma.XOR<Prisma.VisitScalarRelationFilter, Prisma.VisitWhereInput>
 }, "id" | "visitId">
 
 export type VisitResultOrderByWithAggregationInput = {
@@ -281,13 +281,13 @@ export type VisitResultOrderByWithAggregationInput = {
   summary?: Prisma.SortOrder
   measurements?: Prisma.SortOrderInput | Prisma.SortOrder
   clientMood?: Prisma.SortOrderInput | Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   clientPotentiality?: Prisma.SortOrderInput | Prisma.SortOrder
   projectType?: Prisma.SortOrderInput | Prisma.SortOrder
   clientPersonality?: Prisma.SortOrderInput | Prisma.SortOrder
   budgetRange?: Prisma.SortOrderInput | Prisma.SortOrder
   timelineUrgency?: Prisma.SortOrderInput | Prisma.SortOrder
   stylePreference?: Prisma.SortOrderInput | Prisma.SortOrder
-  completedAt?: Prisma.SortOrder
   _count?: Prisma.VisitResultCountOrderByAggregateInput
   _max?: Prisma.VisitResultMaxOrderByAggregateInput
   _min?: Prisma.VisitResultMinOrderByAggregateInput
@@ -302,13 +302,13 @@ export type VisitResultScalarWhereWithAggregatesInput = {
   summary?: Prisma.StringWithAggregatesFilter<"VisitResult"> | string
   measurements?: Prisma.JsonNullableWithAggregatesFilter<"VisitResult">
   clientMood?: Prisma.StringNullableWithAggregatesFilter<"VisitResult"> | string | null
+  completedAt?: Prisma.DateTimeWithAggregatesFilter<"VisitResult"> | Date | string
   clientPotentiality?: Prisma.StringNullableWithAggregatesFilter<"VisitResult"> | string | null
   projectType?: Prisma.StringNullableWithAggregatesFilter<"VisitResult"> | string | null
   clientPersonality?: Prisma.StringNullableWithAggregatesFilter<"VisitResult"> | string | null
   budgetRange?: Prisma.StringNullableWithAggregatesFilter<"VisitResult"> | string | null
   timelineUrgency?: Prisma.StringNullableWithAggregatesFilter<"VisitResult"> | string | null
   stylePreference?: Prisma.StringNullableWithAggregatesFilter<"VisitResult"> | string | null
-  completedAt?: Prisma.DateTimeWithAggregatesFilter<"VisitResult"> | Date | string
 }
 
 export type VisitResultCreateInput = {
@@ -316,15 +316,15 @@ export type VisitResultCreateInput = {
   summary: string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: string | null
+  completedAt?: Date | string
   clientPotentiality?: string | null
   projectType?: string | null
   clientPersonality?: string | null
   budgetRange?: string | null
   timelineUrgency?: string | null
   stylePreference?: string | null
-  completedAt?: Date | string
-  visit: Prisma.VisitCreateNestedOneWithoutResultInput
   files?: Prisma.AttachmentCreateNestedManyWithoutVisitResultInput
+  visit: Prisma.VisitCreateNestedOneWithoutResultInput
 }
 
 export type VisitResultUncheckedCreateInput = {
@@ -333,13 +333,13 @@ export type VisitResultUncheckedCreateInput = {
   summary: string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: string | null
+  completedAt?: Date | string
   clientPotentiality?: string | null
   projectType?: string | null
   clientPersonality?: string | null
   budgetRange?: string | null
   timelineUrgency?: string | null
   stylePreference?: string | null
-  completedAt?: Date | string
   files?: Prisma.AttachmentUncheckedCreateNestedManyWithoutVisitResultInput
 }
 
@@ -348,15 +348,15 @@ export type VisitResultUpdateInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientPotentiality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timelineUrgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stylePreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  visit?: Prisma.VisitUpdateOneRequiredWithoutResultNestedInput
   files?: Prisma.AttachmentUpdateManyWithoutVisitResultNestedInput
+  visit?: Prisma.VisitUpdateOneRequiredWithoutResultNestedInput
 }
 
 export type VisitResultUncheckedUpdateInput = {
@@ -365,13 +365,13 @@ export type VisitResultUncheckedUpdateInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientPotentiality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timelineUrgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stylePreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.AttachmentUncheckedUpdateManyWithoutVisitResultNestedInput
 }
 
@@ -381,13 +381,13 @@ export type VisitResultCreateManyInput = {
   summary: string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: string | null
+  completedAt?: Date | string
   clientPotentiality?: string | null
   projectType?: string | null
   clientPersonality?: string | null
   budgetRange?: string | null
   timelineUrgency?: string | null
   stylePreference?: string | null
-  completedAt?: Date | string
 }
 
 export type VisitResultUpdateManyMutationInput = {
@@ -395,13 +395,13 @@ export type VisitResultUpdateManyMutationInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientPotentiality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timelineUrgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stylePreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VisitResultUncheckedUpdateManyInput = {
@@ -410,13 +410,13 @@ export type VisitResultUncheckedUpdateManyInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientPotentiality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timelineUrgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stylePreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VisitResultNullableScalarRelationFilter = {
@@ -430,13 +430,13 @@ export type VisitResultCountOrderByAggregateInput = {
   summary?: Prisma.SortOrder
   measurements?: Prisma.SortOrder
   clientMood?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   clientPotentiality?: Prisma.SortOrder
   projectType?: Prisma.SortOrder
   clientPersonality?: Prisma.SortOrder
   budgetRange?: Prisma.SortOrder
   timelineUrgency?: Prisma.SortOrder
   stylePreference?: Prisma.SortOrder
-  completedAt?: Prisma.SortOrder
 }
 
 export type VisitResultMaxOrderByAggregateInput = {
@@ -444,13 +444,13 @@ export type VisitResultMaxOrderByAggregateInput = {
   visitId?: Prisma.SortOrder
   summary?: Prisma.SortOrder
   clientMood?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   clientPotentiality?: Prisma.SortOrder
   projectType?: Prisma.SortOrder
   clientPersonality?: Prisma.SortOrder
   budgetRange?: Prisma.SortOrder
   timelineUrgency?: Prisma.SortOrder
   stylePreference?: Prisma.SortOrder
-  completedAt?: Prisma.SortOrder
 }
 
 export type VisitResultMinOrderByAggregateInput = {
@@ -458,13 +458,13 @@ export type VisitResultMinOrderByAggregateInput = {
   visitId?: Prisma.SortOrder
   summary?: Prisma.SortOrder
   clientMood?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
   clientPotentiality?: Prisma.SortOrder
   projectType?: Prisma.SortOrder
   clientPersonality?: Prisma.SortOrder
   budgetRange?: Prisma.SortOrder
   timelineUrgency?: Prisma.SortOrder
   stylePreference?: Prisma.SortOrder
-  completedAt?: Prisma.SortOrder
 }
 
 export type VisitResultScalarRelationFilter = {
@@ -523,13 +523,13 @@ export type VisitResultCreateWithoutVisitInput = {
   summary: string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: string | null
+  completedAt?: Date | string
   clientPotentiality?: string | null
   projectType?: string | null
   clientPersonality?: string | null
   budgetRange?: string | null
   timelineUrgency?: string | null
   stylePreference?: string | null
-  completedAt?: Date | string
   files?: Prisma.AttachmentCreateNestedManyWithoutVisitResultInput
 }
 
@@ -538,13 +538,13 @@ export type VisitResultUncheckedCreateWithoutVisitInput = {
   summary: string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: string | null
+  completedAt?: Date | string
   clientPotentiality?: string | null
   projectType?: string | null
   clientPersonality?: string | null
   budgetRange?: string | null
   timelineUrgency?: string | null
   stylePreference?: string | null
-  completedAt?: Date | string
   files?: Prisma.AttachmentUncheckedCreateNestedManyWithoutVisitResultInput
 }
 
@@ -569,13 +569,13 @@ export type VisitResultUpdateWithoutVisitInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientPotentiality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timelineUrgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stylePreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.AttachmentUpdateManyWithoutVisitResultNestedInput
 }
 
@@ -584,13 +584,13 @@ export type VisitResultUncheckedUpdateWithoutVisitInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientPotentiality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timelineUrgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stylePreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.AttachmentUncheckedUpdateManyWithoutVisitResultNestedInput
 }
 
@@ -599,13 +599,13 @@ export type VisitResultCreateWithoutFilesInput = {
   summary: string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: string | null
+  completedAt?: Date | string
   clientPotentiality?: string | null
   projectType?: string | null
   clientPersonality?: string | null
   budgetRange?: string | null
   timelineUrgency?: string | null
   stylePreference?: string | null
-  completedAt?: Date | string
   visit: Prisma.VisitCreateNestedOneWithoutResultInput
 }
 
@@ -615,13 +615,13 @@ export type VisitResultUncheckedCreateWithoutFilesInput = {
   summary: string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: string | null
+  completedAt?: Date | string
   clientPotentiality?: string | null
   projectType?: string | null
   clientPersonality?: string | null
   budgetRange?: string | null
   timelineUrgency?: string | null
   stylePreference?: string | null
-  completedAt?: Date | string
 }
 
 export type VisitResultCreateOrConnectWithoutFilesInput = {
@@ -645,13 +645,13 @@ export type VisitResultUpdateWithoutFilesInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientPotentiality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timelineUrgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stylePreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visit?: Prisma.VisitUpdateOneRequiredWithoutResultNestedInput
 }
 
@@ -661,13 +661,13 @@ export type VisitResultUncheckedUpdateWithoutFilesInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   measurements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   clientMood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientPotentiality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timelineUrgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stylePreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -707,15 +707,15 @@ export type VisitResultSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   summary?: boolean
   measurements?: boolean
   clientMood?: boolean
+  completedAt?: boolean
   clientPotentiality?: boolean
   projectType?: boolean
   clientPersonality?: boolean
   budgetRange?: boolean
   timelineUrgency?: boolean
   stylePreference?: boolean
-  completedAt?: boolean
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   files?: boolean | Prisma.VisitResult$filesArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.VisitResultCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visitResult"]>
 
@@ -725,13 +725,13 @@ export type VisitResultSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   summary?: boolean
   measurements?: boolean
   clientMood?: boolean
+  completedAt?: boolean
   clientPotentiality?: boolean
   projectType?: boolean
   clientPersonality?: boolean
   budgetRange?: boolean
   timelineUrgency?: boolean
   stylePreference?: boolean
-  completedAt?: boolean
   visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visitResult"]>
 
@@ -741,13 +741,13 @@ export type VisitResultSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   summary?: boolean
   measurements?: boolean
   clientMood?: boolean
+  completedAt?: boolean
   clientPotentiality?: boolean
   projectType?: boolean
   clientPersonality?: boolean
   budgetRange?: boolean
   timelineUrgency?: boolean
   stylePreference?: boolean
-  completedAt?: boolean
   visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visitResult"]>
 
@@ -757,19 +757,19 @@ export type VisitResultSelectScalar = {
   summary?: boolean
   measurements?: boolean
   clientMood?: boolean
+  completedAt?: boolean
   clientPotentiality?: boolean
   projectType?: boolean
   clientPersonality?: boolean
   budgetRange?: boolean
   timelineUrgency?: boolean
   stylePreference?: boolean
-  completedAt?: boolean
 }
 
-export type VisitResultOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "visitId" | "summary" | "measurements" | "clientMood" | "clientPotentiality" | "projectType" | "clientPersonality" | "budgetRange" | "timelineUrgency" | "stylePreference" | "completedAt", ExtArgs["result"]["visitResult"]>
+export type VisitResultOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "visitId" | "summary" | "measurements" | "clientMood" | "completedAt" | "clientPotentiality" | "projectType" | "clientPersonality" | "budgetRange" | "timelineUrgency" | "stylePreference", ExtArgs["result"]["visitResult"]>
 export type VisitResultInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   files?: boolean | Prisma.VisitResult$filesArgs<ExtArgs>
+  visit?: boolean | Prisma.VisitDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.VisitResultCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VisitResultIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -782,8 +782,8 @@ export type VisitResultIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.
 export type $VisitResultPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "VisitResult"
   objects: {
-    visit: Prisma.$VisitPayload<ExtArgs>
     files: Prisma.$AttachmentPayload<ExtArgs>[]
+    visit: Prisma.$VisitPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -791,13 +791,13 @@ export type $VisitResultPayload<ExtArgs extends runtime.Types.Extensions.Interna
     summary: string
     measurements: runtime.JsonValue | null
     clientMood: string | null
+    completedAt: Date
     clientPotentiality: string | null
     projectType: string | null
     clientPersonality: string | null
     budgetRange: string | null
     timelineUrgency: string | null
     stylePreference: string | null
-    completedAt: Date
   }, ExtArgs["result"]["visitResult"]>
   composites: {}
 }
@@ -1192,8 +1192,8 @@ readonly fields: VisitResultFieldRefs;
  */
 export interface Prisma__VisitResultClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  visit<T extends Prisma.VisitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitDefaultArgs<ExtArgs>>): Prisma.Prisma__VisitClient<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   files<T extends Prisma.VisitResult$filesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitResult$filesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  visit<T extends Prisma.VisitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VisitDefaultArgs<ExtArgs>>): Prisma.Prisma__VisitClient<runtime.Types.Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1228,13 +1228,13 @@ export interface VisitResultFieldRefs {
   readonly summary: Prisma.FieldRef<"VisitResult", 'String'>
   readonly measurements: Prisma.FieldRef<"VisitResult", 'Json'>
   readonly clientMood: Prisma.FieldRef<"VisitResult", 'String'>
+  readonly completedAt: Prisma.FieldRef<"VisitResult", 'DateTime'>
   readonly clientPotentiality: Prisma.FieldRef<"VisitResult", 'String'>
   readonly projectType: Prisma.FieldRef<"VisitResult", 'String'>
   readonly clientPersonality: Prisma.FieldRef<"VisitResult", 'String'>
   readonly budgetRange: Prisma.FieldRef<"VisitResult", 'String'>
   readonly timelineUrgency: Prisma.FieldRef<"VisitResult", 'String'>
   readonly stylePreference: Prisma.FieldRef<"VisitResult", 'String'>
-  readonly completedAt: Prisma.FieldRef<"VisitResult", 'DateTime'>
 }
     
 

@@ -39,7 +39,6 @@ export type QuotationDraftSumAggregateOutputType = {
 export type QuotationDraftMinAggregateOutputType = {
   id: string | null
   leadId: string | null
-  draftKey: string | null
   createdById: string | null
   updatedById: string | null
   quotationType: string | null
@@ -48,12 +47,12 @@ export type QuotationDraftMinAggregateOutputType = {
   status: $Enums.QuotationDraftStatus | null
   createdAt: Date | null
   updatedAt: Date | null
+  draftKey: string | null
 }
 
 export type QuotationDraftMaxAggregateOutputType = {
   id: string | null
   leadId: string | null
-  draftKey: string | null
   createdById: string | null
   updatedById: string | null
   quotationType: string | null
@@ -62,12 +61,12 @@ export type QuotationDraftMaxAggregateOutputType = {
   status: $Enums.QuotationDraftStatus | null
   createdAt: Date | null
   updatedAt: Date | null
+  draftKey: string | null
 }
 
 export type QuotationDraftCountAggregateOutputType = {
   id: number
   leadId: number
-  draftKey: number
   createdById: number
   updatedById: number
   quotationType: number
@@ -77,6 +76,7 @@ export type QuotationDraftCountAggregateOutputType = {
   status: number
   createdAt: number
   updatedAt: number
+  draftKey: number
   _all: number
 }
 
@@ -94,7 +94,6 @@ export type QuotationDraftSumAggregateInputType = {
 export type QuotationDraftMinAggregateInputType = {
   id?: true
   leadId?: true
-  draftKey?: true
   createdById?: true
   updatedById?: true
   quotationType?: true
@@ -103,12 +102,12 @@ export type QuotationDraftMinAggregateInputType = {
   status?: true
   createdAt?: true
   updatedAt?: true
+  draftKey?: true
 }
 
 export type QuotationDraftMaxAggregateInputType = {
   id?: true
   leadId?: true
-  draftKey?: true
   createdById?: true
   updatedById?: true
   quotationType?: true
@@ -117,12 +116,12 @@ export type QuotationDraftMaxAggregateInputType = {
   status?: true
   createdAt?: true
   updatedAt?: true
+  draftKey?: true
 }
 
 export type QuotationDraftCountAggregateInputType = {
   id?: true
   leadId?: true
-  draftKey?: true
   createdById?: true
   updatedById?: true
   quotationType?: true
@@ -132,6 +131,7 @@ export type QuotationDraftCountAggregateInputType = {
   status?: true
   createdAt?: true
   updatedAt?: true
+  draftKey?: true
   _all?: true
 }
 
@@ -224,7 +224,6 @@ export type QuotationDraftGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 export type QuotationDraftGroupByOutputType = {
   id: string
   leadId: string
-  draftKey: string
   createdById: string
   updatedById: string | null
   quotationType: string
@@ -234,6 +233,7 @@ export type QuotationDraftGroupByOutputType = {
   status: $Enums.QuotationDraftStatus
   createdAt: Date
   updatedAt: Date
+  draftKey: string
   _count: QuotationDraftCountAggregateOutputType | null
   _avg: QuotationDraftAvgAggregateOutputType | null
   _sum: QuotationDraftSumAggregateOutputType | null
@@ -262,7 +262,6 @@ export type QuotationDraftWhereInput = {
   NOT?: Prisma.QuotationDraftWhereInput | Prisma.QuotationDraftWhereInput[]
   id?: Prisma.StringFilter<"QuotationDraft"> | string
   leadId?: Prisma.StringFilter<"QuotationDraft"> | string
-  draftKey?: Prisma.StringFilter<"QuotationDraft"> | string
   createdById?: Prisma.StringFilter<"QuotationDraft"> | string
   updatedById?: Prisma.StringNullableFilter<"QuotationDraft"> | string | null
   quotationType?: Prisma.StringFilter<"QuotationDraft"> | string
@@ -272,8 +271,10 @@ export type QuotationDraftWhereInput = {
   status?: Prisma.EnumQuotationDraftStatusFilter<"QuotationDraft"> | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFilter<"QuotationDraft"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"QuotationDraft"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
+  draftKey?: Prisma.StringFilter<"QuotationDraft"> | string
+  agreementValueLogs?: Prisma.AgreementValueLogListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   materialRequisitions?: Prisma.MaterialRequisitionListRelationFilter
 }
@@ -281,7 +282,6 @@ export type QuotationDraftWhereInput = {
 export type QuotationDraftOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
-  draftKey?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   quotationType?: Prisma.SortOrder
@@ -291,8 +291,10 @@ export type QuotationDraftOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  lead?: Prisma.LeadOrderByWithRelationInput
+  draftKey?: Prisma.SortOrder
+  agreementValueLogs?: Prisma.AgreementValueLogOrderByRelationAggregateInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  lead?: Prisma.LeadOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
   materialRequisitions?: Prisma.MaterialRequisitionOrderByRelationAggregateInput
 }
@@ -304,7 +306,6 @@ export type QuotationDraftWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.QuotationDraftWhereInput[]
   NOT?: Prisma.QuotationDraftWhereInput | Prisma.QuotationDraftWhereInput[]
   leadId?: Prisma.StringFilter<"QuotationDraft"> | string
-  draftKey?: Prisma.StringFilter<"QuotationDraft"> | string
   createdById?: Prisma.StringFilter<"QuotationDraft"> | string
   updatedById?: Prisma.StringNullableFilter<"QuotationDraft"> | string | null
   quotationType?: Prisma.StringFilter<"QuotationDraft"> | string
@@ -314,8 +315,10 @@ export type QuotationDraftWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumQuotationDraftStatusFilter<"QuotationDraft"> | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFilter<"QuotationDraft"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"QuotationDraft"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
+  draftKey?: Prisma.StringFilter<"QuotationDraft"> | string
+  agreementValueLogs?: Prisma.AgreementValueLogListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   materialRequisitions?: Prisma.MaterialRequisitionListRelationFilter
 }, "id" | "leadId_draftKey">
@@ -323,7 +326,6 @@ export type QuotationDraftWhereUniqueInput = Prisma.AtLeast<{
 export type QuotationDraftOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
-  draftKey?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   quotationType?: Prisma.SortOrder
@@ -333,6 +335,7 @@ export type QuotationDraftOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  draftKey?: Prisma.SortOrder
   _count?: Prisma.QuotationDraftCountOrderByAggregateInput
   _avg?: Prisma.QuotationDraftAvgOrderByAggregateInput
   _max?: Prisma.QuotationDraftMaxOrderByAggregateInput
@@ -346,7 +349,6 @@ export type QuotationDraftScalarWhereWithAggregatesInput = {
   NOT?: Prisma.QuotationDraftScalarWhereWithAggregatesInput | Prisma.QuotationDraftScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"QuotationDraft"> | string
   leadId?: Prisma.StringWithAggregatesFilter<"QuotationDraft"> | string
-  draftKey?: Prisma.StringWithAggregatesFilter<"QuotationDraft"> | string
   createdById?: Prisma.StringWithAggregatesFilter<"QuotationDraft"> | string
   updatedById?: Prisma.StringNullableWithAggregatesFilter<"QuotationDraft"> | string | null
   quotationType?: Prisma.StringWithAggregatesFilter<"QuotationDraft"> | string
@@ -356,11 +358,11 @@ export type QuotationDraftScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumQuotationDraftStatusWithAggregatesFilter<"QuotationDraft"> | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"QuotationDraft"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"QuotationDraft"> | Date | string
+  draftKey?: Prisma.StringWithAggregatesFilter<"QuotationDraft"> | string
 }
 
 export type QuotationDraftCreateInput = {
   id?: string
-  draftKey?: string
   quotationType?: string
   projectSqft?: number | null
   content: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -368,8 +370,10 @@ export type QuotationDraftCreateInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutQuotationDraftsInput
+  draftKey?: string
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutQuotationDraftInput
   createdBy: Prisma.UserCreateNestedOneWithoutQuotationDraftsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutQuotationDraftsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutQuotationDraftsUpdatedInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutQuotationDraftInput
 }
@@ -377,7 +381,6 @@ export type QuotationDraftCreateInput = {
 export type QuotationDraftUncheckedCreateInput = {
   id?: string
   leadId: string
-  draftKey?: string
   createdById: string
   updatedById?: string | null
   quotationType?: string
@@ -387,12 +390,13 @@ export type QuotationDraftUncheckedCreateInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  draftKey?: string
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutQuotationDraftInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutQuotationDraftInput
 }
 
 export type QuotationDraftUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
   projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   content?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -400,8 +404,10 @@ export type QuotationDraftUpdateInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutQuotationDraftsNestedInput
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutQuotationDraftNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutQuotationDraftsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutQuotationDraftsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutQuotationDraftsUpdatedNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutQuotationDraftNestedInput
 }
@@ -409,7 +415,6 @@ export type QuotationDraftUpdateInput = {
 export type QuotationDraftUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
@@ -419,13 +424,14 @@ export type QuotationDraftUncheckedUpdateInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutQuotationDraftNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutQuotationDraftNestedInput
 }
 
 export type QuotationDraftCreateManyInput = {
   id?: string
   leadId: string
-  draftKey?: string
   createdById: string
   updatedById?: string | null
   quotationType?: string
@@ -435,11 +441,11 @@ export type QuotationDraftCreateManyInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  draftKey?: string
 }
 
 export type QuotationDraftUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
   projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   content?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -447,12 +453,12 @@ export type QuotationDraftUpdateManyMutationInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type QuotationDraftUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
@@ -462,6 +468,7 @@ export type QuotationDraftUncheckedUpdateManyInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type QuotationDraftListRelationFilter = {
@@ -474,6 +481,11 @@ export type QuotationDraftOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type QuotationDraftNullableScalarRelationFilter = {
+  is?: Prisma.QuotationDraftWhereInput | null
+  isNot?: Prisma.QuotationDraftWhereInput | null
+}
+
 export type QuotationDraftLeadIdDraftKeyCompoundUniqueInput = {
   leadId: string
   draftKey: string
@@ -482,7 +494,6 @@ export type QuotationDraftLeadIdDraftKeyCompoundUniqueInput = {
 export type QuotationDraftCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
-  draftKey?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   quotationType?: Prisma.SortOrder
@@ -492,6 +503,7 @@ export type QuotationDraftCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  draftKey?: Prisma.SortOrder
 }
 
 export type QuotationDraftAvgOrderByAggregateInput = {
@@ -502,7 +514,6 @@ export type QuotationDraftAvgOrderByAggregateInput = {
 export type QuotationDraftMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
-  draftKey?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   quotationType?: Prisma.SortOrder
@@ -511,12 +522,12 @@ export type QuotationDraftMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  draftKey?: Prisma.SortOrder
 }
 
 export type QuotationDraftMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
-  draftKey?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   quotationType?: Prisma.SortOrder
@@ -525,16 +536,12 @@ export type QuotationDraftMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  draftKey?: Prisma.SortOrder
 }
 
 export type QuotationDraftSumOrderByAggregateInput = {
   projectSqft?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
-}
-
-export type QuotationDraftNullableScalarRelationFilter = {
-  is?: Prisma.QuotationDraftWhereInput | null
-  isNot?: Prisma.QuotationDraftWhereInput | null
 }
 
 export type QuotationDraftCreateNestedManyWithoutLeadInput = {
@@ -663,12 +670,20 @@ export type QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput = {
   deleteMany?: Prisma.QuotationDraftScalarWhereInput | Prisma.QuotationDraftScalarWhereInput[]
 }
 
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type QuotationDraftCreateNestedOneWithoutAgreementValueLogsInput = {
+  create?: Prisma.XOR<Prisma.QuotationDraftCreateWithoutAgreementValueLogsInput, Prisma.QuotationDraftUncheckedCreateWithoutAgreementValueLogsInput>
+  connectOrCreate?: Prisma.QuotationDraftCreateOrConnectWithoutAgreementValueLogsInput
+  connect?: Prisma.QuotationDraftWhereUniqueInput
+}
+
+export type QuotationDraftUpdateOneWithoutAgreementValueLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.QuotationDraftCreateWithoutAgreementValueLogsInput, Prisma.QuotationDraftUncheckedCreateWithoutAgreementValueLogsInput>
+  connectOrCreate?: Prisma.QuotationDraftCreateOrConnectWithoutAgreementValueLogsInput
+  upsert?: Prisma.QuotationDraftUpsertWithoutAgreementValueLogsInput
+  disconnect?: Prisma.QuotationDraftWhereInput | boolean
+  delete?: Prisma.QuotationDraftWhereInput | boolean
+  connect?: Prisma.QuotationDraftWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.QuotationDraftUpdateToOneWithWhereWithoutAgreementValueLogsInput, Prisma.QuotationDraftUpdateWithoutAgreementValueLogsInput>, Prisma.QuotationDraftUncheckedUpdateWithoutAgreementValueLogsInput>
 }
 
 export type EnumQuotationDraftStatusFieldUpdateOperationsInput = {
@@ -693,7 +708,6 @@ export type QuotationDraftUpdateOneWithoutMaterialRequisitionsNestedInput = {
 
 export type QuotationDraftCreateWithoutLeadInput = {
   id?: string
-  draftKey?: string
   quotationType?: string
   projectSqft?: number | null
   content: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -701,6 +715,8 @@ export type QuotationDraftCreateWithoutLeadInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  draftKey?: string
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutQuotationDraftInput
   createdBy: Prisma.UserCreateNestedOneWithoutQuotationDraftsCreatedInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutQuotationDraftsUpdatedInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutQuotationDraftInput
@@ -708,7 +724,6 @@ export type QuotationDraftCreateWithoutLeadInput = {
 
 export type QuotationDraftUncheckedCreateWithoutLeadInput = {
   id?: string
-  draftKey?: string
   createdById: string
   updatedById?: string | null
   quotationType?: string
@@ -718,6 +733,8 @@ export type QuotationDraftUncheckedCreateWithoutLeadInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  draftKey?: string
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutQuotationDraftInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutQuotationDraftInput
 }
 
@@ -753,7 +770,6 @@ export type QuotationDraftScalarWhereInput = {
   NOT?: Prisma.QuotationDraftScalarWhereInput | Prisma.QuotationDraftScalarWhereInput[]
   id?: Prisma.StringFilter<"QuotationDraft"> | string
   leadId?: Prisma.StringFilter<"QuotationDraft"> | string
-  draftKey?: Prisma.StringFilter<"QuotationDraft"> | string
   createdById?: Prisma.StringFilter<"QuotationDraft"> | string
   updatedById?: Prisma.StringNullableFilter<"QuotationDraft"> | string | null
   quotationType?: Prisma.StringFilter<"QuotationDraft"> | string
@@ -763,11 +779,11 @@ export type QuotationDraftScalarWhereInput = {
   status?: Prisma.EnumQuotationDraftStatusFilter<"QuotationDraft"> | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFilter<"QuotationDraft"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"QuotationDraft"> | Date | string
+  draftKey?: Prisma.StringFilter<"QuotationDraft"> | string
 }
 
 export type QuotationDraftCreateWithoutCreatedByInput = {
   id?: string
-  draftKey?: string
   quotationType?: string
   projectSqft?: number | null
   content: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -775,6 +791,8 @@ export type QuotationDraftCreateWithoutCreatedByInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  draftKey?: string
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutQuotationDraftInput
   lead: Prisma.LeadCreateNestedOneWithoutQuotationDraftsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutQuotationDraftsUpdatedInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutQuotationDraftInput
@@ -783,7 +801,6 @@ export type QuotationDraftCreateWithoutCreatedByInput = {
 export type QuotationDraftUncheckedCreateWithoutCreatedByInput = {
   id?: string
   leadId: string
-  draftKey?: string
   updatedById?: string | null
   quotationType?: string
   projectSqft?: number | null
@@ -792,6 +809,8 @@ export type QuotationDraftUncheckedCreateWithoutCreatedByInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  draftKey?: string
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutQuotationDraftInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutQuotationDraftInput
 }
 
@@ -807,7 +826,6 @@ export type QuotationDraftCreateManyCreatedByInputEnvelope = {
 
 export type QuotationDraftCreateWithoutUpdatedByInput = {
   id?: string
-  draftKey?: string
   quotationType?: string
   projectSqft?: number | null
   content: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -815,15 +833,16 @@ export type QuotationDraftCreateWithoutUpdatedByInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutQuotationDraftsInput
+  draftKey?: string
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutQuotationDraftInput
   createdBy: Prisma.UserCreateNestedOneWithoutQuotationDraftsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutQuotationDraftsInput
   materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutQuotationDraftInput
 }
 
 export type QuotationDraftUncheckedCreateWithoutUpdatedByInput = {
   id?: string
   leadId: string
-  draftKey?: string
   createdById: string
   quotationType?: string
   projectSqft?: number | null
@@ -832,6 +851,8 @@ export type QuotationDraftUncheckedCreateWithoutUpdatedByInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  draftKey?: string
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutQuotationDraftInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutQuotationDraftInput
 }
 
@@ -877,9 +898,8 @@ export type QuotationDraftUpdateManyWithWhereWithoutUpdatedByInput = {
   data: Prisma.XOR<Prisma.QuotationDraftUpdateManyMutationInput, Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByInput>
 }
 
-export type QuotationDraftCreateWithoutMaterialRequisitionsInput = {
+export type QuotationDraftCreateWithoutAgreementValueLogsInput = {
   id?: string
-  draftKey?: string
   quotationType?: string
   projectSqft?: number | null
   content: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -887,15 +907,16 @@ export type QuotationDraftCreateWithoutMaterialRequisitionsInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutQuotationDraftsInput
+  draftKey?: string
   createdBy: Prisma.UserCreateNestedOneWithoutQuotationDraftsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutQuotationDraftsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutQuotationDraftsUpdatedInput
+  materialRequisitions?: Prisma.MaterialRequisitionCreateNestedManyWithoutQuotationDraftInput
 }
 
-export type QuotationDraftUncheckedCreateWithoutMaterialRequisitionsInput = {
+export type QuotationDraftUncheckedCreateWithoutAgreementValueLogsInput = {
   id?: string
   leadId: string
-  draftKey?: string
   createdById: string
   updatedById?: string | null
   quotationType?: string
@@ -905,6 +926,88 @@ export type QuotationDraftUncheckedCreateWithoutMaterialRequisitionsInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  draftKey?: string
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutQuotationDraftInput
+}
+
+export type QuotationDraftCreateOrConnectWithoutAgreementValueLogsInput = {
+  where: Prisma.QuotationDraftWhereUniqueInput
+  create: Prisma.XOR<Prisma.QuotationDraftCreateWithoutAgreementValueLogsInput, Prisma.QuotationDraftUncheckedCreateWithoutAgreementValueLogsInput>
+}
+
+export type QuotationDraftUpsertWithoutAgreementValueLogsInput = {
+  update: Prisma.XOR<Prisma.QuotationDraftUpdateWithoutAgreementValueLogsInput, Prisma.QuotationDraftUncheckedUpdateWithoutAgreementValueLogsInput>
+  create: Prisma.XOR<Prisma.QuotationDraftCreateWithoutAgreementValueLogsInput, Prisma.QuotationDraftUncheckedCreateWithoutAgreementValueLogsInput>
+  where?: Prisma.QuotationDraftWhereInput
+}
+
+export type QuotationDraftUpdateToOneWithWhereWithoutAgreementValueLogsInput = {
+  where?: Prisma.QuotationDraftWhereInput
+  data: Prisma.XOR<Prisma.QuotationDraftUpdateWithoutAgreementValueLogsInput, Prisma.QuotationDraftUncheckedUpdateWithoutAgreementValueLogsInput>
+}
+
+export type QuotationDraftUpdateWithoutAgreementValueLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  quotationType?: Prisma.StringFieldUpdateOperationsInput | string
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  content?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutQuotationDraftsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutQuotationDraftsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutQuotationDraftsUpdatedNestedInput
+  materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutQuotationDraftNestedInput
+}
+
+export type QuotationDraftUncheckedUpdateWithoutAgreementValueLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quotationType?: Prisma.StringFieldUpdateOperationsInput | string
+  projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  content?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
+  materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutQuotationDraftNestedInput
+}
+
+export type QuotationDraftCreateWithoutMaterialRequisitionsInput = {
+  id?: string
+  quotationType?: string
+  projectSqft?: number | null
+  content: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  grandTotal?: number
+  status?: $Enums.QuotationDraftStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  draftKey?: string
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutQuotationDraftInput
+  createdBy: Prisma.UserCreateNestedOneWithoutQuotationDraftsCreatedInput
+  lead: Prisma.LeadCreateNestedOneWithoutQuotationDraftsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutQuotationDraftsUpdatedInput
+}
+
+export type QuotationDraftUncheckedCreateWithoutMaterialRequisitionsInput = {
+  id?: string
+  leadId: string
+  createdById: string
+  updatedById?: string | null
+  quotationType?: string
+  projectSqft?: number | null
+  content: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  grandTotal?: number
+  status?: $Enums.QuotationDraftStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  draftKey?: string
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutQuotationDraftInput
 }
 
 export type QuotationDraftCreateOrConnectWithoutMaterialRequisitionsInput = {
@@ -925,7 +1028,6 @@ export type QuotationDraftUpdateToOneWithWhereWithoutMaterialRequisitionsInput =
 
 export type QuotationDraftUpdateWithoutMaterialRequisitionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
   projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   content?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -933,15 +1035,16 @@ export type QuotationDraftUpdateWithoutMaterialRequisitionsInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutQuotationDraftsNestedInput
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutQuotationDraftNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutQuotationDraftsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutQuotationDraftsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutQuotationDraftsUpdatedNestedInput
 }
 
 export type QuotationDraftUncheckedUpdateWithoutMaterialRequisitionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
@@ -951,11 +1054,12 @@ export type QuotationDraftUncheckedUpdateWithoutMaterialRequisitionsInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutQuotationDraftNestedInput
 }
 
 export type QuotationDraftCreateManyLeadInput = {
   id?: string
-  draftKey?: string
   createdById: string
   updatedById?: string | null
   quotationType?: string
@@ -965,11 +1069,11 @@ export type QuotationDraftCreateManyLeadInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  draftKey?: string
 }
 
 export type QuotationDraftUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
   projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   content?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -977,6 +1081,8 @@ export type QuotationDraftUpdateWithoutLeadInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutQuotationDraftNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutQuotationDraftsCreatedNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutQuotationDraftsUpdatedNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutQuotationDraftNestedInput
@@ -984,7 +1090,6 @@ export type QuotationDraftUpdateWithoutLeadInput = {
 
 export type QuotationDraftUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
@@ -994,12 +1099,13 @@ export type QuotationDraftUncheckedUpdateWithoutLeadInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutQuotationDraftNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutQuotationDraftNestedInput
 }
 
 export type QuotationDraftUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1009,12 +1115,12 @@ export type QuotationDraftUncheckedUpdateManyWithoutLeadInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type QuotationDraftCreateManyCreatedByInput = {
   id?: string
   leadId: string
-  draftKey?: string
   updatedById?: string | null
   quotationType?: string
   projectSqft?: number | null
@@ -1023,12 +1129,12 @@ export type QuotationDraftCreateManyCreatedByInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  draftKey?: string
 }
 
 export type QuotationDraftCreateManyUpdatedByInput = {
   id?: string
   leadId: string
-  draftKey?: string
   createdById: string
   quotationType?: string
   projectSqft?: number | null
@@ -1037,11 +1143,11 @@ export type QuotationDraftCreateManyUpdatedByInput = {
   status?: $Enums.QuotationDraftStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  draftKey?: string
 }
 
 export type QuotationDraftUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
   projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   content?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -1049,6 +1155,8 @@ export type QuotationDraftUpdateWithoutCreatedByInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutQuotationDraftNestedInput
   lead?: Prisma.LeadUpdateOneRequiredWithoutQuotationDraftsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutQuotationDraftsUpdatedNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutQuotationDraftNestedInput
@@ -1057,7 +1165,6 @@ export type QuotationDraftUpdateWithoutCreatedByInput = {
 export type QuotationDraftUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
   projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1066,13 +1173,14 @@ export type QuotationDraftUncheckedUpdateWithoutCreatedByInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutQuotationDraftNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutQuotationDraftNestedInput
 }
 
 export type QuotationDraftUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
   projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1081,11 +1189,11 @@ export type QuotationDraftUncheckedUpdateManyWithoutCreatedByInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type QuotationDraftUpdateWithoutUpdatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
   projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   content?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -1093,15 +1201,16 @@ export type QuotationDraftUpdateWithoutUpdatedByInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutQuotationDraftsNestedInput
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutQuotationDraftNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutQuotationDraftsCreatedNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutQuotationDraftsNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUpdateManyWithoutQuotationDraftNestedInput
 }
 
 export type QuotationDraftUncheckedUpdateWithoutUpdatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
   projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1110,13 +1219,14 @@ export type QuotationDraftUncheckedUpdateWithoutUpdatedByInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutQuotationDraftNestedInput
   materialRequisitions?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutQuotationDraftNestedInput
 }
 
 export type QuotationDraftUncheckedUpdateManyWithoutUpdatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
-  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   quotationType?: Prisma.StringFieldUpdateOperationsInput | string
   projectSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1125,6 +1235,7 @@ export type QuotationDraftUncheckedUpdateManyWithoutUpdatedByInput = {
   status?: Prisma.EnumQuotationDraftStatusFieldUpdateOperationsInput | $Enums.QuotationDraftStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  draftKey?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -1133,10 +1244,12 @@ export type QuotationDraftUncheckedUpdateManyWithoutUpdatedByInput = {
  */
 
 export type QuotationDraftCountOutputType = {
+  agreementValueLogs: number
   materialRequisitions: number
 }
 
 export type QuotationDraftCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  agreementValueLogs?: boolean | QuotationDraftCountOutputTypeCountAgreementValueLogsArgs
   materialRequisitions?: boolean | QuotationDraftCountOutputTypeCountMaterialRequisitionsArgs
 }
 
@@ -1153,6 +1266,13 @@ export type QuotationDraftCountOutputTypeDefaultArgs<ExtArgs extends runtime.Typ
 /**
  * QuotationDraftCountOutputType without action
  */
+export type QuotationDraftCountOutputTypeCountAgreementValueLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AgreementValueLogWhereInput
+}
+
+/**
+ * QuotationDraftCountOutputType without action
+ */
 export type QuotationDraftCountOutputTypeCountMaterialRequisitionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MaterialRequisitionWhereInput
 }
@@ -1161,7 +1281,6 @@ export type QuotationDraftCountOutputTypeCountMaterialRequisitionsArgs<ExtArgs e
 export type QuotationDraftSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   leadId?: boolean
-  draftKey?: boolean
   createdById?: boolean
   updatedById?: boolean
   quotationType?: boolean
@@ -1171,8 +1290,10 @@ export type QuotationDraftSelect<ExtArgs extends runtime.Types.Extensions.Intern
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  draftKey?: boolean
+  agreementValueLogs?: boolean | Prisma.QuotationDraft$agreementValueLogsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.QuotationDraft$updatedByArgs<ExtArgs>
   materialRequisitions?: boolean | Prisma.QuotationDraft$materialRequisitionsArgs<ExtArgs>
   _count?: boolean | Prisma.QuotationDraftCountOutputTypeDefaultArgs<ExtArgs>
@@ -1181,7 +1302,6 @@ export type QuotationDraftSelect<ExtArgs extends runtime.Types.Extensions.Intern
 export type QuotationDraftSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   leadId?: boolean
-  draftKey?: boolean
   createdById?: boolean
   updatedById?: boolean
   quotationType?: boolean
@@ -1191,15 +1311,15 @@ export type QuotationDraftSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  draftKey?: boolean
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.QuotationDraft$updatedByArgs<ExtArgs>
 }, ExtArgs["result"]["quotationDraft"]>
 
 export type QuotationDraftSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   leadId?: boolean
-  draftKey?: boolean
   createdById?: boolean
   updatedById?: boolean
   quotationType?: boolean
@@ -1209,15 +1329,15 @@ export type QuotationDraftSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  draftKey?: boolean
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.QuotationDraft$updatedByArgs<ExtArgs>
 }, ExtArgs["result"]["quotationDraft"]>
 
 export type QuotationDraftSelectScalar = {
   id?: boolean
   leadId?: boolean
-  draftKey?: boolean
   createdById?: boolean
   updatedById?: boolean
   quotationType?: boolean
@@ -1227,39 +1347,41 @@ export type QuotationDraftSelectScalar = {
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  draftKey?: boolean
 }
 
-export type QuotationDraftOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "draftKey" | "createdById" | "updatedById" | "quotationType" | "projectSqft" | "content" | "grandTotal" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["quotationDraft"]>
+export type QuotationDraftOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "createdById" | "updatedById" | "quotationType" | "projectSqft" | "content" | "grandTotal" | "status" | "createdAt" | "updatedAt" | "draftKey", ExtArgs["result"]["quotationDraft"]>
 export type QuotationDraftInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  agreementValueLogs?: boolean | Prisma.QuotationDraft$agreementValueLogsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.QuotationDraft$updatedByArgs<ExtArgs>
   materialRequisitions?: boolean | Prisma.QuotationDraft$materialRequisitionsArgs<ExtArgs>
   _count?: boolean | Prisma.QuotationDraftCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type QuotationDraftIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.QuotationDraft$updatedByArgs<ExtArgs>
 }
 export type QuotationDraftIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.QuotationDraft$updatedByArgs<ExtArgs>
 }
 
 export type $QuotationDraftPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "QuotationDraft"
   objects: {
-    lead: Prisma.$LeadPayload<ExtArgs>
+    agreementValueLogs: Prisma.$AgreementValueLogPayload<ExtArgs>[]
     createdBy: Prisma.$UserPayload<ExtArgs>
+    lead: Prisma.$LeadPayload<ExtArgs>
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     materialRequisitions: Prisma.$MaterialRequisitionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     leadId: string
-    draftKey: string
     createdById: string
     updatedById: string | null
     quotationType: string
@@ -1269,6 +1391,7 @@ export type $QuotationDraftPayload<ExtArgs extends runtime.Types.Extensions.Inte
     status: $Enums.QuotationDraftStatus
     createdAt: Date
     updatedAt: Date
+    draftKey: string
   }, ExtArgs["result"]["quotationDraft"]>
   composites: {}
 }
@@ -1663,8 +1786,9 @@ readonly fields: QuotationDraftFieldRefs;
  */
 export interface Prisma__QuotationDraftClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  lead<T extends Prisma.LeadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  agreementValueLogs<T extends Prisma.QuotationDraft$agreementValueLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.QuotationDraft$agreementValueLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AgreementValueLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.QuotationDraft$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.QuotationDraft$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   materialRequisitions<T extends Prisma.QuotationDraft$materialRequisitionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.QuotationDraft$materialRequisitionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MaterialRequisitionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1698,7 +1822,6 @@ export interface Prisma__QuotationDraftClient<T, Null = never, ExtArgs extends r
 export interface QuotationDraftFieldRefs {
   readonly id: Prisma.FieldRef<"QuotationDraft", 'String'>
   readonly leadId: Prisma.FieldRef<"QuotationDraft", 'String'>
-  readonly draftKey: Prisma.FieldRef<"QuotationDraft", 'String'>
   readonly createdById: Prisma.FieldRef<"QuotationDraft", 'String'>
   readonly updatedById: Prisma.FieldRef<"QuotationDraft", 'String'>
   readonly quotationType: Prisma.FieldRef<"QuotationDraft", 'String'>
@@ -1708,6 +1831,7 @@ export interface QuotationDraftFieldRefs {
   readonly status: Prisma.FieldRef<"QuotationDraft", 'QuotationDraftStatus'>
   readonly createdAt: Prisma.FieldRef<"QuotationDraft", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"QuotationDraft", 'DateTime'>
+  readonly draftKey: Prisma.FieldRef<"QuotationDraft", 'String'>
 }
     
 
@@ -2101,6 +2225,30 @@ export type QuotationDraftDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many QuotationDrafts to delete.
    */
   limit?: number
+}
+
+/**
+ * QuotationDraft.agreementValueLogs
+ */
+export type QuotationDraft$agreementValueLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AgreementValueLog
+   */
+  select?: Prisma.AgreementValueLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AgreementValueLog
+   */
+  omit?: Prisma.AgreementValueLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgreementValueLogInclude<ExtArgs> | null
+  where?: Prisma.AgreementValueLogWhereInput
+  orderBy?: Prisma.AgreementValueLogOrderByWithRelationInput | Prisma.AgreementValueLogOrderByWithRelationInput[]
+  cursor?: Prisma.AgreementValueLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AgreementValueLogScalarFieldEnum | Prisma.AgreementValueLogScalarFieldEnum[]
 }
 
 /**

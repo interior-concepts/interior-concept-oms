@@ -27,28 +27,28 @@ export type AggregateLeadStatusHistory = {
 export type LeadStatusHistoryMinAggregateOutputType = {
   id: string | null
   leadId: string | null
-  oldStatus: $Enums.LeadStage | null
-  newStatus: $Enums.LeadStage | null
   changedById: string | null
   changedAt: Date | null
+  oldStatus: $Enums.LeadStage | null
+  newStatus: $Enums.LeadStage | null
 }
 
 export type LeadStatusHistoryMaxAggregateOutputType = {
   id: string | null
   leadId: string | null
-  oldStatus: $Enums.LeadStage | null
-  newStatus: $Enums.LeadStage | null
   changedById: string | null
   changedAt: Date | null
+  oldStatus: $Enums.LeadStage | null
+  newStatus: $Enums.LeadStage | null
 }
 
 export type LeadStatusHistoryCountAggregateOutputType = {
   id: number
   leadId: number
-  oldStatus: number
-  newStatus: number
   changedById: number
   changedAt: number
+  oldStatus: number
+  newStatus: number
   _all: number
 }
 
@@ -56,28 +56,28 @@ export type LeadStatusHistoryCountAggregateOutputType = {
 export type LeadStatusHistoryMinAggregateInputType = {
   id?: true
   leadId?: true
-  oldStatus?: true
-  newStatus?: true
   changedById?: true
   changedAt?: true
+  oldStatus?: true
+  newStatus?: true
 }
 
 export type LeadStatusHistoryMaxAggregateInputType = {
   id?: true
   leadId?: true
-  oldStatus?: true
-  newStatus?: true
   changedById?: true
   changedAt?: true
+  oldStatus?: true
+  newStatus?: true
 }
 
 export type LeadStatusHistoryCountAggregateInputType = {
   id?: true
   leadId?: true
-  oldStatus?: true
-  newStatus?: true
   changedById?: true
   changedAt?: true
+  oldStatus?: true
+  newStatus?: true
   _all?: true
 }
 
@@ -156,10 +156,10 @@ export type LeadStatusHistoryGroupByArgs<ExtArgs extends runtime.Types.Extension
 export type LeadStatusHistoryGroupByOutputType = {
   id: string
   leadId: string
-  oldStatus: $Enums.LeadStage
-  newStatus: $Enums.LeadStage
   changedById: string
   changedAt: Date
+  oldStatus: $Enums.LeadStage
+  newStatus: $Enums.LeadStage
   _count: LeadStatusHistoryCountAggregateOutputType | null
   _min: LeadStatusHistoryMinAggregateOutputType | null
   _max: LeadStatusHistoryMaxAggregateOutputType | null
@@ -186,23 +186,23 @@ export type LeadStatusHistoryWhereInput = {
   NOT?: Prisma.LeadStatusHistoryWhereInput | Prisma.LeadStatusHistoryWhereInput[]
   id?: Prisma.StringFilter<"LeadStatusHistory"> | string
   leadId?: Prisma.StringFilter<"LeadStatusHistory"> | string
-  oldStatus?: Prisma.EnumLeadStageFilter<"LeadStatusHistory"> | $Enums.LeadStage
-  newStatus?: Prisma.EnumLeadStageFilter<"LeadStatusHistory"> | $Enums.LeadStage
   changedById?: Prisma.StringFilter<"LeadStatusHistory"> | string
   changedAt?: Prisma.DateTimeFilter<"LeadStatusHistory"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
+  oldStatus?: Prisma.EnumLeadStageFilter<"LeadStatusHistory"> | $Enums.LeadStage
+  newStatus?: Prisma.EnumLeadStageFilter<"LeadStatusHistory"> | $Enums.LeadStage
   changedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
 }
 
 export type LeadStatusHistoryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
-  oldStatus?: Prisma.SortOrder
-  newStatus?: Prisma.SortOrder
   changedById?: Prisma.SortOrder
   changedAt?: Prisma.SortOrder
-  lead?: Prisma.LeadOrderByWithRelationInput
+  oldStatus?: Prisma.SortOrder
+  newStatus?: Prisma.SortOrder
   changedBy?: Prisma.UserOrderByWithRelationInput
+  lead?: Prisma.LeadOrderByWithRelationInput
 }
 
 export type LeadStatusHistoryWhereUniqueInput = Prisma.AtLeast<{
@@ -211,21 +211,21 @@ export type LeadStatusHistoryWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.LeadStatusHistoryWhereInput[]
   NOT?: Prisma.LeadStatusHistoryWhereInput | Prisma.LeadStatusHistoryWhereInput[]
   leadId?: Prisma.StringFilter<"LeadStatusHistory"> | string
-  oldStatus?: Prisma.EnumLeadStageFilter<"LeadStatusHistory"> | $Enums.LeadStage
-  newStatus?: Prisma.EnumLeadStageFilter<"LeadStatusHistory"> | $Enums.LeadStage
   changedById?: Prisma.StringFilter<"LeadStatusHistory"> | string
   changedAt?: Prisma.DateTimeFilter<"LeadStatusHistory"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
+  oldStatus?: Prisma.EnumLeadStageFilter<"LeadStatusHistory"> | $Enums.LeadStage
+  newStatus?: Prisma.EnumLeadStageFilter<"LeadStatusHistory"> | $Enums.LeadStage
   changedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
 }, "id">
 
 export type LeadStatusHistoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
-  oldStatus?: Prisma.SortOrder
-  newStatus?: Prisma.SortOrder
   changedById?: Prisma.SortOrder
   changedAt?: Prisma.SortOrder
+  oldStatus?: Prisma.SortOrder
+  newStatus?: Prisma.SortOrder
   _count?: Prisma.LeadStatusHistoryCountOrderByAggregateInput
   _max?: Prisma.LeadStatusHistoryMaxOrderByAggregateInput
   _min?: Prisma.LeadStatusHistoryMinOrderByAggregateInput
@@ -237,71 +237,71 @@ export type LeadStatusHistoryScalarWhereWithAggregatesInput = {
   NOT?: Prisma.LeadStatusHistoryScalarWhereWithAggregatesInput | Prisma.LeadStatusHistoryScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"LeadStatusHistory"> | string
   leadId?: Prisma.StringWithAggregatesFilter<"LeadStatusHistory"> | string
-  oldStatus?: Prisma.EnumLeadStageWithAggregatesFilter<"LeadStatusHistory"> | $Enums.LeadStage
-  newStatus?: Prisma.EnumLeadStageWithAggregatesFilter<"LeadStatusHistory"> | $Enums.LeadStage
   changedById?: Prisma.StringWithAggregatesFilter<"LeadStatusHistory"> | string
   changedAt?: Prisma.DateTimeWithAggregatesFilter<"LeadStatusHistory"> | Date | string
+  oldStatus?: Prisma.EnumLeadStageWithAggregatesFilter<"LeadStatusHistory"> | $Enums.LeadStage
+  newStatus?: Prisma.EnumLeadStageWithAggregatesFilter<"LeadStatusHistory"> | $Enums.LeadStage
 }
 
 export type LeadStatusHistoryCreateInput = {
   id?: string
+  changedAt?: Date | string
   oldStatus: $Enums.LeadStage
   newStatus: $Enums.LeadStage
-  changedAt?: Date | string
-  lead: Prisma.LeadCreateNestedOneWithoutStatusHistoryInput
   changedBy: Prisma.UserCreateNestedOneWithoutStatusChangesInput
+  lead: Prisma.LeadCreateNestedOneWithoutStatusHistoryInput
 }
 
 export type LeadStatusHistoryUncheckedCreateInput = {
   id?: string
   leadId: string
-  oldStatus: $Enums.LeadStage
-  newStatus: $Enums.LeadStage
   changedById: string
   changedAt?: Date | string
+  oldStatus: $Enums.LeadStage
+  newStatus: $Enums.LeadStage
 }
 
 export type LeadStatusHistoryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
-  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadUpdateOneRequiredWithoutStatusHistoryNestedInput
   changedBy?: Prisma.UserUpdateOneRequiredWithoutStatusChangesNestedInput
+  lead?: Prisma.LeadUpdateOneRequiredWithoutStatusHistoryNestedInput
 }
 
 export type LeadStatusHistoryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
-  oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
-  newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   changedById?: Prisma.StringFieldUpdateOperationsInput | string
   changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
 }
 
 export type LeadStatusHistoryCreateManyInput = {
   id?: string
   leadId: string
-  oldStatus: $Enums.LeadStage
-  newStatus: $Enums.LeadStage
   changedById: string
   changedAt?: Date | string
+  oldStatus: $Enums.LeadStage
+  newStatus: $Enums.LeadStage
 }
 
 export type LeadStatusHistoryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
-  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadStatusHistoryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
-  oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
-  newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   changedById?: Prisma.StringFieldUpdateOperationsInput | string
   changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
 }
 
 export type LeadStatusHistoryListRelationFilter = {
@@ -317,28 +317,28 @@ export type LeadStatusHistoryOrderByRelationAggregateInput = {
 export type LeadStatusHistoryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
-  oldStatus?: Prisma.SortOrder
-  newStatus?: Prisma.SortOrder
   changedById?: Prisma.SortOrder
   changedAt?: Prisma.SortOrder
+  oldStatus?: Prisma.SortOrder
+  newStatus?: Prisma.SortOrder
 }
 
 export type LeadStatusHistoryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
-  oldStatus?: Prisma.SortOrder
-  newStatus?: Prisma.SortOrder
   changedById?: Prisma.SortOrder
   changedAt?: Prisma.SortOrder
+  oldStatus?: Prisma.SortOrder
+  newStatus?: Prisma.SortOrder
 }
 
 export type LeadStatusHistoryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
-  oldStatus?: Prisma.SortOrder
-  newStatus?: Prisma.SortOrder
   changedById?: Prisma.SortOrder
   changedAt?: Prisma.SortOrder
+  oldStatus?: Prisma.SortOrder
+  newStatus?: Prisma.SortOrder
 }
 
 export type LeadStatusHistoryCreateNestedManyWithoutLeadInput = {
@@ -427,18 +427,18 @@ export type LeadStatusHistoryUncheckedUpdateManyWithoutChangedByNestedInput = {
 
 export type LeadStatusHistoryCreateWithoutLeadInput = {
   id?: string
+  changedAt?: Date | string
   oldStatus: $Enums.LeadStage
   newStatus: $Enums.LeadStage
-  changedAt?: Date | string
   changedBy: Prisma.UserCreateNestedOneWithoutStatusChangesInput
 }
 
 export type LeadStatusHistoryUncheckedCreateWithoutLeadInput = {
   id?: string
-  oldStatus: $Enums.LeadStage
-  newStatus: $Enums.LeadStage
   changedById: string
   changedAt?: Date | string
+  oldStatus: $Enums.LeadStage
+  newStatus: $Enums.LeadStage
 }
 
 export type LeadStatusHistoryCreateOrConnectWithoutLeadInput = {
@@ -473,26 +473,26 @@ export type LeadStatusHistoryScalarWhereInput = {
   NOT?: Prisma.LeadStatusHistoryScalarWhereInput | Prisma.LeadStatusHistoryScalarWhereInput[]
   id?: Prisma.StringFilter<"LeadStatusHistory"> | string
   leadId?: Prisma.StringFilter<"LeadStatusHistory"> | string
-  oldStatus?: Prisma.EnumLeadStageFilter<"LeadStatusHistory"> | $Enums.LeadStage
-  newStatus?: Prisma.EnumLeadStageFilter<"LeadStatusHistory"> | $Enums.LeadStage
   changedById?: Prisma.StringFilter<"LeadStatusHistory"> | string
   changedAt?: Prisma.DateTimeFilter<"LeadStatusHistory"> | Date | string
+  oldStatus?: Prisma.EnumLeadStageFilter<"LeadStatusHistory"> | $Enums.LeadStage
+  newStatus?: Prisma.EnumLeadStageFilter<"LeadStatusHistory"> | $Enums.LeadStage
 }
 
 export type LeadStatusHistoryCreateWithoutChangedByInput = {
   id?: string
+  changedAt?: Date | string
   oldStatus: $Enums.LeadStage
   newStatus: $Enums.LeadStage
-  changedAt?: Date | string
   lead: Prisma.LeadCreateNestedOneWithoutStatusHistoryInput
 }
 
 export type LeadStatusHistoryUncheckedCreateWithoutChangedByInput = {
   id?: string
   leadId: string
+  changedAt?: Date | string
   oldStatus: $Enums.LeadStage
   newStatus: $Enums.LeadStage
-  changedAt?: Date | string
 }
 
 export type LeadStatusHistoryCreateOrConnectWithoutChangedByInput = {
@@ -523,66 +523,66 @@ export type LeadStatusHistoryUpdateManyWithWhereWithoutChangedByInput = {
 
 export type LeadStatusHistoryCreateManyLeadInput = {
   id?: string
-  oldStatus: $Enums.LeadStage
-  newStatus: $Enums.LeadStage
   changedById: string
   changedAt?: Date | string
+  oldStatus: $Enums.LeadStage
+  newStatus: $Enums.LeadStage
 }
 
 export type LeadStatusHistoryUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
-  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   changedBy?: Prisma.UserUpdateOneRequiredWithoutStatusChangesNestedInput
 }
 
 export type LeadStatusHistoryUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
-  newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   changedById?: Prisma.StringFieldUpdateOperationsInput | string
   changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
 }
 
 export type LeadStatusHistoryUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
-  newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   changedById?: Prisma.StringFieldUpdateOperationsInput | string
   changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
+  newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
 }
 
 export type LeadStatusHistoryCreateManyChangedByInput = {
   id?: string
   leadId: string
+  changedAt?: Date | string
   oldStatus: $Enums.LeadStage
   newStatus: $Enums.LeadStage
-  changedAt?: Date | string
 }
 
 export type LeadStatusHistoryUpdateWithoutChangedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
-  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lead?: Prisma.LeadUpdateOneRequiredWithoutStatusHistoryNestedInput
 }
 
 export type LeadStatusHistoryUncheckedUpdateWithoutChangedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
-  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadStatusHistoryUncheckedUpdateManyWithoutChangedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.StringFieldUpdateOperationsInput | string
+  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   oldStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
   newStatus?: Prisma.EnumLeadStageFieldUpdateOperationsInput | $Enums.LeadStage
-  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -590,72 +590,72 @@ export type LeadStatusHistoryUncheckedUpdateManyWithoutChangedByInput = {
 export type LeadStatusHistorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   leadId?: boolean
-  oldStatus?: boolean
-  newStatus?: boolean
   changedById?: boolean
   changedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  oldStatus?: boolean
+  newStatus?: boolean
   changedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadStatusHistory"]>
 
 export type LeadStatusHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   leadId?: boolean
-  oldStatus?: boolean
-  newStatus?: boolean
   changedById?: boolean
   changedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  oldStatus?: boolean
+  newStatus?: boolean
   changedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadStatusHistory"]>
 
 export type LeadStatusHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   leadId?: boolean
-  oldStatus?: boolean
-  newStatus?: boolean
   changedById?: boolean
   changedAt?: boolean
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
+  oldStatus?: boolean
+  newStatus?: boolean
   changedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadStatusHistory"]>
 
 export type LeadStatusHistorySelectScalar = {
   id?: boolean
   leadId?: boolean
-  oldStatus?: boolean
-  newStatus?: boolean
   changedById?: boolean
   changedAt?: boolean
+  oldStatus?: boolean
+  newStatus?: boolean
 }
 
-export type LeadStatusHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "oldStatus" | "newStatus" | "changedById" | "changedAt", ExtArgs["result"]["leadStatusHistory"]>
+export type LeadStatusHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "changedById" | "changedAt" | "oldStatus" | "newStatus", ExtArgs["result"]["leadStatusHistory"]>
 export type LeadStatusHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }
 export type LeadStatusHistoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }
 export type LeadStatusHistoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }
 
 export type $LeadStatusHistoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadStatusHistory"
   objects: {
-    lead: Prisma.$LeadPayload<ExtArgs>
     changedBy: Prisma.$UserPayload<ExtArgs>
+    lead: Prisma.$LeadPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     leadId: string
-    oldStatus: $Enums.LeadStage
-    newStatus: $Enums.LeadStage
     changedById: string
     changedAt: Date
+    oldStatus: $Enums.LeadStage
+    newStatus: $Enums.LeadStage
   }, ExtArgs["result"]["leadStatusHistory"]>
   composites: {}
 }
@@ -1050,8 +1050,8 @@ readonly fields: LeadStatusHistoryFieldRefs;
  */
 export interface Prisma__LeadStatusHistoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  lead<T extends Prisma.LeadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   changedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1083,10 +1083,10 @@ export interface Prisma__LeadStatusHistoryClient<T, Null = never, ExtArgs extend
 export interface LeadStatusHistoryFieldRefs {
   readonly id: Prisma.FieldRef<"LeadStatusHistory", 'String'>
   readonly leadId: Prisma.FieldRef<"LeadStatusHistory", 'String'>
-  readonly oldStatus: Prisma.FieldRef<"LeadStatusHistory", 'LeadStage'>
-  readonly newStatus: Prisma.FieldRef<"LeadStatusHistory", 'LeadStage'>
   readonly changedById: Prisma.FieldRef<"LeadStatusHistory", 'String'>
   readonly changedAt: Prisma.FieldRef<"LeadStatusHistory", 'DateTime'>
+  readonly oldStatus: Prisma.FieldRef<"LeadStatusHistory", 'LeadStage'>
+  readonly newStatus: Prisma.FieldRef<"LeadStatusHistory", 'LeadStage'>
 }
     
 

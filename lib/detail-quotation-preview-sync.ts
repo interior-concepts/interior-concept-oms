@@ -78,6 +78,10 @@ export function buildDetailPreviewUrl(input: {
   context: DetailPreviewContext
   contextId: string
   slotIndex?: number
+  download?: boolean
+  isBlank?: boolean
+  checklist?: boolean
+  layout?: 'standard' | 'compact'
 }) {
   const params = new URLSearchParams({
     context: input.context,
@@ -85,6 +89,18 @@ export function buildDetailPreviewUrl(input: {
   })
   if (input.slotIndex && input.slotIndex > 1) {
     params.set('slot', String(input.slotIndex))
+  }
+  if (input.download) {
+    params.set('download', 'true')
+  }
+  if (input.isBlank) {
+    params.set('isBlank', 'true')
+  }
+  if (input.checklist) {
+    params.set('checklist', 'true')
+  }
+  if (input.layout) {
+    params.set('layout', input.layout)
   }
   return `/quotation-team/detail-preview?${params.toString()}`
 }

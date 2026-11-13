@@ -59,14 +59,18 @@ export const ModelName = {
   Note: 'Note',
   User: 'User',
   DeviceToken: 'DeviceToken',
+  AgreementValueLog: 'AgreementValueLog',
   LeadPhaseTask: 'LeadPhaseTask',
   LeadJrArchitectRequest: 'LeadJrArchitectRequest',
   LeadPhaseReview: 'LeadPhaseReview',
   LeadMeetingEvent: 'LeadMeetingEvent',
   CadWorkSubmission: 'CadWorkSubmission',
   QuotationDraft: 'QuotationDraft',
+  AgreementDocument: 'AgreementDocument',
   FurnitureQuotationDraft: 'FurnitureQuotationDraft',
   FurnitureQuotationSavedItem: 'FurnitureQuotationSavedItem',
+  ElectricalQuotationDraft: 'ElectricalQuotationDraft',
+  PartialQuotationDraft: 'PartialQuotationDraft',
   CadWorkSubmissionFile: 'CadWorkSubmissionFile',
   Visit: 'Visit',
   VisitUpdateRequest: 'VisitUpdateRequest',
@@ -82,6 +86,7 @@ export const ModelName = {
   WhatsAppWebhookControl: 'WhatsAppWebhookControl',
   WhatsAppProcessedMessage: 'WhatsAppProcessedMessage',
   VisitWorkflowControl: 'VisitWorkflowControl',
+  JrArchitectWorkflowControl: 'JrArchitectWorkflowControl',
   WhatsAppWebhookEvent: 'WhatsAppWebhookEvent',
   Role: 'Role',
   Department: 'Department',
@@ -89,6 +94,8 @@ export const ModelName = {
   UserDepartment: 'UserDepartment',
   FinanceAccount: 'FinanceAccount',
   Transaction: 'Transaction',
+  ConveyanceRequest: 'ConveyanceRequest',
+  ConveyanceBill: 'ConveyanceBill',
   CashFlowDaily: 'CashFlowDaily',
   WebsiteProject: 'WebsiteProject',
   WebsiteProjectImage: 'WebsiteProjectImage',
@@ -98,10 +105,22 @@ export const ModelName = {
   QuotationTemplateOverride: 'QuotationTemplateOverride',
   JrArchitectPerformance: 'JrArchitectPerformance',
   QuotationUserPerformance: 'QuotationUserPerformance',
+  VisitMemberMonthlyAssessment: 'VisitMemberMonthlyAssessment',
+  Vendor: 'Vendor',
+  VendorAgreement: 'VendorAgreement',
+  VendorAgreementRevision: 'VendorAgreementRevision',
+  VendorPaymentMilestone: 'VendorPaymentMilestone',
+  VendorPayment: 'VendorPayment',
+  StockItem: 'StockItem',
+  StockMovement: 'StockMovement',
   MaterialRequisition: 'MaterialRequisition',
   MaterialRequisitionItem: 'MaterialRequisitionItem',
   BoqSavedAccessoryItem: 'BoqSavedAccessoryItem',
-  RequisitionAmendment: 'RequisitionAmendment'
+  RequisitionAmendment: 'RequisitionAmendment',
+  Supplier: 'Supplier',
+  ProcurementWallet: 'ProcurementWallet',
+  ProcurementWalletTransaction: 'ProcurementWalletTransaction',
+  SiteDeliveryLog: 'SiteDeliveryLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -122,29 +141,27 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const LeadScalarFieldEnum = {
   id: 'id',
-  clientId: 'clientId',
   name: 'name',
+  clientId: 'clientId',
   phone: 'phone',
   email: 'email',
+  assignedTo: 'assignedTo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  budget: 'budget',
+  location: 'location',
+  remarks: 'remarks',
   source: 'source',
   stage: 'stage',
   subStatus: 'subStatus',
-  budget: 'budget',
+  primaryOwnerDepartment: 'primaryOwnerDepartment',
+  primaryOwnerUserId: 'primaryOwnerUserId',
   quotationType: 'quotationType',
   agreementType: 'agreementType',
   agreementValue: 'agreementValue',
-  location: 'location',
-  remarks: 'remarks',
-  assignedTo: 'assignedTo',
-  primaryOwnerDepartment: 'primaryOwnerDepartment',
-  primaryOwnerUserId: 'primaryOwnerUserId',
   accountStatus: 'accountStatus',
-  sentiment: 'sentiment',
-  objection: 'objection',
-  objectionNote: 'objectionNote',
-  lastContactedAt: 'lastContactedAt',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
+  agreementSqft: 'agreementSqft',
+  initialAgreementValue: 'initialAgreementValue'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
@@ -164,10 +181,10 @@ export type LeadAssignmentScalarFieldEnum = (typeof LeadAssignmentScalarFieldEnu
 export const LeadStatusHistoryScalarFieldEnum = {
   id: 'id',
   leadId: 'leadId',
-  oldStatus: 'oldStatus',
-  newStatus: 'newStatus',
   changedById: 'changedById',
-  changedAt: 'changedAt'
+  changedAt: 'changedAt',
+  oldStatus: 'oldStatus',
+  newStatus: 'newStatus'
 } as const
 
 export type LeadStatusHistoryScalarFieldEnum = (typeof LeadStatusHistoryScalarFieldEnum)[keyof typeof LeadStatusHistoryScalarFieldEnum]
@@ -192,9 +209,6 @@ export const FollowUpScalarFieldEnum = {
   followupDate: 'followupDate',
   status: 'status',
   notes: 'notes',
-  category: 'category',
-  sentiment: 'sentiment',
-  objection: 'objection',
   createdAt: 'createdAt'
 } as const
 
@@ -218,12 +232,12 @@ export const UserScalarFieldEnum = {
   email: 'email',
   phone: 'phone',
   passwordHash: 'passwordHash',
-  isActive: 'isActive',
-  clerkUserId: 'clerkUserId',
-  approvedById: 'approvedById',
-  approvedAt: 'approvedAt',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  clerkUserId: 'clerkUserId',
+  isActive: 'isActive',
+  approvedById: 'approvedById',
+  approvedAt: 'approvedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -241,22 +255,36 @@ export const DeviceTokenScalarFieldEnum = {
 export type DeviceTokenScalarFieldEnum = (typeof DeviceTokenScalarFieldEnum)[keyof typeof DeviceTokenScalarFieldEnum]
 
 
+export const AgreementValueLogScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  amount: 'amount',
+  note: 'note',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  quotationDraftId: 'quotationDraftId',
+  versionTitle: 'versionTitle'
+} as const
+
+export type AgreementValueLogScalarFieldEnum = (typeof AgreementValueLogScalarFieldEnum)[keyof typeof AgreementValueLogScalarFieldEnum]
+
+
 export const LeadPhaseTaskScalarFieldEnum = {
   id: 'id',
   leadId: 'leadId',
   phaseType: 'phaseType',
-  workDetails: 'workDetails',
   assigneeUserId: 'assigneeUserId',
-  startedAt: 'startedAt',
   dueAt: 'dueAt',
   status: 'status',
-  completedAt: 'completedAt',
-  lastSrActionAt: 'lastSrActionAt',
-  sourceVisitId: 'sourceVisitId',
   currentReviewRound: 'currentReviewRound',
   createdById: 'createdById',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  workDetails: 'workDetails',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  lastSrActionAt: 'lastSrActionAt',
+  sourceVisitId: 'sourceVisitId'
 } as const
 
 export type LeadPhaseTaskScalarFieldEnum = (typeof LeadPhaseTaskScalarFieldEnum)[keyof typeof LeadPhaseTaskScalarFieldEnum]
@@ -311,6 +339,9 @@ export const CadWorkSubmissionScalarFieldEnum = {
   leadId: 'leadId',
   submittedById: 'submittedById',
   note: 'note',
+  versionNumber: 'versionNumber',
+  versionName: 'versionName',
+  department: 'department',
   submittedAt: 'submittedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -322,7 +353,6 @@ export type CadWorkSubmissionScalarFieldEnum = (typeof CadWorkSubmissionScalarFi
 export const QuotationDraftScalarFieldEnum = {
   id: 'id',
   leadId: 'leadId',
-  draftKey: 'draftKey',
   createdById: 'createdById',
   updatedById: 'updatedById',
   quotationType: 'quotationType',
@@ -331,10 +361,24 @@ export const QuotationDraftScalarFieldEnum = {
   grandTotal: 'grandTotal',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  draftKey: 'draftKey'
 } as const
 
 export type QuotationDraftScalarFieldEnum = (typeof QuotationDraftScalarFieldEnum)[keyof typeof QuotationDraftScalarFieldEnum]
+
+
+export const AgreementDocumentScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  content: 'content',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AgreementDocumentScalarFieldEnum = (typeof AgreementDocumentScalarFieldEnum)[keyof typeof AgreementDocumentScalarFieldEnum]
 
 
 export const FurnitureQuotationDraftScalarFieldEnum = {
@@ -369,6 +413,36 @@ export const FurnitureQuotationSavedItemScalarFieldEnum = {
 export type FurnitureQuotationSavedItemScalarFieldEnum = (typeof FurnitureQuotationSavedItemScalarFieldEnum)[keyof typeof FurnitureQuotationSavedItemScalarFieldEnum]
 
 
+export const ElectricalQuotationDraftScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  content: 'content',
+  grandTotal: 'grandTotal',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ElectricalQuotationDraftScalarFieldEnum = (typeof ElectricalQuotationDraftScalarFieldEnum)[keyof typeof ElectricalQuotationDraftScalarFieldEnum]
+
+
+export const PartialQuotationDraftScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  content: 'content',
+  grandTotal: 'grandTotal',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PartialQuotationDraftScalarFieldEnum = (typeof PartialQuotationDraftScalarFieldEnum)[keyof typeof PartialQuotationDraftScalarFieldEnum]
+
+
 export const CadWorkSubmissionFileScalarFieldEnum = {
   id: 'id',
   submissionId: 'submissionId',
@@ -388,15 +462,16 @@ export const VisitScalarFieldEnum = {
   leadId: 'leadId',
   assignedToId: 'assignedToId',
   scheduledAt: 'scheduledAt',
-  visitFee: 'visitFee',
   status: 'status',
-  projectSqft: 'projectSqft',
-  projectStatus: 'projectStatus',
+  visitType: 'visitType',
   location: 'location',
   notes: 'notes',
   createdById: 'createdById',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  projectSqft: 'projectSqft',
+  projectStatus: 'projectStatus',
+  visitFee: 'visitFee'
 } as const
 
 export type VisitScalarFieldEnum = (typeof VisitScalarFieldEnum)[keyof typeof VisitScalarFieldEnum]
@@ -424,13 +499,13 @@ export const VisitResultScalarFieldEnum = {
   summary: 'summary',
   measurements: 'measurements',
   clientMood: 'clientMood',
+  completedAt: 'completedAt',
   clientPotentiality: 'clientPotentiality',
   projectType: 'projectType',
   clientPersonality: 'clientPersonality',
   budgetRange: 'budgetRange',
   timelineUrgency: 'timelineUrgency',
-  stylePreference: 'stylePreference',
-  completedAt: 'completedAt'
+  stylePreference: 'stylePreference'
 } as const
 
 export type VisitResultScalarFieldEnum = (typeof VisitResultScalarFieldEnum)[keyof typeof VisitResultScalarFieldEnum]
@@ -505,15 +580,15 @@ export const NotificationScalarFieldEnum = {
   userId: 'userId',
   leadId: 'leadId',
   followUpId: 'followUpId',
-  visitId: 'visitId',
-  subjectUserId: 'subjectUserId',
   type: 'type',
   title: 'title',
   message: 'message',
   scheduledFor: 'scheduledFor',
   isRead: 'isRead',
   readAt: 'readAt',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  visitId: 'visitId',
+  subjectUserId: 'subjectUserId'
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
@@ -522,12 +597,6 @@ export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[k
 export const FacebookSyncControlScalarFieldEnum = {
   id: 'id',
   enabled: 'enabled',
-  latestEnabled: 'latestEnabled',
-  latestIntervalMinutes: 'latestIntervalMinutes',
-  latestBatchLimit: 'latestBatchLimit',
-  backfillEnabled: 'backfillEnabled',
-  backfillIntervalMinutes: 'backfillIntervalMinutes',
-  backfillBatchLimit: 'backfillBatchLimit',
   fallbackEnabled: 'fallbackEnabled',
   fallbackIntervalMinutes: 'fallbackIntervalMinutes',
   batchLimit: 'batchLimit',
@@ -537,6 +606,17 @@ export const FacebookSyncControlScalarFieldEnum = {
   lastSyncCreated: 'lastSyncCreated',
   lastSyncError: 'lastSyncError',
   lastSyncTrigger: 'lastSyncTrigger',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  incrementalCursor: 'incrementalCursor',
+  incrementalWatermark: 'incrementalWatermark',
+  jrCrmRoundRobinOffset: 'jrCrmRoundRobinOffset',
+  latestEnabled: 'latestEnabled',
+  latestIntervalMinutes: 'latestIntervalMinutes',
+  latestBatchLimit: 'latestBatchLimit',
+  backfillEnabled: 'backfillEnabled',
+  backfillIntervalMinutes: 'backfillIntervalMinutes',
+  backfillBatchLimit: 'backfillBatchLimit',
   lastLatestSyncAt: 'lastLatestSyncAt',
   lastLatestSyncStatus: 'lastLatestSyncStatus',
   lastLatestSyncFetched: 'lastLatestSyncFetched',
@@ -548,12 +628,7 @@ export const FacebookSyncControlScalarFieldEnum = {
   lastBackfillSyncCreated: 'lastBackfillSyncCreated',
   lastBackfillSyncError: 'lastBackfillSyncError',
   latestWatermark: 'latestWatermark',
-  backfillCursor: 'backfillCursor',
-  incrementalCursor: 'incrementalCursor',
-  incrementalWatermark: 'incrementalWatermark',
-  jrCrmRoundRobinOffset: 'jrCrmRoundRobinOffset',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  backfillCursor: 'backfillCursor'
 } as const
 
 export type FacebookSyncControlScalarFieldEnum = (typeof FacebookSyncControlScalarFieldEnum)[keyof typeof FacebookSyncControlScalarFieldEnum]
@@ -619,14 +694,24 @@ export type WhatsAppProcessedMessageScalarFieldEnum = (typeof WhatsAppProcessedM
 export const VisitWorkflowControlScalarFieldEnum = {
   id: 'id',
   supportDataEnabled: 'supportDataEnabled',
-  weeklySeniorCrmAutomationEnabled: 'weeklySeniorCrmAutomationEnabled',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   weeklySeniorCrmUserId: 'weeklySeniorCrmUserId',
   weeklySeniorCrmWeekStart: 'weeklySeniorCrmWeekStart',
+  weeklySeniorCrmAutomationEnabled: 'weeklySeniorCrmAutomationEnabled'
+} as const
+
+export type VisitWorkflowControlScalarFieldEnum = (typeof VisitWorkflowControlScalarFieldEnum)[keyof typeof VisitWorkflowControlScalarFieldEnum]
+
+
+export const JrArchitectWorkflowControlScalarFieldEnum = {
+  id: 'id',
+  completeResubmissionEnabled: 'completeResubmissionEnabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type VisitWorkflowControlScalarFieldEnum = (typeof VisitWorkflowControlScalarFieldEnum)[keyof typeof VisitWorkflowControlScalarFieldEnum]
+export type JrArchitectWorkflowControlScalarFieldEnum = (typeof JrArchitectWorkflowControlScalarFieldEnum)[keyof typeof JrArchitectWorkflowControlScalarFieldEnum]
 
 
 export const WhatsAppWebhookEventScalarFieldEnum = {
@@ -694,22 +779,56 @@ export type FinanceAccountScalarFieldEnum = (typeof FinanceAccountScalarFieldEnu
 
 export const TransactionScalarFieldEnum = {
   id: 'id',
-  serialNo: 'serialNo',
-  voucherNo: 'voucherNo',
   date: 'date',
   type: 'type',
-  category: 'category',
   particular: 'particular',
   amount: 'amount',
-  imageUrl: 'imageUrl',
-  financeAccountId: 'financeAccountId',
   recordedById: 'recordedById',
   leadId: 'leadId',
+  category: 'category',
+  serialNo: 'serialNo',
+  voucherNo: 'voucherNo',
   visitId: 'visitId',
-  collectedById: 'collectedById'
+  collectedById: 'collectedById',
+  financeAccountId: 'financeAccountId',
+  imageUrl: 'imageUrl'
 } as const
 
 export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
+
+
+export const ConveyanceRequestScalarFieldEnum = {
+  id: 'id',
+  requesterId: 'requesterId',
+  amount: 'amount',
+  clientName: 'clientName',
+  clientLocation: 'clientLocation',
+  status: 'status',
+  voucherNo: 'voucherNo',
+  approvedAmount: 'approvedAmount',
+  accountsNote: 'accountsNote',
+  reviewedById: 'reviewedById',
+  reviewedAt: 'reviewedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConveyanceRequestScalarFieldEnum = (typeof ConveyanceRequestScalarFieldEnum)[keyof typeof ConveyanceRequestScalarFieldEnum]
+
+
+export const ConveyanceBillScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  date: 'date',
+  from: 'from',
+  to: 'to',
+  mode: 'mode',
+  purpose: 'purpose',
+  amount: 'amount',
+  createdAt: 'createdAt'
+} as const
+
+export type ConveyanceBillScalarFieldEnum = (typeof ConveyanceBillScalarFieldEnum)[keyof typeof ConveyanceBillScalarFieldEnum]
 
 
 export const CashFlowDailyScalarFieldEnum = {
@@ -864,6 +983,147 @@ export const QuotationUserPerformanceScalarFieldEnum = {
 export type QuotationUserPerformanceScalarFieldEnum = (typeof QuotationUserPerformanceScalarFieldEnum)[keyof typeof QuotationUserPerformanceScalarFieldEnum]
 
 
+export const VisitMemberMonthlyAssessmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  monthKey: 'monthKey',
+  absentDays: 'absentDays',
+  attendanceScore: 'attendanceScore',
+  behaviourTag: 'behaviourTag',
+  behaviourScore: 'behaviourScore',
+  isEnabled: 'isEnabled',
+  notes: 'notes',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VisitMemberMonthlyAssessmentScalarFieldEnum = (typeof VisitMemberMonthlyAssessmentScalarFieldEnum)[keyof typeof VisitMemberMonthlyAssessmentScalarFieldEnum]
+
+
+export const VendorScalarFieldEnum = {
+  id: 'id',
+  vendorId: 'vendorId',
+  vendorCompanyName: 'vendorCompanyName',
+  vendorName: 'vendorName',
+  status: 'status',
+  vendorType: 'vendorType',
+  bankName: 'bankName',
+  routingNumber: 'routingNumber',
+  accountNumber: 'accountNumber',
+  primaryEmail: 'primaryEmail',
+  primaryPhone: 'primaryPhone',
+  billingAddress: 'billingAddress',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VendorScalarFieldEnum = (typeof VendorScalarFieldEnum)[keyof typeof VendorScalarFieldEnum]
+
+
+export const VendorAgreementScalarFieldEnum = {
+  id: 'id',
+  vendorId: 'vendorId',
+  leadId: 'leadId',
+  agreementValue: 'agreementValue',
+  workScope: 'workScope',
+  workStatus: 'workStatus',
+  retentionPercent: 'retentionPercent',
+  retentionReleased: 'retentionReleased',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VendorAgreementScalarFieldEnum = (typeof VendorAgreementScalarFieldEnum)[keyof typeof VendorAgreementScalarFieldEnum]
+
+
+export const VendorAgreementRevisionScalarFieldEnum = {
+  id: 'id',
+  agreementId: 'agreementId',
+  oldValue: 'oldValue',
+  newValue: 'newValue',
+  changeReason: 'changeReason',
+  changedAt: 'changedAt'
+} as const
+
+export type VendorAgreementRevisionScalarFieldEnum = (typeof VendorAgreementRevisionScalarFieldEnum)[keyof typeof VendorAgreementRevisionScalarFieldEnum]
+
+
+export const VendorPaymentMilestoneScalarFieldEnum = {
+  id: 'id',
+  agreementId: 'agreementId',
+  title: 'title',
+  amount: 'amount',
+  dueDate: 'dueDate',
+  isPaid: 'isPaid',
+  paidAt: 'paidAt',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VendorPaymentMilestoneScalarFieldEnum = (typeof VendorPaymentMilestoneScalarFieldEnum)[keyof typeof VendorPaymentMilestoneScalarFieldEnum]
+
+
+export const VendorPaymentScalarFieldEnum = {
+  id: 'id',
+  agreementId: 'agreementId',
+  milestoneId: 'milestoneId',
+  amount: 'amount',
+  paymentDate: 'paymentDate',
+  paymentMethod: 'paymentMethod',
+  voucherNo: 'voucherNo',
+  note: 'note',
+  transactionId: 'transactionId',
+  createdAt: 'createdAt'
+} as const
+
+export type VendorPaymentScalarFieldEnum = (typeof VendorPaymentScalarFieldEnum)[keyof typeof VendorPaymentScalarFieldEnum]
+
+
+export const StockItemScalarFieldEnum = {
+  id: 'id',
+  sku: 'sku',
+  name: 'name',
+  category: 'category',
+  unit: 'unit',
+  currentStock: 'currentStock',
+  minStockAlert: 'minStockAlert',
+  unitCostPrice: 'unitCostPrice',
+  standardSellingPrice: 'standardSellingPrice',
+  vendorId: 'vendorId',
+  location: 'location',
+  description: 'description',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StockItemScalarFieldEnum = (typeof StockItemScalarFieldEnum)[keyof typeof StockItemScalarFieldEnum]
+
+
+export const StockMovementScalarFieldEnum = {
+  id: 'id',
+  stockItemId: 'stockItemId',
+  type: 'type',
+  quantity: 'quantity',
+  unitCost: 'unitCost',
+  totalValue: 'totalValue',
+  referenceNo: 'referenceNo',
+  leadId: 'leadId',
+  vendorId: 'vendorId',
+  transactionId: 'transactionId',
+  department: 'department',
+  recipientUserId: 'recipientUserId',
+  createdById: 'createdById',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type StockMovementScalarFieldEnum = (typeof StockMovementScalarFieldEnum)[keyof typeof StockMovementScalarFieldEnum]
+
+
 export const MaterialRequisitionScalarFieldEnum = {
   id: 'id',
   leadId: 'leadId',
@@ -928,6 +1188,91 @@ export const RequisitionAmendmentScalarFieldEnum = {
 } as const
 
 export type RequisitionAmendmentScalarFieldEnum = (typeof RequisitionAmendmentScalarFieldEnum)[keyof typeof RequisitionAmendmentScalarFieldEnum]
+
+
+export const SupplierScalarFieldEnum = {
+  id: 'id',
+  supplierCode: 'supplierCode',
+  name: 'name',
+  companyName: 'companyName',
+  phone: 'phone',
+  email: 'email',
+  address: 'address',
+  supplyCategory: 'supplyCategory',
+  bankName: 'bankName',
+  bankAccountNumber: 'bankAccountNumber',
+  routingNumber: 'routingNumber',
+  notes: 'notes',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SupplierScalarFieldEnum = (typeof SupplierScalarFieldEnum)[keyof typeof SupplierScalarFieldEnum]
+
+
+export const ProcurementWalletScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  advanceBalance: 'advanceBalance',
+  pendingReimbursement: 'pendingReimbursement',
+  totalSpent: 'totalSpent',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProcurementWalletScalarFieldEnum = (typeof ProcurementWalletScalarFieldEnum)[keyof typeof ProcurementWalletScalarFieldEnum]
+
+
+export const ProcurementWalletTransactionScalarFieldEnum = {
+  id: 'id',
+  walletId: 'walletId',
+  type: 'type',
+  status: 'status',
+  date: 'date',
+  amount: 'amount',
+  charge: 'charge',
+  totalAmount: 'totalAmount',
+  paymentMethod: 'paymentMethod',
+  paidFrom: 'paidFrom',
+  category: 'category',
+  particular: 'particular',
+  voucherNo: 'voucherNo',
+  receiptUrl: 'receiptUrl',
+  leadId: 'leadId',
+  materialRequisitionId: 'materialRequisitionId',
+  financeAccountId: 'financeAccountId',
+  financeTransactionId: 'financeTransactionId',
+  submittedById: 'submittedById',
+  reviewedById: 'reviewedById',
+  reviewedAt: 'reviewedAt',
+  rejectionReason: 'rejectionReason',
+  accountsNote: 'accountsNote',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProcurementWalletTransactionScalarFieldEnum = (typeof ProcurementWalletTransactionScalarFieldEnum)[keyof typeof ProcurementWalletTransactionScalarFieldEnum]
+
+
+export const SiteDeliveryLogScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  receivedById: 'receivedById',
+  challanNo: 'challanNo',
+  vendorName: 'vendorName',
+  itemsSummary: 'itemsSummary',
+  quantity: 'quantity',
+  unit: 'unit',
+  deliveryDate: 'deliveryDate',
+  condition: 'condition',
+  slipUrl: 'slipUrl',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SiteDeliveryLogScalarFieldEnum = (typeof SiteDeliveryLogScalarFieldEnum)[keyof typeof SiteDeliveryLogScalarFieldEnum]
 
 
 export const SortOrder = {
