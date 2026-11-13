@@ -43,6 +43,7 @@ import {
   Building,
   FileText,
   PieChart,
+  Users,
   Calendar,
   Briefcase,
   Search,
@@ -64,9 +65,10 @@ import {
   FileDown,
   Pencil,
   Trash2,
-  BarChart3,
+  Warehouse,
 } from "lucide-react"
-import { uploadDirectBlobFile } from "@/lib/client-blob-upload"
+import { uploadDirectGCSFile } from "@/lib/client-gcs-upload"
+import { downloadMoneyReceiptPDF } from "@/lib/money-receipt-pdf"
 
 // Category display mapping
 type TransactionCategoryType = "OUTFLOW" | "INFLOW"
@@ -79,6 +81,7 @@ type TransactionCategory = {
 }
 
 const EXPENSE_CATEGORIES: TransactionCategory[] = [
+  { key: "VENDOR_PAYMENT", label: "Vendor Payment", icon: Users },
   { key: "OFFICE_RENT", label: "Office Rent", icon: Building },
   { key: "SALARY", label: "Staff Salary", icon: HandCoins },
   { key: "SALARY_ADVANCE", label: "Salary Advance", icon: HandCoins },
@@ -139,7 +142,7 @@ const CUSTOM_CATEGORY_STORAGE_KEY = "finance-custom-transaction-categories"
 const formatCustomCategoryKey = (name: string, type: TransactionCategoryType) =>
   `CUSTOM_${type}_${name.trim().toUpperCase().replace(/[^A-Z0-9]+/g, "_").replace(/^_+|_+$/g, "")}`
 
-// -- Date preset helpers ------------------------------------------------------
+// ── Date preset helpers ──────────────────────────────────────────────────────
 type DatePreset = "today" | "yesterday" | "this_week" | "this_month" | "custom"
 
 function getTodayStr() {
@@ -202,7 +205,7 @@ export default function FinanceDashboard() {
   })
   const [particular, setParticular] = useState("")
   const [amount, setAmount] = useState("")
-  const [account, setAccount] = useState<string>("CASH")
+  const [account, setAccount] = useState<string>("")
   const [leadId, setLeadId] = useState<string>("none")
   const [date, setDate] = useState(new Date().toISOString().split("T")[0])
 
@@ -217,6 +220,15 @@ export default function FinanceDashboard() {
   // Collected-by (visit team leader) state
   const [collectedById, setCollectedById] = useState<string | null>(null)
   const [visitTeamMembers, setVisitTeamMembers] = useState<{ id: string; fullName: string }[]>([])
+
+  // Vendor Payment Picker States (for VENDOR_PAYMENT category)
+  const [vendorList, setVendorList] = useState<any[]>([])
+  const [vendorListLoading, setVendorListLoading] = useState(false)
+  const [selectedVendorId, setSelectedVendorId] = useState<string>("")
+  const [vendorAgreements, setVendorAgreements] = useState<any[]>([])
+  const [vendorAgreementsLoading, setVendorAgreementsLoading] = useState(false)
+  const [selectedAgreementId, setSelectedAgreementId] = useState<string>("")
+  const [vendorSearchQuery, setVendorSearchQuery] = useState<string>("")
 
   // Project Picker Dialog States
   const [isProjectPickerOpen, setIsProjectPickerOpen] = useState(false)
@@ -268,9 +280,10 @@ export default function FinanceDashboard() {
       const res = await fetch('/api/finance/accounts')
       const data = await res.json()
       if (data.success) {
-        setAccounts(data.data.filter((a: any) => a.isActive))
-        if (data.data.length > 0 && !account) {
-          setAccount(data.data[0].id)
+        const activeAccs = data.data.filter((a: any) => a.isActive)
+        setAccounts(activeAccs)
+        if (activeAccs.length > 0) {
+          setAccount((prev) => (prev && prev !== "CASH" ? prev : activeAccs[0].id))
         }
       }
     } catch (e) {
@@ -332,6 +345,33 @@ export default function FinanceDashboard() {
     }
   }
 
+  const loadVendors = async () => {
+    setVendorListLoading(true)
+    try {
+      const res = await fetch("/api/vendors")
+      const data = await res.json()
+      if (data.success) setVendorList(data.data ?? [])
+    } catch {
+      toast.error("Failed to load vendors")
+    } finally {
+      setVendorListLoading(false)
+    }
+  }
+
+  const loadVendorAgreements = async (vendorId: string) => {
+    if (!vendorId) { setVendorAgreements([]); return }
+    setVendorAgreementsLoading(true)
+    try {
+      const res = await fetch(`/api/vendors/${vendorId}/projects`)
+      const data = await res.json()
+      if (data.success) setVendorAgreements(data.data ?? [])
+    } catch {
+      toast.error("Failed to load vendor agreements")
+    } finally {
+      setVendorAgreementsLoading(false)
+    }
+  }
+
   useEffect(() => {
     void loadJournalData(datePreset, customStart, customEnd)
     void loadVisitTeamMembers()
@@ -350,6 +390,22 @@ export default function FinanceDashboard() {
       }
     }
   }, [])
+
+  useEffect(() => {
+    if (!isProjectPickerOpen) return
+    const timer = window.setTimeout(() => {
+      void loadFinanceLeads(pickerSearch, pickerSrCrmFilter)
+    }, 300)
+    return () => window.clearTimeout(timer)
+  }, [pickerSearch, pickerSrCrmFilter, isProjectPickerOpen])
+
+  useEffect(() => {
+    if (!isVisitPickerOpen) return
+    const timer = window.setTimeout(() => {
+      void loadVisitSearch(visitSearch)
+    }, 300)
+    return () => window.clearTimeout(timer)
+  }, [visitSearch, isVisitPickerOpen])
 
   const activeCategories = type === "OUTFLOW"
     ? [...customCategories.OUTFLOW, ...EXPENSE_CATEGORIES]
@@ -373,12 +429,25 @@ export default function FinanceDashboard() {
     setType(nextType)
     setCategory(nextType === "OUTFLOW" ? EXPENSE_CATEGORIES[0].key : INCOME_CATEGORIES[0].key)
     setCategorySearch("")
+    // Reset vendor picker state when switching type
+    setSelectedVendorId("")
+    setVendorAgreements([])
+    setSelectedAgreementId("")
+    setVendorSearchQuery("")
   }
 
   const handleSelectCategory = (nextCategory: string) => {
     setCategory(nextCategory)
     setIsCategoryOpen(false)
     setCategorySearch("")
+    // Load vendors list when VENDOR_PAYMENT is selected
+    if (nextCategory === "VENDOR_PAYMENT") {
+      setSelectedVendorId("")
+      setVendorAgreements([])
+      setSelectedAgreementId("")
+      setVendorSearchQuery("")
+      void loadVendors()
+    }
   }
 
   const handleAddCategory = () => {
@@ -415,6 +484,51 @@ export default function FinanceDashboard() {
 
   const handleCreateTransaction = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    // ── Special path: VENDOR_PAYMENT ─────────────────────────────────────────
+    if (category === "VENDOR_PAYMENT") {
+      if (!selectedAgreementId) {
+        toast.error("Please select a vendor project / agreement")
+        return
+      }
+      if (!amount || parseFloat(amount) <= 0) {
+        toast.error("Please enter a valid amount")
+        return
+      }
+      try {
+        setIsUploading(true)
+        const res = await fetch(`/api/vendors/agreements/${selectedAgreementId}/payments`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount: parseFloat(amount),
+            paymentDate: date,
+            financeAccountId: account || null,
+            note: particular || null,
+          }),
+        })
+        const data = await res.json()
+        if (data.success) {
+          toast.success("Vendor payment recorded & logged!")
+          setIsLogOpen(false)
+          resetForm()
+          setSelectedVendorId("")
+          setVendorAgreements([])
+          setSelectedAgreementId("")
+          setVendorSearchQuery("")
+          loadData()
+        } else {
+          toast.error(data.error || "Failed to record vendor payment")
+        }
+      } catch (err: any) {
+        toast.error("Error: " + err.message)
+      } finally {
+        setIsUploading(false)
+      }
+      return
+    }
+    // ── Normal path ───────────────────────────────────────────────────────────
+
     if (!particular || !amount) {
       toast.error("Please fill in all required fields")
       return
@@ -426,7 +540,7 @@ export default function FinanceDashboard() {
       
       if (imageFile) {
         const tempId = `receipt-${Date.now()}`
-        const uploaded = await uploadDirectBlobFile({
+        const uploaded = await uploadDirectGCSFile({
           file: imageFile,
           context: 'transaction-receipt',
           ownerId: tempId,
@@ -514,16 +628,44 @@ export default function FinanceDashboard() {
     setAmount("")
     setImageFile(null)
     setPreviewUrl(null)
+    setSelectedVendorId("")
+    setVendorAgreements([])
+    setSelectedAgreementId("")
+    setVendorSearchQuery("")
   }
 
   // Client-side search filter only (type/date filters go to the API)
   const filteredTransactions = transactions.filter((tx) => {
     if (!searchTerm) return true
+    const q = searchTerm.toLowerCase().trim()
+    const vNum = (tx.voucherNo || "").toLowerCase()
+    const sNum = String(tx.serialNo || "")
     return (
-      tx.particular.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (tx.lead?.name || "").toLowerCase().includes(searchTerm.toLowerCase())
+      tx.particular.toLowerCase().includes(q) ||
+      (tx.lead?.name || "").toLowerCase().includes(q) ||
+      vNum.includes(q) ||
+      sNum.includes(q) ||
+      `mr-${vNum}`.includes(q) ||
+      `mr-${sNum}`.includes(q) ||
+      `vch-${sNum}`.includes(q)
     )
   })
+
+  const handleDownloadMoneyReceipt = (tx: any) => {
+    void downloadMoneyReceiptPDF({
+      receiptNo: tx.voucherNo ? `MR-${tx.voucherNo}` : `MR-${tx.serialNo || tx.id.slice(-6).toUpperCase()}`,
+      voucherNo: tx.voucherNo,
+      serialNo: tx.serialNo,
+      date: tx.date,
+      payerName: tx.lead?.name || tx.particular,
+      payerPhone: tx.lead?.phone || null,
+      payerAddress: tx.lead?.location || null,
+      paymentMethod: tx.category === "SITE_VISIT_PAYMENT" ? "CASH" : "BANK_TRANSFER",
+      referenceNo: tx.voucherNo || (tx.serialNo ? `VCH-${tx.serialNo}` : undefined),
+      purpose: CATEGORY_LABELS[tx.category] || tx.particular,
+      amount: tx.amount,
+    })
+  }
 
   const totalInflow = filteredTransactions
     .filter((tx) => tx.type === "INFLOW")
@@ -553,14 +695,14 @@ export default function FinanceDashboard() {
     const displayEnd = fmtDisplayDate(end)
 
     const logoImg = new Image()
-    logoImg.src = "/Logo/interior-concept-logobg-removed.png"
+    logoImg.src = "/Logo/HeaderLogo.png"
     await new Promise((resolve) => {
       logoImg.onload = resolve
       logoImg.onerror = resolve
     })
     doc.addImage(logoImg, "PNG", 14, 8, 43.2, 8)
 
-    const dateText = `${displayStart}   ?   ${displayEnd}`
+    const dateText = `${displayStart}   →   ${displayEnd}`
     doc.setFontSize(7.5)
     doc.setFont("helvetica", "bold")
     const dateW = doc.getTextWidth(dateText)
@@ -670,10 +812,10 @@ export default function FinanceDashboard() {
           doc.setFontSize(8)
           doc.setFont("helvetica", "bold")
           doc.setTextColor(30, 41, 59)
-          doc.text(`INTERIOR CONCEPT — ${reportTitle}`, 14, 7)
+          doc.text(`Aesthetic Interior — ${reportTitle}`, 14, 7)
           doc.setFont("helvetica", "normal")
           doc.setTextColor(100, 116, 139)
-          doc.text(`${displayStart} ? ${displayEnd}  |  Page ${pageNum}`, pageW - 14, 7, { align: "right" })
+          doc.text(`${displayStart} → ${displayEnd}  |  Page ${pageNum}`, pageW - 14, 7, { align: "right" })
           doc.setDrawColor(226, 232, 240)
           doc.setLineWidth(0.4)
           doc.line(14, 9, pageW - 14, 9)
@@ -737,14 +879,19 @@ export default function FinanceDashboard() {
         </div>
 
         <div className="flex items-center gap-2">
-          <Link href="/crm/accounts/summary" prefetch={false}>
+          <Link href="/crm/admin/finance/stock" prefetch={false}>
             <Button size="lg" variant="outline" className="gap-2">
-              <BarChart3 className="w-5 h-5 text-sky-600" /> Cash Flow Summary
+              <Warehouse className="w-5 h-5 text-emerald-600" /> Stock & Office Goods
+            </Button>
+          </Link>
+          <Link href="/crm/admin/finance/vendors" prefetch={false}>
+            <Button size="lg" variant="outline" className="gap-2">
+              <Users className="w-5 h-5 text-primary" /> Vendor AP Dashboard
             </Button>
           </Link>
 
           {/* LOG TRANSACTION TRIGGER */}
-          <Dialog open={isLogOpen} onOpenChange={(open) => {
+        <Dialog open={isLogOpen} onOpenChange={(open) => {
           setIsLogOpen(open)
           if (!open) {
             resetForm()
@@ -763,7 +910,7 @@ export default function FinanceDashboard() {
               <PlusCircle className="w-5 h-5" /> Log Transaction
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-md bg-card border border-border">
+          <DialogContent className="max-w-md max-h-[85vh] overflow-y-auto bg-card border border-border">
             <DialogHeader>
               <DialogTitle>{editingTxId ? "Edit Transaction" : "Log New Transaction"}</DialogTitle>
             </DialogHeader>
@@ -871,166 +1018,166 @@ export default function FinanceDashboard() {
                   </Dialog>
               </div>
 
-              <div className="space-y-1">
-                <label className="text-xs font-semibold">Project/Client Allocation (Optional)</label>
-                {/* Project Picker Trigger Button */}
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full justify-between h-auto min-h-10 px-3 py-2"
-                  onClick={() => {
-                    setIsProjectPickerOpen(true)
-                    loadFinanceLeads(pickerSearch, pickerSrCrmFilter)
-                  }}
-                >
-                  <span className="flex items-center gap-2 text-left">
-                    {leadId === "none" ? (
-                      <span className="text-muted-foreground">Office (Overhead / General)</span>
-                    ) : (
-                      <span>{financeLeads.find((l) => l.id === leadId)?.name ?? leads.find((l: any) => l.id === leadId)?.name ?? leadId}</span>
-                    )}
-                  </span>
-                  <Search className="w-4 h-4 text-muted-foreground" />
-                </Button>
-
-                {/* Project Picker Dialog */}
-                <Dialog open={isProjectPickerOpen} onOpenChange={setIsProjectPickerOpen}>
-                  <DialogContent className="max-w-[95vw] md:max-w-4xl lg:max-w-5xl bg-card border border-border flex flex-col h-[85vh] md:h-[75vh]">
-                    <DialogHeader className="shrink-0">
-                      <DialogTitle>Select Project / Client Allocation</DialogTitle>
-                    </DialogHeader>
-
-                    {/* Search + Filter bar */}
-                    <div className="flex flex-col gap-2 sm:flex-row shrink-0 pt-1">
-                      <div className="relative flex-1">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                        <Input
-                          className="pl-9"
-                          placeholder="Search by name, location, phone..."
-                          value={pickerSearch}
-                          onChange={(e) => {
-                            setPickerSearch(e.target.value)
-                            loadFinanceLeads(e.target.value, pickerSrCrmFilter)
-                          }}
-                        />
-                      </div>
-                      {srCrmOptions.length > 0 && (
-                        <Select
-                          value={pickerSrCrmFilter}
-                          onValueChange={(val) => {
-                            setPickerSrCrmFilter(val)
-                            loadFinanceLeads(pickerSearch, val)
-                          }}
-                        >
-                          <SelectTrigger className="w-full sm:w-52">
-                            <SelectValue placeholder="Filter by Sr. CRM" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="all">All Sr. CRM</SelectItem>
-                            {srCrmOptions.map((sr) => (
-                              <SelectItem key={sr.id} value={sr.id}>{sr.name}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      )}
-                    </div>
-
-                    {/* Cards grid */}
-                    <div className="flex-1 overflow-y-auto min-h-0 pr-1">
-                      {financeLeadsLoading ? (
-                        <div className="flex items-center justify-center h-40 text-muted-foreground text-sm">Loading projects...</div>
+              {category !== "VENDOR_PAYMENT" && (
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold">Project/Client Allocation (Optional)</label>
+                  {/* Project Picker Trigger Button */}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="w-full justify-between h-auto min-h-10 px-3 py-2"
+                    onClick={() => {
+                      setIsProjectPickerOpen(true)
+                      loadFinanceLeads(pickerSearch, pickerSrCrmFilter)
+                    }}
+                  >
+                    <span className="flex items-center gap-2 text-left">
+                      {leadId === "none" ? (
+                        <span className="text-muted-foreground">Office (Overhead / General)</span>
                       ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pb-4">
-                          {/* Office / General overhead card */}
-                          <button
-                            type="button"
-                            onClick={() => { setLeadId("none"); setIsProjectPickerOpen(false) }}
-                            className={`group text-left rounded-xl border-2 p-4 transition-all duration-200 hover:shadow-md ${
-                              leadId === "none"
-                                ? "border-primary bg-primary/5"
-                                : "border-border bg-card hover:border-primary/50"
-                            }`}
-                          >
-                            <div className="flex items-start justify-between mb-3">
-                              <div className="p-2 rounded-lg bg-muted">
-                                <Building className="w-5 h-5 text-muted-foreground" />
-                              </div>
-                              {leadId === "none" && (
-                                <Badge className="text-[10px] bg-primary text-primary-foreground">Selected</Badge>
-                              )}
-                            </div>
-                            <p className="font-semibold text-sm text-foreground">Office / General Overhead</p>
-                            <p className="text-xs text-muted-foreground mt-1">Not project-specific</p>
-                          </button>
+                        <span>{financeLeads.find((l) => l.id === leadId)?.name ?? leads.find((l: any) => l.id === leadId)?.name ?? leadId}</span>
+                      )}
+                    </span>
+                    <Search className="w-4 h-4 text-muted-foreground" />
+                  </Button>
 
-                          {financeLeads.map((lead) => (
+                  {/* Project Picker Dialog */}
+                  <Dialog open={isProjectPickerOpen} onOpenChange={setIsProjectPickerOpen}>
+                    <DialogContent className="max-w-[95vw] md:max-w-4xl lg:max-w-5xl bg-card border border-border flex flex-col h-[85vh] md:h-[75vh]">
+                      <DialogHeader className="shrink-0">
+                        <DialogTitle>Select Project / Client Allocation</DialogTitle>
+                      </DialogHeader>
+
+                      {/* Search + Filter bar */}
+                      <div className="flex flex-col gap-2 sm:flex-row shrink-0 pt-1">
+                        <div className="relative flex-1">
+                          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                          <Input
+                            className="pl-9"
+                            placeholder="Search by name, location, phone..."
+                            value={pickerSearch}
+                            onChange={(e) => {
+                              setPickerSearch(e.target.value)
+                            }}
+                          />
+                        </div>
+                        {srCrmOptions.length > 0 && (
+                          <Select
+                            value={pickerSrCrmFilter}
+                            onValueChange={(val) => {
+                              setPickerSrCrmFilter(val)
+                            }}
+                          >
+                            <SelectTrigger className="w-full sm:w-52">
+                              <SelectValue placeholder="Filter by Sr. CRM" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="all">All Sr. CRM</SelectItem>
+                              {srCrmOptions.map((sr) => (
+                                <SelectItem key={sr.id} value={sr.id}>{sr.name}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        )}
+                      </div>
+
+                      {/* Cards grid */}
+                      <div className="flex-1 overflow-y-auto min-h-0 pr-1">
+                        {financeLeadsLoading ? (
+                          <div className="flex items-center justify-center h-40 text-muted-foreground text-sm">Loading projects...</div>
+                        ) : (
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pb-4">
+                            {/* Office / General overhead card */}
                             <button
-                              key={lead.id}
                               type="button"
-                              onClick={() => { setLeadId(lead.id); setIsProjectPickerOpen(false) }}
+                              onClick={() => { setLeadId("none"); setIsProjectPickerOpen(false) }}
                               className={`group text-left rounded-xl border-2 p-4 transition-all duration-200 hover:shadow-md ${
-                                leadId === lead.id
+                                leadId === "none"
                                   ? "border-primary bg-primary/5"
                                   : "border-border bg-card hover:border-primary/50"
                               }`}
                             >
                               <div className="flex items-start justify-between mb-3">
-                                <Badge
-                                  variant="secondary"
-                                  className={`text-[10px] font-semibold ${
-                                    lead.stage === "CONVERSION" ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200" :
-                                    lead.stage === "QUOTATION_PHASE" ? "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200" :
-                                    lead.stage === "BUDGET_PHASE" ? "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200" :
-                                    lead.stage === "VISUALIZATION_PHASE" ? "bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-200" :
-                                    lead.stage === "CLOSED" ? "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300" :
-                                    ""
-                                  }`}
-                                >
-                                  {lead.stage === "QUOTATION_PHASE" ? "Quotation" :
-                                   lead.stage === "BUDGET_PHASE" ? "Budget" :
-                                   lead.stage === "VISUALIZATION_PHASE" ? "Visualization" :
-                                   lead.stage === "CONVERSION" ? "Conversion" :
-                                   lead.stage === "CLOSED" ? "Closed" : lead.stage}
-                                </Badge>
-                                {leadId === lead.id && (
+                                <div className="p-2 rounded-lg bg-muted">
+                                  <Building className="w-5 h-5 text-muted-foreground" />
+                                </div>
+                                {leadId === "none" && (
                                   <Badge className="text-[10px] bg-primary text-primary-foreground">Selected</Badge>
                                 )}
                               </div>
-                              <p className="font-semibold text-sm text-foreground leading-snug mb-2">{lead.name}</p>
-                              <div className="space-y-1">
-                                {lead.location && (
-                                  <p className="text-xs text-muted-foreground flex items-center gap-1">
-                                    <MapPin className="w-3 h-3 shrink-0" />
-                                    <span className="truncate">{lead.location}</span>
-                                  </p>
-                                )}
-                                {lead.phone && (
-                                  <p className="text-xs text-muted-foreground flex items-center gap-1">
-                                    <Phone className="w-3 h-3 shrink-0" />
-                                    {lead.phone}
-                                  </p>
-                                )}
-                                {lead.srCrm && (
-                                  <p className="text-xs text-muted-foreground flex items-center gap-1">
-                                    <User className="w-3 h-3 shrink-0" />
-                                    {lead.srCrm}
-                                  </p>
-                                )}
-                              </div>
+                              <p className="font-semibold text-sm text-foreground">Office / General Overhead</p>
+                              <p className="text-xs text-muted-foreground mt-1">Not project-specific</p>
                             </button>
-                          ))}
 
-                          {!financeLeadsLoading && financeLeads.length === 0 && (
-                            <div className="col-span-full text-center py-10 text-sm text-muted-foreground">
-                              No projects found matching your search.
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
+                            {financeLeads.map((lead) => (
+                              <button
+                                key={lead.id}
+                                type="button"
+                                onClick={() => { setLeadId(lead.id); setIsProjectPickerOpen(false) }}
+                                className={`group text-left rounded-xl border-2 p-4 transition-all duration-200 hover:shadow-md ${
+                                  leadId === lead.id
+                                    ? "border-primary bg-primary/5"
+                                    : "border-border bg-card hover:border-primary/50"
+                                }`}
+                              >
+                                <div className="flex items-start justify-between mb-3">
+                                  <Badge
+                                    variant="secondary"
+                                    className={`text-[10px] font-semibold ${
+                                      lead.stage === "CONVERSION" ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200" :
+                                      lead.stage === "QUOTATION_PHASE" ? "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200" :
+                                      lead.stage === "BUDGET_PHASE" ? "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200" :
+                                      lead.stage === "VISUALIZATION_PHASE" ? "bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-200" :
+                                      lead.stage === "CLOSED" ? "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300" :
+                                      ""
+                                    }`}
+                                  >
+                                    {lead.stage === "QUOTATION_PHASE" ? "Quotation" :
+                                     lead.stage === "BUDGET_PHASE" ? "Budget" :
+                                     lead.stage === "VISUALIZATION_PHASE" ? "Visualization" :
+                                     lead.stage === "CONVERSION" ? "Conversion" :
+                                     lead.stage === "CLOSED" ? "Closed" : lead.stage}
+                                  </Badge>
+                                  {leadId === lead.id && (
+                                    <Badge className="text-[10px] bg-primary text-primary-foreground">Selected</Badge>
+                                  )}
+                                </div>
+                                <p className="font-semibold text-sm text-foreground leading-snug mb-2">{lead.name}</p>
+                                <div className="space-y-1">
+                                  {lead.location && (
+                                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                                      <MapPin className="w-3 h-3 shrink-0" />
+                                      <span className="truncate">{lead.location}</span>
+                                    </p>
+                                  )}
+                                  {lead.phone && (
+                                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                                      <Phone className="w-3 h-3 shrink-0" />
+                                      {lead.phone}
+                                    </p>
+                                  )}
+                                  {lead.srCrm && (
+                                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                                      <User className="w-3 h-3 shrink-0" />
+                                      {lead.srCrm}
+                                    </p>
+                                  )}
+                                </div>
+                              </button>
+                            ))}
+
+                            {!financeLeadsLoading && financeLeads.length === 0 && (
+                              <div className="col-span-full text-center py-10 text-sm text-muted-foreground">
+                                No projects found matching your search.
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              )}
 
               {category === "SITE_VISIT_PAYMENT" && (
                 <>
@@ -1061,7 +1208,6 @@ export default function FinanceDashboard() {
                             value={visitSearch}
                             onChange={(e) => {
                               setVisitSearch(e.target.value)
-                              loadVisitSearch(e.target.value)
                             }}
                           />
                         </div>
@@ -1137,7 +1283,97 @@ export default function FinanceDashboard() {
                 </>
               )}
 
-              <div className="grid grid-cols-3 gap-2">
+              {/* ── VENDOR PAYMENT inline picker ─────────────────────── */}
+              {category === "VENDOR_PAYMENT" && (
+                <div className="space-y-2.5 rounded-lg border border-amber-500/30 bg-amber-500/5 p-3 text-xs">
+                  <p className="font-semibold text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
+                    <Users className="w-3.5 h-3.5" /> Vendor Payment Details
+                  </p>
+
+                  {/* Step 1 — Pick Vendor */}
+                  <div className="space-y-1">
+                    <label className="font-medium text-muted-foreground">1. Select Vendor</label>
+                    {vendorListLoading ? (
+                      <div className="flex items-center gap-2 text-muted-foreground py-1">
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" /> Loading vendors...
+                      </div>
+                    ) : (
+                      <Select
+                        value={selectedVendorId}
+                        onValueChange={(v) => {
+                          setSelectedVendorId(v)
+                          setSelectedAgreementId("")
+                          void loadVendorAgreements(v)
+                        }}
+                      >
+                        <SelectTrigger className="h-8 text-xs">
+                          <SelectValue placeholder="Choose a vendor..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {vendorList.map((v) => (
+                            <SelectItem key={v.id} value={v.id}>
+                              {v.vendorName} {v.vendorCompanyName ? `(${v.vendorCompanyName})` : ''} [{v.vendorId}]
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  </div>
+
+                  {/* Step 2 — Pick Project Agreement */}
+                  {selectedVendorId && (
+                    <div className="space-y-1">
+                      <label className="font-medium text-muted-foreground">2. Select Project Agreement</label>
+                      {vendorAgreementsLoading ? (
+                        <div className="flex items-center gap-2 text-muted-foreground py-1">
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" /> Loading agreements...
+                        </div>
+                      ) : vendorAgreements.length === 0 ? (
+                        <p className="text-muted-foreground py-1">No project agreements found for this vendor.</p>
+                      ) : (
+                        <Select
+                          value={selectedAgreementId}
+                          onValueChange={(agId) => {
+                            setSelectedAgreementId(agId)
+                            const ag = vendorAgreements.find((a) => a.id === agId)
+                            if (ag) {
+                              setLeadId(ag.lead?.id ?? "none")
+                              if (ag.balance > 0 && !amount) setAmount(String(ag.balance))
+                            }
+                          }}
+                        >
+                          <SelectTrigger className="h-8 text-xs">
+                            <SelectValue placeholder="Choose project agreement..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {vendorAgreements.map((ag) => (
+                              <SelectItem key={ag.id} value={ag.id}>
+                                {ag.lead?.name ?? "Unknown Project"} — Due: ৳{(ag.balance ?? 0).toLocaleString()}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Compact Agreement Summary */}
+                  {selectedAgreementId && (() => {
+                    const selectedAg = vendorAgreements.find((a) => a.id === selectedAgreementId)
+                    if (!selectedAg) return null
+                    return (
+                      <div className="flex justify-between items-center bg-background/80 rounded px-2.5 py-1.5 border border-border text-[11px] text-muted-foreground">
+                        <span>Contract: <strong className="text-foreground">৳{(selectedAg.agreementValue ?? 0).toLocaleString()}</strong></span>
+                        <span>Paid: <strong className="text-emerald-600">৳{(selectedAg.totalPaid ?? 0).toLocaleString()}</strong></span>
+                        <span>Due: <strong className="text-amber-600">৳{(selectedAg.balance ?? 0).toLocaleString()}</strong></span>
+                      </div>
+                    )
+                  })()}
+
+                </div>
+              )}
+
+              <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-1">
                   <label className="text-xs font-semibold">Amount (BDT)</label>
                   <Input
@@ -1160,13 +1396,15 @@ export default function FinanceDashboard() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold">Particulars / Description</label>
+                <label className="text-xs font-semibold">
+                  Particulars / Description {category === "VENDOR_PAYMENT" ? "(Optional Note)" : ""}
+                </label>
                 <Textarea
-                  placeholder="Details of the payment (e.g. Chowkath purchase, Eid Bonus)"
+                  placeholder={category === "VENDOR_PAYMENT" ? "Optional note (e.g. Stage 1 payment)" : "Details of the payment (e.g. Chowkath purchase, Eid Bonus)"}
                   value={particular}
                   onChange={(e) => setParticular(e.target.value)}
                   rows={2}
-                  required
+                  required={category !== "VENDOR_PAYMENT"}
                 />
               </div>
 
@@ -1238,7 +1476,7 @@ export default function FinanceDashboard() {
 
       {/* STATS HEADER */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Link href="/crm/admin/finance/settings/accounts">
+        <Link href="/crm/admin/finance/settings/accounts" prefetch={false}>
           <Card className="hover:ring-2 hover:ring-indigo-500/50 transition-all cursor-pointer bg-gradient-to-br from-indigo-500/10 via-indigo-600/5 to-transparent border border-indigo-500/20 backdrop-blur-md h-full">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-indigo-400">Total Net Assets</CardTitle>
@@ -1363,7 +1601,7 @@ export default function FinanceDashboard() {
                     value={customStart}
                     onChange={(e) => setCustomStart(e.target.value)}
                   />
-                  <span className="text-xs text-muted-foreground">?</span>
+                  <span className="text-xs text-muted-foreground">→</span>
                   <Input
                     type="date"
                     className={`h-8 w-36 text-xs ${
@@ -1402,7 +1640,7 @@ export default function FinanceDashboard() {
 
             <CardContent>
               {loading ? (
-                // -- Skeleton ------------------------------------------------
+                // ── Skeleton ────────────────────────────────────────────────
                 <div className="overflow-x-auto border border-border rounded-lg">
                   <table className="w-full text-left border-collapse">
                     <thead>
@@ -1553,6 +1791,17 @@ export default function FinanceDashboard() {
                                       <Trash2 className="w-3 h-3" />
                                       {isDeletingThis ? "Deleting..." : "Delete"}
                                     </Button>
+                                    {tx.type === "INFLOW" && (
+                                      <Button
+                                        size="sm"
+                                        variant="outline"
+                                        className="h-7 text-xs gap-1.5 border-emerald-500/50 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40"
+                                        onClick={(e) => { e.stopPropagation(); handleDownloadMoneyReceipt(tx) }}
+                                      >
+                                        <FileDown className="w-3.5 h-3.5" />
+                                        Money Receipt PDF
+                                      </Button>
+                                    )}
                                   </div>
                                 </td>
                               </tr>
