@@ -24,10 +24,6 @@ model Lead {
   subStatus              LeadSubStatus?
   primaryOwnerDepartment LeadPrimaryOwnerDepartment?
   primaryOwnerUserId     String?
-  sentiment              ClientSentiment?
-  objection              ClientObjection?
-  objectionNote          String?
-  lastContactedAt        DateTime?
   quotationType          String?
   agreementType          String?
   agreementValue         Float?
@@ -119,9 +115,6 @@ model FollowUp {
   followupDate  DateTime
   status        FollowUpStatus @default(PENDING)
   notes         String?
-  category      FollowUpCategory  @default(GENERAL)
-  sentiment     ClientSentiment?
-  objection     ClientObjection?
   createdAt     DateTime       @default(now())
   assignedTo    User           @relation(fields: [assignedToId], references: [id], onDelete: Cascade)
   lead          Lead           @relation(fields: [leadId], references: [id], onDelete: Cascade)
@@ -1890,26 +1883,4 @@ model QuotationWorkActivityLog {
 
 
 
-enum FollowUpCategory {
-  LAYOUT_REVIEW
-  BUDGET_NEGOTIATION
-  SITE_VISIT
-  CONTRACT_SIGNING
-  GENERAL
-}
 
-enum ClientSentiment {
-  HOT
-  WARM
-  COLD
-  AT_RISK
-}
-
-enum ClientObjection {
-  BUDGET_TOO_HIGH
-  COMPETITOR_COMPARISON
-  DESIGN_REVISION_NEEDED
-  SPACE_PLANNING_QUERY
-  TIMELINE_DELAY
-  OTHER
-}

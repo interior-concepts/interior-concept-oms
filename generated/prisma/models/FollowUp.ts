@@ -31,9 +31,6 @@ export type FollowUpMinAggregateOutputType = {
   followupDate: Date | null
   status: $Enums.FollowUpStatus | null
   notes: string | null
-  category: $Enums.FollowUpCategory | null
-  sentiment: $Enums.ClientSentiment | null
-  objection: $Enums.ClientObjection | null
   createdAt: Date | null
 }
 
@@ -44,9 +41,6 @@ export type FollowUpMaxAggregateOutputType = {
   followupDate: Date | null
   status: $Enums.FollowUpStatus | null
   notes: string | null
-  category: $Enums.FollowUpCategory | null
-  sentiment: $Enums.ClientSentiment | null
-  objection: $Enums.ClientObjection | null
   createdAt: Date | null
 }
 
@@ -57,9 +51,6 @@ export type FollowUpCountAggregateOutputType = {
   followupDate: number
   status: number
   notes: number
-  category: number
-  sentiment: number
-  objection: number
   createdAt: number
   _all: number
 }
@@ -72,9 +63,6 @@ export type FollowUpMinAggregateInputType = {
   followupDate?: true
   status?: true
   notes?: true
-  category?: true
-  sentiment?: true
-  objection?: true
   createdAt?: true
 }
 
@@ -85,9 +73,6 @@ export type FollowUpMaxAggregateInputType = {
   followupDate?: true
   status?: true
   notes?: true
-  category?: true
-  sentiment?: true
-  objection?: true
   createdAt?: true
 }
 
@@ -98,9 +83,6 @@ export type FollowUpCountAggregateInputType = {
   followupDate?: true
   status?: true
   notes?: true
-  category?: true
-  sentiment?: true
-  objection?: true
   createdAt?: true
   _all?: true
 }
@@ -184,9 +166,6 @@ export type FollowUpGroupByOutputType = {
   followupDate: Date
   status: $Enums.FollowUpStatus
   notes: string | null
-  category: $Enums.FollowUpCategory
-  sentiment: $Enums.ClientSentiment | null
-  objection: $Enums.ClientObjection | null
   createdAt: Date
   _count: FollowUpCountAggregateOutputType | null
   _min: FollowUpMinAggregateOutputType | null
@@ -218,9 +197,6 @@ export type FollowUpWhereInput = {
   followupDate?: Prisma.DateTimeFilter<"FollowUp"> | Date | string
   status?: Prisma.EnumFollowUpStatusFilter<"FollowUp"> | $Enums.FollowUpStatus
   notes?: Prisma.StringNullableFilter<"FollowUp"> | string | null
-  category?: Prisma.EnumFollowUpCategoryFilter<"FollowUp"> | $Enums.FollowUpCategory
-  sentiment?: Prisma.EnumClientSentimentNullableFilter<"FollowUp"> | $Enums.ClientSentiment | null
-  objection?: Prisma.EnumClientObjectionNullableFilter<"FollowUp"> | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFilter<"FollowUp"> | Date | string
   assignedTo?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
@@ -234,9 +210,6 @@ export type FollowUpOrderByWithRelationInput = {
   followupDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  category?: Prisma.SortOrder
-  sentiment?: Prisma.SortOrderInput | Prisma.SortOrder
-  objection?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   assignedTo?: Prisma.UserOrderByWithRelationInput
   lead?: Prisma.LeadOrderByWithRelationInput
@@ -253,9 +226,6 @@ export type FollowUpWhereUniqueInput = Prisma.AtLeast<{
   followupDate?: Prisma.DateTimeFilter<"FollowUp"> | Date | string
   status?: Prisma.EnumFollowUpStatusFilter<"FollowUp"> | $Enums.FollowUpStatus
   notes?: Prisma.StringNullableFilter<"FollowUp"> | string | null
-  category?: Prisma.EnumFollowUpCategoryFilter<"FollowUp"> | $Enums.FollowUpCategory
-  sentiment?: Prisma.EnumClientSentimentNullableFilter<"FollowUp"> | $Enums.ClientSentiment | null
-  objection?: Prisma.EnumClientObjectionNullableFilter<"FollowUp"> | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFilter<"FollowUp"> | Date | string
   assignedTo?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
@@ -269,9 +239,6 @@ export type FollowUpOrderByWithAggregationInput = {
   followupDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  category?: Prisma.SortOrder
-  sentiment?: Prisma.SortOrderInput | Prisma.SortOrder
-  objection?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.FollowUpCountOrderByAggregateInput
   _max?: Prisma.FollowUpMaxOrderByAggregateInput
@@ -288,9 +255,6 @@ export type FollowUpScalarWhereWithAggregatesInput = {
   followupDate?: Prisma.DateTimeWithAggregatesFilter<"FollowUp"> | Date | string
   status?: Prisma.EnumFollowUpStatusWithAggregatesFilter<"FollowUp"> | $Enums.FollowUpStatus
   notes?: Prisma.StringNullableWithAggregatesFilter<"FollowUp"> | string | null
-  category?: Prisma.EnumFollowUpCategoryWithAggregatesFilter<"FollowUp"> | $Enums.FollowUpCategory
-  sentiment?: Prisma.EnumClientSentimentNullableWithAggregatesFilter<"FollowUp"> | $Enums.ClientSentiment | null
-  objection?: Prisma.EnumClientObjectionNullableWithAggregatesFilter<"FollowUp"> | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FollowUp"> | Date | string
 }
 
@@ -299,9 +263,6 @@ export type FollowUpCreateInput = {
   followupDate: Date | string
   status?: $Enums.FollowUpStatus
   notes?: string | null
-  category?: $Enums.FollowUpCategory
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
   createdAt?: Date | string
   assignedTo: Prisma.UserCreateNestedOneWithoutFollowUpsInput
   lead: Prisma.LeadCreateNestedOneWithoutFollowUpsInput
@@ -315,9 +276,6 @@ export type FollowUpUncheckedCreateInput = {
   followupDate: Date | string
   status?: $Enums.FollowUpStatus
   notes?: string | null
-  category?: $Enums.FollowUpCategory
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
   createdAt?: Date | string
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFollowUpInput
 }
@@ -327,9 +285,6 @@ export type FollowUpUpdateInput = {
   followupDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.EnumFollowUpCategoryFieldUpdateOperationsInput | $Enums.FollowUpCategory
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedTo?: Prisma.UserUpdateOneRequiredWithoutFollowUpsNestedInput
   lead?: Prisma.LeadUpdateOneRequiredWithoutFollowUpsNestedInput
@@ -343,9 +298,6 @@ export type FollowUpUncheckedUpdateInput = {
   followupDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.EnumFollowUpCategoryFieldUpdateOperationsInput | $Enums.FollowUpCategory
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFollowUpNestedInput
 }
@@ -357,9 +309,6 @@ export type FollowUpCreateManyInput = {
   followupDate: Date | string
   status?: $Enums.FollowUpStatus
   notes?: string | null
-  category?: $Enums.FollowUpCategory
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
   createdAt?: Date | string
 }
 
@@ -368,9 +317,6 @@ export type FollowUpUpdateManyMutationInput = {
   followupDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.EnumFollowUpCategoryFieldUpdateOperationsInput | $Enums.FollowUpCategory
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -381,9 +327,6 @@ export type FollowUpUncheckedUpdateManyInput = {
   followupDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.EnumFollowUpCategoryFieldUpdateOperationsInput | $Enums.FollowUpCategory
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -404,9 +347,6 @@ export type FollowUpCountOrderByAggregateInput = {
   followupDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  category?: Prisma.SortOrder
-  sentiment?: Prisma.SortOrder
-  objection?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -417,9 +357,6 @@ export type FollowUpMaxOrderByAggregateInput = {
   followupDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  category?: Prisma.SortOrder
-  sentiment?: Prisma.SortOrder
-  objection?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -430,9 +367,6 @@ export type FollowUpMinOrderByAggregateInput = {
   followupDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  category?: Prisma.SortOrder
-  sentiment?: Prisma.SortOrder
-  objection?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -485,10 +419,6 @@ export type FollowUpUncheckedUpdateManyWithoutLeadNestedInput = {
 
 export type EnumFollowUpStatusFieldUpdateOperationsInput = {
   set?: $Enums.FollowUpStatus
-}
-
-export type EnumFollowUpCategoryFieldUpdateOperationsInput = {
-  set?: $Enums.FollowUpCategory
 }
 
 export type FollowUpCreateNestedManyWithoutAssignedToInput = {
@@ -554,9 +484,6 @@ export type FollowUpCreateWithoutLeadInput = {
   followupDate: Date | string
   status?: $Enums.FollowUpStatus
   notes?: string | null
-  category?: $Enums.FollowUpCategory
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
   createdAt?: Date | string
   assignedTo: Prisma.UserCreateNestedOneWithoutFollowUpsInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFollowUpInput
@@ -568,9 +495,6 @@ export type FollowUpUncheckedCreateWithoutLeadInput = {
   followupDate: Date | string
   status?: $Enums.FollowUpStatus
   notes?: string | null
-  category?: $Enums.FollowUpCategory
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
   createdAt?: Date | string
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFollowUpInput
 }
@@ -611,9 +535,6 @@ export type FollowUpScalarWhereInput = {
   followupDate?: Prisma.DateTimeFilter<"FollowUp"> | Date | string
   status?: Prisma.EnumFollowUpStatusFilter<"FollowUp"> | $Enums.FollowUpStatus
   notes?: Prisma.StringNullableFilter<"FollowUp"> | string | null
-  category?: Prisma.EnumFollowUpCategoryFilter<"FollowUp"> | $Enums.FollowUpCategory
-  sentiment?: Prisma.EnumClientSentimentNullableFilter<"FollowUp"> | $Enums.ClientSentiment | null
-  objection?: Prisma.EnumClientObjectionNullableFilter<"FollowUp"> | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFilter<"FollowUp"> | Date | string
 }
 
@@ -622,9 +543,6 @@ export type FollowUpCreateWithoutAssignedToInput = {
   followupDate: Date | string
   status?: $Enums.FollowUpStatus
   notes?: string | null
-  category?: $Enums.FollowUpCategory
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
   createdAt?: Date | string
   lead: Prisma.LeadCreateNestedOneWithoutFollowUpsInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFollowUpInput
@@ -636,9 +554,6 @@ export type FollowUpUncheckedCreateWithoutAssignedToInput = {
   followupDate: Date | string
   status?: $Enums.FollowUpStatus
   notes?: string | null
-  category?: $Enums.FollowUpCategory
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
   createdAt?: Date | string
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFollowUpInput
 }
@@ -674,9 +589,6 @@ export type FollowUpCreateWithoutNotificationsInput = {
   followupDate: Date | string
   status?: $Enums.FollowUpStatus
   notes?: string | null
-  category?: $Enums.FollowUpCategory
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
   createdAt?: Date | string
   assignedTo: Prisma.UserCreateNestedOneWithoutFollowUpsInput
   lead: Prisma.LeadCreateNestedOneWithoutFollowUpsInput
@@ -689,9 +601,6 @@ export type FollowUpUncheckedCreateWithoutNotificationsInput = {
   followupDate: Date | string
   status?: $Enums.FollowUpStatus
   notes?: string | null
-  category?: $Enums.FollowUpCategory
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
   createdAt?: Date | string
 }
 
@@ -716,9 +625,6 @@ export type FollowUpUpdateWithoutNotificationsInput = {
   followupDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.EnumFollowUpCategoryFieldUpdateOperationsInput | $Enums.FollowUpCategory
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedTo?: Prisma.UserUpdateOneRequiredWithoutFollowUpsNestedInput
   lead?: Prisma.LeadUpdateOneRequiredWithoutFollowUpsNestedInput
@@ -731,9 +637,6 @@ export type FollowUpUncheckedUpdateWithoutNotificationsInput = {
   followupDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.EnumFollowUpCategoryFieldUpdateOperationsInput | $Enums.FollowUpCategory
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -743,9 +646,6 @@ export type FollowUpCreateManyLeadInput = {
   followupDate: Date | string
   status?: $Enums.FollowUpStatus
   notes?: string | null
-  category?: $Enums.FollowUpCategory
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
   createdAt?: Date | string
 }
 
@@ -754,9 +654,6 @@ export type FollowUpUpdateWithoutLeadInput = {
   followupDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.EnumFollowUpCategoryFieldUpdateOperationsInput | $Enums.FollowUpCategory
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedTo?: Prisma.UserUpdateOneRequiredWithoutFollowUpsNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFollowUpNestedInput
@@ -768,9 +665,6 @@ export type FollowUpUncheckedUpdateWithoutLeadInput = {
   followupDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.EnumFollowUpCategoryFieldUpdateOperationsInput | $Enums.FollowUpCategory
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFollowUpNestedInput
 }
@@ -781,9 +675,6 @@ export type FollowUpUncheckedUpdateManyWithoutLeadInput = {
   followupDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.EnumFollowUpCategoryFieldUpdateOperationsInput | $Enums.FollowUpCategory
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -793,9 +684,6 @@ export type FollowUpCreateManyAssignedToInput = {
   followupDate: Date | string
   status?: $Enums.FollowUpStatus
   notes?: string | null
-  category?: $Enums.FollowUpCategory
-  sentiment?: $Enums.ClientSentiment | null
-  objection?: $Enums.ClientObjection | null
   createdAt?: Date | string
 }
 
@@ -804,9 +692,6 @@ export type FollowUpUpdateWithoutAssignedToInput = {
   followupDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.EnumFollowUpCategoryFieldUpdateOperationsInput | $Enums.FollowUpCategory
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lead?: Prisma.LeadUpdateOneRequiredWithoutFollowUpsNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFollowUpNestedInput
@@ -818,9 +703,6 @@ export type FollowUpUncheckedUpdateWithoutAssignedToInput = {
   followupDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.EnumFollowUpCategoryFieldUpdateOperationsInput | $Enums.FollowUpCategory
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFollowUpNestedInput
 }
@@ -831,9 +713,6 @@ export type FollowUpUncheckedUpdateManyWithoutAssignedToInput = {
   followupDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFollowUpStatusFieldUpdateOperationsInput | $Enums.FollowUpStatus
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  category?: Prisma.EnumFollowUpCategoryFieldUpdateOperationsInput | $Enums.FollowUpCategory
-  sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
-  objection?: Prisma.NullableEnumClientObjectionFieldUpdateOperationsInput | $Enums.ClientObjection | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -875,9 +754,6 @@ export type FollowUpSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   followupDate?: boolean
   status?: boolean
   notes?: boolean
-  category?: boolean
-  sentiment?: boolean
-  objection?: boolean
   createdAt?: boolean
   assignedTo?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
@@ -892,9 +768,6 @@ export type FollowUpSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   followupDate?: boolean
   status?: boolean
   notes?: boolean
-  category?: boolean
-  sentiment?: boolean
-  objection?: boolean
   createdAt?: boolean
   assignedTo?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
@@ -907,9 +780,6 @@ export type FollowUpSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   followupDate?: boolean
   status?: boolean
   notes?: boolean
-  category?: boolean
-  sentiment?: boolean
-  objection?: boolean
   createdAt?: boolean
   assignedTo?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
@@ -922,13 +792,10 @@ export type FollowUpSelectScalar = {
   followupDate?: boolean
   status?: boolean
   notes?: boolean
-  category?: boolean
-  sentiment?: boolean
-  objection?: boolean
   createdAt?: boolean
 }
 
-export type FollowUpOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "assignedToId" | "followupDate" | "status" | "notes" | "category" | "sentiment" | "objection" | "createdAt", ExtArgs["result"]["followUp"]>
+export type FollowUpOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "assignedToId" | "followupDate" | "status" | "notes" | "createdAt", ExtArgs["result"]["followUp"]>
 export type FollowUpInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignedTo?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
@@ -958,9 +825,6 @@ export type $FollowUpPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     followupDate: Date
     status: $Enums.FollowUpStatus
     notes: string | null
-    category: $Enums.FollowUpCategory
-    sentiment: $Enums.ClientSentiment | null
-    objection: $Enums.ClientObjection | null
     createdAt: Date
   }, ExtArgs["result"]["followUp"]>
   composites: {}
@@ -1394,9 +1258,6 @@ export interface FollowUpFieldRefs {
   readonly followupDate: Prisma.FieldRef<"FollowUp", 'DateTime'>
   readonly status: Prisma.FieldRef<"FollowUp", 'FollowUpStatus'>
   readonly notes: Prisma.FieldRef<"FollowUp", 'String'>
-  readonly category: Prisma.FieldRef<"FollowUp", 'FollowUpCategory'>
-  readonly sentiment: Prisma.FieldRef<"FollowUp", 'ClientSentiment'>
-  readonly objection: Prisma.FieldRef<"FollowUp", 'ClientObjection'>
   readonly createdAt: Prisma.FieldRef<"FollowUp", 'DateTime'>
 }
     
