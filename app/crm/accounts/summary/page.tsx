@@ -225,7 +225,7 @@ export default function SummaryPage() {
       await new Promise((r) => {
         logoImg.onload = r
         logoImg.onerror = () => {
-          logoImg.src = "/Logo/HeaderLogo.png"
+          logoImg.src = "/Logo/interior-concept-logobg-removed.png"
           logoImg.onload = r
           logoImg.onerror = r
         }
@@ -477,7 +477,7 @@ export default function SummaryPage() {
       await new Promise((r) => {
         logoImg.onload = r
         logoImg.onerror = () => {
-          logoImg.src = "/Logo/HeaderLogo.png"
+          logoImg.src = "/Logo/interior-concept-logobg-removed.png"
           logoImg.onload = r
           logoImg.onerror = r
         }

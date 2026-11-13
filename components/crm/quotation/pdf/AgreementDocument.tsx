@@ -80,10 +80,10 @@ const logoSrc = isBrowser
     : '/Logo/interior-concept-logobg-removed.png'
 
 const watermarkSrc = isBrowser
-  ? '/android-chrome-512x512.png'
+  ? '/Logo/interior-concept-icon-light.png'
   : typeof process !== 'undefined' && process.cwd
-    ? `${process.cwd()}/public/android-chrome-512x512.png`
-    : '/android-chrome-512x512.png'
+    ? `${process.cwd()}/public/Logo/interior-concept-icon-light.png`
+    : '/Logo/interior-concept-icon-light.png'
 
 const styles = StyleSheet.create({
   // ─── Cover Page Styles (Premium Corporate Two-Tone Geometric) ───

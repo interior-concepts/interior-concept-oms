@@ -1061,7 +1061,7 @@ export function RequisitionBuilderClient({
       const reqNo = existingRequisition?.requisitionNo || `DRAFT-${lead.id.slice(-6).toUpperCase()}`
 
       const logoImg = new Image()
-      logoImg.src = '/Logo/HeaderLogo.png'
+      logoImg.src = '/Logo/interior-concept-logobg-removed.png'
       await new Promise((resolve) => {
         logoImg.onload = resolve
         logoImg.onerror = resolve

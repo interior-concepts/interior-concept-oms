@@ -57,7 +57,7 @@ export async function downloadMoneyReceiptPDF(data: MoneyReceiptData) {
   // ── Background Watermark Logo ──────────────────────────────────────────────
   try {
     const watermarkImg = new Image()
-    watermarkImg.src = "/android-chrome-512x512.png"
+    watermarkImg.src = "/Logo/interior-concept-icon-light.png"
     await new Promise((resolve) => {
       watermarkImg.onload = resolve
       watermarkImg.onerror = resolve
@@ -84,7 +84,7 @@ export async function downloadMoneyReceiptPDF(data: MoneyReceiptData) {
   // Left Side: HeaderLogo.png ONLY (Maintaining Exact Real Aspect Ratio)
   try {
     const logoImg = new Image()
-    logoImg.src = "/Logo/HeaderLogo.png"
+    logoImg.src = "/Logo/interior-concept-logobg-removed.png"
     await new Promise((resolve) => {
       logoImg.onload = resolve
       logoImg.onerror = resolve

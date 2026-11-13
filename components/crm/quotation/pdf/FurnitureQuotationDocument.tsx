@@ -131,7 +131,7 @@ export function FurnitureQuotationDocument({ content, leadName, leadLocation }: 
   const grandTotal = content.items.reduce((sum, item) => sum + item.quantity * item.rate, 0)
   return <Document>
     <Page size="A4" style={styles.page} wrap>
-      <View style={styles.watermark} fixed><Image src={`${getBaseUrl()}/android-chrome-512x512.png`} style={{ width: 400, height: 400 }} /></View>
+      <View style={styles.watermark} fixed><Image src={`${getBaseUrl()}/Logo/interior-concept-icon-light.png`} style={{ width: 400, height: 400 }} /></View>
       <GlobalHeader date={content.quotationDate} />
       <Footer />
       <View style={styles.client}>
