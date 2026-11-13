@@ -113,7 +113,7 @@ export async function downloadMoneyReceiptPDF(data: MoneyReceiptData) {
   doc.setFontSize(4.5)
   doc.setTextColor(71, 85, 105)
 
-  const emailStr = "info@interiorconceptsstudio.com"
+  const emailStr = "interiorconceptsstudio@gmail.com"
   const emailTextW = doc.getTextWidth(emailStr)
 
   // Black Circle Badge dimensions
@@ -139,24 +139,37 @@ export async function downloadMoneyReceiptPDF(data: MoneyReceiptData) {
     }
   }
 
-  // 1. Phone numbers — 3 separate lines, badge centered across all 3
-  const phoneLines = ["01329694660", "01329694661", "01329694662"]
+  // 1. Phone numbers & WhatsApp
+  const phoneLines = ["01334-935532", "01334-935532 (WhatsApp)"]
   const phoneLineH = 0.05
   const phoneTotalH = (phoneLines.length - 1) * phoneLineH
   const phoneBadgeCenterY = curY - 0.015 + phoneTotalH / 2
   drawBadgeIcon(icons.whitePhone, phoneBadgeCenterY)
   phoneLines.forEach((num, i) => {
-    doc.text(num, textX, curY + i * phoneLineH)
+    const lineY = curY + i * phoneLineH
+    doc.text(num, textX, lineY)
+    if (num.includes("WhatsApp")) {
+      try {
+        if ((doc as any).link) {
+          (doc as any).link(textX, lineY - 0.03, doc.getTextWidth(num), 0.045, { url: "https://wa.me/8801334935532" })
+        }
+      } catch {}
+    }
   })
 
-  // 2. Email row (advance past all 3 phone lines + gap)
+  // 2. Email row (advance past all phone lines + gap)
   curY += phoneTotalH + 0.07
   drawBadgeIcon(icons.whiteEmail, curY - 0.015)
   doc.text(emailStr, textX, curY)
+  try {
+    if ((doc as any).link) {
+      (doc as any).link(textX, curY - 0.03, emailTextW, 0.045, { url: "mailto:interiorconceptsstudio@gmail.com" })
+    }
+  } catch {}
 
   // 3. Address row (Wrapped into 2 lines, icon badge centered vertically across lines)
   curY += 0.07
-  const addressStr = "3rd floor, 183 East Senpara Parbata, Begum Rokeya Sarani, Mirpur 10, Dhaka"
+  const addressStr = "174/1, Lake View Road, Gulshan-1, Dhaka, Bangladesh, 1212"
   const splitAddress = doc.splitTextToSize(addressStr, emailTextW)
   const lineHeight = 0.05
   const totalTextH = (splitAddress.length - 1) * lineHeight
@@ -164,6 +177,11 @@ export async function downloadMoneyReceiptPDF(data: MoneyReceiptData) {
 
   drawBadgeIcon(icons.whiteLocation, addrBadgeCenterY)
   doc.text(splitAddress, textX, curY)
+  try {
+    if ((doc as any).link) {
+      (doc as any).link(textX, curY - 0.03, emailTextW, (splitAddress.length * lineHeight), { url: "https://maps.google.com/?q=174/1+Lake+View+Road+Gulshan-1+Dhaka+1212" })
+    }
+  } catch {}
 
   // Divider Line below Header removed
   y = Math.max(margin + 0.46, curY + totalTextH + 0.04)
