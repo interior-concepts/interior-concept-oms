@@ -471,3 +471,36 @@ export const SiteDeliveryCondition = {
 } as const
 
 export type SiteDeliveryCondition = (typeof SiteDeliveryCondition)[keyof typeof SiteDeliveryCondition]
+
+
+export const FollowUpCategory = {
+  LAYOUT_REVIEW: 'LAYOUT_REVIEW',
+  BUDGET_NEGOTIATION: 'BUDGET_NEGOTIATION',
+  SITE_VISIT: 'SITE_VISIT',
+  CONTRACT_SIGNING: 'CONTRACT_SIGNING',
+  GENERAL: 'GENERAL'
+} as const
+
+export type FollowUpCategory = (typeof FollowUpCategory)[keyof typeof FollowUpCategory]
+
+
+export const ClientSentiment = {
+  HOT: 'HOT',
+  WARM: 'WARM',
+  COLD: 'COLD',
+  AT_RISK: 'AT_RISK'
+} as const
+
+export type ClientSentiment = (typeof ClientSentiment)[keyof typeof ClientSentiment]
+
+
+export const ClientObjection = {
+  BUDGET_TOO_HIGH: 'BUDGET_TOO_HIGH',
+  COMPETITOR_COMPARISON: 'COMPETITOR_COMPARISON',
+  DESIGN_REVISION_NEEDED: 'DESIGN_REVISION_NEEDED',
+  SPACE_PLANNING_QUERY: 'SPACE_PLANNING_QUERY',
+  TIMELINE_DELAY: 'TIMELINE_DELAY',
+  OTHER: 'OTHER'
+} as const
+
+export type ClientObjection = (typeof ClientObjection)[keyof typeof ClientObjection]

@@ -949,10 +949,6 @@ export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type UserUpdateOneWithoutApprovedUsersNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutApprovedUsersInput, Prisma.UserUncheckedCreateWithoutApprovedUsersInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutApprovedUsersInput
