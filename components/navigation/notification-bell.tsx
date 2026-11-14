@@ -35,8 +35,6 @@ type NotificationsResponse = {
   error?: string
 }
 
-const NOTIFICATION_SOUND_SRC = '/sounds/mixkit-correct-answer-tone-2870.wav'
-
 function formatWhen(value: string | null) {
   if (!value) return null
   const parsed = new Date(value)
@@ -44,36 +42,54 @@ function formatWhen(value: string | null) {
   return parsed.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })
 }
 
+// Single shared AudioContext — created lazily on first user gesture to satisfy
+// the browser autoplay policy. Never recreated to avoid the "not allowed to
+// start" console warning.
+let sharedAudioCtx: AudioContext | null = null
+
+function getAudioContext(): AudioContext | null {
+  if (typeof window === 'undefined') return null
+  if (sharedAudioCtx) return sharedAudioCtx
+  const AudioCtx =
+    window.AudioContext ||
+    (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
+  if (!AudioCtx) return null
+  sharedAudioCtx = new AudioCtx()
+  return sharedAudioCtx
+}
+
 function playAlertBeep() {
-  if (typeof window === 'undefined') return
-  const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
-  if (!AudioCtx) return
-  const ctx = new AudioCtx()
-  const master = ctx.createGain()
-  master.gain.value = 0.16
-  master.connect(ctx.destination)
+  const ctx = getAudioContext()
+  if (!ctx) return
 
-  const playTone = (startAt: number, frequency: number, duration = 0.11) => {
-    const osc = ctx.createOscillator()
-    const gain = ctx.createGain()
+  // Resume if suspended (happens after the context idles)
+  void ctx.resume().then(() => {
+    const master = ctx.createGain()
+    master.gain.value = 0.16
+    master.connect(ctx.destination)
 
-    osc.type = 'triangle'
-    osc.frequency.setValueAtTime(frequency, startAt)
-    osc.frequency.exponentialRampToValueAtTime(frequency * 1.04, startAt + duration)
+    const playTone = (startAt: number, frequency: number, duration = 0.11) => {
+      const osc = ctx.createOscillator()
+      const gain = ctx.createGain()
 
-    gain.gain.setValueAtTime(0.0001, startAt)
-    gain.gain.exponentialRampToValueAtTime(0.12, startAt + 0.012)
-    gain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration)
+      osc.type = 'triangle'
+      osc.frequency.setValueAtTime(frequency, startAt)
+      osc.frequency.exponentialRampToValueAtTime(frequency * 1.04, startAt + duration)
 
-    osc.connect(gain)
-    gain.connect(master)
-    osc.start(startAt)
-    osc.stop(startAt + duration + 0.02)
-  }
+      gain.gain.setValueAtTime(0.0001, startAt)
+      gain.gain.exponentialRampToValueAtTime(0.12, startAt + 0.012)
+      gain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration)
 
-  const t0 = ctx.currentTime
-  playTone(t0, 988, 0.1) // B5
-  playTone(t0 + 0.115, 1318.5, 0.12) // E6
+      osc.connect(gain)
+      gain.connect(master)
+      osc.start(startAt)
+      osc.stop(startAt + duration + 0.02)
+    }
+
+    const t0 = ctx.currentTime
+    playTone(t0, 988, 0.1)         // B5
+    playTone(t0 + 0.115, 1318.5, 0.12) // E6
+  })
 }
 
 export function NotificationBell() {
@@ -85,25 +101,14 @@ export function NotificationBell() {
   const [soundEnabled, setSoundEnabled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const knownIdsRef = useRef<Set<string>>(new Set())
-  const soundRef = useRef<HTMLAudioElement | null>(null)
   const visibleUnreadCountRef = useRef(0)
   const wasHiddenRef = useRef(false)
   const unreadCountRef = useRef(0)
   const originalTitleRef = useRef<string | null>(null)
 
+  // Pure WebAudio beep — no WAV file fetch, no cache issues
   const playNotificationSound = useCallback(() => {
-    if (typeof window === 'undefined') return
-    if (!soundRef.current) {
-      const audio = new Audio(NOTIFICATION_SOUND_SRC)
-      audio.preload = 'auto'
-      soundRef.current = audio
-    }
-
-    const audio = soundRef.current
-    audio.currentTime = 0
-    void audio.play().catch(() => {
-      playAlertBeep()
-    })
+    playAlertBeep()
   }, [])
 
   const loadNotifications = useCallback(async (showLoading = false, fromReturn = false) => {
@@ -194,8 +199,10 @@ export function NotificationBell() {
   }, [unreadCount])
 
   useEffect(() => {
+    // Read saved preference — default to OFF so we never auto-play on page load
     const saved = window.localStorage.getItem('crm_notification_sound')
-    setSoundEnabled(saved !== 'off')
+    setSoundEnabled(saved === 'on')
+
     loadNotifications(true)
 
     const timer = window.setInterval(() => {
@@ -243,7 +250,8 @@ export function NotificationBell() {
       const response = await fetch('/api/notifications', { method: 'PATCH' })
       const payload = await response.json()
       if (!response.ok || !payload.success) {
-        throw new Error(payload.error || 'Failed to mark all as read')
+        throw new Error(payload.error || 'Failed to mark all as read'
+        )
       }
       setItems((prev) => prev.map((item) => ({ ...item, isRead: true })))
       setUnreadCount(0)
@@ -257,6 +265,7 @@ export function NotificationBell() {
     setSoundEnabled(next)
     window.localStorage.setItem('crm_notification_sound', next ? 'on' : 'off')
     if (next) {
+      // User gesture — safe to init AudioContext and play
       playNotificationSound()
       toast.success('Notification sound enabled')
     } else {
