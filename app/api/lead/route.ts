@@ -486,6 +486,7 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    console.log('🔎 [GET /api/lead] Request params:', Object.fromEntries(request.nextUrl.searchParams.entries()), 'Actor:', authResult.actorUserId);
     const timedDb = await timeAsync(async () => {
       const leadSelect: Prisma.LeadSelect = {
         id: true,
@@ -534,6 +535,7 @@ export async function GET(request: NextRequest) {
           take: limit,
         }),
       ]);
+      console.log(`📊 [GET /api/lead] Query returned: total=${total}, leads=${leads.length}`);
       const leadIds = leads.map((lead) => lead.id);
       const [attachmentResult, phaseTaskResult, groupedStageCountsResult] = await Promise.allSettled([
         includeAttachmentPreview && leadIds.length > 0
@@ -1010,6 +1012,7 @@ export async function POST(request: NextRequest) {
     // Parse incoming JSON request body
     // console.log('📝 [POST /api/lead] - Parsing request body');
     const body = (await request.json()) as CreateLeadBody;
+    console.log('📥 [POST /api/lead] Received body:', body);
 
     // Extract and validate required fields
     const name = toOptionalString(body.name);
@@ -1472,6 +1475,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    console.log('🎉 [POST /api/lead] Lead successfully created:', { id: lead.id, name: lead.name, phone: lead.phone });
     // Return 201 Created with the new lead data
     return NextResponse.json(
       { success: true, data: lead, message: 'Lead created successfully' },

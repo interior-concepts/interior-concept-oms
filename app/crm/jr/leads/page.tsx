@@ -512,7 +512,20 @@ export default function LeadsPage() {
         params.set('createdTo', createdTo)
       }
 
-      let payloadPromise = leadsRequestMap.get(requestKey)
+      console.log('🔍 [JR Leads Page] Fetching leads with params:', Object.fromEntries(params.entries()), {
+        filterKey,
+        offset,
+        replace,
+        search,
+        stageFilter,
+        sourceFilter,
+        assignmentFilter,
+        datePreset,
+        createdFrom,
+        createdTo,
+      });
+
+      let payloadPromise = leadsRequestMap.get(requestKey);
       if (!payloadPromise) {
         payloadPromise = fetch(`/api/lead?${params.toString()}`)
           .then(async (res) => {

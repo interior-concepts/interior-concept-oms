@@ -254,12 +254,15 @@ export default function LeadCreateModal({
     }
     let data: { success?: boolean; error?: string } = {}
     try {
-      const res = await fetch('/api/lead', {
+      console.log('🚀 [LeadCreateModal] Submitting new lead payload:', payload);
+    const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
       data = await res.json()
+      console.log('📥 [LeadCreateModal] POST /api/lead response:', { ok: res.ok, status: res.status, data });
+      if (!res.ok) console.error('❌ [LeadCreateModal] Failed with error:', data?.error);
       if (!res.ok) {
         setError(data.error || 'Failed to create lead')
         setLoading(false)
