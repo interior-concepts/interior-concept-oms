@@ -966,10 +966,6 @@ export type UserUncheckedCreateNestedManyWithoutApprovedByInput = {
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type UserUpdateOneWithoutApprovedUsersNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutApprovedUsersInput, Prisma.UserUncheckedCreateWithoutApprovedUsersInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutApprovedUsersInput

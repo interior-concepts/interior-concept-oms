@@ -6013,6 +6013,7 @@ export const LeadScalarFieldEnum = {
   agreementType: 'agreementType',
   agreementValue: 'agreementValue',
   accountStatus: 'accountStatus',
+  isInstantQuotation: 'isInstantQuotation',
   agreementSqft: 'agreementSqft',
   initialAgreementValue: 'initialAgreementValue',
   sentiment: 'sentiment',
@@ -7360,6 +7361,13 @@ export type ListEnumAccountStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'ClientSentiment'
  */
 export type EnumClientSentimentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClientSentiment'>
@@ -7440,13 +7448,6 @@ export type EnumFollowUpCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'FollowUpCategory[]'
  */
 export type ListEnumFollowUpCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FollowUpCategory[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 

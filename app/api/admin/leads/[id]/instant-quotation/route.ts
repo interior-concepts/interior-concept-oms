@@ -136,6 +136,7 @@ export async function POST(req: NextRequest, context: RouteContext) {
           primaryOwnerDepartment: LeadPrimaryOwnerDepartment.SR_CRM,
           primaryOwnerUserId: seniorCrmUserId,
           assignedTo: seniorCrmUserId,
+          isInstantQuotation: true,
         },
       })
 

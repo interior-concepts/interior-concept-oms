@@ -28,6 +28,7 @@ model Lead {
   agreementType          String?
   agreementValue         Float?
   accountStatus          AccountStatus?
+  isInstantQuotation     Boolean                     @default(false)
   agreementSqft          Float?
   initialAgreementValue  Float?
   activities             ActivityLog[]

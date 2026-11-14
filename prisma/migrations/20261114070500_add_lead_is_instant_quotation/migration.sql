@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Lead" ADD COLUMN IF NOT EXISTS "isInstantQuotation" BOOLEAN NOT NULL DEFAULT false;

@@ -61,6 +61,7 @@ export type LeadMinAggregateOutputType = {
   agreementType: string | null
   agreementValue: number | null
   accountStatus: $Enums.AccountStatus | null
+  isInstantQuotation: boolean | null
   agreementSqft: number | null
   initialAgreementValue: number | null
   sentiment: $Enums.ClientSentiment | null
@@ -90,6 +91,7 @@ export type LeadMaxAggregateOutputType = {
   agreementType: string | null
   agreementValue: number | null
   accountStatus: $Enums.AccountStatus | null
+  isInstantQuotation: boolean | null
   agreementSqft: number | null
   initialAgreementValue: number | null
   sentiment: $Enums.ClientSentiment | null
@@ -119,6 +121,7 @@ export type LeadCountAggregateOutputType = {
   agreementType: number
   agreementValue: number
   accountStatus: number
+  isInstantQuotation: number
   agreementSqft: number
   initialAgreementValue: number
   sentiment: number
@@ -164,6 +167,7 @@ export type LeadMinAggregateInputType = {
   agreementType?: true
   agreementValue?: true
   accountStatus?: true
+  isInstantQuotation?: true
   agreementSqft?: true
   initialAgreementValue?: true
   sentiment?: true
@@ -193,6 +197,7 @@ export type LeadMaxAggregateInputType = {
   agreementType?: true
   agreementValue?: true
   accountStatus?: true
+  isInstantQuotation?: true
   agreementSqft?: true
   initialAgreementValue?: true
   sentiment?: true
@@ -222,6 +227,7 @@ export type LeadCountAggregateInputType = {
   agreementType?: true
   agreementValue?: true
   accountStatus?: true
+  isInstantQuotation?: true
   agreementSqft?: true
   initialAgreementValue?: true
   sentiment?: true
@@ -338,6 +344,7 @@ export type LeadGroupByOutputType = {
   agreementType: string | null
   agreementValue: number | null
   accountStatus: $Enums.AccountStatus | null
+  isInstantQuotation: boolean
   agreementSqft: number | null
   initialAgreementValue: number | null
   sentiment: $Enums.ClientSentiment | null
@@ -390,6 +397,7 @@ export type LeadWhereInput = {
   agreementType?: Prisma.StringNullableFilter<"Lead"> | string | null
   agreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
   accountStatus?: Prisma.EnumAccountStatusNullableFilter<"Lead"> | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFilter<"Lead"> | boolean
   agreementSqft?: Prisma.FloatNullableFilter<"Lead"> | number | null
   initialAgreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
   sentiment?: Prisma.EnumClientSentimentNullableFilter<"Lead"> | $Enums.ClientSentiment | null
@@ -447,6 +455,7 @@ export type LeadOrderByWithRelationInput = {
   agreementType?: Prisma.SortOrderInput | Prisma.SortOrder
   agreementValue?: Prisma.SortOrderInput | Prisma.SortOrder
   accountStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  isInstantQuotation?: Prisma.SortOrder
   agreementSqft?: Prisma.SortOrderInput | Prisma.SortOrder
   initialAgreementValue?: Prisma.SortOrderInput | Prisma.SortOrder
   sentiment?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -507,6 +516,7 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   agreementType?: Prisma.StringNullableFilter<"Lead"> | string | null
   agreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
   accountStatus?: Prisma.EnumAccountStatusNullableFilter<"Lead"> | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFilter<"Lead"> | boolean
   agreementSqft?: Prisma.FloatNullableFilter<"Lead"> | number | null
   initialAgreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
   sentiment?: Prisma.EnumClientSentimentNullableFilter<"Lead"> | $Enums.ClientSentiment | null
@@ -564,6 +574,7 @@ export type LeadOrderByWithAggregationInput = {
   agreementType?: Prisma.SortOrderInput | Prisma.SortOrder
   agreementValue?: Prisma.SortOrderInput | Prisma.SortOrder
   accountStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  isInstantQuotation?: Prisma.SortOrder
   agreementSqft?: Prisma.SortOrderInput | Prisma.SortOrder
   initialAgreementValue?: Prisma.SortOrderInput | Prisma.SortOrder
   sentiment?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -601,6 +612,7 @@ export type LeadScalarWhereWithAggregatesInput = {
   agreementType?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   agreementValue?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
   accountStatus?: Prisma.EnumAccountStatusNullableWithAggregatesFilter<"Lead"> | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolWithAggregatesFilter<"Lead"> | boolean
   agreementSqft?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
   initialAgreementValue?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
   sentiment?: Prisma.EnumClientSentimentNullableWithAggregatesFilter<"Lead"> | $Enums.ClientSentiment | null
@@ -628,6 +640,7 @@ export type LeadCreateInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -685,6 +698,7 @@ export type LeadUncheckedCreateInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -738,6 +752,7 @@ export type LeadUpdateInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -795,6 +810,7 @@ export type LeadUncheckedUpdateInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -850,6 +866,7 @@ export type LeadCreateManyInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -877,6 +894,7 @@ export type LeadUpdateManyMutationInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -906,6 +924,7 @@ export type LeadUncheckedUpdateManyInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -935,6 +954,7 @@ export type LeadCountOrderByAggregateInput = {
   agreementType?: Prisma.SortOrder
   agreementValue?: Prisma.SortOrder
   accountStatus?: Prisma.SortOrder
+  isInstantQuotation?: Prisma.SortOrder
   agreementSqft?: Prisma.SortOrder
   initialAgreementValue?: Prisma.SortOrder
   sentiment?: Prisma.SortOrder
@@ -971,6 +991,7 @@ export type LeadMaxOrderByAggregateInput = {
   agreementType?: Prisma.SortOrder
   agreementValue?: Prisma.SortOrder
   accountStatus?: Prisma.SortOrder
+  isInstantQuotation?: Prisma.SortOrder
   agreementSqft?: Prisma.SortOrder
   initialAgreementValue?: Prisma.SortOrder
   sentiment?: Prisma.SortOrder
@@ -1000,6 +1021,7 @@ export type LeadMinOrderByAggregateInput = {
   agreementType?: Prisma.SortOrder
   agreementValue?: Prisma.SortOrder
   accountStatus?: Prisma.SortOrder
+  isInstantQuotation?: Prisma.SortOrder
   agreementSqft?: Prisma.SortOrder
   initialAgreementValue?: Prisma.SortOrder
   sentiment?: Prisma.SortOrder
@@ -1069,6 +1091,10 @@ export type NullableEnumLeadPrimaryOwnerDepartmentFieldUpdateOperationsInput = {
 
 export type NullableEnumAccountStatusFieldUpdateOperationsInput = {
   set?: $Enums.AccountStatus | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type NullableEnumClientSentimentFieldUpdateOperationsInput = {
@@ -1558,6 +1584,7 @@ export type LeadCreateWithoutAssignmentsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -1614,6 +1641,7 @@ export type LeadUncheckedCreateWithoutAssignmentsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -1682,6 +1710,7 @@ export type LeadUpdateWithoutAssignmentsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -1738,6 +1767,7 @@ export type LeadUncheckedUpdateWithoutAssignmentsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -1790,6 +1820,7 @@ export type LeadCreateWithoutStatusHistoryInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -1846,6 +1877,7 @@ export type LeadUncheckedCreateWithoutStatusHistoryInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -1914,6 +1946,7 @@ export type LeadUpdateWithoutStatusHistoryInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -1970,6 +2003,7 @@ export type LeadUncheckedUpdateWithoutStatusHistoryInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -2022,6 +2056,7 @@ export type LeadCreateWithoutActivitiesInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -2078,6 +2113,7 @@ export type LeadUncheckedCreateWithoutActivitiesInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -2146,6 +2182,7 @@ export type LeadUpdateWithoutActivitiesInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -2202,6 +2239,7 @@ export type LeadUncheckedUpdateWithoutActivitiesInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -2254,6 +2292,7 @@ export type LeadCreateWithoutFollowUpsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -2310,6 +2349,7 @@ export type LeadUncheckedCreateWithoutFollowUpsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -2378,6 +2418,7 @@ export type LeadUpdateWithoutFollowUpsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -2434,6 +2475,7 @@ export type LeadUncheckedUpdateWithoutFollowUpsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -2486,6 +2528,7 @@ export type LeadCreateWithoutNotesInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -2542,6 +2585,7 @@ export type LeadUncheckedCreateWithoutNotesInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -2610,6 +2654,7 @@ export type LeadUpdateWithoutNotesInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -2666,6 +2711,7 @@ export type LeadUncheckedUpdateWithoutNotesInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -2718,6 +2764,7 @@ export type LeadCreateWithoutAssigneeInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -2773,6 +2820,7 @@ export type LeadUncheckedCreateWithoutAssigneeInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -2836,6 +2884,7 @@ export type LeadCreateWithoutPrimaryOwnerInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -2891,6 +2940,7 @@ export type LeadUncheckedCreateWithoutPrimaryOwnerInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -2975,6 +3025,7 @@ export type LeadScalarWhereInput = {
   agreementType?: Prisma.StringNullableFilter<"Lead"> | string | null
   agreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
   accountStatus?: Prisma.EnumAccountStatusNullableFilter<"Lead"> | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFilter<"Lead"> | boolean
   agreementSqft?: Prisma.FloatNullableFilter<"Lead"> | number | null
   initialAgreementValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
   sentiment?: Prisma.EnumClientSentimentNullableFilter<"Lead"> | $Enums.ClientSentiment | null
@@ -3018,6 +3069,7 @@ export type LeadCreateWithoutAgreementValueLogsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -3074,6 +3126,7 @@ export type LeadUncheckedCreateWithoutAgreementValueLogsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -3142,6 +3195,7 @@ export type LeadUpdateWithoutAgreementValueLogsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -3198,6 +3252,7 @@ export type LeadUncheckedUpdateWithoutAgreementValueLogsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -3250,6 +3305,7 @@ export type LeadCreateWithoutPhaseTasksInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -3306,6 +3362,7 @@ export type LeadUncheckedCreateWithoutPhaseTasksInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -3374,6 +3431,7 @@ export type LeadUpdateWithoutPhaseTasksInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -3430,6 +3488,7 @@ export type LeadUncheckedUpdateWithoutPhaseTasksInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -3482,6 +3541,7 @@ export type LeadCreateWithoutJrArchitectRequestsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -3538,6 +3598,7 @@ export type LeadUncheckedCreateWithoutJrArchitectRequestsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -3606,6 +3667,7 @@ export type LeadUpdateWithoutJrArchitectRequestsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -3662,6 +3724,7 @@ export type LeadUncheckedUpdateWithoutJrArchitectRequestsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -3714,6 +3777,7 @@ export type LeadCreateWithoutMeetingEventsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -3770,6 +3834,7 @@ export type LeadUncheckedCreateWithoutMeetingEventsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -3838,6 +3903,7 @@ export type LeadUpdateWithoutMeetingEventsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -3894,6 +3960,7 @@ export type LeadUncheckedUpdateWithoutMeetingEventsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -3946,6 +4013,7 @@ export type LeadCreateWithoutCadWorkSubmissionsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -4002,6 +4070,7 @@ export type LeadUncheckedCreateWithoutCadWorkSubmissionsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -4070,6 +4139,7 @@ export type LeadUpdateWithoutCadWorkSubmissionsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -4126,6 +4196,7 @@ export type LeadUncheckedUpdateWithoutCadWorkSubmissionsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -4178,6 +4249,7 @@ export type LeadCreateWithoutQuotationDraftsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -4234,6 +4306,7 @@ export type LeadUncheckedCreateWithoutQuotationDraftsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -4302,6 +4375,7 @@ export type LeadUpdateWithoutQuotationDraftsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -4358,6 +4432,7 @@ export type LeadUncheckedUpdateWithoutQuotationDraftsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -4410,6 +4485,7 @@ export type LeadCreateWithoutAgreementDocumentInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -4466,6 +4542,7 @@ export type LeadUncheckedCreateWithoutAgreementDocumentInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -4534,6 +4611,7 @@ export type LeadUpdateWithoutAgreementDocumentInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -4590,6 +4668,7 @@ export type LeadUncheckedUpdateWithoutAgreementDocumentInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -4642,6 +4721,7 @@ export type LeadCreateWithoutFurnitureQuotationDraftInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -4698,6 +4778,7 @@ export type LeadUncheckedCreateWithoutFurnitureQuotationDraftInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -4766,6 +4847,7 @@ export type LeadUpdateWithoutFurnitureQuotationDraftInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -4822,6 +4904,7 @@ export type LeadUncheckedUpdateWithoutFurnitureQuotationDraftInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -4874,6 +4957,7 @@ export type LeadCreateWithoutElectricalQuotationDraftInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -4930,6 +5014,7 @@ export type LeadUncheckedCreateWithoutElectricalQuotationDraftInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -4998,6 +5083,7 @@ export type LeadUpdateWithoutElectricalQuotationDraftInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -5054,6 +5140,7 @@ export type LeadUncheckedUpdateWithoutElectricalQuotationDraftInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -5106,6 +5193,7 @@ export type LeadCreateWithoutPartialQuotationDraftInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -5162,6 +5250,7 @@ export type LeadUncheckedCreateWithoutPartialQuotationDraftInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -5230,6 +5319,7 @@ export type LeadUpdateWithoutPartialQuotationDraftInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -5286,6 +5376,7 @@ export type LeadUncheckedUpdateWithoutPartialQuotationDraftInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -5338,6 +5429,7 @@ export type LeadCreateWithoutVisitsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -5394,6 +5486,7 @@ export type LeadUncheckedCreateWithoutVisitsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -5462,6 +5555,7 @@ export type LeadUpdateWithoutVisitsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -5518,6 +5612,7 @@ export type LeadUncheckedUpdateWithoutVisitsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -5570,6 +5665,7 @@ export type LeadCreateWithoutAttachmentsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -5626,6 +5722,7 @@ export type LeadUncheckedCreateWithoutAttachmentsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -5694,6 +5791,7 @@ export type LeadUpdateWithoutAttachmentsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -5750,6 +5848,7 @@ export type LeadUncheckedUpdateWithoutAttachmentsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -5802,6 +5901,7 @@ export type LeadCreateWithoutNotificationsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -5858,6 +5958,7 @@ export type LeadUncheckedCreateWithoutNotificationsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -5926,6 +6027,7 @@ export type LeadUpdateWithoutNotificationsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -5982,6 +6084,7 @@ export type LeadUncheckedUpdateWithoutNotificationsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -6034,6 +6137,7 @@ export type LeadCreateWithoutTransactionsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -6090,6 +6194,7 @@ export type LeadUncheckedCreateWithoutTransactionsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -6158,6 +6263,7 @@ export type LeadUpdateWithoutTransactionsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -6214,6 +6320,7 @@ export type LeadUncheckedUpdateWithoutTransactionsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -6266,6 +6373,7 @@ export type LeadCreateWithoutVendorAgreementsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -6322,6 +6430,7 @@ export type LeadUncheckedCreateWithoutVendorAgreementsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -6390,6 +6499,7 @@ export type LeadUpdateWithoutVendorAgreementsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -6446,6 +6556,7 @@ export type LeadUncheckedUpdateWithoutVendorAgreementsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -6498,6 +6609,7 @@ export type LeadCreateWithoutStockMovementsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -6554,6 +6666,7 @@ export type LeadUncheckedCreateWithoutStockMovementsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -6622,6 +6735,7 @@ export type LeadUpdateWithoutStockMovementsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -6678,6 +6792,7 @@ export type LeadUncheckedUpdateWithoutStockMovementsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -6730,6 +6845,7 @@ export type LeadCreateWithoutMaterialRequisitionsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -6786,6 +6902,7 @@ export type LeadUncheckedCreateWithoutMaterialRequisitionsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -6854,6 +6971,7 @@ export type LeadUpdateWithoutMaterialRequisitionsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -6910,6 +7028,7 @@ export type LeadUncheckedUpdateWithoutMaterialRequisitionsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -6962,6 +7081,7 @@ export type LeadCreateWithoutProcurementWalletTransactionsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -7018,6 +7138,7 @@ export type LeadUncheckedCreateWithoutProcurementWalletTransactionsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -7086,6 +7207,7 @@ export type LeadUpdateWithoutProcurementWalletTransactionsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -7142,6 +7264,7 @@ export type LeadUncheckedUpdateWithoutProcurementWalletTransactionsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -7194,6 +7317,7 @@ export type LeadCreateWithoutSiteDeliveryLogsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -7250,6 +7374,7 @@ export type LeadUncheckedCreateWithoutSiteDeliveryLogsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -7318,6 +7443,7 @@ export type LeadUpdateWithoutSiteDeliveryLogsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -7374,6 +7500,7 @@ export type LeadUncheckedUpdateWithoutSiteDeliveryLogsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -7426,6 +7553,7 @@ export type LeadCreateWithoutQuotationDailyWorkReportsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -7482,6 +7610,7 @@ export type LeadUncheckedCreateWithoutQuotationDailyWorkReportsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -7550,6 +7679,7 @@ export type LeadUpdateWithoutQuotationDailyWorkReportsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -7606,6 +7736,7 @@ export type LeadUncheckedUpdateWithoutQuotationDailyWorkReportsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -7658,6 +7789,7 @@ export type LeadCreateWithoutQuotationWorkActivityLogsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -7714,6 +7846,7 @@ export type LeadUncheckedCreateWithoutQuotationWorkActivityLogsInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -7782,6 +7915,7 @@ export type LeadUpdateWithoutQuotationWorkActivityLogsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -7838,6 +7972,7 @@ export type LeadUncheckedUpdateWithoutQuotationWorkActivityLogsInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -7891,6 +8026,7 @@ export type LeadCreateManyAssigneeInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -7919,6 +8055,7 @@ export type LeadCreateManyPrimaryOwnerInput = {
   agreementType?: string | null
   agreementValue?: number | null
   accountStatus?: $Enums.AccountStatus | null
+  isInstantQuotation?: boolean
   agreementSqft?: number | null
   initialAgreementValue?: number | null
   sentiment?: $Enums.ClientSentiment | null
@@ -7946,6 +8083,7 @@ export type LeadUpdateWithoutAssigneeInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -8001,6 +8139,7 @@ export type LeadUncheckedUpdateWithoutAssigneeInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -8055,6 +8194,7 @@ export type LeadUncheckedUpdateManyWithoutAssigneeInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -8082,6 +8222,7 @@ export type LeadUpdateWithoutPrimaryOwnerInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -8137,6 +8278,7 @@ export type LeadUncheckedUpdateWithoutPrimaryOwnerInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -8191,6 +8333,7 @@ export type LeadUncheckedUpdateManyWithoutPrimaryOwnerInput = {
   agreementType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   accountStatus?: Prisma.NullableEnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus | null
+  isInstantQuotation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agreementSqft?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   initialAgreementValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sentiment?: Prisma.NullableEnumClientSentimentFieldUpdateOperationsInput | $Enums.ClientSentiment | null
@@ -8440,6 +8583,7 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   agreementType?: boolean
   agreementValue?: boolean
   accountStatus?: boolean
+  isInstantQuotation?: boolean
   agreementSqft?: boolean
   initialAgreementValue?: boolean
   sentiment?: boolean
@@ -8498,6 +8642,7 @@ export type LeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   agreementType?: boolean
   agreementValue?: boolean
   accountStatus?: boolean
+  isInstantQuotation?: boolean
   agreementSqft?: boolean
   initialAgreementValue?: boolean
   sentiment?: boolean
@@ -8529,6 +8674,7 @@ export type LeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   agreementType?: boolean
   agreementValue?: boolean
   accountStatus?: boolean
+  isInstantQuotation?: boolean
   agreementSqft?: boolean
   initialAgreementValue?: boolean
   sentiment?: boolean
@@ -8560,6 +8706,7 @@ export type LeadSelectScalar = {
   agreementType?: boolean
   agreementValue?: boolean
   accountStatus?: boolean
+  isInstantQuotation?: boolean
   agreementSqft?: boolean
   initialAgreementValue?: boolean
   sentiment?: boolean
@@ -8568,7 +8715,7 @@ export type LeadSelectScalar = {
   lastContactedAt?: boolean
 }
 
-export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "clientId" | "phone" | "email" | "assignedTo" | "created_at" | "updated_at" | "budget" | "location" | "remarks" | "source" | "stage" | "subStatus" | "primaryOwnerDepartment" | "primaryOwnerUserId" | "quotationType" | "agreementType" | "agreementValue" | "accountStatus" | "agreementSqft" | "initialAgreementValue" | "sentiment" | "objection" | "objectionNote" | "lastContactedAt", ExtArgs["result"]["lead"]>
+export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "clientId" | "phone" | "email" | "assignedTo" | "created_at" | "updated_at" | "budget" | "location" | "remarks" | "source" | "stage" | "subStatus" | "primaryOwnerDepartment" | "primaryOwnerUserId" | "quotationType" | "agreementType" | "agreementValue" | "accountStatus" | "isInstantQuotation" | "agreementSqft" | "initialAgreementValue" | "sentiment" | "objection" | "objectionNote" | "lastContactedAt", ExtArgs["result"]["lead"]>
 export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   activities?: boolean | Prisma.Lead$activitiesArgs<ExtArgs>
   agreementValueLogs?: boolean | Prisma.Lead$agreementValueLogsArgs<ExtArgs>
@@ -8662,6 +8809,7 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     agreementType: string | null
     agreementValue: number | null
     accountStatus: $Enums.AccountStatus | null
+    isInstantQuotation: boolean
     agreementSqft: number | null
     initialAgreementValue: number | null
     sentiment: $Enums.ClientSentiment | null
@@ -9139,6 +9287,7 @@ export interface LeadFieldRefs {
   readonly agreementType: Prisma.FieldRef<"Lead", 'String'>
   readonly agreementValue: Prisma.FieldRef<"Lead", 'Float'>
   readonly accountStatus: Prisma.FieldRef<"Lead", 'AccountStatus'>
+  readonly isInstantQuotation: Prisma.FieldRef<"Lead", 'Boolean'>
   readonly agreementSqft: Prisma.FieldRef<"Lead", 'Float'>
   readonly initialAgreementValue: Prisma.FieldRef<"Lead", 'Float'>
   readonly sentiment: Prisma.FieldRef<"Lead", 'ClientSentiment'>

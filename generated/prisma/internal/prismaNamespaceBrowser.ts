@@ -164,6 +164,7 @@ export const LeadScalarFieldEnum = {
   agreementType: 'agreementType',
   agreementValue: 'agreementValue',
   accountStatus: 'accountStatus',
+  isInstantQuotation: 'isInstantQuotation',
   agreementSqft: 'agreementSqft',
   initialAgreementValue: 'initialAgreementValue',
   sentiment: 'sentiment',

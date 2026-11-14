@@ -126,6 +126,7 @@ async function runPreflightDatabaseFixes() {
       END $$;
 
       -- 3. Ensure all missing Lead columns exist
+      ALTER TABLE "Lead" ADD COLUMN IF NOT EXISTS "isInstantQuotation" BOOLEAN NOT NULL DEFAULT false;
       ALTER TABLE "Lead" ADD COLUMN IF NOT EXISTS "agreementSqft" DOUBLE PRECISION;
       ALTER TABLE "Lead" ADD COLUMN IF NOT EXISTS "initialAgreementValue" DOUBLE PRECISION;
       ALTER TABLE "Lead" ADD COLUMN IF NOT EXISTS "agreementType" TEXT;

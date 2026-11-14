@@ -17,6 +17,8 @@ type LeadDetail = {
   subStatus: string | null
   location: string | null
   phone: string | null
+  isInstantQuotation?: boolean
+  budget?: number | null
 }
 
 export default function AdminQuotationLeadWorkspacePage() {
@@ -110,6 +112,8 @@ export default function AdminQuotationLeadWorkspacePage() {
               leadName={lead.name}
               leadLocation={lead.location}
               leadSubStatus={lead.subStatus}
+              isInstantQuotation={lead.isInstantQuotation}
+              leadBudget={lead.budget}
             />
           </>
         ) : null}

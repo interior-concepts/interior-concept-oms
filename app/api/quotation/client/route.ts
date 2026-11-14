@@ -142,6 +142,7 @@ export async function POST(request: NextRequest) {
           remarks,
           stage: LeadStage.QUOTATION_PHASE,
           subStatus: LeadSubStatus.QUOTATION_WORKING,
+          isInstantQuotation: true,
           assignedTo: targetQuotationUserId,
           primaryOwnerDepartment: targetSrCrmUserId ? LeadPrimaryOwnerDepartment.SR_CRM : null,
           primaryOwnerUserId: targetSrCrmUserId,

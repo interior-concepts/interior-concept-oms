@@ -15,6 +15,8 @@ type LeadDetail = {
   subStatus: string | null
   location: string | null
   phone: string | null
+  isInstantQuotation?: boolean
+  budget?: number | null
   meetingEvents?: Array<{
     id: string
     title: string
@@ -65,14 +67,14 @@ export default function QuotationLeadWorkspacePage() {
   return (
     <div className="min-h-screen bg-background">
       <CrmPageHeader
-        title={lead ? `${lead.name} - Quotation Workspace` : 'Quotation Workspace'}
-        subtitle="Create separate short, detail, and furniture quotation drafts for this lead."
+        title={lead ? `${lead.name} - Quotation Studio (Quotation Team)` : 'Quotation Studio (Quotation Team)'}
+        subtitle="Quotation phase workspace to build, edit, and submit client quotations."
       />
 
       <main className="mx-auto max-w-[1440px] px-6 py-6 space-y-4">
         {loading ? (
           <Card>
-            <CardContent className="py-8 text-sm text-muted-foreground">Loading lead...</CardContent>
+            <CardContent className="py-8 text-sm text-muted-foreground">Loading quotation workspace...</CardContent>
           </Card>
         ) : error ? (
           <Card>
@@ -83,14 +85,14 @@ export default function QuotationLeadWorkspacePage() {
             <Card>
               <CardContent className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <p className="text-sm font-medium">Detail quotation PDF</p>
-                  <p className="text-xs text-muted-foreground">Open the PDF preview, then click Download PDF to save this lead's detail quotation.</p>
+                  <p className="text-sm font-medium">Detail Quotation PDF</p>
+                  <p className="text-xs text-muted-foreground">Open detail preview to review formatted typography and export PDF.</p>
                 </div>
                 <Link
                   href={buildDetailPreviewUrl({ context: 'lead', contextId: lead.id })}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex w-fit items-center justify-center rounded-md border bg-white px-4 py-2 text-sm font-medium hover:bg-muted"
+                  className="inline-flex w-fit items-center justify-center rounded-md border bg-white px-4 py-2 text-sm font-medium hover:bg-muted dark:bg-slate-900"
                 >
                   Download detail PDF
                 </Link>
@@ -102,6 +104,8 @@ export default function QuotationLeadWorkspacePage() {
               leadName={lead.name}
               leadLocation={lead.location}
               leadSubStatus={lead.subStatus}
+              isInstantQuotation={lead.isInstantQuotation}
+              leadBudget={lead.budget}
             />
 
             <details className="rounded-lg border bg-card">
