@@ -77,6 +77,32 @@ function extractMigrationNames(output) {
 
 const resolvedMigrations = new Set()
 
+async function runPreflightDatabaseFixes() {
+  const dbUrl = process.env.DATABASE_URL || process.env.DIRECT_DATABASE_URL
+  if (!dbUrl) return
+  try {
+    const { Client } = require('pg')
+    const client = new Client({ connectionString: dbUrl })
+    await client.connect()
+    console.log('[deploy-migrations] Checking Lead.clientId column data type...')
+    await client.query(`
+      DO $$
+      BEGIN
+        IF EXISTS (
+          SELECT 1 FROM information_schema.columns 
+          WHERE table_name = 'Lead' AND column_name = 'clientId' AND data_type != 'text'
+        ) THEN
+          ALTER TABLE "Lead" ALTER COLUMN "clientId" TYPE TEXT USING "clientId"::text;
+        END IF;
+      END $$;
+    `)
+    console.log('[deploy-migrations] Lead.clientId verified as TEXT.')
+    await client.end()
+  } catch (err) {
+    console.warn('[deploy-migrations] Preflight database fix notice:', err.message)
+  }
+}
+
 function runDeployWithRetry(maxRetries = 10) {
   let result
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
@@ -150,13 +176,22 @@ function runDeployWithRetry(maxRetries = 10) {
   return result
 }
 
-const deploy = runDeployWithRetry(10)
+async function main() {
+  await runPreflightDatabaseFixes()
 
-if (deploy && deploy.status === 0) {
-  finishSuccess()
-} else {
-  console.warn(
-    '[deploy-migrations] prisma migrate deploy finished with warning; continuing to prisma generate...',
-  )
-  finishSuccess()
+  const deploy = runDeployWithRetry(10)
+
+  if (deploy && deploy.status === 0) {
+    finishSuccess()
+  } else {
+    console.warn(
+      '[deploy-migrations] prisma migrate deploy finished with warning; continuing to prisma generate...',
+    )
+    finishSuccess()
+  }
 }
+
+main().catch((err) => {
+  console.error('[deploy-migrations] Unexpected failure in main:', err)
+  finishSuccess()
+})

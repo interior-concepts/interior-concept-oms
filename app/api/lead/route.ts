@@ -1238,10 +1238,24 @@ export async function POST(request: NextRequest) {
             : null;
         const primaryOwnerUserId = srCrmAssigneeId ?? jrCrmAssigneeId ?? null;
 
+        let nextClientId: string | null = null;
+        try {
+          const latestLeadWithClientId = await tx.lead.findFirst({
+            where: { clientId: { not: null } },
+            orderBy: { created_at: 'desc' },
+            select: { clientId: true },
+          });
+          const parsed = latestLeadWithClientId?.clientId ? parseInt(latestLeadWithClientId.clientId, 10) : 0;
+          if (!Number.isNaN(parsed) && parsed > 0) {
+            nextClientId = String(parsed + 1);
+          }
+        } catch {}
+
         // Create the new lead with validated data
         const newLead = await tx.lead.create({
           data: {
             name,
+            ...(nextClientId ? { clientId: nextClientId } : {}),
             phone: phone ?? null,
             email,
             source,
