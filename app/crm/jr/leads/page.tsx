@@ -332,10 +332,10 @@ export default function LeadsPage() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const leadListQuery = useMemo(() => searchParams.toString(), [searchParams])
-  const defaultRange = useMemo(() => getTodayRange(), [])
+  const defaultRange = useMemo(() => getLifetimeRange(), [])
   const initialFilters = useMemo(() => {
     const rawPreset = searchParams.get('preset')
-    const preset: LeadDatePreset = isLeadDatePreset(rawPreset) ? rawPreset : 'TODAY'
+    const preset: LeadDatePreset = isLeadDatePreset(rawPreset) ? rawPreset : 'LIFETIME'
     const fallbackRange = preset === 'CUSTOM' ? defaultRange : getRangeForPreset(preset)
     const from = searchParams.get('from')?.trim() || fallbackRange.from
     const to = searchParams.get('to')?.trim() || fallbackRange.to
@@ -587,23 +587,23 @@ export default function LeadsPage() {
   useEffect(() => {
     const sentinel = sentinelRef.current
 
-    if (!sentinel || !hasMore || loadingInitial || loadingMore || nextOffset === null) {
+    if (!sentinel || !hasMore || loadingInitial || loadingMore || nextOffset === null || nextOffset <= 0 || leads.length === 0) {
       return
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries
-        if (entry.isIntersecting && !loadingMore) {
+        if (entry.isIntersecting && !loadingMore && !loadingInitial && nextOffset > 0) {
           fetchLeads(nextOffset, false)
         }
       },
-      { rootMargin: '400px 0px' },
+      { rootMargin: '200px 0px' },
     )
 
     observer.observe(sentinel)
     return () => observer.disconnect()
-  }, [fetchLeads, hasMore, loadingInitial, loadingMore, nextOffset])
+  }, [fetchLeads, hasMore, loadingInitial, loadingMore, nextOffset, leads.length])
 
   const refreshLeads = useCallback(() => {
     fetchLeads(0, true)

@@ -457,17 +457,14 @@ export async function GET(request: NextRequest) {
       !unassignedOnly &&
       !hasCreatedDateFilter;
 
-    if (shouldRunFallbackFacebookSync) {
-      try {
-        await maybeRunFacebookFallbackSync();
-      } catch (syncError) {
-        console.error('[GET /api/lead] Facebook fallback sync failed:', syncError);
-      }
-      try {
-        await maybeRunInstagramFallbackSync();
-      } catch (syncError) {
-        console.error('[GET /api/lead] Instagram fallback sync failed:', syncError);
-      }
+        if (shouldRunFallbackFacebookSync) {
+      // Run fallback sync in background — NEVER block user GET /api/lead request!
+      void Promise.allSettled([
+        maybeRunFacebookFallbackSync(),
+        maybeRunInstagramFallbackSync(),
+      ]).catch((syncError) => {
+        console.error('[GET /api/lead] Background fallback sync failed:', syncError);
+      });
     }
 
     if (shouldSyncFacebook) {
