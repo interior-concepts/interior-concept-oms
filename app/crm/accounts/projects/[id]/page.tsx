@@ -1156,45 +1156,47 @@ export default function ProjectDetailPage() {
             ) : null}
 
             {/* Summary Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
             <Card 
-              className="relative overflow-hidden cursor-pointer hover:border-primary/50 transition-colors"
+              className="col-span-2 sm:col-span-2 md:col-span-4 lg:col-span-2 relative overflow-hidden cursor-pointer hover:border-primary/50 transition-colors shadow-xs"
               onClick={() => setAgreementHistoryModalOpen(true)}
             >
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between mb-1">
-                  <div className="text-xs text-muted-foreground">Agreement Value / Budget</div>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="h-6 px-1.5 text-[11px] text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/50"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      setAgreementHistoryModalOpen(true)
-                    }}
-                  >
-                    <History className="h-3 w-3 mr-1" />
-                    History
-                  </Button>
-                </div>
-                <div className="text-xl font-bold">
-                  {agreementValue !== null ? `${agreementValue.toLocaleString()} BDT` : 'Not Defined'}
-                </div>
-                {agreementValue !== null && (
-                  <div className="mt-2 text-[11px] text-muted-foreground flex flex-wrap items-center justify-between gap-1 border-t pt-1.5 border-border/60">
-                    <span>Original: <strong className="font-semibold text-foreground">{initialAgreementValue ? `${initialAgreementValue.toLocaleString()} BDT` : 'N/A'}</strong></span>
-                    {agreementAdjustmentTotal !== 0 && (
-                      <Badge variant="outline" className={`text-[10px] px-1.5 py-0 ${agreementAdjustmentTotal > 0 ? 'text-emerald-600 border-emerald-300 bg-emerald-50 dark:bg-emerald-950/30' : 'text-rose-600 border-rose-300 bg-rose-50 dark:bg-rose-950/30'}`}>
-                        {agreementAdjustmentTotal > 0 ? `+${agreementAdjustmentTotal.toLocaleString()}` : `${agreementAdjustmentTotal.toLocaleString()}`} BDT
-                      </Badge>
-                    )}
+              <CardContent className="p-4 sm:p-5 flex flex-col justify-between h-full">
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-xs font-semibold text-muted-foreground">Agreement Value / Budget</span>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="h-6 px-2 text-[11px] font-medium text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/50"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setAgreementHistoryModalOpen(true)
+                      }}
+                    >
+                      <History className="h-3 w-3 mr-1" />
+                      History
+                    </Button>
                   </div>
-                )}
-                <div className="mt-3 flex gap-1.5">
+                  <div className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+                    {agreementValue !== null ? `${agreementValue.toLocaleString()} BDT` : 'Not Defined'}
+                  </div>
+                  {agreementValue !== null && (
+                    <div className="mt-2 text-xs text-muted-foreground flex flex-wrap items-center justify-between gap-1 border-t pt-2 border-border/60">
+                      <span>Original: <strong className="font-semibold text-foreground">{initialAgreementValue ? `${initialAgreementValue.toLocaleString()} BDT` : 'N/A'}</strong></span>
+                      {agreementAdjustmentTotal !== 0 && (
+                        <Badge variant="outline" className={`text-[10px] font-bold px-1.5 py-0 ${agreementAdjustmentTotal > 0 ? 'text-emerald-600 border-emerald-300 bg-emerald-50 dark:bg-emerald-950/30' : 'text-rose-600 border-rose-300 bg-rose-50 dark:bg-rose-950/30'}`}>
+                          {agreementAdjustmentTotal > 0 ? `+${agreementAdjustmentTotal.toLocaleString()}` : `${agreementAdjustmentTotal.toLocaleString()}`} BDT
+                        </Badge>
+                      )}
+                    </div>
+                  )}
+                </div>
+                <div className="mt-3 flex gap-2">
                   <Button
                     size="sm"
                     variant="outline"
-                    className="flex-1 h-7 text-xs gap-1 border-emerald-300 hover:bg-emerald-50 text-emerald-700 dark:hover:bg-emerald-950/30"
+                    className="flex-1 h-7 text-xs font-semibold gap-1 border-emerald-300 hover:bg-emerald-50 text-emerald-700 dark:hover:bg-emerald-950/30 shadow-2xs"
                     onClick={(e) => {
                       e.stopPropagation()
                       setAdjustType('ADD')
@@ -1208,7 +1210,7 @@ export default function ProjectDetailPage() {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="flex-1 h-7 text-xs gap-1 border-rose-300 hover:bg-rose-50 text-rose-700 dark:hover:bg-rose-950/30"
+                    className="flex-1 h-7 text-xs font-semibold gap-1 border-rose-300 hover:bg-rose-50 text-rose-700 dark:hover:bg-rose-950/30 shadow-2xs"
                     onClick={(e) => {
                       e.stopPropagation()
                       setAdjustType('DECREASE')
@@ -1222,40 +1224,44 @@ export default function ProjectDetailPage() {
                 </div>
               </CardContent>
             </Card>
-            <Card>
-              <CardContent className="pt-6">
-                <div className="text-xs text-muted-foreground mb-1">Total Paid (Deposits)</div>
-                <div className="text-xl font-bold text-emerald-500">
-                  {displayTotalPaid.toLocaleString()} BDT
+
+            <Card className="col-span-1 shadow-xs">
+              <CardContent className="p-4 sm:p-5 flex flex-col justify-between h-full">
+                <div className="text-xs font-medium text-muted-foreground mb-1">Total Paid (Deposits)</div>
+                <div className="text-lg sm:text-xl font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">
+                  {displayTotalPaid.toLocaleString()} <span className="text-xs font-normal text-muted-foreground">BDT</span>
                 </div>
               </CardContent>
             </Card>
-            <Card>
-              <CardContent className="pt-6">
-                <div className="text-xs text-muted-foreground mb-1">Payment Due</div>
-                <div className={`text-xl font-bold ${displayDue !== null && displayDue > 0 ? 'text-rose-500' : 'text-emerald-500'}`}>
-                  {displayDue !== null ? `${displayDue.toLocaleString()} BDT` : 'N/A'}
+
+            <Card className="col-span-1 shadow-xs">
+              <CardContent className="p-4 sm:p-5 flex flex-col justify-between h-full">
+                <div className="text-xs font-medium text-muted-foreground mb-1">Payment Due</div>
+                <div className={`text-lg sm:text-xl font-bold tabular-nums ${displayDue !== null && displayDue > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
+                  {displayDue !== null ? `${displayDue.toLocaleString()}` : 'N/A'} {displayDue !== null && <span className="text-xs font-normal text-muted-foreground">BDT</span>}
                 </div>
               </CardContent>
             </Card>
-            <Card>
-              <CardContent className="pt-6">
-                <div className="text-xs text-muted-foreground mb-1">Site Expense Logged</div>
-                <div className="text-xl font-bold text-rose-500">
-                  {displayTotalExpense.toLocaleString()} BDT
+
+            <Card className="col-span-1 shadow-xs">
+              <CardContent className="p-4 sm:p-5 flex flex-col justify-between h-full">
+                <div className="text-xs font-medium text-muted-foreground mb-1">Site Expense Logged</div>
+                <div className="text-lg sm:text-xl font-bold text-rose-600 dark:text-rose-400 tabular-nums">
+                  {displayTotalExpense.toLocaleString()} <span className="text-xs font-normal text-muted-foreground">BDT</span>
                 </div>
               </CardContent>
             </Card>
-            <Card className="bg-muted">
-              <CardContent className="pt-6">
-                <div className="flex flex-wrap items-center gap-2 mb-1">
-                  <div className="text-xs text-muted-foreground">Profit Margin Estimate</div>
+
+            <Card className="col-span-1 bg-muted/40 shadow-xs">
+              <CardContent className="p-4 sm:p-5 flex flex-col justify-between h-full">
+                <div className="flex flex-wrap items-center gap-1.5 mb-1">
+                  <div className="text-xs font-medium text-muted-foreground">Profit Margin</div>
                   {displayProfit !== null && displayProfit < 0 && (
-                    <Badge variant="destructive" className="h-5 text-[10px] uppercase font-bold px-1.5 py-0">LOSS</Badge>
+                    <Badge variant="destructive" className="h-4 text-[9px] uppercase font-bold px-1 py-0">LOSS</Badge>
                   )}
                 </div>
-                <div className={`text-xl font-bold ${displayProfit !== null && displayProfit >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
-                  {displayProfit !== null ? `${displayProfit.toLocaleString()} BDT` : 'N/A'}
+                <div className={`text-lg sm:text-xl font-bold tabular-nums ${displayProfit !== null && displayProfit >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
+                  {displayProfit !== null ? `${displayProfit.toLocaleString()}` : 'N/A'} {displayProfit !== null && <span className="text-xs font-normal text-muted-foreground">BDT</span>}
                 </div>
               </CardContent>
             </Card>
