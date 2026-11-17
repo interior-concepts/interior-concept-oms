@@ -1,8 +1,8 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { ArrowLeft, Download, ExternalLink, Eye, FileDown, FileText, History, Loader2, MapPin, Minus, Phone, Plus, Send, ShieldCheck, Sparkles, X } from 'lucide-react'
+import { ArrowLeft, ChevronLeft, ChevronRight, Download, ExternalLink, Eye, FileDown, FileText, History, Loader2, MapPin, Minus, Phone, Plus, Send, ShieldCheck, Sparkles, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
@@ -97,6 +97,45 @@ export default function ProjectDetailPage() {
   const [syncDraftId, setSyncDraftId] = useState<string | null>(null)
   const [syncVersionTitle, setSyncVersionTitle] = useState<string | null>(null)
   const [syncTargetValue, setSyncTargetValue] = useState<number | null>(null)
+
+  // Table horizontal scroll sync
+  const tableScrollRef = useRef<HTMLDivElement>(null)
+  const topScrollRef = useRef<HTMLDivElement>(null)
+  const [tableScrollWidth, setTableScrollWidth] = useState(0)
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (tableScrollRef.current) {
+        setTableScrollWidth(tableScrollRef.current.scrollWidth)
+      }
+    }
+    updateWidth()
+    const timer = setTimeout(updateWidth, 300)
+    window.addEventListener('resize', updateWidth)
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('resize', updateWidth)
+    }
+  }, [report])
+
+  const handleTopScroll = () => {
+    if (topScrollRef.current && tableScrollRef.current) {
+      tableScrollRef.current.scrollLeft = topScrollRef.current.scrollLeft
+    }
+  }
+
+  const handleTableScroll = () => {
+    if (topScrollRef.current && tableScrollRef.current) {
+      topScrollRef.current.scrollLeft = tableScrollRef.current.scrollLeft
+    }
+  }
+
+  const scrollTable = (direction: 'left' | 'right') => {
+    if (tableScrollRef.current) {
+      const delta = direction === 'left' ? -350 : 350
+      tableScrollRef.current.scrollBy({ left: delta, behavior: 'smooth' })
+    }
+  }
 
   // Date range filter state
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined)
@@ -1442,48 +1481,135 @@ export default function ProjectDetailPage() {
 
           {/* Category Breakdown */}
           {Object.keys(activeCategoryTotals).length > 0 && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base">Category-wise Spending Breakdown</CardTitle>
-                <CardDescription>Total amount spent per expense category.</CardDescription>
+            <Card className="overflow-hidden">
+              <CardHeader className="pb-3 px-4 sm:px-6">
+                <div className="flex items-center justify-between gap-2">
+                  <div>
+                    <CardTitle className="text-base">Category-wise Spending Breakdown</CardTitle>
+                    <CardDescription className="text-xs sm:text-sm">
+                      Total amount spent per expense category. Click any category to view details.
+                    </CardDescription>
+                  </div>
+                  <Badge variant="outline" className="text-xs shrink-0 font-normal">
+                    {Object.keys(activeCategoryTotals).length} categories
+                  </Badge>
+                </div>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                  {Object.entries(activeCategoryTotals).map(([cat, val]: any) => (
-                    <div
-                      key={cat}
-                      className="p-3 border border-border rounded-lg bg-muted/30 flex flex-col gap-1 cursor-pointer hover:bg-muted/50 transition-colors"
-                      onClick={() => setModalFilter({ type: 'CATEGORY', value: cat })}
-                    >
-                      <div className="flex items-start justify-between gap-2">
-                        <span className="text-xs text-muted-foreground font-medium leading-tight">
-                          {formatCategory(cat)}
-                        </span>
-                        {displayTotalExpense > 0 && (
-                          <Badge variant="secondary" className="text-xs font-bold px-2 py-0.5 shrink-0 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border-blue-200 dark:border-blue-800">
-                            {((val / displayTotalExpense) * 100).toFixed(1)}%
-                          </Badge>
-                        )}
+              <CardContent className="px-4 sm:px-6 pb-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3">
+                  {Object.entries(activeCategoryTotals).map(([cat, val]: any) => {
+                    const percentage = displayTotalExpense > 0 ? ((val / displayTotalExpense) * 100).toFixed(1) : null
+                    return (
+                      <div
+                        key={cat}
+                        className="p-2.5 sm:p-3 border border-border rounded-xl bg-card hover:bg-muted/40 hover:border-primary/40 transition-all flex flex-col justify-between gap-2 cursor-pointer shadow-xs min-w-0 group"
+                        onClick={() => setModalFilter({ type: 'CATEGORY', value: cat })}
+                        title={`Click to filter by ${formatCategory(cat)}`}
+                      >
+                        {/* Category Name - Full width on top, no badge crowding */}
+                        <div className="min-w-0">
+                          <span 
+                            className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors leading-snug line-clamp-2 break-words block" 
+                            title={formatCategory(cat)}
+                          >
+                            {formatCategory(cat)}
+                          </span>
+                        </div>
+
+                        {/* Amount & Percentage cleanly separated in the bottom row */}
+                        <div className="pt-1.5 border-t border-border/50 flex items-center justify-between gap-1 min-w-0">
+                          <div className="flex items-baseline gap-0.5 truncate min-w-0">
+                            <span className="text-xs sm:text-sm font-bold tabular-nums text-foreground tracking-tight truncate">
+                              {val.toLocaleString()}
+                            </span>
+                            <span className="text-[10px] sm:text-xs font-medium text-muted-foreground shrink-0">
+                              BDT
+                            </span>
+                          </div>
+                          {percentage !== null && (
+                            <Badge 
+                              variant="secondary" 
+                              className="text-[10px] font-bold px-1.5 py-0 shrink-0 bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800"
+                            >
+                              {percentage}%
+                            </Badge>
+                          )}
+                        </div>
                       </div>
-                      <span className="text-sm font-bold tabular-nums">{val.toLocaleString()} BDT</span>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
               </CardContent>
             </Card>
           )}
 
           {/* Raw Transaction Logs */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Raw Logs for this Site</CardTitle>
-              <CardDescription>
-                {isDateFiltered ? 'Filtered transactions for selected date range.' : 'All transactions recorded for this project.'}
-              </CardDescription>
+          <Card className="overflow-hidden">
+            <CardHeader className="px-4 sm:px-6 pb-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <CardTitle className="text-base">Raw Logs for this Site</CardTitle>
+                  <CardDescription className="text-xs sm:text-sm">
+                    {isDateFiltered ? 'Filtered transactions for selected date range.' : 'All transactions recorded for this project.'}
+                  </CardDescription>
+                </div>
+                {/* Horizontal scroll controller buttons at the top */}
+                <div className="flex items-center gap-1.5 self-start sm:self-auto">
+                  <span className="text-[11px] text-muted-foreground hidden sm:inline">Scroll table:</span>
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    className="h-7 px-2 text-xs gap-1 shadow-xs"
+                    onClick={() => scrollTable('left')}
+                    title="Scroll table left"
+                  >
+                    <ChevronLeft className="w-3.5 h-3.5" />
+                    <span>Left</span>
+                  </Button>
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    className="h-7 px-2 text-xs gap-1 shadow-xs"
+                    onClick={() => scrollTable('right')}
+                    title="Scroll table right"
+                  >
+                    <span>Right</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </Button>
+                </div>
+              </div>
             </CardHeader>
+
+            {/* Top horizontal scrollbar and touch hint bar */}
+            <div className="border-t border-border bg-muted/20">
+              <div className="flex items-center justify-between px-3 py-1 text-[11px] text-muted-foreground border-b border-border/40">
+                <span className="flex items-center gap-1 font-medium">
+                  ↔ Scroll horizontally: Use Left/Right buttons, drag top bar, or swipe table
+                </span>
+                <span className="text-[10px] opacity-70 hidden sm:inline">
+                  Click Inflow/Outflow headers to filter
+                </span>
+              </div>
+              <div 
+                ref={topScrollRef} 
+                onScroll={handleTopScroll}
+                className="overflow-x-auto scrollbar-thin"
+                style={{ height: '14px' }}
+                title="Drag to scroll table horizontally"
+              >
+                <div style={{ width: tableScrollWidth ? `${tableScrollWidth}px` : '900px', height: '1px' }} />
+              </div>
+            </div>
+
             <CardContent className="p-0">
-              <div className="overflow-x-auto rounded-b-xl -webkit-overflow-scrolling-touch">
-                <table className="w-full min-w-[750px] text-left text-sm">
+              <div 
+                ref={tableScrollRef}
+                onScroll={handleTableScroll}
+                className="overflow-x-auto rounded-b-xl -webkit-overflow-scrolling-touch"
+              >
+                <table className="w-full min-w-[780px] text-left text-sm">
                   <thead className="bg-muted text-xs uppercase tracking-wider text-muted-foreground font-bold border-b border-border">
                     <tr>
                       <th className="p-3 whitespace-nowrap">Date</th>
