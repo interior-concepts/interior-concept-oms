@@ -947,114 +947,120 @@ export default function ProjectDetailPage() {
     <div className="flex flex-col min-h-screen">
       {/* Custom Project Header */}
       <header className="sticky top-0 z-20 border-b border-border bg-card/80 backdrop-blur-sm">
-        <div className="mx-auto flex w-full items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
-          <div>
-            <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+        {/* Top row: title + download */}
+        <div className="mx-auto flex w-full items-start justify-between gap-2 px-4 pt-3 pb-2 sm:px-6 sm:pt-4 sm:pb-3">
+          <div className="min-w-0 flex-1">
+            <h1 className="text-base font-bold tracking-tight text-foreground sm:text-xl lg:text-2xl truncate">
               {project?.name ?? 'Project Ledger'}
             </h1>
             {project && (
-              <div className="mt-1 flex flex-col gap-0.5">
+              <div className="mt-0.5 flex flex-wrap gap-x-3 gap-y-0.5">
                 {project.phone && (
-                  <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <span className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Phone className="w-3 h-3 shrink-0" />
                     {project.phone}
                   </span>
                 )}
                 {project.location && (
-                  <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <span className="flex items-center gap-1 text-xs text-muted-foreground">
                     <MapPin className="w-3 h-3 shrink-0" />
-                    {project.location}
+                    <span className="truncate max-w-[160px] sm:max-w-xs">{project.location}</span>
                   </span>
                 )}
               </div>
             )}
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="hidden text-sm text-muted-foreground sm:inline">
+          <div className="flex shrink-0 items-center gap-2">
+            <span className="hidden text-xs text-muted-foreground sm:inline">
               {new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
             </span>
             {report && (
-              <div className="flex flex-wrap items-center gap-2">
-                <div className="flex items-center gap-1 bg-muted/40 p-1 rounded-lg border border-border">
-                  <Button
-                    size="sm"
-                    variant={!dateRange ? "secondary" : "ghost"}
-                    className="h-7 text-xs px-2"
-                    onClick={() => setPresetRange('ALL')}
-                  >
-                    All Time
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="h-7 text-xs px-2"
-                    onClick={() => setPresetRange('TODAY')}
-                  >
-                    Today
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="h-7 text-xs px-2"
-                    onClick={() => setPresetRange('THIS_MONTH')}
-                  >
-                    This Month
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="h-7 text-xs px-2"
-                    onClick={() => setPresetRange('LAST_7_DAYS')}
-                  >
-                    7 Days
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="h-7 text-xs px-2"
-                    onClick={() => setPresetRange('LAST_30_DAYS')}
-                  >
-                    30 Days
-                  </Button>
-                </div>
-
-                <div className="w-56 sm:w-64">
-                  <DateRangePicker
-                    value={dateRange}
-                    onChange={setDateRange}
-                    placeholder="Filter by date range"
-                    className="h-8 text-xs"
-                  />
-                </div>
-
-                {isDateFiltered && (
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground"
-                    onClick={() => setDateRange(undefined)}
-                    title="Clear date filter"
-                  >
-                    <X className="w-3.5 h-3.5 mr-1" />
-                    Reset Filter
-                  </Button>
-                )}
-
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="h-8 gap-2 text-xs"
-                  onClick={() => void handleDownloadPDF()}
-                >
-                  <FileDown className="w-4 h-4" />
-                  Download PDF
-                </Button>
-              </div>
+              <Button
+                size="sm"
+                variant="outline"
+                className="h-8 gap-1.5 text-xs"
+                onClick={() => void handleDownloadPDF()}
+              >
+                <FileDown className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Download</span> PDF
+              </Button>
             )}
           </div>
         </div>
+
+        {/* Bottom row: date filters — horizontally scrollable */}
+        {report && (
+          <div className="border-t border-border/60 overflow-x-auto scrollbar-none">
+            <div className="flex items-center gap-2 px-4 py-2 sm:px-6 min-w-max">
+              <div className="flex items-center gap-0.5 bg-muted/40 p-1 rounded-lg border border-border shrink-0">
+                <Button
+                  size="sm"
+                  variant={!dateRange ? "secondary" : "ghost"}
+                  className="h-6 text-xs px-2"
+                  onClick={() => setPresetRange('ALL')}
+                >
+                  All
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-6 text-xs px-2"
+                  onClick={() => setPresetRange('TODAY')}
+                >
+                  Today
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-6 text-xs px-2"
+                  onClick={() => setPresetRange('THIS_MONTH')}
+                >
+                  Month
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-6 text-xs px-2"
+                  onClick={() => setPresetRange('LAST_7_DAYS')}
+                >
+                  7d
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-6 text-xs px-2"
+                  onClick={() => setPresetRange('LAST_30_DAYS')}
+                >
+                  30d
+                </Button>
+              </div>
+
+              <div className="w-44 sm:w-56 shrink-0">
+                <DateRangePicker
+                  value={dateRange}
+                  onChange={setDateRange}
+                  placeholder="Pick date range"
+                  className="h-7 text-xs"
+                />
+              </div>
+
+              {isDateFiltered && (
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground shrink-0"
+                  onClick={() => setDateRange(undefined)}
+                  title="Clear date filter"
+                >
+                  <X className="w-3 h-3 mr-1" />
+                  Clear
+                </Button>
+              )}
+            </div>
+          </div>
+        )}
       </header>
-      <div className="flex flex-col gap-4 p-4 md:gap-6 md:p-8 flex-1 w-full mx-auto">
+      <div className="flex flex-col gap-4 p-3 sm:p-4 md:gap-6 md:p-6 lg:p-8 flex-1 w-full mx-auto">
         {/* Back button */}
         <div>
           <Button variant="outline" size="sm" className="gap-2" onClick={() => router.back()}>
@@ -1111,7 +1117,7 @@ export default function ProjectDetailPage() {
             ) : null}
 
             {/* Summary Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
             <Card 
               className="relative overflow-hidden cursor-pointer hover:border-primary/50 transition-colors"
               onClick={() => setAgreementHistoryModalOpen(true)}
@@ -1476,25 +1482,25 @@ export default function ProjectDetailPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="p-0">
-              <div className="overflow-x-auto rounded-b-xl">
-                <table className="w-full text-left text-sm">
+              <div className="overflow-x-auto rounded-b-xl -webkit-overflow-scrolling-touch">
+                <table className="w-full min-w-[750px] text-left text-sm">
                   <thead className="bg-muted text-xs uppercase tracking-wider text-muted-foreground font-bold border-b border-border">
                     <tr>
-                      <th className="p-3">Date</th>
-                      <th className="p-3">Category</th>
-                      <th className="p-3">Particulars</th>
-                      <th className="p-3">Account</th>
-                      <th className="p-3">Recorder</th>
-                      <th className="p-3 text-center">Image</th>
-                      <th className="p-3 text-center">Receipt</th>
+                      <th className="p-3 whitespace-nowrap">Date</th>
+                      <th className="p-3 whitespace-nowrap">Category</th>
+                      <th className="p-3 whitespace-nowrap">Particulars</th>
+                      <th className="p-3 whitespace-nowrap">Account</th>
+                      <th className="p-3 whitespace-nowrap">Recorder</th>
+                      <th className="p-3 text-center whitespace-nowrap">Image</th>
+                      <th className="p-3 text-center whitespace-nowrap">Receipt</th>
                       <th 
-                        className="p-3 text-right text-emerald-600 dark:text-emerald-400 cursor-pointer hover:underline"
+                        className="p-3 text-right whitespace-nowrap text-emerald-600 dark:text-emerald-400 cursor-pointer hover:underline"
                         onClick={() => setModalFilter({ type: 'INFLOW' })}
                       >
                         Inflow
                       </th>
                       <th 
-                        className="p-3 text-right text-rose-600 dark:text-rose-400 cursor-pointer hover:underline"
+                        className="p-3 text-right whitespace-nowrap text-rose-600 dark:text-rose-400 cursor-pointer hover:underline"
                         onClick={() => setModalFilter({ type: 'OUTFLOW' })}
                       >
                         Outflow
@@ -1527,7 +1533,7 @@ export default function ProjectDetailPage() {
                               {formatCategory(tx.category)}
                             </Badge>
                           </td>
-                          <td className="p-3 text-sm max-w-[150px] lg:max-w-[250px] truncate" title={tx.particular}>
+                          <td className="p-3 text-sm max-w-[120px] truncate" title={tx.particular}>
                             {tx.particular}
                           </td>
                           <td className="p-3 text-xs font-medium">
@@ -1619,16 +1625,16 @@ export default function ProjectDetailPage() {
             </Button>
           </DialogHeader>
           <div className="overflow-x-auto rounded-lg border border-border mt-4">
-            <table className="w-full text-left text-sm">
+            <table className="w-full min-w-[560px] text-left text-sm">
               <thead className="bg-muted text-xs uppercase tracking-wider text-muted-foreground font-bold border-b border-border">
                 <tr>
-                  <th className="p-3">Date</th>
-                  <th className="p-3">Category</th>
-                  <th className="p-3">Particulars</th>
-                  <th className="p-3">Account</th>
-                  <th className="p-3 text-center">Image</th>
-                  <th className="p-3 text-right">Inflow (BDT)</th>
-                  <th className="p-3 text-right">Outflow (BDT)</th>
+                  <th className="p-3 whitespace-nowrap">Date</th>
+                  <th className="p-3 whitespace-nowrap">Category</th>
+                  <th className="p-3 whitespace-nowrap">Particulars</th>
+                  <th className="p-3 whitespace-nowrap">Account</th>
+                  <th className="p-3 text-center whitespace-nowrap">Image</th>
+                  <th className="p-3 text-right whitespace-nowrap">Inflow (BDT)</th>
+                  <th className="p-3 text-right whitespace-nowrap">Outflow (BDT)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
@@ -1657,7 +1663,7 @@ export default function ProjectDetailPage() {
                           {formatCategory(tx.category)}
                         </Badge>
                       </td>
-                      <td className="p-3 text-sm max-w-[150px] lg:max-w-[250px] truncate" title={tx.particular}>
+                      <td className="p-3 text-sm max-w-[120px] truncate" title={tx.particular}>
                         {tx.particular}
                       </td>
                       <td className="p-3 text-xs">{tx.financeAccount?.name || 'Unknown'}</td>
@@ -1705,7 +1711,7 @@ export default function ProjectDetailPage() {
 
       {/* Agreement Value History Modal */}
       <Dialog open={agreementHistoryModalOpen} onOpenChange={setAgreementHistoryModalOpen}>
-        <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-w-[95vw] md:max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <div className="flex items-center justify-between pr-6">
               <div>
@@ -1855,14 +1861,14 @@ export default function ProjectDetailPage() {
 
           {/* Logs Table */}
           <div className="overflow-x-auto border border-border rounded-lg mt-2">
-            <table className="w-full text-left text-xs">
+            <table className="w-full min-w-[500px] text-left text-xs">
               <thead className="bg-muted text-muted-foreground font-semibold uppercase tracking-wider border-b border-border">
                 <tr>
-                  <th className="p-2.5">Date & Time</th>
-                  <th className="p-2.5">Type & Amount</th>
-                  <th className="p-2.5 text-right">Running Total</th>
-                  <th className="p-2.5">Particulars / Reason</th>
-                  <th className="p-2.5">Logged By</th>
+                  <th className="p-2.5 whitespace-nowrap">Date & Time</th>
+                  <th className="p-2.5 whitespace-nowrap">Type & Amount</th>
+                  <th className="p-2.5 text-right whitespace-nowrap">Running Total</th>
+                  <th className="p-2.5 whitespace-nowrap">Particulars / Reason</th>
+                  <th className="p-2.5 whitespace-nowrap">Logged By</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
