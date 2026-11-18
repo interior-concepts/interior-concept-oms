@@ -14,6 +14,9 @@ export type AgreementContent = {
   projectAddress: string
   srCrmName: string
   ceoName: string
+  ceoDesignation?: string
+  officeAdminName?: string
+  officeAdminDesignation?: string
   companyRepresentative: string
   companyRepresentativeTitle: string
   letterBody: string
@@ -52,9 +55,12 @@ export function defaultAgreementContent(input: {
     ownerAddress: input.location || '',
     projectAddress: input.location || '',
     srCrmName: input.srCrmName || '',
-    ceoName: 'Md Johirul Islam',
-    companyRepresentative: 'Md. Nazrul Islam',
-    companyRepresentativeTitle: 'General Manager',
+    ceoName: 'Shopi Ullah Rashed',
+    ceoDesignation: 'Chief Executive Officer (CEO)',
+    officeAdminName: 'Tushar Imran',
+    officeAdminDesignation: 'Office Admin',
+    companyRepresentative: 'Tushar Imran',
+    companyRepresentativeTitle: 'Office Admin',
     letterBody: `I, ${input.name}, hereby issue this Work Order to Interior Concepts for the execution and completion of the interior works of the above-mentioned Project, based on your submitted quotation and subsequent evaluation and agreement.\n\nThe works shall be executed in accordance with the approved quotation, Schedule of Rates, Terms & Conditions, drawings, specifications, Consultant’s Declaration, and other agreed project documents, all of which shall form an integral part of this Work Order.\n\nYou are hereby instructed to commence the works and coordinate with the Project Engineer-in-Charge and/or Consultant appointed by the Client. All works shall be carried out in accordance with the approved drawings, specifications, project requirements, and authorized instructions.\n\nPlease sign and return the duplicate copy of this Work Order as formal acknowledgment and acceptance of the Work Order and its terms and conditions.\n\nThanking you—`,
     paymentSchedule: stages.map(({ stage, percentage, fraction }) => ({
       stage,

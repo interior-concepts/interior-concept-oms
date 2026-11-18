@@ -45,12 +45,17 @@ import {
   Download,
   ExternalLink,
   Sparkles,
+  Loader2,
   type LucideIcon,
 } from 'lucide-react'
+import { toast } from 'sonner'
 import LeadCreateModal from '@/components/crm/junior/LeadCreateModal'
 import { LeadImportModal } from '@/components/crm/admin/lead-import-modal'
 import { InstantQuotationModal } from '@/components/crm/admin/instant-quotation-modal'
 import { LeadAgreementModal } from '@/components/crm/admin/lead-agreement-modal'
+import { AgreementDocument } from '@/components/crm/agreement/AgreementDocument'
+import { downloadPdfFromDocument } from '@/components/crm/quotation/pdf/pdf-download'
+import type { AgreementData } from '@/lib/agreement-types'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { LeadDateRangeFilter, type LeadDatePreset } from '@/components/crm/shared/lead-date-range-filter'
 import { downloadDetailQuotationWord, downloadShortQuotationWord } from '@/components/crm/quotation/word-download'
@@ -515,6 +520,7 @@ export default function LeadsPage() {
   const [instantQuotationLead, setInstantQuotationLead] = useState<LeadSummary | null>(null)
   const [agreementModalLead, setAgreementModalLead] = useState<LeadSummary | null>(null)
   const [downloadingDraftId, setDownloadingDraftId] = useState<string | null>(null)
+  const [downloadingAgreementId, setDownloadingAgreementId] = useState<string | null>(null)
   const [batchAssignOpen, setBatchAssignOpen] = useState(false)
   const [departments, setDepartments] = useState<DepartmentSummary[]>([])
   const [departmentUsers, setDepartmentUsers] = useState<DepartmentUser[]>([])
@@ -594,6 +600,31 @@ export default function LeadsPage() {
 
     return () => window.clearTimeout(timer)
   }, [searchInput])
+
+  const handleDownloadAgreementPdf = useCallback(async (lead: LeadSummary) => {
+    if (downloadingAgreementId) return
+    setDownloadingAgreementId(lead.id)
+    try {
+      const res = await fetch(`/api/agreements/${lead.id}`, { cache: 'no-store' })
+      const json = (await res.json()) as { success: boolean; data?: AgreementData; error?: string }
+      if (!res.ok || !json.success || !json.data) throw new Error(json.error ?? 'Failed to load agreement')
+      const data: AgreementData = {
+        ...json.data,
+        companyAddress: '174/1, South Badda Lake View Road, Gulshan-1, Dhaka-1212, Bangladesh',
+      }
+      const safeName = (data.clientName || lead.name).replace(/[^a-z0-9]/gi, '_').toLowerCase()
+      await downloadPdfFromDocument(
+        <AgreementDocument {...data} />,
+        `Agreement_${safeName}.pdf`
+      )
+      toast.success('Agreement PDF downloaded!')
+    } catch (err) {
+      console.error('Agreement PDF download failed:', err)
+      toast.error('Failed to download agreement PDF.')
+    } finally {
+      setDownloadingAgreementId(null)
+    }
+  }, [downloadingAgreementId])
 
   const handleDownloadQuotation = useCallback(async (lead: LeadSummary, draft: NonNullable<LeadSummary['quotationDrafts']>[number]) => {
     if (downloadingDraftId) return
@@ -1240,6 +1271,20 @@ export default function LeadsPage() {
                               <FileCheck2 className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
                               <span>{lead.agreementValue ? `Agreement (৳${Number(lead.agreementValue).toLocaleString('en-IN')})` : 'Do Agreement'}</span>
                             </Button>
+                            {(lead.agreementValue || lead.agreementType) && (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-7 w-7 p-0 border-emerald-500/40 text-emerald-700 hover:bg-emerald-100 dark:border-emerald-800 dark:text-emerald-300"
+                                onClick={() => void handleDownloadAgreementPdf(lead)}
+                                disabled={downloadingAgreementId === lead.id}
+                                title="Download Agreement PDF"
+                              >
+                                {downloadingAgreementId === lead.id
+                                  ? <Loader2 className="h-3 w-3 animate-spin" />
+                                  : <Download className="h-3 w-3" />}
+                              </Button>
+                            )}
                             {(lead.quotationDrafts && lead.quotationDrafts.filter(d => d.draftKey !== 'agreement').length > 0) ? (
                               <Button
                                 variant="outline"
@@ -1506,15 +1551,29 @@ export default function LeadsPage() {
                           {/* Agreement */}
                           <td className="py-3 px-4 align-middle text-center whitespace-nowrap min-w-[140px]">
                             {lead.agreementValue || lead.agreementType || lead.quotationDrafts?.some((d) => d.draftKey === 'agreement') ? (
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="h-7 text-xs gap-1.5 font-semibold border-emerald-500/40 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-200 dark:border-emerald-800 w-full justify-center"
-                                onClick={() => setAgreementModalLead(lead)}
-                              >
-                                <FileCheck2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
-                                <span>Agreement {lead.agreementValue ? `(৳${Number(lead.agreementValue).toLocaleString('en-IN')})` : ''}</span>
-                              </Button>
+                              <div className="flex gap-1 w-full">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="h-7 text-xs gap-1.5 font-semibold border-emerald-500/40 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-200 dark:border-emerald-800 flex-1 justify-center"
+                                  onClick={() => setAgreementModalLead(lead)}
+                                >
+                                  <FileCheck2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+                                  <span>Agreement {lead.agreementValue ? `(৳${Number(lead.agreementValue).toLocaleString('en-IN')})` : ''}</span>
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="h-7 w-7 p-0 border-emerald-500/40 text-emerald-700 hover:bg-emerald-100 dark:border-emerald-800 dark:text-emerald-300"
+                                  onClick={() => void handleDownloadAgreementPdf(lead)}
+                                  disabled={downloadingAgreementId === lead.id}
+                                  title="Download Agreement PDF"
+                                >
+                                  {downloadingAgreementId === lead.id
+                                    ? <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                                    : <Download className="h-3.5 w-3.5" />}
+                                </Button>
+                              </div>
                             ) : (
                               <Button
                                 variant="outline"

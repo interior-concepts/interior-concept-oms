@@ -1,6 +1,6 @@
 'use client'
 
-import { Circle, Document, Font, Image, Page, StyleSheet, Svg, Text, View } from '@react-pdf/renderer'
+import { Circle, Document, Font, G, Image, Line, Page, Rect, StyleSheet, Svg, Text, View } from '@react-pdf/renderer'
 import type { AgreementData, AgreementClauseGroup } from '@/lib/agreement-types'
 import type { QuotationDraftContent, QuotationTotals } from '@/lib/quotation-types'
 import {
@@ -29,141 +29,210 @@ const BDT_SYMBOL    = '৳'
 const DETAIL_ROW_LINE_HEIGHT    = 1.25
 const DETAIL_ROW_VERTICAL_PADDING = 3.5
 
-const getBaseUrl = () => {
-  if (typeof window !== 'undefined') return window.location.origin
-  return 'https://interiorconcepts.com'
-}
+const isBrowser = typeof window !== 'undefined'
+
+const fontRegular = isBrowser
+  ? '/fonts/NotoSansBengali-Regular.ttf'
+  : typeof process !== 'undefined' && process.cwd
+    ? `${process.cwd()}/public/fonts/NotoSansBengali-Regular.ttf`
+    : '/fonts/NotoSansBengali-Regular.ttf'
+
+const fontBold = isBrowser
+  ? '/fonts/NotoSansBengali-Bold.ttf'
+  : typeof process !== 'undefined' && process.cwd
+    ? `${process.cwd()}/public/fonts/NotoSansBengali-Bold.ttf`
+    : '/fonts/NotoSansBengali-Bold.ttf'
 
 Font.register({
   family: 'Noto Sans Bengali',
   fonts: [
-    { src: `${getBaseUrl()}/fonts/NotoSansBengali-Regular.ttf` },
-    { src: `${getBaseUrl()}/fonts/NotoSansBengali-Regular.ttf`, fontStyle: 'italic' },
-    { src: `${getBaseUrl()}/fonts/NotoSansBengali-Bold.ttf`, fontWeight: 'bold' },
-    { src: `${getBaseUrl()}/fonts/NotoSansBengali-Bold.ttf`, fontWeight: 'bold', fontStyle: 'italic' },
+    { src: fontRegular },
+    { src: fontRegular, fontStyle: 'italic' },
+    { src: fontBold, fontWeight: 'bold' },
+    { src: fontBold, fontWeight: 'bold', fontStyle: 'italic' },
   ],
 })
+
+const playfairRegular = isBrowser
+  ? '/fonts/PlayfairDisplay-Regular.ttf'
+  : typeof process !== 'undefined' && process.cwd
+    ? `${process.cwd()}/public/fonts/PlayfairDisplay-Regular.ttf`
+    : '/fonts/PlayfairDisplay-Regular.ttf'
+
+const playfairBold = isBrowser
+  ? '/fonts/PlayfairDisplay-Bold.ttf'
+  : typeof process !== 'undefined' && process.cwd
+    ? `${process.cwd()}/public/fonts/PlayfairDisplay-Bold.ttf`
+    : '/fonts/PlayfairDisplay-Bold.ttf'
 
 Font.register({
   family: 'Playfair Display',
   fonts: [
-    { src: `${getBaseUrl()}/fonts/PlayfairDisplay-Regular.ttf` },
-    { src: `${getBaseUrl()}/fonts/PlayfairDisplay-Bold.ttf`, fontWeight: 'bold' },
+    { src: playfairRegular },
+    { src: playfairBold, fontWeight: 'bold' },
   ],
 })
+
+const robotoMonoRegular = isBrowser
+  ? '/fonts/RobotoMono-Regular.ttf'
+  : typeof process !== 'undefined' && process.cwd
+    ? `${process.cwd()}/public/fonts/RobotoMono-Regular.ttf`
+    : '/fonts/RobotoMono-Regular.ttf'
+
+const robotoMonoMedium = isBrowser
+  ? '/fonts/RobotoMono-Medium.ttf'
+  : typeof process !== 'undefined' && process.cwd
+    ? `${process.cwd()}/public/fonts/RobotoMono-Medium.ttf`
+    : '/fonts/RobotoMono-Medium.ttf'
 
 Font.register({
   family: 'Roboto Mono',
   fonts: [
-    { src: `${getBaseUrl()}/fonts/RobotoMono-Regular.ttf` },
-    { src: `${getBaseUrl()}/fonts/RobotoMono-Medium.ttf`, fontWeight: 500 },
+    { src: robotoMonoRegular },
+    { src: robotoMonoMedium, fontWeight: 500 },
   ],
 })
 
 Font.registerHyphenationCallback((word) => [word])
 
-const logoSrc = `${getBaseUrl()}/Logo/interior-concept-logobg-removed.png`
-const watermarkSrc = `${getBaseUrl()}/Logo/interior-concept-icon-light.png`
+const logoSrc = isBrowser
+  ? '/Logo/interior-concept-logobg-removed.png'
+  : typeof process !== 'undefined' && process.cwd
+    ? `${process.cwd()}/public/Logo/interior-concept-logobg-removed.png`
+    : '/Logo/interior-concept-logobg-removed.png'
+
+const watermarkSrc = isBrowser
+  ? '/Logo/interior-concept-icon-light.png'
+  : typeof process !== 'undefined' && process.cwd
+    ? `${process.cwd()}/public/Logo/interior-concept-icon-light.png`
+    : '/Logo/interior-concept-icon-light.png'
 
 const styles = StyleSheet.create({
   // ─── Cover Page Styles (Corporate Two-Section Design) ───
   coverPage: {
     position: 'relative',
-    padding: 0,
     backgroundColor: '#ffffff',
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    overflow: 'hidden',
+    padding: 0,
   },
-  coverUpperSection: {
-    height: '53%',
-    backgroundColor: '#f6f9f8',
+  coverTopSection: {
     position: 'relative',
-    overflow: 'hidden',
+    height: 421,
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingTop: 45,
+    paddingBottom: 36,
     paddingHorizontal: 40,
-    paddingTop: 46,
-    paddingBottom: 42,
-  },
-  coverUpperContent: {
-    width: '100%',
-    alignItems: 'center',
     zIndex: 2,
   },
-  coverLogoSection: {
-    alignItems: 'center',
-    marginBottom: 0,
-  },
-  coverLogo: {
-    width: 200,
-  },
-  coverTitleSection: {
-    alignItems: 'center',
-    marginBottom: 0,
-    zIndex: 2,
-  },
-  coverInteriorWorkSub: {
-    fontSize: 9,
-    fontWeight: 'bold',
-    color: '#a57c00',
-    textTransform: 'uppercase',
-    letterSpacing: 6,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  coverTitle: {
-    fontFamily: 'Playfair Display',
-    fontSize: 38,
-    fontWeight: 'bold',
-    color: '#1f363d',
-    letterSpacing: 2.2,
-    textAlign: 'center',
-  },
-  coverGoldDivider: {
-    width: 52,
-    height: 1.5,
-    backgroundColor: '#c5a059',
-    marginTop: 12,
-    alignSelf: 'center',
-  },
-  coverLowerSection: {
-    height: '47%',
-    backgroundColor: '#16282e',
+  coverBottomSection: {
     position: 'relative',
-    overflow: 'hidden',
+    height: 421,
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 44,
-    paddingVertical: 32,
-  },
-  coverLowerContent: {
-    width: '100%',
-    maxWidth: 390,
-    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 36,
+    paddingBottom: 26,
+    paddingHorizontal: 40,
     zIndex: 2,
   },
-  coverInfoBlock: {
+  coverHeaderSection: {
+    alignItems: 'center',
+  },
+  coverHeaderLogo: {
+    width: 165,
+    height: 45,
+    objectFit: 'contain',
+  },
+  coverHeaderInfoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 8,
+  },
+  coverHeaderInfoText: {
+    fontSize: 8,
+    color: '#64748b',
+    letterSpacing: 0.5,
+  },
+  coverHeaderInfoDot: {
+    fontSize: 7,
+    color: '#94a3b8',
+    marginHorizontal: 8,
+  },
+  coverTitleSection: {
+    alignItems: 'center',
+  },
+  coverInteriorWorkSub: {
+    fontSize: 8.5,
+    fontWeight: 'bold',
+    color: GOLD,
+    textTransform: 'uppercase',
+    letterSpacing: 5,
+    marginBottom: 7,
+    textAlign: 'center',
+  },
+  coverMainTitle: {
+    fontFamily: 'Playfair Display',
+    fontWeight: 'bold',
+    fontSize: 23,
+    color: PRIMARY,
+    textTransform: 'uppercase',
+    letterSpacing: 2,
+    textAlign: 'center',
+  },
+  coverSubtitle: {
+    fontSize: 8.5,
+    fontWeight: 'bold',
+    color: '#475569',
+    textTransform: 'uppercase',
+    letterSpacing: 2,
+    marginTop: 4,
+    textAlign: 'center',
+  },
+  coverGoldDivider: {
+    width: 50,
+    height: 1.5,
+    backgroundColor: GOLD,
+    marginTop: 10,
+    marginBottom: 8,
+    alignSelf: 'center',
+  },
+  coverTagline: {
+    fontSize: 8.5,
+    fontFamily: 'Playfair Display',
+    fontStyle: 'italic',
+    color: '#64748b',
+    textAlign: 'center',
+  },
+  coverDataSectionDark: {
+    width: '100%',
+    maxWidth: 400,
+    alignItems: 'center',
+  },
+  coverSectionDark: {
     alignItems: 'center',
     width: '100%',
   },
   coverSectionLabelDark: {
-    fontSize: 8,
+    fontSize: 7.5,
     fontWeight: 'bold',
-    color: '#c5a059',
+    color: GOLD,
     textTransform: 'uppercase',
     letterSpacing: 2.5,
-    marginBottom: 5,
+    marginBottom: 4,
     textAlign: 'center',
   },
   coverClientNameDark: {
     fontFamily: 'Playfair Display',
-    fontSize: 16.5,
+    fontSize: 16,
     fontWeight: 'bold',
     color: '#ffffff',
     textAlign: 'center',
@@ -172,40 +241,53 @@ const styles = StyleSheet.create({
   coverClientSubDark: {
     fontSize: 9,
     color: '#cbd5e1',
-    marginTop: 4,
+    marginTop: 3,
     textAlign: 'center',
-    lineHeight: 1.45,
-    maxWidth: 340,
+    lineHeight: 1.4,
+    maxWidth: 320,
   },
-  coverInfoDivider: {
-    width: 48,
+  coverInfoDividerDark: {
+    width: 44,
     height: 0.75,
-    backgroundColor: '#c5a059',
-    opacity: 0.45,
-    marginVertical: 18,
+    backgroundColor: GOLD,
+    opacity: 0.4,
+    marginVertical: 14,
     alignSelf: 'center',
   },
   coverCompanyNameDark: {
     fontFamily: 'Playfair Display',
-    fontSize: 14.5,
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#ffffff',
     textAlign: 'center',
     letterSpacing: 0.5,
   },
-  coverMetaSmallDark: {
-    fontSize: 8.5,
-    color: '#94a3b8',
+  coverMetaRowDark: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 4,
-    textAlign: 'center',
-    letterSpacing: 0.4,
   },
-  coverMetaSmallDateDark: {
+  coverMetaSmallDark: {
     fontSize: 8,
-    color: '#c5a059',
-    marginTop: 4,
+    color: '#94a3b8',
     textAlign: 'center',
-    letterSpacing: 0.5,
+  },
+  coverBottomBadgePill: {
+    paddingVertical: 5,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    borderWidth: 0.75,
+    borderColor: '#334e58',
+    backgroundColor: 'rgba(255,255,255,0.04)',
+    alignSelf: 'center',
+  },
+  coverBottomBadgeText: {
+    fontSize: 6.5,
+    letterSpacing: 1.5,
+    color: '#94a3b8',
+    textTransform: 'uppercase',
+    textAlign: 'center',
   },
   // ─── Main Page Styles ───
   page: {
@@ -838,7 +920,7 @@ const GlobalHeader = ({
 
 const GlobalFooter = ({
   companyName = 'Interior Concepts Studio',
-  companyAddress = 'TA-174/1, Unit 4A, 3rd Floor(Lift-3) Khonikachroy, South Badda Lake View Road, Badda, Dhaka-1212',
+  companyAddress = '174/1, South Badda Lake View Road, Gulshan-1, Dhaka-1212, Bangladesh',
   companyPhones = '+880 1334-935530 | +880 1334-935531',
   companyWebsite = 'interiorconceptsstudio.com',
   workOrderId,
@@ -1035,16 +1117,19 @@ export function AgreementDocument(props: AgreementPdfProps) {
   const clientName = props.ownerName || props.clientName || 'Valued Client'
   const projectAddress = props.projectAddress || props.siteAddress || props.ownerAddress || 'Dhaka, Bangladesh'
   const companyName = props.companyName || 'Interior Concepts'
-  const companyAddress = props.companyAddress || 'TA-174/1, Unit 4A, 3rd Floor(Lift-3) Khonikachroy, South Badda Lake View Road, Badda, Dhaka-1212'
+  const companyAddress = props.companyAddress || '174/1, South Badda Lake View Road, Gulshan-1, Dhaka-1212, Bangladesh'
   const companyPhones = props.companyPhones || '+880 1334-935530 | +880 1334-935531'
   const companyWebsite = props.companyWebsite || 'interiorconceptsstudio.com'
   const tradeLicenseNo = props.tradeLicenseNo || 'TRAD/DNCC/048385/2025'
   const tinNo = props.tinNo || '469560437683'
   const ceoName = props.ceoName || 'Shopi Ullah Rashed'
+  const ceoDesignation = props.ceoDesignation || 'Chief Executive Officer (CEO)'
   const ceoNid = props.ceoNid || '7762979297'
   const companyRepresentative = props.companyRepresentative || 'Shopi Ullah Rashed'
-  const companyRepresentativeTitle = props.companyRepresentativeTitle || 'Chief Executive Officer'
-  const srCrmName = props.srCrmName || props.officeAdminName || 'Senior Project Coordinator'
+  const companyRepresentativeTitle = props.companyRepresentativeTitle || 'Chief Executive Officer (CEO)'
+  const officeAdminName = props.officeAdminName || 'Tushar Imran'
+  const officeAdminDesignation = props.officeAdminDesignation || 'Office Admin'
+  const srCrmName = props.srCrmName || officeAdminName
 
   const getAreaGroups = (entry: ReturnType<typeof buildDetailFloorSummaries>[number]) => {
     const isFinishingElectrical =
@@ -1123,74 +1208,91 @@ export function AgreementDocument(props: AgreementPdfProps) {
 
   return (
     <Document title={`Agreement - ${clientName}`} author={companyName}>
-      {/* ─── FRONT COVER PAGE (CORPORATE TWO-SECTION DESIGN) ────────── */}
-      <Page size="A4" style={styles.coverPage}>
-        {/* UPPER LIGHT SECTION */}
-        <View style={styles.coverUpperSection}>
-          {/* Geometric Decorative Elements: Overlapping Circular Arcs & Rings on Left */}
-          <Svg
-            width={280}
-            height={445}
-            viewBox="0 0 280 445"
-            style={{ position: 'absolute', top: 0, left: 0 }}
-          >
-            {/* 1. Large subtle background arc */}
-            <Circle cx={-30} cy={210} r={190} fill="#1f363d" opacity={0.05} />
-            {/* 2. Primary outer accent ring */}
-            <Circle cx={-20} cy={210} r={150} stroke="#a57c00" strokeWidth={2.5} fill="none" opacity={0.32} />
-            {/* 3. Intersecting shaded arc */}
-            <Circle cx={-10} cy={250} r={110} fill="#1f363d" opacity={0.09} />
-            {/* 4. Secondary inner ring */}
-            <Circle cx={15} cy={230} r={75} stroke="#1f363d" strokeWidth={1.8} fill="none" opacity={0.25} />
-            {/* 5. Delicate gold inner ring */}
-            <Circle cx={25} cy={225} r={48} stroke="#c5a059" strokeWidth={1.2} fill="none" opacity={0.45} />
-            {/* 6. Subtle decorative floating circles */}
-            <Circle cx={155} cy={140} r={4.5} fill="#a57c00" opacity={0.55} />
-            <Circle cx={185} cy={245} r={6.5} fill="#1f363d" opacity={0.18} />
-            <Circle cx={125} cy={305} r={3.5} fill="#a57c00" opacity={0.65} />
-            <Circle cx={195} cy={185} r={2.5} fill="#1f363d" opacity={0.35} />
-          </Svg>
+      {/* ─── FRONT COVER PAGE (PREMIUM TWO-TONE GEOMETRIC) ────────── */}
+      <Page size="A4" style={styles.coverPage} wrap={false}>
+        {/* Full-bleed SVG Background Layer: Two-section tone + Geometric Rings */}
+        <Svg width={595} height={842} viewBox="0 0 595 842" style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
+          {/* Upper Section: Warm Ivory / Linen Brand Tone */}
+          <Rect x={0} y={0} width={595} height={421} fill="#FAF7F2" />
 
-          {/* Top Logo */}
-          <View style={styles.coverLogoSection}>
-            <Image src={logoSrc} style={styles.coverLogo} />
+          {/* Lower Section: Deep Signature Dark Charcoal Teal */}
+          <Rect x={0} y={421} width={595} height={421} fill="#172b31" />
+
+          {/* Horizontal Brand Dividing Accent */}
+          <Line x1={0} y1={421} x2={595} y2={421} stroke={GOLD} strokeWidth={2} />
+          <Line x1={0} y1={423} x2={595} y2={423} stroke="#ffffff" strokeWidth={0.5} opacity={0.15} />
+
+          {/* ─── Upper Section: Overlapping Circular Arcs along Left Edge ─── */}
+          <G>
+            {/* Outermost sweeping arc */}
+            <Circle cx={-10} cy={230} r={330} stroke={PRIMARY} strokeWidth={1.2} opacity={0.08} fill="none" />
+            {/* Large warm gold ring */}
+            <Circle cx={10} cy={240} r={270} stroke={GOLD} strokeWidth={1.8} opacity={0.16} fill="none" />
+            {/* Soft translucent depth wash */}
+            <Circle cx={-25} cy={225} r={215} fill={PRIMARY} opacity={0.035} />
+            {/* Prominent gold ring */}
+            <Circle cx={-5} cy={220} r={175} stroke={GOLD} strokeWidth={2.2} opacity={0.24} fill="none" />
+            {/* Dark teal inner ring */}
+            <Circle cx={20} cy={210} r={120} stroke={PRIMARY} strokeWidth={1.5} opacity={0.16} fill="none" />
+            {/* Fine gold concentric core */}
+            <Circle cx={35} cy={205} r={65} stroke={GOLD} strokeWidth={1.2} opacity={0.3} fill="none" />
+            {/* Subtle secondary arc higher up */}
+            <Circle cx={90} cy={110} r={95} stroke={PRIMARY} strokeWidth={1} opacity={0.07} fill="none" />
+            {/* Delicate floating decorative circles */}
+            <Circle cx={125} cy={180} r={4} fill={GOLD} opacity={0.4} />
+            <Circle cx={155} cy={275} r={6} stroke={PRIMARY} strokeWidth={1.2} opacity={0.22} fill="none" />
+            <Circle cx={80} cy={330} r={3} fill={PRIMARY} opacity={0.25} />
+          </G>
+
+          {/* ─── Lower Section: Complementary Circular Rings in Bottom-Right Corner ─── */}
+          <G>
+            {/* Outermost slate/white ring */}
+            <Circle cx={590} cy={820} r={270} stroke="#ffffff" strokeWidth={1} opacity={0.08} fill="none" />
+            {/* Rich gold accent ring */}
+            <Circle cx={585} cy={815} r={205} stroke="#c59b27" strokeWidth={1.8} opacity={0.28} fill="none" />
+            {/* Crisp white concentric ring */}
+            <Circle cx={580} cy={810} r={145} stroke="#ffffff" strokeWidth={1.2} opacity={0.18} fill="none" />
+            {/* Vibrant warm gold inner ring */}
+            <Circle cx={575} cy={805} r={90} stroke="#e2b342" strokeWidth={2} opacity={0.35} fill="none" />
+            {/* Inner accent ring */}
+            <Circle cx={570} cy={800} r={45} stroke="#ffffff" strokeWidth={1} opacity={0.15} fill="none" />
+            {/* Delicate floating decorative circles */}
+            <Circle cx={455} cy={735} r={4.5} fill="#c59b27" opacity={0.45} />
+            <Circle cx={490} cy={775} r={7} stroke="#ffffff" strokeWidth={1} opacity={0.22} fill="none" />
+            <Circle cx={520} cy={705} r={3} fill="#ffffff" opacity={0.25} />
+          </G>
+        </Svg>
+
+        {/* ─── Upper Section Content (Warm Light Background) ─── */}
+        <View style={styles.coverTopSection} wrap={false}>
+          {/* 1. Header Section: Logo + Contact Info Row */}
+          <View style={styles.coverHeaderSection}>
+            <Image src={logoSrc} style={styles.coverHeaderLogo} />
+            <View style={styles.coverHeaderInfoRow}>
+              <Text style={styles.coverHeaderInfoText}>Dhaka, Bangladesh</Text>
+              <Text style={styles.coverHeaderInfoDot}>&bull;</Text>
+              <Text style={styles.coverHeaderInfoText}>info@interiorconceptsstudio.com</Text>
+              <Text style={styles.coverHeaderInfoDot}>&bull;</Text>
+              <Text style={styles.coverHeaderInfoText}>www.interiorconceptsstudio.com</Text>
+            </View>
           </View>
 
-          {/* Prominent Agreement Title */}
+          {/* 2. Main Title Section: Eyebrow + Large Heading + Subtitle + Gold Divider + Tagline */}
           <View style={styles.coverTitleSection}>
             <Text style={styles.coverInteriorWorkSub}>INTERIOR WORK</Text>
-            <Text style={styles.coverTitle}>Agreement</Text>
+            <Text style={styles.coverMainTitle}>INTERIOR DESIGN AGREEMENT</Text>
+            <Text style={styles.coverSubtitle}>PROJECT AGREEMENT &amp; TERMS OF SERVICE</Text>
             <View style={styles.coverGoldDivider} />
+            <Text style={styles.coverTagline}>&ldquo;Designing spaces, creating experiences.&rdquo;</Text>
           </View>
         </View>
 
-        {/* LOWER DARK SECTION */}
-        <View style={styles.coverLowerSection}>
-          {/* Geometric Decorative Elements: Complementary Rings on Bottom-Right */}
-          <Svg
-            width={260}
-            height={360}
-            viewBox="0 0 260 360"
-            style={{ position: 'absolute', bottom: 0, right: 0 }}
-          >
-            {/* Large subtle outline ring */}
-            <Circle cx={260} cy={360} r={200} stroke="#c5a059" strokeWidth={2} fill="none" opacity={0.22} />
-            {/* Concentric darker depth disc */}
-            <Circle cx={260} cy={360} r={140} fill="#0d1b1f" opacity={0.5} />
-            {/* Inner accent ring */}
-            <Circle cx={260} cy={360} r={90} stroke="#a57c00" strokeWidth={1.5} fill="none" opacity={0.38} />
-            {/* Innermost ring */}
-            <Circle cx={260} cy={360} r={50} stroke="#ffffff" strokeWidth={0.75} fill="none" opacity={0.15} />
-            {/* Subtle floating circles */}
-            <Circle cx={110} cy={240} r={4.5} fill="#c5a059" opacity={0.45} />
-            <Circle cx={155} cy={175} r={3} fill="#ffffff" opacity={0.3} />
-            <Circle cx={85} cy={285} r={2.5} fill="#c5a059" opacity={0.55} />
-          </Svg>
-
-          {/* Centered Agreement Information */}
-          <View style={styles.coverLowerContent}>
-            {/* Prepared For Block */}
-            <View style={styles.coverInfoBlock}>
+        {/* ─── Lower Section Content (Deep Dark Brand Background) ─── */}
+        <View style={styles.coverBottomSection} wrap={false}>
+          {/* 3. Agreement Information: Prepared For & Prepared By */}
+          <View style={styles.coverDataSectionDark}>
+            {/* Prepared For */}
+            <View style={styles.coverSectionDark}>
               <Text style={styles.coverSectionLabelDark}>PREPARED FOR</Text>
               <Text style={styles.coverClientNameDark}>{clientName}</Text>
               {projectAddress ? (
@@ -1198,16 +1300,26 @@ export function AgreementDocument(props: AgreementPdfProps) {
               ) : null}
             </View>
 
-            {/* Separator Divider */}
-            <View style={styles.coverInfoDivider} />
+            {/* Subtle Gold Divider */}
+            <View style={styles.coverInfoDividerDark} />
 
-            {/* Prepared By Block */}
-            <View style={styles.coverInfoBlock}>
+            {/* Prepared By */}
+            <View style={styles.coverSectionDark}>
               <Text style={styles.coverSectionLabelDark}>PREPARED BY</Text>
               <Text style={styles.coverCompanyNameDark}>{companyName}</Text>
-              <Text style={styles.coverMetaSmallDark}>{companyWebsite}</Text>
-              <Text style={styles.coverMetaSmallDateDark}>{formatDateString(agreementDate)}</Text>
+              <View style={styles.coverMetaRowDark}>
+                <Text style={styles.coverMetaSmallDark}>{companyWebsite}</Text>
+                <Text style={[styles.coverHeaderInfoDot, { color: '#64748b' }]}>&bull;</Text>
+                <Text style={styles.coverMetaSmallDark}>{formatDateString(agreementDate)}</Text>
+              </View>
             </View>
+          </View>
+
+          {/* Bottom Official Document Badge */}
+          <View style={styles.coverBottomBadgePill}>
+            <Text style={styles.coverBottomBadgeText}>
+              INTERIOR CONCEPTS STUDIO &bull; OFFICIAL CONTRACT DOCUMENT
+            </Text>
           </View>
         </View>
       </Page>
@@ -1254,9 +1366,9 @@ export function AgreementDocument(props: AgreementPdfProps) {
               <Text style={styles.sigRole}>Signature: ______________________</Text>
             </View>
             <View style={styles.sigBlock}>
-              <Text style={styles.sigName}>{srCrmName}</Text>
-              <Text style={styles.sigRole}>Assistant General Manager (AGM)</Text>
-              <Text style={styles.sigRole}>{companyName}</Text>
+              <Text style={styles.sigName}>{officeAdminName}</Text>
+              <Text style={styles.sigRole}>{officeAdminDesignation}, {companyName}</Text>
+              <Text style={styles.sigRole}>Date: {formatDateString(agreementDate)}</Text>
             </View>
           </View>
         </View>
@@ -1871,7 +1983,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
           ))}
         </View>
 
-        <View style={{ marginTop: 12, marginBottom: 16 }}>
+        <View style={{ marginTop: 12, marginBottom: 12 }}>
           <View style={styles.sigRow}>
             <View style={styles.sigBlock}>
               <Text style={styles.sigName}>{clientName}</Text>
@@ -1880,9 +1992,31 @@ export function AgreementDocument(props: AgreementPdfProps) {
             </View>
             <View style={styles.sigBlock}>
               <Text style={styles.sigName}>{ceoName}</Text>
-              <Text style={styles.sigRole}>Chief Executive Officer (CEO)</Text>
+              <Text style={styles.sigRole}>{ceoDesignation}</Text>
               <Text style={styles.sigRole}>{companyName}</Text>
             </View>
+          </View>
+        </View>
+
+        {/* Office Admin / Consultant Acknowledgment Block */}
+        <View style={styles.gmCard}>
+          <Text style={[styles.bold, { fontSize: 8, color: PRIMARY, marginBottom: 3, textTransform: 'uppercase' }]}>
+            Consultant Declaration &amp; Acknowledgment
+          </Text>
+          <Text style={[styles.paragraph, { fontSize: 7, color: '#333333', marginBottom: 6, lineHeight: 1.4 }]}>
+            I, <Text style={styles.bold}>{officeAdminName}</Text>,{' '}
+            {officeAdminDesignation} of {companyName}, hereby confirm that I am fully
+            aware of and have reviewed the terms and conditions of this Work Order/Agreement, including the approved scope of
+            work, Schedule of Rates, specifications, payment terms, project timeline, and other contractual requirements. I
+            acknowledge that the contents of this Work Order/Agreement have been duly communicated to and understood by the
+            concerned management and project team of {companyName}, and that the Company shall execute the Project in
+            accordance with the agreed contractual terms and conditions.
+          </Text>
+          <View style={{ marginTop: 6, paddingTop: 3, borderTopWidth: 0.5, borderTopColor: BORDER, width: '45%' }}>
+            <Text style={{ fontSize: 6.5, color: TEXT_MUTED }}>Acknowledged by:</Text>
+            <Text style={[styles.sigName, { marginTop: 1 }]}>{ceoName}</Text>
+            <Text style={styles.sigRole}>{ceoDesignation}</Text>
+            <Text style={styles.sigRole}>{companyName}</Text>
           </View>
         </View>
 

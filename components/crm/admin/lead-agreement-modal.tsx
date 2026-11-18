@@ -164,6 +164,14 @@ export function LeadAgreementModal({
           if (fetchedData.discountAmount) {
             setDiscountValue(fetchedData.discountAmount)
           }
+
+          // Initialize editable payment milestones
+          if (fetchedData.paymentSchedule?.length) {
+            setEditableStages(fetchedData.paymentSchedule)
+          } else {
+            const initialVal = fetchedData.grandTotal || (typeof lead?.agreementValue === 'number' ? lead.agreementValue : 0)
+            setEditableStages(defaultAgreementStages(initialVal > 0 ? initialVal : 1000000))
+          }
         }
       } catch (err) {
         console.error('Failed to load agreement data:', err)
@@ -179,18 +187,62 @@ export function LeadAgreementModal({
     }
   }, [isOpen, lead, hasQuotation, quotations])
 
-  // Sync editable stages whenever finalValue changes (or when existing data loads)
+  // Recalculate milestone amounts whenever finalValue changes
   useEffect(() => {
-    if (!isOpen) return
-    if (agreementData?.paymentSchedule?.length) {
-      setEditableStages(agreementData.paymentSchedule)
-    } else if (finalValue > 0) {
-      setEditableStages(defaultAgreementStages(finalValue))
-    } else {
-      setEditableStages(defaultAgreementStages(1000000))
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!isOpen || finalValue <= 0) return
+    setEditableStages((prevStages) => {
+      if (!prevStages.length) return defaultAgreementStages(finalValue)
+      return prevStages.map((stg) => {
+        const pctNum = parseFloat(stg.percentage.replace(/[^0-9.]/g, ''))
+        if (!isNaN(pctNum) && pctNum > 0) {
+          return {
+            ...stg,
+            amount: String(Math.round((pctNum / 100) * finalValue)),
+            fraction: pctNum / 100,
+          }
+        }
+        return stg
+      })
+    })
   }, [finalValue, isOpen])
+
+  const handleStagePercentageChange = (idx: number, newPctStr: string) => {
+    const cleanNum = parseFloat(newPctStr.replace(/[^0-9.]/g, ''))
+    setEditableStages((prev) => {
+      const updated = [...prev]
+      const current = updated[idx]
+      let calcAmount = current.amount
+      if (!isNaN(cleanNum) && finalValue > 0) {
+        calcAmount = String(Math.round((cleanNum / 100) * finalValue))
+      }
+      updated[idx] = {
+        ...current,
+        percentage: newPctStr ? `${newPctStr}%` : '',
+        amount: calcAmount,
+        fraction: !isNaN(cleanNum) ? cleanNum / 100 : current.fraction,
+      }
+      return updated
+    })
+  }
+
+  const handleStageAmountChange = (idx: number, newAmount: string) => {
+    setEditableStages((prev) => {
+      const updated = [...prev]
+      const current = updated[idx]
+      const amtNum = parseFloat(newAmount.replace(/,/g, ''))
+      let newPct = current.percentage
+      if (!isNaN(amtNum) && finalValue > 0) {
+        const pct = ((amtNum / finalValue) * 100).toFixed(2).replace(/\.00$/, '')
+        newPct = `${pct}%`
+      }
+      updated[idx] = {
+        ...current,
+        amount: newAmount,
+        percentage: newPct,
+      }
+      return updated
+    })
+  }
 
   if (!isOpen || !lead) return null
 
@@ -483,31 +535,50 @@ export function LeadAgreementModal({
                   onClick={() => setShowMilestones(!showMilestones)}
                   className="w-full flex items-center justify-between p-2.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <span className="flex items-center gap-1.5">
+                  <span className="flex items-center gap-1.5 font-semibold text-foreground">
                     <BadgePercent className="h-3.5 w-3.5 text-primary" />
                     Payment Milestones ({editableStages.length} Stages)
                   </span>
-                  {showMilestones ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] text-muted-foreground font-mono">
+                      Total: {editableStages.reduce((sum, s) => sum + (parseFloat(s.percentage.replace(/[^0-9.]/g, '')) || 0), 0).toFixed(1)}%
+                    </span>
+                    {showMilestones ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
+                  </div>
                 </button>
 
                 {showMilestones ? (
-                  <div className="p-2.5 pt-0 border-t border-border/40 space-y-1 text-xs">
+                  <div className="p-2.5 pt-0 border-t border-border/40 space-y-1.5 text-xs">
+                    <div className="grid grid-cols-[1fr_75px_110px] gap-2 text-[10px] font-semibold text-muted-foreground uppercase pt-2 pb-0.5 px-0.5">
+                      <span>Milestone Stage</span>
+                      <span className="text-center">Percent</span>
+                      <span className="text-right">Amount (৳)</span>
+                    </div>
                     {editableStages.map((stg, idx) => (
-                      <div key={idx} className="grid grid-cols-[1fr_auto_auto] gap-2 items-center py-1.5 border-b border-border/30 last:border-none">
-                        <span className="text-[11px] text-muted-foreground truncate">
+                      <div key={idx} className="grid grid-cols-[1fr_75px_110px] gap-2 items-center py-1 border-b border-border/30 last:border-none">
+                        <span className="text-[11px] text-muted-foreground line-clamp-2 leading-tight" title={stg.stage}>
                           {idx + 1}. {stg.stage}
                         </span>
-                        <span className="text-[10px] text-muted-foreground font-mono shrink-0">({stg.percentage})</span>
-                        <Input
-                          type="number"
-                          value={stg.amount}
-                          onChange={(e) => {
-                            const updated = [...editableStages]
-                            updated[idx] = { ...updated[idx], amount: e.target.value }
-                            setEditableStages(updated)
-                          }}
-                          className="h-6 w-28 text-xs text-right font-semibold"
-                        />
+                        <div className="relative flex items-center">
+                          <Input
+                            type="text"
+                            value={stg.percentage.replace('%', '').trim()}
+                            onChange={(e) => handleStagePercentageChange(idx, e.target.value)}
+                            placeholder="%"
+                            className="h-7 text-xs text-center font-bold pr-3.5"
+                          />
+                          <span className="absolute right-1 text-[10px] text-muted-foreground pointer-events-none">%</span>
+                        </div>
+                        <div className="relative flex items-center">
+                          <Input
+                            type="number"
+                            value={stg.amount}
+                            onChange={(e) => handleStageAmountChange(idx, e.target.value)}
+                            placeholder="৳"
+                            className="h-7 text-xs text-right font-semibold pl-3.5"
+                          />
+                          <span className="absolute left-1.5 text-[10px] text-muted-foreground pointer-events-none">৳</span>
+                        </div>
                       </div>
                     ))}
                   </div>

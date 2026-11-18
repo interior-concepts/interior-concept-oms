@@ -368,7 +368,7 @@ Please sign and return the duplicate copy of this Work Order as formal acknowled
     projectSqft: lead.projectSqft || null,
 
     companyName: 'INTERIOR CONCEPTS',
-    companyAddress: 'TA-174/1, Unit 4A, 3rd Floor(Lift-3) Khonikachroy, South Badda Lake View Road, Badda, Dhaka-1212',
+    companyAddress: '174/1, South Badda Lake View Road, Gulshan-1, Dhaka-1212, Bangladesh',
     companyPhones: '+880 1334-935530 | +880 1334-935531',
     companyWebsite: 'interiorconceptsstudio.com',
     tradeLicenseNo: 'TRAD/DNCC/048385/2025',
@@ -376,10 +376,10 @@ Please sign and return the duplicate copy of this Work Order as formal acknowled
     ceoName: 'Shopi Ullah Rashed',
     ceoDesignation: 'Chief Executive Officer (CEO)',
     ceoNid: '7762979297',
-    companyRepresentative: 'Shopi Ullah Rashed',
-    companyRepresentativeTitle: 'Chief Executive Officer',
+    companyRepresentative: 'Tushar Imran',
+    companyRepresentativeTitle: 'Office Admin',
     srCrmName: lead.srCrm?.fullName || 'Senior Project Coordinator',
-    officeAdminName: lead.srCrm?.fullName || 'Senior Project Coordinator',
+    officeAdminName: 'Tushar Imran',
     officeAdminDesignation: 'Office Admin',
 
     // 1. Intro Letter

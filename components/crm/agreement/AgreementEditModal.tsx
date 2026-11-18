@@ -103,7 +103,14 @@ export function AgreementEditModal({
   const handlePaymentChange = (index: number, field: keyof AgreementPaymentStage, value: string) => {
     if (!data) return
     const updated = [...(data.paymentSchedule || [])]
-    updated[index] = { ...updated[index], [field]: value }
+    if (field === 'percentage') {
+      const cleanPct = parseFloat(value.replace(/[^0-9.]/g, ''))
+      const total = Number(data.grandTotal || data.agreementValue || 0)
+      const newAmount = !isNaN(cleanPct) && total > 0 ? String(Math.round((cleanPct / 100) * total)) : updated[index].amount
+      updated[index] = { ...updated[index], percentage: value, amount: newAmount }
+    } else {
+      updated[index] = { ...updated[index], [field]: value }
+    }
     setData({ ...data, paymentSchedule: updated })
   }
 

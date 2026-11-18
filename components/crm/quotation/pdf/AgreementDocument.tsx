@@ -898,7 +898,7 @@ const GlobalFooter = ({
         <Text style={[styles.footerText, { color: PRIMARY, fontWeight: 'bold', fontSize: 8 }]}>
           Interior Concepts Studio
         </Text>
-        <Text style={styles.footerText}>183, East Senpara, Mirpur-10, Dhaka-1216</Text>
+        <Text style={styles.footerText}>174/1, South Badda Lake View Road, Gulshan-1, Dhaka-1212, Bangladesh</Text>
       </View>
       <View style={{ width: '30%', alignItems: 'center' }}>
         <Text style={styles.footerText}>+88 0132969 4663 · +88 0132969 4660</Text>
@@ -1350,10 +1350,10 @@ export function AgreementDocumentPdf({
                   Work Order Accepted By
                 </Text>
                 <Text style={styles.sigName}>
-                  {agreement.companyRepresentative || agreement.srCrmName || 'Md. Nazrul Islam'}
+                  {agreement.officeAdminName || 'Tushar Imran'}
                 </Text>
                 <Text style={styles.sigRole}>
-                  {agreement.companyRepresentativeTitle || 'General Manager'}, Interior Concepts
+                  {agreement.officeAdminDesignation || 'Office Admin'}, Interior Concepts
                 </Text>
                 <Text style={styles.sigRole}>Date: {formatDateString(agreement.agreementDate)}</Text>
               </View>
@@ -1390,10 +1390,10 @@ export function AgreementDocumentPdf({
             AND
           </Text>
           <Text style={styles.paragraph}>
-            <Text style={styles.bold}>INTERIOR CONCEPTS</Text>, having registered address at Dhaka, Bangladesh,
-            Begum Rokeya Sarani, Mirpur-10, Trade License No: <Text style={styles.bold}>TRAD/DNCC/037755/2025</Text>,
-            Represented by <Text style={styles.bold}>{agreement.companyRepresentative || 'Md. Nazrul Islam'}</Text>,
-            Designation: {agreement.companyRepresentativeTitle || 'General Manager'}, (hereinafter referred to as the{' '}
+            <Text style={styles.bold}>INTERIOR CONCEPTS</Text>, having registered address at 174/1, South Badda Lake View Road,
+            Gulshan-1, Dhaka-1212, Bangladesh, Trade License No: <Text style={styles.bold}>TRAD/DNCC/048385/2025</Text>,
+            Represented by <Text style={styles.bold}>{agreement.ceoName || 'Shopi Ullah Rashed'}</Text>,
+            Designation: {agreement.ceoDesignation || 'Chief Executive Officer (CEO)'}, (hereinafter referred to as the{' '}
             <Text style={styles.bold}>&quot;Consultant&quot;</Text> which expression shall, unless it be repugnant to the context or meaning
             thereof, be deemed to mean and include its successors and assigns) of the other part.
           </Text>
@@ -1877,21 +1877,21 @@ export function AgreementDocumentPdf({
               <Text style={styles.sigRole}>Date: {agreement.agreementDate}</Text>
             </View>
             <View style={styles.sigBlock}>
-              <Text style={styles.sigName}>{agreement.ceoName || 'Md Johirul Islam'}</Text>
+              <Text style={styles.sigName}>{agreement.ceoName || 'Shopi Ullah Rashed'}</Text>
               <Text style={styles.sigRole}>Chief Executive Officer (CEO)</Text>
               <Text style={styles.sigRole}>Interior Concepts</Text>
             </View>
           </View>
         </View>
 
-        {/* General Manager Official Acknowledgment Block */}
+        {/* Office Admin Official Acknowledgment Block */}
         <View style={styles.gmCard}>
           <Text style={[styles.bold, { fontSize: 8, color: PRIMARY, marginBottom: 3, textTransform: 'uppercase' }]}>
             Consultant Declaration &amp; Acknowledgment
           </Text>
           <Text style={[styles.paragraph, { fontSize: 7, color: '#333333', marginBottom: 6, lineHeight: 1.4 }]}>
-            I, <Text style={styles.bold}>{agreement.companyRepresentative || 'Md. Nazrul Islam'}</Text>,{' '}
-            {agreement.companyRepresentativeTitle || 'General Manager'} of Interior Concepts, hereby confirm that I am fully
+            I, <Text style={styles.bold}>{agreement.officeAdminName || 'Tushar Imran'}</Text>,{' '}
+            {agreement.officeAdminDesignation || 'Office Admin'} of Interior Concepts, hereby confirm that I am fully
             aware of and have reviewed the terms and conditions of this Work Order/Agreement, including the approved scope of
             work, Schedule of Rates, specifications, payment terms, project timeline, and other contractual requirements. I
             acknowledge that the contents of this Work Order/Agreement have been duly communicated to and understood by the
@@ -1900,8 +1900,8 @@ export function AgreementDocumentPdf({
           </Text>
           <View style={{ marginTop: 6, paddingTop: 3, borderTopWidth: 0.5, borderTopColor: BORDER, width: '45%' }}>
             <Text style={{ fontSize: 6.5, color: TEXT_MUTED }}>Acknowledged by:</Text>
-            <Text style={[styles.sigName, { marginTop: 1 }]}>{agreement.companyRepresentative || 'Md. Nazrul Islam'}</Text>
-            <Text style={styles.sigRole}>{agreement.companyRepresentativeTitle || 'General Manager (GM)'}</Text>
+            <Text style={[styles.sigName, { marginTop: 1 }]}>{agreement.ceoName || 'Shopi Ullah Rashed'}</Text>
+            <Text style={styles.sigRole}>{agreement.ceoDesignation || 'Chief Executive Officer (CEO)'}</Text>
             <Text style={styles.sigRole}>Interior Concepts</Text>
           </View>
         </View>
