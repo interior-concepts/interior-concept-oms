@@ -35,7 +35,7 @@ import {
   ChevronUp,
 } from 'lucide-react'
 import { toast } from 'sonner'
-import type { AgreementData } from '@/lib/agreement-types'
+import type { AgreementData, AgreementPaymentStage } from '@/lib/agreement-types'
 import { defaultAgreementStages } from '@/lib/agreement-types'
 import { AgreementDocument } from '@/components/crm/agreement/AgreementDocument'
 import { AgreementEditModal } from '@/components/crm/agreement/AgreementEditModal'
@@ -71,10 +71,7 @@ interface LeadAgreementModalProps {
 
 const AGREEMENT_TYPES = [
   { value: 'FITOUT_AGREEMENT', label: 'Interior Fitout Agreement' },
-  { value: 'DESIGN_AND_EXECUTION', label: 'Comprehensive Design & Execution' },
-  { value: 'FULL_INTERIOR', label: 'Full Interior Turnkey Work' },
-  { value: 'RENOVATION_AGREEMENT', label: 'Renovation & Remodeling Agreement' },
-  { value: 'FURNITURE_AGREEMENT', label: 'Custom Furniture Supply & Fitting' },
+  { value: 'DESIGN_AGREEMENT', label: 'Interior Design Agreement' },
 ]
 
 export function LeadAgreementModal({
@@ -87,7 +84,8 @@ export function LeadAgreementModal({
   const [saving, setSaving] = useState(false)
   const [downloading, setDownloading] = useState(false)
   const [showFullEditModal, setShowFullEditModal] = useState(false)
-  const [showMilestones, setShowMilestones] = useState(false)
+  const [showMilestones, setShowMilestones] = useState(true)
+  const [editableStages, setEditableStages] = useState<AgreementPaymentStage[]>([])
 
   // Agreement State
   const [agreementData, setAgreementData] = useState<AgreementData | null>(null)
@@ -181,6 +179,19 @@ export function LeadAgreementModal({
     }
   }, [isOpen, lead, hasQuotation, quotations])
 
+  // Sync editable stages whenever finalValue changes (or when existing data loads)
+  useEffect(() => {
+    if (!isOpen) return
+    if (agreementData?.paymentSchedule?.length) {
+      setEditableStages(agreementData.paymentSchedule)
+    } else if (finalValue > 0) {
+      setEditableStages(defaultAgreementStages(finalValue))
+    } else {
+      setEditableStages(defaultAgreementStages(1000000))
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finalValue, isOpen])
+
   if (!isOpen || !lead) return null
 
   // Save Agreement
@@ -206,7 +217,7 @@ export function LeadAgreementModal({
         grandTotal: finalValue,
         agreementValue: finalValue,
         inWordsText: `${amountInWordsTaka(finalValue)} Taka Only.`,
-        paymentSchedule: defaultAgreementStages(finalValue),
+        paymentSchedule: editableStages.length > 0 ? editableStages : defaultAgreementStages(finalValue),
       }
 
       const res = await fetch(`/api/agreements/${lead.id}`, {
@@ -251,8 +262,6 @@ export function LeadAgreementModal({
       setDownloading(false)
     }
   }
-
-  const stagesPreview = defaultAgreementStages(finalValue > 0 ? finalValue : 1000000)
 
   return (
     <>
@@ -467,7 +476,7 @@ export function LeadAgreementModal({
                 </Select>
               </div>
 
-              {/* Collapsible Payment Milestones Breakdown */}
+              {/* Editable Payment Milestones */}
               <div className="rounded-lg border border-border/60 bg-muted/20">
                 <button
                   type="button"
@@ -476,24 +485,29 @@ export function LeadAgreementModal({
                 >
                   <span className="flex items-center gap-1.5">
                     <BadgePercent className="h-3.5 w-3.5 text-primary" />
-                    Standard Payment Milestones ({stagesPreview.length} Stages)
+                    Payment Milestones ({editableStages.length} Stages)
                   </span>
                   {showMilestones ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                 </button>
 
                 {showMilestones ? (
-                  <div className="p-2.5 pt-0 border-t border-border/40 space-y-1.5 text-xs">
-                    {stagesPreview.map((stg, idx) => (
-                      <div key={idx} className="flex items-center justify-between py-1 border-b border-border/30 last:border-none text-[11px]">
-                        <span className="text-muted-foreground line-clamp-1 max-w-[280px]">
+                  <div className="p-2.5 pt-0 border-t border-border/40 space-y-1 text-xs">
+                    {editableStages.map((stg, idx) => (
+                      <div key={idx} className="grid grid-cols-[1fr_auto_auto] gap-2 items-center py-1.5 border-b border-border/30 last:border-none">
+                        <span className="text-[11px] text-muted-foreground truncate">
                           {idx + 1}. {stg.stage}
                         </span>
-                        <div className="flex items-center gap-2 shrink-0">
-                          <span className="text-muted-foreground font-mono text-[10px]">({stg.percentage})</span>
-                          <span className="font-semibold text-foreground">
-                            ৳{Number(stg.amount).toLocaleString('en-IN')}
-                          </span>
-                        </div>
+                        <span className="text-[10px] text-muted-foreground font-mono shrink-0">({stg.percentage})</span>
+                        <Input
+                          type="number"
+                          value={stg.amount}
+                          onChange={(e) => {
+                            const updated = [...editableStages]
+                            updated[idx] = { ...updated[idx], amount: e.target.value }
+                            setEditableStages(updated)
+                          }}
+                          className="h-6 w-28 text-xs text-right font-semibold"
+                        />
                       </div>
                     ))}
                   </div>

@@ -1240,15 +1240,27 @@ export default function LeadsPage() {
                               <FileCheck2 className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
                               <span>{lead.agreementValue ? `Agreement (৳${Number(lead.agreementValue).toLocaleString('en-IN')})` : 'Do Agreement'}</span>
                             </Button>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="h-7 text-xs gap-1 border-sky-400/70 text-sky-700 hover:bg-sky-50 dark:border-sky-800 dark:text-sky-300"
-                              onClick={() => setInstantQuotationLead(lead)}
-                            >
-                              <Sparkles className="h-3 w-3 text-sky-600 dark:text-sky-400" />
-                              <span>Instant Quote</span>
-                            </Button>
+                            {(lead.quotationDrafts && lead.quotationDrafts.filter(d => d.draftKey !== 'agreement').length > 0) ? (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-7 text-xs gap-1 border-sky-500/40 text-sky-700 hover:bg-sky-50 dark:border-sky-800 dark:text-sky-300 font-semibold"
+                                onClick={() => setQuotationModalLead(lead)}
+                              >
+                                <FileText className="h-3 w-3 text-sky-600 dark:text-sky-400" />
+                                <span>Quotations ({lead.quotationDrafts.filter(d => d.draftKey !== 'agreement').length})</span>
+                              </Button>
+                            ) : (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-7 text-xs gap-1 border-sky-400/70 text-sky-700 hover:bg-sky-50 dark:border-sky-800 dark:text-sky-300"
+                                onClick={() => setInstantQuotationLead(lead)}
+                              >
+                                <Sparkles className="h-3 w-3 text-sky-600 dark:text-sky-400" />
+                                <span>Instant Quote</span>
+                              </Button>
+                            )}
                             <Link href={getLeadHref(lead.id)}>
                               <Button variant="outline" size="sm" className="h-7">View</Button>
                             </Link>
@@ -1299,7 +1311,7 @@ export default function LeadsPage() {
                             }}
                             className={`${rowStyle} ${isSelected ? 'ring-2 ring-inset ring-primary/60' : ''} cursor-pointer transition-colors`}
                           >
-                          <td className="py-4 px-4 align-top">
+                          <td className="py-3 px-4 align-middle">
                             <input
                               type="checkbox"
                               checked={selectedLeadIds.includes(lead.id)}
@@ -1311,12 +1323,12 @@ export default function LeadsPage() {
                           </td>
 
                           {/* 1. Client ID */}
-                          <td className="py-4 px-4 align-top font-bold text-primary whitespace-nowrap">
+                          <td className="py-3 px-4 align-middle font-bold text-primary whitespace-nowrap">
                             {lead.clientId ? `#${lead.clientId}` : '—'}
                           </td>
 
                           {/* 2. Client Info (Name, Phone, Address/Location) */}
-                          <td className="py-4 px-4 align-top min-w-[220px]">
+                          <td className="py-3 px-4 align-middle min-w-[220px]">
                             <div className="flex items-start gap-2.5">
                               {(() => {
                                 const sourceVisual = getSourceVisual(lead.source)
@@ -1349,7 +1361,7 @@ export default function LeadsPage() {
                           </td>
 
                           {/* Stage */}
-                          <td className="py-4 px-4 align-top whitespace-nowrap">
+                          <td className="py-3 px-4 align-middle whitespace-nowrap">
                             <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-semibold ${stageColors[lead.stage] || 'bg-muted text-foreground'}`}>
                               {formatStageDisplay(lead.stage)}
                             </span>
@@ -1374,7 +1386,7 @@ export default function LeadsPage() {
                           </td>
 
                           {/* 3. Visit (Visit schedule date, visit complete time, visit team members) */}
-                          <td className="py-4 px-4 align-top min-w-[210px]">
+                          <td className="py-3 px-4 align-middle min-w-[210px]">
                             {lead.latestVisit ? (
                               <div className="space-y-1 text-xs">
                                 <div className="flex items-center gap-1.5 font-medium text-foreground">
@@ -1410,7 +1422,7 @@ export default function LeadsPage() {
                           </td>
 
                           {/* 4. CAD (if CAD files exist, button to open modal with all files; if none show X) */}
-                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[120px]">
+                          <td className="py-3 px-4 align-middle text-center whitespace-nowrap min-w-[120px]">
                             {(() => {
                               const cadFiles = lead.cadSubmissions?.flatMap((sub) =>
                                 sub.files.map((f) => ({
@@ -1461,43 +1473,38 @@ export default function LeadsPage() {
                           </td>
 
                           {/* 6. Quotation */}
-                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[140px]">
-                            {lead.quotationDrafts && lead.quotationDrafts.length > 0 ? (
-                              <div className="flex flex-col items-center gap-1.5">
+                          <td className="py-3 px-4 align-middle text-center whitespace-nowrap min-w-[140px]">
+                            {(() => {
+                              const realDrafts = (lead.quotationDrafts || []).filter(d => d.draftKey !== 'agreement')
+                              if (realDrafts.length > 0) {
+                                return (
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="h-7 text-xs gap-1.5 font-semibold border-sky-500/40 text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-950/30 w-full justify-center"
+                                    onClick={() => setQuotationModalLead(lead)}
+                                  >
+                                    <FileText className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
+                                    <span>Quotations ({realDrafts.length})</span>
+                                  </Button>
+                                )
+                              }
+                              return (
                                 <Button
                                   variant="outline"
                                   size="sm"
-                                  className="h-7 text-xs gap-1.5 font-semibold border-sky-500/40 text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-950/30 w-full justify-center"
-                                  onClick={() => setQuotationModalLead(lead)}
-                                >
-                                  <FileText className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
-                                  <span>Quotations ({lead.quotationDrafts.length})</span>
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  className="h-6 px-2 text-[11px] gap-1 font-medium text-sky-700 hover:text-sky-800 hover:bg-sky-100/50 dark:text-sky-300 dark:hover:bg-sky-950/40"
+                                  className="h-7 text-xs gap-1.5 font-semibold border-sky-500/50 bg-sky-50 text-sky-800 hover:bg-sky-100 dark:bg-sky-950/40 dark:text-sky-200 dark:border-sky-800"
                                   onClick={() => setInstantQuotationLead(lead)}
                                 >
-                                  <Sparkles className="h-3 w-3" />
+                                  <Sparkles className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
                                   <span>Instant Quote</span>
                                 </Button>
-                              </div>
-                            ) : (
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="h-7 text-xs gap-1.5 font-semibold border-sky-500/50 bg-sky-50 text-sky-800 hover:bg-sky-100 dark:bg-sky-950/40 dark:text-sky-200 dark:border-sky-800"
-                                onClick={() => setInstantQuotationLead(lead)}
-                              >
-                                <Sparkles className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
-                                <span>Instant Quote</span>
-                              </Button>
-                            )}
+                              )
+                            })()}
                           </td>
 
                           {/* Agreement */}
-                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[140px]">
+                          <td className="py-3 px-4 align-middle text-center whitespace-nowrap min-w-[140px]">
                             {lead.agreementValue || lead.agreementType || lead.quotationDrafts?.some((d) => d.draftKey === 'agreement') ? (
                               <Button
                                 variant="outline"
@@ -1522,7 +1529,7 @@ export default function LeadsPage() {
                           </td>
 
                           {/* 7. Show last followup data */}
-                          <td className="py-4 px-4 align-top min-w-[220px] max-w-[320px]">
+                          <td className="py-3 px-4 align-middle min-w-[220px] max-w-[320px]">
                             {lead.lastFollowup ? (
                               <div className="space-y-1.5">
                                 {/* Primary focus: Follow-up remarks shown in a bigger, clearer way */}
