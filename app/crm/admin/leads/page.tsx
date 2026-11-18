@@ -41,6 +41,7 @@ import {
   Calendar,
   Users,
   FileText,
+  FileCheck2,
   Download,
   ExternalLink,
   Sparkles,
@@ -49,6 +50,7 @@ import {
 import LeadCreateModal from '@/components/crm/junior/LeadCreateModal'
 import { LeadImportModal } from '@/components/crm/admin/lead-import-modal'
 import { InstantQuotationModal } from '@/components/crm/admin/instant-quotation-modal'
+import { LeadAgreementModal } from '@/components/crm/admin/lead-agreement-modal'
 import { CrmPageHeader } from '@/components/crm/shared/page-header'
 import { LeadDateRangeFilter, type LeadDatePreset } from '@/components/crm/shared/lead-date-range-filter'
 import { downloadDetailQuotationWord, downloadShortQuotationWord } from '@/components/crm/quotation/word-download'
@@ -248,6 +250,8 @@ type LeadSummary = {
   source: string | null
   stage: string
   location: string | null
+  agreementType?: string | null
+  agreementValue?: number | null
   created_at: string
   assignments?: Array<{
     id: string
@@ -509,6 +513,7 @@ export default function LeadsPage() {
   const [cadModalLead, setCadModalLead] = useState<LeadSummary | null>(null)
   const [quotationModalLead, setQuotationModalLead] = useState<LeadSummary | null>(null)
   const [instantQuotationLead, setInstantQuotationLead] = useState<LeadSummary | null>(null)
+  const [agreementModalLead, setAgreementModalLead] = useState<LeadSummary | null>(null)
   const [downloadingDraftId, setDownloadingDraftId] = useState<string | null>(null)
   const [batchAssignOpen, setBatchAssignOpen] = useState(false)
   const [departments, setDepartments] = useState<DepartmentSummary[]>([])
@@ -1225,6 +1230,19 @@ export default function LeadsPage() {
                             <Button
                               variant="outline"
                               size="sm"
+                              className={`h-7 text-xs gap-1 ${
+                                lead.agreementValue || lead.agreementType
+                                  ? 'border-emerald-500/50 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 dark:text-emerald-300 dark:bg-emerald-950/40 font-semibold'
+                                  : 'border-border text-foreground hover:bg-muted'
+                              }`}
+                              onClick={() => setAgreementModalLead(lead)}
+                            >
+                              <FileCheck2 className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
+                              <span>{lead.agreementValue ? `Agreement (৳${Number(lead.agreementValue).toLocaleString('en-IN')})` : 'Do Agreement'}</span>
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
                               className="h-7 text-xs gap-1 border-sky-400/70 text-sky-700 hover:bg-sky-50 dark:border-sky-800 dark:text-sky-300"
                               onClick={() => setInstantQuotationLead(lead)}
                             >
@@ -1262,6 +1280,7 @@ export default function LeadsPage() {
                         <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">CAD</th>
                         <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">Meeting</th>
                         <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">Quotation</th>
+                        <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">Agreement</th>
                         <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground whitespace-nowrap">Last Followup</th>
                         <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground whitespace-nowrap">Next Followup</th>
                         <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">Action</th>
@@ -1482,6 +1501,31 @@ export default function LeadsPage() {
                               >
                                 <Sparkles className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
                                 <span>Instant Quote</span>
+                              </Button>
+                            )}
+                          </td>
+
+                          {/* Agreement */}
+                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[140px]">
+                            {lead.agreementValue || lead.agreementType || lead.quotationDrafts?.some((d) => d.draftKey === 'agreement') ? (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-7 text-xs gap-1.5 font-semibold border-emerald-500/40 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-200 dark:border-emerald-800 w-full justify-center"
+                                onClick={() => setAgreementModalLead(lead)}
+                              >
+                                <FileCheck2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+                                <span>Agreement {lead.agreementValue ? `(৳${Number(lead.agreementValue).toLocaleString('en-IN')})` : ''}</span>
+                              </Button>
+                            ) : (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-7 text-xs gap-1.5 font-medium border-border/80 text-foreground hover:bg-muted/60 hover:border-emerald-500/50 hover:text-emerald-700 w-full justify-center"
+                                onClick={() => setAgreementModalLead(lead)}
+                              >
+                                <FileCheck2 className="h-3.5 w-3.5 text-muted-foreground" />
+                                <span>Do Agreement</span>
                               </Button>
                             )}
                           </td>
@@ -1988,6 +2032,19 @@ export default function LeadsPage() {
               router.push(url)
             }}
           />
+
+          {/* 5. Direct Agreement Modal */}
+          {agreementModalLead ? (
+            <LeadAgreementModal
+              isOpen={Boolean(agreementModalLead)}
+              onClose={() => setAgreementModalLead(null)}
+              lead={agreementModalLead}
+              onSuccess={() => {
+                leadsCache = null
+                void fetchLeads(0, true)
+              }}
+            />
+          ) : null}
         </div>
       </main>
     </div>

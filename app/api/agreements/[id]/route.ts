@@ -59,6 +59,11 @@ export async function GET(request: NextRequest, context: RouteContext) {
     const detailContent = (detailDraft?.content as QuotationDraftContent | null) || null
     const srCrmUser = lead.assignments[0]?.user ?? null
 
+    const anyOtherDraft = lead.quotationDrafts.find(
+      (d) => d.draftKey !== 'agreement' && d.grandTotal > 0
+    )
+    const effectiveAgreementValue = lead.agreementValue ?? anyOtherDraft?.grandTotal ?? null
+
     const defaultAgreement = buildDefaultAgreementData(
       {
         id: lead.id,
@@ -67,7 +72,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
         phone: lead.phone,
         location: lead.location,
         agreementType: lead.agreementType,
-        agreementValue: lead.agreementValue,
+        agreementValue: effectiveAgreementValue,
         projectSqft: lead.visits[0]?.projectSqft ?? null,
         srCrm: srCrmUser,
       },
@@ -133,7 +138,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
 
     const lead = await prisma.lead.findUnique({
       where: { id },
-      select: { id: true, clientId: true },
+      select: { id: true, clientId: true, accountStatus: true },
     })
 
     if (!lead) {
@@ -168,14 +173,28 @@ export async function PUT(request: NextRequest, context: RouteContext) {
       },
     })
 
-    // Also update lead's agreementValue and agreementType
+    // Also update lead's agreementValue, agreementType and accountStatus
     await prisma.lead.update({
       where: { id: lead.id },
       data: {
         agreementValue: grandTotal > 0 ? grandTotal : undefined,
         agreementType: body.agreementType || undefined,
+        accountStatus: lead.accountStatus ?? 'PENDING',
       },
     })
+
+    try {
+      await prisma.activityLog.create({
+        data: {
+          leadId: lead.id,
+          userId: authResult.actorUserId,
+          type: 'NOTE',
+          description: `Agreement confirmed: ${body.agreementType || 'FITOUT_AGREEMENT'} with final value ৳${grandTotal.toLocaleString('en-IN')}.`,
+        },
+      })
+    } catch (actErr) {
+      console.warn('[agreements/[id]] Failed to log activity:', actErr)
+    }
 
     return NextResponse.json({
       success: true,

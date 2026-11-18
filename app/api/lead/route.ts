@@ -496,6 +496,8 @@ export async function GET(request: NextRequest) {
         subStatus: true,
         budget: true,
         location: true,
+        agreementType: true,
+        agreementValue: true,
         assignedTo: true,
         created_at: true,
         updated_at: true,

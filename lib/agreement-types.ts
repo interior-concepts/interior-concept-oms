@@ -104,6 +104,8 @@ export type AgreementData = {
   // 4. Detail Quotation Items & Totals
   items: AgreementDetailItem[]
   interiorWorkTotal: number
+  grossTotal?: number
+  discountAmount?: number
   grandTotal: number
   inWordsText: string
   quotationDraft?: QuotationDraftContent | null
@@ -312,7 +314,7 @@ export function buildDefaultAgreementData(
     })
   }
 
-  const finalTotal = calculatedGrandTotal > 0 ? calculatedGrandTotal : (lead.agreementValue || 1435100)
+  const finalTotal = calculatedGrandTotal > 0 ? calculatedGrandTotal : (lead.agreementValue || 0)
 
   if (items.length === 0) {
     items.push({
@@ -321,12 +323,12 @@ export function buildDefaultAgreementData(
       name: 'Interior Work and Fixed Furniture',
       materials: 'Supplying & Making of 18mm High Pressure laminated Imported Architect Grade MR (Moisture Resistant) Highly Compressed Engineered Board with factory UV edging and smart soft-close hardware.',
       qtySft: '1 Package',
-      unitPrice: finalTotal.toLocaleString('en-IN'),
+      unitPrice: finalTotal > 0 ? finalTotal.toLocaleString('en-IN') : 'Package',
       total: finalTotal,
     })
   }
 
-  const inWords = `${amountInWordsTaka(finalTotal)} Taka Only.`
+  const inWords = finalTotal > 0 ? `${amountInWordsTaka(finalTotal)} Taka Only.` : 'Zero Taka Only.'
   const paymentSchedule = defaultAgreementStages(finalTotal)
   const annexures = defaultAgreementAnnexures()
   const clauseGroups = defaultAgreementClauseGroups()
