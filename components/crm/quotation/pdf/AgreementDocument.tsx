@@ -86,121 +86,96 @@ const watermarkSrc = isBrowser
     : '/Logo/interior-concept-icon-light.png'
 
 const styles = StyleSheet.create({
-  // ─── Cover Page Styles (Premium Corporate Two-Tone Geometric) ───
+  // ─── Cover Page Styles (Corporate Two-Section Design) ───
   coverPage: {
     position: 'relative',
+    padding: 0,
     backgroundColor: '#ffffff',
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    padding: 0,
+    overflow: 'hidden',
   },
-  coverTopSection: {
+  coverUpperSection: {
+    height: '53%',
+    backgroundColor: '#f6f9f8',
     position: 'relative',
-    height: 421,
-    width: '100%',
+    overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 45,
-    paddingBottom: 36,
     paddingHorizontal: 40,
-    zIndex: 2,
+    paddingTop: 46,
+    paddingBottom: 42,
   },
-  coverBottomSection: {
-    position: 'relative',
-    height: 421,
+  coverUpperContent: {
     width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingTop: 36,
-    paddingBottom: 26,
-    paddingHorizontal: 40,
     zIndex: 2,
   },
-  coverHeaderSection: {
+  coverLogoSection: {
     alignItems: 'center',
+    marginBottom: 0,
   },
-  coverHeaderLogo: {
-    width: 165,
-    height: 45,
-    objectFit: 'contain',
-  },
-  coverHeaderInfoRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 8,
-  },
-  coverHeaderInfoText: {
-    fontSize: 8,
-    color: '#64748b',
-    letterSpacing: 0.5,
-  },
-  coverHeaderInfoDot: {
-    fontSize: 7,
-    color: '#94a3b8',
-    marginHorizontal: 8,
+  coverLogo: {
+    width: 200,
   },
   coverTitleSection: {
     alignItems: 'center',
+    marginBottom: 0,
+    zIndex: 2,
   },
   coverInteriorWorkSub: {
-    fontSize: 8.5,
+    fontSize: 9,
     fontWeight: 'bold',
-    color: GOLD,
+    color: '#a57c00',
     textTransform: 'uppercase',
-    letterSpacing: 5,
-    marginBottom: 7,
+    letterSpacing: 6,
+    marginBottom: 8,
     textAlign: 'center',
   },
-  coverMainTitle: {
+  coverTitle: {
     fontFamily: 'Playfair Display',
+    fontSize: 38,
     fontWeight: 'bold',
-    fontSize: 23,
-    color: PRIMARY,
-    textTransform: 'uppercase',
-    letterSpacing: 2,
-    textAlign: 'center',
-  },
-  coverSubtitle: {
-    fontSize: 8.5,
-    fontWeight: 'bold',
-    color: '#64748b',
-    textTransform: 'uppercase',
-    letterSpacing: 3,
-    marginTop: 6,
+    color: '#1f363d',
+    letterSpacing: 2.2,
     textAlign: 'center',
   },
   coverGoldDivider: {
-    width: 46,
+    width: 52,
     height: 1.5,
-    backgroundColor: GOLD,
-    marginTop: 11,
-    marginBottom: 9,
+    backgroundColor: '#c5a059',
+    marginTop: 12,
     alignSelf: 'center',
   },
-  coverTagline: {
-    fontFamily: 'Playfair Display',
-    fontStyle: 'italic',
-    fontSize: 9.5,
-    color: '#64748b',
-    textAlign: 'center',
+  coverLowerSection: {
+    height: '47%',
+    backgroundColor: '#16282e',
+    position: 'relative',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 44,
+    paddingVertical: 32,
   },
-  coverDataSectionDark: {
+  coverLowerContent: {
+    width: '100%',
+    maxWidth: 390,
+    alignItems: 'center',
+    zIndex: 2,
+  },
+  coverInfoBlock: {
     alignItems: 'center',
     width: '100%',
   },
-  coverSectionDark: {
-    alignItems: 'center',
-  },
   coverSectionLabelDark: {
-    fontSize: 8.5,
+    fontSize: 8,
     fontWeight: 'bold',
-    color: '#e2b342',
+    color: '#c5a059',
     textTransform: 'uppercase',
     letterSpacing: 2.5,
     marginBottom: 5,
@@ -208,62 +183,49 @@ const styles = StyleSheet.create({
   },
   coverClientNameDark: {
     fontFamily: 'Playfair Display',
-    fontSize: 17,
+    fontSize: 16.5,
     fontWeight: 'bold',
     color: '#ffffff',
     textAlign: 'center',
     letterSpacing: 0.5,
   },
   coverClientSubDark: {
-    fontSize: 9.5,
+    fontSize: 9,
     color: '#cbd5e1',
-    marginTop: 3,
+    marginTop: 4,
     textAlign: 'center',
-    maxWidth: 380,
+    lineHeight: 1.45,
+    maxWidth: 340,
   },
-  coverInfoDividerDark: {
-    width: 32,
-    height: 1,
-    backgroundColor: '#a57c00',
-    opacity: 0.6,
-    marginVertical: 14,
+  coverInfoDivider: {
+    width: 48,
+    height: 0.75,
+    backgroundColor: '#c5a059',
+    opacity: 0.45,
+    marginVertical: 18,
     alignSelf: 'center',
   },
   coverCompanyNameDark: {
+    fontFamily: 'Playfair Display',
     fontSize: 14.5,
     fontWeight: 'bold',
     color: '#ffffff',
     textAlign: 'center',
     letterSpacing: 0.5,
   },
-  coverMetaRowDark: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 4,
-  },
   coverMetaSmallDark: {
     fontSize: 8.5,
     color: '#94a3b8',
+    marginTop: 4,
     textAlign: 'center',
+    letterSpacing: 0.4,
   },
-  coverBottomBadgePill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 5,
-    paddingHorizontal: 16,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#26424b',
-    backgroundColor: '#132429',
-  },
-  coverBottomBadgeText: {
-    fontSize: 7.5,
-    color: '#94a3b8',
-    letterSpacing: 1.5,
-    textTransform: 'uppercase',
+  coverMetaSmallDateDark: {
+    fontSize: 8,
+    color: '#c5a059',
+    marginTop: 4,
     textAlign: 'center',
+    letterSpacing: 0.5,
   },
 
 
@@ -1109,91 +1071,74 @@ export function AgreementDocumentPdf({
 
   return (
     <Document title={`Agreement - ${clientName}`} author="Interior Concepts">
-      {/* ─── FRONT COVER PAGE (PREMIUM TWO-TONE GEOMETRIC) ────────── */}
-      <Page size="A4" style={styles.coverPage} wrap={false}>
-        {/* Full-bleed SVG Background Layer: Two-section tone + Geometric Rings */}
-        <Svg width={595} height={842} viewBox="0 0 595 842" style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
-          {/* Upper Section: Warm Ivory / Linen Brand Tone */}
-          <Rect x={0} y={0} width={595} height={421} fill="#FAF7F2" />
+      {/* ─── FRONT COVER PAGE (CORPORATE TWO-SECTION DESIGN) ────────── */}
+      <Page size="A4" style={styles.coverPage}>
+        {/* UPPER LIGHT SECTION */}
+        <View style={styles.coverUpperSection}>
+          {/* Geometric Decorative Elements: Overlapping Circular Arcs & Rings on Left */}
+          <Svg
+            width={280}
+            height={445}
+            viewBox="0 0 280 445"
+            style={{ position: 'absolute', top: 0, left: 0 }}
+          >
+            {/* 1. Large subtle background arc */}
+            <Circle cx={-30} cy={210} r={190} fill="#1f363d" opacity={0.05} />
+            {/* 2. Primary outer accent ring */}
+            <Circle cx={-20} cy={210} r={150} stroke="#a57c00" strokeWidth={2.5} fill="none" opacity={0.32} />
+            {/* 3. Intersecting shaded arc */}
+            <Circle cx={-10} cy={250} r={110} fill="#1f363d" opacity={0.09} />
+            {/* 4. Secondary inner ring */}
+            <Circle cx={15} cy={230} r={75} stroke="#1f363d" strokeWidth={1.8} fill="none" opacity={0.25} />
+            {/* 5. Delicate gold inner ring */}
+            <Circle cx={25} cy={225} r={48} stroke="#c5a059" strokeWidth={1.2} fill="none" opacity={0.45} />
+            {/* 6. Subtle decorative floating circles */}
+            <Circle cx={155} cy={140} r={4.5} fill="#a57c00" opacity={0.55} />
+            <Circle cx={185} cy={245} r={6.5} fill="#1f363d" opacity={0.18} />
+            <Circle cx={125} cy={305} r={3.5} fill="#a57c00" opacity={0.65} />
+            <Circle cx={195} cy={185} r={2.5} fill="#1f363d" opacity={0.35} />
+          </Svg>
 
-          {/* Lower Section: Deep Signature Dark Charcoal Teal */}
-          <Rect x={0} y={421} width={595} height={421} fill="#172b31" />
-
-          {/* Horizontal Brand Dividing Accent */}
-          <Line x1={0} y1={421} x2={595} y2={421} stroke={GOLD} strokeWidth={2} />
-          <Line x1={0} y1={423} x2={595} y2={423} stroke="#ffffff" strokeWidth={0.5} opacity={0.15} />
-
-          {/* ─── Upper Section: Overlapping Circular Arcs along Left Edge ─── */}
-          <G>
-            {/* Outermost sweeping arc */}
-            <Circle cx={-10} cy={230} r={330} stroke={PRIMARY} strokeWidth={1.2} opacity={0.08} fill="none" />
-            {/* Large warm gold ring */}
-            <Circle cx={10} cy={240} r={270} stroke={GOLD} strokeWidth={1.8} opacity={0.16} fill="none" />
-            {/* Soft translucent depth wash */}
-            <Circle cx={-25} cy={225} r={215} fill={PRIMARY} opacity={0.035} />
-            {/* Prominent gold ring */}
-            <Circle cx={-5} cy={220} r={175} stroke={GOLD} strokeWidth={2.2} opacity={0.24} fill="none" />
-            {/* Dark teal inner ring */}
-            <Circle cx={20} cy={210} r={120} stroke={PRIMARY} strokeWidth={1.5} opacity={0.16} fill="none" />
-            {/* Fine gold concentric core */}
-            <Circle cx={35} cy={205} r={65} stroke={GOLD} strokeWidth={1.2} opacity={0.3} fill="none" />
-            {/* Subtle secondary arc higher up */}
-            <Circle cx={90} cy={110} r={95} stroke={PRIMARY} strokeWidth={1} opacity={0.07} fill="none" />
-            {/* Delicate floating decorative circles */}
-            <Circle cx={125} cy={180} r={4} fill={GOLD} opacity={0.4} />
-            <Circle cx={155} cy={275} r={6} stroke={PRIMARY} strokeWidth={1.2} opacity={0.22} fill="none" />
-            <Circle cx={80} cy={330} r={3} fill={PRIMARY} opacity={0.25} />
-          </G>
-
-          {/* ─── Lower Section: Complementary Circular Rings in Bottom-Right Corner ─── */}
-          <G>
-            {/* Outermost slate/white ring */}
-            <Circle cx={590} cy={820} r={270} stroke="#ffffff" strokeWidth={1} opacity={0.08} fill="none" />
-            {/* Rich gold accent ring */}
-            <Circle cx={585} cy={815} r={205} stroke="#c59b27" strokeWidth={1.8} opacity={0.28} fill="none" />
-            {/* Crisp white concentric ring */}
-            <Circle cx={580} cy={810} r={145} stroke="#ffffff" strokeWidth={1.2} opacity={0.18} fill="none" />
-            {/* Vibrant warm gold inner ring */}
-            <Circle cx={575} cy={805} r={90} stroke="#e2b342" strokeWidth={2} opacity={0.35} fill="none" />
-            {/* Inner accent ring */}
-            <Circle cx={570} cy={800} r={45} stroke="#ffffff" strokeWidth={1} opacity={0.15} fill="none" />
-            {/* Delicate floating decorative circles */}
-            <Circle cx={455} cy={735} r={4.5} fill="#c59b27" opacity={0.45} />
-            <Circle cx={490} cy={775} r={7} stroke="#ffffff" strokeWidth={1} opacity={0.22} fill="none" />
-            <Circle cx={520} cy={705} r={3} fill="#ffffff" opacity={0.25} />
-          </G>
-        </Svg>
-
-        {/* ─── Upper Section Content (Warm Light Background) ─── */}
-        <View style={styles.coverTopSection} wrap={false}>
-          {/* 1. Header Section: Logo + Contact Info Row */}
-          <View style={styles.coverHeaderSection}>
-            <Image src={logoSrc} style={styles.coverHeaderLogo} />
-            <View style={styles.coverHeaderInfoRow}>
-              <Text style={styles.coverHeaderInfoText}>Dhaka, Bangladesh</Text>
-              <Text style={styles.coverHeaderInfoDot}>&bull;</Text>
-              <Text style={styles.coverHeaderInfoText}>info@interiorconceptsstudio.com</Text>
-              <Text style={styles.coverHeaderInfoDot}>&bull;</Text>
-              <Text style={styles.coverHeaderInfoText}>www.interiorconceptsstudio.com</Text>
-            </View>
+          {/* Top Logo */}
+          <View style={styles.coverLogoSection}>
+            <Image src={logoSrc} style={styles.coverLogo} />
           </View>
 
-          {/* 2. Main Title Section: Eyebrow + Large Heading + Subtitle + Gold Divider + Tagline */}
+          {/* Prominent Agreement Title */}
           <View style={styles.coverTitleSection}>
             <Text style={styles.coverInteriorWorkSub}>INTERIOR WORK</Text>
-            <Text style={styles.coverMainTitle}>INTERIOR DESIGN AGREEMENT</Text>
-            <Text style={styles.coverSubtitle}>PROJECT AGREEMENT &amp; TERMS OF SERVICE</Text>
+            <Text style={styles.coverTitle}>Agreement</Text>
             <View style={styles.coverGoldDivider} />
-            <Text style={styles.coverTagline}>&ldquo;Designing spaces, creating experiences.&rdquo;</Text>
           </View>
         </View>
 
-        {/* ─── Lower Section Content (Deep Dark Brand Background) ─── */}
-        <View style={styles.coverBottomSection} wrap={false}>
-          {/* 3. Agreement Information: Prepared For & Prepared By */}
-          <View style={styles.coverDataSectionDark}>
-            {/* Prepared For */}
-            <View style={styles.coverSectionDark}>
+        {/* LOWER DARK SECTION */}
+        <View style={styles.coverLowerSection}>
+          {/* Geometric Decorative Elements: Complementary Rings on Bottom-Right */}
+          <Svg
+            width={260}
+            height={360}
+            viewBox="0 0 260 360"
+            style={{ position: 'absolute', bottom: 0, right: 0 }}
+          >
+            {/* Large subtle outline ring */}
+            <Circle cx={260} cy={360} r={200} stroke="#c5a059" strokeWidth={2} fill="none" opacity={0.22} />
+            {/* Concentric darker depth disc */}
+            <Circle cx={260} cy={360} r={140} fill="#0d1b1f" opacity={0.5} />
+            {/* Inner accent ring */}
+            <Circle cx={260} cy={360} r={90} stroke="#a57c00" strokeWidth={1.5} fill="none" opacity={0.38} />
+            {/* Innermost ring */}
+            <Circle cx={260} cy={360} r={50} stroke="#ffffff" strokeWidth={0.75} fill="none" opacity={0.15} />
+            {/* Subtle floating circles */}
+            <Circle cx={110} cy={240} r={4.5} fill="#c5a059" opacity={0.45} />
+            <Circle cx={155} cy={175} r={3} fill="#ffffff" opacity={0.3} />
+            <Circle cx={85} cy={285} r={2.5} fill="#c5a059" opacity={0.55} />
+          </Svg>
+
+          {/* Centered Agreement Information */}
+          <View style={styles.coverLowerContent}>
+            {/* Prepared For Block */}
+            <View style={styles.coverInfoBlock}>
               <Text style={styles.coverSectionLabelDark}>PREPARED FOR</Text>
               <Text style={styles.coverClientNameDark}>{agreement.ownerName || clientName}</Text>
               {agreement.projectAddress || agreement.projectName ? (
@@ -1201,26 +1146,16 @@ export function AgreementDocumentPdf({
               ) : null}
             </View>
 
-            {/* Subtle Gold Divider */}
-            <View style={styles.coverInfoDividerDark} />
+            {/* Separator Divider */}
+            <View style={styles.coverInfoDivider} />
 
-            {/* Prepared By */}
-            <View style={styles.coverSectionDark}>
+            {/* Prepared By Block */}
+            <View style={styles.coverInfoBlock}>
               <Text style={styles.coverSectionLabelDark}>PREPARED BY</Text>
               <Text style={styles.coverCompanyNameDark}>Interior Concepts</Text>
-              <View style={styles.coverMetaRowDark}>
-                <Text style={styles.coverMetaSmallDark}>www.interiorconceptsstudio.com</Text>
-                <Text style={[styles.coverHeaderInfoDot, { color: '#64748b' }]}>&bull;</Text>
-                <Text style={styles.coverMetaSmallDark}>{formatDateString(agreement.agreementDate)}</Text>
-              </View>
+              <Text style={styles.coverMetaSmallDark}>interiorconceptsstudio.com</Text>
+              <Text style={styles.coverMetaSmallDateDark}>{formatDateString(agreement.agreementDate)}</Text>
             </View>
-          </View>
-
-          {/* Bottom Official Document Badge */}
-          <View style={styles.coverBottomBadgePill}>
-            <Text style={styles.coverBottomBadgeText}>
-              INTERIOR CONCEPTS STUDIO &bull; OFFICIAL CONTRACT DOCUMENT
-            </Text>
           </View>
         </View>
       </Page>
@@ -1274,7 +1209,7 @@ export function AgreementDocumentPdf({
                 <Text style={styles.woPartyTag}>AWARDED TO (EXECUTANT)</Text>
                 <Text style={styles.woPartyName}>INTERIOR CONCEPTS</Text>
                 <Text style={styles.woPartyDetail}>
-                  Head Office: Dhaka, Bangladesh Parbata, Mirpur 10, Dhaka-1216
+                  Head Office: 174/1, South Badda Lake View Road, Gulshan-1, Dhaka-1212, Bangladesh
                 </Text>
                 <Text style={styles.woPartyDetail}>
                   Hotlines: 01329-694660, 01329-694661 · Trade Lic: TRAD/DNCC/037755/2025
