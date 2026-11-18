@@ -1260,7 +1260,7 @@ export default function LeadsPage() {
                 </div>
               ) : (
                 <div className="w-full overflow-x-auto touch-pan-x scrollbar-thin">
-                  <table className="w-full min-w-[1450px] text-sm divide-y divide-border">
+                  <table className="w-full min-w-[1100px] text-sm divide-y divide-border">
                     <thead>
                       <tr className="bg-muted/50 border-b border-border">
                         <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground w-12">
@@ -1278,12 +1278,9 @@ export default function LeadsPage() {
                         <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground whitespace-nowrap">Stage</th>
                         <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground whitespace-nowrap">Visit Details</th>
                         <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">CAD</th>
-                        <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">Meeting</th>
                         <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">Quotation</th>
                         <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">Agreement</th>
                         <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground whitespace-nowrap">Last Followup</th>
-                        <th className="px-4 py-3.5 text-left font-semibold text-muted-foreground whitespace-nowrap">Next Followup</th>
-                        <th className="px-4 py-3.5 text-center font-semibold text-muted-foreground whitespace-nowrap">Action</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-border">
@@ -1293,7 +1290,14 @@ export default function LeadsPage() {
                         return (
                           <tr
                             key={lead.id}
-                            className={`${rowStyle} ${isSelected ? 'ring-2 ring-inset ring-primary/60' : ''} transition-colors`}
+                            onClick={(e) => {
+                              const target = e.target as HTMLElement
+                              if (target.closest('button, input, a, [role="button"]')) {
+                                return
+                              }
+                              router.push(getLeadHref(lead.id))
+                            }}
+                            className={`${rowStyle} ${isSelected ? 'ring-2 ring-inset ring-primary/60' : ''} cursor-pointer transition-colors`}
                           >
                           <td className="py-4 px-4 align-top">
                             <input
@@ -1456,19 +1460,6 @@ export default function LeadsPage() {
                             })()}
                           </td>
 
-                          {/* 5. Meeting (modal button showing time + date and remarks) */}
-                          <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[120px]">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="h-8 text-xs gap-1.5 font-medium"
-                              onClick={() => setMeetingModalLead(lead)}
-                            >
-                              <Calendar className="h-3.5 w-3.5 text-primary" />
-                              <span>Meetings ({lead.meetings?.length ?? 0})</span>
-                            </Button>
-                          </td>
-
                           {/* 6. Quotation */}
                           <td className="py-4 px-4 align-top text-center whitespace-nowrap min-w-[140px]">
                             {lead.quotationDrafts && lead.quotationDrafts.length > 0 ? (
@@ -1561,31 +1552,6 @@ export default function LeadsPage() {
                             ) : (
                               <span className="text-muted-foreground text-xs">—</span>
                             )}
-                          </td>
-
-                          {/* 8. Show next follow up date */}
-                          <td className="py-4 px-4 align-top min-w-[140px]">
-                            {lead.nextFollowup ? (
-                              <div className="text-xs space-y-1">
-                                <div className="font-bold text-primary">
-                                  {formatDate(lead.nextFollowup.followupDate)}
-                                </div>
-                                {lead.nextFollowup.assignedTo ? (
-                                  <div className="text-[11px] text-muted-foreground">
-                                    Assigned: {lead.nextFollowup.assignedTo.fullName}
-                                  </div>
-                                ) : null}
-                              </div>
-                            ) : (
-                              <span className="text-muted-foreground text-xs">—</span>
-                            )}
-                          </td>
-
-                          {/* Action */}
-                          <td className="py-4 px-4 align-top text-center whitespace-nowrap">
-                            <Link href={getLeadHref(lead.id)}>
-                              <Button variant="outline" size="sm" className="h-8">View</Button>
-                            </Link>
                           </td>
                         </tr>
                       )})}
