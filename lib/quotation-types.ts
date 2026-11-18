@@ -8,6 +8,7 @@ export type QuotationSection = {
   id: string
   name: string
   sortOrder: number
+  sectionType?: string
 }
 
 export type QuotationArea = {
@@ -37,6 +38,7 @@ export type QuotationLineItem = {
   isCustom: boolean
   notes?: string
   unitPriceLabel?: string
+  isFinishingElectrical?: boolean
 }
 
 export type QuotationDraftContent = {
