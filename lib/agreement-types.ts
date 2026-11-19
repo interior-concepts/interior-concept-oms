@@ -335,7 +335,7 @@ export function buildDefaultAgreementData(
 
   const workOrderId = `WRK-${safeNamePart}-${dateCode}`
   const subContractId = `SUB-${lead.id.slice(-8).toUpperCase()}`
-  const reference = `AI/${dateCode}/${leadCode}`
+  const reference = `IC/${dateCode}/${leadCode}`
 
   const letterBody = `I, ${clientCleanName}, hereby issue this Work Order to Interior Concepts for the execution and completion of the interior works of the above-mentioned Project, based on your submitted quotation and subsequent evaluation and agreement.
 

@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   coverLogo: {
-    width: 200,
+    width: 250,
   },
   coverTitleSection: {
     alignItems: 'center',
@@ -302,19 +302,19 @@ const styles = StyleSheet.create({
   },
   header: {
     position: 'absolute',
-    top: 18,
+    top: 14,
     left: PAGE_PADDING,
     right: PAGE_PADDING,
-    height: 50,
+    height: 52,
     borderBottomWidth: 1.2,
     borderBottomColor: GOLD,
-    paddingBottom: 6,
+    paddingBottom: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
   },
   headerBrand: {
-    width: 140,
+    width: 175,
   },
   headerMeta: {
     alignItems: 'flex-end',
@@ -868,7 +868,7 @@ const GlobalHeader = ({
 }) => (
   <View style={[styles.header, { left: sidePadding, right: sidePadding }]} fixed>
     <View style={styles.headerBrand}>
-      <Image src={logoSrc} style={{ width: 130 }} />
+      <Image src={logoSrc} style={{ width: 160 }} />
     </View>
     <View style={styles.headerMeta}>
       <Text style={styles.headerDocTitle}>{title}</Text>
@@ -1071,7 +1071,12 @@ export function AgreementDocument(props: AgreementPdfProps) {
   )
 
   const workOrderId = props.workOrderId || `WRK-${props.clientId || '001'}`
-  const reference = props.reference || props.referenceNo || workOrderId
+  const rawReference = props.reference || props.referenceNo || workOrderId
+  const reference = rawReference.startsWith('AI/')
+    ? rawReference.replace(/^AI\//, 'IC/')
+    : rawReference.startsWith('ai/')
+      ? rawReference.replace(/^ai\//, 'IC/')
+      : rawReference
   const subContractId = props.subContractId || `SUB-${String(props.clientId || '001').padStart(4, '0')}`
   const agreementDate = props.agreementDate || formatDateString(new Date().toISOString())
   const clientName = props.ownerName || props.clientName || 'Valued Client'
@@ -1563,7 +1568,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
             <Text style={styles.detailSectionTitle}>{softWrapPdfText(entry.floor.name)}</Text>
 
             <View style={styles.detailTableWrapper}>
-              <View style={styles.detailTHead}>
+              <View style={styles.detailTHead} fixed>
                 <Text style={[styles.detailThCol, styles.wSl]}>SL</Text>
                 <Text style={[styles.detailThCol, styles.wName]}>Name</Text>
                 <Text style={[styles.detailThCol, styles.wMats]}>Material Description</Text>
@@ -1790,7 +1795,7 @@ export function AgreementDocument(props: AgreementPdfProps) {
           <Text style={styles.detailSectionTitle}>INTERIOR FIT-OUT WORKS</Text>
 
           <View style={styles.detailTableWrapper}>
-            <View style={styles.detailTHead}>
+            <View style={styles.detailTHead} fixed>
               <Text style={[styles.detailThCol, styles.wSl]}>SL</Text>
               <Text style={[styles.detailThCol, styles.wName]}>Name</Text>
               <Text style={[styles.detailThCol, styles.wMats]}>Material Description</Text>
@@ -1920,7 +1925,10 @@ export function AgreementDocument(props: AgreementPdfProps) {
           <View style={styles.sigRow}>
             <View style={styles.sigBlock}>
               <Text style={styles.sigName}>{clientName}</Text>
-              <Text style={styles.sigRole}>Owner (Project)</Text>
+              <Text style={styles.sigRole}>Project Owner: {clientName}</Text>
+              {projectAddress ? (
+                <Text style={styles.sigRole}>Project Address: {projectAddress}</Text>
+              ) : null}
               <Text style={styles.sigRole}>Date: {agreementDate}</Text>
             </View>
             <View style={styles.sigBlock}>

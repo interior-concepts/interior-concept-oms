@@ -47,7 +47,7 @@ export function defaultAgreementContent(input: {
   return {
     workOrderId: `WRK-${input.name}-${dateCode}`,
     subContractId: `SUB-${input.leadId.slice(-8).toUpperCase()}`,
-    reference: `AI/${dateCode}/${input.leadId.slice(-6).toUpperCase()}`,
+    reference: `IC/${dateCode}/${input.leadId.slice(-6).toUpperCase()}`,
     agreementDate: date,
     agreementValue: String(value || ''),
     projectName: input.location || '',

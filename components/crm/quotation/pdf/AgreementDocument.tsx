@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   coverLogo: {
-    width: 200,
+    width: 250,
   },
   coverTitleSection: {
     alignItems: 'center',
@@ -261,19 +261,19 @@ const styles = StyleSheet.create({
   },
   header: {
     position: 'absolute',
-    top: 18,
+    top: 14,
     left: PAGE_PADDING,
     right: PAGE_PADDING,
     height: 52,
     borderBottomWidth: 1.5,
     borderBottomColor: GOLD,
-    paddingBottom: 8,
+    paddingBottom: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
   },
   headerBrand: {
-    width: 140,
+    width: 175,
   },
   headerMeta: {
     alignItems: 'flex-end',
@@ -826,7 +826,7 @@ const GlobalHeader = ({
 }) => (
   <View style={[styles.header, { left: sidePadding, right: sidePadding }]} fixed>
     <View style={styles.headerBrand}>
-      <Image src={logoSrc} style={{ width: 130 }} />
+      <Image src={logoSrc} style={{ width: 160 }} />
     </View>
     <View style={styles.headerMeta}>
       <Text style={styles.headerDocTitle}>{title}</Text>
@@ -997,7 +997,7 @@ function formatDetailTotalCurrency(line: QuotationDraftContent['lineItems'][numb
 }
 
 export function AgreementDocumentPdf({
-  agreement,
+  agreement: rawAgreement,
   quotation,
   totals,
   clientName,
@@ -1009,6 +1009,12 @@ export function AgreementDocumentPdf({
   clientName: string
   agreementValue: number | null
 }) {
+  const normalizedReference = rawAgreement.reference?.startsWith('AI/')
+    ? rawAgreement.reference.replace(/^AI\//, 'IC/')
+    : rawAgreement.reference?.startsWith('ai/')
+      ? rawAgreement.reference.replace(/^ai\//, 'IC/')
+      : rawAgreement.reference
+  const agreement = { ...rawAgreement, reference: normalizedReference }
   const rows = quotation ? buildDetailFloorSummaries(quotation) : []
   const finalValue = Number(agreement.agreementValue) || agreementValue || totals?.grandTotal || 0
   const subtotalValue = totals?.subtotal ?? finalValue
@@ -1523,7 +1529,7 @@ export function AgreementDocumentPdf({
               <Text style={styles.detailSectionTitle}>{softWrapPdfText(entry.floor.name)}</Text>
 
               <View style={styles.detailTableWrapper}>
-                <View style={styles.detailTHead}>
+                <View style={styles.detailTHead} fixed>
                   <Text style={[styles.detailThCol, styles.wSl]}>SL</Text>
                   <Text style={[styles.detailThCol, styles.wName]}>Name</Text>
                   <Text style={[styles.detailThCol, styles.wMats]}>Material Description</Text>
@@ -1808,7 +1814,10 @@ export function AgreementDocumentPdf({
           <View style={styles.sigRow}>
             <View style={styles.sigBlock}>
               <Text style={styles.sigName}>{agreement.ownerName || clientName}</Text>
-              <Text style={styles.sigRole}>Owner (Project)</Text>
+              <Text style={styles.sigRole}>Project Owner: {agreement.ownerName || clientName}</Text>
+              {agreement.projectAddress || agreement.ownerAddress ? (
+                <Text style={styles.sigRole}>Project Address: {agreement.projectAddress || agreement.ownerAddress}</Text>
+              ) : null}
               <Text style={styles.sigRole}>Date: {agreement.agreementDate}</Text>
             </View>
             <View style={styles.sigBlock}>
