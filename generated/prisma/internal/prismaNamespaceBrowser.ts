@@ -107,7 +107,9 @@ export const ModelName = {
   QuotationUserPerformance: 'QuotationUserPerformance',
   VisitMemberMonthlyAssessment: 'VisitMemberMonthlyAssessment',
   DepartmentMemberMonthlySetting: 'DepartmentMemberMonthlySetting',
+  VendorTypeOption: 'VendorTypeOption',
   Vendor: 'Vendor',
+  VendorBankAccount: 'VendorBankAccount',
   VendorAgreement: 'VendorAgreement',
   VendorAgreementRevision: 'VendorAgreementRevision',
   VendorPaymentMilestone: 'VendorPaymentMilestone',
@@ -1028,6 +1030,17 @@ export const DepartmentMemberMonthlySettingScalarFieldEnum = {
 export type DepartmentMemberMonthlySettingScalarFieldEnum = (typeof DepartmentMemberMonthlySettingScalarFieldEnum)[keyof typeof DepartmentMemberMonthlySettingScalarFieldEnum]
 
 
+export const VendorTypeOptionScalarFieldEnum = {
+  id: 'id',
+  value: 'value',
+  label: 'label',
+  isDefault: 'isDefault',
+  createdAt: 'createdAt'
+} as const
+
+export type VendorTypeOptionScalarFieldEnum = (typeof VendorTypeOptionScalarFieldEnum)[keyof typeof VendorTypeOptionScalarFieldEnum]
+
+
 export const VendorScalarFieldEnum = {
   id: 'id',
   vendorId: 'vendorId',
@@ -1036,16 +1049,35 @@ export const VendorScalarFieldEnum = {
   status: 'status',
   vendorType: 'vendorType',
   bankName: 'bankName',
+  bankBranch: 'bankBranch',
+  accountName: 'accountName',
   routingNumber: 'routingNumber',
   accountNumber: 'accountNumber',
   primaryEmail: 'primaryEmail',
   primaryPhone: 'primaryPhone',
+  primaryPhones: 'primaryPhones',
   billingAddress: 'billingAddress',
+  billingAddresses: 'billingAddresses',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type VendorScalarFieldEnum = (typeof VendorScalarFieldEnum)[keyof typeof VendorScalarFieldEnum]
+
+
+export const VendorBankAccountScalarFieldEnum = {
+  id: 'id',
+  vendorId: 'vendorId',
+  bankName: 'bankName',
+  bankBranch: 'bankBranch',
+  accountName: 'accountName',
+  routingNumber: 'routingNumber',
+  accountNumber: 'accountNumber',
+  isPrimary: 'isPrimary',
+  createdAt: 'createdAt'
+} as const
+
+export type VendorBankAccountScalarFieldEnum = (typeof VendorBankAccountScalarFieldEnum)[keyof typeof VendorBankAccountScalarFieldEnum]
 
 
 export const VendorAgreementScalarFieldEnum = {

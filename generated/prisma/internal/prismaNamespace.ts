@@ -440,7 +440,9 @@ export const ModelName = {
   QuotationUserPerformance: 'QuotationUserPerformance',
   VisitMemberMonthlyAssessment: 'VisitMemberMonthlyAssessment',
   DepartmentMemberMonthlySetting: 'DepartmentMemberMonthlySetting',
+  VendorTypeOption: 'VendorTypeOption',
   Vendor: 'Vendor',
+  VendorBankAccount: 'VendorBankAccount',
   VendorAgreement: 'VendorAgreement',
   VendorAgreementRevision: 'VendorAgreementRevision',
   VendorPaymentMilestone: 'VendorPaymentMilestone',
@@ -473,7 +475,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "lead" | "leadAssignment" | "leadStatusHistory" | "activityLog" | "followUp" | "note" | "user" | "deviceToken" | "agreementValueLog" | "leadPhaseTask" | "leadJrArchitectRequest" | "leadPhaseReview" | "leadMeetingEvent" | "cadWorkSubmission" | "quotationDraft" | "agreementDocument" | "furnitureQuotationDraft" | "furnitureQuotationSavedItem" | "electricalQuotationDraft" | "partialQuotationDraft" | "cadWorkSubmissionFile" | "visit" | "visitUpdateRequest" | "visitResult" | "visitSupportAssignment" | "visitSupportResult" | "attachment" | "leadAttachment" | "supportAttachment" | "notification" | "facebookSyncControl" | "instagramSyncControl" | "whatsAppWebhookControl" | "whatsAppProcessedMessage" | "visitWorkflowControl" | "jrArchitectWorkflowControl" | "whatsAppWebhookEvent" | "role" | "department" | "userRole" | "userDepartment" | "financeAccount" | "transaction" | "conveyanceRequest" | "conveyanceBill" | "cashFlowDaily" | "websiteProject" | "websiteProjectImage" | "websiteVideo" | "websiteTestimonial" | "websiteTeamMember" | "quotationTemplateOverride" | "jrArchitectPerformance" | "quotationUserPerformance" | "visitMemberMonthlyAssessment" | "departmentMemberMonthlySetting" | "vendor" | "vendorAgreement" | "vendorAgreementRevision" | "vendorPaymentMilestone" | "vendorPayment" | "stockItem" | "stockMovement" | "materialRequisition" | "materialRequisitionItem" | "boqSavedAccessoryItem" | "boqSavedApplianceItem" | "requisitionAmendment" | "supplier" | "procurementWallet" | "procurementWalletTransaction" | "siteDeliveryLog" | "quotationDailyWorkReport" | "quotationWorkActivityLog"
+    modelProps: "lead" | "leadAssignment" | "leadStatusHistory" | "activityLog" | "followUp" | "note" | "user" | "deviceToken" | "agreementValueLog" | "leadPhaseTask" | "leadJrArchitectRequest" | "leadPhaseReview" | "leadMeetingEvent" | "cadWorkSubmission" | "quotationDraft" | "agreementDocument" | "furnitureQuotationDraft" | "furnitureQuotationSavedItem" | "electricalQuotationDraft" | "partialQuotationDraft" | "cadWorkSubmissionFile" | "visit" | "visitUpdateRequest" | "visitResult" | "visitSupportAssignment" | "visitSupportResult" | "attachment" | "leadAttachment" | "supportAttachment" | "notification" | "facebookSyncControl" | "instagramSyncControl" | "whatsAppWebhookControl" | "whatsAppProcessedMessage" | "visitWorkflowControl" | "jrArchitectWorkflowControl" | "whatsAppWebhookEvent" | "role" | "department" | "userRole" | "userDepartment" | "financeAccount" | "transaction" | "conveyanceRequest" | "conveyanceBill" | "cashFlowDaily" | "websiteProject" | "websiteProjectImage" | "websiteVideo" | "websiteTestimonial" | "websiteTeamMember" | "quotationTemplateOverride" | "jrArchitectPerformance" | "quotationUserPerformance" | "visitMemberMonthlyAssessment" | "departmentMemberMonthlySetting" | "vendorTypeOption" | "vendor" | "vendorBankAccount" | "vendorAgreement" | "vendorAgreementRevision" | "vendorPaymentMilestone" | "vendorPayment" | "stockItem" | "stockMovement" | "materialRequisition" | "materialRequisitionItem" | "boqSavedAccessoryItem" | "boqSavedApplianceItem" | "requisitionAmendment" | "supplier" | "procurementWallet" | "procurementWalletTransaction" | "siteDeliveryLog" | "quotationDailyWorkReport" | "quotationWorkActivityLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4621,6 +4623,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    VendorTypeOption: {
+      payload: Prisma.$VendorTypeOptionPayload<ExtArgs>
+      fields: Prisma.VendorTypeOptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VendorTypeOptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeOptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VendorTypeOptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeOptionPayload>
+        }
+        findFirst: {
+          args: Prisma.VendorTypeOptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeOptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VendorTypeOptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeOptionPayload>
+        }
+        findMany: {
+          args: Prisma.VendorTypeOptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeOptionPayload>[]
+        }
+        create: {
+          args: Prisma.VendorTypeOptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeOptionPayload>
+        }
+        createMany: {
+          args: Prisma.VendorTypeOptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VendorTypeOptionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeOptionPayload>[]
+        }
+        delete: {
+          args: Prisma.VendorTypeOptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeOptionPayload>
+        }
+        update: {
+          args: Prisma.VendorTypeOptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeOptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.VendorTypeOptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VendorTypeOptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VendorTypeOptionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeOptionPayload>[]
+        }
+        upsert: {
+          args: Prisma.VendorTypeOptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeOptionPayload>
+        }
+        aggregate: {
+          args: Prisma.VendorTypeOptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVendorTypeOption>
+        }
+        groupBy: {
+          args: Prisma.VendorTypeOptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VendorTypeOptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VendorTypeOptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VendorTypeOptionCountAggregateOutputType> | number
+        }
+      }
+    }
     Vendor: {
       payload: Prisma.$VendorPayload<ExtArgs>
       fields: Prisma.VendorFieldRefs
@@ -4692,6 +4768,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.VendorCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.VendorCountAggregateOutputType> | number
+        }
+      }
+    }
+    VendorBankAccount: {
+      payload: Prisma.$VendorBankAccountPayload<ExtArgs>
+      fields: Prisma.VendorBankAccountFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VendorBankAccountFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorBankAccountPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VendorBankAccountFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorBankAccountPayload>
+        }
+        findFirst: {
+          args: Prisma.VendorBankAccountFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorBankAccountPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VendorBankAccountFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorBankAccountPayload>
+        }
+        findMany: {
+          args: Prisma.VendorBankAccountFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorBankAccountPayload>[]
+        }
+        create: {
+          args: Prisma.VendorBankAccountCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorBankAccountPayload>
+        }
+        createMany: {
+          args: Prisma.VendorBankAccountCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VendorBankAccountCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorBankAccountPayload>[]
+        }
+        delete: {
+          args: Prisma.VendorBankAccountDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorBankAccountPayload>
+        }
+        update: {
+          args: Prisma.VendorBankAccountUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorBankAccountPayload>
+        }
+        deleteMany: {
+          args: Prisma.VendorBankAccountDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VendorBankAccountUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VendorBankAccountUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorBankAccountPayload>[]
+        }
+        upsert: {
+          args: Prisma.VendorBankAccountUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorBankAccountPayload>
+        }
+        aggregate: {
+          args: Prisma.VendorBankAccountAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVendorBankAccount>
+        }
+        groupBy: {
+          args: Prisma.VendorBankAccountGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VendorBankAccountGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VendorBankAccountCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VendorBankAccountCountAggregateOutputType> | number
         }
       }
     }
@@ -6877,6 +7027,17 @@ export const DepartmentMemberMonthlySettingScalarFieldEnum = {
 export type DepartmentMemberMonthlySettingScalarFieldEnum = (typeof DepartmentMemberMonthlySettingScalarFieldEnum)[keyof typeof DepartmentMemberMonthlySettingScalarFieldEnum]
 
 
+export const VendorTypeOptionScalarFieldEnum = {
+  id: 'id',
+  value: 'value',
+  label: 'label',
+  isDefault: 'isDefault',
+  createdAt: 'createdAt'
+} as const
+
+export type VendorTypeOptionScalarFieldEnum = (typeof VendorTypeOptionScalarFieldEnum)[keyof typeof VendorTypeOptionScalarFieldEnum]
+
+
 export const VendorScalarFieldEnum = {
   id: 'id',
   vendorId: 'vendorId',
@@ -6885,16 +7046,35 @@ export const VendorScalarFieldEnum = {
   status: 'status',
   vendorType: 'vendorType',
   bankName: 'bankName',
+  bankBranch: 'bankBranch',
+  accountName: 'accountName',
   routingNumber: 'routingNumber',
   accountNumber: 'accountNumber',
   primaryEmail: 'primaryEmail',
   primaryPhone: 'primaryPhone',
+  primaryPhones: 'primaryPhones',
   billingAddress: 'billingAddress',
+  billingAddresses: 'billingAddresses',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type VendorScalarFieldEnum = (typeof VendorScalarFieldEnum)[keyof typeof VendorScalarFieldEnum]
+
+
+export const VendorBankAccountScalarFieldEnum = {
+  id: 'id',
+  vendorId: 'vendorId',
+  bankName: 'bankName',
+  bankBranch: 'bankBranch',
+  accountName: 'accountName',
+  routingNumber: 'routingNumber',
+  accountNumber: 'accountNumber',
+  isPrimary: 'isPrimary',
+  createdAt: 'createdAt'
+} as const
+
+export type VendorBankAccountScalarFieldEnum = (typeof VendorBankAccountScalarFieldEnum)[keyof typeof VendorBankAccountScalarFieldEnum]
 
 
 export const VendorAgreementScalarFieldEnum = {
@@ -7690,20 +7870,6 @@ export type ListEnumVendorStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
- * Reference to a field of type 'VendorType'
- */
-export type EnumVendorTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VendorType'>
-    
-
-
-/**
- * Reference to a field of type 'VendorType[]'
- */
-export type ListEnumVendorTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VendorType[]'>
-    
-
-
-/**
  * Reference to a field of type 'VendorWorkStatus'
  */
 export type EnumVendorWorkStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VendorWorkStatus'>
@@ -8021,7 +8187,9 @@ export type GlobalOmitConfig = {
   quotationUserPerformance?: Prisma.QuotationUserPerformanceOmit
   visitMemberMonthlyAssessment?: Prisma.VisitMemberMonthlyAssessmentOmit
   departmentMemberMonthlySetting?: Prisma.DepartmentMemberMonthlySettingOmit
+  vendorTypeOption?: Prisma.VendorTypeOptionOmit
   vendor?: Prisma.VendorOmit
+  vendorBankAccount?: Prisma.VendorBankAccountOmit
   vendorAgreement?: Prisma.VendorAgreementOmit
   vendorAgreementRevision?: Prisma.VendorAgreementRevisionOmit
   vendorPaymentMilestone?: Prisma.VendorPaymentMilestoneOmit

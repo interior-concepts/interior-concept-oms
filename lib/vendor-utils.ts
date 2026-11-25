@@ -1,9 +1,20 @@
-import { VendorType } from "@/generated/prisma/client"
+/**
+ * Default vendor type options seeded into VendorTypeOption
+ */
+export const DEFAULT_VENDOR_TYPES = [
+  { value: "SUPPLIER", label: "Supplier" },
+  { value: "CONTRACTOR", label: "Contractor" },
+  { value: "PAINTER", label: "Painter" },
+  { value: "CARPENTER", label: "Carpenter" },
+  { value: "SERVICE_PROVIDER", label: "Service Provider" },
+  { value: "FREELANCER", label: "Freelancer" },
+  { value: "OTHER", label: "Other" },
+] as const
 
 /**
  * Maps VendorType to the appropriate ExpenseCategory for auto-created Transactions
  */
-export const VENDOR_TYPE_TO_EXPENSE_CATEGORY: Record<VendorType, string> = {
+export const VENDOR_TYPE_TO_EXPENSE_CATEGORY: Record<string, string> = {
   SUPPLIER:         "BOARD_MATERIAL",
   CONTRACTOR:       "CIVIL_WORK",
   PAINTER:          "PAINT_PAYMENT",
@@ -14,10 +25,10 @@ export const VENDOR_TYPE_TO_EXPENSE_CATEGORY: Record<VendorType, string> = {
 }
 
 /**
- * Generates a human-readable vendor ID label
+ * Generates a human-readable vendor type label
  */
-export function formatVendorType(type: VendorType): string {
-  const labels: Record<VendorType, string> = {
+export function formatVendorType(type: string): string {
+  const labels: Record<string, string> = {
     SUPPLIER:         "Supplier",
     CONTRACTOR:       "Contractor",
     PAINTER:          "Painter",
@@ -26,5 +37,10 @@ export function formatVendorType(type: VendorType): string {
     FREELANCER:       "Freelancer",
     OTHER:            "Other",
   }
-  return labels[type] ?? type
+  if (labels[type]) return labels[type]
+  return type
+    .split("_")
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ")
 }

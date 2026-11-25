@@ -773,13 +773,6 @@ export type EnumVendorStatusFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumVendorStatusFilter<$PrismaModel> | $Enums.VendorStatus
 }
 
-export type EnumVendorTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.VendorType | Prisma.EnumVendorTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.VendorType[] | Prisma.ListEnumVendorTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.VendorType[] | Prisma.ListEnumVendorTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumVendorTypeFilter<$PrismaModel> | $Enums.VendorType
-}
-
 export type EnumVendorStatusWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.VendorStatus | Prisma.EnumVendorStatusFieldRefInput<$PrismaModel>
   in?: $Enums.VendorStatus[] | Prisma.ListEnumVendorStatusFieldRefInput<$PrismaModel>
@@ -788,16 +781,6 @@ export type EnumVendorStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumVendorStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumVendorStatusFilter<$PrismaModel>
-}
-
-export type EnumVendorTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.VendorType | Prisma.EnumVendorTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.VendorType[] | Prisma.ListEnumVendorTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.VendorType[] | Prisma.ListEnumVendorTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumVendorTypeWithAggregatesFilter<$PrismaModel> | $Enums.VendorType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumVendorTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumVendorTypeFilter<$PrismaModel>
 }
 
 export type EnumVendorWorkStatusFilter<$PrismaModel = never> = {
@@ -1700,13 +1683,6 @@ export type NestedEnumVendorStatusFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumVendorStatusFilter<$PrismaModel> | $Enums.VendorStatus
 }
 
-export type NestedEnumVendorTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.VendorType | Prisma.EnumVendorTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.VendorType[] | Prisma.ListEnumVendorTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.VendorType[] | Prisma.ListEnumVendorTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumVendorTypeFilter<$PrismaModel> | $Enums.VendorType
-}
-
 export type NestedEnumVendorStatusWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.VendorStatus | Prisma.EnumVendorStatusFieldRefInput<$PrismaModel>
   in?: $Enums.VendorStatus[] | Prisma.ListEnumVendorStatusFieldRefInput<$PrismaModel>
@@ -1715,16 +1691,6 @@ export type NestedEnumVendorStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumVendorStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumVendorStatusFilter<$PrismaModel>
-}
-
-export type NestedEnumVendorTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.VendorType | Prisma.EnumVendorTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.VendorType[] | Prisma.ListEnumVendorTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.VendorType[] | Prisma.ListEnumVendorTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumVendorTypeWithAggregatesFilter<$PrismaModel> | $Enums.VendorType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumVendorTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumVendorTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumVendorWorkStatusFilter<$PrismaModel = never> = {

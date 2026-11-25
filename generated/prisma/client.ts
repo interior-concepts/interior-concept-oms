@@ -320,10 +320,20 @@ export type VisitMemberMonthlyAssessment = Prisma.VisitMemberMonthlyAssessmentMo
  */
 export type DepartmentMemberMonthlySetting = Prisma.DepartmentMemberMonthlySettingModel
 /**
+ * Model VendorTypeOption
+ * 
+ */
+export type VendorTypeOption = Prisma.VendorTypeOptionModel
+/**
  * Model Vendor
  * 
  */
 export type Vendor = Prisma.VendorModel
+/**
+ * Model VendorBankAccount
+ * 
+ */
+export type VendorBankAccount = Prisma.VendorBankAccountModel
 /**
  * Model VendorAgreement
  * 

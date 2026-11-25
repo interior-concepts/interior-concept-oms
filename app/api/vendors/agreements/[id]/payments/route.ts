@@ -81,8 +81,8 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     })
     if (!agreement) return NextResponse.json({ success: false, error: "Agreement not found" }, { status: 404 })
 
-    // Determine expense category from vendor type
-    const expenseCategory = VENDOR_TYPE_TO_EXPENSE_CATEGORY[agreement.vendor.vendorType]
+    // Determine expense category from vendor type (fallback to OTHERS for custom vendor types)
+    const expenseCategory = VENDOR_TYPE_TO_EXPENSE_CATEGORY[agreement.vendor.vendorType] ?? "OTHERS"
 
     // Build transaction particular
     const particular = `Vendor Payment – ${agreement.vendor.vendorName} (${agreement.vendor.vendorType.replace(/_/g, " ")})`

@@ -359,19 +359,6 @@ export const VendorStatus = {
 export type VendorStatus = (typeof VendorStatus)[keyof typeof VendorStatus]
 
 
-export const VendorType = {
-  SUPPLIER: 'SUPPLIER',
-  CONTRACTOR: 'CONTRACTOR',
-  PAINTER: 'PAINTER',
-  CARPENTER: 'CARPENTER',
-  SERVICE_PROVIDER: 'SERVICE_PROVIDER',
-  FREELANCER: 'FREELANCER',
-  OTHER: 'OTHER'
-} as const
-
-export type VendorType = (typeof VendorType)[keyof typeof VendorType]
-
-
 export const VendorWorkStatus = {
   NOT_STARTED: 'NOT_STARTED',
   IN_PROGRESS: 'IN_PROGRESS',

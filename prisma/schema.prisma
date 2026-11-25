@@ -1353,16 +1353,6 @@ enum VendorStatus {
   DISABLED
 }
 
-enum VendorType {
-  SUPPLIER
-  CONTRACTOR
-  PAINTER
-  CARPENTER
-  SERVICE_PROVIDER
-  FREELANCER
-  OTHER
-}
-
 enum VendorWorkStatus {
   NOT_STARTED
   IN_PROGRESS
@@ -1377,33 +1367,62 @@ enum VendorPaymentMethod {
   MOBILE_BANKING
 }
 
+model VendorTypeOption {
+  id        String   @id @default(cuid())
+  value     String   @unique
+  label     String
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
 model Vendor {
   id                String            @id @default(cuid())
   vendorId          String            @unique
   vendorCompanyName String?
   vendorName        String
   status            VendorStatus      @default(ACTIVE)
-  vendorType        VendorType
+  vendorType        String
 
-  // Financial & Payment Info
+  // Financial & Payment Info (primary/legacy fields kept in sync with first bank account)
   bankName          String?
+  bankBranch        String?
+  accountName       String?
   routingNumber     String?
   accountNumber     String?
 
   // Contact & Address
   primaryEmail      String?
   primaryPhone      String?
+  primaryPhones     String[]          @default([])
   billingAddress    String?
+  billingAddresses  String[]          @default([])
 
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
 
+  bankAccounts      VendorBankAccount[]
   agreements        VendorAgreement[]
   stockItems        StockItem[]
   stockMovements    StockMovement[]
 
   @@index([status])
   @@index([vendorType])
+}
+
+model VendorBankAccount {
+  id            String   @id @default(cuid())
+  vendorId      String
+  bankName      String?
+  bankBranch    String?
+  accountName   String?
+  routingNumber String?
+  accountNumber String?
+  isPrimary     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  vendor        Vendor   @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+
+  @@index([vendorId])
 }
 
 model VendorAgreement {

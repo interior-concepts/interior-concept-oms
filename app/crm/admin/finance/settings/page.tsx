@@ -66,7 +66,10 @@ import {
   Mail,
   MapPin,
   CreditCard,
+  Plus,
+  X,
 } from "lucide-react"
+import { DEFAULT_VENDOR_TYPES, formatVendorType } from "@/lib/vendor-utils"
 
 // ─── Category types ───────────────────────────────────────────────────────────
 type TransactionCategoryType = "OUTFLOW" | "INFLOW"
@@ -103,15 +106,12 @@ const formatCustomCategoryKey = (name: string, type: TransactionCategoryType) =>
   `CUSTOM_${type}_${name.trim().toUpperCase().replace(/[^A-Z0-9]+/g, "_").replace(/^_+|_+$/g, "")}`
 
 // ─── Vendor types ─────────────────────────────────────────────────────────────
-const VENDOR_TYPES = [
-  { value: "SUPPLIER", label: "Supplier" },
-  { value: "CONTRACTOR", label: "Contractor" },
-  { value: "PAINTER", label: "Painter" },
-  { value: "CARPENTER", label: "Carpenter" },
-  { value: "SERVICE_PROVIDER", label: "Service Provider" },
-  { value: "FREELANCER", label: "Freelancer" },
-  { value: "OTHER", label: "Other" },
-]
+type VendorTypeOption = {
+  id?: string
+  value: string
+  label: string
+  isDefault?: boolean
+}
 
 const VENDOR_TYPE_COLORS: Record<string, string> = {
   SUPPLIER: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
@@ -123,6 +123,32 @@ const VENDOR_TYPE_COLORS: Record<string, string> = {
   OTHER: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
 }
 
+type VendorBankAccount = {
+  id?: string
+  bankName: string | null
+  bankBranch: string | null
+  accountName: string | null
+  routingNumber: string | null
+  accountNumber: string | null
+  isPrimary?: boolean
+}
+
+type BankAccountForm = {
+  bankName: string
+  bankBranch: string
+  accountName: string
+  routingNumber: string
+  accountNumber: string
+}
+
+const EMPTY_BANK_ACCOUNT: BankAccountForm = {
+  bankName: "",
+  bankBranch: "",
+  accountName: "",
+  routingNumber: "",
+  accountNumber: "",
+}
+
 type Vendor = {
   id: string
   vendorId: string
@@ -131,25 +157,39 @@ type Vendor = {
   vendorType: string
   status: "ACTIVE" | "DISABLED"
   bankName: string | null
+  bankBranch: string | null
+  accountName: string | null
   routingNumber: string | null
   accountNumber: string | null
+  bankAccounts?: VendorBankAccount[]
   primaryEmail: string | null
   primaryPhone: string | null
+  primaryPhones?: string[]
   billingAddress: string | null
+  billingAddresses?: string[]
   createdAt: string
 }
 
-const VENDOR_EMPTY = {
+type VendorFormState = {
+  vendorName: string
+  vendorCompanyName: string
+  vendorType: string
+  status: "ACTIVE" | "DISABLED"
+  bankAccounts: BankAccountForm[]
+  primaryEmail: string
+  primaryPhones: string[]
+  billingAddresses: string[]
+}
+
+const VENDOR_EMPTY: VendorFormState = {
   vendorName: "",
   vendorCompanyName: "",
   vendorType: "",
-  status: "ACTIVE" as "ACTIVE" | "DISABLED",
-  bankName: "",
-  routingNumber: "",
-  accountNumber: "",
+  status: "ACTIVE",
+  bankAccounts: [{ ...EMPTY_BANK_ACCOUNT }],
   primaryEmail: "",
-  primaryPhone: "",
-  billingAddress: "",
+  primaryPhones: [""],
+  billingAddresses: [""],
 }
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
@@ -163,12 +203,16 @@ export default function FinanceSettingsPage() {
 
   // Vendor state
   const [vendors, setVendors] = useState<Vendor[]>([])
+  const [vendorTypes, setVendorTypes] = useState<VendorTypeOption[]>([...DEFAULT_VENDOR_TYPES])
+  const [showAddVendorType, setShowAddVendorType] = useState(false)
+  const [newVendorTypeLabel, setNewVendorTypeLabel] = useState("")
+  const [savingVendorType, setSavingVendorType] = useState(false)
   const [vendorLoading, setVendorLoading] = useState(true)
   const [vendorSaving, setVendorSaving] = useState(false)
   const [showVendorDialog, setShowVendorDialog] = useState(false)
   const [editingVendor, setEditingVendor] = useState<Vendor | null>(null)
   const [deleteVendorId, setDeleteVendorId] = useState<string | null>(null)
-  const [vendorForm, setVendorForm] = useState(VENDOR_EMPTY)
+  const [vendorForm, setVendorForm] = useState<VendorFormState>(VENDOR_EMPTY)
 
   // ── Custom categories ──────────────────────────────────────────────────────
   useEffect(() => {
@@ -229,28 +273,114 @@ export default function FinanceSettingsPage() {
     finally { setVendorLoading(false) }
   }, [])
 
-  useEffect(() => { fetchVendors() }, [fetchVendors])
+  const fetchVendorTypes = useCallback(async () => {
+    try {
+      const res = await fetch("/api/vendors/types")
+      const json = await res.json()
+      if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+        setVendorTypes(json.data)
+      }
+    } catch {
+      // Keep default vendor types fallback on network error
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchVendors()
+    fetchVendorTypes()
+  }, [fetchVendors, fetchVendorTypes])
+
+  const handleCreateVendorType = async () => {
+    const trimmed = newVendorTypeLabel.trim()
+    if (!trimmed) { toast.error("Please enter a vendor type name"); return }
+
+    setSavingVendorType(true)
+    try {
+      const res = await fetch("/api/vendors/types", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ label: trimmed }),
+      })
+      const json = await res.json()
+      if (!json.success) {
+        toast.error(json.error ?? "Failed to add vendor type")
+        return
+      }
+      const created: VendorTypeOption = json.data
+      setVendorTypes((prev) => (prev.some((t) => t.value === created.value) ? prev : [...prev, created]))
+      setVendorForm((f) => ({ ...f, vendorType: created.value }))
+      setNewVendorTypeLabel("")
+      setShowAddVendorType(false)
+      toast.success(`Vendor type "${created.label}" saved!`)
+    } catch {
+      toast.error("Failed to save vendor type")
+    } finally {
+      setSavingVendorType(false)
+    }
+  }
 
   const openCreateVendor = () => {
     setEditingVendor(null)
-    setVendorForm(VENDOR_EMPTY)
+    setVendorForm({
+      ...VENDOR_EMPTY,
+      bankAccounts: [{ ...EMPTY_BANK_ACCOUNT }],
+      primaryPhones: [""],
+      billingAddresses: [""],
+    })
+    setShowAddVendorType(false)
+    setNewVendorTypeLabel("")
     setShowVendorDialog(true)
   }
 
   const openEditVendor = (v: Vendor) => {
     setEditingVendor(v)
+    const bankList: BankAccountForm[] =
+      v.bankAccounts && v.bankAccounts.length > 0
+        ? v.bankAccounts.map((b) => ({
+            bankName: b.bankName ?? "",
+            bankBranch: b.bankBranch ?? "",
+            accountName: b.accountName ?? "",
+            routingNumber: b.routingNumber ?? "",
+            accountNumber: b.accountNumber ?? "",
+          }))
+        : v.bankName || v.bankBranch || v.accountName || v.routingNumber || v.accountNumber
+          ? [
+              {
+                bankName: v.bankName ?? "",
+                bankBranch: v.bankBranch ?? "",
+                accountName: v.accountName ?? "",
+                routingNumber: v.routingNumber ?? "",
+                accountNumber: v.accountNumber ?? "",
+              },
+            ]
+          : [{ ...EMPTY_BANK_ACCOUNT }]
+
+    const phonesList =
+      v.primaryPhones && v.primaryPhones.length > 0
+        ? v.primaryPhones
+        : v.primaryPhone
+          ? [v.primaryPhone]
+          : [""]
+
+    const addressesList =
+      v.billingAddresses && v.billingAddresses.length > 0
+        ? v.billingAddresses
+        : v.billingAddress
+          ? [v.billingAddress]
+          : [""]
+
     setVendorForm({
       vendorName: v.vendorName,
       vendorCompanyName: v.vendorCompanyName ?? "",
       vendorType: v.vendorType,
       status: v.status,
-      bankName: v.bankName ?? "",
-      routingNumber: v.routingNumber ?? "",
-      accountNumber: v.accountNumber ?? "",
+      bankAccounts: bankList,
       primaryEmail: v.primaryEmail ?? "",
-      primaryPhone: v.primaryPhone ?? "",
-      billingAddress: v.billingAddress ?? "",
+      primaryPhones: phonesList,
+      billingAddresses: addressesList,
     })
+    setShowAddVendorType(false)
+    setNewVendorTypeLabel("")
     setShowVendorDialog(true)
   }
 
@@ -261,17 +391,36 @@ export default function FinanceSettingsPage() {
 
     setVendorSaving(true)
     try {
+      const cleanedBanks = vendorForm.bankAccounts
+        .map((b) => ({
+          bankName: b.bankName.trim() || null,
+          bankBranch: b.bankBranch.trim() || null,
+          accountName: b.accountName.trim() || null,
+          routingNumber: b.routingNumber.trim() || null,
+          accountNumber: b.accountNumber.trim() || null,
+        }))
+        .filter((b) => b.bankName || b.bankBranch || b.accountName || b.routingNumber || b.accountNumber)
+
+      const cleanedPhones = vendorForm.primaryPhones.map((p) => p.trim()).filter(Boolean)
+      const cleanedAddresses = vendorForm.billingAddresses.map((a) => a.trim()).filter(Boolean)
+      const primaryBank = cleanedBanks[0]
+
       const payload = {
         vendorName: vendorForm.vendorName.trim(),
         vendorCompanyName: vendorForm.vendorCompanyName.trim() || null,
         vendorType: vendorForm.vendorType,
         status: vendorForm.status,
-        bankName: vendorForm.bankName.trim() || null,
-        routingNumber: vendorForm.routingNumber.trim() || null,
-        accountNumber: vendorForm.accountNumber.trim() || null,
+        bankName: primaryBank?.bankName ?? null,
+        bankBranch: primaryBank?.bankBranch ?? null,
+        accountName: primaryBank?.accountName ?? null,
+        routingNumber: primaryBank?.routingNumber ?? null,
+        accountNumber: primaryBank?.accountNumber ?? null,
+        bankAccounts: cleanedBanks,
         primaryEmail: vendorForm.primaryEmail.trim() || null,
-        primaryPhone: vendorForm.primaryPhone.trim() || null,
-        billingAddress: vendorForm.billingAddress.trim() || null,
+        primaryPhone: cleanedPhones[0] ?? null,
+        primaryPhones: cleanedPhones,
+        billingAddress: cleanedAddresses[0] ?? null,
+        billingAddresses: cleanedAddresses,
       }
 
       const url = editingVendor ? `/api/vendors/${editingVendor.id}` : "/api/vendors"
@@ -398,14 +547,65 @@ export default function FinanceSettingsPage() {
                 </div>
                 <div className="space-y-2">
                   <Label>Vendor Type <span className="text-destructive">*</span></Label>
-                  <Select value={vendorForm.vendorType} onValueChange={(v) => setVendorForm((f) => ({ ...f, vendorType: v }))}>
+                  <Select
+                    value={vendorForm.vendorType}
+                    onValueChange={(v) => {
+                      if (v === "__ADD_NEW__") {
+                        setShowAddVendorType(true)
+                        return
+                      }
+                      setShowAddVendorType(false)
+                      setVendorForm((f) => ({ ...f, vendorType: v }))
+                    }}
+                  >
                     <SelectTrigger><SelectValue placeholder="Select type" /></SelectTrigger>
                     <SelectContent>
-                      {VENDOR_TYPES.map((t) => (
+                      {vendorTypes.map((t) => (
                         <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>
                       ))}
+                      <SelectItem value="__ADD_NEW__" className="text-primary font-medium border-t mt-1 pt-1.5">
+                        + Add New Vendor Type
+                      </SelectItem>
                     </SelectContent>
                   </Select>
+                  {showAddVendorType && (
+                    <div className="flex items-center gap-2 pt-1">
+                      <Input
+                        placeholder="New vendor type (e.g. Electrician)"
+                        value={newVendorTypeLabel}
+                        onChange={(e) => setNewVendorTypeLabel(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault()
+                            handleCreateVendorType()
+                          }
+                        }}
+                        className="h-8 text-xs"
+                        autoFocus
+                      />
+                      <Button
+                        type="button"
+                        size="sm"
+                        className="h-8 px-2.5 text-xs shrink-0"
+                        disabled={savingVendorType}
+                        onClick={handleCreateVendorType}
+                      >
+                        {savingVendorType ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : "Save"}
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="ghost"
+                        className="h-8 px-2 text-xs shrink-0"
+                        onClick={() => {
+                          setShowAddVendorType(false)
+                          setNewVendorTypeLabel("")
+                        }}
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </Button>
+                    </div>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label>Status</Label>
@@ -424,32 +624,126 @@ export default function FinanceSettingsPage() {
 
             {/* Financial Info */}
             <div className="space-y-4">
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Financial & Payment Info</h3>
-              <div className="grid gap-4 sm:grid-cols-3">
-                <div className="space-y-2">
-                  <Label>Bank Name</Label>
-                  <Input
-                    placeholder="e.g. Dutch-Bangla Bank"
-                    value={vendorForm.bankName}
-                    onChange={(e) => setVendorForm((f) => ({ ...f, bankName: e.target.value }))}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label>Routing Number</Label>
-                  <Input
-                    placeholder="e.g. 090261595"
-                    value={vendorForm.routingNumber}
-                    onChange={(e) => setVendorForm((f) => ({ ...f, routingNumber: e.target.value }))}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label>Account Number</Label>
-                  <Input
-                    placeholder="e.g. 1234567890"
-                    value={vendorForm.accountNumber}
-                    onChange={(e) => setVendorForm((f) => ({ ...f, accountNumber: e.target.value }))}
-                  />
-                </div>
+              <div className="flex items-center justify-between gap-2">
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Financial & Payment Info</h3>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="h-7 gap-1 text-xs"
+                  onClick={() =>
+                    setVendorForm((f) => ({
+                      ...f,
+                      bankAccounts: [...f.bankAccounts, { ...EMPTY_BANK_ACCOUNT }],
+                    }))
+                  }
+                >
+                  <Plus className="w-3.5 h-3.5" /> Bank Details
+                </Button>
+              </div>
+              <div className="space-y-3">
+                {vendorForm.bankAccounts.map((bank, idx) => (
+                  <div key={idx} className="rounded-lg border border-border/70 p-3 space-y-3 bg-muted/20">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-muted-foreground">
+                        Bank Details #{idx + 1}{idx === 0 ? " (Primary)" : ""}
+                      </span>
+                      {vendorForm.bankAccounts.length > 1 && (
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 px-2 text-xs text-destructive hover:bg-destructive/10"
+                          onClick={() =>
+                            setVendorForm((f) => ({
+                              ...f,
+                              bankAccounts: f.bankAccounts.filter((_, i) => i !== idx),
+                            }))
+                          }
+                        >
+                          <Trash2 className="w-3 h-3 mr-1" /> Remove
+                        </Button>
+                      )}
+                    </div>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <div className="space-y-1.5">
+                        <Label className="text-xs">Bank Name</Label>
+                        <Input
+                          placeholder="e.g. Dutch-Bangla Bank"
+                          value={bank.bankName}
+                          onChange={(e) =>
+                            setVendorForm((f) => ({
+                              ...f,
+                              bankAccounts: f.bankAccounts.map((item, i) =>
+                                i === idx ? { ...item, bankName: e.target.value } : item
+                              ),
+                            }))
+                          }
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label className="text-xs">Bank Branch</Label>
+                        <Input
+                          placeholder="e.g. Banani Branch"
+                          value={bank.bankBranch}
+                          onChange={(e) =>
+                            setVendorForm((f) => ({
+                              ...f,
+                              bankAccounts: f.bankAccounts.map((item, i) =>
+                                i === idx ? { ...item, bankBranch: e.target.value } : item
+                              ),
+                            }))
+                          }
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label className="text-xs">Account Name</Label>
+                        <Input
+                          placeholder="e.g. Rahman Furniture Ltd."
+                          value={bank.accountName}
+                          onChange={(e) =>
+                            setVendorForm((f) => ({
+                              ...f,
+                              bankAccounts: f.bankAccounts.map((item, i) =>
+                                i === idx ? { ...item, accountName: e.target.value } : item
+                              ),
+                            }))
+                          }
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label className="text-xs">Account Number</Label>
+                        <Input
+                          placeholder="e.g. 1234567890"
+                          value={bank.accountNumber}
+                          onChange={(e) =>
+                            setVendorForm((f) => ({
+                              ...f,
+                              bankAccounts: f.bankAccounts.map((item, i) =>
+                                i === idx ? { ...item, accountNumber: e.target.value } : item
+                              ),
+                            }))
+                          }
+                        />
+                      </div>
+                      <div className="space-y-1.5 sm:col-span-2">
+                        <Label className="text-xs">Routing Number</Label>
+                        <Input
+                          placeholder="e.g. 090261595"
+                          value={bank.routingNumber}
+                          onChange={(e) =>
+                            setVendorForm((f) => ({
+                              ...f,
+                              bankAccounts: f.bankAccounts.map((item, i) =>
+                                i === idx ? { ...item, routingNumber: e.target.value } : item
+                              ),
+                            }))
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -458,33 +752,113 @@ export default function FinanceSettingsPage() {
             {/* Contact & Address */}
             <div className="space-y-4">
               <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Contact & Address</h3>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <Label>Primary Email</Label>
-                  <Input
-                    type="email"
-                    placeholder="vendor@example.com"
-                    value={vendorForm.primaryEmail}
-                    onChange={(e) => setVendorForm((f) => ({ ...f, primaryEmail: e.target.value }))}
-                  />
+              <div className="space-y-2">
+                <Label>Primary Email</Label>
+                <Input
+                  type="email"
+                  placeholder="vendor@example.com"
+                  value={vendorForm.primaryEmail}
+                  onChange={(e) => setVendorForm((f) => ({ ...f, primaryEmail: e.target.value }))}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center justify-between gap-2">
+                  <Label>Primary Phone Numbers</Label>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="h-7 gap-1 text-xs"
+                    onClick={() =>
+                      setVendorForm((f) => ({ ...f, primaryPhones: [...f.primaryPhones, ""] }))
+                    }
+                  >
+                    <Plus className="w-3.5 h-3.5" /> Add Phone
+                  </Button>
                 </div>
                 <div className="space-y-2">
-                  <Label>Primary Phone</Label>
-                  <Input
-                    placeholder="+880 1xxx-xxxxxx"
-                    value={vendorForm.primaryPhone}
-                    onChange={(e) => setVendorForm((f) => ({ ...f, primaryPhone: e.target.value }))}
-                  />
+                  {vendorForm.primaryPhones.map((phone, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <Input
+                        placeholder={idx === 0 ? "+880 1xxx-xxxxxx (Primary)" : "+880 1xxx-xxxxxx"}
+                        value={phone}
+                        onChange={(e) =>
+                          setVendorForm((f) => ({
+                            ...f,
+                            primaryPhones: f.primaryPhones.map((p, i) => (i === idx ? e.target.value : p)),
+                          }))
+                        }
+                      />
+                      {vendorForm.primaryPhones.length > 1 && (
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          className="h-9 w-9 shrink-0 text-destructive hover:bg-destructive/10"
+                          onClick={() =>
+                            setVendorForm((f) => ({
+                              ...f,
+                              primaryPhones: f.primaryPhones.filter((_, i) => i !== idx),
+                            }))
+                          }
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
+
               <div className="space-y-2">
-                <Label>Billing Address</Label>
-                <Textarea
-                  placeholder="Full billing address..."
-                  value={vendorForm.billingAddress}
-                  onChange={(e) => setVendorForm((f) => ({ ...f, billingAddress: e.target.value }))}
-                  rows={2}
-                />
+                <div className="flex items-center justify-between gap-2">
+                  <Label>Primary Addresses</Label>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="h-7 gap-1 text-xs"
+                    onClick={() =>
+                      setVendorForm((f) => ({ ...f, billingAddresses: [...f.billingAddresses, ""] }))
+                    }
+                  >
+                    <Plus className="w-3.5 h-3.5" /> Add Address
+                  </Button>
+                </div>
+                <div className="space-y-2">
+                  {vendorForm.billingAddresses.map((addr, idx) => (
+                    <div key={idx} className="flex items-start gap-2">
+                      <Textarea
+                        placeholder={idx === 0 ? "Primary billing/office address..." : "Additional address..."}
+                        value={addr}
+                        onChange={(e) =>
+                          setVendorForm((f) => ({
+                            ...f,
+                            billingAddresses: f.billingAddresses.map((a, i) => (i === idx ? e.target.value : a)),
+                          }))
+                        }
+                        rows={2}
+                      />
+                      {vendorForm.billingAddresses.length > 1 && (
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          className="h-9 w-9 shrink-0 text-destructive hover:bg-destructive/10"
+                          onClick={() =>
+                            setVendorForm((f) => ({
+                              ...f,
+                              billingAddresses: f.billingAddresses.filter((_, i) => i !== idx),
+                            }))
+                          }
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -665,8 +1039,24 @@ export default function FinanceSettingsPage() {
   }
 
   function renderVendorCard(v: Vendor) {
-    const typeLabel = VENDOR_TYPES.find((t) => t.value === v.vendorType)?.label ?? v.vendorType
+    const typeLabel = vendorTypes.find((t) => t.value === v.vendorType)?.label ?? formatVendorType(v.vendorType)
     const typeColor = VENDOR_TYPE_COLORS[v.vendorType] ?? VENDOR_TYPE_COLORS.OTHER
+    const phones = v.primaryPhones && v.primaryPhones.length > 0 ? v.primaryPhones : v.primaryPhone ? [v.primaryPhone] : []
+    const addresses = v.billingAddresses && v.billingAddresses.length > 0 ? v.billingAddresses : v.billingAddress ? [v.billingAddress] : []
+    const banks: VendorBankAccount[] =
+      v.bankAccounts && v.bankAccounts.length > 0
+        ? v.bankAccounts
+        : v.bankName || v.bankBranch || v.accountName || v.accountNumber
+          ? [
+              {
+                bankName: v.bankName,
+                bankBranch: v.bankBranch,
+                accountName: v.accountName,
+                routingNumber: v.routingNumber,
+                accountNumber: v.accountNumber,
+              },
+            ]
+          : []
 
     return (
       <Card key={v.id} className="border border-border hover:border-border/80 transition group">
@@ -689,30 +1079,39 @@ export default function FinanceSettingsPage() {
 
           {/* Contact info */}
           <div className="space-y-1">
-            {v.primaryPhone && (
-              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            {phones.map((phone, idx) => (
+              <div key={idx} className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <Phone className="w-3 h-3 shrink-0" />
-                <span className="truncate">{v.primaryPhone}</span>
+                <span className="truncate">{phone}</span>
               </div>
-            )}
+            ))}
             {v.primaryEmail && (
               <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <Mail className="w-3 h-3 shrink-0" />
                 <span className="truncate">{v.primaryEmail}</span>
               </div>
             )}
-            {v.bankName && (
-              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <CreditCard className="w-3 h-3 shrink-0" />
-                <span className="truncate">{v.bankName}{v.accountNumber ? ` · ****${v.accountNumber.slice(-4)}` : ""}</span>
+            {banks.map((bank, idx) => (
+              <div key={idx} className="flex items-start gap-1.5 text-xs text-muted-foreground">
+                <CreditCard className="w-3 h-3 shrink-0 mt-0.5" />
+                <span className="truncate">
+                  {[
+                    bank.bankName,
+                    bank.bankBranch,
+                    bank.accountName,
+                    bank.accountNumber ? `****${bank.accountNumber.slice(-4)}` : null,
+                  ]
+                    .filter(Boolean)
+                    .join(" · ")}
+                </span>
               </div>
-            )}
-            {v.billingAddress && (
-              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            ))}
+            {addresses.map((address, idx) => (
+              <div key={idx} className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <MapPin className="w-3 h-3 shrink-0" />
-                <span className="truncate">{v.billingAddress}</span>
+                <span className="truncate">{address}</span>
               </div>
-            )}
+            ))}
           </div>
 
           {/* Actions */}

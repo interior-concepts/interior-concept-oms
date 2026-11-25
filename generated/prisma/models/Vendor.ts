@@ -30,8 +30,10 @@ export type VendorMinAggregateOutputType = {
   vendorCompanyName: string | null
   vendorName: string | null
   status: $Enums.VendorStatus | null
-  vendorType: $Enums.VendorType | null
+  vendorType: string | null
   bankName: string | null
+  bankBranch: string | null
+  accountName: string | null
   routingNumber: string | null
   accountNumber: string | null
   primaryEmail: string | null
@@ -47,8 +49,10 @@ export type VendorMaxAggregateOutputType = {
   vendorCompanyName: string | null
   vendorName: string | null
   status: $Enums.VendorStatus | null
-  vendorType: $Enums.VendorType | null
+  vendorType: string | null
   bankName: string | null
+  bankBranch: string | null
+  accountName: string | null
   routingNumber: string | null
   accountNumber: string | null
   primaryEmail: string | null
@@ -66,11 +70,15 @@ export type VendorCountAggregateOutputType = {
   status: number
   vendorType: number
   bankName: number
+  bankBranch: number
+  accountName: number
   routingNumber: number
   accountNumber: number
   primaryEmail: number
   primaryPhone: number
+  primaryPhones: number
   billingAddress: number
+  billingAddresses: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -85,6 +93,8 @@ export type VendorMinAggregateInputType = {
   status?: true
   vendorType?: true
   bankName?: true
+  bankBranch?: true
+  accountName?: true
   routingNumber?: true
   accountNumber?: true
   primaryEmail?: true
@@ -102,6 +112,8 @@ export type VendorMaxAggregateInputType = {
   status?: true
   vendorType?: true
   bankName?: true
+  bankBranch?: true
+  accountName?: true
   routingNumber?: true
   accountNumber?: true
   primaryEmail?: true
@@ -119,11 +131,15 @@ export type VendorCountAggregateInputType = {
   status?: true
   vendorType?: true
   bankName?: true
+  bankBranch?: true
+  accountName?: true
   routingNumber?: true
   accountNumber?: true
   primaryEmail?: true
   primaryPhone?: true
+  primaryPhones?: true
   billingAddress?: true
+  billingAddresses?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -207,13 +223,17 @@ export type VendorGroupByOutputType = {
   vendorCompanyName: string | null
   vendorName: string
   status: $Enums.VendorStatus
-  vendorType: $Enums.VendorType
+  vendorType: string
   bankName: string | null
+  bankBranch: string | null
+  accountName: string | null
   routingNumber: string | null
   accountNumber: string | null
   primaryEmail: string | null
   primaryPhone: string | null
+  primaryPhones: string[]
   billingAddress: string | null
+  billingAddresses: string[]
   createdAt: Date
   updatedAt: Date
   _count: VendorCountAggregateOutputType | null
@@ -245,15 +265,20 @@ export type VendorWhereInput = {
   vendorCompanyName?: Prisma.StringNullableFilter<"Vendor"> | string | null
   vendorName?: Prisma.StringFilter<"Vendor"> | string
   status?: Prisma.EnumVendorStatusFilter<"Vendor"> | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeFilter<"Vendor"> | $Enums.VendorType
+  vendorType?: Prisma.StringFilter<"Vendor"> | string
   bankName?: Prisma.StringNullableFilter<"Vendor"> | string | null
+  bankBranch?: Prisma.StringNullableFilter<"Vendor"> | string | null
+  accountName?: Prisma.StringNullableFilter<"Vendor"> | string | null
   routingNumber?: Prisma.StringNullableFilter<"Vendor"> | string | null
   accountNumber?: Prisma.StringNullableFilter<"Vendor"> | string | null
   primaryEmail?: Prisma.StringNullableFilter<"Vendor"> | string | null
   primaryPhone?: Prisma.StringNullableFilter<"Vendor"> | string | null
+  primaryPhones?: Prisma.StringNullableListFilter<"Vendor">
   billingAddress?: Prisma.StringNullableFilter<"Vendor"> | string | null
+  billingAddresses?: Prisma.StringNullableListFilter<"Vendor">
   createdAt?: Prisma.DateTimeFilter<"Vendor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Vendor"> | Date | string
+  bankAccounts?: Prisma.VendorBankAccountListRelationFilter
   agreements?: Prisma.VendorAgreementListRelationFilter
   stockItems?: Prisma.StockItemListRelationFilter
   stockMovements?: Prisma.StockMovementListRelationFilter
@@ -267,13 +292,18 @@ export type VendorOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   vendorType?: Prisma.SortOrder
   bankName?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankBranch?: Prisma.SortOrderInput | Prisma.SortOrder
+  accountName?: Prisma.SortOrderInput | Prisma.SortOrder
   routingNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   accountNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   primaryEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   primaryPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryPhones?: Prisma.SortOrder
   billingAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingAddresses?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  bankAccounts?: Prisma.VendorBankAccountOrderByRelationAggregateInput
   agreements?: Prisma.VendorAgreementOrderByRelationAggregateInput
   stockItems?: Prisma.StockItemOrderByRelationAggregateInput
   stockMovements?: Prisma.StockMovementOrderByRelationAggregateInput
@@ -288,15 +318,20 @@ export type VendorWhereUniqueInput = Prisma.AtLeast<{
   vendorCompanyName?: Prisma.StringNullableFilter<"Vendor"> | string | null
   vendorName?: Prisma.StringFilter<"Vendor"> | string
   status?: Prisma.EnumVendorStatusFilter<"Vendor"> | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeFilter<"Vendor"> | $Enums.VendorType
+  vendorType?: Prisma.StringFilter<"Vendor"> | string
   bankName?: Prisma.StringNullableFilter<"Vendor"> | string | null
+  bankBranch?: Prisma.StringNullableFilter<"Vendor"> | string | null
+  accountName?: Prisma.StringNullableFilter<"Vendor"> | string | null
   routingNumber?: Prisma.StringNullableFilter<"Vendor"> | string | null
   accountNumber?: Prisma.StringNullableFilter<"Vendor"> | string | null
   primaryEmail?: Prisma.StringNullableFilter<"Vendor"> | string | null
   primaryPhone?: Prisma.StringNullableFilter<"Vendor"> | string | null
+  primaryPhones?: Prisma.StringNullableListFilter<"Vendor">
   billingAddress?: Prisma.StringNullableFilter<"Vendor"> | string | null
+  billingAddresses?: Prisma.StringNullableListFilter<"Vendor">
   createdAt?: Prisma.DateTimeFilter<"Vendor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Vendor"> | Date | string
+  bankAccounts?: Prisma.VendorBankAccountListRelationFilter
   agreements?: Prisma.VendorAgreementListRelationFilter
   stockItems?: Prisma.StockItemListRelationFilter
   stockMovements?: Prisma.StockMovementListRelationFilter
@@ -310,11 +345,15 @@ export type VendorOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   vendorType?: Prisma.SortOrder
   bankName?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankBranch?: Prisma.SortOrderInput | Prisma.SortOrder
+  accountName?: Prisma.SortOrderInput | Prisma.SortOrder
   routingNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   accountNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   primaryEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   primaryPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryPhones?: Prisma.SortOrder
   billingAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingAddresses?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.VendorCountOrderByAggregateInput
@@ -331,13 +370,17 @@ export type VendorScalarWhereWithAggregatesInput = {
   vendorCompanyName?: Prisma.StringNullableWithAggregatesFilter<"Vendor"> | string | null
   vendorName?: Prisma.StringWithAggregatesFilter<"Vendor"> | string
   status?: Prisma.EnumVendorStatusWithAggregatesFilter<"Vendor"> | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeWithAggregatesFilter<"Vendor"> | $Enums.VendorType
+  vendorType?: Prisma.StringWithAggregatesFilter<"Vendor"> | string
   bankName?: Prisma.StringNullableWithAggregatesFilter<"Vendor"> | string | null
+  bankBranch?: Prisma.StringNullableWithAggregatesFilter<"Vendor"> | string | null
+  accountName?: Prisma.StringNullableWithAggregatesFilter<"Vendor"> | string | null
   routingNumber?: Prisma.StringNullableWithAggregatesFilter<"Vendor"> | string | null
   accountNumber?: Prisma.StringNullableWithAggregatesFilter<"Vendor"> | string | null
   primaryEmail?: Prisma.StringNullableWithAggregatesFilter<"Vendor"> | string | null
   primaryPhone?: Prisma.StringNullableWithAggregatesFilter<"Vendor"> | string | null
+  primaryPhones?: Prisma.StringNullableListFilter<"Vendor">
   billingAddress?: Prisma.StringNullableWithAggregatesFilter<"Vendor"> | string | null
+  billingAddresses?: Prisma.StringNullableListFilter<"Vendor">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Vendor"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Vendor"> | Date | string
 }
@@ -348,15 +391,20 @@ export type VendorCreateInput = {
   vendorCompanyName?: string | null
   vendorName: string
   status?: $Enums.VendorStatus
-  vendorType: $Enums.VendorType
+  vendorType: string
   bankName?: string | null
+  bankBranch?: string | null
+  accountName?: string | null
   routingNumber?: string | null
   accountNumber?: string | null
   primaryEmail?: string | null
   primaryPhone?: string | null
+  primaryPhones?: Prisma.VendorCreateprimaryPhonesInput | string[]
   billingAddress?: string | null
+  billingAddresses?: Prisma.VendorCreatebillingAddressesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  bankAccounts?: Prisma.VendorBankAccountCreateNestedManyWithoutVendorInput
   agreements?: Prisma.VendorAgreementCreateNestedManyWithoutVendorInput
   stockItems?: Prisma.StockItemCreateNestedManyWithoutVendorInput
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutVendorInput
@@ -368,15 +416,20 @@ export type VendorUncheckedCreateInput = {
   vendorCompanyName?: string | null
   vendorName: string
   status?: $Enums.VendorStatus
-  vendorType: $Enums.VendorType
+  vendorType: string
   bankName?: string | null
+  bankBranch?: string | null
+  accountName?: string | null
   routingNumber?: string | null
   accountNumber?: string | null
   primaryEmail?: string | null
   primaryPhone?: string | null
+  primaryPhones?: Prisma.VendorCreateprimaryPhonesInput | string[]
   billingAddress?: string | null
+  billingAddresses?: Prisma.VendorCreatebillingAddressesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  bankAccounts?: Prisma.VendorBankAccountUncheckedCreateNestedManyWithoutVendorInput
   agreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutVendorInput
   stockItems?: Prisma.StockItemUncheckedCreateNestedManyWithoutVendorInput
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutVendorInput
@@ -388,15 +441,20 @@ export type VendorUpdateInput = {
   vendorCompanyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeFieldUpdateOperationsInput | $Enums.VendorType
+  vendorType?: Prisma.StringFieldUpdateOperationsInput | string
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankBranch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhones?: Prisma.VendorUpdateprimaryPhonesInput | string[]
   billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddresses?: Prisma.VendorUpdatebillingAddressesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccounts?: Prisma.VendorBankAccountUpdateManyWithoutVendorNestedInput
   agreements?: Prisma.VendorAgreementUpdateManyWithoutVendorNestedInput
   stockItems?: Prisma.StockItemUpdateManyWithoutVendorNestedInput
   stockMovements?: Prisma.StockMovementUpdateManyWithoutVendorNestedInput
@@ -408,15 +466,20 @@ export type VendorUncheckedUpdateInput = {
   vendorCompanyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeFieldUpdateOperationsInput | $Enums.VendorType
+  vendorType?: Prisma.StringFieldUpdateOperationsInput | string
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankBranch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhones?: Prisma.VendorUpdateprimaryPhonesInput | string[]
   billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddresses?: Prisma.VendorUpdatebillingAddressesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccounts?: Prisma.VendorBankAccountUncheckedUpdateManyWithoutVendorNestedInput
   agreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutVendorNestedInput
   stockItems?: Prisma.StockItemUncheckedUpdateManyWithoutVendorNestedInput
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutVendorNestedInput
@@ -428,13 +491,17 @@ export type VendorCreateManyInput = {
   vendorCompanyName?: string | null
   vendorName: string
   status?: $Enums.VendorStatus
-  vendorType: $Enums.VendorType
+  vendorType: string
   bankName?: string | null
+  bankBranch?: string | null
+  accountName?: string | null
   routingNumber?: string | null
   accountNumber?: string | null
   primaryEmail?: string | null
   primaryPhone?: string | null
+  primaryPhones?: Prisma.VendorCreateprimaryPhonesInput | string[]
   billingAddress?: string | null
+  billingAddresses?: Prisma.VendorCreatebillingAddressesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -445,13 +512,17 @@ export type VendorUpdateManyMutationInput = {
   vendorCompanyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeFieldUpdateOperationsInput | $Enums.VendorType
+  vendorType?: Prisma.StringFieldUpdateOperationsInput | string
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankBranch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhones?: Prisma.VendorUpdateprimaryPhonesInput | string[]
   billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddresses?: Prisma.VendorUpdatebillingAddressesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -462,15 +533,27 @@ export type VendorUncheckedUpdateManyInput = {
   vendorCompanyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeFieldUpdateOperationsInput | $Enums.VendorType
+  vendorType?: Prisma.StringFieldUpdateOperationsInput | string
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankBranch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhones?: Prisma.VendorUpdateprimaryPhonesInput | string[]
   billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddresses?: Prisma.VendorUpdatebillingAddressesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
 }
 
 export type VendorCountOrderByAggregateInput = {
@@ -481,11 +564,15 @@ export type VendorCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   vendorType?: Prisma.SortOrder
   bankName?: Prisma.SortOrder
+  bankBranch?: Prisma.SortOrder
+  accountName?: Prisma.SortOrder
   routingNumber?: Prisma.SortOrder
   accountNumber?: Prisma.SortOrder
   primaryEmail?: Prisma.SortOrder
   primaryPhone?: Prisma.SortOrder
+  primaryPhones?: Prisma.SortOrder
   billingAddress?: Prisma.SortOrder
+  billingAddresses?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -498,6 +585,8 @@ export type VendorMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   vendorType?: Prisma.SortOrder
   bankName?: Prisma.SortOrder
+  bankBranch?: Prisma.SortOrder
+  accountName?: Prisma.SortOrder
   routingNumber?: Prisma.SortOrder
   accountNumber?: Prisma.SortOrder
   primaryEmail?: Prisma.SortOrder
@@ -515,6 +604,8 @@ export type VendorMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   vendorType?: Prisma.SortOrder
   bankName?: Prisma.SortOrder
+  bankBranch?: Prisma.SortOrder
+  accountName?: Prisma.SortOrder
   routingNumber?: Prisma.SortOrder
   accountNumber?: Prisma.SortOrder
   primaryEmail?: Prisma.SortOrder
@@ -534,12 +625,40 @@ export type VendorNullableScalarRelationFilter = {
   isNot?: Prisma.VendorWhereInput | null
 }
 
+export type VendorCreateprimaryPhonesInput = {
+  set: string[]
+}
+
+export type VendorCreatebillingAddressesInput = {
+  set: string[]
+}
+
 export type EnumVendorStatusFieldUpdateOperationsInput = {
   set?: $Enums.VendorStatus
 }
 
-export type EnumVendorTypeFieldUpdateOperationsInput = {
-  set?: $Enums.VendorType
+export type VendorUpdateprimaryPhonesInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type VendorUpdatebillingAddressesInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type VendorCreateNestedOneWithoutBankAccountsInput = {
+  create?: Prisma.XOR<Prisma.VendorCreateWithoutBankAccountsInput, Prisma.VendorUncheckedCreateWithoutBankAccountsInput>
+  connectOrCreate?: Prisma.VendorCreateOrConnectWithoutBankAccountsInput
+  connect?: Prisma.VendorWhereUniqueInput
+}
+
+export type VendorUpdateOneRequiredWithoutBankAccountsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorCreateWithoutBankAccountsInput, Prisma.VendorUncheckedCreateWithoutBankAccountsInput>
+  connectOrCreate?: Prisma.VendorCreateOrConnectWithoutBankAccountsInput
+  upsert?: Prisma.VendorUpsertWithoutBankAccountsInput
+  connect?: Prisma.VendorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorUpdateToOneWithWhereWithoutBankAccountsInput, Prisma.VendorUpdateWithoutBankAccountsInput>, Prisma.VendorUncheckedUpdateWithoutBankAccountsInput>
 }
 
 export type VendorCreateNestedOneWithoutAgreementsInput = {
@@ -588,21 +707,138 @@ export type VendorUpdateOneWithoutStockMovementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorUpdateToOneWithWhereWithoutStockMovementsInput, Prisma.VendorUpdateWithoutStockMovementsInput>, Prisma.VendorUncheckedUpdateWithoutStockMovementsInput>
 }
 
+export type VendorCreateWithoutBankAccountsInput = {
+  id?: string
+  vendorId: string
+  vendorCompanyName?: string | null
+  vendorName: string
+  status?: $Enums.VendorStatus
+  vendorType: string
+  bankName?: string | null
+  bankBranch?: string | null
+  accountName?: string | null
+  routingNumber?: string | null
+  accountNumber?: string | null
+  primaryEmail?: string | null
+  primaryPhone?: string | null
+  primaryPhones?: Prisma.VendorCreateprimaryPhonesInput | string[]
+  billingAddress?: string | null
+  billingAddresses?: Prisma.VendorCreatebillingAddressesInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  agreements?: Prisma.VendorAgreementCreateNestedManyWithoutVendorInput
+  stockItems?: Prisma.StockItemCreateNestedManyWithoutVendorInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutVendorInput
+}
+
+export type VendorUncheckedCreateWithoutBankAccountsInput = {
+  id?: string
+  vendorId: string
+  vendorCompanyName?: string | null
+  vendorName: string
+  status?: $Enums.VendorStatus
+  vendorType: string
+  bankName?: string | null
+  bankBranch?: string | null
+  accountName?: string | null
+  routingNumber?: string | null
+  accountNumber?: string | null
+  primaryEmail?: string | null
+  primaryPhone?: string | null
+  primaryPhones?: Prisma.VendorCreateprimaryPhonesInput | string[]
+  billingAddress?: string | null
+  billingAddresses?: Prisma.VendorCreatebillingAddressesInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  agreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutVendorInput
+  stockItems?: Prisma.StockItemUncheckedCreateNestedManyWithoutVendorInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorCreateOrConnectWithoutBankAccountsInput = {
+  where: Prisma.VendorWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorCreateWithoutBankAccountsInput, Prisma.VendorUncheckedCreateWithoutBankAccountsInput>
+}
+
+export type VendorUpsertWithoutBankAccountsInput = {
+  update: Prisma.XOR<Prisma.VendorUpdateWithoutBankAccountsInput, Prisma.VendorUncheckedUpdateWithoutBankAccountsInput>
+  create: Prisma.XOR<Prisma.VendorCreateWithoutBankAccountsInput, Prisma.VendorUncheckedCreateWithoutBankAccountsInput>
+  where?: Prisma.VendorWhereInput
+}
+
+export type VendorUpdateToOneWithWhereWithoutBankAccountsInput = {
+  where?: Prisma.VendorWhereInput
+  data: Prisma.XOR<Prisma.VendorUpdateWithoutBankAccountsInput, Prisma.VendorUncheckedUpdateWithoutBankAccountsInput>
+}
+
+export type VendorUpdateWithoutBankAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  vendorId?: Prisma.StringFieldUpdateOperationsInput | string
+  vendorCompanyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
+  vendorType?: Prisma.StringFieldUpdateOperationsInput | string
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankBranch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhones?: Prisma.VendorUpdateprimaryPhonesInput | string[]
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddresses?: Prisma.VendorUpdatebillingAddressesInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreements?: Prisma.VendorAgreementUpdateManyWithoutVendorNestedInput
+  stockItems?: Prisma.StockItemUpdateManyWithoutVendorNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorUncheckedUpdateWithoutBankAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  vendorId?: Prisma.StringFieldUpdateOperationsInput | string
+  vendorCompanyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
+  vendorType?: Prisma.StringFieldUpdateOperationsInput | string
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankBranch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhones?: Prisma.VendorUpdateprimaryPhonesInput | string[]
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddresses?: Prisma.VendorUpdatebillingAddressesInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutVendorNestedInput
+  stockItems?: Prisma.StockItemUncheckedUpdateManyWithoutVendorNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutVendorNestedInput
+}
+
 export type VendorCreateWithoutAgreementsInput = {
   id?: string
   vendorId: string
   vendorCompanyName?: string | null
   vendorName: string
   status?: $Enums.VendorStatus
-  vendorType: $Enums.VendorType
+  vendorType: string
   bankName?: string | null
+  bankBranch?: string | null
+  accountName?: string | null
   routingNumber?: string | null
   accountNumber?: string | null
   primaryEmail?: string | null
   primaryPhone?: string | null
+  primaryPhones?: Prisma.VendorCreateprimaryPhonesInput | string[]
   billingAddress?: string | null
+  billingAddresses?: Prisma.VendorCreatebillingAddressesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  bankAccounts?: Prisma.VendorBankAccountCreateNestedManyWithoutVendorInput
   stockItems?: Prisma.StockItemCreateNestedManyWithoutVendorInput
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutVendorInput
 }
@@ -613,15 +849,20 @@ export type VendorUncheckedCreateWithoutAgreementsInput = {
   vendorCompanyName?: string | null
   vendorName: string
   status?: $Enums.VendorStatus
-  vendorType: $Enums.VendorType
+  vendorType: string
   bankName?: string | null
+  bankBranch?: string | null
+  accountName?: string | null
   routingNumber?: string | null
   accountNumber?: string | null
   primaryEmail?: string | null
   primaryPhone?: string | null
+  primaryPhones?: Prisma.VendorCreateprimaryPhonesInput | string[]
   billingAddress?: string | null
+  billingAddresses?: Prisma.VendorCreatebillingAddressesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  bankAccounts?: Prisma.VendorBankAccountUncheckedCreateNestedManyWithoutVendorInput
   stockItems?: Prisma.StockItemUncheckedCreateNestedManyWithoutVendorInput
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutVendorInput
 }
@@ -648,15 +889,20 @@ export type VendorUpdateWithoutAgreementsInput = {
   vendorCompanyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeFieldUpdateOperationsInput | $Enums.VendorType
+  vendorType?: Prisma.StringFieldUpdateOperationsInput | string
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankBranch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhones?: Prisma.VendorUpdateprimaryPhonesInput | string[]
   billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddresses?: Prisma.VendorUpdatebillingAddressesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccounts?: Prisma.VendorBankAccountUpdateManyWithoutVendorNestedInput
   stockItems?: Prisma.StockItemUpdateManyWithoutVendorNestedInput
   stockMovements?: Prisma.StockMovementUpdateManyWithoutVendorNestedInput
 }
@@ -667,15 +913,20 @@ export type VendorUncheckedUpdateWithoutAgreementsInput = {
   vendorCompanyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeFieldUpdateOperationsInput | $Enums.VendorType
+  vendorType?: Prisma.StringFieldUpdateOperationsInput | string
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankBranch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhones?: Prisma.VendorUpdateprimaryPhonesInput | string[]
   billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddresses?: Prisma.VendorUpdatebillingAddressesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccounts?: Prisma.VendorBankAccountUncheckedUpdateManyWithoutVendorNestedInput
   stockItems?: Prisma.StockItemUncheckedUpdateManyWithoutVendorNestedInput
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutVendorNestedInput
 }
@@ -686,15 +937,20 @@ export type VendorCreateWithoutStockItemsInput = {
   vendorCompanyName?: string | null
   vendorName: string
   status?: $Enums.VendorStatus
-  vendorType: $Enums.VendorType
+  vendorType: string
   bankName?: string | null
+  bankBranch?: string | null
+  accountName?: string | null
   routingNumber?: string | null
   accountNumber?: string | null
   primaryEmail?: string | null
   primaryPhone?: string | null
+  primaryPhones?: Prisma.VendorCreateprimaryPhonesInput | string[]
   billingAddress?: string | null
+  billingAddresses?: Prisma.VendorCreatebillingAddressesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  bankAccounts?: Prisma.VendorBankAccountCreateNestedManyWithoutVendorInput
   agreements?: Prisma.VendorAgreementCreateNestedManyWithoutVendorInput
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutVendorInput
 }
@@ -705,15 +961,20 @@ export type VendorUncheckedCreateWithoutStockItemsInput = {
   vendorCompanyName?: string | null
   vendorName: string
   status?: $Enums.VendorStatus
-  vendorType: $Enums.VendorType
+  vendorType: string
   bankName?: string | null
+  bankBranch?: string | null
+  accountName?: string | null
   routingNumber?: string | null
   accountNumber?: string | null
   primaryEmail?: string | null
   primaryPhone?: string | null
+  primaryPhones?: Prisma.VendorCreateprimaryPhonesInput | string[]
   billingAddress?: string | null
+  billingAddresses?: Prisma.VendorCreatebillingAddressesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  bankAccounts?: Prisma.VendorBankAccountUncheckedCreateNestedManyWithoutVendorInput
   agreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutVendorInput
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutVendorInput
 }
@@ -740,15 +1001,20 @@ export type VendorUpdateWithoutStockItemsInput = {
   vendorCompanyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeFieldUpdateOperationsInput | $Enums.VendorType
+  vendorType?: Prisma.StringFieldUpdateOperationsInput | string
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankBranch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhones?: Prisma.VendorUpdateprimaryPhonesInput | string[]
   billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddresses?: Prisma.VendorUpdatebillingAddressesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccounts?: Prisma.VendorBankAccountUpdateManyWithoutVendorNestedInput
   agreements?: Prisma.VendorAgreementUpdateManyWithoutVendorNestedInput
   stockMovements?: Prisma.StockMovementUpdateManyWithoutVendorNestedInput
 }
@@ -759,15 +1025,20 @@ export type VendorUncheckedUpdateWithoutStockItemsInput = {
   vendorCompanyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeFieldUpdateOperationsInput | $Enums.VendorType
+  vendorType?: Prisma.StringFieldUpdateOperationsInput | string
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankBranch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhones?: Prisma.VendorUpdateprimaryPhonesInput | string[]
   billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddresses?: Prisma.VendorUpdatebillingAddressesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccounts?: Prisma.VendorBankAccountUncheckedUpdateManyWithoutVendorNestedInput
   agreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutVendorNestedInput
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutVendorNestedInput
 }
@@ -778,15 +1049,20 @@ export type VendorCreateWithoutStockMovementsInput = {
   vendorCompanyName?: string | null
   vendorName: string
   status?: $Enums.VendorStatus
-  vendorType: $Enums.VendorType
+  vendorType: string
   bankName?: string | null
+  bankBranch?: string | null
+  accountName?: string | null
   routingNumber?: string | null
   accountNumber?: string | null
   primaryEmail?: string | null
   primaryPhone?: string | null
+  primaryPhones?: Prisma.VendorCreateprimaryPhonesInput | string[]
   billingAddress?: string | null
+  billingAddresses?: Prisma.VendorCreatebillingAddressesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  bankAccounts?: Prisma.VendorBankAccountCreateNestedManyWithoutVendorInput
   agreements?: Prisma.VendorAgreementCreateNestedManyWithoutVendorInput
   stockItems?: Prisma.StockItemCreateNestedManyWithoutVendorInput
 }
@@ -797,15 +1073,20 @@ export type VendorUncheckedCreateWithoutStockMovementsInput = {
   vendorCompanyName?: string | null
   vendorName: string
   status?: $Enums.VendorStatus
-  vendorType: $Enums.VendorType
+  vendorType: string
   bankName?: string | null
+  bankBranch?: string | null
+  accountName?: string | null
   routingNumber?: string | null
   accountNumber?: string | null
   primaryEmail?: string | null
   primaryPhone?: string | null
+  primaryPhones?: Prisma.VendorCreateprimaryPhonesInput | string[]
   billingAddress?: string | null
+  billingAddresses?: Prisma.VendorCreatebillingAddressesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  bankAccounts?: Prisma.VendorBankAccountUncheckedCreateNestedManyWithoutVendorInput
   agreements?: Prisma.VendorAgreementUncheckedCreateNestedManyWithoutVendorInput
   stockItems?: Prisma.StockItemUncheckedCreateNestedManyWithoutVendorInput
 }
@@ -832,15 +1113,20 @@ export type VendorUpdateWithoutStockMovementsInput = {
   vendorCompanyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeFieldUpdateOperationsInput | $Enums.VendorType
+  vendorType?: Prisma.StringFieldUpdateOperationsInput | string
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankBranch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhones?: Prisma.VendorUpdateprimaryPhonesInput | string[]
   billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddresses?: Prisma.VendorUpdatebillingAddressesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccounts?: Prisma.VendorBankAccountUpdateManyWithoutVendorNestedInput
   agreements?: Prisma.VendorAgreementUpdateManyWithoutVendorNestedInput
   stockItems?: Prisma.StockItemUpdateManyWithoutVendorNestedInput
 }
@@ -851,15 +1137,20 @@ export type VendorUncheckedUpdateWithoutStockMovementsInput = {
   vendorCompanyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendorName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-  vendorType?: Prisma.EnumVendorTypeFieldUpdateOperationsInput | $Enums.VendorType
+  vendorType?: Prisma.StringFieldUpdateOperationsInput | string
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankBranch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPhones?: Prisma.VendorUpdateprimaryPhonesInput | string[]
   billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddresses?: Prisma.VendorUpdatebillingAddressesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccounts?: Prisma.VendorBankAccountUncheckedUpdateManyWithoutVendorNestedInput
   agreements?: Prisma.VendorAgreementUncheckedUpdateManyWithoutVendorNestedInput
   stockItems?: Prisma.StockItemUncheckedUpdateManyWithoutVendorNestedInput
 }
@@ -870,12 +1161,14 @@ export type VendorUncheckedUpdateWithoutStockMovementsInput = {
  */
 
 export type VendorCountOutputType = {
+  bankAccounts: number
   agreements: number
   stockItems: number
   stockMovements: number
 }
 
 export type VendorCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  bankAccounts?: boolean | VendorCountOutputTypeCountBankAccountsArgs
   agreements?: boolean | VendorCountOutputTypeCountAgreementsArgs
   stockItems?: boolean | VendorCountOutputTypeCountStockItemsArgs
   stockMovements?: boolean | VendorCountOutputTypeCountStockMovementsArgs
@@ -889,6 +1182,13 @@ export type VendorCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
    * Select specific fields to fetch from the VendorCountOutputType
    */
   select?: Prisma.VendorCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * VendorCountOutputType without action
+ */
+export type VendorCountOutputTypeCountBankAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VendorBankAccountWhereInput
 }
 
 /**
@@ -921,13 +1221,18 @@ export type VendorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   status?: boolean
   vendorType?: boolean
   bankName?: boolean
+  bankBranch?: boolean
+  accountName?: boolean
   routingNumber?: boolean
   accountNumber?: boolean
   primaryEmail?: boolean
   primaryPhone?: boolean
+  primaryPhones?: boolean
   billingAddress?: boolean
+  billingAddresses?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  bankAccounts?: boolean | Prisma.Vendor$bankAccountsArgs<ExtArgs>
   agreements?: boolean | Prisma.Vendor$agreementsArgs<ExtArgs>
   stockItems?: boolean | Prisma.Vendor$stockItemsArgs<ExtArgs>
   stockMovements?: boolean | Prisma.Vendor$stockMovementsArgs<ExtArgs>
@@ -942,11 +1247,15 @@ export type VendorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   status?: boolean
   vendorType?: boolean
   bankName?: boolean
+  bankBranch?: boolean
+  accountName?: boolean
   routingNumber?: boolean
   accountNumber?: boolean
   primaryEmail?: boolean
   primaryPhone?: boolean
+  primaryPhones?: boolean
   billingAddress?: boolean
+  billingAddresses?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["vendor"]>
@@ -959,11 +1268,15 @@ export type VendorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   status?: boolean
   vendorType?: boolean
   bankName?: boolean
+  bankBranch?: boolean
+  accountName?: boolean
   routingNumber?: boolean
   accountNumber?: boolean
   primaryEmail?: boolean
   primaryPhone?: boolean
+  primaryPhones?: boolean
   billingAddress?: boolean
+  billingAddresses?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["vendor"]>
@@ -976,17 +1289,22 @@ export type VendorSelectScalar = {
   status?: boolean
   vendorType?: boolean
   bankName?: boolean
+  bankBranch?: boolean
+  accountName?: boolean
   routingNumber?: boolean
   accountNumber?: boolean
   primaryEmail?: boolean
   primaryPhone?: boolean
+  primaryPhones?: boolean
   billingAddress?: boolean
+  billingAddresses?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type VendorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendorId" | "vendorCompanyName" | "vendorName" | "status" | "vendorType" | "bankName" | "routingNumber" | "accountNumber" | "primaryEmail" | "primaryPhone" | "billingAddress" | "createdAt" | "updatedAt", ExtArgs["result"]["vendor"]>
+export type VendorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendorId" | "vendorCompanyName" | "vendorName" | "status" | "vendorType" | "bankName" | "bankBranch" | "accountName" | "routingNumber" | "accountNumber" | "primaryEmail" | "primaryPhone" | "primaryPhones" | "billingAddress" | "billingAddresses" | "createdAt" | "updatedAt", ExtArgs["result"]["vendor"]>
 export type VendorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  bankAccounts?: boolean | Prisma.Vendor$bankAccountsArgs<ExtArgs>
   agreements?: boolean | Prisma.Vendor$agreementsArgs<ExtArgs>
   stockItems?: boolean | Prisma.Vendor$stockItemsArgs<ExtArgs>
   stockMovements?: boolean | Prisma.Vendor$stockMovementsArgs<ExtArgs>
@@ -998,6 +1316,7 @@ export type VendorIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type $VendorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Vendor"
   objects: {
+    bankAccounts: Prisma.$VendorBankAccountPayload<ExtArgs>[]
     agreements: Prisma.$VendorAgreementPayload<ExtArgs>[]
     stockItems: Prisma.$StockItemPayload<ExtArgs>[]
     stockMovements: Prisma.$StockMovementPayload<ExtArgs>[]
@@ -1008,13 +1327,17 @@ export type $VendorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     vendorCompanyName: string | null
     vendorName: string
     status: $Enums.VendorStatus
-    vendorType: $Enums.VendorType
+    vendorType: string
     bankName: string | null
+    bankBranch: string | null
+    accountName: string | null
     routingNumber: string | null
     accountNumber: string | null
     primaryEmail: string | null
     primaryPhone: string | null
+    primaryPhones: string[]
     billingAddress: string | null
+    billingAddresses: string[]
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["vendor"]>
@@ -1411,6 +1734,7 @@ readonly fields: VendorFieldRefs;
  */
 export interface Prisma__VendorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  bankAccounts<T extends Prisma.Vendor$bankAccountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vendor$bankAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorBankAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   agreements<T extends Prisma.Vendor$agreementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vendor$agreementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorAgreementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockItems<T extends Prisma.Vendor$stockItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vendor$stockItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockMovements<T extends Prisma.Vendor$stockMovementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vendor$stockMovementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockMovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1448,13 +1772,17 @@ export interface VendorFieldRefs {
   readonly vendorCompanyName: Prisma.FieldRef<"Vendor", 'String'>
   readonly vendorName: Prisma.FieldRef<"Vendor", 'String'>
   readonly status: Prisma.FieldRef<"Vendor", 'VendorStatus'>
-  readonly vendorType: Prisma.FieldRef<"Vendor", 'VendorType'>
+  readonly vendorType: Prisma.FieldRef<"Vendor", 'String'>
   readonly bankName: Prisma.FieldRef<"Vendor", 'String'>
+  readonly bankBranch: Prisma.FieldRef<"Vendor", 'String'>
+  readonly accountName: Prisma.FieldRef<"Vendor", 'String'>
   readonly routingNumber: Prisma.FieldRef<"Vendor", 'String'>
   readonly accountNumber: Prisma.FieldRef<"Vendor", 'String'>
   readonly primaryEmail: Prisma.FieldRef<"Vendor", 'String'>
   readonly primaryPhone: Prisma.FieldRef<"Vendor", 'String'>
+  readonly primaryPhones: Prisma.FieldRef<"Vendor", 'String[]'>
   readonly billingAddress: Prisma.FieldRef<"Vendor", 'String'>
+  readonly billingAddresses: Prisma.FieldRef<"Vendor", 'String[]'>
   readonly createdAt: Prisma.FieldRef<"Vendor", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Vendor", 'DateTime'>
 }
@@ -1842,6 +2170,30 @@ export type VendorDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many Vendors to delete.
    */
   limit?: number
+}
+
+/**
+ * Vendor.bankAccounts
+ */
+export type Vendor$bankAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VendorBankAccount
+   */
+  select?: Prisma.VendorBankAccountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VendorBankAccount
+   */
+  omit?: Prisma.VendorBankAccountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VendorBankAccountInclude<ExtArgs> | null
+  where?: Prisma.VendorBankAccountWhereInput
+  orderBy?: Prisma.VendorBankAccountOrderByWithRelationInput | Prisma.VendorBankAccountOrderByWithRelationInput[]
+  cursor?: Prisma.VendorBankAccountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VendorBankAccountScalarFieldEnum | Prisma.VendorBankAccountScalarFieldEnum[]
 }
 
 /**
