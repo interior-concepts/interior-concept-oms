@@ -286,6 +286,9 @@ export type UserWhereInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionListRelationFilter
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionListRelationFilter
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogListRelationFilter
+  advanceAccount?: Prisma.XOR<Prisma.AdvanceAccountNullableScalarRelationFilter, Prisma.AdvanceAccountWhereInput> | null
+  advanceTransactions?: Prisma.AdvanceTransactionListRelationFilter
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -356,6 +359,9 @@ export type UserOrderByWithRelationInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionOrderByRelationAggregateInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionOrderByRelationAggregateInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogOrderByRelationAggregateInput
+  advanceAccount?: Prisma.AdvanceAccountOrderByWithRelationInput
+  advanceTransactions?: Prisma.AdvanceTransactionOrderByRelationAggregateInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -429,6 +435,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionListRelationFilter
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionListRelationFilter
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogListRelationFilter
+  advanceAccount?: Prisma.XOR<Prisma.AdvanceAccountNullableScalarRelationFilter, Prisma.AdvanceAccountWhereInput> | null
+  advanceTransactions?: Prisma.AdvanceTransactionListRelationFilter
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionListRelationFilter
 }, "id" | "email" | "clerkUserId">
 
 export type UserOrderByWithAggregationInput = {
@@ -532,6 +541,9 @@ export type UserCreateInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -601,6 +613,9 @@ export type UserUncheckedCreateInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUpdateInput = {
@@ -670,6 +685,9 @@ export type UserUpdateInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -739,6 +757,9 @@ export type UserUncheckedUpdateInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1688,6 +1709,48 @@ export type UserUpdateOneRequiredWithoutQuotationWorkActivityLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutQuotationWorkActivityLogsInput, Prisma.UserUpdateWithoutQuotationWorkActivityLogsInput>, Prisma.UserUncheckedUpdateWithoutQuotationWorkActivityLogsInput>
 }
 
+export type UserCreateNestedOneWithoutAdvanceAccountInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAdvanceAccountInput, Prisma.UserUncheckedCreateWithoutAdvanceAccountInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdvanceAccountInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAdvanceAccountNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAdvanceAccountInput, Prisma.UserUncheckedCreateWithoutAdvanceAccountInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdvanceAccountInput
+  upsert?: Prisma.UserUpsertWithoutAdvanceAccountInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAdvanceAccountInput, Prisma.UserUpdateWithoutAdvanceAccountInput>, Prisma.UserUncheckedUpdateWithoutAdvanceAccountInput>
+}
+
+export type UserCreateNestedOneWithoutAdvanceTransactionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAdvanceTransactionsInput, Prisma.UserUncheckedCreateWithoutAdvanceTransactionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdvanceTransactionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutAdvanceTransactionsRecordedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAdvanceTransactionsRecordedInput, Prisma.UserUncheckedCreateWithoutAdvanceTransactionsRecordedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdvanceTransactionsRecordedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAdvanceTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAdvanceTransactionsInput, Prisma.UserUncheckedCreateWithoutAdvanceTransactionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdvanceTransactionsInput
+  upsert?: Prisma.UserUpsertWithoutAdvanceTransactionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAdvanceTransactionsInput, Prisma.UserUpdateWithoutAdvanceTransactionsInput>, Prisma.UserUncheckedUpdateWithoutAdvanceTransactionsInput>
+}
+
+export type UserUpdateOneRequiredWithoutAdvanceTransactionsRecordedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAdvanceTransactionsRecordedInput, Prisma.UserUncheckedCreateWithoutAdvanceTransactionsRecordedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdvanceTransactionsRecordedInput
+  upsert?: Prisma.UserUpsertWithoutAdvanceTransactionsRecordedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAdvanceTransactionsRecordedInput, Prisma.UserUpdateWithoutAdvanceTransactionsRecordedInput>, Prisma.UserUncheckedUpdateWithoutAdvanceTransactionsRecordedInput>
+}
+
 export type UserCreateWithoutLeadsInput = {
   id?: string
   fullName: string
@@ -1754,6 +1817,9 @@ export type UserCreateWithoutLeadsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutLeadsInput = {
@@ -1822,6 +1888,9 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutLeadsInput = {
@@ -1895,6 +1964,9 @@ export type UserCreateWithoutPrimaryOwnedLeadsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutPrimaryOwnedLeadsInput = {
@@ -1963,6 +2035,9 @@ export type UserUncheckedCreateWithoutPrimaryOwnedLeadsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutPrimaryOwnedLeadsInput = {
@@ -2047,6 +2122,9 @@ export type UserUpdateWithoutLeadsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeadsInput = {
@@ -2115,6 +2193,9 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutPrimaryOwnedLeadsInput = {
@@ -2194,6 +2275,9 @@ export type UserUpdateWithoutPrimaryOwnedLeadsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPrimaryOwnedLeadsInput = {
@@ -2262,6 +2346,9 @@ export type UserUncheckedUpdateWithoutPrimaryOwnedLeadsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutLeadAssignmentsInput = {
@@ -2330,6 +2417,9 @@ export type UserCreateWithoutLeadAssignmentsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutLeadAssignmentsInput = {
@@ -2398,6 +2488,9 @@ export type UserUncheckedCreateWithoutLeadAssignmentsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutLeadAssignmentsInput = {
@@ -2482,6 +2575,9 @@ export type UserUpdateWithoutLeadAssignmentsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeadAssignmentsInput = {
@@ -2550,6 +2646,9 @@ export type UserUncheckedUpdateWithoutLeadAssignmentsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutStatusChangesInput = {
@@ -2618,6 +2717,9 @@ export type UserCreateWithoutStatusChangesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutStatusChangesInput = {
@@ -2686,6 +2788,9 @@ export type UserUncheckedCreateWithoutStatusChangesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutStatusChangesInput = {
@@ -2770,6 +2875,9 @@ export type UserUpdateWithoutStatusChangesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStatusChangesInput = {
@@ -2838,6 +2946,9 @@ export type UserUncheckedUpdateWithoutStatusChangesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutActivitiesInput = {
@@ -2906,6 +3017,9 @@ export type UserCreateWithoutActivitiesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutActivitiesInput = {
@@ -2974,6 +3088,9 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutActivitiesInput = {
@@ -3058,6 +3175,9 @@ export type UserUpdateWithoutActivitiesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivitiesInput = {
@@ -3126,6 +3246,9 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutFollowUpsInput = {
@@ -3194,6 +3317,9 @@ export type UserCreateWithoutFollowUpsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutFollowUpsInput = {
@@ -3262,6 +3388,9 @@ export type UserUncheckedCreateWithoutFollowUpsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutFollowUpsInput = {
@@ -3346,6 +3475,9 @@ export type UserUpdateWithoutFollowUpsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowUpsInput = {
@@ -3414,6 +3546,9 @@ export type UserUncheckedUpdateWithoutFollowUpsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutNotesInput = {
@@ -3482,6 +3617,9 @@ export type UserCreateWithoutNotesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutNotesInput = {
@@ -3550,6 +3688,9 @@ export type UserUncheckedCreateWithoutNotesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutNotesInput = {
@@ -3634,6 +3775,9 @@ export type UserUpdateWithoutNotesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotesInput = {
@@ -3702,6 +3846,9 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutApprovedUsersInput = {
@@ -3770,6 +3917,9 @@ export type UserCreateWithoutApprovedUsersInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutApprovedUsersInput = {
@@ -3838,6 +3988,9 @@ export type UserUncheckedCreateWithoutApprovedUsersInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutApprovedUsersInput = {
@@ -3911,6 +4064,9 @@ export type UserCreateWithoutApprovedByInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutApprovedByInput = {
@@ -3979,6 +4135,9 @@ export type UserUncheckedCreateWithoutApprovedByInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutApprovedByInput = {
@@ -4068,6 +4227,9 @@ export type UserUpdateWithoutApprovedUsersInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApprovedUsersInput = {
@@ -4136,6 +4298,9 @@ export type UserUncheckedUpdateWithoutApprovedUsersInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutApprovedByInput = {
@@ -4237,6 +4402,9 @@ export type UserCreateWithoutDeviceTokensInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutDeviceTokensInput = {
@@ -4305,6 +4473,9 @@ export type UserUncheckedCreateWithoutDeviceTokensInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutDeviceTokensInput = {
@@ -4389,6 +4560,9 @@ export type UserUpdateWithoutDeviceTokensInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeviceTokensInput = {
@@ -4457,6 +4631,9 @@ export type UserUncheckedUpdateWithoutDeviceTokensInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutAgreementValueLogsInput = {
@@ -4525,6 +4702,9 @@ export type UserCreateWithoutAgreementValueLogsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutAgreementValueLogsInput = {
@@ -4593,6 +4773,9 @@ export type UserUncheckedCreateWithoutAgreementValueLogsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutAgreementValueLogsInput = {
@@ -4677,6 +4860,9 @@ export type UserUpdateWithoutAgreementValueLogsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAgreementValueLogsInput = {
@@ -4745,6 +4931,9 @@ export type UserUncheckedUpdateWithoutAgreementValueLogsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutPhaseTasksAssignedInput = {
@@ -4813,6 +5002,9 @@ export type UserCreateWithoutPhaseTasksAssignedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutPhaseTasksAssignedInput = {
@@ -4881,6 +5073,9 @@ export type UserUncheckedCreateWithoutPhaseTasksAssignedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutPhaseTasksAssignedInput = {
@@ -4954,6 +5149,9 @@ export type UserCreateWithoutPhaseTasksCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutPhaseTasksCreatedInput = {
@@ -5022,6 +5220,9 @@ export type UserUncheckedCreateWithoutPhaseTasksCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutPhaseTasksCreatedInput = {
@@ -5106,6 +5307,9 @@ export type UserUpdateWithoutPhaseTasksAssignedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhaseTasksAssignedInput = {
@@ -5174,6 +5378,9 @@ export type UserUncheckedUpdateWithoutPhaseTasksAssignedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutPhaseTasksCreatedInput = {
@@ -5253,6 +5460,9 @@ export type UserUpdateWithoutPhaseTasksCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhaseTasksCreatedInput = {
@@ -5321,6 +5531,9 @@ export type UserUncheckedUpdateWithoutPhaseTasksCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutJrArchitectRequestsInput = {
@@ -5389,6 +5602,9 @@ export type UserCreateWithoutJrArchitectRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutJrArchitectRequestsInput = {
@@ -5457,6 +5673,9 @@ export type UserUncheckedCreateWithoutJrArchitectRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutJrArchitectRequestsInput = {
@@ -5530,6 +5749,9 @@ export type UserCreateWithoutJrArchitectReviewedRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutJrArchitectReviewedRequestsInput = {
@@ -5598,6 +5820,9 @@ export type UserUncheckedCreateWithoutJrArchitectReviewedRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutJrArchitectReviewedRequestsInput = {
@@ -5682,6 +5907,9 @@ export type UserUpdateWithoutJrArchitectRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJrArchitectRequestsInput = {
@@ -5750,6 +5978,9 @@ export type UserUncheckedUpdateWithoutJrArchitectRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutJrArchitectReviewedRequestsInput = {
@@ -5829,6 +6060,9 @@ export type UserUpdateWithoutJrArchitectReviewedRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJrArchitectReviewedRequestsInput = {
@@ -5897,6 +6131,9 @@ export type UserUncheckedUpdateWithoutJrArchitectReviewedRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutPhaseReviewsInput = {
@@ -5965,6 +6202,9 @@ export type UserCreateWithoutPhaseReviewsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutPhaseReviewsInput = {
@@ -6033,6 +6273,9 @@ export type UserUncheckedCreateWithoutPhaseReviewsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutPhaseReviewsInput = {
@@ -6117,6 +6360,9 @@ export type UserUpdateWithoutPhaseReviewsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhaseReviewsInput = {
@@ -6185,6 +6431,9 @@ export type UserUncheckedUpdateWithoutPhaseReviewsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutMeetingEventsCreatedInput = {
@@ -6253,6 +6502,9 @@ export type UserCreateWithoutMeetingEventsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutMeetingEventsCreatedInput = {
@@ -6321,6 +6573,9 @@ export type UserUncheckedCreateWithoutMeetingEventsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutMeetingEventsCreatedInput = {
@@ -6405,6 +6660,9 @@ export type UserUpdateWithoutMeetingEventsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMeetingEventsCreatedInput = {
@@ -6473,6 +6731,9 @@ export type UserUncheckedUpdateWithoutMeetingEventsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutCadWorkSubmissionsInput = {
@@ -6541,6 +6802,9 @@ export type UserCreateWithoutCadWorkSubmissionsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutCadWorkSubmissionsInput = {
@@ -6609,6 +6873,9 @@ export type UserUncheckedCreateWithoutCadWorkSubmissionsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutCadWorkSubmissionsInput = {
@@ -6693,6 +6960,9 @@ export type UserUpdateWithoutCadWorkSubmissionsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCadWorkSubmissionsInput = {
@@ -6761,6 +7031,9 @@ export type UserUncheckedUpdateWithoutCadWorkSubmissionsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutQuotationDraftsCreatedInput = {
@@ -6829,6 +7102,9 @@ export type UserCreateWithoutQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutQuotationDraftsCreatedInput = {
@@ -6897,6 +7173,9 @@ export type UserUncheckedCreateWithoutQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutQuotationDraftsCreatedInput = {
@@ -6970,6 +7249,9 @@ export type UserCreateWithoutQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutQuotationDraftsUpdatedInput = {
@@ -7038,6 +7320,9 @@ export type UserUncheckedCreateWithoutQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutQuotationDraftsUpdatedInput = {
@@ -7122,6 +7407,9 @@ export type UserUpdateWithoutQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuotationDraftsCreatedInput = {
@@ -7190,6 +7478,9 @@ export type UserUncheckedUpdateWithoutQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutQuotationDraftsUpdatedInput = {
@@ -7269,6 +7560,9 @@ export type UserUpdateWithoutQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuotationDraftsUpdatedInput = {
@@ -7337,6 +7631,9 @@ export type UserUncheckedUpdateWithoutQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutFurnitureQuotationDraftsCreatedInput = {
@@ -7405,6 +7702,9 @@ export type UserCreateWithoutFurnitureQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutFurnitureQuotationDraftsCreatedInput = {
@@ -7473,6 +7773,9 @@ export type UserUncheckedCreateWithoutFurnitureQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutFurnitureQuotationDraftsCreatedInput = {
@@ -7546,6 +7849,9 @@ export type UserCreateWithoutFurnitureQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutFurnitureQuotationDraftsUpdatedInput = {
@@ -7614,6 +7920,9 @@ export type UserUncheckedCreateWithoutFurnitureQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutFurnitureQuotationDraftsUpdatedInput = {
@@ -7698,6 +8007,9 @@ export type UserUpdateWithoutFurnitureQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFurnitureQuotationDraftsCreatedInput = {
@@ -7766,6 +8078,9 @@ export type UserUncheckedUpdateWithoutFurnitureQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutFurnitureQuotationDraftsUpdatedInput = {
@@ -7845,6 +8160,9 @@ export type UserUpdateWithoutFurnitureQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFurnitureQuotationDraftsUpdatedInput = {
@@ -7913,6 +8231,9 @@ export type UserUncheckedUpdateWithoutFurnitureQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutElectricalQuotationDraftsCreatedInput = {
@@ -7981,6 +8302,9 @@ export type UserCreateWithoutElectricalQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutElectricalQuotationDraftsCreatedInput = {
@@ -8049,6 +8373,9 @@ export type UserUncheckedCreateWithoutElectricalQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutElectricalQuotationDraftsCreatedInput = {
@@ -8122,6 +8449,9 @@ export type UserCreateWithoutElectricalQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutElectricalQuotationDraftsUpdatedInput = {
@@ -8190,6 +8520,9 @@ export type UserUncheckedCreateWithoutElectricalQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutElectricalQuotationDraftsUpdatedInput = {
@@ -8274,6 +8607,9 @@ export type UserUpdateWithoutElectricalQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutElectricalQuotationDraftsCreatedInput = {
@@ -8342,6 +8678,9 @@ export type UserUncheckedUpdateWithoutElectricalQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutElectricalQuotationDraftsUpdatedInput = {
@@ -8421,6 +8760,9 @@ export type UserUpdateWithoutElectricalQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutElectricalQuotationDraftsUpdatedInput = {
@@ -8489,6 +8831,9 @@ export type UserUncheckedUpdateWithoutElectricalQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutPartialQuotationDraftsCreatedInput = {
@@ -8557,6 +8902,9 @@ export type UserCreateWithoutPartialQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutPartialQuotationDraftsCreatedInput = {
@@ -8625,6 +8973,9 @@ export type UserUncheckedCreateWithoutPartialQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutPartialQuotationDraftsCreatedInput = {
@@ -8698,6 +9049,9 @@ export type UserCreateWithoutPartialQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutPartialQuotationDraftsUpdatedInput = {
@@ -8766,6 +9120,9 @@ export type UserUncheckedCreateWithoutPartialQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutPartialQuotationDraftsUpdatedInput = {
@@ -8850,6 +9207,9 @@ export type UserUpdateWithoutPartialQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPartialQuotationDraftsCreatedInput = {
@@ -8918,6 +9278,9 @@ export type UserUncheckedUpdateWithoutPartialQuotationDraftsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutPartialQuotationDraftsUpdatedInput = {
@@ -8997,6 +9360,9 @@ export type UserUpdateWithoutPartialQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPartialQuotationDraftsUpdatedInput = {
@@ -9065,6 +9431,9 @@ export type UserUncheckedUpdateWithoutPartialQuotationDraftsUpdatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutVisitsAssignedInput = {
@@ -9133,6 +9502,9 @@ export type UserCreateWithoutVisitsAssignedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutVisitsAssignedInput = {
@@ -9201,6 +9573,9 @@ export type UserUncheckedCreateWithoutVisitsAssignedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutVisitsAssignedInput = {
@@ -9274,6 +9649,9 @@ export type UserCreateWithoutVisitsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutVisitsCreatedInput = {
@@ -9342,6 +9720,9 @@ export type UserUncheckedCreateWithoutVisitsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutVisitsCreatedInput = {
@@ -9426,6 +9807,9 @@ export type UserUpdateWithoutVisitsAssignedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVisitsAssignedInput = {
@@ -9494,6 +9878,9 @@ export type UserUncheckedUpdateWithoutVisitsAssignedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutVisitsCreatedInput = {
@@ -9573,6 +9960,9 @@ export type UserUpdateWithoutVisitsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVisitsCreatedInput = {
@@ -9641,6 +10031,9 @@ export type UserUncheckedUpdateWithoutVisitsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutVisitUpdateRequestsInput = {
@@ -9709,6 +10102,9 @@ export type UserCreateWithoutVisitUpdateRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutVisitUpdateRequestsInput = {
@@ -9777,6 +10173,9 @@ export type UserUncheckedCreateWithoutVisitUpdateRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutVisitUpdateRequestsInput = {
@@ -9850,6 +10249,9 @@ export type UserCreateWithoutResolvedVisitUpdateRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutResolvedVisitUpdateRequestsInput = {
@@ -9918,6 +10320,9 @@ export type UserUncheckedCreateWithoutResolvedVisitUpdateRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutResolvedVisitUpdateRequestsInput = {
@@ -10002,6 +10407,9 @@ export type UserUpdateWithoutVisitUpdateRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVisitUpdateRequestsInput = {
@@ -10070,6 +10478,9 @@ export type UserUncheckedUpdateWithoutVisitUpdateRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutResolvedVisitUpdateRequestsInput = {
@@ -10149,6 +10560,9 @@ export type UserUpdateWithoutResolvedVisitUpdateRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResolvedVisitUpdateRequestsInput = {
@@ -10217,6 +10631,9 @@ export type UserUncheckedUpdateWithoutResolvedVisitUpdateRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutSupportVisitsAssignedByInput = {
@@ -10285,6 +10702,9 @@ export type UserCreateWithoutSupportVisitsAssignedByInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutSupportVisitsAssignedByInput = {
@@ -10353,6 +10773,9 @@ export type UserUncheckedCreateWithoutSupportVisitsAssignedByInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutSupportVisitsAssignedByInput = {
@@ -10426,6 +10849,9 @@ export type UserCreateWithoutSupportVisitsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutSupportVisitsInput = {
@@ -10494,6 +10920,9 @@ export type UserUncheckedCreateWithoutSupportVisitsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutSupportVisitsInput = {
@@ -10578,6 +11007,9 @@ export type UserUpdateWithoutSupportVisitsAssignedByInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSupportVisitsAssignedByInput = {
@@ -10646,6 +11078,9 @@ export type UserUncheckedUpdateWithoutSupportVisitsAssignedByInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutSupportVisitsInput = {
@@ -10725,6 +11160,9 @@ export type UserUpdateWithoutSupportVisitsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSupportVisitsInput = {
@@ -10793,6 +11231,9 @@ export type UserUncheckedUpdateWithoutSupportVisitsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutSupportVisitResultsInput = {
@@ -10861,6 +11302,9 @@ export type UserCreateWithoutSupportVisitResultsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutSupportVisitResultsInput = {
@@ -10929,6 +11373,9 @@ export type UserUncheckedCreateWithoutSupportVisitResultsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutSupportVisitResultsInput = {
@@ -11013,6 +11460,9 @@ export type UserUpdateWithoutSupportVisitResultsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSupportVisitResultsInput = {
@@ -11081,6 +11531,9 @@ export type UserUncheckedUpdateWithoutSupportVisitResultsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutSignupNotificationsInput = {
@@ -11149,6 +11602,9 @@ export type UserCreateWithoutSignupNotificationsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutSignupNotificationsInput = {
@@ -11217,6 +11673,9 @@ export type UserUncheckedCreateWithoutSignupNotificationsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutSignupNotificationsInput = {
@@ -11290,6 +11749,9 @@ export type UserCreateWithoutNotificationsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -11358,6 +11820,9 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -11442,6 +11907,9 @@ export type UserUpdateWithoutSignupNotificationsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSignupNotificationsInput = {
@@ -11510,6 +11978,9 @@ export type UserUncheckedUpdateWithoutSignupNotificationsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutNotificationsInput = {
@@ -11589,6 +12060,9 @@ export type UserUpdateWithoutNotificationsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -11657,6 +12131,9 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutUserRolesInput = {
@@ -11725,6 +12202,9 @@ export type UserCreateWithoutUserRolesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -11793,6 +12273,9 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -11877,6 +12360,9 @@ export type UserUpdateWithoutUserRolesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -11945,6 +12431,9 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutUserDepartmentsInput = {
@@ -12013,6 +12502,9 @@ export type UserCreateWithoutUserDepartmentsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutUserDepartmentsInput = {
@@ -12081,6 +12573,9 @@ export type UserUncheckedCreateWithoutUserDepartmentsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutUserDepartmentsInput = {
@@ -12165,6 +12660,9 @@ export type UserUpdateWithoutUserDepartmentsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserDepartmentsInput = {
@@ -12233,6 +12731,9 @@ export type UserUncheckedUpdateWithoutUserDepartmentsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutTransactionsCollectedInput = {
@@ -12301,6 +12802,9 @@ export type UserCreateWithoutTransactionsCollectedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutTransactionsCollectedInput = {
@@ -12369,6 +12873,9 @@ export type UserUncheckedCreateWithoutTransactionsCollectedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutTransactionsCollectedInput = {
@@ -12442,6 +12949,9 @@ export type UserCreateWithoutTransactionsRecordedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutTransactionsRecordedInput = {
@@ -12510,6 +13020,9 @@ export type UserUncheckedCreateWithoutTransactionsRecordedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutTransactionsRecordedInput = {
@@ -12594,6 +13107,9 @@ export type UserUpdateWithoutTransactionsCollectedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTransactionsCollectedInput = {
@@ -12662,6 +13178,9 @@ export type UserUncheckedUpdateWithoutTransactionsCollectedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutTransactionsRecordedInput = {
@@ -12741,6 +13260,9 @@ export type UserUpdateWithoutTransactionsRecordedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTransactionsRecordedInput = {
@@ -12809,6 +13331,9 @@ export type UserUncheckedUpdateWithoutTransactionsRecordedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutConveyanceRequestsInput = {
@@ -12877,6 +13402,9 @@ export type UserCreateWithoutConveyanceRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutConveyanceRequestsInput = {
@@ -12945,6 +13473,9 @@ export type UserUncheckedCreateWithoutConveyanceRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutConveyanceRequestsInput = {
@@ -13018,6 +13549,9 @@ export type UserCreateWithoutConveyanceReviewedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutConveyanceReviewedInput = {
@@ -13086,6 +13620,9 @@ export type UserUncheckedCreateWithoutConveyanceReviewedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutConveyanceReviewedInput = {
@@ -13170,6 +13707,9 @@ export type UserUpdateWithoutConveyanceRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConveyanceRequestsInput = {
@@ -13238,6 +13778,9 @@ export type UserUncheckedUpdateWithoutConveyanceRequestsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutConveyanceReviewedInput = {
@@ -13317,6 +13860,9 @@ export type UserUpdateWithoutConveyanceReviewedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConveyanceReviewedInput = {
@@ -13385,6 +13931,9 @@ export type UserUncheckedUpdateWithoutConveyanceReviewedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutJrArchitectPerformancesInput = {
@@ -13453,6 +14002,9 @@ export type UserCreateWithoutJrArchitectPerformancesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutJrArchitectPerformancesInput = {
@@ -13521,6 +14073,9 @@ export type UserUncheckedCreateWithoutJrArchitectPerformancesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutJrArchitectPerformancesInput = {
@@ -13605,6 +14160,9 @@ export type UserUpdateWithoutJrArchitectPerformancesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJrArchitectPerformancesInput = {
@@ -13673,6 +14231,9 @@ export type UserUncheckedUpdateWithoutJrArchitectPerformancesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutQuotationPerformancesInput = {
@@ -13741,6 +14302,9 @@ export type UserCreateWithoutQuotationPerformancesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutQuotationPerformancesInput = {
@@ -13809,6 +14373,9 @@ export type UserUncheckedCreateWithoutQuotationPerformancesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutQuotationPerformancesInput = {
@@ -13893,6 +14460,9 @@ export type UserUpdateWithoutQuotationPerformancesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuotationPerformancesInput = {
@@ -13961,6 +14531,9 @@ export type UserUncheckedUpdateWithoutQuotationPerformancesInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutVisitMonthlyAssessmentsInput = {
@@ -14029,6 +14602,9 @@ export type UserCreateWithoutVisitMonthlyAssessmentsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutVisitMonthlyAssessmentsInput = {
@@ -14097,6 +14673,9 @@ export type UserUncheckedCreateWithoutVisitMonthlyAssessmentsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutVisitMonthlyAssessmentsInput = {
@@ -14181,6 +14760,9 @@ export type UserUpdateWithoutVisitMonthlyAssessmentsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVisitMonthlyAssessmentsInput = {
@@ -14249,6 +14831,9 @@ export type UserUncheckedUpdateWithoutVisitMonthlyAssessmentsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutDepartmentMemberMonthlySettingsInput = {
@@ -14317,6 +14902,9 @@ export type UserCreateWithoutDepartmentMemberMonthlySettingsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutDepartmentMemberMonthlySettingsInput = {
@@ -14385,6 +14973,9 @@ export type UserUncheckedCreateWithoutDepartmentMemberMonthlySettingsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutDepartmentMemberMonthlySettingsInput = {
@@ -14469,6 +15060,9 @@ export type UserUpdateWithoutDepartmentMemberMonthlySettingsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDepartmentMemberMonthlySettingsInput = {
@@ -14537,6 +15131,9 @@ export type UserUncheckedUpdateWithoutDepartmentMemberMonthlySettingsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutStockMovementsInput = {
@@ -14605,6 +15202,9 @@ export type UserCreateWithoutStockMovementsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutStockMovementsInput = {
@@ -14673,6 +15273,9 @@ export type UserUncheckedCreateWithoutStockMovementsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutStockMovementsInput = {
@@ -14746,6 +15349,9 @@ export type UserCreateWithoutStockReceivedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutStockReceivedInput = {
@@ -14814,6 +15420,9 @@ export type UserUncheckedCreateWithoutStockReceivedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutStockReceivedInput = {
@@ -14898,6 +15507,9 @@ export type UserUpdateWithoutStockMovementsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStockMovementsInput = {
@@ -14966,6 +15578,9 @@ export type UserUncheckedUpdateWithoutStockMovementsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutStockReceivedInput = {
@@ -15045,6 +15660,9 @@ export type UserUpdateWithoutStockReceivedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStockReceivedInput = {
@@ -15113,6 +15731,9 @@ export type UserUncheckedUpdateWithoutStockReceivedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutMaterialRequisitionsCreatedInput = {
@@ -15181,6 +15802,9 @@ export type UserCreateWithoutMaterialRequisitionsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutMaterialRequisitionsCreatedInput = {
@@ -15249,6 +15873,9 @@ export type UserUncheckedCreateWithoutMaterialRequisitionsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutMaterialRequisitionsCreatedInput = {
@@ -15333,6 +15960,9 @@ export type UserUpdateWithoutMaterialRequisitionsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMaterialRequisitionsCreatedInput = {
@@ -15401,6 +16031,9 @@ export type UserUncheckedUpdateWithoutMaterialRequisitionsCreatedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutRequisitionAmendmentsRequestedInput = {
@@ -15469,6 +16102,9 @@ export type UserCreateWithoutRequisitionAmendmentsRequestedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutRequisitionAmendmentsRequestedInput = {
@@ -15537,6 +16173,9 @@ export type UserUncheckedCreateWithoutRequisitionAmendmentsRequestedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutRequisitionAmendmentsRequestedInput = {
@@ -15610,6 +16249,9 @@ export type UserCreateWithoutRequisitionAmendmentsAcknowledgedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutRequisitionAmendmentsAcknowledgedInput = {
@@ -15678,6 +16320,9 @@ export type UserUncheckedCreateWithoutRequisitionAmendmentsAcknowledgedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutRequisitionAmendmentsAcknowledgedInput = {
@@ -15762,6 +16407,9 @@ export type UserUpdateWithoutRequisitionAmendmentsRequestedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRequisitionAmendmentsRequestedInput = {
@@ -15830,6 +16478,9 @@ export type UserUncheckedUpdateWithoutRequisitionAmendmentsRequestedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutRequisitionAmendmentsAcknowledgedInput = {
@@ -15909,6 +16560,9 @@ export type UserUpdateWithoutRequisitionAmendmentsAcknowledgedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRequisitionAmendmentsAcknowledgedInput = {
@@ -15977,6 +16631,9 @@ export type UserUncheckedUpdateWithoutRequisitionAmendmentsAcknowledgedInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutProcurementWalletInput = {
@@ -16045,6 +16702,9 @@ export type UserCreateWithoutProcurementWalletInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutProcurementWalletInput = {
@@ -16113,6 +16773,9 @@ export type UserUncheckedCreateWithoutProcurementWalletInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutProcurementWalletInput = {
@@ -16197,6 +16860,9 @@ export type UserUpdateWithoutProcurementWalletInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcurementWalletInput = {
@@ -16265,6 +16931,9 @@ export type UserUncheckedUpdateWithoutProcurementWalletInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutProcurementWalletTxSubmittedInput = {
@@ -16333,6 +17002,9 @@ export type UserCreateWithoutProcurementWalletTxSubmittedInput = {
   procurementWallet?: Prisma.ProcurementWalletCreateNestedOneWithoutUserInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutProcurementWalletTxSubmittedInput = {
@@ -16401,6 +17073,9 @@ export type UserUncheckedCreateWithoutProcurementWalletTxSubmittedInput = {
   procurementWallet?: Prisma.ProcurementWalletUncheckedCreateNestedOneWithoutUserInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutProcurementWalletTxSubmittedInput = {
@@ -16474,6 +17149,9 @@ export type UserCreateWithoutProcurementWalletTxReviewedInput = {
   procurementWallet?: Prisma.ProcurementWalletCreateNestedOneWithoutUserInput
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutProcurementWalletTxReviewedInput = {
@@ -16542,6 +17220,9 @@ export type UserUncheckedCreateWithoutProcurementWalletTxReviewedInput = {
   procurementWallet?: Prisma.ProcurementWalletUncheckedCreateNestedOneWithoutUserInput
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutProcurementWalletTxReviewedInput = {
@@ -16626,6 +17307,9 @@ export type UserUpdateWithoutProcurementWalletTxSubmittedInput = {
   procurementWallet?: Prisma.ProcurementWalletUpdateOneWithoutUserNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcurementWalletTxSubmittedInput = {
@@ -16694,6 +17378,9 @@ export type UserUncheckedUpdateWithoutProcurementWalletTxSubmittedInput = {
   procurementWallet?: Prisma.ProcurementWalletUncheckedUpdateOneWithoutUserNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUpsertWithoutProcurementWalletTxReviewedInput = {
@@ -16773,6 +17460,9 @@ export type UserUpdateWithoutProcurementWalletTxReviewedInput = {
   procurementWallet?: Prisma.ProcurementWalletUpdateOneWithoutUserNestedInput
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcurementWalletTxReviewedInput = {
@@ -16841,6 +17531,9 @@ export type UserUncheckedUpdateWithoutProcurementWalletTxReviewedInput = {
   procurementWallet?: Prisma.ProcurementWalletUncheckedUpdateOneWithoutUserNestedInput
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutSiteDeliveriesReceivedInput = {
@@ -16909,6 +17602,9 @@ export type UserCreateWithoutSiteDeliveriesReceivedInput = {
   procurementWallet?: Prisma.ProcurementWalletCreateNestedOneWithoutUserInput
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutSiteDeliveriesReceivedInput = {
@@ -16977,6 +17673,9 @@ export type UserUncheckedCreateWithoutSiteDeliveriesReceivedInput = {
   procurementWallet?: Prisma.ProcurementWalletUncheckedCreateNestedOneWithoutUserInput
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutSiteDeliveriesReceivedInput = {
@@ -17061,6 +17760,9 @@ export type UserUpdateWithoutSiteDeliveriesReceivedInput = {
   procurementWallet?: Prisma.ProcurementWalletUpdateOneWithoutUserNestedInput
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSiteDeliveriesReceivedInput = {
@@ -17129,6 +17831,9 @@ export type UserUncheckedUpdateWithoutSiteDeliveriesReceivedInput = {
   procurementWallet?: Prisma.ProcurementWalletUncheckedUpdateOneWithoutUserNestedInput
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutQuotationDailyWorkReportsInput = {
@@ -17197,6 +17902,9 @@ export type UserCreateWithoutQuotationDailyWorkReportsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutQuotationDailyWorkReportsInput = {
@@ -17265,6 +17973,9 @@ export type UserUncheckedCreateWithoutQuotationDailyWorkReportsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutQuotationDailyWorkReportsInput = {
@@ -17349,6 +18060,9 @@ export type UserUpdateWithoutQuotationDailyWorkReportsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuotationDailyWorkReportsInput = {
@@ -17417,6 +18131,9 @@ export type UserUncheckedUpdateWithoutQuotationDailyWorkReportsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserCreateWithoutQuotationWorkActivityLogsInput = {
@@ -17485,6 +18202,9 @@ export type UserCreateWithoutQuotationWorkActivityLogsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserUncheckedCreateWithoutQuotationWorkActivityLogsInput = {
@@ -17553,6 +18273,9 @@ export type UserUncheckedCreateWithoutQuotationWorkActivityLogsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
 }
 
 export type UserCreateOrConnectWithoutQuotationWorkActivityLogsInput = {
@@ -17637,6 +18360,9 @@ export type UserUpdateWithoutQuotationWorkActivityLogsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuotationWorkActivityLogsInput = {
@@ -17705,6 +18431,909 @@ export type UserUncheckedUpdateWithoutQuotationWorkActivityLogsInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
+}
+
+export type UserCreateWithoutAdvanceAccountInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  passwordHash?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  clerkUserId?: string | null
+  isActive?: boolean
+  approvedAt?: Date | string | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutAssignedToInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadCreateNestedManyWithoutPrimaryOwnerInput
+  leadAssignments?: Prisma.LeadAssignmentCreateNestedManyWithoutUserInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventCreateNestedManyWithoutCreatedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutReviewedByInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskCreateNestedManyWithoutCreatedByInput
+  statusChanges?: Prisma.LeadStatusHistoryCreateNestedManyWithoutChangedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  electricalQuotationDraftsCreated?: Prisma.ElectricalQuotationDraftCreateNestedManyWithoutCreatedByInput
+  electricalQuotationDraftsUpdated?: Prisma.ElectricalQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  partialQuotationDraftsCreated?: Prisma.PartialQuotationDraftCreateNestedManyWithoutCreatedByInput
+  partialQuotationDraftsUpdated?: Prisma.PartialQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutUserInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutUserInput
+  visitMonthlyAssessments?: Prisma.VisitMemberMonthlyAssessmentCreateNestedManyWithoutUserInput
+  departmentMemberMonthlySettings?: Prisma.DepartmentMemberMonthlySettingCreateNestedManyWithoutUserInput
+  transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
+  transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedUsersInput
+  approvedUsers?: Prisma.UserCreateNestedManyWithoutApprovedByInput
+  userDepartments?: Prisma.UserDepartmentCreateNestedManyWithoutUserInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitCreateNestedManyWithoutCreatedByInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutAssignedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutSupportUserInput
+  supportVisitResults?: Prisma.VisitSupportResultCreateNestedManyWithoutSupportUserInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutResolvedByInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  stockReceived?: Prisma.StockMovementCreateNestedManyWithoutRecipientUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  conveyanceRequests?: Prisma.ConveyanceRequestCreateNestedManyWithoutRequesterInput
+  conveyanceReviewed?: Prisma.ConveyanceRequestCreateNestedManyWithoutReviewedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
+  procurementWallet?: Prisma.ProcurementWalletCreateNestedOneWithoutUserInput
+  procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
+  procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
+  siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
+}
+
+export type UserUncheckedCreateWithoutAdvanceAccountInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  passwordHash?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  clerkUserId?: string | null
+  isActive?: boolean
+  approvedById?: string | null
+  approvedAt?: Date | string | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutAssignedToInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutPrimaryOwnerInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutUserInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutCreatedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutReviewedByInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  electricalQuotationDraftsCreated?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  electricalQuotationDraftsUpdated?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  partialQuotationDraftsCreated?: Prisma.PartialQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  partialQuotationDraftsUpdated?: Prisma.PartialQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutUserInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutUserInput
+  visitMonthlyAssessments?: Prisma.VisitMemberMonthlyAssessmentUncheckedCreateNestedManyWithoutUserInput
+  departmentMemberMonthlySettings?: Prisma.DepartmentMemberMonthlySettingUncheckedCreateNestedManyWithoutUserInput
+  transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
+  transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
+  approvedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutApprovedByInput
+  userDepartments?: Prisma.UserDepartmentUncheckedCreateNestedManyWithoutUserInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitUncheckedCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitUncheckedCreateNestedManyWithoutCreatedByInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutSupportUserInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutSupportUserInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutResolvedByInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  stockReceived?: Prisma.StockMovementUncheckedCreateNestedManyWithoutRecipientUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  conveyanceRequests?: Prisma.ConveyanceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  conveyanceReviewed?: Prisma.ConveyanceRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
+  procurementWallet?: Prisma.ProcurementWalletUncheckedCreateNestedOneWithoutUserInput
+  procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
+  procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
+  siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
+}
+
+export type UserCreateOrConnectWithoutAdvanceAccountInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAdvanceAccountInput, Prisma.UserUncheckedCreateWithoutAdvanceAccountInput>
+}
+
+export type UserUpsertWithoutAdvanceAccountInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAdvanceAccountInput, Prisma.UserUncheckedUpdateWithoutAdvanceAccountInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAdvanceAccountInput, Prisma.UserUncheckedCreateWithoutAdvanceAccountInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAdvanceAccountInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAdvanceAccountInput, Prisma.UserUncheckedUpdateWithoutAdvanceAccountInput>
+}
+
+export type UserUpdateWithoutAdvanceAccountInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutAssignedToNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUpdateManyWithoutPrimaryOwnerNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUpdateManyWithoutUserNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUpdateManyWithoutCreatedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUpdateManyWithoutReviewedByNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUpdateManyWithoutCreatedByNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUpdateManyWithoutChangedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  electricalQuotationDraftsCreated?: Prisma.ElectricalQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  electricalQuotationDraftsUpdated?: Prisma.ElectricalQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  partialQuotationDraftsCreated?: Prisma.PartialQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  partialQuotationDraftsUpdated?: Prisma.PartialQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutUserNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutUserNestedInput
+  visitMonthlyAssessments?: Prisma.VisitMemberMonthlyAssessmentUpdateManyWithoutUserNestedInput
+  departmentMemberMonthlySettings?: Prisma.DepartmentMemberMonthlySettingUpdateManyWithoutUserNestedInput
+  transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
+  transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedUsersNestedInput
+  approvedUsers?: Prisma.UserUpdateManyWithoutApprovedByNestedInput
+  userDepartments?: Prisma.UserDepartmentUpdateManyWithoutUserNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUpdateManyWithoutCreatedByNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUpdateManyWithoutAssignedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUpdateManyWithoutSupportUserNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUpdateManyWithoutSupportUserNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutResolvedByNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  stockReceived?: Prisma.StockMovementUpdateManyWithoutRecipientUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  conveyanceRequests?: Prisma.ConveyanceRequestUpdateManyWithoutRequesterNestedInput
+  conveyanceReviewed?: Prisma.ConveyanceRequestUpdateManyWithoutReviewedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
+  procurementWallet?: Prisma.ProcurementWalletUpdateOneWithoutUserNestedInput
+  procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
+  procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
+  siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAdvanceAccountInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutAssignedToNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedUpdateManyWithoutPrimaryOwnerNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutCreatedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutReviewedByNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  electricalQuotationDraftsCreated?: Prisma.ElectricalQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  electricalQuotationDraftsUpdated?: Prisma.ElectricalQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  partialQuotationDraftsCreated?: Prisma.PartialQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  partialQuotationDraftsUpdated?: Prisma.PartialQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutUserNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  visitMonthlyAssessments?: Prisma.VisitMemberMonthlyAssessmentUncheckedUpdateManyWithoutUserNestedInput
+  departmentMemberMonthlySettings?: Prisma.DepartmentMemberMonthlySettingUncheckedUpdateManyWithoutUserNestedInput
+  transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
+  transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
+  approvedUsers?: Prisma.UserUncheckedUpdateManyWithoutApprovedByNestedInput
+  userDepartments?: Prisma.UserDepartmentUncheckedUpdateManyWithoutUserNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUncheckedUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutSupportUserNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutResolvedByNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  stockReceived?: Prisma.StockMovementUncheckedUpdateManyWithoutRecipientUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  conveyanceRequests?: Prisma.ConveyanceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  conveyanceReviewed?: Prisma.ConveyanceRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
+  procurementWallet?: Prisma.ProcurementWalletUncheckedUpdateOneWithoutUserNestedInput
+  procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
+  siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
+}
+
+export type UserCreateWithoutAdvanceTransactionsInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  passwordHash?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  clerkUserId?: string | null
+  isActive?: boolean
+  approvedAt?: Date | string | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutAssignedToInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadCreateNestedManyWithoutPrimaryOwnerInput
+  leadAssignments?: Prisma.LeadAssignmentCreateNestedManyWithoutUserInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventCreateNestedManyWithoutCreatedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutReviewedByInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskCreateNestedManyWithoutCreatedByInput
+  statusChanges?: Prisma.LeadStatusHistoryCreateNestedManyWithoutChangedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  electricalQuotationDraftsCreated?: Prisma.ElectricalQuotationDraftCreateNestedManyWithoutCreatedByInput
+  electricalQuotationDraftsUpdated?: Prisma.ElectricalQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  partialQuotationDraftsCreated?: Prisma.PartialQuotationDraftCreateNestedManyWithoutCreatedByInput
+  partialQuotationDraftsUpdated?: Prisma.PartialQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutUserInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutUserInput
+  visitMonthlyAssessments?: Prisma.VisitMemberMonthlyAssessmentCreateNestedManyWithoutUserInput
+  departmentMemberMonthlySettings?: Prisma.DepartmentMemberMonthlySettingCreateNestedManyWithoutUserInput
+  transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
+  transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedUsersInput
+  approvedUsers?: Prisma.UserCreateNestedManyWithoutApprovedByInput
+  userDepartments?: Prisma.UserDepartmentCreateNestedManyWithoutUserInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitCreateNestedManyWithoutCreatedByInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutAssignedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutSupportUserInput
+  supportVisitResults?: Prisma.VisitSupportResultCreateNestedManyWithoutSupportUserInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutResolvedByInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  stockReceived?: Prisma.StockMovementCreateNestedManyWithoutRecipientUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  conveyanceRequests?: Prisma.ConveyanceRequestCreateNestedManyWithoutRequesterInput
+  conveyanceReviewed?: Prisma.ConveyanceRequestCreateNestedManyWithoutReviewedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
+  procurementWallet?: Prisma.ProcurementWalletCreateNestedOneWithoutUserInput
+  procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
+  procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
+  siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionCreateNestedManyWithoutRecordedByInput
+}
+
+export type UserUncheckedCreateWithoutAdvanceTransactionsInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  passwordHash?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  clerkUserId?: string | null
+  isActive?: boolean
+  approvedById?: string | null
+  approvedAt?: Date | string | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutAssignedToInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutPrimaryOwnerInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutUserInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutCreatedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutReviewedByInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  electricalQuotationDraftsCreated?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  electricalQuotationDraftsUpdated?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  partialQuotationDraftsCreated?: Prisma.PartialQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  partialQuotationDraftsUpdated?: Prisma.PartialQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutUserInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutUserInput
+  visitMonthlyAssessments?: Prisma.VisitMemberMonthlyAssessmentUncheckedCreateNestedManyWithoutUserInput
+  departmentMemberMonthlySettings?: Prisma.DepartmentMemberMonthlySettingUncheckedCreateNestedManyWithoutUserInput
+  transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
+  transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
+  approvedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutApprovedByInput
+  userDepartments?: Prisma.UserDepartmentUncheckedCreateNestedManyWithoutUserInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitUncheckedCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitUncheckedCreateNestedManyWithoutCreatedByInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutSupportUserInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutSupportUserInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutResolvedByInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  stockReceived?: Prisma.StockMovementUncheckedCreateNestedManyWithoutRecipientUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  conveyanceRequests?: Prisma.ConveyanceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  conveyanceReviewed?: Prisma.ConveyanceRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
+  procurementWallet?: Prisma.ProcurementWalletUncheckedCreateNestedOneWithoutUserInput
+  procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
+  procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
+  siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutRecordedByInput
+}
+
+export type UserCreateOrConnectWithoutAdvanceTransactionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAdvanceTransactionsInput, Prisma.UserUncheckedCreateWithoutAdvanceTransactionsInput>
+}
+
+export type UserCreateWithoutAdvanceTransactionsRecordedInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  passwordHash?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  clerkUserId?: string | null
+  isActive?: boolean
+  approvedAt?: Date | string | null
+  activities?: Prisma.ActivityLogCreateNestedManyWithoutUserInput
+  agreementValueLogs?: Prisma.AgreementValueLogCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionCreateNestedManyWithoutSubmittedByInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  followUps?: Prisma.FollowUpCreateNestedManyWithoutAssignedToInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadCreateNestedManyWithoutPrimaryOwnerInput
+  leadAssignments?: Prisma.LeadAssignmentCreateNestedManyWithoutUserInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventCreateNestedManyWithoutCreatedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewCreateNestedManyWithoutReviewedByInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskCreateNestedManyWithoutCreatedByInput
+  statusChanges?: Prisma.LeadStatusHistoryCreateNestedManyWithoutChangedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationCreateNestedManyWithoutSubjectUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  quotationDraftsCreated?: Prisma.QuotationDraftCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  electricalQuotationDraftsCreated?: Prisma.ElectricalQuotationDraftCreateNestedManyWithoutCreatedByInput
+  electricalQuotationDraftsUpdated?: Prisma.ElectricalQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  partialQuotationDraftsCreated?: Prisma.PartialQuotationDraftCreateNestedManyWithoutCreatedByInput
+  partialQuotationDraftsUpdated?: Prisma.PartialQuotationDraftCreateNestedManyWithoutUpdatedByInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceCreateNestedManyWithoutUserInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportCreateNestedManyWithoutUserInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogCreateNestedManyWithoutUserInput
+  visitMonthlyAssessments?: Prisma.VisitMemberMonthlyAssessmentCreateNestedManyWithoutUserInput
+  departmentMemberMonthlySettings?: Prisma.DepartmentMemberMonthlySettingCreateNestedManyWithoutUserInput
+  transactionsCollected?: Prisma.TransactionCreateNestedManyWithoutCollectedByInput
+  transactionsRecorded?: Prisma.TransactionCreateNestedManyWithoutRecordedByInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedUsersInput
+  approvedUsers?: Prisma.UserCreateNestedManyWithoutApprovedByInput
+  userDepartments?: Prisma.UserDepartmentCreateNestedManyWithoutUserInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitCreateNestedManyWithoutCreatedByInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutAssignedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentCreateNestedManyWithoutSupportUserInput
+  supportVisitResults?: Prisma.VisitSupportResultCreateNestedManyWithoutSupportUserInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestCreateNestedManyWithoutResolvedByInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  stockReceived?: Prisma.StockMovementCreateNestedManyWithoutRecipientUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionCreateNestedManyWithoutCreatedByInput
+  conveyanceRequests?: Prisma.ConveyanceRequestCreateNestedManyWithoutRequesterInput
+  conveyanceReviewed?: Prisma.ConveyanceRequestCreateNestedManyWithoutReviewedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentCreateNestedManyWithoutAcknowledgedByInput
+  procurementWallet?: Prisma.ProcurementWalletCreateNestedOneWithoutUserInput
+  procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutSubmittedByInput
+  procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionCreateNestedManyWithoutReviewedByInput
+  siteDeliveriesReceived?: Prisma.SiteDeliveryLogCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAdvanceTransactionsRecordedInput = {
+  id?: string
+  fullName: string
+  email: string
+  phone: string
+  passwordHash?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  clerkUserId?: string | null
+  isActive?: boolean
+  approvedById?: string | null
+  approvedAt?: Date | string | null
+  activities?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedCreateNestedManyWithoutCreatedByInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedCreateNestedManyWithoutSubmittedByInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutAssignedToInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssigneeInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutPrimaryOwnerInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedCreateNestedManyWithoutUserInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedCreateNestedManyWithoutCreatedByInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedCreateNestedManyWithoutReviewedByInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutAssigneeInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  signupNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubjectUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  electricalQuotationDraftsCreated?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  electricalQuotationDraftsUpdated?: Prisma.ElectricalQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  partialQuotationDraftsCreated?: Prisma.PartialQuotationDraftUncheckedCreateNestedManyWithoutCreatedByInput
+  partialQuotationDraftsUpdated?: Prisma.PartialQuotationDraftUncheckedCreateNestedManyWithoutUpdatedByInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedCreateNestedManyWithoutUserInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedCreateNestedManyWithoutUserInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedCreateNestedManyWithoutUserInput
+  visitMonthlyAssessments?: Prisma.VisitMemberMonthlyAssessmentUncheckedCreateNestedManyWithoutUserInput
+  departmentMemberMonthlySettings?: Prisma.DepartmentMemberMonthlySettingUncheckedCreateNestedManyWithoutUserInput
+  transactionsCollected?: Prisma.TransactionUncheckedCreateNestedManyWithoutCollectedByInput
+  transactionsRecorded?: Prisma.TransactionUncheckedCreateNestedManyWithoutRecordedByInput
+  approvedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutApprovedByInput
+  userDepartments?: Prisma.UserDepartmentUncheckedCreateNestedManyWithoutUserInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  visitsAssigned?: Prisma.VisitUncheckedCreateNestedManyWithoutAssignedToInput
+  visitsCreated?: Prisma.VisitUncheckedCreateNestedManyWithoutCreatedByInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedCreateNestedManyWithoutSupportUserInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedCreateNestedManyWithoutSupportUserInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedCreateNestedManyWithoutResolvedByInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  stockReceived?: Prisma.StockMovementUncheckedCreateNestedManyWithoutRecipientUserInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedCreateNestedManyWithoutCreatedByInput
+  conveyanceRequests?: Prisma.ConveyanceRequestUncheckedCreateNestedManyWithoutRequesterInput
+  conveyanceReviewed?: Prisma.ConveyanceRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutRequestedByInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedCreateNestedManyWithoutAcknowledgedByInput
+  procurementWallet?: Prisma.ProcurementWalletUncheckedCreateNestedOneWithoutUserInput
+  procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutSubmittedByInput
+  procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedCreateNestedManyWithoutReviewedByInput
+  siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedCreateNestedManyWithoutReceivedByInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedCreateNestedOneWithoutUserInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAdvanceTransactionsRecordedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAdvanceTransactionsRecordedInput, Prisma.UserUncheckedCreateWithoutAdvanceTransactionsRecordedInput>
+}
+
+export type UserUpsertWithoutAdvanceTransactionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAdvanceTransactionsInput, Prisma.UserUncheckedUpdateWithoutAdvanceTransactionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAdvanceTransactionsInput, Prisma.UserUncheckedCreateWithoutAdvanceTransactionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAdvanceTransactionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAdvanceTransactionsInput, Prisma.UserUncheckedUpdateWithoutAdvanceTransactionsInput>
+}
+
+export type UserUpdateWithoutAdvanceTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutAssignedToNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUpdateManyWithoutPrimaryOwnerNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUpdateManyWithoutUserNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUpdateManyWithoutCreatedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUpdateManyWithoutReviewedByNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUpdateManyWithoutCreatedByNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUpdateManyWithoutChangedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  electricalQuotationDraftsCreated?: Prisma.ElectricalQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  electricalQuotationDraftsUpdated?: Prisma.ElectricalQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  partialQuotationDraftsCreated?: Prisma.PartialQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  partialQuotationDraftsUpdated?: Prisma.PartialQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutUserNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutUserNestedInput
+  visitMonthlyAssessments?: Prisma.VisitMemberMonthlyAssessmentUpdateManyWithoutUserNestedInput
+  departmentMemberMonthlySettings?: Prisma.DepartmentMemberMonthlySettingUpdateManyWithoutUserNestedInput
+  transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
+  transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedUsersNestedInput
+  approvedUsers?: Prisma.UserUpdateManyWithoutApprovedByNestedInput
+  userDepartments?: Prisma.UserDepartmentUpdateManyWithoutUserNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUpdateManyWithoutCreatedByNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUpdateManyWithoutAssignedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUpdateManyWithoutSupportUserNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUpdateManyWithoutSupportUserNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutResolvedByNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  stockReceived?: Prisma.StockMovementUpdateManyWithoutRecipientUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  conveyanceRequests?: Prisma.ConveyanceRequestUpdateManyWithoutRequesterNestedInput
+  conveyanceReviewed?: Prisma.ConveyanceRequestUpdateManyWithoutReviewedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
+  procurementWallet?: Prisma.ProcurementWalletUpdateOneWithoutUserNestedInput
+  procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
+  procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
+  siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAdvanceTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutAssignedToNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedUpdateManyWithoutPrimaryOwnerNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutCreatedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutReviewedByNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  electricalQuotationDraftsCreated?: Prisma.ElectricalQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  electricalQuotationDraftsUpdated?: Prisma.ElectricalQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  partialQuotationDraftsCreated?: Prisma.PartialQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  partialQuotationDraftsUpdated?: Prisma.PartialQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutUserNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  visitMonthlyAssessments?: Prisma.VisitMemberMonthlyAssessmentUncheckedUpdateManyWithoutUserNestedInput
+  departmentMemberMonthlySettings?: Prisma.DepartmentMemberMonthlySettingUncheckedUpdateManyWithoutUserNestedInput
+  transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
+  transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
+  approvedUsers?: Prisma.UserUncheckedUpdateManyWithoutApprovedByNestedInput
+  userDepartments?: Prisma.UserDepartmentUncheckedUpdateManyWithoutUserNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUncheckedUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutSupportUserNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutResolvedByNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  stockReceived?: Prisma.StockMovementUncheckedUpdateManyWithoutRecipientUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  conveyanceRequests?: Prisma.ConveyanceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  conveyanceReviewed?: Prisma.ConveyanceRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
+  procurementWallet?: Prisma.ProcurementWalletUncheckedUpdateOneWithoutUserNestedInput
+  procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
+  siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
+}
+
+export type UserUpsertWithoutAdvanceTransactionsRecordedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAdvanceTransactionsRecordedInput, Prisma.UserUncheckedUpdateWithoutAdvanceTransactionsRecordedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAdvanceTransactionsRecordedInput, Prisma.UserUncheckedCreateWithoutAdvanceTransactionsRecordedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAdvanceTransactionsRecordedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAdvanceTransactionsRecordedInput, Prisma.UserUncheckedUpdateWithoutAdvanceTransactionsRecordedInput>
+}
+
+export type UserUpdateWithoutAdvanceTransactionsRecordedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activities?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUpdateManyWithoutSubmittedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  followUps?: Prisma.FollowUpUpdateManyWithoutAssignedToNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUpdateManyWithoutPrimaryOwnerNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUpdateManyWithoutUserNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUpdateManyWithoutCreatedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUpdateManyWithoutReviewedByNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUpdateManyWithoutCreatedByNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUpdateManyWithoutChangedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUpdateManyWithoutSubjectUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  electricalQuotationDraftsCreated?: Prisma.ElectricalQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  electricalQuotationDraftsUpdated?: Prisma.ElectricalQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  partialQuotationDraftsCreated?: Prisma.PartialQuotationDraftUpdateManyWithoutCreatedByNestedInput
+  partialQuotationDraftsUpdated?: Prisma.PartialQuotationDraftUpdateManyWithoutUpdatedByNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUpdateManyWithoutUserNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUpdateManyWithoutUserNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUpdateManyWithoutUserNestedInput
+  visitMonthlyAssessments?: Prisma.VisitMemberMonthlyAssessmentUpdateManyWithoutUserNestedInput
+  departmentMemberMonthlySettings?: Prisma.DepartmentMemberMonthlySettingUpdateManyWithoutUserNestedInput
+  transactionsCollected?: Prisma.TransactionUpdateManyWithoutCollectedByNestedInput
+  transactionsRecorded?: Prisma.TransactionUpdateManyWithoutRecordedByNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedUsersNestedInput
+  approvedUsers?: Prisma.UserUpdateManyWithoutApprovedByNestedInput
+  userDepartments?: Prisma.UserDepartmentUpdateManyWithoutUserNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUpdateManyWithoutCreatedByNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUpdateManyWithoutAssignedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUpdateManyWithoutSupportUserNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUpdateManyWithoutSupportUserNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUpdateManyWithoutResolvedByNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  stockReceived?: Prisma.StockMovementUpdateManyWithoutRecipientUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUpdateManyWithoutCreatedByNestedInput
+  conveyanceRequests?: Prisma.ConveyanceRequestUpdateManyWithoutRequesterNestedInput
+  conveyanceReviewed?: Prisma.ConveyanceRequestUpdateManyWithoutReviewedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUpdateManyWithoutAcknowledgedByNestedInput
+  procurementWallet?: Prisma.ProcurementWalletUpdateOneWithoutUserNestedInput
+  procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
+  procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
+  siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAdvanceTransactionsRecordedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clerkUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activities?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  agreementValueLogs?: Prisma.AgreementValueLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  cadWorkSubmissions?: Prisma.CadWorkSubmissionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutAssignedToNestedInput
+  jrArchitectPerformances?: Prisma.JrArchitectPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutAssigneeNestedInput
+  primaryOwnedLeads?: Prisma.LeadUncheckedUpdateManyWithoutPrimaryOwnerNestedInput
+  leadAssignments?: Prisma.LeadAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  jrArchitectRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  jrArchitectReviewedRequests?: Prisma.LeadJrArchitectRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  meetingEventsCreated?: Prisma.LeadMeetingEventUncheckedUpdateManyWithoutCreatedByNestedInput
+  phaseReviews?: Prisma.LeadPhaseReviewUncheckedUpdateManyWithoutReviewedByNestedInput
+  phaseTasksAssigned?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutAssigneeNestedInput
+  phaseTasksCreated?: Prisma.LeadPhaseTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  statusChanges?: Prisma.LeadStatusHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  signupNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSubjectUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  quotationDraftsCreated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  quotationDraftsUpdated?: Prisma.QuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  furnitureQuotationDraftsCreated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  furnitureQuotationDraftsUpdated?: Prisma.FurnitureQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  electricalQuotationDraftsCreated?: Prisma.ElectricalQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  electricalQuotationDraftsUpdated?: Prisma.ElectricalQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  partialQuotationDraftsCreated?: Prisma.PartialQuotationDraftUncheckedUpdateManyWithoutCreatedByNestedInput
+  partialQuotationDraftsUpdated?: Prisma.PartialQuotationDraftUncheckedUpdateManyWithoutUpdatedByNestedInput
+  quotationPerformances?: Prisma.QuotationUserPerformanceUncheckedUpdateManyWithoutUserNestedInput
+  quotationDailyWorkReports?: Prisma.QuotationDailyWorkReportUncheckedUpdateManyWithoutUserNestedInput
+  quotationWorkActivityLogs?: Prisma.QuotationWorkActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  visitMonthlyAssessments?: Prisma.VisitMemberMonthlyAssessmentUncheckedUpdateManyWithoutUserNestedInput
+  departmentMemberMonthlySettings?: Prisma.DepartmentMemberMonthlySettingUncheckedUpdateManyWithoutUserNestedInput
+  transactionsCollected?: Prisma.TransactionUncheckedUpdateManyWithoutCollectedByNestedInput
+  transactionsRecorded?: Prisma.TransactionUncheckedUpdateManyWithoutRecordedByNestedInput
+  approvedUsers?: Prisma.UserUncheckedUpdateManyWithoutApprovedByNestedInput
+  userDepartments?: Prisma.UserDepartmentUncheckedUpdateManyWithoutUserNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  visitsAssigned?: Prisma.VisitUncheckedUpdateManyWithoutAssignedToNestedInput
+  visitsCreated?: Prisma.VisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  supportVisitsAssignedBy?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  supportVisits?: Prisma.VisitSupportAssignmentUncheckedUpdateManyWithoutSupportUserNestedInput
+  supportVisitResults?: Prisma.VisitSupportResultUncheckedUpdateManyWithoutSupportUserNestedInput
+  visitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  resolvedVisitUpdateRequests?: Prisma.VisitUpdateRequestUncheckedUpdateManyWithoutResolvedByNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  stockReceived?: Prisma.StockMovementUncheckedUpdateManyWithoutRecipientUserNestedInput
+  materialRequisitionsCreated?: Prisma.MaterialRequisitionUncheckedUpdateManyWithoutCreatedByNestedInput
+  conveyanceRequests?: Prisma.ConveyanceRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  conveyanceReviewed?: Prisma.ConveyanceRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  requisitionAmendmentsRequested?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutRequestedByNestedInput
+  requisitionAmendmentsAcknowledged?: Prisma.RequisitionAmendmentUncheckedUpdateManyWithoutAcknowledgedByNestedInput
+  procurementWallet?: Prisma.ProcurementWalletUncheckedUpdateOneWithoutUserNestedInput
+  procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
+  siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyApprovedByInput = {
@@ -17786,6 +19415,9 @@ export type UserUpdateWithoutApprovedByInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApprovedByInput = {
@@ -17854,6 +19486,9 @@ export type UserUncheckedUpdateWithoutApprovedByInput = {
   procurementWalletTxSubmitted?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutSubmittedByNestedInput
   procurementWalletTxReviewed?: Prisma.ProcurementWalletTransactionUncheckedUpdateManyWithoutReviewedByNestedInput
   siteDeliveriesReceived?: Prisma.SiteDeliveryLogUncheckedUpdateManyWithoutReceivedByNestedInput
+  advanceAccount?: Prisma.AdvanceAccountUncheckedUpdateOneWithoutUserNestedInput
+  advanceTransactions?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+  advanceTransactionsRecorded?: Prisma.AdvanceTransactionUncheckedUpdateManyWithoutRecordedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutApprovedByInput = {
@@ -17929,6 +19564,8 @@ export type UserCountOutputType = {
   procurementWalletTxSubmitted: number
   procurementWalletTxReviewed: number
   siteDeliveriesReceived: number
+  advanceTransactions: number
+  advanceTransactionsRecorded: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -17986,6 +19623,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   procurementWalletTxSubmitted?: boolean | UserCountOutputTypeCountProcurementWalletTxSubmittedArgs
   procurementWalletTxReviewed?: boolean | UserCountOutputTypeCountProcurementWalletTxReviewedArgs
   siteDeliveriesReceived?: boolean | UserCountOutputTypeCountSiteDeliveriesReceivedArgs
+  advanceTransactions?: boolean | UserCountOutputTypeCountAdvanceTransactionsArgs
+  advanceTransactionsRecorded?: boolean | UserCountOutputTypeCountAdvanceTransactionsRecordedArgs
 }
 
 /**
@@ -18376,6 +20015,20 @@ export type UserCountOutputTypeCountSiteDeliveriesReceivedArgs<ExtArgs extends r
   where?: Prisma.SiteDeliveryLogWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAdvanceTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AdvanceTransactionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAdvanceTransactionsRecordedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AdvanceTransactionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -18445,6 +20098,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   procurementWalletTxSubmitted?: boolean | Prisma.User$procurementWalletTxSubmittedArgs<ExtArgs>
   procurementWalletTxReviewed?: boolean | Prisma.User$procurementWalletTxReviewedArgs<ExtArgs>
   siteDeliveriesReceived?: boolean | Prisma.User$siteDeliveriesReceivedArgs<ExtArgs>
+  advanceAccount?: boolean | Prisma.User$advanceAccountArgs<ExtArgs>
+  advanceTransactions?: boolean | Prisma.User$advanceTransactionsArgs<ExtArgs>
+  advanceTransactionsRecorded?: boolean | Prisma.User$advanceTransactionsRecordedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -18550,6 +20206,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   procurementWalletTxSubmitted?: boolean | Prisma.User$procurementWalletTxSubmittedArgs<ExtArgs>
   procurementWalletTxReviewed?: boolean | Prisma.User$procurementWalletTxReviewedArgs<ExtArgs>
   siteDeliveriesReceived?: boolean | Prisma.User$siteDeliveriesReceivedArgs<ExtArgs>
+  advanceAccount?: boolean | Prisma.User$advanceAccountArgs<ExtArgs>
+  advanceTransactions?: boolean | Prisma.User$advanceTransactionsArgs<ExtArgs>
+  advanceTransactionsRecorded?: boolean | Prisma.User$advanceTransactionsRecordedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -18618,6 +20277,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     procurementWalletTxSubmitted: Prisma.$ProcurementWalletTransactionPayload<ExtArgs>[]
     procurementWalletTxReviewed: Prisma.$ProcurementWalletTransactionPayload<ExtArgs>[]
     siteDeliveriesReceived: Prisma.$SiteDeliveryLogPayload<ExtArgs>[]
+    advanceAccount: Prisma.$AdvanceAccountPayload<ExtArgs> | null
+    advanceTransactions: Prisma.$AdvanceTransactionPayload<ExtArgs>[]
+    advanceTransactionsRecorded: Prisma.$AdvanceTransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -19081,6 +20743,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   procurementWalletTxSubmitted<T extends Prisma.User$procurementWalletTxSubmittedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$procurementWalletTxSubmittedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcurementWalletTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   procurementWalletTxReviewed<T extends Prisma.User$procurementWalletTxReviewedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$procurementWalletTxReviewedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcurementWalletTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   siteDeliveriesReceived<T extends Prisma.User$siteDeliveriesReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$siteDeliveriesReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteDeliveryLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  advanceAccount<T extends Prisma.User$advanceAccountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$advanceAccountArgs<ExtArgs>>): Prisma.Prisma__AdvanceAccountClient<runtime.Types.Result.GetResult<Prisma.$AdvanceAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  advanceTransactions<T extends Prisma.User$advanceTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$advanceTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdvanceTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  advanceTransactionsRecorded<T extends Prisma.User$advanceTransactionsRecordedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$advanceTransactionsRecordedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdvanceTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20848,6 +22513,73 @@ export type User$siteDeliveriesReceivedArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.SiteDeliveryLogScalarFieldEnum | Prisma.SiteDeliveryLogScalarFieldEnum[]
+}
+
+/**
+ * User.advanceAccount
+ */
+export type User$advanceAccountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdvanceAccount
+   */
+  select?: Prisma.AdvanceAccountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AdvanceAccount
+   */
+  omit?: Prisma.AdvanceAccountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdvanceAccountInclude<ExtArgs> | null
+  where?: Prisma.AdvanceAccountWhereInput
+}
+
+/**
+ * User.advanceTransactions
+ */
+export type User$advanceTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdvanceTransaction
+   */
+  select?: Prisma.AdvanceTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AdvanceTransaction
+   */
+  omit?: Prisma.AdvanceTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdvanceTransactionInclude<ExtArgs> | null
+  where?: Prisma.AdvanceTransactionWhereInput
+  orderBy?: Prisma.AdvanceTransactionOrderByWithRelationInput | Prisma.AdvanceTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.AdvanceTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AdvanceTransactionScalarFieldEnum | Prisma.AdvanceTransactionScalarFieldEnum[]
+}
+
+/**
+ * User.advanceTransactionsRecorded
+ */
+export type User$advanceTransactionsRecordedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdvanceTransaction
+   */
+  select?: Prisma.AdvanceTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AdvanceTransaction
+   */
+  omit?: Prisma.AdvanceTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdvanceTransactionInclude<ExtArgs> | null
+  where?: Prisma.AdvanceTransactionWhereInput
+  orderBy?: Prisma.AdvanceTransactionOrderByWithRelationInput | Prisma.AdvanceTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.AdvanceTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AdvanceTransactionScalarFieldEnum | Prisma.AdvanceTransactionScalarFieldEnum[]
 }
 
 /**

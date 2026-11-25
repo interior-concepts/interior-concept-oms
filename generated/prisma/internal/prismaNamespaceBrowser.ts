@@ -126,7 +126,9 @@ export const ModelName = {
   ProcurementWalletTransaction: 'ProcurementWalletTransaction',
   SiteDeliveryLog: 'SiteDeliveryLog',
   QuotationDailyWorkReport: 'QuotationDailyWorkReport',
-  QuotationWorkActivityLog: 'QuotationWorkActivityLog'
+  QuotationWorkActivityLog: 'QuotationWorkActivityLog',
+  AdvanceAccount: 'AdvanceAccount',
+  AdvanceTransaction: 'AdvanceTransaction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1389,6 +1391,38 @@ export const QuotationWorkActivityLogScalarFieldEnum = {
 } as const
 
 export type QuotationWorkActivityLogScalarFieldEnum = (typeof QuotationWorkActivityLogScalarFieldEnum)[keyof typeof QuotationWorkActivityLogScalarFieldEnum]
+
+
+export const AdvanceAccountScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  totalGiven: 'totalGiven',
+  totalReturned: 'totalReturned',
+  balance: 'balance',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdvanceAccountScalarFieldEnum = (typeof AdvanceAccountScalarFieldEnum)[keyof typeof AdvanceAccountScalarFieldEnum]
+
+
+export const AdvanceTransactionScalarFieldEnum = {
+  id: 'id',
+  advanceAccountId: 'advanceAccountId',
+  userId: 'userId',
+  type: 'type',
+  amount: 'amount',
+  date: 'date',
+  paymentMethod: 'paymentMethod',
+  purpose: 'purpose',
+  voucherNo: 'voucherNo',
+  note: 'note',
+  recordedById: 'recordedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdvanceTransactionScalarFieldEnum = (typeof AdvanceTransactionScalarFieldEnum)[keyof typeof AdvanceTransactionScalarFieldEnum]
 
 
 export const SortOrder = {

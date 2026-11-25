@@ -459,7 +459,9 @@ export const ModelName = {
   ProcurementWalletTransaction: 'ProcurementWalletTransaction',
   SiteDeliveryLog: 'SiteDeliveryLog',
   QuotationDailyWorkReport: 'QuotationDailyWorkReport',
-  QuotationWorkActivityLog: 'QuotationWorkActivityLog'
+  QuotationWorkActivityLog: 'QuotationWorkActivityLog',
+  AdvanceAccount: 'AdvanceAccount',
+  AdvanceTransaction: 'AdvanceTransaction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -475,7 +477,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "lead" | "leadAssignment" | "leadStatusHistory" | "activityLog" | "followUp" | "note" | "user" | "deviceToken" | "agreementValueLog" | "leadPhaseTask" | "leadJrArchitectRequest" | "leadPhaseReview" | "leadMeetingEvent" | "cadWorkSubmission" | "quotationDraft" | "agreementDocument" | "furnitureQuotationDraft" | "furnitureQuotationSavedItem" | "electricalQuotationDraft" | "partialQuotationDraft" | "cadWorkSubmissionFile" | "visit" | "visitUpdateRequest" | "visitResult" | "visitSupportAssignment" | "visitSupportResult" | "attachment" | "leadAttachment" | "supportAttachment" | "notification" | "facebookSyncControl" | "instagramSyncControl" | "whatsAppWebhookControl" | "whatsAppProcessedMessage" | "visitWorkflowControl" | "jrArchitectWorkflowControl" | "whatsAppWebhookEvent" | "role" | "department" | "userRole" | "userDepartment" | "financeAccount" | "transaction" | "conveyanceRequest" | "conveyanceBill" | "cashFlowDaily" | "websiteProject" | "websiteProjectImage" | "websiteVideo" | "websiteTestimonial" | "websiteTeamMember" | "quotationTemplateOverride" | "jrArchitectPerformance" | "quotationUserPerformance" | "visitMemberMonthlyAssessment" | "departmentMemberMonthlySetting" | "vendorTypeOption" | "vendor" | "vendorBankAccount" | "vendorAgreement" | "vendorAgreementRevision" | "vendorPaymentMilestone" | "vendorPayment" | "stockItem" | "stockMovement" | "materialRequisition" | "materialRequisitionItem" | "boqSavedAccessoryItem" | "boqSavedApplianceItem" | "requisitionAmendment" | "supplier" | "procurementWallet" | "procurementWalletTransaction" | "siteDeliveryLog" | "quotationDailyWorkReport" | "quotationWorkActivityLog"
+    modelProps: "lead" | "leadAssignment" | "leadStatusHistory" | "activityLog" | "followUp" | "note" | "user" | "deviceToken" | "agreementValueLog" | "leadPhaseTask" | "leadJrArchitectRequest" | "leadPhaseReview" | "leadMeetingEvent" | "cadWorkSubmission" | "quotationDraft" | "agreementDocument" | "furnitureQuotationDraft" | "furnitureQuotationSavedItem" | "electricalQuotationDraft" | "partialQuotationDraft" | "cadWorkSubmissionFile" | "visit" | "visitUpdateRequest" | "visitResult" | "visitSupportAssignment" | "visitSupportResult" | "attachment" | "leadAttachment" | "supportAttachment" | "notification" | "facebookSyncControl" | "instagramSyncControl" | "whatsAppWebhookControl" | "whatsAppProcessedMessage" | "visitWorkflowControl" | "jrArchitectWorkflowControl" | "whatsAppWebhookEvent" | "role" | "department" | "userRole" | "userDepartment" | "financeAccount" | "transaction" | "conveyanceRequest" | "conveyanceBill" | "cashFlowDaily" | "websiteProject" | "websiteProjectImage" | "websiteVideo" | "websiteTestimonial" | "websiteTeamMember" | "quotationTemplateOverride" | "jrArchitectPerformance" | "quotationUserPerformance" | "visitMemberMonthlyAssessment" | "departmentMemberMonthlySetting" | "vendorTypeOption" | "vendor" | "vendorBankAccount" | "vendorAgreement" | "vendorAgreementRevision" | "vendorPaymentMilestone" | "vendorPayment" | "stockItem" | "stockMovement" | "materialRequisition" | "materialRequisitionItem" | "boqSavedAccessoryItem" | "boqSavedApplianceItem" | "requisitionAmendment" | "supplier" | "procurementWallet" | "procurementWalletTransaction" | "siteDeliveryLog" | "quotationDailyWorkReport" | "quotationWorkActivityLog" | "advanceAccount" | "advanceTransaction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -6103,6 +6105,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AdvanceAccount: {
+      payload: Prisma.$AdvanceAccountPayload<ExtArgs>
+      fields: Prisma.AdvanceAccountFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdvanceAccountFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceAccountPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdvanceAccountFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceAccountPayload>
+        }
+        findFirst: {
+          args: Prisma.AdvanceAccountFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceAccountPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdvanceAccountFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceAccountPayload>
+        }
+        findMany: {
+          args: Prisma.AdvanceAccountFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceAccountPayload>[]
+        }
+        create: {
+          args: Prisma.AdvanceAccountCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceAccountPayload>
+        }
+        createMany: {
+          args: Prisma.AdvanceAccountCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AdvanceAccountCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceAccountPayload>[]
+        }
+        delete: {
+          args: Prisma.AdvanceAccountDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceAccountPayload>
+        }
+        update: {
+          args: Prisma.AdvanceAccountUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceAccountPayload>
+        }
+        deleteMany: {
+          args: Prisma.AdvanceAccountDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdvanceAccountUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AdvanceAccountUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceAccountPayload>[]
+        }
+        upsert: {
+          args: Prisma.AdvanceAccountUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceAccountPayload>
+        }
+        aggregate: {
+          args: Prisma.AdvanceAccountAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdvanceAccount>
+        }
+        groupBy: {
+          args: Prisma.AdvanceAccountGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdvanceAccountGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdvanceAccountCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdvanceAccountCountAggregateOutputType> | number
+        }
+      }
+    }
+    AdvanceTransaction: {
+      payload: Prisma.$AdvanceTransactionPayload<ExtArgs>
+      fields: Prisma.AdvanceTransactionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdvanceTransactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceTransactionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdvanceTransactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceTransactionPayload>
+        }
+        findFirst: {
+          args: Prisma.AdvanceTransactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceTransactionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdvanceTransactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceTransactionPayload>
+        }
+        findMany: {
+          args: Prisma.AdvanceTransactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceTransactionPayload>[]
+        }
+        create: {
+          args: Prisma.AdvanceTransactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceTransactionPayload>
+        }
+        createMany: {
+          args: Prisma.AdvanceTransactionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AdvanceTransactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceTransactionPayload>[]
+        }
+        delete: {
+          args: Prisma.AdvanceTransactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceTransactionPayload>
+        }
+        update: {
+          args: Prisma.AdvanceTransactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceTransactionPayload>
+        }
+        deleteMany: {
+          args: Prisma.AdvanceTransactionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdvanceTransactionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AdvanceTransactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceTransactionPayload>[]
+        }
+        upsert: {
+          args: Prisma.AdvanceTransactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvanceTransactionPayload>
+        }
+        aggregate: {
+          args: Prisma.AdvanceTransactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdvanceTransaction>
+        }
+        groupBy: {
+          args: Prisma.AdvanceTransactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdvanceTransactionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdvanceTransactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdvanceTransactionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -7388,6 +7538,38 @@ export const QuotationWorkActivityLogScalarFieldEnum = {
 export type QuotationWorkActivityLogScalarFieldEnum = (typeof QuotationWorkActivityLogScalarFieldEnum)[keyof typeof QuotationWorkActivityLogScalarFieldEnum]
 
 
+export const AdvanceAccountScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  totalGiven: 'totalGiven',
+  totalReturned: 'totalReturned',
+  balance: 'balance',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdvanceAccountScalarFieldEnum = (typeof AdvanceAccountScalarFieldEnum)[keyof typeof AdvanceAccountScalarFieldEnum]
+
+
+export const AdvanceTransactionScalarFieldEnum = {
+  id: 'id',
+  advanceAccountId: 'advanceAccountId',
+  userId: 'userId',
+  type: 'type',
+  amount: 'amount',
+  date: 'date',
+  paymentMethod: 'paymentMethod',
+  purpose: 'purpose',
+  voucherNo: 'voucherNo',
+  note: 'note',
+  recordedById: 'recordedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdvanceTransactionScalarFieldEnum = (typeof AdvanceTransactionScalarFieldEnum)[keyof typeof AdvanceTransactionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -8036,6 +8218,20 @@ export type EnumQuotationWorkTypeFieldRefInput<$PrismaModel> = FieldRefInputType
 export type ListEnumQuotationWorkTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QuotationWorkType[]'>
     
 
+
+/**
+ * Reference to a field of type 'AdvanceTransactionType'
+ */
+export type EnumAdvanceTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdvanceTransactionType'>
+    
+
+
+/**
+ * Reference to a field of type 'AdvanceTransactionType[]'
+ */
+export type ListEnumAdvanceTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdvanceTransactionType[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -8207,6 +8403,8 @@ export type GlobalOmitConfig = {
   siteDeliveryLog?: Prisma.SiteDeliveryLogOmit
   quotationDailyWorkReport?: Prisma.QuotationDailyWorkReportOmit
   quotationWorkActivityLog?: Prisma.QuotationWorkActivityLogOmit
+  advanceAccount?: Prisma.AdvanceAccountOmit
+  advanceTransaction?: Prisma.AdvanceTransactionOmit
 }
 
 /* Types for Logging */

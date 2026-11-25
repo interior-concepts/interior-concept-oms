@@ -524,3 +524,11 @@ export const ClientObjection = {
 } as const
 
 export type ClientObjection = (typeof ClientObjection)[keyof typeof ClientObjection]
+
+
+export const AdvanceTransactionType = {
+  GIVEN: 'GIVEN',
+  RETURNED: 'RETURNED'
+} as const
+
+export type AdvanceTransactionType = (typeof AdvanceTransactionType)[keyof typeof AdvanceTransactionType]

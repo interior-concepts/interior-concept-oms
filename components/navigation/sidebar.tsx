@@ -24,6 +24,7 @@ import {
   Package,
   Wallet,
   Receipt,
+  HandCoins,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/components/theme-provider'
@@ -127,6 +128,11 @@ const navigationGroups: Record<string, NavGroup[]> = {
           icon: Users,
           label: 'Vendors (AP)',
           href: '/crm/admin/finance/vendors',
+        },
+        {
+          icon: HandCoins,
+          label: 'Advances',
+          href: '/crm/accounts/advances',
         },
       ],
     },
@@ -501,6 +507,11 @@ const navigationGroups: Record<string, NavGroup[]> = {
           href: '/crm/admin/finance/vendors',
         },
         {
+          icon: HandCoins,
+          label: 'Advances',
+          href: '/crm/accounts/advances',
+        },
+        {
           icon: Settings,
           label: 'Finance Settings',
           href: '/crm/admin/finance/settings',
@@ -557,6 +568,7 @@ const navigationGroups: Record<string, NavGroup[]> = {
         { icon: ClipboardList, label: 'Visit Payments', href: '/crm/accounts/visit-payments' },
         { icon: Receipt, label: 'Token Money', href: '/crm/accounts/token-money' },
         { icon: Wallet, label: 'Conveyance Bills', href: '/crm/accounts/conveyance' },
+        { icon: HandCoins, label: 'Advances', href: '/crm/accounts/advances' },
         {
           icon: Settings,
           label: 'Finance Settings',

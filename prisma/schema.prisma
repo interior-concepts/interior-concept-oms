@@ -213,6 +213,9 @@ model User {
   procurementWalletTxSubmitted   ProcurementWalletTransaction[] @relation("ProcurementWalletSubmittedBy")
   procurementWalletTxReviewed    ProcurementWalletTransaction[] @relation("ProcurementWalletReviewedBy")
   siteDeliveriesReceived         SiteDeliveryLog[]          @relation("SiteDeliveryReceivedBy")
+  advanceAccount                 AdvanceAccount?            @relation("AdvanceAccountOwner")
+  advanceTransactions            AdvanceTransaction[]       @relation("AdvanceTransactionUser")
+  advanceTransactionsRecorded    AdvanceTransaction[]       @relation("AdvanceTransactionRecorder")
 }
 
 model DeviceToken {
@@ -1928,4 +1931,47 @@ enum ClientObjection {
   SPACE_PLANNING_QUERY
   TIMELINE_DELAY
   OTHER
+}
+
+enum AdvanceTransactionType {
+  GIVEN
+  RETURNED
+}
+
+model AdvanceAccount {
+  id            String               @id @default(cuid())
+  userId        String               @unique
+  user          User                 @relation("AdvanceAccountOwner", fields: [userId], references: [id], onDelete: Cascade)
+  totalGiven    Float                @default(0)
+  totalReturned Float                @default(0)
+  balance       Float                @default(0)
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  transactions  AdvanceTransaction[]
+
+  @@index([userId])
+}
+
+model AdvanceTransaction {
+  id               String                 @id @default(cuid())
+  advanceAccountId String
+  advanceAccount   AdvanceAccount         @relation(fields: [advanceAccountId], references: [id], onDelete: Cascade)
+  userId           String
+  user             User                   @relation("AdvanceTransactionUser", fields: [userId], references: [id], onDelete: Cascade)
+  type             AdvanceTransactionType
+  amount           Float
+  date             DateTime               @default(now())
+  paymentMethod    String?
+  purpose          String
+  voucherNo        String?                @unique
+  note             String?
+  recordedById     String
+  recordedBy       User                   @relation("AdvanceTransactionRecorder", fields: [recordedById], references: [id])
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  @@index([advanceAccountId])
+  @@index([userId])
+  @@index([type])
+  @@index([date])
 }

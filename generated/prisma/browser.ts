@@ -397,3 +397,13 @@ export type QuotationDailyWorkReport = Prisma.QuotationDailyWorkReportModel
  * 
  */
 export type QuotationWorkActivityLog = Prisma.QuotationWorkActivityLogModel
+/**
+ * Model AdvanceAccount
+ * 
+ */
+export type AdvanceAccount = Prisma.AdvanceAccountModel
+/**
+ * Model AdvanceTransaction
+ * 
+ */
+export type AdvanceTransaction = Prisma.AdvanceTransactionModel
